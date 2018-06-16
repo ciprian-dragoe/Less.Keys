@@ -11,7 +11,8 @@
 ;----------------- CONFIGURATION SECTION
 global contextKey := "space"
 global timeoutStillSendSpecialContextKey := 201
-global timeoutResetSendContextKey := 151
+global timeoutResetTreatContextKeyAsRegularKey := 151
+global timeoutModifierKeysAlternativeLayoutActive := 251
 global allowSendContextKey := 1
 
 global contextEnter := "d"
@@ -41,12 +42,12 @@ global context8 := ""
 global context9 := ""
 global context0 := ""
 
-global alternativeCtrlLeft := "lalt"
-global alternativeShiftLeft := ""
-global alternativeAltLeft := "capslock"
-global alternativeCtrlRight := ""
-global alternativeShiftRight := ""
-global alternativeAltRight := ""
+global alternativeCtrlLeft := "2"
+global alternativeShiftLeft := "3"
+global alternativeAltLeft := "4"
+global alternativeCtrlRight := "-"
+global alternativeShiftRight := "0"
+global alternativeAltRight := "9"
 ;----------------- END OF CONFIGURATION SECTION
 
 
@@ -56,19 +57,19 @@ global alternativeAltRight := ""
 
 
 
-
-
+SetKeyDelay -1
 global sendSpecialContextKeyOnNormalKeyPress := false
-global navigationMode = 1
+global navigationMode := 1
 
 
 
 
 
-
-
-#If navigationMode  = 1
+#If navigationMode = 1
     ;-------------------- process key
+    
+    global leftModifierGroupFirstPressed := false
+    global rightModifierGroupFirstPressed := false
     processKeyDown(key)
     {
         if (key = contextKey)
@@ -77,43 +78,84 @@ global navigationMode = 1
             return
         }
         
-        if (key = alternativeCtrlLeft)
+        if (leftModifierGroupFirstPressed)
         {
-            processModifierKeyDown("ctrl")
-            return		
+            if (key = alternativeCtrlLeft)
+            {
+                processLeftSideModifierKeyDown("ctrl")
+                return		
+            }
+            if (key = alternativeAltLeft)
+            {
+                processLeftSideModifierKeyDown("alt")
+                return		
+            }
+            if (key = alternativeShiftLeft)
+            {
+                processLeftSideModifierKeyDown("shift")
+                return		
+            }
         }
         
-        if (key = alternativeShiftLeft)
+        if (rightModifierGroupFirstPressed)
         {
-            processModifierKeyDown("shift")
-            return
+            if (key = alternativeCtrlRight)
+            {
+                processRightSideModifierKeyDown("ctrl")
+                return		
+            }
+            if (key = alternativeAltRight)
+            {
+                processRightSideModifierKeyDown("alt")
+                return		
+            }
+            if (key = alternativeShiftRight)
+            {
+                processRightSideModifierKeyDown("shift")
+                return		
+            }
         }
         
-        if (key = alternativeAltLeft)
+        if (modifierKeysAlternativeLayoutActive)
         {
-            processModifierKeyDown("alt")
-            return
+            if (key = alternativeCtrlLeft && !rigthModifierGroupFirstPressed)
+            {
+                processLeftSideModifierKeyDown("ctrl")
+                return		
+            }
+            
+            if (key = alternativeShiftLeft && !rigthModifierGroupFirstPressed)
+            {
+                processLeftSideModifierKeyDown("shift")
+                return
+            }
+            
+            if (key = alternativeAltLeft && !rigthModifierGroupFirstPressed)
+            {
+                processLeftSideModifierKeyDown("alt")
+                return
+            }
+            
+            if (key = alternativeCtrlRight && !leftModifierGroupFirstPressed)
+            {
+                processRightSideModifierKeyDown("ctrl")
+                return
+            }
+            
+            if (key = alternativeShiftRight && !leftModifierGroupFirstPressed)
+            {
+                processRightSideModifierKeyDown("shift")
+                return
+            }
+            
+            if (key = alternativeAltRight && !leftModifierGroupFirstPressed)
+            {
+                processRightSideModifierKeyDown("alt")
+                return
+            }
         }
         
-        if (key = alternativeCtrlRight)
-        {
-            processModifierKeyDown("ctrl")
-            return
-        }
-        
-        if (key = alternativeShiftRight)
-        {
-            processModifierKeyDown("shift")
-            return
-        }
-        
-        if (key = alternativeAltRight)
-        {
-            processModifierKeyDown("alt")
-            return
-        }
-        
-        if (specialContextActive)
+        if (alternativeLayoutActive)
         {
             if (key = contextLeft)
             {
@@ -253,41 +295,35 @@ global navigationMode = 1
         
         if (key = alternativeCtrlLeft)
         {
-            processModifierKeyUp("ctrl")
-            return
+            processLeftSideModifierKeyUp("ctrl")
         }
         
         if (key = alternativeShiftLeft)
         {
-            processModifierKeyUp("shift")
-            return
+            processLeftSideModifierKeyUp("shift")
         }
         
         if (key = alternativeAltLeft)
         {
-            processModifierKeyUp("alt")
-            return
+            processLeftSideModifierKeyUp("alt")
         }
         
         if (key = alternativeCtrlRight)
         {
-            processModifierKeyUp("ctrl")
-            return
+            processRightSideModifierKeyUp("ctrl")
         }
         
         if (key = alternativeShiftRight)
         {
-            processModifierKeyUp("shift")
-            return
+            processRightSideModifierKeyUp("shift")
         }
         
         if (key = alternativeAltRight)
         {
-            processModifierKeyUp("alt")
-            return
+            processRightSideModifierKeyUp("alt")
         }
         
-        if (specialContextActive)
+        if (alternativeLayoutActive)
         {
             if (key = contextLeft)
             {
@@ -416,6 +452,94 @@ global navigationMode = 1
         
         processNormalKeyUp(key)
     }
+    global leftCtrlModifierActive := false
+    global leftAltModifierActive := false
+    global leftShiftModifierActive := false
+    global rightCtrlModifierActive := false
+    global rightAltModifierActive := false
+    global rightShiftModifierActive := false
+    processLeftSideModifierKeyDown(key)
+    {
+        sendContextKey := false
+        leftModifierGroupFirstPressed := true
+        if (key = "ctrl")
+        {
+            leftCtrlModifierActive := true
+        }
+        if (key = "alt")
+        {
+            leftAltModifierActive := true
+        }
+        if (key = "shift")
+        {
+            leftShiftModifierActive := true
+        }    
+    }
+    processRightSideModifierKeyDown(key)
+    {
+        sendContextKey := false
+        rightModifierGroupFirstPressed := true
+        if (key = "ctrl")
+        {
+            rightCtrlModifierActive := true
+        }
+        if (key = "alt")
+        {
+            rightAltModifierActive := true
+        }
+        if (key = "shift")
+        {
+            rightShiftModifierActive := true
+        }
+    }
+    processLeftSideModifierKeyUp(key)
+    {
+        if (key = "ctrl")
+        {
+            leftCtrlModifierActive := false
+        }
+        if (key = "alt")
+        {
+            leftAltModifierActive := false
+            if (altDeepPressed)
+            {
+                altDeepPressed := false
+                send {alt up}
+            }
+        }
+        if (key = "shift")
+        {
+            leftShiftModifierActive := false
+        }
+        if (!leftShiftModifierActive && !leftAltModifierActive && !leftCtrlModifierActive)
+        {
+            leftModifierGroupFirstPressed := false
+        }
+    }
+    processRightSideModifierKeyUp(key)
+    {
+        if (key = "ctrl")
+        {
+            rightCtrlModifierActive := false
+        }
+        if (key = "alt")
+        {
+            rightAltModifierActive := false
+            if (altDeepPressed)
+            {
+                altDeepPressed := false
+                send {alt up}
+            }
+        }
+        if (key = "shift")
+        {
+            rightShiftModifierActive := false
+        }
+        if (!rightShiftModifierActive && !rightAltModifierActive && !rightCtrlModifierActive)
+        {
+            rightModifierGroupFirstPressed := false
+        }
+    }
     ;-------------------- END OF process key
     
     
@@ -423,37 +547,43 @@ global navigationMode = 1
     
     
     ;-------------------- special context management
-    global specialContextActive
+    global alternativeLayoutActive
     global sendContextKey
-    
     manageContextKeyDown(key)
     {
-        if !specialContextActive 
+        if !alternativeLayoutActive 
         {
-            if (sendContextKeyNormal)
+            if (treatContextKeyAsRegularKey)
             {
                 send {blind}{%key%}
                 sendContextKey := false
             }
             else
             {
-                specialContextActive := true
+                modifierKeysAlternativeLayoutActive := true
+                alternativeLayoutActive := true
                 sendContextKey := true
                 SetTimer, TimerTimeoutSendSpecialContextKey, %timeoutStillSendSpecialContextKey%
             }
-            ;show("context key down")
+            ;debug(key . " manageContextKeyDown")
         }
     }
     
+    global modifierKeysAlternativeLayoutActive := false
     manageContextKeyUp(key)
     {
-        specialContextActive := false
+        alternativeLayoutActive := false
         SetTimer, TimerTimeoutSendSpecialContextKey, OFF
+        if (!treatContextKeyAsRegularKey)
+        {
+            SetTimer, TimerTimeoutModifierKeysAlternativeLayoutActive, OFF
+            SetTimer, TimerTimeoutModifierKeysAlternativeLayoutActive, %timeoutModifierKeysAlternativeLayoutActive%
+        }
         if (sendContextKey && allowSendContextKey)
         {
             send {blind}{%key%}
         }
-        ;show(sendContextKey)
+        ;debug(key . " manageContextKeyUp")
     }
     
     TimerTimeoutSendSpecialContextKey:
@@ -461,8 +591,13 @@ global navigationMode = 1
         if GetKeyState(contextKey, "P")
         {    
             sendContextKey := false
-            ;show("timer terminat " . sendContextKey)
+            ;debug("timer terminat " . sendContextKey)
         }
+    return
+    
+    TimerTimeoutModifierKeysAlternativeLayoutActive:
+        SetTimer, TimerTimeoutModifierKeysAlternativeLayoutActive, OFF
+        modifierKeysAlternativeLayoutActive := false
     return
     ;-------------------- END OF special context management
     
@@ -471,50 +606,60 @@ global navigationMode = 1
     
     
     ;-------------------- normal keys
-    global sendContextKeyNormal := false
+    global treatContextKeyAsRegularKey := false
     processNormalKeyDown(key)
     {
-         if (!specialContextActive)
+         if (!alternativeLayoutActive)
         {
-            sendContextKeyNormal := true
+            treatContextKeyAsRegularKey := true
+            SetTimer, TriggerResetTreatContextKeyAsRegularKey, OFF
+            SetTimer, TriggerResetTreatContextKeyAsRegularKey, %timeoutResetTreatContextKeyAsRegularKey%
         }
         else
         {
             sendContextKey := false
         }
-        SetKeyDelay -1
-        send {blind}{%key% down}
-        ;show("apas normal " . key)
+        activeModifiers := getActiveModifiers(key)
+        send {blind}%activeModifiers%{%key% down}
+        ;debug(key . " processNormalKeyDown")
+    }
+    
+    global altDeepPressed := false
+    getActiveModifiers(key)
+    {
+        result = 
+        if (leftCtrlModifierActive || rightCtrlModifierActive)
+        {
+            result .= "^"
+        }
+        if (leftAltModifierActive || rightAltModifierActive)
+        {
+            if (key = "tab")
+            {
+                result .= "{alt downTemp}"
+                altDeepPressed := true
+            }
+            else
+            {
+                result .= "!"
+            }
+        }
+        if (leftShiftModifierActive || rightShiftModifierActive)
+        {
+            result .= "+"
+        }
+        return result
     }
     
     processNormalKeyUp(key)
     {
-        if (!specialContextActive)
-        {
-            SetTimer, TriggerResetSendContextKey, %timeoutResetSendContextKey%
-        }
-        SetKeyDelay -1
         Send {Blind}{%key% Up}
-        ;show("ridic normal " . key)
+        ;debug(key . " processNormalKeyUp")
     }
     
-    processModifierKeyDown(key)
-    {
-        SetKeyDelay -1
-        send {%key% down}
-        ;show("apas modifier " . key)
-    }
-    
-    processModifierKeyUp(key)
-    {
-        SetKeyDelay -1
-        send {blind}{%key% Up}
-        ;show("apas normal " . key)
-    }
-    
-    TriggerResetSendContextKey:
-        SetTimer, TriggerResetSendContextKey, OFF
-        sendContextKeyNormal := false
+    TriggerResetTreatContextKeyAsRegularKey:
+        SetTimer, TriggerResetTreatContextKeyAsRegularKey, OFF
+        treatContextKeyAsRegularKey := false
     return
     ;-------------------- END OF normal keys
     
@@ -757,18 +902,17 @@ return
 	reload
 return
 
-show(value)
+debug(value)
 {
-	tooltip, |%value%|
-	sleep 300
-	tooltip
+    store(value)
 }
 
-
-*f12::
-	textToDisplay := "canActivateSpecialContext " . canActivateSpecialContext . "`n" . "modifiersFirstActivatedLeft " . modifiersFirstActivatedLeft . "`n" . "modifiersFirstActivatedRight " . modifiersFirstActivatedRight . "`n" . "specialContextModifierActive " . specialContextModifierActive . "`n" . "specialContextModifierActive " . specialContextModifierActive . "`n"
-	msgBox % textToDisplay
-return
+ToolTip(value)
+{
+    tooltip, |%value%|
+    sleep 300
+    tooltip
+}
 
 
 send(value)
@@ -779,6 +923,7 @@ send(value)
 store(value)
 {
 	FormatTime, TimeString
-	FileAppend, %TimeString% - %value%`n,c:\Users\cipri\Desktop\debugKeyboardHack.txt
+	textToSend = %value%
+	FileAppend, %TimeString% - %textToSend%`n,c:\Users\cipri\Desktop\debugKeyboardHack.txt
 }
 ;-------------------- END OF Debugging
