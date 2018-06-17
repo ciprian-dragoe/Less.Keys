@@ -10,10 +10,7 @@
 ; sc029 -> `
 ;----------------- CONFIGURATION SECTION
 global contextKey := "space"
-global timeoutStillSendSpecialContextKey := 201
-global timeoutResetTreatContextKeyAsRegularKey := 151
-global timeoutModifierKeysAlternativeLayoutActive := 251
-global allowSendContextKey := 1
+
 
 global contextEnter := "d"
 global contextBackspace := "f"
@@ -58,6 +55,9 @@ global alternativeAltRight := "9"
 
 
 SetKeyDelay -1
+global timeoutStillSendSpecialContextKey := 201
+global timeoutResetTreatContextKeyAsRegularKey := 151
+global allowSendContextKey := 1
 global sendSpecialContextKeyOnNormalKeyPress := false
 global navigationMode := 1
 
@@ -452,6 +452,61 @@ global navigationMode := 1
         
         processNormalKeyUp(key)
     }
+    
+    ;-------------------- END OF process key
+    
+    
+    
+    
+    
+    ;-------------------- special context management
+    global alternativeLayoutActive
+    global sendContextKey
+    manageContextKeyDown(key)
+    {
+        if !alternativeLayoutActive 
+        {
+            if (treatContextKeyAsRegularKey)
+            {
+                send {blind}{%key%}
+                sendContextKey := false
+            }
+            else
+            {
+                modifierKeysAlternativeLayoutActive := true
+                alternativeLayoutActive := true
+                sendContextKey := true
+                SetTimer, TimerTimeoutSendSpecialContextKey, %timeoutStillSendSpecialContextKey%
+            }
+            ;debug(key . " manageContextKeyDown")
+        }
+    }
+    
+    global modifierKeysAlternativeLayoutActive := false
+    manageContextKeyUp(key)
+    {
+        alternativeLayoutActive := false
+        SetTimer, TimerTimeoutSendSpecialContextKey, OFF
+        if (!treatContextKeyAsRegularKey)
+        {
+            modifierKeysAlternativeLayoutActive := false
+        }
+        if (sendContextKey && allowSendContextKey)
+        {
+            send {blind}{%key%}
+        }
+        ;debug(key . " manageContextKeyUp")
+    }
+    
+    TimerTimeoutSendSpecialContextKey:
+        SetTimer, TimerTimeoutSendSpecialContextKey, OFF
+        if GetKeyState(contextKey, "P")
+        {    
+            sendContextKey := false
+            ;debug("timer terminat " . sendContextKey)
+        }
+    return
+    
     global leftCtrlModifierActive := false
     global leftAltModifierActive := false
     global leftShiftModifierActive := false
@@ -540,65 +595,6 @@ global navigationMode := 1
             rightModifierGroupFirstPressed := false
         }
     }
-    ;-------------------- END OF process key
-    
-    
-    
-    
-    
-    ;-------------------- special context management
-    global alternativeLayoutActive
-    global sendContextKey
-    manageContextKeyDown(key)
-    {
-        if !alternativeLayoutActive 
-        {
-            if (treatContextKeyAsRegularKey)
-            {
-                send {blind}{%key%}
-                sendContextKey := false
-            }
-            else
-            {
-                modifierKeysAlternativeLayoutActive := true
-                alternativeLayoutActive := true
-                sendContextKey := true
-                SetTimer, TimerTimeoutSendSpecialContextKey, %timeoutStillSendSpecialContextKey%
-            }
-            ;debug(key . " manageContextKeyDown")
-        }
-    }
-    
-    global modifierKeysAlternativeLayoutActive := false
-    manageContextKeyUp(key)
-    {
-        alternativeLayoutActive := false
-        SetTimer, TimerTimeoutSendSpecialContextKey, OFF
-        if (!treatContextKeyAsRegularKey)
-        {
-            SetTimer, TimerTimeoutModifierKeysAlternativeLayoutActive, OFF
-            SetTimer, TimerTimeoutModifierKeysAlternativeLayoutActive, %timeoutModifierKeysAlternativeLayoutActive%
-        }
-        if (sendContextKey && allowSendContextKey)
-        {
-            send {blind}{%key%}
-        }
-        ;debug(key . " manageContextKeyUp")
-    }
-    
-    TimerTimeoutSendSpecialContextKey:
-        SetTimer, TimerTimeoutSendSpecialContextKey, OFF
-        if GetKeyState(contextKey, "P")
-        {    
-            sendContextKey := false
-            ;debug("timer terminat " . sendContextKey)
-        }
-    return
-    
-    TimerTimeoutModifierKeysAlternativeLayoutActive:
-        SetTimer, TimerTimeoutModifierKeysAlternativeLayoutActive, OFF
-        modifierKeysAlternativeLayoutActive := false
-    return
     ;-------------------- END OF special context management
     
     
