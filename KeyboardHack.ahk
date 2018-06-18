@@ -1,7 +1,4 @@
-﻿; nu merge ctrl space delete si da ctrl f in loc de ctrl backspace
-; tweak algoritmul de scriu rapid si face diferenta intre context special si programez rapid
-
-#SingleInstance
+﻿#SingleInstance
 #Persistent
 #MaxHotkeysPerInterval 400
 ; ^ ctrl	! alt		+ shift		# WindowsKey
@@ -10,10 +7,7 @@
 ; sc029 -> `
 ;----------------- CONFIGURATION SECTION
 global contextKey := "space"
-global timeoutStillSendSpecialContextKey := 201
-global timeoutResetTreatContextKeyAsRegularKey := 151
-global timeoutModifierKeysAlternativeLayoutActive := 251
-global allowSendContextKey := 1
+
 
 global contextEnter := "d"
 global contextBackspace := "f"
@@ -48,6 +42,7 @@ global alternativeAltLeft := "4"
 global alternativeCtrlRight := "-"
 global alternativeShiftRight := "0"
 global alternativeAltRight := "9"
+global alternativeWinRight := "8"
 ;----------------- END OF CONFIGURATION SECTION
 
 
@@ -58,12 +53,153 @@ global alternativeAltRight := "9"
 
 
 SetKeyDelay -1
+global timeoutStillSendSpecialContextKey := 201
+global timeoutResetTreatContextKeyAsRegularKey := 151
+global allowSendContextKey := 1
 global sendSpecialContextKeyOnNormalKeyPress := false
 global navigationMode := 1
 
 
 
-
+global debugComputer := false
+if (A_ComputerName = "lenovo-x230") {
+	debugComputer := true
+}
+processAhkKeyboardShortcuts(activeModifiers, key)
+{
+    if (debugComputer)
+    {
+        WinGetClass, ActiveWindowClass, A
+        combination := activeModifiers . key
+        
+        if (combination = "#w")
+        {
+            send #1
+            return true
+        }
+        if (combination = "#e")
+        {
+            send #2
+            return true
+        }
+        if (combination = "#r")
+        {
+            send #3
+            return true
+        }
+        if (combination = "#s")
+        {
+            send #4
+            return true
+        }
+        if (combination = "#d")
+        {
+            send #5
+            return true
+        }
+        if (combination = "#f")
+        {
+            run MLO.ahk 3
+            return true
+        }
+        if (combination = "#x")
+        {
+            send #7
+            return true
+        }
+        if (combination = "#c")
+        {
+            send #8
+            return true
+        }
+        if (combination = "#v")
+        {
+            send #9
+            return true
+        }
+        
+        if (combination = "+#w")
+        {
+            send #+{NumPad7}
+            return true
+        }
+        if (combination = "+#e")
+        {
+            send #+{NumPad8}
+            return true
+        }
+        if (combination = "+#r")
+        {
+            send #+{NumPad9}
+            return true
+        }
+        if (combination = "+#s")
+        {
+            send #+{NumPad4}
+            return true
+        }
+        if (combination = "+#d")
+        {
+            send #+{NumPad5}
+            return true
+        }
+        if (combination = "+#f")
+        {
+            send #+{NumPad6}
+            return true
+        }
+        if (combination = "+#x")
+        {
+            send #+{NumPad1}
+            return true
+        }
+        if (combination = "+#c")
+        {
+            send #+{NumPad2}
+            return true
+        }
+        if (combination = "+#v")
+        {
+            send #+{NumPad3}
+            return true
+        }
+        
+        if (ActiveWindowClass = "TfrmMyLifeMain")
+        {
+            if (combination = "!q")
+            {
+                run MLO.ahk 1
+                return true
+            }
+            if (combination = "+F1")
+            {
+                run MLO.ahk 5
+                return true
+            }
+            if (combination = "^up")
+            {
+                run MLO.ahk 7
+                return true
+            }
+            if (combination = "^down")
+            {
+                run MLO.ahk 8
+                return true
+            }
+            if (combination = "^f")
+            {
+                run MLO.ahk 9
+                return true
+            }
+            if (combination = "^+f")
+            {
+                run MLO.ahk 10
+                return true
+            }
+        }
+    }
+    return false
+}
 
 #If navigationMode = 1
     ;-------------------- process key
@@ -114,6 +250,11 @@ global navigationMode := 1
                 processRightSideModifierKeyDown("shift")
                 return		
             }
+            if (key = alternativeWinRight)
+            {
+                processRightSideModifierKeyDown("lwin")
+                return		
+            }
         }
         
         if (modifierKeysAlternativeLayoutActive)
@@ -151,6 +292,12 @@ global navigationMode := 1
             if (key = alternativeAltRight && !leftModifierGroupFirstPressed)
             {
                 processRightSideModifierKeyDown("alt")
+                return
+            }
+            
+            if (key = alternativeWinRight && !leftModifierGroupFirstPressed)
+            {
+                processRightSideModifierKeyDown("lwin")
                 return
             }
         }
@@ -323,6 +470,11 @@ global navigationMode := 1
             processRightSideModifierKeyUp("alt")
         }
         
+        if (key = alternativeWinRight)
+        {
+            processRightSideModifierKeyUp("lwin")
+        }
+        
         if (alternativeLayoutActive)
         {
             if (key = contextLeft)
@@ -452,12 +604,68 @@ global navigationMode := 1
         
         processNormalKeyUp(key)
     }
+    
+    ;-------------------- END OF process key
+    
+    
+    
+    
+    
+    ;-------------------- special context management
+    global alternativeLayoutActive
+    global sendContextKey
+    manageContextKeyDown(key)
+    {
+        if !alternativeLayoutActive 
+        {
+            if (treatContextKeyAsRegularKey)
+            {
+                send {blind}{%key%}
+                sendContextKey := false
+            }
+            else
+            {
+                modifierKeysAlternativeLayoutActive := true
+                alternativeLayoutActive := true
+                sendContextKey := true
+                SetTimer, TimerTimeoutSendSpecialContextKey, %timeoutStillSendSpecialContextKey%
+            }
+            ;debug(key . " manageContextKeyDown")
+        }
+    }
+    
+    global modifierKeysAlternativeLayoutActive := false
+    manageContextKeyUp(key)
+    {
+        alternativeLayoutActive := false
+        SetTimer, TimerTimeoutSendSpecialContextKey, OFF
+        if (!treatContextKeyAsRegularKey)
+        {
+            modifierKeysAlternativeLayoutActive := false
+        }
+        if (sendContextKey && allowSendContextKey)
+        {
+            send {blind}{%key%}
+        }
+        ;debug(key . " manageContextKeyUp")
+    }
+    
+    TimerTimeoutSendSpecialContextKey:
+        SetTimer, TimerTimeoutSendSpecialContextKey, OFF
+        if GetKeyState(contextKey, "P")
+        {    
+            sendContextKey := false
+            ;debug("timer terminat " . sendContextKey)
+        }
+    return
+    
     global leftCtrlModifierActive := false
     global leftAltModifierActive := false
     global leftShiftModifierActive := false
     global rightCtrlModifierActive := false
     global rightAltModifierActive := false
     global rightShiftModifierActive := false
+    global rightWinModifierActive := false
     processLeftSideModifierKeyDown(key)
     {
         sendContextKey := false
@@ -490,6 +698,10 @@ global navigationMode := 1
         if (key = "shift")
         {
             rightShiftModifierActive := true
+        }
+        if (key = "lwin")
+        {
+            rightWinModifierActive := true
         }
     }
     processLeftSideModifierKeyUp(key)
@@ -535,70 +747,15 @@ global navigationMode := 1
         {
             rightShiftModifierActive := false
         }
-        if (!rightShiftModifierActive && !rightAltModifierActive && !rightCtrlModifierActive)
+        if (key = "lwin")
+        {
+            rightWinModifierActive := false
+        }
+        if (!rightShiftModifierActive && !rightAltModifierActive && !rightCtrlModifierActive && !rightWinModifierActive)
         {
             rightModifierGroupFirstPressed := false
         }
     }
-    ;-------------------- END OF process key
-    
-    
-    
-    
-    
-    ;-------------------- special context management
-    global alternativeLayoutActive
-    global sendContextKey
-    manageContextKeyDown(key)
-    {
-        if !alternativeLayoutActive 
-        {
-            if (treatContextKeyAsRegularKey)
-            {
-                send {blind}{%key%}
-                sendContextKey := false
-            }
-            else
-            {
-                modifierKeysAlternativeLayoutActive := true
-                alternativeLayoutActive := true
-                sendContextKey := true
-                SetTimer, TimerTimeoutSendSpecialContextKey, %timeoutStillSendSpecialContextKey%
-            }
-            ;debug(key . " manageContextKeyDown")
-        }
-    }
-    
-    global modifierKeysAlternativeLayoutActive := false
-    manageContextKeyUp(key)
-    {
-        alternativeLayoutActive := false
-        SetTimer, TimerTimeoutSendSpecialContextKey, OFF
-        if (!treatContextKeyAsRegularKey)
-        {
-            SetTimer, TimerTimeoutModifierKeysAlternativeLayoutActive, OFF
-            SetTimer, TimerTimeoutModifierKeysAlternativeLayoutActive, %timeoutModifierKeysAlternativeLayoutActive%
-        }
-        if (sendContextKey && allowSendContextKey)
-        {
-            send {blind}{%key%}
-        }
-        ;debug(key . " manageContextKeyUp")
-    }
-    
-    TimerTimeoutSendSpecialContextKey:
-        SetTimer, TimerTimeoutSendSpecialContextKey, OFF
-        if GetKeyState(contextKey, "P")
-        {    
-            sendContextKey := false
-            ;debug("timer terminat " . sendContextKey)
-        }
-    return
-    
-    TimerTimeoutModifierKeysAlternativeLayoutActive:
-        SetTimer, TimerTimeoutModifierKeysAlternativeLayoutActive, OFF
-        modifierKeysAlternativeLayoutActive := false
-    return
     ;-------------------- END OF special context management
     
     
@@ -620,8 +777,12 @@ global navigationMode := 1
             sendContextKey := false
         }
         activeModifiers := getActiveModifiers(key)
-        send {blind}%activeModifiers%{%key% down}
-        ;debug(key . " processNormalKeyDown")
+        if (!processAhkKeyboardShortcuts(activeModifiers, key))
+        {
+            send {blind}%activeModifiers%{%key% down}
+            ;debug(key . " processNormalKeyDown")
+        }
+        
     }
     
     global altDeepPressed := false
@@ -647,6 +808,10 @@ global navigationMode := 1
         if (leftShiftModifierActive || rightShiftModifierActive)
         {
             result .= "+"
+        }
+        if (rightWinModifierActive)
+        {
+            result .= "#"
         }
         return result
     }
@@ -763,26 +928,8 @@ global navigationMode := 1
     *m::processKeyDown("m")	
     *m up::processKeyUp("m")
     
-    *lalt::processKeyDown("lalt")
-    *lalt up::processKeyUp("lalt")
-    
-    *ralt::processKeyDown("ralt")
-    *ralt up::processKeyUp("ralt")
-    
     *capslock::processKeyDown("capslock")
     *capslock up::processKeyUp("capslock")
-    
-    *lshift::processKeyDown("lshift")
-    *lshift up::processKeyUp("lshift")
-    
-    *rshift::processKeyDown("rshift")
-    *rshift up::processKeyUp("rshift")
-    
-    *lctrl::processKeyDown("lctrl")
-    *lctrl up::processKeyUp("lctrl")
-    
-    *rctrl::processKeyDown("rctrl")
-    *rctrl up::processKeyUp("rctrl")
     
     *sc033::processKeyDown(",")
     *sc033 up::processKeyUp(",")
@@ -878,6 +1025,11 @@ global navigationMode := 1
 
 
 ;-------------------- Debugging
+#if debugComputer
+    pgdn::end
+    pgup::home
+#if
+
 #SC029::
 	if navigationMode = 0
 	{
