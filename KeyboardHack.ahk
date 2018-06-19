@@ -117,6 +117,16 @@ processAhkKeyboardShortcuts(activeModifiers, key)
             send #9
             return true
         }
+        if (combination = "#g")
+        {
+            send #d
+            return true
+        }
+        if (combination = "#t")
+        {
+            send #r
+            return true
+        }
         
         if (combination = "+#w")
         {
@@ -1009,8 +1019,8 @@ processAhkKeyboardShortcuts(activeModifiers, key)
     *f7::processKeyDown("f7")
     *f7 up::processKeyUp("f7")
     
-    *f8::processKeyDown("f8")
-    *f8 up::processKeyUp("f8")
+    ;*f8::processKeyDown("f8")
+    ;*f8 up::processKeyUp("f8")
     
     *f9::processKeyDown("f9")
     *f9 up::processKeyUp("f9")
@@ -1053,6 +1063,12 @@ return
 	sleep 400
 	reload
 return
+
+*f8::
+	debugInfo := "rightWinModifierActive=" . rightWinModifierActive . "`n"
+	msgbox, % debugInfo
+return
+
 
 debug(value)
 {
