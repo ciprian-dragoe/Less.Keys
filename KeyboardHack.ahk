@@ -176,9 +176,19 @@ processAhkKeyboardShortcuts(activeModifiers, key)
         
         if (ActiveWindowClass = "TfrmMyLifeMain")
         {
-            if (combination = "!q")
+            if (combination = "!w")
             {
                 run MLO.ahk 1
+                return true
+            }
+            if (combination = "!e")
+            {
+                run MLO.ahk 11
+                return true
+            }
+            if (combination = "!r")
+            {
+                run MLO.ahk 12
                 return true
             }
             if (combination = "+F1")
@@ -1038,6 +1048,11 @@ processAhkKeyboardShortcuts(activeModifiers, key)
 #if debugComputer
     pgdn::end
     pgup::home
+    
+    *f8::
+    	debugInfo := "rightWinModifierActive=" . rightWinModifierActive . "`n"
+    	msgbox, % debugInfo
+    return
 #if
 
 #SC029::
@@ -1063,12 +1078,6 @@ return
 	sleep 400
 	reload
 return
-
-*f8::
-	debugInfo := "rightWinModifierActive=" . rightWinModifierActive . "`n"
-	msgbox, % debugInfo
-return
-
 
 debug(value)
 {
