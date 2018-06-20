@@ -9,21 +9,22 @@
 global contextKey := "space"
 
 
-global contextEnter := "d"
-global contextBackspace := "f"
-global contextDelete := "s"
-global contextTab := "r"
-global contextF12 := "e"
-global contextEscape := "w"
+global contextDelete := "h"
+global contextBackspace := "j"
+global contextEnter := "k"
+global contextTab := "l"
+global contextEscape := ";"
+global contextF12 := "'"
+global contextInsert := "/"
 
-global contextLeft := "j"
-global contextDown := "k"
-global contextRight := "l"
-global contextUp := "i"
-global contextHome := "u"
-global contextEnd := "o"
-global contextPgUp := "h"
-global contextPgDn := ";"
+global contextLeft := "a"
+global contextDown := "s"
+global contextUp := "d"
+global contextRight := "f"
+global contextHome := "capslock"
+global contextEnd := "g"
+global contextPgDn := "z"
+global contextPgUp := x
 
 global context1 := ""
 global context2 := ""
@@ -36,13 +37,13 @@ global context8 := ""
 global context9 := ""
 global context0 := ""
 
-global alternativeCtrlLeft := "2"
-global alternativeShiftLeft := "3"
-global alternativeAltLeft := "4"
-global alternativeCtrlRight := "-"
-global alternativeShiftRight := "0"
-global alternativeAltRight := "9"
-global alternativeWinRight := "8"
+global alternativeCtrlLeft := "w"
+global alternativeShiftLeft := "e"
+global alternativeAltLeft := "r"
+global alternativeWinRight := "u"
+global alternativeAltRight := "i"
+global alternativeShiftRight := "o"
+global alternativeCtrlRight := "p"
 ;----------------- END OF CONFIGURATION SECTION
 
 
@@ -62,7 +63,7 @@ global navigationMode := 1
 
 
 global debugComputer := false
-if (A_ComputerName = "lenovo-x230") {
+if (A_ComputerName = "lenovo-x230" || "CIPI-ASUS-ROG") {
 	debugComputer := true
 }
 processAhkKeyboardShortcuts(activeModifiers, key)
@@ -447,6 +448,11 @@ processAhkKeyboardShortcuts(activeModifiers, key)
                 processNormalKeyDown("0")
                 return
             }
+            if (key = contextInsert)
+            {
+                processNormalKeyDown("insert")
+                return
+            }
         }
             
         processNormalKeyDown(key)
@@ -618,6 +624,11 @@ processAhkKeyboardShortcuts(activeModifiers, key)
             if (key = context0)
             {
                 processNormalKeyUp("0")
+                return
+            }
+            if (key = contextInsert)
+            {
+                processNormalKeyUp("insert")
                 return
             }
         }
@@ -1037,6 +1048,15 @@ processAhkKeyboardShortcuts(activeModifiers, key)
     
     *f10::processKeyDown("f10")
     *f10 up::processKeyUp("f10")
+    
+    *f11::processKeyDown("f11")
+    *f11 up::processKeyUp("f11")
+    
+    *f12::processKeyDown("f12")
+    *f12 up::processKeyUp("f12")
+    
+    *insert::processKeyDown("insert")
+    *insert up::processKeyUp("insert")
     ;-------------------- END OF keys that will be processed
 #if
 
