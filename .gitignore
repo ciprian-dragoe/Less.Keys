@@ -1,5 +1,6 @@
 *.sln
 .idea
+.vs
 *.ahk.bak
 MLO.ahk
 MLO.exe

@@ -740,6 +740,11 @@ processAhkKeyboardShortcuts(activeModifiers, key)
         if (key = "ctrl")
         {
             leftCtrlModifierActive := false
+            if (ctrlDeepPressed)
+            {
+                ctrlDeepPressed := false
+                send {ctrl up}
+            }
         }
         if (key = "alt")
         {
@@ -817,12 +822,21 @@ processAhkKeyboardShortcuts(activeModifiers, key)
     }
     
     global altDeepPressed := false
+    global ctrlDeepPressed := false
     getActiveModifiers(key)
     {
         result = 
         if (leftCtrlModifierActive || rightCtrlModifierActive)
         {
-            result .= "^"
+            if (key = "tab")
+            {
+                result .= "{ctrl downTemp}"
+                ctrlDeepPressed := true
+            }
+            else
+            {
+                result .= "^"
+            }
         }
         if (leftAltModifierActive || rightAltModifierActive)
         {
