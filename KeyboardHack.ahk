@@ -131,47 +131,47 @@ processAhkKeyboardShortcuts(activeModifiers, key)
         
         if (combination = "+#w")
         {
-            send #+{NumPad7}
+            send !{NumPad7}
             return true
         }
         if (combination = "+#e")
         {
-            send #+{NumPad8}
+            send !{NumPad8}
             return true
         }
         if (combination = "+#r")
         {
-            send #+{NumPad9}
+            send !{NumPad9}
             return true
         }
         if (combination = "+#s")
         {
-            send #+{NumPad4}
+            send !{NumPad4}
             return true
         }
         if (combination = "+#d")
         {
-            send #+{NumPad5}
+            send !{NumPad5}
             return true
         }
         if (combination = "+#f")
         {
-            send #+{NumPad6}
+            send !{NumPad6}
             return true
         }
         if (combination = "+#x")
         {
-            send #+{NumPad1}
+            send !{NumPad1}
             return true
         }
         if (combination = "+#c")
         {
-            send #+{NumPad2}
+            send !{NumPad2}
             return true
         }
         if (combination = "+#v")
         {
-            send #+{NumPad3}
+            send !{NumPad3}
             return true
         }
         
