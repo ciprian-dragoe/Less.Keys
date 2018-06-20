@@ -75,47 +75,54 @@ processAhkKeyboardShortcuts(activeModifiers, key)
         
         if (combination = "#w")
         {
-            send #1
+            switchWindow("1")
             return true
         }
         if (combination = "#e")
         {
-            send #2
+            switchWindow("2")
             return true
         }
         if (combination = "#r")
         {
-            send #3
+            switchWindow("3")
             return true
         }
         if (combination = "#s")
         {
-            send #4
+            switchWindow("4")
             return true
         }
         if (combination = "#d")
         {
-            send #5
+            switchWindow("5")
             return true
         }
         if (combination = "#f")
         {
-            run MLO.ahk 3
+            if (A_ComputerName = "lenovo-x230")
+            {
+                run MLO.ahk 3
+            }
+            else
+            {
+                switchWindow("6")
+            }
             return true
         }
         if (combination = "#x")
         {
-            send #7
+            switchWindow("7")
             return true
         }
         if (combination = "#c")
         {
-            send #8
+            switchWindow("8")
             return true
         }
         if (combination = "#v")
         {
-            send #9
+            switchWindow("9")
             return true
         }
         if (combination = "#g")
@@ -220,6 +227,18 @@ processAhkKeyboardShortcuts(activeModifiers, key)
         }
     }
     return false
+}
+switchWindow(key)
+{
+    if (winDeepPressed)
+    {
+        send %key%
+    }
+    else
+    {
+        send {lwin down}%key%
+        winDeepPressed := true
+    }
 }
 
 #If navigationMode = 1
@@ -786,6 +805,12 @@ processAhkKeyboardShortcuts(activeModifiers, key)
         if (key = "lwin")
         {
             rightWinModifierActive := false
+            if (winDeepPressed)
+            {
+                winDeepPressed := false
+                ;showToolTip("ridic wind") 
+                send {lwin up}
+            }
         }
         if (!rightShiftModifierActive && !rightAltModifierActive && !rightCtrlModifierActive && !rightWinModifierActive)
         {
@@ -823,6 +848,7 @@ processAhkKeyboardShortcuts(activeModifiers, key)
     
     global altDeepPressed := false
     global ctrlDeepPressed := false
+    global winDeepPressed := false
     getActiveModifiers(key)
     {
         result = 
@@ -1118,10 +1144,10 @@ debug(value)
     store(value)
 }
 
-ToolTip(value)
+showToolTip(value)
 {
     tooltip, |%value%|
-    sleep 300
+    sleep 800
     tooltip
 }
 
