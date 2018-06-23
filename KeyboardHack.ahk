@@ -55,7 +55,7 @@ global alternativeCtrlRight := "p"
 
 SetKeyDelay -1
 global timeoutStillSendSpecialContextKey := 201
-global timeoutResetTreatContextKeyAsRegularKey := 151
+global timeoutResetTreatContextKeyAsRegularKey := 351
 global allowSendContextKey := 1
 global sendSpecialContextKeyOnNormalKeyPress := false
 global navigationMode := 1
@@ -65,6 +65,7 @@ global navigationMode := 1
 global debugComputer := false
 if (A_ComputerName = "lenovo-x230" || "CIPI-ASUS-ROG") {
 	debugComputer := true
+	FileDelete, c:\Users\cipri\Desktop\debugKeyboardHack.txt
 }
 processAhkKeyboardShortcuts(activeModifiers, key)
 {
@@ -662,10 +663,12 @@ switchWindow(key)
     
     
     ;-------------------- special context management
+    global contextKeyPressed
     global alternativeLayoutActive
     global sendContextKey
     manageContextKeyDown(key)
     {
+        contextKeyPressed := true
         if !alternativeLayoutActive 
         {
             if (treatContextKeyAsRegularKey)
@@ -687,6 +690,7 @@ switchWindow(key)
     global modifierKeysAlternativeLayoutActive := false
     manageContextKeyUp(key)
     {
+        contextKeyPressed := false
         alternativeLayoutActive := false
         SetTimer, TimerTimeoutSendSpecialContextKey, OFF
         if (!treatContextKeyAsRegularKey)
@@ -827,7 +831,7 @@ switchWindow(key)
     global treatContextKeyAsRegularKey := false
     processNormalKeyDown(key)
     {
-         if (!alternativeLayoutActive)
+        if (!alternativeLayoutActive)
         {
             treatContextKeyAsRegularKey := true
             SetTimer, TriggerResetTreatContextKeyAsRegularKey, OFF
@@ -887,16 +891,21 @@ switchWindow(key)
         return result
     }
     
-    processNormalKeyUp(key)
-    {
-        Send {Blind}{%key% Up}
-        ;debug(key . " processNormalKeyUp")
-    }
-    
     TriggerResetTreatContextKeyAsRegularKey:
         SetTimer, TriggerResetTreatContextKeyAsRegularKey, OFF
         treatContextKeyAsRegularKey := false
     return
+    
+    processNormalKeyUp(key)
+    {
+        if (!contextKeyPressed)
+        {
+            treatContextKeyAsRegularKey := false
+        }
+        Send {Blind}{%key% Up}
+        ;debug(key . " processNormalKeyUp")
+    }
+    
     ;-------------------- END OF normal keys
     
     
@@ -1160,7 +1169,7 @@ send(value)
 store(value)
 {
 	FormatTime, TimeString
-	textToSend = %value%
+	textToSend = %value% |contextKeyPressed=%contextKeyPressed%|
 	FileAppend, %TimeString% - %textToSend%`n,c:\Users\cipri\Desktop\debugKeyboardHack.txt
 }
 ;-------------------- END OF Debugging
