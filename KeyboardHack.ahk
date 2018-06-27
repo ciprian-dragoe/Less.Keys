@@ -8,7 +8,6 @@
 ;----------------- CONFIGURATION SECTION
 global contextKey := "space"
 
-
 global contextDelete := "h"
 global contextBackspace := "j"
 global contextEnter := "k"
@@ -40,7 +39,7 @@ global context0 := ""
 global alternativeCtrlLeft := "w"
 global alternativeShiftLeft := "e"
 global alternativeAltLeft := "r"
-global alternativeWinRight := "u"
+global alternativeWinRight := "["
 global alternativeAltRight := "i"
 global alternativeShiftRight := "o"
 global alternativeCtrlRight := "p"
@@ -67,6 +66,7 @@ if (A_ComputerName = "lenovo-x230" || "CIPI-ASUS-ROG") {
 	debugComputer := true
 	FileDelete, c:\Users\cipri\Desktop\debugKeyboardHack.txt
 }
+
 processAhkKeyboardShortcuts(activeModifiers, key)
 {
     if (debugComputer)
@@ -300,43 +300,43 @@ switchWindow(key)
         
         if (modifierKeysAlternativeLayoutActive)
         {
-            if (key = alternativeCtrlLeft && !rigthModifierGroupFirstPressed)
+            if (key = alternativeCtrlLeft)
             {
                 processLeftSideModifierKeyDown("ctrl")
                 return		
             }
             
-            if (key = alternativeShiftLeft && !rigthModifierGroupFirstPressed)
+            if (key = alternativeShiftLeft)
             {
                 processLeftSideModifierKeyDown("shift")
                 return
             }
             
-            if (key = alternativeAltLeft && !rigthModifierGroupFirstPressed)
+            if (key = alternativeAltLeft)
             {
                 processLeftSideModifierKeyDown("alt")
                 return
             }
             
-            if (key = alternativeCtrlRight && !leftModifierGroupFirstPressed)
+            if (key = alternativeCtrlRight)
             {
                 processRightSideModifierKeyDown("ctrl")
                 return
             }
             
-            if (key = alternativeShiftRight && !leftModifierGroupFirstPressed)
+            if (key = alternativeShiftRight)
             {
                 processRightSideModifierKeyDown("shift")
                 return
             }
             
-            if (key = alternativeAltRight && !leftModifierGroupFirstPressed)
+            if (key = alternativeAltRight)
             {
                 processRightSideModifierKeyDown("alt")
                 return
             }
             
-            if (key = alternativeWinRight && !leftModifierGroupFirstPressed)
+            if (key = alternativeWinRight)
             {
                 processRightSideModifierKeyDown("lwin")
                 return
@@ -723,7 +723,11 @@ switchWindow(key)
     processLeftSideModifierKeyDown(key)
     {
         sendContextKey := false
-        leftModifierGroupFirstPressed := true
+        if (!leftModifierGroupFirstPressed )
+        {
+            leftModifierGroupFirstPressed := true
+        }
+        
         if (key = "ctrl")
         {
             leftCtrlModifierActive := true
@@ -740,7 +744,11 @@ switchWindow(key)
     processRightSideModifierKeyDown(key)
     {
         sendContextKey := false
-        rightModifierGroupFirstPressed := true
+        if (!leftModifierGroupFirstPressed)
+        {
+            rightModifierGroupFirstPressed := true
+        }
+        
         if (key = "ctrl")
         {
             rightCtrlModifierActive := true
@@ -1117,10 +1125,20 @@ switchWindow(key)
 #if debugComputer
     pgdn::end
     pgup::home
+    global leftCtrlModifierActive := false
+    global leftAltModifierActive := false
+    global leftShiftModifierActive := false
+    global rightCtrlModifierActive := false
+    global rightAltModifierActive := false
+    global rightShiftModifierActive := false
+    global rightWinModifierActive := false
+    
     
     *f8::
-    	debugInfo := "rightWinModifierActive=" . rightWinModifierActive . "`n"
-    	msgbox, % debugInfo
+    	debugInfo := "leftCtrlModifierActive=" . leftCtrlModifierActive . "`n" . "leftAltModifierActive=" . leftAltModifierActive . "`n" . "leftShiftModifierActive=" . leftShiftModifierActive . "`n" . "`n" . "rightCtrlModifierActive=" . rightCtrlModifierActive . "`n" . "rightAltModifierActive=" . rightAltModifierActive . "`n" . "rightShiftModifierActive=" . rightShiftModifierActive . "`n" . "rightWinModifierActive=" . rightWinModifierActive
+    	
+        fixStickyKeys()
+        msgbox, % debugInfo
     return
 #if
 
@@ -1152,6 +1170,12 @@ debug(value)
 {
     store(value)
 }
+
+fixStickyKeys()
+{
+    send {shift up}{alt up}{ctrl up}{lwin up}
+}
+
 
 showToolTip(value)
 {
