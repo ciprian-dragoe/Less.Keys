@@ -771,11 +771,9 @@ switchWindow(key)
     {
         contextKeyPressed := false
         alternativeLayoutActive := false
+        modifierKeysAlternativeLayoutActive := false
         SetTimer, TimerTimeoutSendSpecialContextKey, OFF
-        if (!rightModifierGroupPressed && !leftModifierGroupPressed)
-        {
-            modifierKeysAlternativeLayoutActive := false
-        }
+        
         if (sendContextKey && allowSendContextKey)
         {
             send {blind}{%key%}
@@ -796,7 +794,7 @@ switchWindow(key)
     global leftAltModifierActive := false
     global leftShiftModifierActive := false
     global rightCtrlModifierActive := false
-    global rightAltModifierActive := false
+    global rightAltModifierActive := false 
     global rightShiftModifierActive := false
     global rightWinModifierActive := false
     processLeftSideModifierKeyDown(key)
@@ -1177,14 +1175,14 @@ switchWindow(key)
     pgdn::end
     pgup::home
     
-    *f8::
-    	debugInfo := "leftCtrlModifierActive=" . leftCtrlModifierActive . "`n" . "leftAltModifierActive=" . leftAltModifierActive . "`n" . "leftShiftModifierActive=" . leftShiftModifierActive . "`n" . "`n" . "rightCtrlModifierActive=" . rightCtrlModifierActive . "`n" . "rightAltModifierActive=" . rightAltModifierActive . "`n" . "rightShiftModifierActive=" . rightShiftModifierActive . "`n" . "rightWinModifierActive=" . rightWinModifierActive
+    *f9::
+    	debugInfo := "leftModifierGroupPressed=" . leftModifierGroupPressed . "`n" . "leftCtrlModifierActive=" . leftCtrlModifierActive . "`n" . "leftAltModifierActive=" . leftAltModifierActive . "`n" . "leftShiftModifierActive=" . leftShiftModifierActive . "`n" . "`n" . "rightModifierGroupPressed=" . rightModifierGroupPressed . "`n" . "rightCtrlModifierActive=" . rightCtrlModifierActive . "`n" . "rightAltModifierActive=" . rightAltModifierActive . "`n" . "rightShiftModifierActive=" . rightShiftModifierActive . "`n" . "rightWinModifierActive=" . rightWinModifierActive
     	
         fixStickyKeys()
         msgbox, % debugInfo
     return
     
-    *f9::
+    *f8::
         debugInfo := "Array taste apasate contine: `n`"
         For index, value in activePressedKeys
         {
