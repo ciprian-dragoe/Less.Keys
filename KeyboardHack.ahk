@@ -58,6 +58,7 @@ global timeoutResetTreatContextKeyAsRegularKey := 351
 global allowSendContextKey := 1
 global sendSpecialContextKeyOnNormalKeyPress := false
 global navigationMode := 1
+global activePressedKeys := []
 
 
 
@@ -474,8 +475,29 @@ switchWindow(key)
                 return
             }
         }
-            
+        
+        addToActivePressedKeys(key)
         processNormalKeyDown(key)
+    }
+    
+    addToActivePressedKeys(key)
+    {
+        ;showToolTip("Intrat cu valoarea: " . key)
+        if (activePressedKeys.Length() < 0)
+        {
+            activePressedKeys.Push(key)
+        }
+        else 
+        {
+            itemNotPresent := true
+            For index, value in activePressedKeys
+            {
+                if (value = key)
+                    itemNotPresent := false
+            }
+            if (itemNotPresent)
+                activePressedKeys.Push(key)
+        }
     }
     
     processKeyUp(key)
@@ -653,7 +675,17 @@ switchWindow(key)
             }
         }
         
+        removeFromActivePressedKeys(key)
         processNormalKeyUp(key)
+    }
+    
+    removeFromActivePressedKeys(key)
+    {
+        For index, value in activePressedKeys
+        {
+            if (value = key)
+                activePressedKeys.Remove(index)
+        }
     }
     
     ;-------------------- END OF process key
@@ -681,6 +713,7 @@ switchWindow(key)
                 modifierKeysAlternativeLayoutActive := true
                 alternativeLayoutActive := true
                 sendContextKey := true
+                SetTimer, TimerTimeoutSendSpecialContextKey, OFF
                 SetTimer, TimerTimeoutSendSpecialContextKey, %timeoutStillSendSpecialContextKey%
             }
             ;debug(key . " manageContextKeyDown")
@@ -1100,8 +1133,8 @@ switchWindow(key)
     ;*f8::processKeyDown("f8")
     ;*f8 up::processKeyUp("f8")
     
-    *f9::processKeyDown("f9")
-    *f9 up::processKeyUp("f9")
+    ;*f9::processKeyDown("f9")
+    ;*f9 up::processKeyUp("f9")
     
     *f10::processKeyDown("f10")
     *f10 up::processKeyUp("f10")
@@ -1125,19 +1158,21 @@ switchWindow(key)
 #if debugComputer
     pgdn::end
     pgup::home
-    global leftCtrlModifierActive := false
-    global leftAltModifierActive := false
-    global leftShiftModifierActive := false
-    global rightCtrlModifierActive := false
-    global rightAltModifierActive := false
-    global rightShiftModifierActive := false
-    global rightWinModifierActive := false
-    
     
     *f8::
     	debugInfo := "leftCtrlModifierActive=" . leftCtrlModifierActive . "`n" . "leftAltModifierActive=" . leftAltModifierActive . "`n" . "leftShiftModifierActive=" . leftShiftModifierActive . "`n" . "`n" . "rightCtrlModifierActive=" . rightCtrlModifierActive . "`n" . "rightAltModifierActive=" . rightAltModifierActive . "`n" . "rightShiftModifierActive=" . rightShiftModifierActive . "`n" . "rightWinModifierActive=" . rightWinModifierActive
     	
         fixStickyKeys()
+        msgbox, % debugInfo
+    return
+    
+    *f9::
+        debugInfo := "Array taste apasate contine: `n`"
+        For index, value in activePressedKeys
+        {
+            debugInfo := debugInfo . value . "`n"
+        }
+    
         msgbox, % debugInfo
     return
 #if
@@ -1180,7 +1215,7 @@ fixStickyKeys()
 showToolTip(value)
 {
     tooltip, |%value%|
-    sleep 800
+    sleep 1800
     tooltip
 }
 
