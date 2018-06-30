@@ -54,7 +54,6 @@ global alternativeCtrlRight := "p"
 
 SetKeyDelay -1
 global timeoutStillSendSpecialContextKey := 201
-global timeoutResetTreatContextKeyAsRegularKey := 351
 global allowSendContextKey := 1
 global sendSpecialContextKeyOnNormalKeyPress := false
 global navigationMode := 1
@@ -246,8 +245,8 @@ switchWindow(key)
 #If navigationMode = 1
     ;-------------------- process key
     
-    global leftModifierGroupFirstPressed := false
-    global rightModifierGroupFirstPressed := false
+    global leftModifierGroupPressed := false
+    global rightModifierGroupPressed := false
     processKeyDown(key)
     {
         if (key = contextKey)
@@ -256,44 +255,51 @@ switchWindow(key)
             return
         }
         
-        if (leftModifierGroupFirstPressed)
+        if (leftModifierGroupPressed)
         {
             if (key = alternativeCtrlLeft)
             {
+                sendContextKey := false
                 processLeftSideModifierKeyDown("ctrl")
                 return		
             }
             if (key = alternativeAltLeft)
             {
+                sendContextKey := false
                 processLeftSideModifierKeyDown("alt")
                 return		
             }
             if (key = alternativeShiftLeft)
             {
+                sendContextKey := false
                 processLeftSideModifierKeyDown("shift")
                 return		
             }
         }
         
-        if (rightModifierGroupFirstPressed)
+        if (rightModifierGroupPressed)
         {
             if (key = alternativeCtrlRight)
             {
+                sendContextKey := false
                 processRightSideModifierKeyDown("ctrl")
                 return		
             }
             if (key = alternativeAltRight)
             {
+                sendContextKey := false
                 processRightSideModifierKeyDown("alt")
                 return		
             }
             if (key = alternativeShiftRight)
             {
+                sendContextKey := false
                 processRightSideModifierKeyDown("shift")
                 return		
             }
             if (key = alternativeWinRight)
             {
+                sendContextKey := false
                 processRightSideModifierKeyDown("lwin")
                 return		
             }
@@ -303,42 +309,49 @@ switchWindow(key)
         {
             if (key = alternativeCtrlLeft)
             {
+                sendContextKey := false
                 processLeftSideModifierKeyDown("ctrl")
                 return		
             }
             
             if (key = alternativeShiftLeft)
             {
+                sendContextKey := false
                 processLeftSideModifierKeyDown("shift")
                 return
             }
             
             if (key = alternativeAltLeft)
             {
+                sendContextKey := false
                 processLeftSideModifierKeyDown("alt")
                 return
             }
             
             if (key = alternativeCtrlRight)
             {
+                sendContextKey := false
                 processRightSideModifierKeyDown("ctrl")
                 return
             }
             
             if (key = alternativeShiftRight)
             {
+                sendContextKey := false
                 processRightSideModifierKeyDown("shift")
                 return
             }
             
             if (key = alternativeAltRight)
             {
+                sendContextKey := false
                 processRightSideModifierKeyDown("alt")
                 return
             }
             
             if (key = alternativeWinRight)
             {
+                sendContextKey := false
                 processRightSideModifierKeyDown("lwin")
                 return
             }
@@ -348,135 +361,163 @@ switchWindow(key)
         {
             if (key = contextLeft)
             {
+                sendContextKey := false
                 processNormalKeyDown("left")
                 return
             }
             if (key = contextDown)
             {
+                sendContextKey := false
                 processNormalKeyDown("down")
                 return
             }
             if (key = contextRight)
             {
+                sendContextKey := false
                 processNormalKeyDown("right")
                 return
             }
             if (key = contextUp)
             {
+                sendContextKey := false
                 processNormalKeyDown("up")
                 return
             }
             if (key = contextHome)
             {
+                sendContextKey := false
                 processNormalKeyDown("home")
                 return
             }
             if (key = contextEnd)
             {
+                sendContextKey := false
                 processNormalKeyDown("end")
                 return
             }
             if (key = contextPgDn)
             {
+                sendContextKey := false
                 processNormalKeyDown("PgDn")
                 return
             }
             if (key = contextPgUp)
             {
+                sendContextKey := false
                 processNormalKeyDown("PgUp")
                 return
             }
     
             if (key = contextEscape)
             {
+                sendContextKey := false
                 processNormalKeyDown("escape")
                 return
             }
             if (key = contextF12)
             {
+                sendContextKey := false
                 processNormalKeyDown("F12")
                 return
             }
             if (key = contextTab)
             {
+                sendContextKey := false
                 processNormalKeyDown("tab")
                 return
             }
             if (key = contextEnter)
             {
+                sendContextKey := false
                 processNormalKeyDown("enter")
                 return
             }
             if (key = contextBackspace)
             {
+                sendContextKey := false
                 processNormalKeyDown("backspace")
                 return
             }
             if (key = contextDelete)
             {
+                sendContextKey := false
                 processNormalKeyDown("delete")
                 return
             }
     
             if (key = context1)
             {
+                sendContextKey := false
                 processNormalKeyDown("1")
                 return
             }
             if (key = context2)
             {
+                sendContextKey := false
                 processNormalKeyDown("2")
                 return
             }
             if (key = context3)
             {
+                sendContextKey := false
                 processNormalKeyDown("3")
                 return
             }
     
             if (key = context4)
             {
+                sendContextKey := false
                 processNormalKeyDown("4")
                 return
             }
             if (key = context5)
             {
+                sendContextKey := false
                 processNormalKeyDown("5")
                 return
             }
             if (key = context6)
             {
+                sendContextKey := false
                 processNormalKeyDown("6")
                 return
             }
             if (key = context7)
             {
+                sendContextKey := false
                 processNormalKeyDown("7")
                 return
             }
             if (key = context8)
             {
+                sendContextKey := false
                 processNormalKeyDown("8")
                 return
             }
             if (key = context9)
             {
+                sendContextKey := false
                 processNormalKeyDown("9")
                 return
             }
             if (key = context0)
             {
+                sendContextKey := false
                 processNormalKeyDown("0")
                 return
             }
             if (key = contextInsert)
             {
+                sendContextKey := false
                 processNormalKeyDown("insert")
                 return
             }
         }
         
-        addToActivePressedKeys(key)
+        if (!alternativeLayoutActive)
+        {
+            addToActivePressedKeys(key)
+        }
         processNormalKeyDown(key)
     }
     
@@ -703,7 +744,7 @@ switchWindow(key)
         contextKeyPressed := true
         if !alternativeLayoutActive 
         {
-            if (treatContextKeyAsRegularKey)
+            if (treatContextKeyAsRegularKey())
             {
                 send {blind}{%key%}
                 sendContextKey := false
@@ -720,13 +761,18 @@ switchWindow(key)
         }
     }
     
+    treatContextKeyAsRegularKey()
+    {
+        return activePressedKeys.Length() > 0
+    }
+    
     global modifierKeysAlternativeLayoutActive := false
     manageContextKeyUp(key)
     {
         contextKeyPressed := false
         alternativeLayoutActive := false
         SetTimer, TimerTimeoutSendSpecialContextKey, OFF
-        if (!treatContextKeyAsRegularKey)
+        if (!rightModifierGroupPressed && !leftModifierGroupPressed)
         {
             modifierKeysAlternativeLayoutActive := false
         }
@@ -755,11 +801,7 @@ switchWindow(key)
     global rightWinModifierActive := false
     processLeftSideModifierKeyDown(key)
     {
-        sendContextKey := false
-        if (!leftModifierGroupFirstPressed )
-        {
-            leftModifierGroupFirstPressed := true
-        }
+        leftModifierGroupPressed := true
         
         if (key = "ctrl")
         {
@@ -776,11 +818,7 @@ switchWindow(key)
     }
     processRightSideModifierKeyDown(key)
     {
-        sendContextKey := false
-        if (!leftModifierGroupFirstPressed)
-        {
-            rightModifierGroupFirstPressed := true
-        }
+        rightModifierGroupPressed := true
         
         if (key = "ctrl")
         {
@@ -825,7 +863,7 @@ switchWindow(key)
         }
         if (!leftShiftModifierActive && !leftAltModifierActive && !leftCtrlModifierActive)
         {
-            leftModifierGroupFirstPressed := false
+            leftModifierGroupPressed := false
         }
     }
     processRightSideModifierKeyUp(key)
@@ -859,7 +897,7 @@ switchWindow(key)
         }
         if (!rightShiftModifierActive && !rightAltModifierActive && !rightCtrlModifierActive && !rightWinModifierActive)
         {
-            rightModifierGroupFirstPressed := false
+            rightModifierGroupPressed := false
         }
     }
     ;-------------------- END OF special context management
@@ -869,19 +907,8 @@ switchWindow(key)
     
     
     ;-------------------- normal keys
-    global treatContextKeyAsRegularKey := false
     processNormalKeyDown(key)
     {
-        if (!alternativeLayoutActive)
-        {
-            treatContextKeyAsRegularKey := true
-            SetTimer, TriggerResetTreatContextKeyAsRegularKey, OFF
-            SetTimer, TriggerResetTreatContextKeyAsRegularKey, %timeoutResetTreatContextKeyAsRegularKey%
-        }
-        else
-        {
-            sendContextKey := false
-        }
         activeModifiers := getActiveModifiers(key)
         if (!processAhkKeyboardShortcuts(activeModifiers, key))
         {
@@ -932,17 +959,8 @@ switchWindow(key)
         return result
     }
     
-    TriggerResetTreatContextKeyAsRegularKey:
-        SetTimer, TriggerResetTreatContextKeyAsRegularKey, OFF
-        treatContextKeyAsRegularKey := false
-    return
-    
     processNormalKeyUp(key)
     {
-        if (!contextKeyPressed)
-        {
-            treatContextKeyAsRegularKey := false
-        }
         Send {Blind}{%key% Up}
         ;debug(key . " processNormalKeyUp")
     }
