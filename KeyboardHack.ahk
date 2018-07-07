@@ -53,7 +53,8 @@ global alternativeCtrlRight := "p"
 
 
 SetKeyDelay -1
-global timeoutStillSendSpecialContextKey := 201
+global timeoutStillSendSpecialContextKey := 351
+global timerTimeoutTreatContextKeyAsRegularKey := 81
 global allowSendContextKey := 1
 global sendSpecialContextKeyOnNormalKeyPress := false
 global navigationMode := 1
@@ -739,18 +740,24 @@ switchWindow(key)
     global contextKeyPressed
     global alternativeLayoutActive
     global sendContextKey
+    global treatContextKeyAsRegularKey
+    global stopManagingContextKey
     manageContextKeyDown(key)
     {
         contextKeyPressed := true
-        if !alternativeLayoutActive 
+        if (!stopManagingContextKey)
         {
-            if (treatContextKeyAsRegularKey())
+            if (canTreatContextKeyAsRegularKey())
             {
+                debug(key . " SENT on key down")
                 send {blind}{%key%}
                 sendContextKey := false
+                stopManagingContextKey := true
+                treatContextKeyAsRegularKey := false
             }
             else
             {
+                stopManagingContextKey := true
                 modifierKeysAlternativeLayoutActive := true
                 alternativeLayoutActive := true
                 sendContextKey := true
@@ -761,14 +768,15 @@ switchWindow(key)
         }
     }
     
-    treatContextKeyAsRegularKey()
+    canTreatContextKeyAsRegularKey()
     {
-        return activePressedKeys.Length() > 0
+        return treatContextKeyAsRegularKey || activePressedKeys.Length() > 0
     }
     
     global modifierKeysAlternativeLayoutActive := false
     manageContextKeyUp(key)
     {
+        stopManagingContextKey := false
         contextKeyPressed := false
         alternativeLayoutActive := false
         modifierKeysAlternativeLayoutActive := false
@@ -776,6 +784,7 @@ switchWindow(key)
         
         if (sendContextKey && allowSendContextKey)
         {
+            debug(key . " SENT on key up")
             send {blind}{%key%}
         }
         ;debug(key . " manageContextKeyUp")
@@ -911,7 +920,7 @@ switchWindow(key)
         if (!processAhkKeyboardShortcuts(activeModifiers, key))
         {
             send {blind}%activeModifiers%{%key% down}
-            ;debug(key . " processNormalKeyDown")
+            debug(key . " Down")
         }
         
     }
@@ -959,9 +968,18 @@ switchWindow(key)
     
     processNormalKeyUp(key)
     {
+        treatContextKeyAsRegularKey := true        
+        SetTimer, TimerTreatContextKeyAsRegularKey, OFF
+        SetTimer, TimerTreatContextKeyAsRegularKey, %timerTimeoutTreatContextKeyAsRegularKey%
+        
         Send {Blind}{%key% Up}
-        ;debug(key . " processNormalKeyUp")
+        debug(key . " Up")
     }
+    
+    TimerTreatContextKeyAsRegularKey:
+        treatContextKeyAsRegularKey := false
+        SetTimer, TimerTreatContextKeyAsRegularKey, OFF
+    return
     
     ;-------------------- END OF normal keys
     
@@ -1244,7 +1262,7 @@ send(value)
 store(value)
 {
 	FormatTime, TimeString
-	textToSend = %value% |contextKeyPressed=%contextKeyPressed%|
+	textToSend = %value% |contextKeyPressed=%contextKeyPressed%| - |alternativeLayoutActive=%alternativeLayoutActive%|
 	FileAppend, %TimeString% - %textToSend%`n,c:\Users\cipri\Desktop\debugKeyboardHack.txt
 }
 ;-------------------- END OF Debugging
