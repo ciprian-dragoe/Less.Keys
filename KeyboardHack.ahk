@@ -717,6 +717,9 @@ switchWindow(key)
             }
         }
         
+        treatContextKeyAsRegularKey := true        
+        SetTimer, TimerTreatContextKeyAsRegularKey, OFF
+        SetTimer, TimerTreatContextKeyAsRegularKey, %timerTimeoutTreatContextKeyAsRegularKey%        
         removeFromActivePressedKeys(key)
         processNormalKeyUp(key)
     }
@@ -968,10 +971,6 @@ switchWindow(key)
     
     processNormalKeyUp(key)
     {
-        treatContextKeyAsRegularKey := true        
-        SetTimer, TimerTreatContextKeyAsRegularKey, OFF
-        SetTimer, TimerTreatContextKeyAsRegularKey, %timerTimeoutTreatContextKeyAsRegularKey%
-        
         Send {Blind}{%key% Up}
         debug(key . " Up")
     }
