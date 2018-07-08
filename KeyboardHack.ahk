@@ -54,7 +54,7 @@ global alternativeCtrlRight := "p"
 
 SetKeyDelay -1
 global timeoutStillSendSpecialContextKey := 351
-global timerTimeoutTreatContextKeyAsRegularKey := 81
+global timerTimeoutTreatContextKeyAsRegularKey := 31
 global allowSendContextKey := 1
 global sendSpecialContextKeyOnNormalKeyPress := false
 global navigationMode := 1
@@ -717,9 +717,11 @@ switchWindow(key)
             }
         }
         
-        treatContextKeyAsRegularKey := true        
-        SetTimer, TimerTreatContextKeyAsRegularKey, OFF
-        SetTimer, TimerTreatContextKeyAsRegularKey, %timerTimeoutTreatContextKeyAsRegularKey%        
+        ; EXTRA CONDITION CAN BE RE-ENABLED IF CHANGING CONTEXT SOMETIME FAILS
+        ;treatContextKeyAsRegularKey := true        
+        ;SetTimer, TimerTreatContextKeyAsRegularKey, OFF
+        ;SetTimer, TimerTreatContextKeyAsRegularKey, %timerTimeoutTreatContextKeyAsRegularKey%        
+        
         removeFromActivePressedKeys(key)
         processNormalKeyUp(key)
     }
@@ -752,7 +754,7 @@ switchWindow(key)
         {
             if (canTreatContextKeyAsRegularKey())
             {
-                debug(key . " SENT on key down")
+                ;debug(key . " SENT on key down")
                 send {blind}{%key%}
                 sendContextKey := false
                 stopManagingContextKey := true
@@ -787,7 +789,7 @@ switchWindow(key)
         
         if (sendContextKey && allowSendContextKey)
         {
-            debug(key . " SENT on key up")
+            ;debug(key . " SENT on key up")
             send {blind}{%key%}
         }
         ;debug(key . " manageContextKeyUp")
@@ -923,7 +925,7 @@ switchWindow(key)
         if (!processAhkKeyboardShortcuts(activeModifiers, key))
         {
             send {blind}%activeModifiers%{%key% down}
-            debug(key . " Down")
+            ;debug(key . " Down")
         }
         
     }
@@ -972,7 +974,7 @@ switchWindow(key)
     processNormalKeyUp(key)
     {
         Send {Blind}{%key% Up}
-        debug(key . " Up")
+        ;debug(key . " Up")
     }
     
     TimerTreatContextKeyAsRegularKey:
@@ -1163,8 +1165,8 @@ switchWindow(key)
     *f7::processKeyDown("f7")
     *f7 up::processKeyUp("f7")
     
-    ;*f8::processKeyDown("f8")
-    ;*f8 up::processKeyUp("f8")
+    *f8::processKeyDown("f8")
+    *f8 up::processKeyUp("f8")
     
     ;*f9::processKeyDown("f9")
     ;*f9 up::processKeyUp("f9")
@@ -1196,16 +1198,6 @@ switchWindow(key)
     	debugInfo := "leftModifierGroupPressed=" . leftModifierGroupPressed . "`n" . "leftCtrlModifierActive=" . leftCtrlModifierActive . "`n" . "leftAltModifierActive=" . leftAltModifierActive . "`n" . "leftShiftModifierActive=" . leftShiftModifierActive . "`n" . "`n" . "rightModifierGroupPressed=" . rightModifierGroupPressed . "`n" . "rightCtrlModifierActive=" . rightCtrlModifierActive . "`n" . "rightAltModifierActive=" . rightAltModifierActive . "`n" . "rightShiftModifierActive=" . rightShiftModifierActive . "`n" . "rightWinModifierActive=" . rightWinModifierActive
     	
         fixStickyKeys()
-        msgbox, % debugInfo
-    return
-    
-    *f8::
-        debugInfo := "Array taste apasate contine: `n`"
-        For index, value in activePressedKeys
-        {
-            debugInfo := debugInfo . value . "`n"
-        }
-    
         msgbox, % debugInfo
     return
 #if
