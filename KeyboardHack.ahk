@@ -717,10 +717,9 @@ switchWindow(key)
             }
         }
         
-        ; EXTRA CONDITION CAN BE RE-ENABLED IF CHANGING CONTEXT SOMETIME FAILS
-        ;treatContextKeyAsRegularKey := true        
-        ;SetTimer, TimerTreatContextKeyAsRegularKey, OFF
-        ;SetTimer, TimerTreatContextKeyAsRegularKey, %timerTimeoutTreatContextKeyAsRegularKey%        
+        treatContextKeyAsRegularKey := true        
+        SetTimer, TimerTreatContextKeyAsRegularKey, OFF
+        SetTimer, TimerTreatContextKeyAsRegularKey, %timerTimeoutTreatContextKeyAsRegularKey%        
         
         removeFromActivePressedKeys(key)
         processNormalKeyUp(key)
