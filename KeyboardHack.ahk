@@ -54,7 +54,7 @@ global alternativeCtrlRight := "p"
 
 SetKeyDelay -1
 global timeoutStillSendSpecialContextKey := 311
-global timerTimeoutTreatContextKeyAsRegularKey := 141
+global timerTimeoutTreatContextKeyAsRegularKey := 41
 global allowSendContextKey := 1
 global sendSpecialContextKeyOnNormalKeyPress := false
 global navigationMode := 1
@@ -551,132 +551,8 @@ switchWindow(key)
         
         if (alternativeLayoutActive)
         {
-            if (key = contextLeft)
+            if(IsModifierUp(key))
             {
-                processNormalKeyUp("left")
-                return
-            }
-            if (key = contextDown)
-            {
-                processNormalKeyUp("down")
-                return
-            }
-            if (key = contextRight)
-            {
-                processNormalKeyUp("right")
-                return
-            }
-            if (key = contextUp)
-            {
-                processNormalKeyUp("up")
-                return
-            }
-            if (key = contextHome)
-            {
-                processNormalKeyUp("home")
-                return
-            }
-            if (key = contextEnd)
-            {
-                processNormalKeyUp("end")
-                return
-            }
-            if (key = contextPgDn)
-            {
-                processNormalKeyUp("PgDn")
-                return
-            }
-            if (key = contextPgUp)
-            {
-                processNormalKeyUp("PgUp")
-                return
-            }
-    
-            if (key = contextEscape)
-            {
-                processNormalKeyUp("escape")
-                return
-            }
-            if (key = contextF12)
-            {
-                processNormalKeyUp("F12")
-                return
-            }
-            if (key = contextTab)
-            {
-                processNormalKeyUp("tab")
-                return
-            }
-            if (key = contextEnter)
-            {
-                processNormalKeyUp("enter")
-                return
-            }
-            if (key = contextBackspace)
-            {
-                processNormalKeyUp("backspace")
-                return
-            }
-            if (key = contextDelete)
-            {
-                processNormalKeyUp("delete")
-                return
-            }
-    
-            if (key = context1)
-            {
-                processNormalKeyUp("1")
-                return
-            }
-            if (key = context2)
-            {
-                processNormalKeyUp("2")
-                return
-            }
-            if (key = context3)
-            {
-                processNormalKeyUp("3")
-                return
-            }
-    
-            if (key = context4)
-            {
-                processNormalKeyUp("4")
-                return
-            }
-            if (key = context5)
-            {
-                processNormalKeyUp("5")
-                return
-            }
-            if (key = context6)
-            {
-                processNormalKeyUp("6")
-                return
-            }
-            if (key = context7)
-            {
-                processNormalKeyUp("7")
-                return
-            }
-            if (key = context8)
-            {
-                processNormalKeyUp("8")
-                return
-            }
-            if (key = context9)
-            {
-                processNormalKeyUp("9")
-                return
-            }
-            if (key = context0)
-            {
-                processNormalKeyUp("0")
-                return
-            }
-            if (key = contextInsert)
-            {
-                processNormalKeyUp("insert")
                 return
             }
         }
@@ -735,6 +611,140 @@ switchWindow(key)
         if (key = alternativeWinRight)
         {
             processRightSideModifierKeyUp("lwin")
+            return true
+        }
+        
+        return false
+    }
+    
+    IsModifierUp(key)
+    {
+        if (key = contextLeft)
+        {
+            processNormalKeyUp("left")
+            return true
+        }
+        if (key = contextDown)
+        {
+            processNormalKeyUp("down")
+            return true
+        }
+        if (key = contextRight)
+        {
+            processNormalKeyUp("right")
+            return true
+        }
+        if (key = contextUp)
+        {
+            processNormalKeyUp("up")
+            return true
+        }
+        if (key = contextHome)
+        {
+            processNormalKeyUp("home")
+            return true
+        }
+        if (key = contextEnd)
+        {
+            processNormalKeyUp("end")
+            return true
+        }
+        if (key = contextPgDn)
+        {
+            processNormalKeyUp("PgDn")
+            return true
+        }
+        if (key = contextPgUp)
+        {
+            processNormalKeyUp("PgUp")
+            return true
+        }
+
+        if (key = contextEscape)
+        {
+            processNormalKeyUp("escape")
+            return true
+        }
+        if (key = contextF12)
+        {
+            processNormalKeyUp("F12")
+            return true
+        }
+        if (key = contextTab)
+        {
+            processNormalKeyUp("tab")
+            return true
+        }
+        if (key = contextEnter)
+        {
+            processNormalKeyUp("enter")
+            return true
+        }
+        if (key = contextBackspace)
+        {
+            processNormalKeyUp("backspace")
+            return true
+        }
+        if (key = contextDelete)
+        {
+            processNormalKeyUp("delete")
+            return true
+        }
+
+        if (key = context1)
+        {
+            processNormalKeyUp("1")
+            return true
+        }
+        if (key = context2)
+        {
+            processNormalKeyUp("2")
+            return true
+        }
+        if (key = context3)
+        {
+            processNormalKeyUp("3")
+            return true
+        }
+
+        if (key = context4)
+        {
+            processNormalKeyUp("4")
+            return true
+        }
+        if (key = context5)
+        {
+            processNormalKeyUp("5")
+            return true
+        }
+        if (key = context6)
+        {
+            processNormalKeyUp("6")
+            return true
+        }
+        if (key = context7)
+        {
+            processNormalKeyUp("7")
+            return true
+        }
+        if (key = context8)
+        {
+            processNormalKeyUp("8")
+            return true
+        }
+        if (key = context9)
+        {
+            processNormalKeyUp("9")
+            return true
+        }
+        if (key = context0)
+        {
+            processNormalKeyUp("0")
+            return true
+        }
+        if (key = contextInsert)
+        {
+            processNormalKeyUp("insert")
             return true
         }
         
