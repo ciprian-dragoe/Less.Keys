@@ -541,39 +541,12 @@ switchWindow(key)
             return
         }
         
-        if (key = alternativeCtrlLeft)
+        if(IsAlternativeLeftModifierdUp(key))
         {
-            processLeftSideModifierKeyUp("ctrl")
         }
         
-        if (key = alternativeShiftLeft)
+        if(IsAlternativeRightModifierdUp(key))
         {
-            processLeftSideModifierKeyUp("shift")
-        }
-        
-        if (key = alternativeAltLeft)
-        {
-            processLeftSideModifierKeyUp("alt")
-        }
-        
-        if (key = alternativeCtrlRight)
-        {
-            processRightSideModifierKeyUp("ctrl")
-        }
-        
-        if (key = alternativeShiftRight)
-        {
-            processRightSideModifierKeyUp("shift")
-        }
-        
-        if (key = alternativeAltRight)
-        {
-            processRightSideModifierKeyUp("alt")
-        }
-        
-        if (key = alternativeWinRight)
-        {
-            processRightSideModifierKeyUp("lwin")
         }
         
         if (alternativeLayoutActive)
@@ -714,6 +687,58 @@ switchWindow(key)
         
         removeFromActivePressedKeys(key)
         processNormalKeyUp(key)
+    }
+    
+    IsAlternativeLeftModifierdUp(key)
+    {
+        if (key = alternativeCtrlLeft)
+        {
+            processLeftSideModifierKeyUp("ctrl")
+            return true
+        }
+        
+        if (key = alternativeShiftLeft)
+        {
+            processLeftSideModifierKeyUp("shift")
+            return true
+        }
+        
+        if (key = alternativeAltLeft)
+        {
+            processLeftSideModifierKeyUp("alt")
+            return true
+        }
+        
+        return false
+    }
+    
+    IsAlternativeRightModifierdUp(key)
+    {
+        if (key = alternativeCtrlRight)
+        {
+            processRightSideModifierKeyUp("ctrl")
+            return true
+        }
+        
+        if (key = alternativeShiftRight)
+        {
+            processRightSideModifierKeyUp("shift")
+            return true
+        }
+        
+        if (key = alternativeAltRight)
+        {
+            processRightSideModifierKeyUp("alt")
+            return true
+        }
+        
+        if (key = alternativeWinRight)
+        {
+            processRightSideModifierKeyUp("lwin")
+            return true
+        }
+        
+        return false
     }
     
     removeFromActivePressedKeys(key)
