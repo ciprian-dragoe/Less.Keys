@@ -557,9 +557,9 @@ switchWindow(key)
             }
         }
         
-        treatContextKeyAsRegularKey := true        
-        SetTimer, TimerTreatContextKeyAsRegularKey, OFF
-        SetTimer, TimerTreatContextKeyAsRegularKey, %timerTimeoutTreatContextKeyAsRegularKey%        
+        ;treatContextKeyAsRegularKey := true        
+        ;SetTimer, TimerTreatContextKeyAsRegularKey, OFF
+        ;SetTimer, TimerTreatContextKeyAsRegularKey, %timerTimeoutTreatContextKeyAsRegularKey%        
         
         removeFromActivePressedKeys(key)
         processNormalKeyUp(key)
@@ -794,7 +794,7 @@ switchWindow(key)
                 SetTimer, TimerTimeoutSendSpecialContextKey, OFF
                 SetTimer, TimerTimeoutSendSpecialContextKey, %timeoutStillSendSpecialContextKey%
             }
-            ;debug(key . " manageContextKeyDown")
+            debug(key . " manageContextKeyDown")
         }
     }
     
@@ -814,10 +814,9 @@ switchWindow(key)
         
         if (sendContextKey && allowSendContextKey)
         {
-            ;debug(key . " SENT on key up")
             send {blind}{%key%}
         }
-        ;debug(key . " manageContextKeyUp")
+        debug(key . " manageContextKeyUp")
     }
     
     TimerTimeoutSendSpecialContextKey:
@@ -843,14 +842,17 @@ switchWindow(key)
         if (key = "ctrl")
         {
             leftCtrlModifierActive := true
+            debug("Lctrl" . " down")
         }
         if (key = "alt")
         {
             leftAltModifierActive := true
+            debug("Lalt" . " down")
         }
         if (key = "shift")
         {
             leftShiftModifierActive := true
+            debug("Lshift" . " down")
         }    
     }
     processRightSideModifierKeyDown(key)
@@ -860,18 +862,22 @@ switchWindow(key)
         if (key = "ctrl")
         {
             rightCtrlModifierActive := true
+            debug("Rctrl" . " down")
         }
         if (key = "alt")
         {
             rightAltModifierActive := true
+            debug("Ralt" . " down")
         }
         if (key = "shift")
         {
             rightShiftModifierActive := true
+            debug("Rshift" . " down")
         }
         if (key = "lwin")
         {
             rightWinModifierActive := true
+            debug("Rwin" . "down")
         }
     }
     processLeftSideModifierKeyUp(key)
@@ -879,6 +885,7 @@ switchWindow(key)
         if (key = "ctrl")
         {
             leftCtrlModifierActive := false
+            debug("Lctrl" . " up")
             if (ctrlDeepPressed)
             {
                 ctrlDeepPressed := false
@@ -888,6 +895,7 @@ switchWindow(key)
         if (key = "alt")
         {
             leftAltModifierActive := false
+            debug("Lalt" . " up")
             if (altDeepPressed)
             {
                 altDeepPressed := false
@@ -897,6 +905,7 @@ switchWindow(key)
         if (key = "shift")
         {
             leftShiftModifierActive := false
+            debug("Lshift" . " up")
         }
         if (!leftShiftModifierActive && !leftAltModifierActive && !leftCtrlModifierActive)
         {
@@ -908,10 +917,12 @@ switchWindow(key)
         if (key = "ctrl")
         {
             rightCtrlModifierActive := false
+            debug("Rctrl" . " up")
         }
         if (key = "alt")
         {
             rightAltModifierActive := false
+            debug("Ralt" . " up")
             if (altDeepPressed)
             {
                 altDeepPressed := false
@@ -921,10 +932,12 @@ switchWindow(key)
         if (key = "shift")
         {
             rightShiftModifierActive := false
+            debug("Rshift" . " up")
         }
         if (key = "lwin")
         {
             rightWinModifierActive := false
+            debug("Rwin" . " up")
             if (winDeepPressed)
             {
                 winDeepPressed := false
@@ -950,7 +963,7 @@ switchWindow(key)
         if (!processAhkKeyboardShortcuts(activeModifiers, key))
         {
             send {blind}%activeModifiers%{%key% down}
-            ;debug(key . " Down")
+            debug(key . " Down")
         }
         
     }
@@ -999,7 +1012,7 @@ switchWindow(key)
     processNormalKeyUp(key)
     {
         Send {Blind}{%key% Up}
-        ;debug(key . " Up")
+        debug(key . " Up")
     }
     
     TimerTreatContextKeyAsRegularKey:
