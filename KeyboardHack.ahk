@@ -287,157 +287,8 @@ switchWindow(key)
         
         if (alternativeLayoutActive)
         {
-            if (key = contextLeft)
+            if(IsModifierDown(key))
             {
-                sendContextKey := false
-                processNormalKeyDown("left")
-                return
-            }
-            if (key = contextDown)
-            {
-                sendContextKey := false
-                processNormalKeyDown("down")
-                return
-            }
-            if (key = contextRight)
-            {
-                sendContextKey := false
-                processNormalKeyDown("right")
-                return
-            }
-            if (key = contextUp)
-            {
-                sendContextKey := false
-                processNormalKeyDown("up")
-                return
-            }
-            if (key = contextHome)
-            {
-                sendContextKey := false
-                processNormalKeyDown("home")
-                return
-            }
-            if (key = contextEnd)
-            {
-                sendContextKey := false
-                processNormalKeyDown("end")
-                return
-            }
-            if (key = contextPgDn)
-            {
-                sendContextKey := false
-                processNormalKeyDown("PgDn")
-                return
-            }
-            if (key = contextPgUp)
-            {
-                sendContextKey := false
-                processNormalKeyDown("PgUp")
-                return
-            }
-    
-            if (key = contextEscape)
-            {
-                sendContextKey := false
-                processNormalKeyDown("escape")
-                return
-            }
-            if (key = contextF12)
-            {
-                sendContextKey := false
-                processNormalKeyDown("F12")
-                return
-            }
-            if (key = contextTab)
-            {
-                sendContextKey := false
-                processNormalKeyDown("tab")
-                return
-            }
-            if (key = contextEnter)
-            {
-                sendContextKey := false
-                processNormalKeyDown("enter")
-                return
-            }
-            if (key = contextBackspace)
-            {
-                sendContextKey := false
-                processNormalKeyDown("backspace")
-                return
-            }
-            if (key = contextDelete)
-            {
-                sendContextKey := false
-                processNormalKeyDown("delete")
-                return
-            }
-    
-            if (key = context1)
-            {
-                sendContextKey := false
-                processNormalKeyDown("1")
-                return
-            }
-            if (key = context2)
-            {
-                sendContextKey := false
-                processNormalKeyDown("2")
-                return
-            }
-            if (key = context3)
-            {
-                sendContextKey := false
-                processNormalKeyDown("3")
-                return
-            }
-    
-            if (key = context4)
-            {
-                sendContextKey := false
-                processNormalKeyDown("4")
-                return
-            }
-            if (key = context5)
-            {
-                sendContextKey := false
-                processNormalKeyDown("5")
-                return
-            }
-            if (key = context6)
-            {
-                sendContextKey := false
-                processNormalKeyDown("6")
-                return
-            }
-            if (key = context7)
-            {
-                sendContextKey := false
-                processNormalKeyDown("7")
-                return
-            }
-            if (key = context8)
-            {
-                sendContextKey := false
-                processNormalKeyDown("8")
-                return
-            }
-            if (key = context9)
-            {
-                sendContextKey := false
-                processNormalKeyDown("9")
-                return
-            }
-            if (key = context0)
-            {
-                sendContextKey := false
-                processNormalKeyDown("0")
-                return
-            }
-            if (key = contextInsert)
-            {
-                sendContextKey := false
-                processNormalKeyDown("insert")
                 return
             }
         }
@@ -497,6 +348,165 @@ switchWindow(key)
         {
             sendContextKey := false
             processRightSideModifierKeyDown("lwin")
+            return true
+        }
+        
+        return false
+    }
+    
+    IsModifierDown(key)
+    {
+        if (key = contextLeft)
+        {
+            sendContextKey := false
+            processNormalKeyDown("left")
+            return true
+        }
+        if (key = contextDown)
+        {
+            sendContextKey := false
+            processNormalKeyDown("down")
+            return true
+        }
+        if (key = contextRight)
+        {
+            sendContextKey := false
+            processNormalKeyDown("right")
+            return true
+        }
+        if (key = contextUp)
+        {
+            sendContextKey := false
+            processNormalKeyDown("up")
+            return true
+        }
+        if (key = contextHome)
+        {
+            sendContextKey := false
+            processNormalKeyDown("home")
+            return true
+        }
+        if (key = contextEnd)
+        {
+            sendContextKey := false
+            processNormalKeyDown("end")
+            return true
+        }
+        if (key = contextPgDn)
+        {
+            sendContextKey := false
+            processNormalKeyDown("PgDn")
+            return true
+        }
+        if (key = contextPgUp)
+        {
+            sendContextKey := false
+            processNormalKeyDown("PgUp")
+            return true
+        }
+
+        if (key = contextEscape)
+        {
+            sendContextKey := false
+            processNormalKeyDown("escape")
+            return true
+        }
+        if (key = contextF12)
+        {
+            sendContextKey := false
+            processNormalKeyDown("F12")
+            return true
+        }
+        if (key = contextTab)
+        {
+            sendContextKey := false
+            processNormalKeyDown("tab")
+            return true
+        }
+        if (key = contextEnter)
+        {
+            sendContextKey := false
+            processNormalKeyDown("enter")
+            return true
+        }
+        if (key = contextBackspace)
+        {
+            sendContextKey := false
+            processNormalKeyDown("backspace")
+            return true
+        }
+        if (key = contextDelete)
+        {
+            sendContextKey := false
+            processNormalKeyDown("delete")
+            return true
+        }
+
+        if (key = context1)
+        {
+            sendContextKey := false
+            processNormalKeyDown("1")
+            return true
+        }
+        if (key = context2)
+        {
+            sendContextKey := false
+            processNormalKeyDown("2")
+            return true
+        }
+        if (key = context3)
+        {
+            sendContextKey := false
+            processNormalKeyDown("3")
+            return true
+        }
+
+        if (key = context4)
+        {
+            sendContextKey := false
+            processNormalKeyDown("4")
+            return true
+        }
+        if (key = context5)
+        {
+            sendContextKey := false
+            processNormalKeyDown("5")
+            return true
+        }
+        if (key = context6)
+        {
+            sendContextKey := false
+            processNormalKeyDown("6")
+            return true
+        }
+        if (key = context7)
+        {
+            sendContextKey := false
+            processNormalKeyDown("7")
+            return true
+        }
+        if (key = context8)
+        {
+            sendContextKey := false
+            processNormalKeyDown("8")
+            return true
+        }
+        if (key = context9)
+        {
+            sendContextKey := false
+            processNormalKeyDown("9")
+            return true
+        }
+        if (key = context0)
+        {
+            sendContextKey := false
+            processNormalKeyDown("0")
+            return true
+        }
+        if (key = contextInsert)
+        {
+            sendContextKey := false
+            processNormalKeyDown("insert")
             return true
         }
         
