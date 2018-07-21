@@ -53,8 +53,8 @@ global alternativeCtrlRight := "p"
 
 
 SetKeyDelay -1
-global timeoutStillSendSpecialContextKey := 351
-global timerTimeoutTreatContextKeyAsRegularKey := 31
+global timeoutStillSendSpecialContextKey := 311
+global timerTimeoutTreatContextKeyAsRegularKey := 141
 global allowSendContextKey := 1
 global sendSpecialContextKeyOnNormalKeyPress := false
 global navigationMode := 1
@@ -258,102 +258,29 @@ switchWindow(key)
         
         if (leftModifierGroupPressed)
         {
-            if (key = alternativeCtrlLeft)
+            if (IsAlternativeLeftModifierdDown(key))
             {
-                sendContextKey := false
-                processLeftSideModifierKeyDown("ctrl")
-                return		
-            }
-            if (key = alternativeAltLeft)
-            {
-                sendContextKey := false
-                processLeftSideModifierKeyDown("alt")
-                return		
-            }
-            if (key = alternativeShiftLeft)
-            {
-                sendContextKey := false
-                processLeftSideModifierKeyDown("shift")
-                return		
+                return
             }
         }
         
         if (rightModifierGroupPressed)
         {
-            if (key = alternativeCtrlRight)
+            if(IsAlternativeRightModifierdDown(key))
             {
-                sendContextKey := false
-                processRightSideModifierKeyDown("ctrl")
-                return		
-            }
-            if (key = alternativeAltRight)
-            {
-                sendContextKey := false
-                processRightSideModifierKeyDown("alt")
-                return		
-            }
-            if (key = alternativeShiftRight)
-            {
-                sendContextKey := false
-                processRightSideModifierKeyDown("shift")
-                return		
-            }
-            if (key = alternativeWinRight)
-            {
-                sendContextKey := false
-                processRightSideModifierKeyDown("lwin")
-                return		
+                return
             }
         }
         
         if (modifierKeysAlternativeLayoutActive)
         {
-            if (key = alternativeCtrlLeft)
+            if (IsAlternativeLeftModifierdDown(key))
             {
-                sendContextKey := false
-                processLeftSideModifierKeyDown("ctrl")
-                return		
-            }
-            
-            if (key = alternativeShiftLeft)
-            {
-                sendContextKey := false
-                processLeftSideModifierKeyDown("shift")
                 return
             }
             
-            if (key = alternativeAltLeft)
+            if(IsAlternativeRightModifierdDown(key))
             {
-                sendContextKey := false
-                processLeftSideModifierKeyDown("alt")
-                return
-            }
-            
-            if (key = alternativeCtrlRight)
-            {
-                sendContextKey := false
-                processRightSideModifierKeyDown("ctrl")
-                return
-            }
-            
-            if (key = alternativeShiftRight)
-            {
-                sendContextKey := false
-                processRightSideModifierKeyDown("shift")
-                return
-            }
-            
-            if (key = alternativeAltRight)
-            {
-                sendContextKey := false
-                processRightSideModifierKeyDown("alt")
-                return
-            }
-            
-            if (key = alternativeWinRight)
-            {
-                sendContextKey := false
-                processRightSideModifierKeyDown("lwin")
                 return
             }
         }
@@ -520,6 +447,60 @@ switchWindow(key)
             addToActivePressedKeys(key)
         }
         processNormalKeyDown(key)
+    }
+    
+    IsAlternativeLeftModifierdDown(key)
+    {
+        if (key = alternativeCtrlLeft)
+        {
+            sendContextKey := false
+            processLeftSideModifierKeyDown("ctrl")
+            return true	
+        }
+        if (key = alternativeAltLeft)
+        {
+            sendContextKey := false
+            processLeftSideModifierKeyDown("alt")
+            return true		
+        }
+        if (key = alternativeShiftLeft)
+        {
+            sendContextKey := false
+            processLeftSideModifierKeyDown("shift")
+            return true
+        }
+        
+        return false
+    }
+    
+    IsAlternativeRightModifierdDown(key)
+    {
+        if (key = alternativeCtrlRight)
+        {
+            sendContextKey := false
+            processRightSideModifierKeyDown("ctrl")
+            return true
+        }
+        if (key = alternativeAltRight)
+        {
+            sendContextKey := false
+            processRightSideModifierKeyDown("alt")
+            return true
+        }
+        if (key = alternativeShiftRight)
+        {
+            sendContextKey := false
+            processRightSideModifierKeyDown("shift")
+            return true
+        }
+        if (key = alternativeWinRight)
+        {
+            sendContextKey := false
+            processRightSideModifierKeyDown("lwin")
+            return true
+        }
+        
+        return false
     }
     
     addToActivePressedKeys(key)
