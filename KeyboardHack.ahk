@@ -36,13 +36,13 @@ global context8 := ""
 global context9 := ""
 global context0 := ""
 
-global alternativeCtrlLeft := "w"
+global alternativeCtrlLeft := "r"
 global alternativeShiftLeft := "e"
-global alternativeAltLeft := "r"
+global alternativeAltLeft := "w"
 global alternativeWinRight := "["
-global alternativeAltRight := "i"
+global alternativeAltRight := "p"
 global alternativeShiftRight := "o"
-global alternativeCtrlRight := "p"
+global alternativeCtrlRight := "i"
 ;----------------- END OF CONFIGURATION SECTION
 
 
