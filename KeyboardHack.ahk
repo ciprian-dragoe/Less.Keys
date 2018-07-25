@@ -794,7 +794,7 @@ switchWindow(key)
                 SetTimer, TimerTimeoutSendSpecialContextKey, OFF
                 SetTimer, TimerTimeoutSendSpecialContextKey, %timeoutStillSendSpecialContextKey%
             }
-            debug(key . " manageContextKeyDown")
+            debug(key . " down")
         }
     }
     
@@ -816,7 +816,7 @@ switchWindow(key)
         {
             send {blind}{%key%}
         }
-        debug(key . " manageContextKeyUp")
+        debug(key . " up")
     }
     
     TimerTimeoutSendSpecialContextKey:
@@ -1290,7 +1290,7 @@ send(value)
 
 store(value)
 {
-	textToSend = %value% |contextKeyPressed=%contextKeyPressed%| - |alternativeLayoutActive=%alternativeLayoutActive%|
+	textToSend = %value% |contextKeyPressed=%contextKeyPressed%| - |alternativeLayoutActive=%alternativeLayoutActive%| - |Left%leftModifierGroupPressed% - %leftCtrlModifierActive% %leftShiftModifierActive% %leftAltModifierActive%|   |Rigth%rightModifierGroupPressed% - %rightCtrlModifierActive% %rightShiftModifierActive% %rightAltModifierActive% %rightWinModifierActive%|
 	FileAppend, %A_Hour%:%A_Min%:%A_Sec% (%A_MSec%) - %textToSend%`n,c:\Users\cipri\Desktop\debugKeyboardHack.txt
 }
 ;-------------------- END OF Debugging
