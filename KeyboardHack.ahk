@@ -781,6 +781,7 @@ switchWindow(key)
             {
                 ;debug(key . " SENT on key down")
                 send {blind}{%key%}
+                debug("real space" . " sent")
                 sendContextKey := false
                 stopManagingContextKey := true
                 treatContextKeyAsRegularKey := false
@@ -793,8 +794,8 @@ switchWindow(key)
                 sendContextKey := true
                 SetTimer, TimerTimeoutSendSpecialContextKey, OFF
                 SetTimer, TimerTimeoutSendSpecialContextKey, %timeoutStillSendSpecialContextKey%
+                debug("specialKey" . " down")
             }
-            debug(key . " down")
         }
     }
     
@@ -815,8 +816,10 @@ switchWindow(key)
         if (sendContextKey && allowSendContextKey)
         {
             send {blind}{%key%}
+            debug("space sent on key" . " up")
+            return
         }
-        debug(key . " up")
+        debug("specialKey" . " up")
     }
     
     TimerTimeoutSendSpecialContextKey:
