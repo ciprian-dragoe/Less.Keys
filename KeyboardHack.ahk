@@ -775,7 +775,6 @@ switchWindow(key)
     manageContextKeyDown(key)
     {
         contextKeyPressed := true
-        debug("specialKey" . " down")
         if (!stopManagingContextKey)
         {
             if (canTreatContextKeyAsRegularKey())
@@ -788,6 +787,7 @@ switchWindow(key)
             }
             else
             {
+                debug("specialKey" . " down")
                 stopManagingContextKey := true
                 modifierKeysAlternativeLayoutActive := true
                 alternativeLayoutActive := true
@@ -1239,6 +1239,10 @@ switchWindow(key)
     	
         fixStickyKeys()
         msgbox, % debugInfo
+        
+        FileDelete, c:\Users\cipri\Desktop\debugKeyboardHack.txt
+        FileAppend, %debugStoredData%,c:\Users\cipri\Desktop\debugKeyboardHack.txt
+        debugStoredData := ""
     return
 #if
 
@@ -1268,7 +1272,7 @@ return
 
 debug(value)
 {
-    store(value)
+    writeMemoryStream(value)
 }
 
 fixStickyKeys()
@@ -1293,7 +1297,16 @@ send(value)
 store(value)
 {
     keyPressCount := activePressedKeys.Length()
-	textToSend = %value% |contextKeyPressed=%contextKeyPressed%| - |alternativeLayoutActive=%alternativeLayoutActive%| |activePressedKeys=%keyPressCount%|  - |Left%leftModifierGroupPressed% - %leftCtrlModifierActive% %leftShiftModifierActive% %leftAltModifierActive%|   |Rigth%rightModifierGroupPressed% - %rightCtrlModifierActive% %rightShiftModifierActive% %rightAltModifierActive% %rightWinModifierActive%|
+	textToSend = %value% |contextKeyPressed=%contextKeyPressed%| - |alternativeLayoutActive=%alternativeLayoutActive%| |activePressedKeys=%keyPressCount%|
 	FileAppend, %A_Hour%:%A_Min%:%A_Sec% (%A_MSec%) - %textToSend%`n,c:\Users\cipri\Desktop\debugKeyboardHack.txt
 }
+
+global debugStoredData := ""
+writeMemoryStream(value)
+{
+    keyPressCount := activePressedKeys.Length()
+	textToSend = %A_Hour%:%A_Min%:%A_Sec% (%A_MSec%) - %value% |contextKeyPressed=%contextKeyPressed%| - |alternativeLayoutActive=%alternativeLayoutActive%| |activePressedKeys=%keyPressCount%|`n
+    debugStoredData .= textToSend 
+}
+
 ;-------------------- END OF Debugging
