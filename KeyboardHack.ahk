@@ -775,13 +775,13 @@ switchWindow(key)
     manageContextKeyDown(key)
     {
         contextKeyPressed := true
+        debug("specialKey" . " down")
         if (!stopManagingContextKey)
         {
             if (canTreatContextKeyAsRegularKey())
             {
-                ;debug(key . " SENT on key down")
                 send {blind}{%key%}
-                debug("real space" . " sent")
+                debug("real space" . " sent on key down")
                 sendContextKey := false
                 stopManagingContextKey := true
                 treatContextKeyAsRegularKey := false
@@ -794,7 +794,6 @@ switchWindow(key)
                 sendContextKey := true
                 SetTimer, TimerTimeoutSendSpecialContextKey, OFF
                 SetTimer, TimerTimeoutSendSpecialContextKey, %timeoutStillSendSpecialContextKey%
-                debug("specialKey" . " down")
             }
         }
     }
@@ -816,7 +815,7 @@ switchWindow(key)
         if (sendContextKey && allowSendContextKey)
         {
             send {blind}{%key%}
-            debug("space sent on key" . " up")
+            debug("specialKey as space sent on key" . " up")
             return
         }
         debug("specialKey" . " up")
@@ -1293,7 +1292,8 @@ send(value)
 
 store(value)
 {
-	textToSend = %value% |contextKeyPressed=%contextKeyPressed%| - |alternativeLayoutActive=%alternativeLayoutActive%| - |Left%leftModifierGroupPressed% - %leftCtrlModifierActive% %leftShiftModifierActive% %leftAltModifierActive%|   |Rigth%rightModifierGroupPressed% - %rightCtrlModifierActive% %rightShiftModifierActive% %rightAltModifierActive% %rightWinModifierActive%|
+    keyPressCount := activePressedKeys.Length()
+	textToSend = %value% |contextKeyPressed=%contextKeyPressed%| - |alternativeLayoutActive=%alternativeLayoutActive%| |activePressedKeys=%keyPressCount%|  - |Left%leftModifierGroupPressed% - %leftCtrlModifierActive% %leftShiftModifierActive% %leftAltModifierActive%|   |Rigth%rightModifierGroupPressed% - %rightCtrlModifierActive% %rightShiftModifierActive% %rightAltModifierActive% %rightWinModifierActive%|
 	FileAppend, %A_Hour%:%A_Min%:%A_Sec% (%A_MSec%) - %textToSend%`n,c:\Users\cipri\Desktop\debugKeyboardHack.txt
 }
 ;-------------------- END OF Debugging
