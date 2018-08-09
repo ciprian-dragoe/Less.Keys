@@ -306,10 +306,17 @@ if (A_ComputerName = "lenovo-x230" || "CIPI-ASUS-ROG")
 
 processKeyDown(key)
 {
-    debug(key . " |down")    
+    ;debug(key . " |down")    
     if (key = layoutChangeKey)
     {
         manageLayoutKeyDown(key)
+        return
+    }
+    
+    if (alternativeLayoutActive)
+    {
+        key := alternativeLayout[key]
+        send {blind}{%key% down}
         return
     }
      
