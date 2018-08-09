@@ -18,6 +18,8 @@ global alternativeLayoutActive
 global modifierKeysAlternativeLayoutActive
 global sendLayoutKey
 global stopManagingLayoutKey
+global lastAlternativeLayoutProcessedKey
+
 global debugStoredData := ""
 
 
@@ -333,14 +335,18 @@ processKeyDown(key)
     {
         if (alternativeLayoutActive)
         {
+            lastAlternativeLayoutProcessedKey := key
             key := alternativeLayout[key]
             sendLayoutKey := false
             send {blind}{%key% down}
             return
         }
         
-        addToActivePressedKeys(key)
-        send {blind}{%key% down}
+        if (key != lastAlternativeLayoutProcessedKey)
+        {
+            addToActivePressedKeys(key)
+            send {blind}{%key% down}
+        }
     }
 }
 
@@ -449,6 +455,10 @@ processKeyUp(key)
         return
     }
     
+    if (key = lastAlternativeLayoutProcessedKey)
+    {
+        lastAlternativeLayoutProcessedKey := ""
+    }    
     removeFromActivePressedKeys(key)
     processLayoutOnRelease := true        
     SetTimer, TimerProcessLayoutOnRelease, OFF
