@@ -14,7 +14,7 @@ global contextEnter := "k"
 global contextTab := "l"
 global contextEscape := ";"
 global contextF12 := "'"
-global contextInsert := "/"
+global contextInsert := "q"
 
 global contextLeft := "a"
 global contextDown := "s"
@@ -36,13 +36,13 @@ global context8 := ""
 global context9 := ""
 global context0 := ""
 
-global alternativeCtrlLeft := "r"
+global alternativeCtrlLeft := "w"
 global alternativeShiftLeft := "e"
-global alternativeAltLeft := "w"
+global alternativeAltLeft := "r"
 global alternativeWinRight := "["
-global alternativeAltRight := "p"
+global alternativeAltRight := "i"
 global alternativeShiftRight := "o"
-global alternativeCtrlRight := "i"
+global alternativeCtrlRight := "p"
 ;----------------- END OF CONFIGURATION SECTION
 
 
@@ -59,6 +59,14 @@ global allowSendContextKey := 1
 global sendSpecialContextKeyOnNormalKeyPress := false
 global navigationMode := 1
 global activePressedKeys := []
+
+
+
+global ast := { "ceva":1, "altceva":"dsf"}
+global nou:= "ceva"
+if (ast[nou])
+msgbox % "valoarea este " ast.altceva
+
 
 
 
@@ -1238,7 +1246,7 @@ switchWindow(key)
     	debugInfo := "leftModifierGroupPressed=" . leftModifierGroupPressed . "`n" . "leftCtrlModifierActive=" . leftCtrlModifierActive . "`n" . "leftAltModifierActive=" . leftAltModifierActive . "`n" . "leftShiftModifierActive=" . leftShiftModifierActive . "`n" . "`n" . "rightModifierGroupPressed=" . rightModifierGroupPressed . "`n" . "rightCtrlModifierActive=" . rightCtrlModifierActive . "`n" . "rightAltModifierActive=" . rightAltModifierActive . "`n" . "rightShiftModifierActive=" . rightShiftModifierActive . "`n" . "rightWinModifierActive=" . rightWinModifierActive
     	
         fixStickyKeys()
-        msgbox, % debugInfo
+        ;msgbox, % debugInfo
         
         FileDelete, c:\Users\cipri\Desktop\debugKeyboardHack.txt
         FileAppend, %debugStoredData%,c:\Users\cipri\Desktop\debugKeyboardHack.txt
