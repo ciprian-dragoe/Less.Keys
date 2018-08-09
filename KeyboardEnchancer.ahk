@@ -1,7 +1,7 @@
 ﻿#SingleInstance
 #Persistent
 #MaxHotkeysPerInterval 400
-; ^ ctrl	! alt		+ shift		# WindowsKey
+
 global debugComputer
 global navigationMode = 1
 global activePressedKeys = []
@@ -49,13 +49,8 @@ readTimingsFile(path)
 }
 
 
+
 SetKeyDelay -1
-global ast := { "ceva":1, "altceva":"dsf"}
-global nou:= "ceva"
-;if (ast[nou])
-;msgbox % "valoarea este " ast.altceva
-
-
 
 
 
@@ -323,8 +318,7 @@ if (A_ComputerName = "lenovo-x230" || "CIPI-ASUS-ROG")
 
 
 processKeyDown(key)
-{
-    debug(key . " |down")    
+{    
     if (key = layoutChangeKey)
     {
         manageLayoutKeyDown(key)
@@ -339,12 +333,14 @@ processKeyDown(key)
             key := alternativeLayout[key]
             sendLayoutKey := false
             send {blind}{%key% down}
+            debug(key . " |down")
             return
         }
         
         if (key != lastAlternativeLayoutProcessedKey)
         {
             addToActivePressedKeys(key)
+            debug(key . " |down")
             send {blind}{%key% down}
         }
     }
@@ -376,6 +372,7 @@ addToActivePressedKeys(key)
 manageLayoutKeyDown(key)
 {
     layoutKeyPressed := true
+    debug(key . " |processing")
     if (!stopManagingLayoutKey)
     {
         if (activePressedKeys.Length() > 0)
@@ -408,8 +405,6 @@ manageLayoutKeyUp(key)
     layoutKeyPressed := false
     alternativeLayoutActive := false
     modifierKeysAlternativeLayoutActive := false
-    processLayoutOnRelease := false
-    processKeyOnRelease := false
     SetTimer, TimerTimeoutSendLayoutKey, OFF
     
     if (sendLayoutKey)
@@ -423,6 +418,7 @@ manageLayoutKeyUp(key)
 
 TimerTimeoutSendLayoutKey:
     SetTimer, TimerTimeoutSendLayoutKey, OFF
+    processKeyOnRelease := false
     if (layoutKeyPressed)
     {    
         sendLayoutKey := false
@@ -437,21 +433,24 @@ processKeyUp(key)
     if (key = layoutChangeKey)
     {
         manageLayoutKeyUp(key)
+        debug(key . " |up")
         return
     }
     
     if (processKeyOnRelease)
     {
         processKeyOnRelease := false
+        processLayoutOnRelease := false
         sendLayoutKey := false
         if (alternativeLayoutActive)
         {
             key := alternativeLayout[key]
             send {blind}{%key% down}
+            debug(key . " |up")
             return
         }
-        send {blind}{%layoutChangeKey%}
         send {blind}{%key%}
+        debug(key . " |up")
         return
     }
     
@@ -464,6 +463,7 @@ processKeyUp(key)
     SetTimer, TimerProcessLayoutOnRelease, OFF
     SetTimer, TimerProcessLayoutOnRelease, %timeoutProcessLayoutOnRelease%
     send {Blind}{%key% Up}
+    debug(key . " |up")
 }
 
 removeFromActivePressedKeys(key)
@@ -477,7 +477,6 @@ removeFromActivePressedKeys(key)
 
 TimerProcessLayoutOnRelease:
     processLayoutOnRelease := false
-    processKeyOnRelease := false
     SetTimer, TimerProcessLayoutOnRelease, OFF
 return
 
@@ -555,7 +554,7 @@ store(value)
 writeMemoryStream(value)
 {
     keyPressCount := activePressedKeys.Length()
-	textToSend = %A_Hour%:%A_Min%:%A_Sec% (%A_MSec%) - %value% |layoutKeyPressed=%layoutKeyPressed%| - |alternativeLayoutActive=%alternativeLayoutActive%| |activePressedKeys=%keyPressCount%|`n
+	textToSend = %A_Hour%:%A_Min%:%A_Sec% (%A_MSec%) - %value% |layoutKeyPressed=%layoutKeyPressed%| - |alternativeLayoutActive=%alternativeLayoutActive%| |activePressedKeys=%keyPressCount%| |processKeyOnRelease=%processKeyOnRelease%|`n
     debugStoredData .= textToSend 
 }
 ;-------------------- END OF Debugging
