@@ -376,13 +376,20 @@ TimerTimeoutSendLayoutKey:
     if (layoutKeyPressed)
     {    
         sendLayoutKey := false
-        ;debug("timer terminat " . sendContextKey)
+        debug("timer terminat")
     }
 return
 
 
+
 processKeyUp(key) 
 {
+    if (key = layoutChangeKey)
+    {
+        manageLayoutKeyUp(key)
+        return
+    }
+    
     send {Blind}{%key% Up}
 }
 
