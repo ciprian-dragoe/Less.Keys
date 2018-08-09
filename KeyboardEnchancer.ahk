@@ -6,8 +6,11 @@ global debugComputer
 global navigationMode = 1
 global activePressedKeys = []
 global timeoutStillSendLayoutKey
-global timeoutProcessLayoutKeyOnRelease
-global processLayoutKeyOnRelease
+
+global timeoutProcessLayoutOnRelease
+global processLayoutOnRelease
+global processKeyOnRelease
+
 global alternativeLayout
 global layoutChangeKey
 global layoutKeyPressed
@@ -40,7 +43,7 @@ readLayoutFile(path)
 readTimingsFile(path)
 {
     IniRead, timeoutStillSendLayoutKey, %path%, timings, timeoutStillSendLayoutKey
-    IniRead, timeoutProcessLayoutKeyOnRelease, %path%, timings, timeoutProcessLayoutKeyOnRelease
+    IniRead, timeoutProcessLayoutOnRelease, %path%, timings, timeoutProcessLayoutOnRelease
 }
 
 
@@ -326,16 +329,19 @@ processKeyDown(key)
         return
     }
     
-    if (alternativeLayoutActive)
+    if (!processKeyOnRelease)
     {
-        key := alternativeLayout[key]
-        sendLayoutKey := false
+        if (alternativeLayoutActive)
+        {
+            key := alternativeLayout[key]
+            sendLayoutKey := false
+            send {blind}{%key% down}
+            return
+        }
+        
+        addToActivePressedKeys(key)
         send {blind}{%key% down}
-        return
     }
-    
-    addToActivePressedKeys(key)
-    send {blind}{%key% down}
 }
 
 
@@ -380,6 +386,10 @@ manageLayoutKeyDown(key)
             modifierKeysAlternativeLayoutActive := true
             alternativeLayoutActive := true
             sendLayoutKey := true
+            if (processLayoutOnRelease)
+            {
+                processKeyOnRelease := true
+            }
             SetTimer, TimerTimeoutSendLayoutKey, OFF
             SetTimer, TimerTimeoutSendLayoutKey, %timeoutStillSendLayoutKey%
         }
@@ -392,6 +402,8 @@ manageLayoutKeyUp(key)
     layoutKeyPressed := false
     alternativeLayoutActive := false
     modifierKeysAlternativeLayoutActive := false
+    processLayoutOnRelease := false
+    processKeyOnRelease := false
     SetTimer, TimerTimeoutSendLayoutKey, OFF
     
     if (sendLayoutKey)
@@ -422,10 +434,25 @@ processKeyUp(key)
         return
     }
     
+    if (processKeyOnRelease)
+    {
+        processKeyOnRelease := false
+        sendLayoutKey := false
+        if (alternativeLayoutActive)
+        {
+            key := alternativeLayout[key]
+            send {blind}{%key% down}
+            return
+        }
+        send {blind}{%layoutChangeKey%}
+        send {blind}{%key%}
+        return
+    }
+    
     removeFromActivePressedKeys(key)
-    processLayoutKeyOnRelease := true        
-    SetTimer, TimerProcessLayoutKeyOnRelease, OFF
-    SetTimer, TimerProcessLayoutKeyOnRelease, %timeoutProcessLayoutKeyOnRelease%  
+    processLayoutOnRelease := true        
+    SetTimer, TimerProcessLayoutOnRelease, OFF
+    SetTimer, TimerProcessLayoutOnRelease, %timeoutProcessLayoutOnRelease%
     send {Blind}{%key% Up}
 }
 
@@ -438,9 +465,10 @@ removeFromActivePressedKeys(key)
     }
 }
 
-TimerProcessLayoutKeyOnRelease:
-    processLayoutKeyOnRelease := false
-    SetTimer, TimerProcessLayoutKeyOnRelease, OFF
+TimerProcessLayoutOnRelease:
+    processLayoutOnRelease := false
+    processKeyOnRelease := false
+    SetTimer, TimerProcessLayoutOnRelease, OFF
 return
 
 
