@@ -2,14 +2,26 @@
 #Persistent
 #MaxHotkeysPerInterval 400
 ; ^ ctrl	! alt		+ shift		# WindowsKey
+global debugComputer
 global navigationMode = 1
+global activePressedKeys = []
+global timeoutStillSendLayoutKey
+global timeoutProcessLayoutKeyOnRelease
+global processLayoutKeyOnRelease
+global alternativeLayout
+global layoutChangeKey
+global layoutKeyPressed
+global alternativeLayoutActive
+global modifierKeysAlternativeLayoutActive
+global sendLayoutKey
+global stopManagingLayoutKey
+global debugStoredData := ""
 
 
 
 readLayoutFile("alternative-layout.cfg")
 readTimingsFile("timings.cfg")
-global alternativeLayout
-global layoutChangeKey
+
 readLayoutFile(path)
 {
     FileReadLine, layoutChangeKey, %path%, 1
@@ -24,10 +36,11 @@ readLayoutFile(path)
         alternativeLayout[StrSplit(A_LoopReadLine, "`:").1] :=StrSplit(A_LoopReadLine, "`:").2  
     }
 }
-global timeoutStillSendLayoutKey
+
 readTimingsFile(path)
 {
     IniRead, timeoutStillSendLayoutKey, %path%, timings, timeoutStillSendLayoutKey
+    IniRead, timeoutProcessLayoutKeyOnRelease, %path%, timings, timeoutProcessLayoutKeyOnRelease
 }
 
 
@@ -40,7 +53,7 @@ global nou:= "ceva"
 
 
 
-global debugComputer := false
+
 if (A_ComputerName = "lenovo-x230" || "CIPI-ASUS-ROG") 
 {
 	debugComputer := true
@@ -306,7 +319,7 @@ if (A_ComputerName = "lenovo-x230" || "CIPI-ASUS-ROG")
 
 processKeyDown(key)
 {
-    ;debug(key . " |down")    
+    debug(key . " |down")    
     if (key = layoutChangeKey)
     {
         manageLayoutKeyDown(key)
@@ -316,33 +329,49 @@ processKeyDown(key)
     if (alternativeLayoutActive)
     {
         key := alternativeLayout[key]
+        sendLayoutKey := false
         send {blind}{%key% down}
         return
     }
-     
+    
+    addToActivePressedKeys(key)
     send {blind}{%key% down}
 }
 
 
 
-global layoutKeyPressed
-global alternativeLayoutActive
-global modifierKeysAlternativeLayoutActive
-global sendLayoutKey
-global treatLayoutKeyAsRegularKey
-global stopManagingLayoutKey
+addToActivePressedKeys(key)
+{
+    if (activePressedKeys.Length() < 0)
+    {
+        activePressedKeys.Push(key)
+    }
+    else 
+    {
+        itemNotPresent := true
+        For index, value in activePressedKeys
+        {
+            if (value = key)
+                itemNotPresent := false
+        }
+        if (itemNotPresent)
+            activePressedKeys.Push(key)
+    }
+}
+
+
+
 manageLayoutKeyDown(key)
 {
     layoutKeyPressed := true
     if (!stopManagingLayoutKey)
     {
-        if (canTreatLayoutKeyAsRegularKey())
+        if (activePressedKeys.Length() > 0)
         {
             send {blind}{%key%}
             ;debug("real space" . " sent on key down")
             sendLayoutKey := false
             stopManagingLayoutKey := true
-            treatLayoutKeyAsRegularKey := false
         }
         else
         {
@@ -356,11 +385,7 @@ manageLayoutKeyDown(key)
         }
     }
 }
-canTreatLayoutKeyAsRegularKey()
-{
-    return false
-    ;return treatLayoutKeyAsRegularKey || activePressedKeys.Length() > 0
-}
+
 manageLayoutKeyUp(key)
 {
     stopManagingLayoutKey := false
@@ -383,7 +408,7 @@ TimerTimeoutSendLayoutKey:
     if (layoutKeyPressed)
     {    
         sendLayoutKey := false
-        debug("timer terminat")
+        ;debug("timer terminat")
     }
 return
 
@@ -397,10 +422,26 @@ processKeyUp(key)
         return
     }
     
+    removeFromActivePressedKeys(key)
+    processLayoutKeyOnRelease := true        
+    SetTimer, TimerProcessLayoutKeyOnRelease, OFF
+    SetTimer, TimerProcessLayoutKeyOnRelease, %timeoutProcessLayoutKeyOnRelease%  
     send {Blind}{%key% Up}
 }
 
+removeFromActivePressedKeys(key)
+{
+    For index, value in activePressedKeys
+    {
+        if (value = key)
+            activePressedKeys.Remove(index)
+    }
+}
 
+TimerProcessLayoutKeyOnRelease:
+    processLayoutKeyOnRelease := false
+    SetTimer, TimerProcessLayoutKeyOnRelease, OFF
+return
 
 
 
@@ -472,11 +513,11 @@ store(value)
 
 
 
-global debugStoredData := ""
+
 writeMemoryStream(value)
 {
-    ;keyPressCount := activePressedKeys.Length()
-	textToSend = %A_Hour%:%A_Min%:%A_Sec% (%A_MSec%) - %value% |layoutKeyPressed=%layoutKeyPressed%| - |alternativeLayoutActive=%alternativeLayoutActive%|`n
+    keyPressCount := activePressedKeys.Length()
+	textToSend = %A_Hour%:%A_Min%:%A_Sec% (%A_MSec%) - %value% |layoutKeyPressed=%layoutKeyPressed%| - |alternativeLayoutActive=%alternativeLayoutActive%| |activePressedKeys=%keyPressCount%|`n
     debugStoredData .= textToSend 
 }
 ;-------------------- END OF Debugging
