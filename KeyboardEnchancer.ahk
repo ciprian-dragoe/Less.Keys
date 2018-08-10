@@ -22,23 +22,23 @@ global lastAlternativeLayoutProcessedKey
 
 global leftModifierGroupPressed
 global leftCtrlAlternativeKey
-global leftCtrlActive
 global leftAltAlternativeKey
-global leftAltActive
 global leftShiftAlternativeKey
+global leftWinAlternativeKey
+global leftCtrlActive
+global leftAltActive
 global leftShiftActive
 global leftWinActive
-global leftWinAlternativeKey
 
 global rightModifierGroupPressed
 global rightCtrlAlternativeKey
-global rightCtrlActive
 global rightAltAlternativeKey
-global rightAltActive
 global rightShiftAlternativeKey
-global rightShiftActive
 global rightWinAlternativeKey
-global rightRightActive
+global rightAltActive
+global rightShiftActive
+global rightCtrlActive
+global rightWinActive
 
 global altDeepPressed
 global ctrlDeepPressed
@@ -420,8 +420,11 @@ processKeyDown(key)
             key := alternativeLayout[key]
             sendLayoutKey := false
             activeModifiers := getActiveModifiers(key)
-            send {blind}%activeModifiers%{%key% down}
-            debug(key . " |layout active down ")
+            if (!processAhkKeyboardShortcuts(activeModifiers, key))
+            {
+                send {blind}%activeModifiers%{%key% down}
+                debug(key . " |layout active down ")
+            }
             return
         }
         
@@ -429,7 +432,10 @@ processKeyDown(key)
         {
             addToActivePressedKeys(key)
             activeModifiers := getActiveModifiers(key)
-            send {blind}%activeModifiers%{%key% down}
+            if (!processAhkKeyboardShortcuts(activeModifiers, key))
+            {
+                send {blind}%activeModifiers%{%key% down}
+            }
             return
         }
         
@@ -718,6 +724,183 @@ TimerProcessLayoutOnRelease:
     processLayoutOnRelease := false
     SetTimer, TimerProcessLayoutOnRelease, OFF
 return
+
+
+
+processAhkKeyboardShortcuts(activeModifiers, key)
+{
+    if (debugComputer)
+    {
+        WinGetClass, ActiveWindowClass, A
+        combination := activeModifiers . key
+        
+        if (combination = "#w")
+        {
+            switchWindow("1")
+            return true
+        }
+        if (combination = "#e")
+        {
+            switchWindow("2")
+            return true
+        }
+        if (combination = "#r")
+        {
+            switchWindow("3")
+            return true
+        }
+        if (combination = "#s")
+        {
+            switchWindow("4")
+            return true
+        }
+        if (combination = "#d")
+        {
+            switchWindow("5")
+            return true
+        }
+        if (combination = "#f")
+        {
+            if (A_ComputerName = "lenovo-x230")
+            {
+                run MLO.ahk 3
+            }
+            else
+            {
+                switchWindow("6")
+            }
+            return true
+        }
+        if (combination = "#x")
+        {
+            switchWindow("7")
+            return true
+        }
+        if (combination = "#c")
+        {
+            switchWindow("8")
+            return true
+        }
+        if (combination = "#v")
+        {
+            switchWindow("9")
+            return true
+        }
+        if (combination = "#g")
+        {
+            send #d
+            return true
+        }
+        if (combination = "#t")
+        {
+            send #r
+            return true
+        }
+        
+        if (combination = "+#w")
+        {
+            send !{NumPad7}
+            return true
+        }
+        if (combination = "+#e")
+        {
+            send !{NumPad8}
+            return true
+        }
+        if (combination = "+#r")
+        {
+            send !{NumPad9}
+            return true
+        }
+        if (combination = "+#s")
+        {
+            send !{NumPad4}
+            return true
+        }
+        if (combination = "+#d")
+        {
+            send !{NumPad5}
+            return true
+        }
+        if (combination = "+#f")
+        {
+            send !{NumPad6}
+            return true
+        }
+        if (combination = "+#x")
+        {
+            send !{NumPad1}
+            return true
+        }
+        if (combination = "+#c")
+        {
+            send !{NumPad2}
+            return true
+        }
+        if (combination = "+#v")
+        {
+            send !{NumPad3}
+            return true
+        }
+        
+        if (ActiveWindowClass = "TfrmMyLifeMain")
+        {
+            if (combination = "!w")
+            {
+                run MLO.ahk 1
+                return true
+            }
+            if (combination = "!e")
+            {
+                run MLO.ahk 11
+                return true
+            }
+            if (combination = "!r")
+            {
+                run MLO.ahk 12
+                return true
+            }
+            if (combination = "+F1")
+            {
+                run MLO.ahk 5
+                return true
+            }
+            if (combination = "^up")
+            {
+                run MLO.ahk 7
+                return true
+            }
+            if (combination = "^down")
+            {
+                run MLO.ahk 8
+                return true
+            }
+            if (combination = "^f")
+            {
+                run MLO.ahk 9
+                return true
+            }
+            if (combination = "^+f")
+            {
+                run MLO.ahk 10
+                return true
+            }
+        }
+    }
+    return false
+}
+switchWindow(key)
+{
+    if (winDeepPressed)
+    {
+        send %key%
+    }
+    else
+    {
+        send {lwin down}%key%
+        winDeepPressed := true
+    }
+}
 
 
 
