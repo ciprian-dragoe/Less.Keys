@@ -12,6 +12,7 @@ global processLayoutOnRelease
 global processKeyOnRelease
 
 global alternativeLayout
+
 global layoutChangeKey
 global layoutKeyPressed
 global alternativeLayoutActive
@@ -19,6 +20,30 @@ global modifierKeysAlternativeLayoutActive
 global sendLayoutKey
 global stopManagingLayoutKey
 global lastAlternativeLayoutProcessedKey
+
+global leftModifierGroupPressed
+global leftCtrlAlternativeKey
+global leftCtrlActive
+global leftAltAlternativeKey
+global leftAltActive
+global leftShiftAlternativeKey
+global leftShiftActive
+global leftWinActive
+global leftWinAlternativeKey
+
+global rightModifierGroupPressed
+global rightCtrlAlternativeKey
+global rightCtrlActive
+global rightAltAlternativeKey
+global rightAltActive
+global rightShiftAlternativeKey
+global rightShiftActive
+global rightWinAlternativeKey
+global rightRightActive
+
+global altDeepPressed
+global ctrlDeepPressed
+global winDeepPressed
 
 global debugStoredData := ""
 
@@ -38,7 +63,43 @@ readLayoutFile(path)
         { 
             continue
         }
-        alternativeLayout[StrSplit(A_LoopReadLine, "`:").1] :=StrSplit(A_LoopReadLine, "`:").2  
+        remappedKey := StrSplit(A_LoopReadLine, "`:").2
+        if (remappedKey = "lctrl")
+        {
+            leftCtrlAlternativeKey = StrSplit(A_LoopReadLine, "`:").1
+        }
+        else if (remappedKey = "rctrl")
+        {
+            rightCtrlAlternativeKey = StrSplit(A_LoopReadLine, "`:").1
+        } 
+        else if (remappedKey = "lalt")
+        {
+            leftAltAlternativeKey = StrSplit(A_LoopReadLine, "`:").1
+        }
+        else if (remappedKey = "ralt")
+        {
+            rightAltAlternativeKey = StrSplit(A_LoopReadLine, "`:").1
+        }
+        else if (remappedKey = "lshift")
+        {
+            leftShiftAlternativeKey = StrSplit(A_LoopReadLine, "`:").1
+        }
+        else if (remappedKey = "rshift")
+        {
+            rightShiftAlternativeKey = StrSplit(A_LoopReadLine, "`:").1
+        }
+        else if (remappedKey = "lwin")
+        {
+            leftWinAlternativeKey = StrSplit(A_LoopReadLine, "`:").1
+        }
+        else if (remappedKey = "rwin")
+        {
+            rightWinAlternativeKey = StrSplit(A_LoopReadLine, "`:").1
+        }
+        else
+        {
+            alternativeLayout[StrSplit(A_LoopReadLine, "`:").1] := remappedKey
+        }   
     }
 }
 
@@ -325,6 +386,29 @@ processKeyDown(key)
         return
     }
     
+    if (leftModifierGroupPressed && setLeftModifierKeyState(key, true))
+    {
+        return
+    }
+    if (rightModifierGroupPressed && setRightModifierKeyState(key, true))
+    {
+        return
+    }
+    
+    if (alternativeLayoutActive)
+    {
+        if (setLeftModifierKeyState(key, true))
+        {
+            leftModifierGroupPressed := true
+            return
+        }
+        if (setRightModifierKeyState(key, true))
+        {
+            rightModifierGroupPressed := true
+            return
+        }
+    }
+    
     if (!processKeyOnRelease)
     {
         if (alternativeLayoutActive)
@@ -332,22 +416,139 @@ processKeyDown(key)
             lastAlternativeLayoutProcessedKey := key
             key := alternativeLayout[key]
             sendLayoutKey := false
-            send {blind}{%key% down}
-            debug(key . " |down")
-            return
         }
-        
         if (key != lastAlternativeLayoutProcessedKey)
         {
             addToActivePressedKeys(key)
-            debug(key . " |down")
-            send {blind}{%key% down}
-            return
         }
+        
+        activeModifiers := getActiveModifiers(key)
+        send {blind}%activeModifiers%{%key% down}
+        debug(key . " |down")
+        return
     }
     lastAlternativeLayoutProcessedKey := alternativeLayout[key]
+    debug(key . " |not processed because on up")
 }
 
+getActiveModifiers(key)
+{
+    result = 
+    if (leftCtrlActive || rightCtrlActive)
+    {
+        if (key = "tab")
+        {
+            result .= "{ctrl downTemp}"
+            ctrlDeepPressed := true
+        }
+        else
+        {
+            result .= "^"
+        }
+    }
+    if (leftAltActive || rightAltActive)
+    {
+        if (key = "tab")
+        {
+            result .= "{alt downTemp}"
+            altDeepPressed := true
+        }
+        else
+        {
+            result .= "!"
+        }
+    }
+    if (leftShiftActive || rightShiftActive)
+    {
+        result .= "+"
+    }
+    if (leftWinActive || rightWinActive)
+    {
+        result .= "#"
+    }
+    
+    return result
+}
+
+setLeftModifierKeyState(key, state)
+{
+    if (key = leftCtrlAlternativeKey)
+    {
+        leftCtrlActive := state
+        if (!state && ctrlDeepPressed)
+        {
+            ctrlDeepPressed := false
+            send {ctrl up}
+        }
+        return true
+    }
+    if (key = leftAltAlternativeKey)
+    {
+        leftAltActive := state
+        if (!state && altDeepPressed)
+        {
+            altDeepPressed := false
+            send {alt up}
+        }
+        return true
+    }
+    if (key = leftShiftAlternativeKey)
+    {
+        leftShiftActive := state
+        return true
+    }
+    if (key = leftWinAlternativeKey)
+    {
+        leftWinActive := state
+        if (!state && winDeepPressed)
+        {
+            winDeepPressed := false
+            send {lwin up}
+        }
+        return true
+    } 
+    return false
+}
+
+setRightModifierKeyState(key, state)
+{
+    if (key = RightCtrlAlternativeKey)
+    {
+        rightCtrlActive := state
+        if (!state && ctrlDeepPressed)
+        {
+            ctrlDeepPressed := false
+            send {ctrl up}
+        }
+        return true
+    }
+    if (key = RightAltAlternativeKey)
+    {
+        rightAltActive := state
+        if (!state && altDeepPressed)
+        {
+            altDeepPressed := false
+            send {alt up}
+        }
+        return true
+    }
+    if (key = RightShiftAlternativeKey)
+    {
+        rightShiftActive := state
+        return true
+    }
+    if (key = RightWinAlternativeKey)
+    {
+        rightWinActive := state
+        if (!state && winDeepPressed)
+        {
+            winDeepPressed := false
+            send {lwin up}
+        }
+        return true
+    } 
+    return false
+}
 
 
 addToActivePressedKeys(key)
@@ -444,6 +645,22 @@ processKeyUp(key)
         return
     }
     
+    if (setLeftModifierKeyState(key, false))
+    {
+        if (!leftCtrlAlternativeKey && !leftAltAlternativeKey && !leftShiftAlternativeKey && !leftWinAlternativeKey)
+        {
+            leftModifierGroupPressed := false
+        }
+    }
+    
+    if (setRightModifierKeyState(key, false))
+    {
+        if (!rightCtrlAlternativeKey && !rightAltAlternativeKey && !rightShiftAlternativeKey && !rightWinAlternativeKey)
+        {
+            rightModifierGroupPressed := false
+        }
+    }
+    
     if (processKeyOnRelease)
     {
         processKeyOnRelease := false
@@ -466,9 +683,12 @@ processKeyUp(key)
         lastAlternativeLayoutProcessedKey := ""
     }    
     removeFromActivePressedKeys(key)
-    processLayoutOnRelease := true        
-    SetTimer, TimerProcessLayoutOnRelease, OFF
-    SetTimer, TimerProcessLayoutOnRelease, %timeoutProcessLayoutOnRelease%
+    if (activePressedKeys.Length() > 0)
+    {
+        processLayoutOnRelease := true        
+        SetTimer, TimerProcessLayoutOnRelease, OFF
+        SetTimer, TimerProcessLayoutOnRelease, %timeoutProcessLayoutOnRelease%
+    }
     send {Blind}{%key% Up}
     debug(key . " |up")
 }
