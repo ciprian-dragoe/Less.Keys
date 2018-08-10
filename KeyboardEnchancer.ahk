@@ -16,7 +16,6 @@ global alternativeLayout
 global layoutChangeKey
 global layoutKeyPressed
 global alternativeLayoutActive
-global modifierKeysAlternativeLayoutActive
 global sendLayoutKey
 global stopManagingLayoutKey
 global lastAlternativeLayoutProcessedKey
@@ -66,43 +65,43 @@ readLayoutFile(path)
         remappedKey := StrSplit(A_LoopReadLine, "`:").2
         if (remappedKey = "lctrl")
         {
-            leftCtrlAlternativeKey = StrSplit(A_LoopReadLine, "`:").1
+            leftCtrlAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
         }
         else if (remappedKey = "rctrl")
         {
-            rightCtrlAlternativeKey = StrSplit(A_LoopReadLine, "`:").1
+            rightCtrlAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
         } 
         else if (remappedKey = "lalt")
         {
-            leftAltAlternativeKey = StrSplit(A_LoopReadLine, "`:").1
+            leftAltAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
         }
         else if (remappedKey = "ralt")
         {
-            rightAltAlternativeKey = StrSplit(A_LoopReadLine, "`:").1
+            rightAltAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
         }
         else if (remappedKey = "lshift")
         {
-            leftShiftAlternativeKey = StrSplit(A_LoopReadLine, "`:").1
+            leftShiftAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
         }
         else if (remappedKey = "rshift")
         {
-            rightShiftAlternativeKey = StrSplit(A_LoopReadLine, "`:").1
+            rightShiftAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
         }
         else if (remappedKey = "lwin")
         {
-            leftWinAlternativeKey = StrSplit(A_LoopReadLine, "`:").1
+            leftWinAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
         }
         else if (remappedKey = "rwin")
         {
-            rightWinAlternativeKey = StrSplit(A_LoopReadLine, "`:").1
+            rightWinAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
         }
         else
         {
             alternativeLayout[StrSplit(A_LoopReadLine, "`:").1] := remappedKey
-        }   
+        }
     }
 }
-
+ 
 readTimingsFile(path)
 {
     IniRead, timeoutStillSendLayoutKey, %path%, timings, timeoutStillSendLayoutKey
@@ -388,10 +387,12 @@ processKeyDown(key)
     
     if (leftModifierGroupPressed && setLeftModifierKeyState(key, true))
     {
+        debug("left modifier active")
         return
     }
     if (rightModifierGroupPressed && setRightModifierKeyState(key, true))
     {
+        debug("right modifier active")
         return
     }
     
@@ -400,11 +401,13 @@ processKeyDown(key)
         if (setLeftModifierKeyState(key, true))
         {
             leftModifierGroupPressed := true
+            sendLayoutKey := false
             return
         }
         if (setRightModifierKeyState(key, true))
         {
             rightModifierGroupPressed := true
+            sendLayoutKey := false
             return
         }
     }
@@ -416,17 +419,23 @@ processKeyDown(key)
             lastAlternativeLayoutProcessedKey := key
             key := alternativeLayout[key]
             sendLayoutKey := false
+            activeModifiers := getActiveModifiers(key)
+            send {blind}%activeModifiers%{%key% down}
+            debug(key . " |layout active down ")
+            return
         }
+        
         if (key != lastAlternativeLayoutProcessedKey)
         {
             addToActivePressedKeys(key)
+            activeModifiers := getActiveModifiers(key)
+            send {blind}%activeModifiers%{%key% down}
+            return
         }
         
-        activeModifiers := getActiveModifiers(key)
-        send {blind}%activeModifiers%{%key% down}
-        debug(key . " |down")
         return
     }
+    
     lastAlternativeLayoutProcessedKey := alternativeLayout[key]
     debug(key . " |not processed because on up")
 }
@@ -575,7 +584,6 @@ addToActivePressedKeys(key)
 manageLayoutKeyDown(key)
 {
     layoutKeyPressed := true
-    debug(key . " |processing")
     if (!stopManagingLayoutKey)
     {
         if (activePressedKeys.Length() > 0)
@@ -584,12 +592,12 @@ manageLayoutKeyDown(key)
             ;debug("real space" . " sent on key down")
             sendLayoutKey := false
             stopManagingLayoutKey := true
+            debug(key . " |sent special condition ")
         }
         else
         {
             ;debug("specialKey" . " down")
             stopManagingLayoutKey := true
-            modifierKeysAlternativeLayoutActive := true
             alternativeLayoutActive := true
             sendLayoutKey := true
             if (processLayoutOnRelease)
@@ -598,6 +606,7 @@ manageLayoutKeyDown(key)
             }
             SetTimer, TimerTimeoutSendLayoutKey, OFF
             SetTimer, TimerTimeoutSendLayoutKey, %timeoutStillSendLayoutKey%
+            debug(key . " |processing")
         }
     }
 }
@@ -621,8 +630,11 @@ manageLayoutKeyUp(key)
     stopManagingLayoutKey := false
     layoutKeyPressed := false
     alternativeLayoutActive := false
-    modifierKeysAlternativeLayoutActive := false
     SetTimer, TimerTimeoutSendLayoutKey, OFF
+    if (!lastAlternativeLayoutProcessedKey)
+    {
+        processKeyOnRelease := false
+    }
     
     if (sendLayoutKey)
     {
@@ -630,7 +642,7 @@ manageLayoutKeyUp(key)
         ;debug("specialKey as space sent on key" . " up")
         return
     }
-    ;debug("specialKey" . " up")
+    debug(key . " up")
 }
 
 
@@ -647,7 +659,7 @@ processKeyUp(key)
     
     if (setLeftModifierKeyState(key, false))
     {
-        if (!leftCtrlAlternativeKey && !leftAltAlternativeKey && !leftShiftAlternativeKey && !leftWinAlternativeKey)
+        if (leftModifierGroupPressed && !leftCtrlActive && !leftAltActive && !leftShiftActive && !leftWinActive)
         {
             leftModifierGroupPressed := false
         }
@@ -655,7 +667,7 @@ processKeyUp(key)
     
     if (setRightModifierKeyState(key, false))
     {
-        if (!rightCtrlAlternativeKey && !rightAltAlternativeKey && !rightShiftAlternativeKey && !rightWinAlternativeKey)
+        if (rightModifierGroupPressed && !rightCtrlActive && !rightAltActive && !rightShiftActive && !rightWinActive)
         {
             rightModifierGroupPressed := false
         }
@@ -674,7 +686,7 @@ processKeyUp(key)
             return
         }
         send {blind}{%key%}
-        debug(key . " |up")
+        debug(key . " |up on release")
         return
     }
     
@@ -683,7 +695,7 @@ processKeyUp(key)
         lastAlternativeLayoutProcessedKey := ""
     }    
     removeFromActivePressedKeys(key)
-    if (activePressedKeys.Length() > 0)
+    if (activePressedKeys.Length() = 0)
     {
         processLayoutOnRelease := true        
         SetTimer, TimerProcessLayoutOnRelease, OFF
@@ -781,7 +793,7 @@ store(value)
 writeMemoryStream(value)
 {
     keyPressCount := activePressedKeys.Length()
-	textToSend = %A_Hour%:%A_Min%:%A_Sec% (%A_MSec%) - %value% |layoutKeyPressed=%layoutKeyPressed%| - |alternativeLayoutActive=%alternativeLayoutActive%| |activePressedKeys=%keyPressCount%| |processKeyOnRelease=%processKeyOnRelease%|`n
+	textToSend = %A_Hour%:%A_Min%:%A_Sec%:(%A_MSec%)|%value%|layoutKeyPressed=%layoutKeyPressed%|alternativeLayoutActive=%alternativeLayoutActive%|activePressedKeys=%keyPressCount%|processKeyOnRelease=%processKeyOnRelease%|lastAlternativeProcessedKey=%lastAlternativeLayoutProcessedKey%|`n
     debugStoredData .= textToSend 
 }
 ;-------------------- END OF Debugging
