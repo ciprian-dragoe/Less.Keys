@@ -342,8 +342,10 @@ processKeyDown(key)
             addToActivePressedKeys(key)
             debug(key . " |down")
             send {blind}{%key% down}
+            return
         }
     }
+    lastAlternativeLayoutProcessedKey := alternativeLayout[key]
 }
 
 
@@ -399,6 +401,20 @@ manageLayoutKeyDown(key)
     }
 }
 
+TimerTimeoutSendLayoutKey:
+    SetTimer, TimerTimeoutSendLayoutKey, OFF
+    if (processKeyOnRelease && lastAlternativeLayoutProcessedKey != "")
+    {
+        processKeyOnRelease := false
+        send {blind}{%lastAlternativeLayoutProcessedKey% down}
+    }
+    if (layoutKeyPressed)
+    {    
+        sendLayoutKey := false
+        ;debug("timer terminat")
+    }
+return
+
 manageLayoutKeyUp(key)
 {
     stopManagingLayoutKey := false
@@ -416,15 +432,6 @@ manageLayoutKeyUp(key)
     ;debug("specialKey" . " up")
 }
 
-TimerTimeoutSendLayoutKey:
-    SetTimer, TimerTimeoutSendLayoutKey, OFF
-    processKeyOnRelease := false
-    if (layoutKeyPressed)
-    {    
-        sendLayoutKey := false
-        ;debug("timer terminat")
-    }
-return
 
 
 
