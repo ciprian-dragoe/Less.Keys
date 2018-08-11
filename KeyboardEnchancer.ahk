@@ -40,7 +40,6 @@ global rightWinActive
 
 global altDeepPressed
 global ctrlDeepPressed
-global winDeepPressed
 
 global debugStoredData := ""
 global debugComputer
@@ -100,8 +99,6 @@ if (A_ComputerName = "lenovo-x230" || "CIPI-ASUS-ROG")
     	navigationMode = 0
     	return
     return
-    
-    
     
     #f7::
         showToolTip("RELOADING FILE")
@@ -526,11 +523,6 @@ setLeftModifierKeyState(key, state)
     if (key = leftWinAlternativeKey)
     {
         leftWinActive := state
-        if (!state && winDeepPressed)
-        {
-            winDeepPressed := false
-            send {lwin up}
-        }
         return true
     } 
     return false
@@ -566,11 +558,6 @@ setRightModifierKeyState(key, state)
     if (key = RightWinAlternativeKey)
     {
         rightWinActive := state
-        if (!state && winDeepPressed)
-        {
-            winDeepPressed := false
-            send {lwin up}
-        }
         return true
     } 
     return false
@@ -740,189 +727,16 @@ return
 
 processAhkKeyboardShortcuts(activeModifiers, key)
 {
-    if (debugComputer)
+    combination := activeModifiers . key    
+    action := keyboardShortcuts[combination]
+    if (action)
     {
-        WinGetClass, ActiveWindowClass, A
-        combination := activeModifiers . key
-        
-        action := keyboardShortcuts[combination]
-        if (action)
-        {
-            run %action%
-            return true
-        }
-        
-        if (ActiveWindowClass = "TfrmMyLifeMain")
-        {
-            if (keyboardShortcuts[combination])
-            {
-                action := keyboardShortcuts[combination]
-                run %action%
-                return true
-            }
-            if (combination = "!e")
-            {
-                run MLO.ahk 11
-                return true
-            }
-            if (combination = "!r")
-            {
-                run MLO.ahk 12
-                return true
-            }
-            if (combination = "+F1")
-            {
-                run MLO.ahk 5
-                return true
-            }
-            if (combination = "^up")
-            {
-                run MLO.ahk 7
-                return true
-            }
-            if (combination = "^down")
-            {
-                run MLO.ahk 8
-                return true
-            }
-            if (combination = "^f")
-            {
-                run MLO.ahk 9
-                return true
-            }
-            if (combination = "^+f")
-            {
-                run MLO.ahk 10
-                return true
-            }
-        }
-        
-        if (combination = "#w")
-        {
-            switchWindow("1")
-            return true
-        }
-        if (combination = "#e")
-        {
-            switchWindow("2")
-            return true
-        }
-        if (combination = "#r")
-        {
-            switchWindow("3")
-            return true
-        }
-        if (combination = "#s")
-        {
-            switchWindow("4")
-            return true
-        }
-        if (combination = "#d")
-        {
-            switchWindow("5")
-            return true
-        }
-        if (combination = "#f")
-        {
-            if (A_ComputerName = "lenovo-x230")
-            {
-                run MLO.ahk 3
-            }
-            else
-            {
-                switchWindow("6")
-            }
-            return true
-        }
-        if (combination = "#x")
-        {
-            switchWindow("7")
-            return true
-        }
-        if (combination = "#c")
-        {
-            switchWindow("8")
-            return true
-        }
-        if (combination = "#v")
-        {
-            switchWindow("9")
-            return true
-        }
-        if (combination = "#g")
-        {
-            send #d
-            return true
-        }
-        if (combination = "#t")
-        {
-            send #r
-            return true
-        }
-        
-        if (combination = "+#w")
-        {
-            send !{NumPad7}
-            return true
-        }
-        if (combination = "+#e")
-        {
-            send !{NumPad8}
-            return true
-        }
-        if (combination = "+#r")
-        {
-            send !{NumPad9}
-            return true
-        }
-        if (combination = "+#s")
-        {
-            send !{NumPad4}
-            return true
-        }
-        if (combination = "+#d")
-        {
-            send !{NumPad5}
-            return true
-        }
-        if (combination = "+#f")
-        {
-            send !{NumPad6}
-            return true
-        }
-        if (combination = "+#x")
-        {
-            send !{NumPad1}
-            return true
-        }
-        if (combination = "+#c")
-        {
-            send !{NumPad2}
-            return true
-        }
-        if (combination = "+#v")
-        {
-            send !{NumPad3}
-            return true
-        }
-        
+        run %action%
+        return true
     }
+    
     return false
 }
-switchWindow(key)
-{
-    if (winDeepPressed)
-    {
-        send %key%
-    }
-    else
-    {
-        send {lwin down}%key%
-        winDeepPressed := true
-    }
-}
-
-
 
 
 
