@@ -2,8 +2,6 @@
 #Persistent
 #MaxHotkeysPerInterval 400
 
-global debugComputer
-global navigationMode = 1
 global activePressedKeys = []
 global timeoutStillSendLayoutKey
 
@@ -45,11 +43,16 @@ global ctrlDeepPressed
 global winDeepPressed
 
 global debugStoredData := ""
+global debugComputer
+global navigationMode = 1
+
+global keyboardShortcuts
 
 
 
 readLayoutFile("alternative-layout.cfg")
 readTimingsFile("timings.cfg")
+readKeyboardShortcutsFile("keyboard-shortcuts.cfg")
 
 readLayoutFile(path)
 {
@@ -101,7 +104,21 @@ readLayoutFile(path)
         }
     }
 }
- 
+
+readKeyboardShortcutsFile(path)
+{
+    keyboardShortcuts:=Object()
+    Loop, read, %path%
+    {
+        IfInString, A_LoopReadLine, ### ;if line has ### in it, is a comment and skip
+        { 
+            continue
+        }
+        action := StrSplit(A_LoopReadLine, "`:").2
+        keyboardShortcuts[StrSplit(A_LoopReadLine, "`:").1] := action
+    }
+}
+
 readTimingsFile(path)
 {
     IniRead, timeoutStillSendLayoutKey, %path%, timings, timeoutStillSendLayoutKey
@@ -442,7 +459,7 @@ processKeyDown(key)
         return
     }
     
-    lastAlternativeLayoutProcessedKey := alternativeLayout[key]
+    lastAlternativeLayoutProcessedKey := key
     debug(key . " |not processed because on up")
 }
 
@@ -622,7 +639,7 @@ TimerTimeoutSendLayoutKey:
     if (processKeyOnRelease && lastAlternativeLayoutProcessedKey != "")
     {
         processKeyOnRelease := false
-        send {blind}{%lastAlternativeLayoutProcessedKey% down}
+        send {blind}{alternativeLayout[lastAlternativeLayoutProcessedKey] down}
     }
     if (layoutKeyPressed)
     {    
@@ -845,9 +862,10 @@ processAhkKeyboardShortcuts(activeModifiers, key)
         
         if (ActiveWindowClass = "TfrmMyLifeMain")
         {
-            if (combination = "!w")
+            if (keyboardShortcuts[combination])
             {
-                run MLO.ahk 1
+                action := keyboardShortcuts[combination]
+                run %action%
                 return true
             }
             if (combination = "!e")

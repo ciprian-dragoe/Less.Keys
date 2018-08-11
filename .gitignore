@@ -3,5 +3,6 @@ logs
 .idea
 .vs
 *.ahk.bak
-MLO.ahk
-MLO.exe
+my-alternative-layout.cfg
+my-keyboard-shortcuts.ahk
+my-timings.cfg
