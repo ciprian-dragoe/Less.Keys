@@ -632,8 +632,9 @@ TimerTimeoutSendLayoutKey:
     if (processKeyOnRelease && lastAlternativeLayoutProcessedKey != "")
     {
         processKeyOnRelease := false
-        send {blind}{alternativeLayout[lastAlternativeLayoutProcessedKey] down}
-        debug(alternativeLayout[lastAlternativeLayoutProcessedKey] . " |space timer over")
+        key := alternativeLayout[lastAlternativeLayoutProcessedKey]
+        send {blind}{%key% down}
+        debug(key . " |space timer over")
     }
     if (layoutKeyPressed)
     {    
