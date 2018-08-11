@@ -42,7 +42,7 @@ global altDeepPressed
 global ctrlDeepPressed
 
 global debugStoredData := ""
-global debugComputer
+global debugComputer := false
 global navigationMode = 1
 
 global keyboardShortcuts
@@ -62,32 +62,30 @@ readKeyboardShortcutsFile("configure-keyboard-shortcuts.cfg")
 
 
 ;-------------------- DEBUGGING
-if (A_ComputerName = "lenovo-x230" || "CIPI-ASUS-ROG") 
+if (A_ComputerName = "lenovo-x230" || A_ComputerName = "CIPI-ASUS-ROG") 
 {
 	debugComputer := true
 	FileDelete, c:\Users\cipri\Desktop\debugKeyboardHack.txt
 	readLayoutFile("my-alternative-layout.cfg")
     readTimingsFile("my-timings.cfg")
     readKeyboardShortcutsFile("my-keyboard-shortcuts.cfg")
-
 }
 
 #if debugComputer
     pgdn::end
     pgup::home    
     	
-    *f7::
+    f8::
     	debugInfo := "leftModifierGroupPressed=" . leftModifierGroupPressed . "`n" . "leftCtrlModifierActive=" . leftCtrlModifierActive . "`n" . "leftAltModifierActive=" . leftAltModifierActive . "`n" . "leftShiftModifierActive=" . leftShiftModifierActive . "`n" . "`n" . "rightModifierGroupPressed=" . rightModifierGroupPressed . "`n" . "rightCtrlModifierActive=" . rightCtrlModifierActive . "`n" . "rightAltModifierActive=" . rightAltModifierActive . "`n" . "rightShiftModifierActive=" . rightShiftModifierActive . "`n" . "rightWinModifierActive=" . rightWinModifierActive
-    	
         fixStickyKeys()
-        ;msgbox, % debugInfo
+        showToolTip("DEBUG FILES STORED")
         
         FileDelete, c:\Users\cipri\Desktop\debugKeyboardHack.txt
         FileAppend, %debugStoredData%,c:\Users\cipri\Desktop\debugKeyboardHack.txt
         debugStoredData := ""
     return
     
-    #!F7::
+    F7::
     	if navigationMode = 0
     	{
     	    showToolTip("alternative layout active")
@@ -120,7 +118,7 @@ fixStickyKeys()
 showToolTip(value)
 {
     tooltip, |%value%|
-    sleep 1800
+    sleep 800
     tooltip
 }
 
@@ -722,8 +720,6 @@ TimerProcessLayoutOnRelease:
     processLayoutOnRelease := false
     SetTimer, TimerProcessLayoutOnRelease, OFF
 return
-
-
 
 processAhkKeyboardShortcuts(activeModifiers, key)
 {
