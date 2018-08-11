@@ -650,7 +650,8 @@ manageLayoutKeyUp(key)
     SetTimer, TimerTimeoutSendLayoutKey, OFF
     if (processKeyOnRelease && lastAlternativeLayoutProcessedKey != "")
     {
-        send {blind}{alternativeLayout[lastAlternativeLayoutProcessedKey] down}
+        key := alternativeLayout[lastAlternativeLayoutProcessedKey]
+        send {blind}{%key% down}
         debug(key . " |on space release")
     }
     processKeyOnRelease := false
