@@ -449,7 +449,7 @@ processKeyDown(key)
     }
     
     lastAlternativeLayoutProcessedKey := key
-    debug(key . " |not processed because on up")
+    debug(key . " |not processed")
 }
 
 getActiveModifiers(key)
@@ -633,10 +633,11 @@ manageLayoutKeyUp(key)
     layoutKeyPressed := false
     alternativeLayoutActive := false
     SetTimer, TimerTimeoutSendLayoutKey, OFF
-    if (!lastAlternativeLayoutProcessedKey)
+    if (processKeyOnRelease && lastAlternativeLayoutProcessedKey != "")
     {
-        processKeyOnRelease := false
+        send {blind}{alternativeLayout[lastAlternativeLayoutProcessedKey] down}
     }
+    processKeyOnRelease := false
     
     if (sendLayoutKey)
     {
