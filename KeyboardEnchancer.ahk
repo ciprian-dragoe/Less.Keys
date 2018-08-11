@@ -48,102 +48,36 @@ global navigationMode = 1
 
 global keyboardShortcuts
 
-
-
-readLayoutFile("alternative-layout.cfg")
-readTimingsFile("timings.cfg")
-readKeyboardShortcutsFile("keyboard-shortcuts.cfg")
-
-readLayoutFile(path)
-{
-    FileReadLine, layoutChangeKey, %path%, 1
-    layoutChangeKey := StrSplit(layoutChangeKey, "`:").2 
-    alternativeLayout:=Object()
-    Loop, read, %path%
-    {
-        IfInString, A_LoopReadLine, ### ;if line has ### in it, is a comment and skip
-        { 
-            continue
-        }
-        remappedKey := StrSplit(A_LoopReadLine, "`:").2
-        if (remappedKey = "lctrl")
-        {
-            leftCtrlAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
-        }
-        else if (remappedKey = "rctrl")
-        {
-            rightCtrlAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
-        } 
-        else if (remappedKey = "lalt")
-        {
-            leftAltAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
-        }
-        else if (remappedKey = "ralt")
-        {
-            rightAltAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
-        }
-        else if (remappedKey = "lshift")
-        {
-            leftShiftAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
-        }
-        else if (remappedKey = "rshift")
-        {
-            rightShiftAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
-        }
-        else if (remappedKey = "lwin")
-        {
-            leftWinAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
-        }
-        else if (remappedKey = "rwin")
-        {
-            rightWinAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
-        }
-        else
-        {
-            alternativeLayout[StrSplit(A_LoopReadLine, "`:").1] := remappedKey
-        }
-    }
-}
-
-readKeyboardShortcutsFile(path)
-{
-    keyboardShortcuts:=Object()
-    Loop, read, %path%
-    {
-        IfInString, A_LoopReadLine, ### ;if line has ### in it, is a comment and skip
-        { 
-            continue
-        }
-        action := StrSplit(A_LoopReadLine, "`:").2
-        keyboardShortcuts[StrSplit(A_LoopReadLine, "`:").1] := action
-    }
-}
-
-readTimingsFile(path)
-{
-    IniRead, timeoutStillSendLayoutKey, %path%, timings, timeoutStillSendLayoutKey
-    IniRead, timeoutProcessLayoutOnRelease, %path%, timings, timeoutProcessLayoutOnRelease
-}
-
-
-
 SetKeyDelay -1
 
 
 
+
+
+readLayoutFile("configure-alternative-layout.cfg")
+readTimingsFile("configure-timings.cfg")
+readKeyboardShortcutsFile("configure-keyboard-shortcuts.cfg")
+
+
+
+
+
+;-------------------- DEBUGGING
 if (A_ComputerName = "lenovo-x230" || "CIPI-ASUS-ROG") 
 {
 	debugComputer := true
 	FileDelete, c:\Users\cipri\Desktop\debugKeyboardHack.txt
+	readLayoutFile("my-alternative-layout.cfg")
+    readTimingsFile("my-timings.cfg")
+    readKeyboardShortcutsFile("my-keyboard-shortcuts.cfg")
+
 }
-
-
 
 #if debugComputer
     pgdn::end
     pgup::home    
     	
-    *f9::
+    *f7::
     	debugInfo := "leftModifierGroupPressed=" . leftModifierGroupPressed . "`n" . "leftCtrlModifierActive=" . leftCtrlModifierActive . "`n" . "leftAltModifierActive=" . leftAltModifierActive . "`n" . "leftShiftModifierActive=" . leftShiftModifierActive . "`n" . "`n" . "rightModifierGroupPressed=" . rightModifierGroupPressed . "`n" . "rightCtrlModifierActive=" . rightCtrlModifierActive . "`n" . "rightAltModifierActive=" . rightAltModifierActive . "`n" . "rightShiftModifierActive=" . rightShiftModifierActive . "`n" . "rightWinModifierActive=" . rightWinModifierActive
     	
         fixStickyKeys()
@@ -153,7 +87,67 @@ if (A_ComputerName = "lenovo-x230" || "CIPI-ASUS-ROG")
         FileAppend, %debugStoredData%,c:\Users\cipri\Desktop\debugKeyboardHack.txt
         debugStoredData := ""
     return
+    
+    #!F7::
+    	if navigationMode = 0
+    	{
+    	    showToolTip("alternative layout active")
+    		navigationMode = 1
+    		return
+    	}
+    	
+    	showToolTip("alternative layout off")
+    	navigationMode = 0
+    	return
+    return
+    
+    
+    
+    #f7::
+        showToolTip("RELOADING FILE")
+    	reload
+    return
 #if
+
+debug(value)
+{
+    if (debugComputer)
+        writeMemoryStream(value)
+}
+
+fixStickyKeys()
+{
+    send {shift up}{alt up}{ctrl up}{lwin up}
+}
+
+showToolTip(value)
+{
+    tooltip, |%value%|
+    sleep 1800
+    tooltip
+}
+
+send(value)
+{
+	send % value
+}
+
+store(value)
+{
+    keyPressCount := activePressedKeys.Length()
+	textToSend = %value% |contextKeyPressed=%contextKeyPressed%| - |alternativeLayoutActive=%alternativeLayoutActive%| |activePressedKeys=%keyPressCount%|
+	FileAppend, %A_Hour%:%A_Min%:%A_Sec% (%A_MSec%) - %textToSend%`n,c:\Users\cipri\Desktop\debugKeyboardHack.txt
+}
+
+writeMemoryStream(value)
+{
+    keyPressCount := activePressedKeys.Length()
+	textToSend = %A_Hour%:%A_Min%:%A_Sec%:(%A_MSec%)|%value%|layoutKeyPressed=%layoutKeyPressed%|alternativeLayoutActive=%alternativeLayoutActive%|activePressedKeys=%keyPressCount%|processKeyOnRelease=%processKeyOnRelease%|lastAlternativeProcessedKey=%lastAlternativeLayoutProcessedKey%|`n
+    debugStoredData .= textToSend 
+}
+;-------------------- DEBUGGING
+
+
 
 
 
@@ -751,6 +745,58 @@ processAhkKeyboardShortcuts(activeModifiers, key)
         WinGetClass, ActiveWindowClass, A
         combination := activeModifiers . key
         
+        action := keyboardShortcuts[combination]
+        if (action)
+        {
+            run %action%
+            return true
+        }
+        
+        if (ActiveWindowClass = "TfrmMyLifeMain")
+        {
+            if (keyboardShortcuts[combination])
+            {
+                action := keyboardShortcuts[combination]
+                run %action%
+                return true
+            }
+            if (combination = "!e")
+            {
+                run MLO.ahk 11
+                return true
+            }
+            if (combination = "!r")
+            {
+                run MLO.ahk 12
+                return true
+            }
+            if (combination = "+F1")
+            {
+                run MLO.ahk 5
+                return true
+            }
+            if (combination = "^up")
+            {
+                run MLO.ahk 7
+                return true
+            }
+            if (combination = "^down")
+            {
+                run MLO.ahk 8
+                return true
+            }
+            if (combination = "^f")
+            {
+                run MLO.ahk 9
+                return true
+            }
+            if (combination = "^+f")
+            {
+                run MLO.ahk 10
+                return true
+            }
+        }
+        
         if (combination = "#w")
         {
             switchWindow("1")
@@ -860,50 +906,6 @@ processAhkKeyboardShortcuts(activeModifiers, key)
             return true
         }
         
-        if (ActiveWindowClass = "TfrmMyLifeMain")
-        {
-            if (keyboardShortcuts[combination])
-            {
-                action := keyboardShortcuts[combination]
-                run %action%
-                return true
-            }
-            if (combination = "!e")
-            {
-                run MLO.ahk 11
-                return true
-            }
-            if (combination = "!r")
-            {
-                run MLO.ahk 12
-                return true
-            }
-            if (combination = "+F1")
-            {
-                run MLO.ahk 5
-                return true
-            }
-            if (combination = "^up")
-            {
-                run MLO.ahk 7
-                return true
-            }
-            if (combination = "^down")
-            {
-                run MLO.ahk 8
-                return true
-            }
-            if (combination = "^f")
-            {
-                run MLO.ahk 9
-                return true
-            }
-            if (combination = "^+f")
-            {
-                run MLO.ahk 10
-                return true
-            }
-        }
     }
     return false
 }
@@ -922,79 +924,77 @@ switchWindow(key)
 
 
 
-;-------------------- Debugging
-#SC029::
-	if navigationMode = 0
-	{
-		tooltip SPACE modifier active
-		sleep 600
-		tooltip
-		navigationMode = 1
-		return
-	}
-	
-	tooltip off
-	sleep 600
-	tooltip
-	navigationMode = 0
-	return
-return
 
 
-
-#f7::
-	tooltip Reloading: keyboard test
-	sleep 400
-	reload
-return
-
-
-
-debug(value)
+;-------------------- READ SETTING FILES
+readLayoutFile(path)
 {
-    ;msgbox % value
-    writeMemoryStream(value)
+    FileReadLine, layoutChangeKey, %path%, 1
+    layoutChangeKey := StrSplit(layoutChangeKey, "`:").2 
+    alternativeLayout:=Object()
+    Loop, read, %path%
+    {
+        IfInString, A_LoopReadLine, ### ;if line has ### in it, is a comment and skip
+        { 
+            continue
+        }
+        remappedKey := StrSplit(A_LoopReadLine, "`:").2
+        if (remappedKey = "lctrl")
+        {
+            leftCtrlAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
+        }
+        else if (remappedKey = "rctrl")
+        {
+            rightCtrlAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
+        } 
+        else if (remappedKey = "lalt")
+        {
+            leftAltAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
+        }
+        else if (remappedKey = "ralt")
+        {
+            rightAltAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
+        }
+        else if (remappedKey = "lshift")
+        {
+            leftShiftAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
+        }
+        else if (remappedKey = "rshift")
+        {
+            rightShiftAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
+        }
+        else if (remappedKey = "lwin")
+        {
+            leftWinAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
+        }
+        else if (remappedKey = "rwin")
+        {
+            rightWinAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
+        }
+        else
+        {
+            alternativeLayout[StrSplit(A_LoopReadLine, "`:").1] := remappedKey
+        }
+    }
 }
 
-
-
-fixStickyKeys()
+readKeyboardShortcutsFile(path)
 {
-    send {shift up}{alt up}{ctrl up}{lwin up}
+    keyboardShortcuts:=Object()
+    Loop, read, %path%
+    {
+        IfInString, A_LoopReadLine, ### ;if line has ### in it, is a comment and skip
+        { 
+            continue
+        }
+        action := StrSplit(A_LoopReadLine, "`:").2
+        keyboardShortcuts[StrSplit(A_LoopReadLine, "`:").1] := action
+    }
 }
 
-
-
-showToolTip(value)
+readTimingsFile(path)
 {
-    tooltip, |%value%|
-    sleep 1800
-    tooltip
+    IniRead, timeoutStillSendLayoutKey, %path%, timings, timeoutStillSendLayoutKey
+    IniRead, timeoutProcessLayoutOnRelease, %path%, timings, timeoutProcessLayoutOnRelease
 }
-
-
-
-send(value)
-{
-	send % value
-}
-
-
-
-store(value)
-{
-    keyPressCount := activePressedKeys.Length()
-	textToSend = %value% |contextKeyPressed=%contextKeyPressed%| - |alternativeLayoutActive=%alternativeLayoutActive%| |activePressedKeys=%keyPressCount%|
-	FileAppend, %A_Hour%:%A_Min%:%A_Sec% (%A_MSec%) - %textToSend%`n,c:\Users\cipri\Desktop\debugKeyboardHack.txt
-}
-
-
-
-
-writeMemoryStream(value)
-{
-    keyPressCount := activePressedKeys.Length()
-	textToSend = %A_Hour%:%A_Min%:%A_Sec%:(%A_MSec%)|%value%|layoutKeyPressed=%layoutKeyPressed%|alternativeLayoutActive=%alternativeLayoutActive%|activePressedKeys=%keyPressCount%|processKeyOnRelease=%processKeyOnRelease%|lastAlternativeProcessedKey=%lastAlternativeLayoutProcessedKey%|`n
-    debugStoredData .= textToSend 
-}
-;-------------------- END OF Debugging
+;-------------------- READ SETTING FILES

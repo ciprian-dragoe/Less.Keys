@@ -4,5 +4,6 @@ logs
 .vs
 *.ahk.bak
 my-alternative-layout.cfg
+my-keyboard-shortcuts-script.ahk
 my-keyboard-shortcuts.ahk
 my-timings.cfg
