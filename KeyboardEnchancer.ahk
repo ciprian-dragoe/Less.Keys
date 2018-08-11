@@ -633,7 +633,7 @@ TimerTimeoutSendLayoutKey:
     {
         processKeyOnRelease := false
         send {blind}{alternativeLayout[lastAlternativeLayoutProcessedKey] down}
-        debug(key . " |space timer over")
+        debug(alternativeLayout[lastAlternativeLayoutProcessedKey] . " |space timer over")
     }
     if (layoutKeyPressed)
     {    
