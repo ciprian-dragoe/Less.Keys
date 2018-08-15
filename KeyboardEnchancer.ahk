@@ -648,20 +648,20 @@ manageLayoutKeyUp(key)
     layoutKeyPressed := false
     alternativeLayoutActive := false
     SetTimer, TimerTimeoutSendLayoutKey, OFF
-    if (processKeyOnRelease && lastAlternativeLayoutProcessedKey != "")
-    {
-        key := alternativeLayout[lastAlternativeLayoutProcessedKey]
-        send {blind}{%key% down}
-        debug(key . " |on space release")
-    }
-    processKeyOnRelease := false
     
     if (sendLayoutKey)
     {
         send {blind}{%key%}
         debug(key . " |on up")
-        return
     }
+    
+    if (processKeyOnRelease && lastAlternativeLayoutProcessedKey != "")
+    {
+        keyToSend := alternativeLayout[lastAlternativeLayoutProcessedKey]
+        send {blind}{%keyToSend% down}
+        debug(keyToSend . " |on space release")
+    }
+    processKeyOnRelease := false
 }
 
 processKeyUp(key) 
