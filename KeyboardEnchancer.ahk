@@ -632,16 +632,9 @@ TimerTimeoutSendLayoutKey:
     if (processKeyOnRelease && lastAlternativeLayoutProcessedKey != "")
     {
         processKeyOnRelease := false
-        if (!leftModifierGroupPressed && !rightModifierGroupPressed)
-        {
-            key := alternativeLayout[lastAlternativeLayoutProcessedKey]
-            send {blind}{%key% down}
-            debug(key . " |space timer over")
-        }
-        else
-        {
-            debug(lastAlternativeLayoutProcessedKey . " |space timer over modifider not sent")
-        }
+        key := alternativeLayout[lastAlternativeLayoutProcessedKey]
+        send {blind}{%key% down}
+        debug(key . " |space timer over")
     }
     if (layoutKeyPressed)
     {    
