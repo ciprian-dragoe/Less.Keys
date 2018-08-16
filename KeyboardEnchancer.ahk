@@ -644,6 +644,7 @@ return
 
 manageLayoutKeyUp(key)
 {
+    debug(key . " |processing space up")
     stopManagingLayoutKey := false
     layoutKeyPressed := false
     alternativeLayoutActive := false
@@ -652,7 +653,7 @@ manageLayoutKeyUp(key)
     if (sendLayoutKey)
     {
         send {blind}{%key%}
-        debug(key . " |on up")
+        debug(key . " |sent on up")
     }
     
     if (processKeyOnRelease && lastAlternativeLayoutProcessedKey != "")
