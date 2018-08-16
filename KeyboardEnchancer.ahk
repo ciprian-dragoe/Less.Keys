@@ -2,10 +2,11 @@
 #Persistent
 #MaxHotkeysPerInterval 400
 
-global activePressedKeys = []
 global timeoutStillSendLayoutKey
-
 global timeoutProcessLayoutOnRelease
+global timeoutTimeoutSendModifierOnUp
+
+global activePressedKeys = []
 global processLayoutOnRelease
 global processKeyOnRelease
 
@@ -15,6 +16,7 @@ global layoutChangeKey
 global layoutKeyPressed
 global alternativeLayoutActive
 global sendLayoutKey
+global sendModifierOnUp
 global stopManagingLayoutKey
 global lastAlternativeLayoutProcessedKey
 
@@ -407,7 +409,10 @@ processKeyDown(key)
             leftModifierGroupPressed := true
             if (processKeyOnRelease)
             {
+                processKeyOnRelease := false
                 lastAlternativeLayoutProcessedKey := key
+                SetTimer, TimerTimeoutSendModifierOnUp, OFF
+                SetTimer, TimerTimeoutSendModifierOnUp, %timeoutTimeoutSendModifierOnUp%
                 debug(key . " |modifier on up")
             }
             else
@@ -421,7 +426,10 @@ processKeyDown(key)
             rightModifierGroupPressed := true
             if (processKeyOnRelease)
             {
+                processKeyOnRelease := false
                 lastAlternativeLayoutProcessedKey := key
+                SetTimer, TimerTimeoutSendModifierOnUp, OFF
+                SetTimer, TimerTimeoutSendModifierOnUp, %timeoutTimeoutSendModifierOnUp%                
                 debug(key . " |modifier on up")
             }
             else
@@ -466,6 +474,11 @@ processKeyDown(key)
     lastAlternativeLayoutProcessedKey := key
     debug(key . " |not processed")
 }
+
+TimerTimeoutSendModifierOnUp:
+    SetTimer, TimerTimeoutSendModifierOnUp, OFF
+    lastAlternativeLayoutProcessedKey := ""
+return
 
 getActiveModifiers(key)
 {
@@ -632,16 +645,10 @@ TimerTimeoutSendLayoutKey:
     if (processKeyOnRelease && lastAlternativeLayoutProcessedKey != "")
     {
         processKeyOnRelease := false
-        if (!leftModifierGroupPressed && !rightModifierGroupPressed)
-        {
-            key := alternativeLayout[lastAlternativeLayoutProcessedKey]
-            send {blind}{%key% down}
-            debug(key . " |space timer over")
-        }
-        else
-        {
-            debug(lastAlternativeLayoutProcessedKey . " |alternative not sent on space timeout")
-        }
+        key := alternativeLayout[lastAlternativeLayoutProcessedKey]
+        send {blind}{%key% down}
+        lastAlternativeLayoutProcessedKey := ""
+        debug(key . " |space timer over")
     }
     if (layoutKeyPressed)
     {    
@@ -665,16 +672,11 @@ manageLayoutKeyUp(key)
     
     if (processKeyOnRelease && lastAlternativeLayoutProcessedKey != "")
     {
-        if (!leftModifierGroupPressed && !rightModifierGroupPressed)
-        {
-            send {blind}{%lastAlternativeLayoutProcessedKey% down}
-            debug(lastAlternativeLayoutProcessedKey . " |on space release")
-        }
-        else
-        {
-            debug(lastAlternativeLayoutProcessedKey . " |alternative not sent on space up")
-        }
+        send {blind}{%lastAlternativeLayoutProcessedKey% down}
+        lastAlternativeLayoutProcessedKey := ""
+        debug(lastAlternativeLayoutProcessedKey . " |on space release")
     }
+    
     processKeyOnRelease := false
 }
 
@@ -682,6 +684,7 @@ processKeyUp(key)
 {
     if (key = lastAlternativeLayoutProcessedKey)
     {
+        send {blind}{%lastAlternativeLayoutProcessedKey%}
         lastAlternativeLayoutProcessedKey := ""
     }
      
@@ -705,23 +708,6 @@ processKeyUp(key)
         {
             rightModifierGroupPressed := false
         }
-    }
-    
-    if (processKeyOnRelease)
-    {
-        processKeyOnRelease := false
-        processLayoutOnRelease := false
-        sendLayoutKey := false
-        if (alternativeLayoutActive)
-        {
-            key := alternativeLayout[key]
-            send {blind}{%key% down}
-            debug(key . " |alternative on release")
-            return
-        }
-        send {blind}{%key%}
-        debug(key . " |normal on release")
-        return
     }
        
     removeFromActivePressedKeys(key)
@@ -834,5 +820,6 @@ readTimingsFile(path)
 {
     IniRead, timeoutStillSendLayoutKey, %path%, timings, timeoutStillSendLayoutKey
     IniRead, timeoutProcessLayoutOnRelease, %path%, timings, timeoutProcessLayoutOnRelease
+    IniRead, timeoutTimeoutSendModifierOnUp, %path%, timings, timeoutTimeoutSendModifierOnUp
 }
 ;-------------------- READ SETTING FILES
