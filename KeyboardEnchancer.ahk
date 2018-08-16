@@ -18,7 +18,8 @@ global alternativeLayoutActive
 global sendLayoutKey
 global sendModifierOnUp
 global stopManagingLayoutKey
-global lastAlternativeLayoutProcessedKey
+global keyToSendOnUp
+global lastAlternativeProcessedKey
 
 global leftModifierGroupPressed
 global leftCtrlAlternativeKey
@@ -139,7 +140,7 @@ store(value)
 writeMemoryStream(value)
 {
     keyPressCount := activePressedKeys.Length()
-	textToSend = %A_Hour%:%A_Min%:%A_Sec%:(%A_MSec%)|%value%|layoutKeyPressed=%layoutKeyPressed%|alternativeLayoutActive=%alternativeLayoutActive%|activePressedKeys=%keyPressCount%|processKeyOnRelease=%processKeyOnRelease%|lastAlternativeProcessedKey=%lastAlternativeLayoutProcessedKey%|`n
+	textToSend = %A_Hour%:%A_Min%:%A_Sec%:(%A_MSec%)|%value%|layoutKeyPressed=%layoutKeyPressed%|alternativeLayoutActive=%alternativeLayoutActive%|activePressedKeys=%keyPressCount%|processKeyOnRelease=%processKeyOnRelease%|keyToSendOnUp=%keyToSendOnUp%|`n
     debugStoredData .= textToSend 
 }
 ;-------------------- DEBUGGING
@@ -410,7 +411,7 @@ processKeyDown(key)
             if (processKeyOnRelease)
             {
                 processKeyOnRelease := false
-                lastAlternativeLayoutProcessedKey := key
+                keyToSendOnUp := key
                 SetTimer, TimerTimeoutSendModifierOnUp, OFF
                 SetTimer, TimerTimeoutSendModifierOnUp, %timeoutTimeoutSendModifierOnUp%
                 debug(key . " |modifier on up")
@@ -427,7 +428,7 @@ processKeyDown(key)
             if (processKeyOnRelease)
             {
                 processKeyOnRelease := false
-                lastAlternativeLayoutProcessedKey := key
+                keyToSendOnUp := key
                 SetTimer, TimerTimeoutSendModifierOnUp, OFF
                 SetTimer, TimerTimeoutSendModifierOnUp, %timeoutTimeoutSendModifierOnUp%                
                 debug(key . " |modifier on up")
@@ -444,7 +445,7 @@ processKeyDown(key)
     {
         if (alternativeLayoutActive)
         {
-            lastAlternativeLayoutProcessedKey := key
+            lastAlternativeProcessedKey := key
             key := alternativeLayout[key]
             sendLayoutKey := false
             activeModifiers := getActiveModifiers(key)
@@ -456,7 +457,7 @@ processKeyDown(key)
             return
         }
         
-        if (key != lastAlternativeLayoutProcessedKey)
+        if (key != lastAlternativeProcessedKey)
         {
             addToActivePressedKeys(key)
             activeModifiers := getActiveModifiers(key)
@@ -471,13 +472,13 @@ processKeyDown(key)
         return
     }
     
-    lastAlternativeLayoutProcessedKey := key
+    keyToSendOnUp := key
     debug(key . " |not processed")
 }
 
 TimerTimeoutSendModifierOnUp:
     SetTimer, TimerTimeoutSendModifierOnUp, OFF
-    lastAlternativeLayoutProcessedKey := ""
+    keyToSendOnUp := ""
 return
 
 getActiveModifiers(key)
@@ -611,7 +612,7 @@ addToActivePressedKeys(key)
 
 
 
-manageLayoutKeyDown(key)
+4manageLayoutKeyDown(key)
 {
     layoutKeyPressed := true
     if (!stopManagingLayoutKey)
@@ -642,12 +643,12 @@ manageLayoutKeyDown(key)
 
 TimerTimeoutSendLayoutKey:
     SetTimer, TimerTimeoutSendLayoutKey, OFF
-    if (processKeyOnRelease && lastAlternativeLayoutProcessedKey != "")
+    if (processKeyOnRelease && keyToSendOnUp != "")
     {
         processKeyOnRelease := false
-        key := alternativeLayout[lastAlternativeLayoutProcessedKey]
+        key := alternativeLayout[keyToSendOnUp]
         send {blind}{%key% down}
-        lastAlternativeLayoutProcessedKey := ""
+        keyToSendOnUp := ""
         debug(key . " |space timer over")
     }
     if (layoutKeyPressed)
@@ -670,11 +671,11 @@ manageLayoutKeyUp(key)
         debug(key . " |sent on up")
     }
     
-    if (processKeyOnRelease && lastAlternativeLayoutProcessedKey != "")
+    if (processKeyOnRelease && keyToSendOnUp != "")
     {
-        send {blind}{%lastAlternativeLayoutProcessedKey% down}
-        lastAlternativeLayoutProcessedKey := ""
-        debug(lastAlternativeLayoutProcessedKey . " |on space release")
+        send {blind}{%keyToSendOnUp% down}
+        keyToSendOnUp := ""
+        debug(keyToSendOnUp . " |on space release")
     }
     
     processKeyOnRelease := false
@@ -682,10 +683,25 @@ manageLayoutKeyUp(key)
 
 processKeyUp(key) 
 {
-    if (key = lastAlternativeLayoutProcessedKey)
+    if (key = lastAlternativeProcessedKey)
     {
-        send {blind}{%lastAlternativeLayoutProcessedKey%}
-        lastAlternativeLayoutProcessedKey := ""
+        lastAlternativeProcessedKey := ""
+    }
+    
+    if (keyToSendOnUp)
+    {
+        if (alternativeLayoutActive)
+        {
+            keyToSend := alternativeLayout[keyToSendOnUp]
+            send {blind}{%keyToSend% down}
+            debug(keyToSend . "alternative on up sent")
+        }
+        else
+        {
+            send {blind}{%keyToSendOnUp%}
+            debug(keyToSendOnUp . "on up sent")
+        }
+        keyToSendOnUp := ""
     }
      
     if (key = layoutChangeKey)
