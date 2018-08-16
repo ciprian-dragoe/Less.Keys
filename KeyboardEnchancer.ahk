@@ -632,9 +632,16 @@ TimerTimeoutSendLayoutKey:
     if (processKeyOnRelease && lastAlternativeLayoutProcessedKey != "")
     {
         processKeyOnRelease := false
-        key := alternativeLayout[lastAlternativeLayoutProcessedKey]
-        send {blind}{%key% down}
-        debug(key . " |space timer over")
+        if (!leftModifierGroupPressed && !rightModifierGroupPressed)
+        {
+            key := alternativeLayout[lastAlternativeLayoutProcessedKey]
+            send {blind}{%key% down}
+            debug(key . " |space timer over")
+        }
+        else
+        {
+            debug(lastAlternativeLayoutProcessedKey . " |alternative not sent on space timeout")
+        }
     }
     if (layoutKeyPressed)
     {    
@@ -658,8 +665,15 @@ manageLayoutKeyUp(key)
     
     if (processKeyOnRelease && lastAlternativeLayoutProcessedKey != "")
     {
-        send {blind}{%lastAlternativeLayoutProcessedKey% down}
-        debug(lastAlternativeLayoutProcessedKey . " |on space release")
+        if (!leftModifierGroupPressed && !rightModifierGroupPressed)
+        {
+            send {blind}{%lastAlternativeLayoutProcessedKey% down}
+            debug(lastAlternativeLayoutProcessedKey . " |on space release")
+        }
+        else
+        {
+            debug(lastAlternativeLayoutProcessedKey . " |alternative not sent on space up")
+        }
     }
     processKeyOnRelease := false
 }
