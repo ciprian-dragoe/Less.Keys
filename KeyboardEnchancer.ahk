@@ -745,7 +745,6 @@ removeFromActivePressedKeys(key)
 TimerProcessLayoutOnRelease:
     SetTimer, TimerProcessLayoutOnRelease, OFF
     processLayoutOnRelease := false
-    sendLayoutKey := false
 return
 
 processAhkKeyboardShortcuts(activeModifiers, key)
