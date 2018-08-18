@@ -70,7 +70,6 @@ readKeyboardShortcutsFile("configure-keyboard-shortcuts.cfg")
 if (A_ComputerName = "lenovo-x230" || A_ComputerName = "CIPI-ASUS-ROG") 
 {
 	debugComputer := true
-	FileDelete, c:\Users\cipri\Desktop\debugKeyboardHack.txt
 	readLayoutFile("my-alternative-layout.cfg")
     readTimingsFile("my-settings.cfg")
     readKeyboardShortcutsFile("my-keyboard-shortcuts.cfg")
