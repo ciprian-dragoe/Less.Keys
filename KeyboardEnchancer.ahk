@@ -4,11 +4,11 @@
 
 global timeoutStillSendLayoutKey
 global timeoutProcessLayoutOnRelease
-global timeoutTimeoutSendModifierOnUp
 
 global activePressedKeys = []
 global processLayoutOnRelease
 global processKeyOnRelease
+global processModifierOnRelease
 
 global alternativeLayout
 
@@ -19,6 +19,7 @@ global sendLayoutKey
 global sendModifierOnUp
 global stopManagingLayoutKey
 global keyToSendOnUp
+global modifierKeyToSendOnUp
 global lastAlternativeProcessedKey
 
 global leftModifierGroupPressed
@@ -389,6 +390,12 @@ writeMemoryStream(value)
 processKeyDown(key)
 {    
     debug(key . "| debug down")
+    
+    if (modifierKeyToSendOnUp && modifierKeyToSendOnUp != key)
+    {
+        modifierKeyToSendOnUp := ""
+    }
+    
     if (key = layoutChangeKey)
     {
         manageLayoutKeyDown(key)
@@ -411,15 +418,12 @@ processKeyDown(key)
             leftModifierGroupPressed := true
             if (processKeyOnRelease)
             {
-                keyToSendOnUp := key
-                SetTimer, TimerTimeoutSendModifierOnUp, OFF
-                SetTimer, TimerTimeoutSendModifierOnUp, %timeoutTimeoutSendModifierOnUp%
+                modifierKeyToSendOnUp := key
+                processKeyOnRelease := false
                 debug(key . " |modifier on up")
             }
-            else
-            {
-                sendLayoutKey := false
-            }
+            sendLayoutKey := false
+            debug(key . " |modifier activated")
             return
         }
         if (setRightModifierKeyState(key, true))
@@ -427,15 +431,12 @@ processKeyDown(key)
             rightModifierGroupPressed := true
             if (processKeyOnRelease)
             {
-                keyToSendOnUp := key
-                SetTimer, TimerTimeoutSendModifierOnUp, OFF
-                SetTimer, TimerTimeoutSendModifierOnUp, %timeoutTimeoutSendModifierOnUp%                
+                modifierKeyToSendOnUp := key
+                processKeyOnRelease := false
                 debug(key . " |modifier on up")
             }
-            else
-            {
-                sendLayoutKey := false
-            }
+            sendLayoutKey := false
+            debug(key . " |modifier activated")
             return
         }
     }
@@ -474,11 +475,6 @@ processKeyDown(key)
     keyToSendOnUp := key
     debug(key . " |not processed")
 }
-
-TimerTimeoutSendModifierOnUp:
-    SetTimer, TimerTimeoutSendModifierOnUp, OFF
-    keyToSendOnUp := ""
-return
 
 getActiveModifiers(key)
 {
@@ -643,20 +639,11 @@ TimerTimeoutSendLayoutKey:
     SetTimer, TimerTimeoutSendLayoutKey, OFF
     if (processKeyOnRelease && keyToSendOnUp != "")
     {
-        if (!leftModifierGroupPressed && !rightModifierGroupPressed)
-        {
-            processKeyOnRelease := false
-            key := alternativeLayout[keyToSendOnUp]
-            send {blind}{%key% down}
-            keyToSendOnUp := ""
-            debug(key . " |space timer over")
-        }
-        else
-        {
-            processKeyOnRelease := false
-            keyToSendOnUp := ""
-            debug(key . " |modifier not sent space timer over")
-        }
+        processKeyOnRelease := false
+        key := alternativeLayout[keyToSendOnUp]
+        send {blind}{%key% down}
+        keyToSendOnUp := ""
+        debug(key . " |space timer over")
     }
     sendLayoutKey := false
 return
@@ -701,7 +688,7 @@ processKeyUp(key)
     
     if (keyToSendOnUp)
     {
-        if (!leftModifierGroupPressed !rightModifierGroupPressed)
+        if (!leftModifierGroupPressed && !rightModifierGroupPressed)
         {
             keyToSend := alternativeLayout[keyToSendOnUp]
             send {blind}{%keyToSend% down}
@@ -710,6 +697,14 @@ processKeyUp(key)
         keyToSendOnUp := ""
         processKeyOnRelease := false
         sendLayoutKey := false
+    }
+    
+    if (modifierKeyToSendOnUp)
+    {
+        send {blind}{%layoutChangeKey%}
+        send {blind}{%modifierKeyToSendOnUp%}
+        modifierKeyToSendOnUp := ""
+        debug(keyToSend . " modifier on up special condition")
     }
     
     if (setLeftModifierKeyState(key, false))
@@ -749,8 +744,9 @@ removeFromActivePressedKeys(key)
 }
 
 TimerProcessLayoutOnRelease:
-    processLayoutOnRelease := false
     SetTimer, TimerProcessLayoutOnRelease, OFF
+    processLayoutOnRelease := false
+    sendLayoutKey := false
 return
 
 processAhkKeyboardShortcuts(activeModifiers, key)
@@ -838,6 +834,5 @@ readTimingsFile(path)
 {
     IniRead, timeoutStillSendLayoutKey, %path%, timings, timeoutStillSendLayoutKey
     IniRead, timeoutProcessLayoutOnRelease, %path%, timings, timeoutProcessLayoutOnRelease
-    IniRead, timeoutTimeoutSendModifierOnUp, %path%, timings, timeoutTimeoutSendModifierOnUp
 }
 ;-------------------- READ SETTING FILES
