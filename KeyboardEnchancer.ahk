@@ -139,7 +139,7 @@ store(value)
 writeMemoryStream(value)
 {
     keyPressCount := activePressedKeys.Length()
-	textToSend = %A_Hour%:%A_Min%:%A_Sec%:(%A_MSec%)|%value%|layoutPressed=%layoutKeyPressed%|alternativeLayout=%alternativeLayoutActive%|PressedKeysNr=%keyPressCount%|KeyOnRelease=%processKeyOnRelease%|ToSendOnUp=%keyToSendOnUp%|rightModifier=%rightModifierGroupPressed%|leftModifier=%leftModifierGroupPressed%|`n
+	textToSend = %A_Hour%:%A_Min%:%A_Sec%:%A_MSec%|%value%|layoutPressed=%layoutKeyPressed%|alternativeLayout=%alternativeLayoutActive%|PressedKeysNr=%keyPressCount%|KeyOnRelease=%processKeyOnRelease%|ToSendOnUp=%keyToSendOnUp%|R_Mod=%rightModifierGroupPressed%|L_Mod=%leftModifierGroupPressed%|`n
     debugStoredData .= textToSend
     if (StrLen(debugStoredData) > 6000)
     {
@@ -658,14 +658,14 @@ manageLayoutKeyUp(key)
     if (sendLayoutKey)
     {
         send {blind}{%key%}
-        debug(key . " |sent on up")
+        debug(key . "|sent on up")
     }
     
     if (processKeyOnRelease && keyToSendOnUp != "")
     {
         send {blind}{%keyToSendOnUp% down}
+        debug(keyToSendOnUp . "|on space release")
         keyToSendOnUp := ""
-        debug(keyToSendOnUp . " |on space release")
     }
     
     processKeyOnRelease := false
