@@ -140,7 +140,7 @@ store(value)
 writeMemoryStream(value)
 {
     keyPressCount := activePressedKeys.Length()
-	textToSend = %A_Hour%:%A_Min%:%A_Sec%:(%A_MSec%)|%value%|layoutKeyPressed=%layoutKeyPressed%|alternativeLayoutActive=%alternativeLayoutActive%|activePressedKeys=%keyPressCount%|processKeyOnRelease=%processKeyOnRelease%|keyToSendOnUp=%keyToSendOnUp%|`n
+	textToSend = %A_Hour%:%A_Min%:%A_Sec%:(%A_MSec%)|%value%|layoutPressed=%layoutKeyPressed%|alternativeLayout=%alternativeLayoutActive%|PressedKeysNr=%keyPressCount%|KeyOnRelease=%processKeyOnRelease%|ToSendOnUp=%keyToSendOnUp%|rightModifier=%rightModifierGroupPressed%|leftModifier=%leftModifierGroupPressed%|`n
     debugStoredData .= textToSend 
 }
 ;-------------------- DEBUGGING
@@ -388,6 +388,7 @@ writeMemoryStream(value)
 
 processKeyDown(key)
 {    
+    debug(key . "| debug down")
     if (key = layoutChangeKey)
     {
         manageLayoutKeyDown(key)
@@ -410,7 +411,6 @@ processKeyDown(key)
             leftModifierGroupPressed := true
             if (processKeyOnRelease)
             {
-                processKeyOnRelease := false
                 keyToSendOnUp := key
                 SetTimer, TimerTimeoutSendModifierOnUp, OFF
                 SetTimer, TimerTimeoutSendModifierOnUp, %timeoutTimeoutSendModifierOnUp%
@@ -427,7 +427,6 @@ processKeyDown(key)
             rightModifierGroupPressed := true
             if (processKeyOnRelease)
             {
-                processKeyOnRelease := false
                 keyToSendOnUp := key
                 SetTimer, TimerTimeoutSendModifierOnUp, OFF
                 SetTimer, TimerTimeoutSendModifierOnUp, %timeoutTimeoutSendModifierOnUp%                
@@ -464,7 +463,7 @@ processKeyDown(key)
             if (!processAhkKeyboardShortcuts(activeModifiers, key))
             {
                 send {blind}%activeModifiers%{%key% down}
-                debug(key . " |normal down ")
+                debug(key . " |normal down mergeee!!!")
             }
             return
         }
@@ -612,7 +611,7 @@ addToActivePressedKeys(key)
 
 
 
-4manageLayoutKeyDown(key)
+manageLayoutKeyDown(key)
 {
     layoutKeyPressed := true
     if (!stopManagingLayoutKey)
@@ -626,7 +625,6 @@ addToActivePressedKeys(key)
         }
         else
         {
-            ;debug("specialKey" . " down")
             stopManagingLayoutKey := true
             alternativeLayoutActive := true
             sendLayoutKey := true
@@ -645,25 +643,30 @@ TimerTimeoutSendLayoutKey:
     SetTimer, TimerTimeoutSendLayoutKey, OFF
     if (processKeyOnRelease && keyToSendOnUp != "")
     {
-        processKeyOnRelease := false
-        key := alternativeLayout[keyToSendOnUp]
-        send {blind}{%key% down}
-        keyToSendOnUp := ""
-        debug(key . " |space timer over")
+        if (!leftModifierGroupPressed && !rightModifierGroupPressed)
+        {
+            processKeyOnRelease := false
+            key := alternativeLayout[keyToSendOnUp]
+            send {blind}{%key% down}
+            keyToSendOnUp := ""
+            debug(key . " |space timer over")
+        }
+        else
+        {
+            processKeyOnRelease := false
+            keyToSendOnUp := ""
+            debug(key . " |modifier not sent space timer over")
+        }
     }
-    if (layoutKeyPressed)
-    {    
-        sendLayoutKey := false
-    }
+    sendLayoutKey := false
 return
 
 manageLayoutKeyUp(key)
 {
-    debug(key . " |processing space up")
+    SetTimer, TimerTimeoutSendLayoutKey, OFF
     stopManagingLayoutKey := false
     layoutKeyPressed := false
     alternativeLayoutActive := false
-    SetTimer, TimerTimeoutSendLayoutKey, OFF
     
     if (sendLayoutKey)
     {
@@ -679,35 +682,34 @@ manageLayoutKeyUp(key)
     }
     
     processKeyOnRelease := false
+    debug(key . " |processing space up")
 }
 
 processKeyUp(key) 
 {
+    debug(keyToSendOnUp . " | debug up")
     if (key = lastAlternativeProcessedKey)
     {
         lastAlternativeProcessedKey := ""
     }
     
-    if (keyToSendOnUp)
-    {
-        if (alternativeLayoutActive)
-        {
-            keyToSend := alternativeLayout[keyToSendOnUp]
-            send {blind}{%keyToSend% down}
-            debug(keyToSend . "alternative on up sent")
-        }
-        else
-        {
-            send {blind}{%keyToSendOnUp%}
-            debug(keyToSendOnUp . "on up sent")
-        }
-        keyToSendOnUp := ""
-    }
-     
     if (key = layoutChangeKey)
     {
         manageLayoutKeyUp(key)
         return
+    }
+    
+    if (keyToSendOnUp)
+    {
+        if (!leftModifierGroupPressed !rightModifierGroupPressed)
+        {
+            keyToSend := alternativeLayout[keyToSendOnUp]
+            send {blind}{%keyToSend% down}
+            debug(keyToSend . " alternative on up sent")
+        }
+        keyToSendOnUp := ""
+        processKeyOnRelease := false
+        sendLayoutKey := false
     }
     
     if (setLeftModifierKeyState(key, false))
@@ -727,9 +729,9 @@ processKeyUp(key)
     }
        
     removeFromActivePressedKeys(key)
-    if (activePressedKeys.Length() = 0)
+    if (activePressedKeys.Length() = 0 && !alternativeLayoutActive)
     {
-        processLayoutOnRelease := true        
+        processLayoutOnRelease := true     
         SetTimer, TimerProcessLayoutOnRelease, OFF
         SetTimer, TimerProcessLayoutOnRelease, %timeoutProcessLayoutOnRelease%
     }
