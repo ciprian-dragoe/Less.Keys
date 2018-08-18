@@ -4,6 +4,7 @@
 
 global timeoutStillSendLayoutKey
 global timeoutProcessLayoutOnRelease
+global logInput
 
 global activePressedKeys = []
 global processLayoutOnRelease
@@ -58,7 +59,7 @@ SetKeyDelay -1
 
 
 readLayoutFile("configure-alternative-layout.cfg")
-readTimingsFile("configure-timings.cfg")
+readTimingsFile("configure-settings.cfg")
 readKeyboardShortcutsFile("configure-keyboard-shortcuts.cfg")
 
 
@@ -71,25 +72,23 @@ if (A_ComputerName = "lenovo-x230" || A_ComputerName = "CIPI-ASUS-ROG")
 	debugComputer := true
 	FileDelete, c:\Users\cipri\Desktop\debugKeyboardHack.txt
 	readLayoutFile("my-alternative-layout.cfg")
-    readTimingsFile("my-timings.cfg")
+    readTimingsFile("my-settings.cfg")
     readKeyboardShortcutsFile("my-keyboard-shortcuts.cfg")
 }
 
+#!f7::
+    fixStickyKeys()
+    showToolTip("DEBUG FILES STORED")
+    FileDelete, %A_Desktop%\debugKeyboardHack.txt
+    FileAppend, %debugStoredData%, %A_Desktop%\debugKeyboardHack.txt
+    debugStoredData := ""
+return
+
 #if debugComputer
     pgdn::end
-    pgup::home    
-    	
-    f8::
-    	debugInfo := "leftModifierGroupPressed=" . leftModifierGroupPressed . "`n" . "leftCtrlModifierActive=" . leftCtrlModifierActive . "`n" . "leftAltModifierActive=" . leftAltModifierActive . "`n" . "leftShiftModifierActive=" . leftShiftModifierActive . "`n" . "`n" . "rightModifierGroupPressed=" . rightModifierGroupPressed . "`n" . "rightCtrlModifierActive=" . rightCtrlModifierActive . "`n" . "rightAltModifierActive=" . rightAltModifierActive . "`n" . "rightShiftModifierActive=" . rightShiftModifierActive . "`n" . "rightWinModifierActive=" . rightWinModifierActive
-        fixStickyKeys()
-        showToolTip("DEBUG FILES STORED")
-        
-        FileDelete, c:\Users\cipri\Desktop\debugKeyboardHack.txt
-        FileAppend, %debugStoredData%,c:\Users\cipri\Desktop\debugKeyboardHack.txt
-        debugStoredData := ""
-    return
+    pgup::home
     
-    F7::
+    #^F7::
     	if navigationMode = 0
     	{
     	    showToolTip("alternative layout active")
@@ -103,14 +102,14 @@ if (A_ComputerName = "lenovo-x230" || A_ComputerName = "CIPI-ASUS-ROG")
     return
     
     #f7::
-        showToolTip("RELOADING FILE")
+        showToolTip("RELOADING")
     	reload
     return
 #if
 
 debug(value)
 {
-    if (debugComputer)
+    if (logInput)
         writeMemoryStream(value)
 }
 
@@ -142,7 +141,11 @@ writeMemoryStream(value)
 {
     keyPressCount := activePressedKeys.Length()
 	textToSend = %A_Hour%:%A_Min%:%A_Sec%:(%A_MSec%)|%value%|layoutPressed=%layoutKeyPressed%|alternativeLayout=%alternativeLayoutActive%|PressedKeysNr=%keyPressCount%|KeyOnRelease=%processKeyOnRelease%|ToSendOnUp=%keyToSendOnUp%|rightModifier=%rightModifierGroupPressed%|leftModifier=%leftModifierGroupPressed%|`n
-    debugStoredData .= textToSend 
+    debugStoredData .= textToSend
+    if (StrLen(debugStoredData) > 6000)
+    {
+        StringTrimLeft, debugStoredData, debugStoredData, 3000     
+    }
 }
 ;-------------------- DEBUGGING
 
@@ -389,8 +392,6 @@ writeMemoryStream(value)
 
 processKeyDown(key)
 {    
-    debug(key . "| debug down")
-    
     if (modifierKeyToSendOnUp && modifierKeyToSendOnUp != key)
     {
         modifierKeyToSendOnUp := ""
@@ -464,7 +465,7 @@ processKeyDown(key)
             if (!processAhkKeyboardShortcuts(activeModifiers, key))
             {
                 send {blind}%activeModifiers%{%key% down}
-                debug(key . " |normal down mergeee!!!")
+                debug(key . " |normal down")
             }
             return
         }
@@ -674,7 +675,6 @@ manageLayoutKeyUp(key)
 
 processKeyUp(key) 
 {
-    debug(keyToSendOnUp . " | debug up")
     if (key = lastAlternativeProcessedKey)
     {
         lastAlternativeProcessedKey := ""
@@ -834,5 +834,6 @@ readTimingsFile(path)
 {
     IniRead, timeoutStillSendLayoutKey, %path%, timings, timeoutStillSendLayoutKey
     IniRead, timeoutProcessLayoutOnRelease, %path%, timings, timeoutProcessLayoutOnRelease
+    IniRead, logInput, %path%, logging, logInput
 }
 ;-------------------- READ SETTING FILES
