@@ -723,7 +723,7 @@ processKeyUp(key)
     }
        
     removeFromActivePressedKeys(key)
-    if (activePressedKeys.Length() = 0 && !alternativeLayoutActive)
+    if (activePressedKeys.Length() = 0 && !alternativeLayoutActive && !modifierKeyToSendOnUp)
     {
         processLayoutOnRelease := true     
         SetTimer, TimerProcessLayoutOnRelease, OFF
