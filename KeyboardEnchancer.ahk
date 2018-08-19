@@ -141,9 +141,9 @@ writeMemoryStream(value)
     keyPressCount := activePressedKeys.Length()
 	textToSend = %A_Hour%:%A_Min%:%A_Sec%:%A_MSec%|%value%|layoutPressed=%layoutKeyPressed%|alternativeLayout=%alternativeLayoutActive%|PressedKeysNr=%keyPressCount%|KeyOnRelease=%processKeyOnRelease%|ToSendOnUp=%keyToSendOnUp%|R_Mod=%rightModifierGroupPressed%|L_Mod=%leftModifierGroupPressed%|`n
     debugStoredData .= textToSend
-    if (StrLen(debugStoredData) > 6000)
+    if (StrLen(debugStoredData) > 8000)
     {
-        StringTrimLeft, debugStoredData, debugStoredData, 3000     
+        StringTrimLeft, debugStoredData, debugStoredData, 4000     
     }
 }
 ;-------------------- DEBUGGING
@@ -674,6 +674,7 @@ manageLayoutKeyUp(key)
 
 processKeyUp(key) 
 {
+    removeFromActivePressedKeys(key)
     if (key = lastAlternativeProcessedKey)
     {
         lastAlternativeProcessedKey := ""
@@ -712,6 +713,7 @@ processKeyUp(key)
         {
             leftModifierGroupPressed := false
         }
+        return
     }
     
     if (setRightModifierKeyState(key, false))
@@ -720,10 +722,10 @@ processKeyUp(key)
         {
             rightModifierGroupPressed := false
         }
+        return
     }
        
-    removeFromActivePressedKeys(key)
-    if (activePressedKeys.Length() = 0 && !alternativeLayoutActive && !modifierKeyToSendOnUp)
+    if (activePressedKeys.Length() = 0 && !alternativeLayoutActive && !leftModifierGroupPressed && !rightModifierGroupPressed)
     {
         processLayoutOnRelease := true     
         SetTimer, TimerProcessLayoutOnRelease, OFF
