@@ -80,7 +80,6 @@ if (A_ComputerName = "lenovo-x230" || A_ComputerName = "CIPI-ASUS-ROG")
     showToolTip("DEBUG FILES STORED")
     FileDelete, %A_Desktop%\debugKeyboardHack.txt
     FileAppend, %debugStoredData%, %A_Desktop%\debugKeyboardHack.txt
-    debugStoredData := ""
 return
 
 #if debugComputer
@@ -713,6 +712,7 @@ processKeyUp(key)
         {
             leftModifierGroupPressed := false
         }
+        debug(keyToSend . " leftMod off")
         return
     }
     
@@ -722,6 +722,7 @@ processKeyUp(key)
         {
             rightModifierGroupPressed := false
         }
+        debug(keyToSend . " rightMod off")
         return
     }
        
