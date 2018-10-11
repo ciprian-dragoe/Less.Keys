@@ -423,19 +423,19 @@ writeMemoryStream(value)
         leftShiftActive := false
     return
     
-    *tab::
+    *lshift::
         leftCtrlActive := true
     return
-    *tab up::
+    *lshift up::
         leftCtrlActive := false
         send {ctrl up}
     return
 	
     
-    *lshift::
+    *tab::
         leftAltActive := true
     return
-    *lshift up::
+    *tab up::
         leftAltActive := false
         send {alt up}
     return
