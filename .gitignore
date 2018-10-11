@@ -7,3 +7,5 @@ my-alternative-layout.cfg
 my-keyboard-shortcuts-script.ahk
 my-keyboard-shortcuts.cfg
 my-settings.cfg
+*.lnk
+NOT_SYNC/

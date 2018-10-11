@@ -75,7 +75,7 @@ if (A_ComputerName = "lenovo-x230" || A_ComputerName = "CIPI-ASUS-ROG")
     readKeyboardShortcutsFile("my-keyboard-shortcuts.cfg")
 }
 
-#!f7::
+#f8::
     fixStickyKeys()
     showToolTip("DEBUG FILES STORED")
     FileDelete, %A_Desktop%\debugKeyboardHack.txt
@@ -86,7 +86,7 @@ return
     pgdn::end
     pgup::home
     
-    #^F7::
+    #F9::
     	if navigationMode = 0
     	{
     	    showToolTip("alternative layout active")
@@ -246,8 +246,8 @@ writeMemoryStream(value)
     *backspace::processKeyDown("backspace")
     *backspace up::processKeyUp("backspace")
         
-    *tab::processKeyDown("tab")
-    *tab up::processKeyUp("tab")
+    ;tab::processKeyDown("tab")
+    ;tab up::processKeyUp("tab")
     
     *q::processKeyDown("q")	
     *q up::processKeyUp("q")
@@ -288,8 +288,8 @@ writeMemoryStream(value)
     *\::processKeyDown("\")	
     *\ up::processKeyUp("\")
             
-    *capslock::processKeyDown("capslock")
-    *capslock up::processKeyUp("capslock")
+    ;*capslock::processKeyDown("capslock")
+    ;*capslock up::processKeyUp("capslock")
     
     *a::processKeyDown("a")	
     *a up::processKeyUp("a")
@@ -360,11 +360,11 @@ writeMemoryStream(value)
     *space::processKeyDown("space")
     *space up::processKeyUp("space")
     
-    *appskey::processKeyDown("appskey")
-    *appskey up::processKeyUp("appskey")
+    ;*appskey::processKeyDown("appskey")
+    ;*appskey up::processKeyUp("appskey")
     
-    *printscreen::processKeyDown("printscreen")
-    *printscreen up::processKeyUp("printscreen")
+    ;*printscreen::processKeyDown("printscreen")
+    ;*printscreen up::processKeyUp("printscreen")
     
     *left::processKeyDown("left")
     *left up::processKeyUp("left")
@@ -383,6 +383,78 @@ writeMemoryStream(value)
     
     *pgup::processKeyDown("pgup")
     *pgup up::processKeyUp("pgup")
+    
+    *ralt::
+        rightCtrlActive := true
+    return
+    *ralt up::
+        rightCtrlActive := false
+        send {ctrl up}
+    return
+    
+    *printscreen::
+        rightShiftActive := true
+    return
+    *printscreen up::
+        rightShiftActive := false
+    return
+	
+	*appskey::
+        rightShiftActive := true
+    return
+    *appskey up::
+        rightShiftActive := false
+    return
+        
+    *rctrl::
+        rightAltActive := true
+    return
+    *rctrl up::
+        rightAltActive := false
+        send {alt up}
+    return
+        
+    
+    
+    *lalt::
+        leftShiftActive := true
+    return
+    *lalt up::
+        leftShiftActive := false
+    return
+    
+    *tab::
+        leftCtrlActive := true
+    return
+    *tab up::
+        leftCtrlActive := false
+        send {ctrl up}
+    return
+	
+    
+    *lshift::
+        leftAltActive := true
+    return
+    *lshift up::
+        leftAltActive := false
+        send {alt up}
+    return
+        
+    
+    
+    
+    *capslock::
+        leftWinActive := true
+    return
+    *capslock up::
+        leftWinActive := false
+        send {lwin up}
+    return
+    
+    
+    
+    
+    
     ;-------------------- END OF keys that will be processed
 #if
 
