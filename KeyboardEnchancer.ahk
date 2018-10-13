@@ -156,11 +156,11 @@ writeMemoryStream(value)
     *escape::processKeyDown("escape")
     *escape up::processKeyUp("escape")
     
-    *f1::processKeyDown("f1")
-    *f1 up::processKeyUp("f1")
+    ;*f1::processKeyDown("f1")
+    ;*f1 up::processKeyUp("f1")
     
-    *f2::processKeyDown("f2")
-    *f2 up::processKeyUp("f2")
+    ;*f2::processKeyDown("f2")
+    ;*f2 up::processKeyUp("f2")
     
     *f3::processKeyDown("f3")
     *f3 up::processKeyUp("f3")
@@ -186,11 +186,11 @@ writeMemoryStream(value)
     *f10::processKeyDown("f10")
     *f10 up::processKeyUp("f10")
     
-    *f11::processKeyDown("f11")
-    *f11 up::processKeyUp("f11")
+    ;*f11::processKeyDown("f11")
+    ;*f11 up::processKeyUp("f11")
     
-    *f12::processKeyDown("f12")
-    *f12 up::processKeyUp("f12")
+    ;*f12::processKeyDown("f12")
+    ;*f12 up::processKeyUp("f12")
     
     *home::processKeyDown("home")
     *home up::processKeyUp("home")
@@ -384,32 +384,32 @@ writeMemoryStream(value)
     *pgup::processKeyDown("pgup")
     *pgup up::processKeyUp("pgup")
     
-    *ralt::
+    *f11::
         rightCtrlActive := true
     return
-    *ralt up::
+    *f11 up::
         rightCtrlActive := false
         send {ctrl up}
     return
     
-    *printscreen::
+    *ralt::
         rightShiftActive := true
     return
-    *printscreen up::
+    *ralt up::
         rightShiftActive := false
     return
 	
-	*appskey::
-        rightShiftActive := true
-    return
-    *appskey up::
-        rightShiftActive := false
-    return
+	;*appskey::
+    ;    rightShiftActive := true
+    ;return
+    ;*appskey up::
+    ;    rightShiftActive := false
+    ;return
         
-    *rctrl::
+    *f12::
         rightAltActive := true
     return
-    *rctrl up::
+    *f12 up::
         rightAltActive := false
         send {alt up}
     return
@@ -423,19 +423,19 @@ writeMemoryStream(value)
         leftShiftActive := false
     return
     
-    *lshift::
+    *f2::
         leftCtrlActive := true
     return
-    *lshift up::
+    *f2 up::
         leftCtrlActive := false
         send {ctrl up}
     return
 	
     
-    *tab::
+    *f1::
         leftAltActive := true
     return
-    *tab up::
+    *f1 up::
         leftAltActive := false
         send {alt up}
     return
@@ -443,10 +443,10 @@ writeMemoryStream(value)
     
     
     
-    *capslock::
+    *tab::
         leftWinActive := true
     return
-    *capslock up::
+    *tab up::
         leftWinActive := false
         send {lwin up}
     return
