@@ -162,8 +162,8 @@ writeMemoryStream(value)
     ;*f2::processKeyDown("f2")
     ;*f2 up::processKeyUp("f2")
     
-    *f3::processKeyDown("f3")
-    *f3 up::processKeyUp("f3")
+    ;*f3::processKeyDown("f3")
+    ;*f3 up::processKeyUp("f3")
     
     *f4::processKeyDown("f4")
     *f4 up::processKeyUp("f4")
@@ -246,8 +246,8 @@ writeMemoryStream(value)
     *backspace::processKeyDown("backspace")
     *backspace up::processKeyUp("backspace")
         
-    ;tab::processKeyDown("tab")
-    ;tab up::processKeyUp("tab")
+    tab::processKeyDown("tab")
+    tab up::processKeyUp("tab")
     
     *q::processKeyDown("q")	
     *q up::processKeyUp("q")
@@ -423,19 +423,19 @@ writeMemoryStream(value)
         leftShiftActive := false
     return
     
-    *f2::
+    *f3::
         leftCtrlActive := true
     return
-    *f2 up::
+    *f3 up::
         leftCtrlActive := false
         send {ctrl up}
     return
 	
     
-    *f1::
+    *f2::
         leftAltActive := true
     return
-    *f1 up::
+    *f2 up::
         leftAltActive := false
         send {alt up}
     return
@@ -443,10 +443,10 @@ writeMemoryStream(value)
     
     
     
-    *tab::
+    *capslock::
         leftWinActive := true
     return
-    *tab up::
+    *capslock up::
         leftWinActive := false
         send {lwin up}
     return
