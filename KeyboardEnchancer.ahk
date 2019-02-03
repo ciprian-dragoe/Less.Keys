@@ -23,7 +23,6 @@ global keyToSendOnUp
 global modifierKeyToSendOnUp
 global lastAlternativeProcessedKey
 
-global leftModifierGroupPressed
 global leftCtrlAlternativeKey
 global leftAltAlternativeKey
 global leftShiftAlternativeKey
@@ -33,7 +32,6 @@ global leftAltActive
 global leftShiftActive
 global leftWinActive
 
-global rightModifierGroupPressed
 global rightCtrlAlternativeKey
 global rightAltAlternativeKey
 global rightShiftAlternativeKey
@@ -42,9 +40,6 @@ global rightAltActive
 global rightShiftActive
 global rightCtrlActive
 global rightWinActive
-
-global altDeepPressed
-global ctrlDeepPressed
 
 global debugStoredData := ""
 global debugComputer := false
@@ -138,7 +133,7 @@ store(value)
 writeMemoryStream(value)
 {
     keyPressCount := activePressedKeys.Length()
-	textToSend = %A_Hour%:%A_Min%:%A_Sec%:%A_MSec%|%value%|layoutPressed=%layoutKeyPressed%|alternativeLayout=%alternativeLayoutActive%|PressedKeysNr=%keyPressCount%|KeyOnRelease=%processKeyOnRelease%|ToSendOnUp=%keyToSendOnUp%|R_Mod=%rightModifierGroupPressed%|L_Mod=%leftModifierGroupPressed%|`n
+	textToSend = %A_Hour%:%A_Min%:%A_Sec%:%A_MSec%|%value%|layoutPressed=%layoutKeyPressed%|alternativeLayout=%alternativeLayoutActive%|PressedKeysNr=%keyPressCount%|KeyOnRelease=%processKeyOnRelease%|ToSendOnUp=%keyToSendOnUp%|`n
     debugStoredData .= textToSend
     if (StrLen(debugStoredData) > 8000)
     {
@@ -156,14 +151,14 @@ writeMemoryStream(value)
     *escape::processKeyDown("escape")
     *escape up::processKeyUp("escape")
     
-    ;*f1::processKeyDown("f1")
-    ;*f1 up::processKeyUp("f1")
+    *f1::processKeyDown("f1")
+    *f1 up::processKeyUp("f1")
     
-    ;*f2::processKeyDown("f2")
-    ;*f2 up::processKeyUp("f2")
+    *f2::processKeyDown("f2")
+    *f2 up::processKeyUp("f2")
     
-    ;*f3::processKeyDown("f3")
-    ;*f3 up::processKeyUp("f3")
+    *f3::processKeyDown("f3")
+    *f3 up::processKeyUp("f3")
     
     *f4::processKeyDown("f4")
     *f4 up::processKeyUp("f4")
@@ -180,17 +175,17 @@ writeMemoryStream(value)
     *f8::processKeyDown("f8")
     *f8 up::processKeyUp("f8")
     
-    ;*f9::processKeyDown("f9")
-    ;*f9 up::processKeyUp("f9")
+    *f9::processKeyDown("f9")
+    *f9 up::processKeyUp("f9")
     
     *f10::processKeyDown("f10")
     *f10 up::processKeyUp("f10")
     
-    ;*f11::processKeyDown("f11")
-    ;*f11 up::processKeyUp("f11")
+    *f11::processKeyDown("f11")
+    *f11 up::processKeyUp("f11")
     
-    ;*f12::processKeyDown("f12")
-    ;*f12 up::processKeyUp("f12")
+    *f12::processKeyDown("f12")
+    *f12 up::processKeyUp("f12")
     
     *home::processKeyDown("home")
     *home up::processKeyUp("home")
@@ -288,8 +283,8 @@ writeMemoryStream(value)
     *\::processKeyDown("\")	
     *\ up::processKeyUp("\")
             
-    ;*capslock::processKeyDown("capslock")
-    ;*capslock up::processKeyUp("capslock")
+    *capslock::processKeyDown("capslock")
+    *capslock up::processKeyUp("capslock")
     
     *a::processKeyDown("a")	
     *a up::processKeyUp("a")
@@ -360,11 +355,11 @@ writeMemoryStream(value)
     *space::processKeyDown("space")
     *space up::processKeyUp("space")
     
-    ;*appskey::processKeyDown("appskey")
-    ;*appskey up::processKeyUp("appskey")
+    *appskey::processKeyDown("appskey")
+    *appskey up::processKeyUp("appskey")
     
-    ;*printscreen::processKeyDown("printscreen")
-    ;*printscreen up::processKeyUp("printscreen")
+    *printscreen::processKeyDown("printscreen")
+    *printscreen up::processKeyUp("printscreen")
     
     *left::processKeyDown("left")
     *left up::processKeyUp("left")
@@ -383,78 +378,6 @@ writeMemoryStream(value)
     
     *pgup::processKeyDown("pgup")
     *pgup up::processKeyUp("pgup")
-    
-    *f11::
-        rightCtrlActive := true
-    return
-    *f11 up::
-        rightCtrlActive := false
-        send {ctrl up}
-    return
-    
-    *ralt::
-        rightShiftActive := true
-    return
-    *ralt up::
-        rightShiftActive := false
-    return
-	
-	;*appskey::
-    ;    rightShiftActive := true
-    ;return
-    ;*appskey up::
-    ;    rightShiftActive := false
-    ;return
-        
-    *f12::
-        rightAltActive := true
-    return
-    *f12 up::
-        rightAltActive := false
-        send {alt up}
-    return
-        
-    
-    
-    *lalt::
-        leftShiftActive := true
-    return
-    *lalt up::
-        leftShiftActive := false
-    return
-    
-    *f3::
-        leftCtrlActive := true
-    return
-    *f3 up::
-        leftCtrlActive := false
-        send {ctrl up}
-    return
-	
-    
-    *f2::
-        leftAltActive := true
-    return
-    *f2 up::
-        leftAltActive := false
-        send {alt up}
-    return
-        
-    
-    
-    
-    *capslock::
-        leftWinActive := true
-    return
-    *capslock up::
-        leftWinActive := false
-        send {lwin up}
-    return
-    
-    
-    
-    
-    
     ;-------------------- END OF keys that will be processed
 #if
 
@@ -471,45 +394,6 @@ processKeyDown(key)
     {
         manageLayoutKeyDown(key)
         return
-    }
-    
-    if (leftModifierGroupPressed && setLeftModifierKeyState(key, true))
-    {
-        return
-    }
-    if (rightModifierGroupPressed && setRightModifierKeyState(key, true))
-    {
-        return
-    }
-    
-    if (alternativeLayoutActive)
-    {
-        if (setLeftModifierKeyState(key, true))
-        {
-            leftModifierGroupPressed := true
-            if (processKeyOnRelease)
-            {
-                modifierKeyToSendOnUp := key
-                processKeyOnRelease := false
-                debug(key . "|modifier on up")
-            }
-            sendLayoutKey := false
-            debug(key . "|modifier activated")
-            return
-        }
-        if (setRightModifierKeyState(key, true))
-        {
-            rightModifierGroupPressed := true
-            if (processKeyOnRelease)
-            {
-                modifierKeyToSendOnUp := key
-                processKeyOnRelease := false
-                debug(key . " |modifier on up")
-            }
-            sendLayoutKey := false
-            debug(key . "|modifier activated")
-            return
-        }
     }
     
     if (!processKeyOnRelease)
@@ -552,27 +436,11 @@ getActiveModifiers(key)
     result = 
     if (leftCtrlActive || rightCtrlActive)
     {
-        if (key = "tab")
-        {
-            result .= "{ctrl downTemp}"
-            ctrlDeepPressed := true
-        }
-        else
-        {
-            result .= "^"
-        }
+        result .= "^"
     }
     if (leftAltActive || rightAltActive)
     {
-        if (key = "tab")
-        {
-            result .= "{alt downTemp}"
-            altDeepPressed := true
-        }
-        else
-        {
-            result .= "!"
-        }
+        result .= "!"
     }
     if (leftShiftActive || rightShiftActive)
     {
@@ -586,75 +454,6 @@ getActiveModifiers(key)
     return result
 }
 
-setLeftModifierKeyState(key, state)
-{
-    if (key = leftCtrlAlternativeKey)
-    {
-        leftCtrlActive := state
-        if (!state && ctrlDeepPressed)
-        {
-            ctrlDeepPressed := false
-            send {ctrl up}
-        }
-        return true
-    }
-    if (key = leftAltAlternativeKey)
-    {
-        leftAltActive := state
-        if (!state && altDeepPressed)
-        {
-            altDeepPressed := false
-            send {alt up}
-        }
-        return true
-    }
-    if (key = leftShiftAlternativeKey)
-    {
-        leftShiftActive := state
-        return true
-    }
-    if (key = leftWinAlternativeKey)
-    {
-        leftWinActive := state
-        return true
-    } 
-    return false
-}
-
-setRightModifierKeyState(key, state)
-{
-    if (key = RightCtrlAlternativeKey)
-    {
-        rightCtrlActive := state
-        if (!state && ctrlDeepPressed)
-        {
-            ctrlDeepPressed := false
-            send {ctrl up}
-        }
-        return true
-    }
-    if (key = RightAltAlternativeKey)
-    {
-        rightAltActive := state
-        if (!state && altDeepPressed)
-        {
-            altDeepPressed := false
-            send {alt up}
-        }
-        return true
-    }
-    if (key = RightShiftAlternativeKey)
-    {
-        rightShiftActive := state
-        return true
-    }
-    if (key = RightWinAlternativeKey)
-    {
-        rightWinActive := state
-        return true
-    } 
-    return false
-}
 
 
 addToActivePressedKeys(key)
@@ -759,12 +558,9 @@ processKeyUp(key)
     
     if (keyToSendOnUp)
     {
-        if (!leftModifierGroupPressed && !rightModifierGroupPressed)
-        {
-            keyToSend := alternativeLayout[keyToSendOnUp]
-            send {blind}{%keyToSend% down}
-            debug(keyToSend . "|alternative on up sent")
-        }
+        keyToSend := alternativeLayout[keyToSendOnUp]
+        send {blind}{%keyToSend% down}
+        debug(keyToSend . "|alternative on up sent")   
         keyToSendOnUp := ""
         processKeyOnRelease := false
         sendLayoutKey := false
@@ -778,27 +574,7 @@ processKeyUp(key)
         debug(keyToSend . "|modifier on up special condition")
     }
     
-    if (setLeftModifierKeyState(key, false))
-    {
-        if (leftModifierGroupPressed && !leftCtrlActive && !leftAltActive && !leftShiftActive && !leftWinActive)
-        {
-            leftModifierGroupPressed := false
-        }
-        debug(key . "|leftMod off")
-        return
-    }
-    
-    if (setRightModifierKeyState(key, false))
-    {
-        if (rightModifierGroupPressed && !rightCtrlActive && !rightAltActive && !rightShiftActive && !rightWinActive)
-        {
-            rightModifierGroupPressed := false
-        }
-        debug(key . "|rightMod off")
-        return
-    }
-       
-    if (activePressedKeys.Length() = 0 && !alternativeLayoutActive && !leftModifierGroupPressed && !rightModifierGroupPressed)
+    if (activePressedKeys.Length() = 0 && !alternativeLayoutActive)
     {
         processLayoutOnRelease := true     
         SetTimer, TimerProcessLayoutOnRelease, OFF
