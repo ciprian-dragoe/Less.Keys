@@ -36,19 +36,15 @@ global leftCtrlAlternativeKey
 global leftAltAlternativeKey
 global leftShiftAlternativeKey
 global leftWinAlternativeKey
-global leftCtrlActive
-global leftAltActive
-global leftShiftActive
-global leftWinActive
-
 global rightCtrlAlternativeKey
 global rightAltAlternativeKey
 global rightShiftAlternativeKey
 global rightWinAlternativeKey
-global rightAltActive
-global rightShiftActive
-global rightCtrlActive
-global rightWinActive
+
+global ctrlActive
+global altActive
+global shiftActive
+global winActive
 
 global debugStoredData := ""
 global debugComputer := false
@@ -98,8 +94,8 @@ return
 #if debugComputer
     *F7::
         fixStickyKeys()
-        textToSend = |layoutPressed=%layoutKeyPressed%`n|alternativeLayout=%alternativeLayoutActive%`n|PressedKeysNr=%keyPressCount%`n|KeyOnRelease=%processKeyOnRelease%`n|ToSendOnUp=%keyToSendOnUp%`n|Lctrl=%leftCtrlActive%`n|Rctrl=%rightCtrlActive%`n|Lalt=%leftAltActive%`n|Ralt=%rightAltActive%`n|Lshift=%leftShiftActive%`n|Rshift=%rightShiftActive%`n|Lwin=%leftWinActive%`n|Rwin=%rightWinActive%`n|
-        msgBox %textToSend%
+        textToSend = |layoutPressed=%layoutKeyPressed%`n|alternativeLayout=%alternativeLayoutActive%`n|PressedKeysNr=%keyPressCount%`n|KeyOnRelease=%processKeyOnRelease%`n|ToSendOnUp=%keyToSendOnUp%`n|Lctrl=%ctrlActive%`n|Rctrl=%ctrlActive%`n|Lalt=%altActive%`n|Ralt=%altActive%`n|Lshift=%shiftActive%`n|Rshift=%shiftActive%`n|Lwin=%winActive%`n|Rwin=%winActive%`n|
+        showToolTip(textToSend)
             
     return
     
@@ -110,15 +106,6 @@ return
     		sleep 600
     		tooltip
     		navigationMode = 1
-    		return
-    	}
-    	
-    	if navigationMode = 1
-    	{
-    		tooltip kinesis
-    		sleep 600
-    		tooltip
-    		navigationMode = 2
     		return
     	}
     	
@@ -138,15 +125,10 @@ return
 fixStickyKeys()
 {
     send {lwin up}{ctrl up}{alt up}{shift up}
-    leftCtrlActive := 0
-    leftAltActive := 0
-    leftShiftActive := 0
-    leftWinActive := 0
-    rightCtrlActive := 0
-    rightAltActive := 0
-    rightShiftActive := 0
-    rightWinActive := 0
-
+    ctrlActive := 0
+    altActive := 0
+    shiftActive := 0
+    winActive := 0
 }
 
 debug(value)
@@ -442,15 +424,7 @@ writeMemoryStream(value)
     
     *rshift::processKeyDown("rshift")
     *rshift up::processKeyUp("rshift")
-        
-    *rwin::processKeyDown("rwin")
-    *rwin up::processKeyUp("rwin")
-    
-    *lwin::processKeyDown("lwin")
-    *lwin up::processKeyUp("lwin")
-        
-    
-    ;-------------------- END OF keys that will be processed
+;-------------------- END OF keys that will be processed
 #if
 
 
@@ -461,7 +435,6 @@ processLeftButtonClick()
         Return
     }
     activeModifiers := getActiveModifiers(key)
-    showtooltip(activeModifiers)
     Send %activeModifiers%{LButton Down}
     KeyWait LButton		;physical state
     Send {LButton Up}
@@ -521,60 +494,29 @@ processKeyDown(key)
 
 processModifierKey(key, state)
 {
+    pressedState := state ? "downR" : "up"
     if (key = leftCtrlAlternativeKey || key = rightCtrlAlternativeKey)
     {
-        ;showTooltip("ctrl" . state)
-        leftCtrlActive := state
-        rightCtrlActive := state
+        send {ctrl %pressedState%}
+        ctrlActive := state
         return true
     }
     if (key = leftShiftAlternativeKey || key = rightShiftAlternativeKey)
     {
-        ;showTooltip("shift" . state)
-        leftShiftActive := state
-        rightShiftActive := state
+        send {shift %pressedState%}
+        shiftActive := state
         return true
     } 
     if (key = leftAltAlternativeKey || key = rightAltAlternativeKey)
     {
-        ;showTooltip("alt" . state)
-        leftAltActive := state
-        rightAltActive := state
+        altActive := state
+        send {alt %pressedState%}
         return true
     }
     if (key = leftWinAlternativeKey || key = rightWinAlternativeKey)
     {
-        ;showTooltip("win" . state)
-        leftWinActive := state
-        rightWinActive := state
-        return true
-    }
-    if (key = "lctrl" || key = "rctrl")
-    {
-        ;showTooltip("ctrl" . state)
-        leftCtrlActive := state
-        rightCtrlActive := state
-        return true
-    }
-    if (key = "lshift" || key = "rshift")
-    {
-        ;showTooltip("shift" . state)
-        leftShiftActive := state
-        rightShiftActive := state
-        return true
-    } 
-    if (key = "lalt" || key = "ralt")
-    {
-        ;showTooltip("alt" . state)
-        leftAltActive := state
-        rightAltActive := state
-        return true
-    }
-    if (key = "lwin" || key = "rwin")
-    {
-        ;showTooltip("win" . state)
-        leftWinActive := state
-        rightWinActive := state
+        winActive := state
+        send {lwin %pressedState%}
         return true
     }
 }
@@ -584,19 +526,19 @@ processModifierKey(key, state)
 getActiveModifiers(key)
 {
     result = 
-    if (leftCtrlActive || rightCtrlActive)
+    if (ctrlActive)
     {
         result .= "^"
     }
-    if (leftAltActive || rightAltActive)
+    if (altActive || altActive)
     {
         result .= "!"
     }
-    if (leftShiftActive || rightShiftActive)
+    if (shiftActive || shiftActive)
     {
         result .= "+"
     }
-    if (leftWinActive || rightWinActive)
+    if (winActive || winActive)
     {
         result .= "#"
     }
@@ -776,6 +718,7 @@ readLayoutFile(path)
             continue
         }
         remappedKey := StrSplit(A_LoopReadLine, "`:").2
+        
         if (remappedKey = "lctrl")
         {
             leftCtrlAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
