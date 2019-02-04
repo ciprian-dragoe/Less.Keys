@@ -93,7 +93,7 @@ return
 
 #if debugComputer
     *F7::
-        fixStickyKeys()
+        releaseModifierKeys()
         textToSend = |layoutPressed=%layoutKeyPressed%`n|alternativeLayout=%alternativeLayoutActive%`n|PressedKeysNr=%keyPressCount%`n|KeyOnRelease=%processKeyOnRelease%`n|ToSendOnUp=%keyToSendOnUp%`n|Lctrl=%ctrlActive%`n|Rctrl=%ctrlActive%`n|Lalt=%altActive%`n|Ralt=%altActive%`n|Lshift=%shiftActive%`n|Rshift=%shiftActive%`n|Lwin=%winActive%`n|Rwin=%winActive%`n|
         showToolTip(textToSend)
             
@@ -122,13 +122,9 @@ return
     return
 #if
 
-fixStickyKeys()
+releaseModifierKeys()
 {
     send {lwin up}{ctrl up}{alt up}{shift up}
-    ctrlActive := 0
-    altActive := 0
-    shiftActive := 0
-    winActive := 0
 }
 
 debug(value)
@@ -692,7 +688,7 @@ return
 
 processAhkKeyboardShortcuts(activeModifiers, key)
 {
-    combination := activeModifiers . key    
+    combination := activeModifiers . key
     action := keyboardShortcuts[combination]
     if (action)
     {
