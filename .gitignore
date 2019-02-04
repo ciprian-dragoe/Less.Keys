@@ -9,3 +9,4 @@ my-keyboard-shortcuts.cfg
 my-settings.cfg
 *.lnk
 NOT_SYNC/
+*.DotSettings.user

@@ -1,6 +1,16 @@
 ﻿#SingleInstance
+#SingleInstance
 #Persistent
 #MaxHotkeysPerInterval 400
+
+;----------------------------------- CONFIGURATION SECTION -----------------------------------
+global DebugComputer1 := "lenovo-x230"
+global DebugComputer2 := "SURFACE-STUDIO"
+global DebugComputer3 := "CIPI-ASUS-ROG"
+;----------------------------------- END OF CONFIGURATION SECTION -----------------------------------
+
+
+
 
 global timeoutStillSendLayoutKey
 global timeoutProcessLayoutOnRelease
@@ -20,7 +30,6 @@ global sendLayoutKey
 global sendModifierOnUp
 global stopManagingLayoutKey
 global keyToSendOnUp
-global modifierKeyToSendOnUp
 global lastAlternativeProcessedKey
 
 global leftCtrlAlternativeKey
@@ -50,46 +59,72 @@ global keyboardShortcuts
 SetKeyDelay -1
 
 
+if (A_ComputerName = DebugComputer1) {
+	debugComputer := true
+    readLayoutFile("my-alternative-layout.cfg")
+    readTimingsFile("my-settings.cfg")
+    readKeyboardShortcutsFile("my-keyboard-shortcuts.cfg")
+    pgdn::end
+    pgup::home	
+} else if (A_ComputerName = DebugComputer2) {
+	debugComputer := true
+    readLayoutFile("my-alternative-layout.cfg")
+    readTimingsFile("my-settings.cfg")
+    readKeyboardShortcutsFile("my-keyboard-shortcuts.cfg")
+} else if (A_ComputerName = DebugComputer3){
+	debugComputer := true
+    readLayoutFile("my-alternative-layout.cfg")
+    readTimingsFile("my-settings.cfg")
+    readKeyboardShortcutsFile("my-keyboard-shortcuts.cfg")
+} else {
+    readLayoutFile("configure-alternative-layout.cfg")
+    readTimingsFile("configure-settings.cfg")
+    readKeyboardShortcutsFile("configure-keyboard-shortcuts.cfg")
+}
 
 
-
-readLayoutFile("configure-alternative-layout.cfg")
-readTimingsFile("configure-settings.cfg")
-readKeyboardShortcutsFile("configure-keyboard-shortcuts.cfg")
 
 
 
 
 
 ;-------------------- DEBUGGING
-if (A_ComputerName = "lenovo-x230" || A_ComputerName = "CIPI-ASUS-ROG") 
-{
-	debugComputer := true
-	readLayoutFile("my-alternative-layout.cfg")
-    readTimingsFile("my-settings.cfg")
-    readKeyboardShortcutsFile("my-keyboard-shortcuts.cfg")
-}
-
 #f8::
-    fixStickyKeys()
     showToolTip("DEBUG FILES STORED")
     FileDelete, %A_Desktop%\debugKeyboardHack.txt
     FileAppend, %debugStoredData%, %A_Desktop%\debugKeyboardHack.txt
 return
 
 #if debugComputer
-    pgdn::end
-    pgup::home
+    *F7::
+        fixStickyKeys()
+        textToSend = |layoutPressed=%layoutKeyPressed%`n|alternativeLayout=%alternativeLayoutActive%`n|PressedKeysNr=%keyPressCount%`n|KeyOnRelease=%processKeyOnRelease%`n|ToSendOnUp=%keyToSendOnUp%`n|Lctrl=%leftCtrlActive%`n|Rctrl=%rightCtrlActive%`n|Lalt=%leftAltActive%`n|Ralt=%rightAltActive%`n|Lshift=%leftShiftActive%`n|Rshift=%rightShiftActive%`n|Lwin=%leftWinActive%`n|Rwin=%rightWinActive%`n|
+        msgBox %textToSend%
+            
+    return
     
-    #F9::
-    	if navigationMode = 0
+    #SC029::
+    	if navigationMode = 0 
     	{
-    	    showToolTip("alternative layout active")
+    		tooltip alternative layout
+    		sleep 600
+    		tooltip
     		navigationMode = 1
     		return
     	}
     	
-    	showToolTip("alternative layout off")
+    	if navigationMode = 1
+    	{
+    		tooltip kinesis
+    		sleep 600
+    		tooltip
+    		navigationMode = 2
+    		return
+    	}
+    	
+    	tooltip off
+    	sleep 600
+    	tooltip
     	navigationMode = 0
     	return
     return
@@ -100,15 +135,24 @@ return
     return
 #if
 
+fixStickyKeys()
+{
+    send {lwin up}{ctrl up}{alt up}{shift up}
+    leftCtrlActive := 0
+    leftAltActive := 0
+    leftShiftActive := 0
+    leftWinActive := 0
+    rightCtrlActive := 0
+    rightAltActive := 0
+    rightShiftActive := 0
+    rightWinActive := 0
+
+}
+
 debug(value)
 {
     if (logInput)
         writeMemoryStream(value)
-}
-
-fixStickyKeys()
-{
-    send {shift up}{alt up}{ctrl up}{lwin up}
 }
 
 showToolTip(value)
@@ -147,7 +191,9 @@ writeMemoryStream(value)
 
 
 #If navigationMode = 1
-    ;-------------------- keys that will be processed 
+    ;-------------------- keys that will be processed
+    ;lbutton::processLeftButtonClick()
+    
     *escape::processKeyDown("escape")
     *escape up::processKeyUp("escape")
     
@@ -355,12 +401,6 @@ writeMemoryStream(value)
     *space::processKeyDown("space")
     *space up::processKeyUp("space")
     
-    *appskey::processKeyDown("appskey")
-    *appskey up::processKeyUp("appskey")
-    
-    *printscreen::processKeyDown("printscreen")
-    *printscreen up::processKeyUp("printscreen")
-    
     *left::processKeyDown("left")
     *left up::processKeyUp("left")
     
@@ -378,16 +418,62 @@ writeMemoryStream(value)
     
     *pgup::processKeyDown("pgup")
     *pgup up::processKeyUp("pgup")
+    
+    *appskey::processKeyDown("appskey")
+    *appskey up::processKeyUp("appskey")
+    
+    *printscreen::processKeyDown("printscreen")
+    *printscreen up::processKeyUp("printscreen")
+    
+    *lctrl::processKeyDown("lctrl")
+    *lctrl up::processKeyUp("lctrl")
+        
+    *rctrl::processKeyDown("rctrl")
+    *rctrl up::processKeyUp("rctrl")
+        
+    *lalt::processKeyDown("lalt")
+    *lalt up::processKeyUp("lalt")
+        
+    *ralt::processKeyDown("ralt")
+    *ralt up::processKeyUp("ralt")
+        
+    *lshift::processKeyDown("lshift")
+    *lshift up::processKeyUp("lshift")
+    
+    *rshift::processKeyDown("rshift")
+    *rshift up::processKeyUp("rshift")
+        
+    *rwin::processKeyDown("rwin")
+    *rwin up::processKeyUp("rwin")
+    
+    *lwin::processKeyDown("lwin")
+    *lwin up::processKeyUp("lwin")
+        
+    
     ;-------------------- END OF keys that will be processed
 #if
 
 
 
+processLeftButtonClick()
+{
+    If (A_TimeSincePriorHotkey < 100) { 
+        Return
+    }
+    activeModifiers := getActiveModifiers(key)
+    showtooltip(activeModifiers)
+    Send %activeModifiers%{LButton Down}
+    KeyWait LButton		;physical state
+    Send {LButton Up}
+}
+
+
+
 processKeyDown(key)
-{    
-    if (modifierKeyToSendOnUp && modifierKeyToSendOnUp != key)
+{
+    if (processModifierKey(key, 1))
     {
-        modifierKeyToSendOnUp := ""
+        return
     }
     
     if (key = layoutChangeKey)
@@ -406,6 +492,7 @@ processKeyDown(key)
             activeModifiers := getActiveModifiers(key)
             if (!processAhkKeyboardShortcuts(activeModifiers, key))
             {
+                ;showToolTip(activeModifiers)
                 send {blind}%activeModifiers%{%key% down}
                 debug(key . "|layout active down")
             }
@@ -418,7 +505,8 @@ processKeyDown(key)
             activeModifiers := getActiveModifiers(key)
             if (!processAhkKeyboardShortcuts(activeModifiers, key))
             {
-                send {blind}%activeModifiers%{%key% down}
+                ;showToolTip(activeModifiers)
+                send {blind}%activeModifiers%{%key% downR}
                 debug(key . "|normal down")
             }
             return
@@ -430,6 +518,68 @@ processKeyDown(key)
     keyToSendOnUp := key
     debug(key . "|not processed")
 }
+
+processModifierKey(key, state)
+{
+    if (key = leftCtrlAlternativeKey || key = rightCtrlAlternativeKey)
+    {
+        ;showTooltip("ctrl" . state)
+        leftCtrlActive := state
+        rightCtrlActive := state
+        return true
+    }
+    if (key = leftShiftAlternativeKey || key = rightShiftAlternativeKey)
+    {
+        ;showTooltip("shift" . state)
+        leftShiftActive := state
+        rightShiftActive := state
+        return true
+    } 
+    if (key = leftAltAlternativeKey || key = rightAltAlternativeKey)
+    {
+        ;showTooltip("alt" . state)
+        leftAltActive := state
+        rightAltActive := state
+        return true
+    }
+    if (key = leftWinAlternativeKey || key = rightWinAlternativeKey)
+    {
+        ;showTooltip("win" . state)
+        leftWinActive := state
+        rightWinActive := state
+        return true
+    }
+    if (key = "lctrl" || key = "rctrl")
+    {
+        ;showTooltip("ctrl" . state)
+        leftCtrlActive := state
+        rightCtrlActive := state
+        return true
+    }
+    if (key = "lshift" || key = "rshift")
+    {
+        ;showTooltip("shift" . state)
+        leftShiftActive := state
+        rightShiftActive := state
+        return true
+    } 
+    if (key = "lalt" || key = "ralt")
+    {
+        ;showTooltip("alt" . state)
+        leftAltActive := state
+        rightAltActive := state
+        return true
+    }
+    if (key = "lwin" || key = "rwin")
+    {
+        ;showTooltip("win" . state)
+        leftWinActive := state
+        rightWinActive := state
+        return true
+    }
+}
+
+
 
 getActiveModifiers(key)
 {
@@ -511,7 +661,8 @@ TimerTimeoutSendLayoutKey:
     {
         processKeyOnRelease := false
         key := alternativeLayout[keyToSendOnUp]
-        send {blind}{%key% down}
+        ;showToolTip("trimit timeout send layout key")
+        send {blind}{%key% downR}
         keyToSendOnUp := ""
         debug(key . "|space timer over")
     }
@@ -533,7 +684,8 @@ manageLayoutKeyUp(key)
     
     if (processKeyOnRelease && keyToSendOnUp != "")
     {
-        send {blind}{%keyToSendOnUp% down}
+        ;showToolTip("trimit layout key")
+        send {blind}{%keyToSendOnUp% downR}
         debug(keyToSendOnUp . "|on space release")
         keyToSendOnUp := ""
     }
@@ -544,6 +696,11 @@ manageLayoutKeyUp(key)
 
 processKeyUp(key) 
 {
+    if (processModifierKey(key, 0))
+    {
+        return
+    }
+    
     removeFromActivePressedKeys(key)
     if (key = lastAlternativeProcessedKey)
     {
@@ -559,19 +716,12 @@ processKeyUp(key)
     if (keyToSendOnUp)
     {
         keyToSend := alternativeLayout[keyToSendOnUp]
-        send {blind}{%keyToSend% down}
+        ;showToolTip("trimit la up key")
+        send {blind}{%keyToSend% downR}
         debug(keyToSend . "|alternative on up sent")   
         keyToSendOnUp := ""
         processKeyOnRelease := false
         sendLayoutKey := false
-    }
-    
-    if (modifierKeyToSendOnUp)
-    {
-        send {blind}{%layoutChangeKey%}
-        send {blind}{%modifierKeyToSendOnUp%}
-        modifierKeyToSendOnUp := ""
-        debug(keyToSend . "|modifier on up special condition")
     }
     
     if (activePressedKeys.Length() = 0 && !alternativeLayoutActive)
@@ -685,4 +835,4 @@ readTimingsFile(path)
     IniRead, timeoutProcessLayoutOnRelease, %path%, timings, timeoutProcessLayoutOnRelease
     IniRead, logInput, %path%, logging, logInput
 }
-;-------------------- READ SETTING FILES
+;-------------------- READ SETTING FILESown
