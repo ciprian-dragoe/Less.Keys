@@ -420,6 +420,9 @@ writeMemoryStream(value)
     
     *rshift::processKeyDown("rshift")
     *rshift up::processKeyUp("rshift")
+    
+    *lwin::processKeyDown("lwin")
+    *lwin up::processKeyUp("lwin")
 ;-------------------- END OF keys that will be processed
 #if
 
@@ -538,6 +541,7 @@ getActiveModifiers(key)
     {
         result .= "#"
     }
+    
     
     return result
 }
