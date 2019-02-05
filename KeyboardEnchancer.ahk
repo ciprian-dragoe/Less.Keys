@@ -22,6 +22,7 @@ global processKeyOnRelease
 global processModifierOnRelease
 
 global alternativeLayout
+global modifierKeys
 
 global layoutChangeKey
 global layoutKeyPressed
@@ -93,7 +94,7 @@ return
 
 #if debugComputer
     *F7::
-        releaseModifierKeys()
+        resetStates()
         textToSend = |layoutPressed=%layoutKeyPressed%`n|alternativeLayout=%alternativeLayoutActive%`n|PressedKeysNr=%keyPressCount%`n|KeyOnRelease=%processKeyOnRelease%`n|ToSendOnUp=%keyToSendOnUp%`n|Lctrl=%ctrlActive%`n|Rctrl=%ctrlActive%`n|Lalt=%altActive%`n|Ralt=%altActive%`n|Lshift=%shiftActive%`n|Rshift=%shiftActive%`n|Lwin=%winActive%`n|Rwin=%winActive%`n|
         showToolTip(textToSend)
             
@@ -122,9 +123,25 @@ return
     return
 #if
 
-releaseModifierKeys()
+resetStates()
 {
     send {lwin up}{ctrl up}{alt up}{shift up}
+    activePressedKeys = []
+    processLayoutOnRelease = 
+    processKeyOnRelease = 
+    processModifierOnRelease = 
+    layoutKeyPressed = 
+    alternativeLayoutActive = 
+    sendLayoutKey = 
+    sendModifierOnUp = 
+    stopManagingLayoutKey = 
+    keyToSendOnUp = 
+    lastAlternativeProcessedKey =
+    ctrlActive =
+    altActive =
+    shiftActive =
+    winActive =
+    
 }
 
 debug(value)
@@ -494,33 +511,25 @@ processKeyDown(key)
 processModifierKey(key, state)
 {
     pressedState := state ? "downR" : "up"
-    if (key = leftCtrlAlternativeKey || key = rightCtrlAlternativeKey)
-    {
-        send {ctrl %pressedState%}
-        ctrlActive := state
-        return true
-    }
-    if (key = leftShiftAlternativeKey || key = rightShiftAlternativeKey)
-    {
-        send {shift %pressedState%}
-        shiftActive := state
-        return true
-    } 
-    if (key = leftAltAlternativeKey || key = rightAltAlternativeKey)
-    {
-        altActive := state
-        send {alt %pressedState%}
-        return true
-    }
-    if (key = leftWinAlternativeKey || key = rightWinAlternativeKey)
-    {
-        winActive := state
-        send {lwin %pressedState%}
+    modifierKey := modifierKeys[key]
+    if (modifierKey) { 
+        if (modifierKey == "ctrl") {
+            send {ctrl %pressedState%}
+            ctrlActive := state
+        } else if (modifierKey == "alt") {
+            send {alt %pressedState%}
+            altActive := state
+        } else if (modifierKey == "shift") {
+            send {shift %pressedState%}
+            shiftActive := state
+        } else if (modifierKey == "win") {       
+            send {lwin %pressedState%}
+            winActive := state
+        }
+        
         return true
     }
 }
-
-
 
 getActiveModifiers(key)
 {
@@ -529,20 +538,19 @@ getActiveModifiers(key)
     {
         result .= "^"
     }
-    if (altActive || altActive)
+    if (altActive)
     {
         result .= "!"
     }
-    if (shiftActive || shiftActive)
+    if (shiftActive)
     {
         result .= "+"
     }
-    if (winActive || winActive)
+    if (winActive)
     {
         result .= "#"
     }
-    
-    
+
     return result
 }
 
@@ -708,14 +716,13 @@ processAhkKeyboardShortcuts(activeModifiers, key)
     return false
 }
 
-
-
 ;-------------------- READ SETTING FILES
 readLayoutFile(path)
 {
     FileReadLine, layoutChangeKey, %path%, 1
     layoutChangeKey := StrSplit(layoutChangeKey, "`:").2 
     alternativeLayout:=Object()
+    modifierKeys:=Object()
     Loop, read, %path%
     {
         IfInString, A_LoopReadLine, ### ;if line has ### in it, is a comment and skip
@@ -724,37 +731,21 @@ readLayoutFile(path)
         }
         remappedKey := StrSplit(A_LoopReadLine, "`:").2
         
-        if (remappedKey = "lctrl")
+        if (remappedKey = "ctrl")
         {
-            leftCtrlAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
-        }
-        else if (remappedKey = "rctrl")
-        {
-            rightCtrlAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
+            modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := "ctrl"
         } 
-        else if (remappedKey = "lalt")
+        else if (remappedKey = "alt")
         {
-            leftAltAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
+            modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := "alt"
         }
-        else if (remappedKey = "ralt")
+        else if (remappedKey = "shift")
         {
-            rightAltAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
+            modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := "shift"
         }
-        else if (remappedKey = "lshift")
+        else if (remappedKey = "win")
         {
-            leftShiftAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
-        }
-        else if (remappedKey = "rshift")
-        {
-            rightShiftAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
-        }
-        else if (remappedKey = "lwin")
-        {
-            leftWinAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
-        }
-        else if (remappedKey = "rwin")
-        {
-            rightWinAlternativeKey := StrSplit(A_LoopReadLine, "`:").1
+            modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := "win"
         }
         else
         {
@@ -783,4 +774,4 @@ readTimingsFile(path)
     IniRead, timeoutProcessLayoutOnRelease, %path%, timings, timeoutProcessLayoutOnRelease
     IniRead, logInput, %path%, logging, logInput
 }
-;-------------------- READ SETTING FILESown
+;-------------------- READ SETTING FILES --------------------
