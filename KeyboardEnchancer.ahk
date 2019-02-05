@@ -616,8 +616,16 @@ manageLayoutKeyUp(key)
     
     if (sendLayoutKey)
     {
-        send {blind}{%key%}
-        debug(key . "|sent on up")
+        activeModifiers := getActiveModifiers(key)
+        if (!processAhkKeyboardShortcuts(activeModifiers, key))
+        {
+            ;showToolTip(activeModifiers)
+            send {blind}%activeModifiers%{%key% downR}
+            debug(key . "|sent on up")
+        } else { 
+            send {blind}{%key%}
+            debug(key . "|sent on up")
+        }
     }
     
     if (processKeyOnRelease && keyToSendOnUp != "")
