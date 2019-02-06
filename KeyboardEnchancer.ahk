@@ -17,9 +17,8 @@ global timeoutProcessLayoutOnRelease
 global logInput
 
 global activePressedKeys = []
-global processLayoutOnRelease
 global processKeyOnRelease
-global processModifierOnRelease
+global processKeyOnRelease
 
 global alternativeLayout
 global modifierKeys
@@ -28,19 +27,9 @@ global layoutChangeKey
 global layoutKeyPressed
 global alternativeLayoutActive
 global sendLayoutKey
-global sendModifierOnUp
 global stopManagingLayoutKey
 global keyToSendOnUp
-global lastAlternativeProcessedKey
-
-global leftCtrlAlternativeKey
-global leftAltAlternativeKey
-global leftShiftAlternativeKey
-global leftWinAlternativeKey
-global rightCtrlAlternativeKey
-global rightAltAlternativeKey
-global rightShiftAlternativeKey
-global rightWinAlternativeKey
+global lastKeyProcessedAsAlternative
 
 global ctrlActive
 global altActive
@@ -130,16 +119,14 @@ resetStates()
     
     send {lwin up}{ctrl up}{alt up}{shift up}
     activePressedKeys = []
-    processLayoutOnRelease = 
     processKeyOnRelease = 
-    processModifierOnRelease = 
+    processKeyOnRelease = 
     layoutKeyPressed = 
     alternativeLayoutActive = 
     sendLayoutKey = 
-    sendModifierOnUp = 
     stopManagingLayoutKey = 
     keyToSendOnUp = 
-    lastAlternativeProcessedKey =
+    lastKeyProcessedAsAlternative =
     ctrlActive =
     altActive =
     shiftActive =
@@ -479,41 +466,39 @@ processKeyDown(key)
 
 processNormalKeyDown(key)
 {
-    if (!processKeyOnRelease)
+    if (processKeyOnRelease)
     {
+        keyToSendOnUp := key
+    }
+    else
+    {   
         if (alternativeLayoutActive)
         {
-            lastAlternativeProcessedKey := key
+            lastKeyProcessedAsAlternative := key
             key := alternativeLayout[key]
             sendLayoutKey := false
-            activeModifiers := getActiveModifiers(key)
-            if (!processAhkKeyboardShortcuts(activeModifiers, key))
-            {
-                ;showToolTip(activeModifiers)
-                send {blind}%activeModifiers%{%key% down}
-                debug(key . "|layout active down")
-            }
+            processKeyToSend(key)
+            debug(key . "|------ key down with alternative layout")
+            
             return
         }
         
+        addToActivePressedKeys(key)
         if (key != lastAlternativeProcessedKey)
         {
-            addToActivePressedKeys(key)
-            activeModifiers := getActiveModifiers(key)
-            if (!processAhkKeyboardShortcuts(activeModifiers, key))
-            {
-                ;showToolTip(activeModifiers)
-                send {blind}%activeModifiers%{%key% downR}
-                debug(key . "|normal down")
-            }
-            return
+            processKeyToSend(key)
+            debug(key . "|key down")
         }
-        
-        return
     }
-    
-    keyToSendOnUp := key
-    debug(key . "|not processed")
+}
+
+processKeyToSend(key)
+{
+    activeModifiers := getActiveModifiers(key)
+    if (!processAhkKeyboardShortcuts(activeModifiers, key))
+    {
+        send {blind}%activeModifiers%{%key% down}
+    }
 }
 
 processModifierKey(key, state)
@@ -595,36 +580,30 @@ manageLayoutKeyDown(key)
             send {blind}{%key%}
             sendLayoutKey := false
             stopManagingLayoutKey := true
-            debug(key . "|sent special condition ")
+            debug(key . "|because other keys pressed")
         }
         else
         {
-            stopManagingLayoutKey := true
             alternativeLayoutActive := true
             sendLayoutKey := true
-            if (processLayoutOnRelease)
-            {
-                processKeyOnRelease := true
-            }
             SetTimer, TimerTimeoutSendLayoutKey, OFF
             SetTimer, TimerTimeoutSendLayoutKey, %timeoutStillSendLayoutKey%
-            debug(key . "|processing")
+            debug(key . "|activates alternative layout")
         }
     }
 }
 
 TimerTimeoutSendLayoutKey:
     SetTimer, TimerTimeoutSendLayoutKey, OFF
-    if (processKeyOnRelease && keyToSendOnUp != "")
-    {
-        processKeyOnRelease := false
-        key := alternativeLayout[keyToSendOnUp]
-        ;showToolTip("trimit timeout send layout key")
-        send {blind}{%key% downR}
-        keyToSendOnUp := ""
-        debug(key . "|space timer over")
-    }
     sendLayoutKey := false
+    if (keyToSendOnUp)
+    {
+        key := alternativeLayout[keyToSendOnUp]
+        processKeyToSend(key)
+        processKeyOnRelease := false
+        keyToSendOnUp := ""
+        debug(key . "|---*** on alternative layout hard pressed and send key on up")            
+    }
 return
 
 manageLayoutKeyUp(key)
@@ -635,66 +614,59 @@ manageLayoutKeyUp(key)
     alternativeLayoutActive := false
     
     if (sendLayoutKey)
-    {
-        activeModifiers := getActiveModifiers(key)
-        if (!processAhkKeyboardShortcuts(activeModifiers, key))
+    {   
+        processKeyToSend(key)
+        debug(key . "|sent key up")
+        
+        if (keyToSendOnUp)
         {
-            ;showToolTip("1")
-            send {blind}%activeModifiers%{%key%}
-            debug(key . "|sent on up")
+            processKeyToSend(keyToSendOnUp)
+            processKeyOnRelease := false
+            keyToSendOnUp := ""
+            debug(key . "|^^^^^^ on alternative layout released before")
         }
     }
-    
-    if (processKeyOnRelease && keyToSendOnUp != "")
-    {
-        ;showToolTip("trimit layout key")
-        send {blind}{%keyToSendOnUp% downR}
-        debug(keyToSendOnUp . "|on space release")
-        keyToSendOnUp := ""
-    }
-    
-    processKeyOnRelease := false
-    debug(key . " |processed space up")
 }
 
 processKeyUp(key) 
 {
-    if (processModifierKey(key, 0))
-    {
-        return
-    }
-    
-    removeFromActivePressedKeys(key)
-    if (key = lastAlternativeProcessedKey)
-    {
-        lastAlternativeProcessedKey := ""
-    }
-    
-    if (key = layoutChangeKey)
-    {
-        manageLayoutKeyUp(key)
-        return
-    }
-    
     if (keyToSendOnUp)
     {
-        keyToSend := alternativeLayout[keyToSendOnUp]
-        ;showToolTip("trimit la up key")
-        send {blind}{%keyToSend% downR}
-        debug(keyToSend . "|alternative on up sent")   
-        keyToSendOnUp := ""
+        key := alternativeLayout[keyToSendOnUp]
+        processKeyToSend(key)
         processKeyOnRelease := false
-        sendLayoutKey := false
+        keyToSendOnUp := ""
+        debug(key . "|***^^^ on alternative and key up")        
     }
-    
-    if (activePressedKeys.Length() = 0 && !alternativeLayoutActive)
+    else
     {
-        processLayoutOnRelease := true     
-        SetTimer, TimerProcessLayoutOnRelease, OFF
-        SetTimer, TimerProcessLayoutOnRelease, %timeoutProcessLayoutOnRelease%
+        if (processModifierKey(key, 0))
+        {
+            return
+        }
+        
+        if (key = layoutChangeKey)
+        {
+            manageLayoutKeyUp(key)
+            return
+        }
+        
+        if (key = lastAlternativeProcessedKey)
+        {
+            lastAlternativeProcessedKey := ""
+        }
+        
+        if (activePressedKeys.Length() = 0 !alternativeLayoutActive)
+        {
+            processKeyOnRelease := true
+            SetTimer, TimerProcessLayoutOnRelease, OFF
+            SetTimer, TimerProcessLayoutOnRelease, %timeoutProcessLayoutOnRelease%
+        }
+        
+        removeFromActivePressedKeys(key)
+        send {Blind}{%key% Up}
+        debug(key . "|up")
     }
-    send {Blind}{%key% Up}
-    debug(key . " |up")
 }
 
 removeFromActivePressedKeys(key)
@@ -708,7 +680,7 @@ removeFromActivePressedKeys(key)
 
 TimerProcessLayoutOnRelease:
     SetTimer, TimerProcessLayoutOnRelease, OFF
-    processLayoutOnRelease := false
+    processKeyOnRelease := false
 return
 
 processAhkKeyboardShortcuts(activeModifiers, key)
