@@ -125,7 +125,7 @@ return
 
 resetStates()
 {
-    textToSend = |layoutPressed=%layoutKeyPressed%`n|alternativeLayout=%alternativeLayoutActive%`n|PressedKeysNr=%keyPressCount%`n|KeyOnRelease=%processKeyOnRelease%`n|ToSendOnUp=%keyToSendOnUp%`n|Lctrl=%ctrlActive%`n|Rctrl=%ctrlActive%`n|Lalt=%altActive%`n|Ralt=%altActive%`n|Lshift=%shiftActive%`n|Rshift=%shiftActive%`n|Lwin=%winActive%`n|Rwin=%winActive%`n|
+    textToSend = |layoutPressed=%layoutKeyPressed%`n|alternativeLayout=%alternativeLayoutActive%`n|PressedKeysNr=%activePressedKeys%`n|KeyOnRelease=%processKeyOnRelease%`n|ToSendOnUp=%keyToSendOnUp%`n|Lctrl=%ctrlActive%`n|Lalt=%altActive%`n|Lshift=%shiftActive%`n|Lwin=%winActive%`n|
     showToolTip(textToSend)
     
     send {lwin up}{ctrl up}{alt up}{shift up}
@@ -167,15 +167,15 @@ send(value)
 
 store(value)
 {
-    keyPressCount := activePressedKeys.Length()
-	textToSend = %value% |contextKeyPressed=%contextKeyPressed%| - |alternativeLayoutActive=%alternativeLayoutActive%| |activePressedKeys=%keyPressCount%|
+    activePressedKeys := activePressedKeys.Length()
+	textToSend = %value% |contextKeyPressed=%contextKeyPressed%| - |alternativeLayoutActive=%alternativeLayoutActive%| |activePressedKeys=%activePressedKeys%|
 	FileAppend, %A_Hour%:%A_Min%:%A_Sec% (%A_MSec%) - %textToSend%`n,c:\Users\cipri\Desktop\debugKeyboardHack.txt
 }
 
 writeMemoryStream(value)
 {
-    keyPressCount := activePressedKeys.Length()
-	textToSend = %A_Hour%:%A_Min%:%A_Sec%:%A_MSec%|%value%|layoutPressed=%layoutKeyPressed%|alternativeLayout=%alternativeLayoutActive%|PressedKeysNr=%keyPressCount%|KeyOnRelease=%processKeyOnRelease%|ToSendOnUp=%keyToSendOnUp%|`n
+    activePressedKeys := activePressedKeys.Length()
+	textToSend = %A_Hour%:%A_Min%:%A_Sec%:%A_MSec%|%value%|layoutPressed=%layoutKeyPressed%|alternativeLayout=%alternativeLayoutActive%|PressedKeysNr=%activePressedKeys%|KeyOnRelease=%processKeyOnRelease%|ToSendOnUp=%keyToSendOnUp%|`n
     debugStoredData .= textToSend
     if (StrLen(debugStoredData) > 8000)
     {
@@ -474,6 +474,11 @@ processKeyDown(key)
         return
     }
     
+    processNormalKeydown(key)
+}
+
+processNormalKeyDown(key)
+{
     if (!processKeyOnRelease)
     {
         if (alternativeLayoutActive)
