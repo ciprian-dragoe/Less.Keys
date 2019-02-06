@@ -18,7 +18,6 @@ global logInput
 
 global activePressedKeys = []
 global processKeyOnRelease
-global processKeyOnRelease
 
 global alternativeLayout
 global modifierKeys
@@ -629,7 +628,11 @@ manageLayoutKeyUp(key)
             keyToSendOnUp := ""
             debug(key . "|^^^^^^ on alternative layout released before")
         }
+        
+        return
     }
+    
+    debug(key . "|NOT SENT CAUSE CONSUMED")
 }
 
 processKeyUp(key) 
