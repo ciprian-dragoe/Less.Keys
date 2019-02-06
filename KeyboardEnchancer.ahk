@@ -79,9 +79,7 @@ if (A_ComputerName = DebugComputer1) {
 
 ;-------------------- DEBUGGING
 #f9::
-    showToolTip("DEBUG FILES STORED")
-    FileDelete, %A_Desktop%\debugKeyboardHack.txt
-    FileAppend, %debugStoredData%, %A_Desktop%\debugKeyboardHack.txt
+    processDebugData()
 return
 
 #if debugComputer
@@ -112,11 +110,17 @@ return
     return
 #if
 
+processDebugData()
+{
+    showToolTip("DEBUG FILES STORED")
+    FileDelete, %A_Desktop%\debugKeyboardHack.txt
+    msgbox % debugStoredData
+    FileAppend, %debugStoredData%, %A_Desktop%\debugKeyboardHack.txt
+    resetStates()
+}
+
 resetStates()
 {
-    textToSend = |layoutPressed=%layoutKeyPressed%`n|alternativeLayout=%alternativeLayoutActive%`n|PressedKeysNr=%activePressedKeys%`n|KeyOnRelease=%processKeyOnRelease%`n|ToSendOnUp=%keyToSendOnUp%`n|Lctrl=%ctrlActive%`n|Lalt=%altActive%`n|Lshift=%shiftActive%`n|Lwin=%winActive%`n|
-    showToolTip(textToSend)
-    
     send {lwin up}{ctrl up}{alt up}{shift up}
     activePressedKeys = []
     processKeyOnRelease = 
@@ -161,8 +165,8 @@ store(value)
 
 writeMemoryStream(value)
 {
-    activePressedKeys := activePressedKeys.Length()
-	textToSend = %A_Hour%:%A_Min%:%A_Sec%:%A_MSec%|%value%|layoutPressed=%layoutKeyPressed%|alternativeLayout=%alternativeLayoutActive%|PressedKeysNr=%activePressedKeys%|KeyOnRelease=%processKeyOnRelease%|ToSendOnUp=%keyToSendOnUp%|`n
+    keyPressNr := activePressedKeys.Length()
+	textToSend = %A_Hour%:%A_Min%:%A_Sec%:%A_MSec%|%value%|layoutPressed=%layoutKeyPressed%|alternativeLayout=%alternativeLayoutActive%|PressedKeysNr=%keyPressNr%|KeyOnRelease=%processKeyOnRelease%|ToSendOnUp=%keyToSendOnUp%|`n
     debugStoredData .= textToSend
     if (StrLen(debugStoredData) > 8000)
     {
@@ -636,6 +640,7 @@ processKeyUp(key)
         processKeyToSend(key)
         processKeyOnRelease := false
         keyToSendOnUp := ""
+        sendLayoutKey := false        
         debug(key . "|***^^^ on alternative and key up")        
     }
     else
