@@ -61,6 +61,7 @@ if (A_ComputerName = DebugComputer1) {
     readLayoutFile("my-alternative-layout.cfg")
     readTimingsFile("my-settings.cfg")
     readKeyboardShortcutsFile("my-keyboard-shortcuts.cfg")
+    resetStates()
     pgdn::end
     pgup::home	
 } else if (A_ComputerName = DebugComputer2) {
@@ -68,11 +69,13 @@ if (A_ComputerName = DebugComputer1) {
     readLayoutFile("my-alternative-layout.cfg")
     readTimingsFile("my-settings.cfg")
     readKeyboardShortcutsFile("my-keyboard-shortcuts.cfg")
+    resetStates()
 } else if (A_ComputerName = DebugComputer3){
 	debugComputer := true
     readLayoutFile("my-alternative-layout.cfg")
     readTimingsFile("my-settings.cfg")
     readKeyboardShortcutsFile("my-keyboard-shortcuts.cfg")
+    resetStates()
 } else {
     readLayoutFile("configure-alternative-layout.cfg")
     readTimingsFile("configure-settings.cfg")
@@ -86,20 +89,13 @@ if (A_ComputerName = DebugComputer1) {
 
 
 ;-------------------- DEBUGGING
-#f8::
+#f9::
     showToolTip("DEBUG FILES STORED")
     FileDelete, %A_Desktop%\debugKeyboardHack.txt
     FileAppend, %debugStoredData%, %A_Desktop%\debugKeyboardHack.txt
 return
 
 #if debugComputer
-    *F7::
-        resetStates()
-        textToSend = |layoutPressed=%layoutKeyPressed%`n|alternativeLayout=%alternativeLayoutActive%`n|PressedKeysNr=%keyPressCount%`n|KeyOnRelease=%processKeyOnRelease%`n|ToSendOnUp=%keyToSendOnUp%`n|Lctrl=%ctrlActive%`n|Rctrl=%ctrlActive%`n|Lalt=%altActive%`n|Ralt=%altActive%`n|Lshift=%shiftActive%`n|Rshift=%shiftActive%`n|Lwin=%winActive%`n|Rwin=%winActive%`n|
-        showToolTip(textToSend)
-            
-    return
-    
     #SC029::
     	if navigationMode = 0 
     	{
@@ -121,10 +117,17 @@ return
         showToolTip("RELOADING")
     	reload
     return
+    
+    #f8::
+        resetStates()
+    return
 #if
 
 resetStates()
 {
+    textToSend = |layoutPressed=%layoutKeyPressed%`n|alternativeLayout=%alternativeLayoutActive%`n|PressedKeysNr=%keyPressCount%`n|KeyOnRelease=%processKeyOnRelease%`n|ToSendOnUp=%keyToSendOnUp%`n|Lctrl=%ctrlActive%`n|Rctrl=%ctrlActive%`n|Lalt=%altActive%`n|Ralt=%altActive%`n|Lshift=%shiftActive%`n|Rshift=%shiftActive%`n|Lwin=%winActive%`n|Rwin=%winActive%`n|
+    showToolTip(textToSend)
+    
     send {lwin up}{ctrl up}{alt up}{shift up}
     activePressedKeys = []
     processLayoutOnRelease = 
