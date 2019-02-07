@@ -112,7 +112,7 @@ processKeyToSend(key)
     activeModifiers := getActiveModifiers(key)
     if (!processAhkKeyboardShortcuts(activeModifiers, key))
     {
-        send {blind}%activeModifiers%{%key% down}
+        send {blind}%activeModifiers%{%key% downR}
     }
 }
 
@@ -226,8 +226,11 @@ manageLayoutKeyUp(key)
     
     if (sendLayoutKey)
     {   
-        processKeyToSend(key)
-        debug(key . "|sent key up")
+        activeModifiers := getActiveModifiers(key)
+        if (!processAhkKeyboardShortcuts(activeModifiers, key))
+        {
+            send {blind}%activeModifiers%{%key%}
+        }
         
         if (keyToSendOnUp)
         {
@@ -272,16 +275,16 @@ processKeyUp(key)
             lastKeyProcessedAsAlternative := ""
         }
         
+        removeFromActivePressedKeys(key)
+        send {Blind}{%key% Up}
+        debug(key . "|up")
+        
         if (activePressedKeys.Length() = 0 !alternativeLayoutActive)
         {
             processKeyOnRelease := true
             SetTimer, TimerProcessLayoutOnRelease, OFF
             SetTimer, TimerProcessLayoutOnRelease, %timeoutProcessLayoutOnRelease%
         }
-        
-        removeFromActivePressedKeys(key)
-        send {Blind}{%key% Up}
-        debug(key . "|up")
     }
 }
 
