@@ -244,9 +244,9 @@ manageLayoutKeyUp(key)
         
         if (keyToSendOnUp)
         {
-            keyToSendOnUp := ""
             processKeyToSend(keyToSendOnUp)
-            debug(key . "|^^^^^^ on alternative layout released before")
+            keyToSendOnUp := ""
+            debug(keyToSendOnUp . "|^^^^^^ on alternative layout released before")
         }
         
         return
@@ -257,6 +257,17 @@ manageLayoutKeyUp(key)
 
 processKeyUp(key) 
 {
+    if (processModifierKey(key, 0))
+    {
+        return
+    }
+    
+    if (key = layoutChangeKey)
+    {
+        manageLayoutKeyUp(key)
+        return
+    }
+    
     if (keyToSendOnUp)
     {
         key := alternativeLayout[keyToSendOnUp]
@@ -269,17 +280,6 @@ processKeyUp(key)
     }
     else
     {
-        if (processModifierKey(key, 0))
-        {
-            return
-        }
-        
-        if (key = layoutChangeKey)
-        {
-            manageLayoutKeyUp(key)
-            return
-        }
-
         if (key = lastKeyProcessedAsAlternative)
         {
             lastKeyProcessedAsAlternative := ""
