@@ -28,6 +28,7 @@ global alternativeLayoutActive
 global sendLayoutKey
 global stopManagingLayoutKey
 global keyToSendOnUp
+global layoutKeyActivatesProcessKeyOnRelease
 global lastKeyProcessedAsAlternative
 
 global ctrlActive
@@ -84,6 +85,7 @@ processNormalKeyDown(key)
     if (processKeyOnRelease)
     {
         keyToSendOnUp := key
+        debug(key . "|>>>>>> will be processed on release")
     }
     else
     {   
@@ -199,6 +201,10 @@ manageLayoutKeyDown(key)
             sendLayoutKey := true
             SetTimer, TimerTimeoutSendLayoutKey, OFF
             SetTimer, TimerTimeoutSendLayoutKey, %timeoutStillSendLayoutKey%
+            if (layoutKeyActivatesProcessKeyOnRelease)
+            {
+                processKeyOnRelease := true
+            }
             debug(key . "|activates alternative layout")
         }
     }
@@ -212,6 +218,7 @@ TimerTimeoutSendLayoutKey:
         key := alternativeLayout[keyToSendOnUp]
         processKeyToSend(key)
         processKeyOnRelease := false
+        layoutKeyActivatesProcessKeyOnRelease := false
         keyToSendOnUp := ""
         debug(key . "|---*** on alternative layout hard pressed and send key on up")            
     }
@@ -223,6 +230,8 @@ manageLayoutKeyUp(key)
     stopManagingLayoutKey := false
     layoutKeyPressed := false
     alternativeLayoutActive := false
+    processKeyOnRelease := false
+    layoutKeyActivatesProcessKeyOnRelease := false
     
     if (sendLayoutKey)
     {   
@@ -231,12 +240,12 @@ manageLayoutKeyUp(key)
         {
             send {blind}%activeModifiers%{%key%}
         }
+        debug(key . "|UP")
         
         if (keyToSendOnUp)
         {
-            processKeyToSend(keyToSendOnUp)
-            processKeyOnRelease := false
             keyToSendOnUp := ""
+            processKeyToSend(keyToSendOnUp)
             debug(key . "|^^^^^^ on alternative layout released before")
         }
         
@@ -253,9 +262,10 @@ processKeyUp(key)
         key := alternativeLayout[keyToSendOnUp]
         processKeyToSend(key)
         processKeyOnRelease := false
+        layoutKeyActivatesProcessKeyOnRelease := false
         keyToSendOnUp := ""
         sendLayoutKey := false        
-        debug(key . "|***^^^ on alternative and key up")        
+        debug(key . "|***^^^ key up & process release")        
     }
     else
     {
@@ -277,14 +287,15 @@ processKeyUp(key)
         
         removeFromActivePressedKeys(key)
         send {Blind}{%key% Up}
-        debug(key . "|up")
         
-        if (activePressedKeys.Length() = 0 !alternativeLayoutActive)
+        if (activePressedKeys.Length() = 0 && !alternativeLayoutActive)
         {
-            processKeyOnRelease := true
+            layoutKeyActivatesProcessKeyOnRelease := true
             SetTimer, TimerProcessLayoutOnRelease, OFF
             SetTimer, TimerProcessLayoutOnRelease, %timeoutProcessLayoutOnRelease%
         }
+        
+         debug(key . "|up")
     }
 }
 
@@ -299,10 +310,7 @@ removeFromActivePressedKeys(key)
 
 TimerProcessLayoutOnRelease:
     SetTimer, TimerProcessLayoutOnRelease, OFF
-    if (!keyToSendOnUp)
-    {
-        processKeyOnRelease := false
-    } 
+    layoutKeyActivatesProcessKeyOnRelease := false 
 return
 
 processAhkKeyboardShortcuts(activeModifiers, key)
