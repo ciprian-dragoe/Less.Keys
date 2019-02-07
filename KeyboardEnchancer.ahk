@@ -98,9 +98,9 @@ processNormalKeyDown(key)
             return
         }
         
-        addToActivePressedKeys(key)
-        if (key != lastAlternativeProcessedKey)
+        if (key != lastKeyProcessedAsAlternative)
         {
+            addToActivePressedKeys(key)
             processKeyToSend(key)
             debug(key . "|key down")
         }
@@ -266,10 +266,10 @@ processKeyUp(key)
             manageLayoutKeyUp(key)
             return
         }
-        
-        if (key = lastAlternativeProcessedKey)
+
+        if (key = lastKeyProcessedAsAlternative)
         {
-            lastAlternativeProcessedKey := ""
+            lastKeyProcessedAsAlternative := ""
         }
         
         if (activePressedKeys.Length() = 0 !alternativeLayoutActive)
