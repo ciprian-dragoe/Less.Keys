@@ -5,6 +5,7 @@ logs
 *.ahk.bak
 my-alternative-layout.cfg
 my-keyboard-shortcuts-script.ahk
+my-keyboard-shortcuts-script.exe
 my-keyboard-shortcuts.cfg
 my-settings.cfg
 *.lnk
