@@ -1,27 +1,27 @@
 ﻿#SingleInstance
-#SingleInstance
 #Persistent
 #MaxHotkeysPerInterval 400
-
+SetKeyDelay -1
 ;----------------------------------- CONFIGURATION SECTION -----------------------------------
 global DebugComputer1 := "lenovo-x230"
 global DebugComputer2 := "SURFACE-STUDIO"
 global DebugComputer3 := "CIPI-ASUS-ROG"
 ;----------------------------------- END OF CONFIGURATION SECTION -----------------------------------
 
-
-
-
 global timeoutStillSendLayoutKey
 global timeoutProcessLayoutOnRelease
 global logInput
 
-global activePressedKeys = []
-global processKeyOnRelease
-
 global alternativeLayout
 global modifierKeys
 
+global debugStoredData := ""
+global debugComputer := false
+global navigationMode = 1
+global keyboardShortcuts
+
+global activePressedKeys := []
+global processKeyOnRelease
 global layoutChangeKey
 global layoutKeyPressed
 global alternativeLayoutActive
@@ -35,23 +35,12 @@ global altActive
 global shiftActive
 global winActive
 
-global debugStoredData := ""
-global debugComputer := false
-global navigationMode = 1
-
-global keyboardShortcuts
-
-SetKeyDelay -1
-
-
 if (A_ComputerName = DebugComputer1) {
 	debugComputer := true
     readLayoutFile("my-alternative-layout.cfg")
     readTimingsFile("my-settings.cfg")
     readKeyboardShortcutsFile("my-keyboard-shortcuts.cfg")
-    resetStates()
-    pgdn::end
-    pgup::home	
+    resetStates()	
 } else if (A_ComputerName = DebugComputer2) {
 	debugComputer := true
     readLayoutFile("my-alternative-layout.cfg")
@@ -74,9 +63,388 @@ if (A_ComputerName = DebugComputer1) {
 
 
 
+processKeyDown(key)
+{
+    if (processModifierKey(key, 1))
+    {
+        return
+    }
+    
+    if (key = layoutChangeKey)
+    {
+        manageLayoutKeyDown(key)
+        return
+    }
+    
+    processNormalKeydown(key)
+}
+
+processNormalKeyDown(key)
+{
+    if (processKeyOnRelease)
+    {
+        keyToSendOnUp := key
+    }
+    else
+    {   
+        if (alternativeLayoutActive)
+        {
+            lastKeyProcessedAsAlternative := key
+            key := alternativeLayout[key]
+            sendLayoutKey := false
+            processKeyToSend(key)
+            debug(key . "|------ key down with alternative layout")
+            
+            return
+        }
+        
+        addToActivePressedKeys(key)
+        if (key != lastAlternativeProcessedKey)
+        {
+            processKeyToSend(key)
+            debug(key . "|key down")
+        }
+    }
+}
+
+processKeyToSend(key)
+{
+    activeModifiers := getActiveModifiers(key)
+    if (!processAhkKeyboardShortcuts(activeModifiers, key))
+    {
+        send {blind}%activeModifiers%{%key% down}
+    }
+}
+
+processModifierKey(key, state)
+{
+    pressedState := state ? "downR" : "up"
+    modifierKey := modifierKeys[key]
+    if (modifierKey) { 
+        if (modifierKey == "ctrl") {
+            send {ctrl %pressedState%}
+            ctrlActive := state
+        } else if (modifierKey == "alt") {
+            send {alt %pressedState%}
+            altActive := state
+        } else if (modifierKey == "shift") {
+            send {shift %pressedState%}
+            shiftActive := state
+        } else if (modifierKey == "win") {       
+            send {lwin %pressedState%}
+            winActive := state
+        }
+        
+        return true
+    }
+}
+
+getActiveModifiers(key)
+{
+    result = 
+    if (ctrlActive)
+    {
+        result .= "^"
+    }
+    if (altActive)
+    {
+        result .= "!"
+    }
+    if (shiftActive)
+    {
+        result .= "+"
+    }
+    if (winActive)
+    {
+        result .= "#"
+    }
+
+    return result
+}
+
+addToActivePressedKeys(key)
+{
+    if (activePressedKeys.Length() = 0)
+    {
+        activePressedKeys.Push(key)
+    }
+    else 
+    {
+        itemNotPresent := true
+        For index, value in activePressedKeys
+        {
+            if (value = key)
+                itemNotPresent := false
+        }
+        if (itemNotPresent)
+            activePressedKeys.Push(key)
+    }
+}
+
+manageLayoutKeyDown(key)
+{
+    layoutKeyPressed := true
+    if (!stopManagingLayoutKey)
+    {
+        if (activePressedKeys.Length() > 0)
+        {
+            send {blind}{%key%}
+            sendLayoutKey := false
+            stopManagingLayoutKey := true
+            debug(key . "|because other keys pressed")
+        }
+        else
+        {
+            alternativeLayoutActive := true
+            sendLayoutKey := true
+            SetTimer, TimerTimeoutSendLayoutKey, OFF
+            SetTimer, TimerTimeoutSendLayoutKey, %timeoutStillSendLayoutKey%
+            debug(key . "|activates alternative layout")
+        }
+    }
+}
+
+TimerTimeoutSendLayoutKey:
+    SetTimer, TimerTimeoutSendLayoutKey, OFF
+    sendLayoutKey := false
+    if (keyToSendOnUp)
+    {
+        key := alternativeLayout[keyToSendOnUp]
+        processKeyToSend(key)
+        processKeyOnRelease := false
+        keyToSendOnUp := ""
+        debug(key . "|---*** on alternative layout hard pressed and send key on up")            
+    }
+return
+
+manageLayoutKeyUp(key)
+{
+    SetTimer, TimerTimeoutSendLayoutKey, OFF
+    stopManagingLayoutKey := false
+    layoutKeyPressed := false
+    alternativeLayoutActive := false
+    
+    if (sendLayoutKey)
+    {   
+        processKeyToSend(key)
+        debug(key . "|sent key up")
+        
+        if (keyToSendOnUp)
+        {
+            processKeyToSend(keyToSendOnUp)
+            processKeyOnRelease := false
+            keyToSendOnUp := ""
+            debug(key . "|^^^^^^ on alternative layout released before")
+        }
+        
+        return
+    }
+    
+    debug(key . "|NOT SENT CAUSE CONSUMED")
+}
+
+processKeyUp(key) 
+{
+    if (keyToSendOnUp)
+    {
+        key := alternativeLayout[keyToSendOnUp]
+        processKeyToSend(key)
+        processKeyOnRelease := false
+        keyToSendOnUp := ""
+        sendLayoutKey := false        
+        debug(key . "|***^^^ on alternative and key up")        
+    }
+    else
+    {
+        if (processModifierKey(key, 0))
+        {
+            return
+        }
+        
+        if (key = layoutChangeKey)
+        {
+            manageLayoutKeyUp(key)
+            return
+        }
+        
+        if (key = lastAlternativeProcessedKey)
+        {
+            lastAlternativeProcessedKey := ""
+        }
+        
+        if (activePressedKeys.Length() = 0 !alternativeLayoutActive)
+        {
+            processKeyOnRelease := true
+            SetTimer, TimerProcessLayoutOnRelease, OFF
+            SetTimer, TimerProcessLayoutOnRelease, %timeoutProcessLayoutOnRelease%
+        }
+        
+        removeFromActivePressedKeys(key)
+        send {Blind}{%key% Up}
+        debug(key . "|up")
+    }
+}
+
+removeFromActivePressedKeys(key)
+{
+    For index, value in activePressedKeys
+    {
+        if (value = key)
+            activePressedKeys.Remove(index)
+    }
+}
+
+TimerProcessLayoutOnRelease:
+    SetTimer, TimerProcessLayoutOnRelease, OFF
+    if (!keyToSendOnUp)
+    {
+        processKeyOnRelease := false
+    } 
+return
+
+processAhkKeyboardShortcuts(activeModifiers, key)
+{
+    combination := activeModifiers . key
+    action := keyboardShortcuts[combination]
+    if (action)
+    {
+        run %action%
+        return true
+    }
+    
+    return false
+}
 
 
-;-------------------- DEBUGGING
+
+
+
+;-------------------- READ SETTING FILES --------------------
+readLayoutFile(path)
+{
+    FileReadLine, layoutChangeKey, %path%, 1
+    layoutChangeKey := StrSplit(layoutChangeKey, "`:").2 
+    alternativeLayout:=Object()
+    modifierKeys:=Object()
+    Loop, read, %path%
+    {
+        IfInString, A_LoopReadLine, ### ;if line has ### in it, is a comment and skip
+        { 
+            continue
+        }
+        remappedKey := StrSplit(A_LoopReadLine, "`:").2
+        
+        if (remappedKey = "ctrl")
+        {
+            modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := "ctrl"
+        } 
+        else if (remappedKey = "alt")
+        {
+            modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := "alt"
+        }
+        else if (remappedKey = "shift")
+        {
+            modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := "shift"
+        }
+        else if (remappedKey = "win")
+        {
+            modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := "win"
+        }
+        else
+        {
+            alternativeLayout[StrSplit(A_LoopReadLine, "`:").1] := remappedKey
+        }
+    }
+}
+
+readKeyboardShortcutsFile(path)
+{
+    keyboardShortcuts:=Object()
+    Loop, read, %path%
+    {
+        IfInString, A_LoopReadLine, ### ;if line has ### in it, is a comment and skip
+        { 
+            continue
+        }
+        action := StrSplit(A_LoopReadLine, "`:").2
+        keyboardShortcuts[StrSplit(A_LoopReadLine, "`:").1] := action
+    }
+}
+
+readTimingsFile(path)
+{
+    IniRead, timeoutStillSendLayoutKey, %path%, timings, timeoutStillSendLayoutKey
+    IniRead, timeoutProcessLayoutOnRelease, %path%, timings, timeoutProcessLayoutOnRelease
+    IniRead, logInput, %path%, logging, logInput
+}
+;-------------------- END OF READ SETTING FILES --------------------
+
+
+
+
+
+;-------------------- DEBUGGING --------------------
+processDebugData()
+{
+    showToolTip("DEBUG FILES STORED")
+    FileDelete, %A_Desktop%\debugKeyboardHack.txt
+    msgbox % debugStoredData
+    FileAppend, %debugStoredData%, %A_Desktop%\debugKeyboardHack.txt
+    resetStates()
+}
+
+resetStates()
+{
+    send {lwin up}{ctrl up}{alt up}{shift up}
+    activePressedKeys := []
+    processKeyOnRelease := false
+    layoutKeyPressed := false
+    alternativeLayoutActive := false 
+    sendLayoutKey := false
+    stopManagingLayoutKey :=false 
+    keyToSendOnUp := ""
+    lastKeyProcessedAsAlternative := ""
+    ctrlActive := false
+    altActive := false
+    shiftActive := false
+    winActive := false
+}
+
+debug(value)
+{
+    if (logInput)
+        writeMemoryStream(value)
+}
+
+showToolTip(value)
+{
+    tooltip, |%value%|
+    sleep 800
+    tooltip
+}
+
+send(value)
+{
+	send % value
+}
+
+writeMemoryStream(value)
+{
+    keyPressNr := activePressedKeys.Length()
+	textToSend = %A_Hour%:%A_Min%:%A_Sec%:%A_MSec%|%value%|layoutPressed=%layoutKeyPressed%|alternativeLayout=%alternativeLayoutActive%|PressedKeysNr=%keyPressNr%|ProcessKeyOnRelease=%processKeyOnRelease%|keyToSendOnUp=%keyToSendOnUp%|`n
+    debugStoredData .= textToSend
+    if (StrLen(debugStoredData) > 8000)
+    {
+        StringTrimLeft, debugStoredData, debugStoredData, 4000     
+    }
+}
+;-------------------- END OF DEBUGGING --------------------
+
+
+
+
+
+;-------------------- DEBUGGING KEYS -------------------- 
 #f9::
     processDebugData()
 return
@@ -106,81 +474,16 @@ return
     
     #f8::
         resetStates()
+        showToolTip("STATES RESTORED")
     return
 #if
-
-processDebugData()
-{
-    showToolTip("DEBUG FILES STORED")
-    FileDelete, %A_Desktop%\debugKeyboardHack.txt
-    msgbox % debugStoredData
-    FileAppend, %debugStoredData%, %A_Desktop%\debugKeyboardHack.txt
-    resetStates()
-}
-
-resetStates()
-{
-    send {lwin up}{ctrl up}{alt up}{shift up}
-    activePressedKeys = []
-    processKeyOnRelease = 
-    processKeyOnRelease = 
-    layoutKeyPressed = 
-    alternativeLayoutActive = 
-    sendLayoutKey = 
-    stopManagingLayoutKey = 
-    keyToSendOnUp = 
-    lastKeyProcessedAsAlternative =
-    ctrlActive =
-    altActive =
-    shiftActive =
-    winActive =
-    
-}
-
-debug(value)
-{
-    if (logInput)
-        writeMemoryStream(value)
-}
-
-showToolTip(value)
-{
-    tooltip, |%value%|
-    sleep 800
-    tooltip
-}
-
-send(value)
-{
-	send % value
-}
-
-store(value)
-{
-    activePressedKeys := activePressedKeys.Length()
-	textToSend = %value% |contextKeyPressed=%contextKeyPressed%| - |alternativeLayoutActive=%alternativeLayoutActive%| |activePressedKeys=%activePressedKeys%|
-	FileAppend, %A_Hour%:%A_Min%:%A_Sec% (%A_MSec%) - %textToSend%`n,c:\Users\cipri\Desktop\debugKeyboardHack.txt
-}
-
-writeMemoryStream(value)
-{
-    keyPressNr := activePressedKeys.Length()
-	textToSend = %A_Hour%:%A_Min%:%A_Sec%:%A_MSec%|%value%|layoutPressed=%layoutKeyPressed%|alternativeLayout=%alternativeLayoutActive%|PressedKeysNr=%keyPressNr%|KeyOnRelease=%processKeyOnRelease%|ToSendOnUp=%keyToSendOnUp%|`n
-    debugStoredData .= textToSend
-    if (StrLen(debugStoredData) > 8000)
-    {
-        StringTrimLeft, debugStoredData, debugStoredData, 4000     
-    }
-}
-;-------------------- DEBUGGING
+;-------------------- END OF DEBUGGING SHORTCUTS --------------------
 
 
 
 
-
+;-------------------- keys that will be processed --------------------
 #If navigationMode = 1
-    ;-------------------- keys that will be processed
-    ;lbutton::processLeftButtonClick()
     
     *escape::processKeyDown("escape")
     *escape up::processKeyUp("escape")
@@ -435,331 +738,3 @@ writeMemoryStream(value)
     *lwin up::processKeyUp("lwin")
 ;-------------------- END OF keys that will be processed
 #if
-
-
-
-processLeftButtonClick()
-{
-    If (A_TimeSincePriorHotkey < 100) { 
-        Return
-    }
-    activeModifiers := getActiveModifiers(key)
-    Send %activeModifiers%{LButton Down}
-    KeyWait LButton		;physical state
-    Send {LButton Up}
-}
-
-
-
-processKeyDown(key)
-{
-    if (processModifierKey(key, 1))
-    {
-        return
-    }
-    
-    if (key = layoutChangeKey)
-    {
-        manageLayoutKeyDown(key)
-        return
-    }
-    
-    processNormalKeydown(key)
-}
-
-processNormalKeyDown(key)
-{
-    if (processKeyOnRelease)
-    {
-        keyToSendOnUp := key
-    }
-    else
-    {   
-        if (alternativeLayoutActive)
-        {
-            lastKeyProcessedAsAlternative := key
-            key := alternativeLayout[key]
-            sendLayoutKey := false
-            processKeyToSend(key)
-            debug(key . "|------ key down with alternative layout")
-            
-            return
-        }
-        
-        addToActivePressedKeys(key)
-        if (key != lastAlternativeProcessedKey)
-        {
-            processKeyToSend(key)
-            debug(key . "|key down")
-        }
-    }
-}
-
-processKeyToSend(key)
-{
-    activeModifiers := getActiveModifiers(key)
-    if (!processAhkKeyboardShortcuts(activeModifiers, key))
-    {
-        send {blind}%activeModifiers%{%key% down}
-    }
-}
-
-processModifierKey(key, state)
-{
-    pressedState := state ? "downR" : "up"
-    modifierKey := modifierKeys[key]
-    if (modifierKey) { 
-        if (modifierKey == "ctrl") {
-            send {ctrl %pressedState%}
-            ctrlActive := state
-        } else if (modifierKey == "alt") {
-            send {alt %pressedState%}
-            altActive := state
-        } else if (modifierKey == "shift") {
-            send {shift %pressedState%}
-            shiftActive := state
-        } else if (modifierKey == "win") {       
-            send {lwin %pressedState%}
-            winActive := state
-        }
-        
-        return true
-    }
-}
-
-getActiveModifiers(key)
-{
-    result = 
-    if (ctrlActive)
-    {
-        result .= "^"
-    }
-    if (altActive)
-    {
-        result .= "!"
-    }
-    if (shiftActive)
-    {
-        result .= "+"
-    }
-    if (winActive)
-    {
-        result .= "#"
-    }
-
-    return result
-}
-
-
-
-addToActivePressedKeys(key)
-{
-    if (activePressedKeys.Length() < 0)
-    {
-        activePressedKeys.Push(key)
-    }
-    else 
-    {
-        itemNotPresent := true
-        For index, value in activePressedKeys
-        {
-            if (value = key)
-                itemNotPresent := false
-        }
-        if (itemNotPresent)
-            activePressedKeys.Push(key)
-    }
-}
-
-
-
-manageLayoutKeyDown(key)
-{
-    layoutKeyPressed := true
-    if (!stopManagingLayoutKey)
-    {
-        if (activePressedKeys.Length() > 0)
-        {
-            send {blind}{%key%}
-            sendLayoutKey := false
-            stopManagingLayoutKey := true
-            debug(key . "|because other keys pressed")
-        }
-        else
-        {
-            alternativeLayoutActive := true
-            sendLayoutKey := true
-            SetTimer, TimerTimeoutSendLayoutKey, OFF
-            SetTimer, TimerTimeoutSendLayoutKey, %timeoutStillSendLayoutKey%
-            debug(key . "|activates alternative layout")
-        }
-    }
-}
-
-TimerTimeoutSendLayoutKey:
-    SetTimer, TimerTimeoutSendLayoutKey, OFF
-    sendLayoutKey := false
-    if (keyToSendOnUp)
-    {
-        key := alternativeLayout[keyToSendOnUp]
-        processKeyToSend(key)
-        processKeyOnRelease := false
-        keyToSendOnUp := ""
-        debug(key . "|---*** on alternative layout hard pressed and send key on up")            
-    }
-return
-
-manageLayoutKeyUp(key)
-{
-    SetTimer, TimerTimeoutSendLayoutKey, OFF
-    stopManagingLayoutKey := false
-    layoutKeyPressed := false
-    alternativeLayoutActive := false
-    
-    if (sendLayoutKey)
-    {   
-        processKeyToSend(key)
-        debug(key . "|sent key up")
-        
-        if (keyToSendOnUp)
-        {
-            processKeyToSend(keyToSendOnUp)
-            processKeyOnRelease := false
-            keyToSendOnUp := ""
-            debug(key . "|^^^^^^ on alternative layout released before")
-        }
-        
-        return
-    }
-    
-    debug(key . "|NOT SENT CAUSE CONSUMED")
-}
-
-processKeyUp(key) 
-{
-    if (keyToSendOnUp)
-    {
-        key := alternativeLayout[keyToSendOnUp]
-        processKeyToSend(key)
-        processKeyOnRelease := false
-        keyToSendOnUp := ""
-        sendLayoutKey := false        
-        debug(key . "|***^^^ on alternative and key up")        
-    }
-    else
-    {
-        if (processModifierKey(key, 0))
-        {
-            return
-        }
-        
-        if (key = layoutChangeKey)
-        {
-            manageLayoutKeyUp(key)
-            return
-        }
-        
-        if (key = lastAlternativeProcessedKey)
-        {
-            lastAlternativeProcessedKey := ""
-        }
-        
-        if (activePressedKeys.Length() = 0 !alternativeLayoutActive)
-        {
-            processKeyOnRelease := true
-            SetTimer, TimerProcessLayoutOnRelease, OFF
-            SetTimer, TimerProcessLayoutOnRelease, %timeoutProcessLayoutOnRelease%
-        }
-        
-        removeFromActivePressedKeys(key)
-        send {Blind}{%key% Up}
-        debug(key . "|up")
-    }
-}
-
-removeFromActivePressedKeys(key)
-{
-    For index, value in activePressedKeys
-    {
-        if (value = key)
-            activePressedKeys.Remove(index)
-    }
-}
-
-TimerProcessLayoutOnRelease:
-    SetTimer, TimerProcessLayoutOnRelease, OFF
-    processKeyOnRelease := false
-return
-
-processAhkKeyboardShortcuts(activeModifiers, key)
-{
-    combination := activeModifiers . key
-    action := keyboardShortcuts[combination]
-    if (action)
-    {
-        run %action%
-        return true
-    }
-    
-    return false
-}
-
-;-------------------- READ SETTING FILES
-readLayoutFile(path)
-{
-    FileReadLine, layoutChangeKey, %path%, 1
-    layoutChangeKey := StrSplit(layoutChangeKey, "`:").2 
-    alternativeLayout:=Object()
-    modifierKeys:=Object()
-    Loop, read, %path%
-    {
-        IfInString, A_LoopReadLine, ### ;if line has ### in it, is a comment and skip
-        { 
-            continue
-        }
-        remappedKey := StrSplit(A_LoopReadLine, "`:").2
-        
-        if (remappedKey = "ctrl")
-        {
-            modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := "ctrl"
-        } 
-        else if (remappedKey = "alt")
-        {
-            modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := "alt"
-        }
-        else if (remappedKey = "shift")
-        {
-            modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := "shift"
-        }
-        else if (remappedKey = "win")
-        {
-            modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := "win"
-        }
-        else
-        {
-            alternativeLayout[StrSplit(A_LoopReadLine, "`:").1] := remappedKey
-        }
-    }
-}
-
-readKeyboardShortcutsFile(path)
-{
-    keyboardShortcuts:=Object()
-    Loop, read, %path%
-    {
-        IfInString, A_LoopReadLine, ### ;if line has ### in it, is a comment and skip
-        { 
-            continue
-        }
-        action := StrSplit(A_LoopReadLine, "`:").2
-        keyboardShortcuts[StrSplit(A_LoopReadLine, "`:").1] := action
-    }
-}
-
-readTimingsFile(path)
-{
-    IniRead, timeoutStillSendLayoutKey, %path%, timings, timeoutStillSendLayoutKey
-    IniRead, timeoutProcessLayoutOnRelease, %path%, timings, timeoutProcessLayoutOnRelease
-    IniRead, logInput, %path%, logging, logInput
-}
-;-------------------- READ SETTING FILES --------------------
