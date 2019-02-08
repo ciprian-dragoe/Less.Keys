@@ -197,6 +197,7 @@ manageLayoutKeyDown(key)
         }
         else
         {
+            stopManagingLayoutKey := true
             alternativeLayoutActive := true
             sendLayoutKey := true
             SetTimer, TimerTimeoutSendLayoutKey, OFF
@@ -232,7 +233,7 @@ manageLayoutKeyUp(key)
     alternativeLayoutActive := false
     processKeyOnRelease := false
     layoutKeyActivatesProcessKeyOnRelease := false
-    
+     
     if (sendLayoutKey)
     {   
         activeModifiers := getActiveModifiers(key)
