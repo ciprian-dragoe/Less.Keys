@@ -64,37 +64,34 @@ if (A_ComputerName = DebugComputer1) {
 ; if the cpu is executing intensive tasks then the lift key up command may not be processed for 
 ; modifier keys (ctrl, shift, alt, win) and they are still registered by the os as pressed.
 ; this is a fail safe for such situations
-SetTimer, FixStickyKeys, 2000
+SetTimer, FixStickyKeys, 1000
 FixStickyKeys: 
+    resetKeys = 1
     for key in modifierKeys
     {
-        if (!GetKeyState(key , "P")) 
+        if (GetKeyState(key, "P")) 
         {
-            modifierKey := modifierKeys[key]
-            if (modifierKey = "ctrl") 
-            {
-                ctrlActive := false
-                send {ctrl up}
-            } else if (modifierKey = "shift") 
-            {
-                shiftActive := false
-                send {shift up}
-            } else if (modifierKey = "alt") 
-            {
-                altActive := false
-                send {alt up}
-            } else if (modifierKey = "win") 
-            {
-                winActive := false
-                send {win up}
-            }
+            resetKeys = 0
+            break
         }
     }
     
-    if (!GetKeyState(layoutChangeKey , "P"))
+    if (resetKeys) 
     {
-        layoutKeyPressed := false 
-        sendLayoutKey := false
+        ctrlActive := false
+        send {ctrl up}
+        shiftActive := false
+        send {shift up}
+        altActive := false
+        send {alt up}
+        winActive := false
+        send {lwin up}
+    }
+    
+    if (!GetKeyState(layoutChangeKey, "P"))
+    {
+        layoutKeyPressed := false
+        alternativeLayoutActive := false
         stopManagingLayoutKey := false
     }
 return
@@ -167,7 +164,7 @@ processModifierKey(key, state)
         } else if (modifierKey == "shift") {
             send {shift %pressedState%}
             shiftActive := state
-        } else if (modifierKey == "win") {       
+        } else if (modifierKey == "lwin") {       
             send {lwin %pressedState%}
             winActive := state
         }
@@ -393,9 +390,9 @@ readLayoutFile(path)
         {
             modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := "shift"
         }
-        else if (remappedKey = "win")
+        else if (remappedKey = "lwin")
         {
-            modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := "win"
+            modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := "lwin"
         }
         else
         {
@@ -625,8 +622,8 @@ return
     *backspace::processKeyDown("backspace")
     *backspace up::processKeyUp("backspace")
         
-    tab::processKeyDown("tab")
-    tab up::processKeyUp("tab")
+    *tab::processKeyDown("tab")
+    *tab up::processKeyUp("tab")
     
     *q::processKeyDown("q")	
     *q up::processKeyUp("q")
