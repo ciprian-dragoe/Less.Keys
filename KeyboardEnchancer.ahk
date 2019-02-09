@@ -67,8 +67,13 @@ if (A_ComputerName = DebugComputer1) {
 SetTimer, FixStickyKeys, 1000
 FixStickyKeys: 
     resetKeys = 1
+    resetCapsLock = 0
     for key in modifierKeys
     {
+        if ("capslock" = key)
+        {
+            resetCapsLock = 1
+        }
         if (GetKeyState(key, "P")) 
         {
             resetKeys = 0
@@ -86,6 +91,10 @@ FixStickyKeys:
         send {alt up}
         winActive := false
         send {lwin up}
+        if (resetCapsLock)
+        {
+            SetCapsLockState, off  
+        }
     }
     
     if (!GetKeyState(layoutChangeKey, "P"))
