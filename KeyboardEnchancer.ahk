@@ -61,8 +61,20 @@ if (A_ComputerName = DebugComputer1) {
 }
 
 
-
-
+; if the cpu is executing intensive tasks then the lift key up command may not be processed for 
+; modifier keys (ctrl, shift, alt, win) and they are still registered by the os as pressed.
+; this is a fail safe for such situations
+SetTimer, FixStickyKeys, 2000
+FixStickyKeys: 
+    for key in modifierKeys
+    {
+        if (!GetKeyState(key , "P")) 
+        {
+            modifierKey := modifierKeys[key]
+            send {modifierKey up}
+        }
+    }
+return
 
 processKeyDown(key)
 {
@@ -745,8 +757,5 @@ return
     
     *rshift::processKeyDown("rshift")
     *rshift up::processKeyUp("rshift")
-    
-    *lwin::processKeyDown("lwin")
-    *lwin up::processKeyUp("lwin")
 ;-------------------- END OF keys that will be processed
 #if
