@@ -71,8 +71,31 @@ FixStickyKeys:
         if (!GetKeyState(key , "P")) 
         {
             modifierKey := modifierKeys[key]
-            send {modifierKey up}
+            if (modifierKey = "ctrl") 
+            {
+                ctrlActive := false
+                send {ctrl up}
+            } else if (modifierKey = "shift") 
+            {
+                shiftActive := false
+                send {shift up}
+            } else if (modifierKey = "alt") 
+            {
+                altActive := false
+                send {alt up}
+            } else if (modifierKey = "win") 
+            {
+                winActive := false
+                send {win up}
+            }
         }
+    }
+    
+    if (!GetKeyState(layoutChangeKey , "P"))
+    {
+        layoutKeyPressed := false 
+        sendLayoutKey := false
+        stopManagingLayoutKey := false
     }
 return
 
