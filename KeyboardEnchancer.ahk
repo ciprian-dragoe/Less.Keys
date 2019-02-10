@@ -36,6 +36,8 @@ global altActive
 global shiftActive
 global winActive
 
+global timerTimeoutStickyKeys := 1000
+
 if (A_ComputerName = DebugComputer1) {
 	debugComputer := true
     readLayoutFile("my-alternative-layout.cfg")
@@ -64,7 +66,7 @@ if (A_ComputerName = DebugComputer1) {
 ; if the cpu is executing intensive tasks then the lift key up command may not be processed for 
 ; modifier keys (ctrl, shift, alt, win) and they are still registered by the os as pressed.
 ; this is a fail safe for such situations
-SetTimer, FixStickyKeys, 1000
+SetTimer, FixStickyKeys, %timerTimeoutStickyKeys%
 FixStickyKeys: 
     resetKeys = 1
     resetCapsLock = 0
@@ -103,6 +105,10 @@ FixStickyKeys:
         alternativeLayoutActive := false
         stopManagingLayoutKey := false
     }
+return
+
+TimerStickyActivePressedKeys:
+    activePressedKeys := []
 return
 
 processKeyDown(key)
@@ -207,6 +213,8 @@ getActiveModifiers(key)
 
 addToActivePressedKeys(key)
 {
+    setTimer TimerStickyActivePressedKeys, 0
+    setTimer TimerStickyActivePressedKeys, %timerTimeoutStickyKeys%
     if (activePressedKeys.Length() = 0)
     {
         activePressedKeys.Push(key)
