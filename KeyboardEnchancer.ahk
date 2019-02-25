@@ -1,12 +1,15 @@
-﻿#SingleInstance
+﻿;----------------------------------- CONFIGURATION SECTION -----------------------------------
+global DEBUG_COMPUTER_1 := "lenovo-x230"
+global DEBUG_COMPUTER_2 := "SURFACE-STUDIO"
+global DEBUG_COMPUTER_3 := "CIPI-ASUS-ROG"
+;----------------------------------- END OF CONFIGURATION SECTION -----------------------------------
+
+
+#SingleInstance
 #Persistent
 #MaxHotkeysPerInterval 400
+#include shortcut-scripts.ahk
 SetKeyDelay -1
-;----------------------------------- CONFIGURATION SECTION -----------------------------------
-global DebugComputer1 := "lenovo-x230"
-global DebugComputer2 := "SURFACE-STUDIO"
-global DebugComputer3 := "CIPI-ASUS-ROG"
-;----------------------------------- END OF CONFIGURATION SECTION -----------------------------------
 
 global timeoutStillSendLayoutKey
 global timeoutProcessLayoutOnRelease
@@ -37,20 +40,21 @@ global shiftActive
 global winActive
 
 global timerTimeoutStickyKeys := 1000
+global debugTemp
 
-if (A_ComputerName = DebugComputer1) {
-	debugComputer := true
-    readLayoutFile("my-alternative-layout.cfg")
-    readTimingsFile("my-settings.cfg")
-    readKeyboardShortcutsFile("my-keyboard-shortcuts.cfg")
-    resetStates()	
-} else if (A_ComputerName = DebugComputer2) {
+if (A_ComputerName = DEBUG_COMPUTER_1) {
 	debugComputer := true
     readLayoutFile("my-alternative-layout.cfg")
     readTimingsFile("my-settings.cfg")
     readKeyboardShortcutsFile("my-keyboard-shortcuts.cfg")
     resetStates()
-} else if (A_ComputerName = DebugComputer3){
+} else if (A_ComputerName = DEBUG_COMPUTER_2) {
+	debugComputer := true
+    readLayoutFile("my-alternative-layout.cfg")
+    readTimingsFile("my-settings.cfg")
+    readKeyboardShortcutsFile("my-keyboard-shortcuts.cfg")
+    resetStates()
+} else if (A_ComputerName = DEBUG_COMPUTER_3){
 	debugComputer := true
     readLayoutFile("my-alternative-layout.cfg")
     readTimingsFile("my-settings.cfg")
@@ -61,6 +65,7 @@ if (A_ComputerName = DebugComputer1) {
     readTimingsFile("configure-settings.cfg")
     readKeyboardShortcutsFile("configure-keyboard-shortcuts.cfg")
 }
+
 
 
 ; if the cpu is executing intensive tasks then the lift key up command may not be processed for 
@@ -76,6 +81,10 @@ FixStickyKeys:
         {
             resetCapsLock = 1
         }
+        if (debugTemp)
+        {
+            showToolTip(key . "|" . GetKeyState(key, "P"))
+        }
         if (GetKeyState(key, "P")) 
         {
             resetKeys = 0
@@ -85,6 +94,10 @@ FixStickyKeys:
     
     if (resetKeys) 
     {
+        if (debugTemp)
+        {
+            showToolTip("-----------reset")
+        }
         ctrlActive := false
         send {ctrl up}
         shiftActive := false
@@ -161,7 +174,7 @@ processKeyToSend(key)
     activeModifiers := getActiveModifiers(key)
     if (!processAhkKeyboardShortcuts(activeModifiers, key))
     {
-        send {blind}%activeModifiers%{%key% downR}
+        send {blind}%activeModifiers%{%key%}
     }
 }
 
@@ -366,10 +379,10 @@ return
 processAhkKeyboardShortcuts(activeModifiers, key)
 {
     combination := activeModifiers . key
-    action := keyboardShortcuts[combination]
-    if (action)
+    index := keyboardShortcuts[combination]
+    if (index)
     {
-        run %action%
+        processShortcut(index)
         return true
     }
     
@@ -480,7 +493,7 @@ debug(value)
 showToolTip(value)
 {
     tooltip, |%value%|
-    sleep 800
+    sleep 600
     tooltip
 }
 
@@ -509,6 +522,32 @@ writeMemoryStream(value)
 #f9::
     processDebugData()
 return
+
+^printscreen::
+#printscreen::
+!printscreen::
++printscreen::
+^+printscreen::
+^!printscreen::
+^#printscreen::
+!#printscreen::
+!+printscreen::
++#printscreen::
++!^printscreen::
++!#printscreen::
+^!+#printscreen::
+printscreen::
+    debugSet()
+return
+
+debugSet()
+{
+    showtooltip("activating debugTemp")
+    if (debugTemp)
+        debugTemp := 0
+    else
+        debugTemp := 1
+}
 
 #if debugComputer
     #SC029::
