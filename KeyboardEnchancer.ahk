@@ -67,7 +67,6 @@ if (A_ComputerName = DEBUG_COMPUTER_1) {
 }
 
 
-
 ; if the cpu is executing intensive tasks then the lift key up command may not be processed for 
 ; modifier keys (ctrl, shift, alt, win) and they are still registered by the os as pressed.
 ; this is a fail safe for such situations
@@ -120,9 +119,11 @@ FixStickyKeys:
     }
 return
 
+
 TimerStickyActivePressedKeys:
     activePressedKeys := []
 return
+
 
 processKeyDown(key)
 {
@@ -139,6 +140,7 @@ processKeyDown(key)
     
     processNormalKeydown(key)
 }
+
 
 processNormalKeyDown(key)
 {
@@ -169,6 +171,7 @@ processNormalKeyDown(key)
     }
 }
 
+
 processKeyToSend(key)
 {
     activeModifiers := getActiveModifiers(key)
@@ -177,6 +180,7 @@ processKeyToSend(key)
         send {blind}%activeModifiers%{%key%}
     }
 }
+
 
 processModifierKey(key, state)
 {
@@ -201,6 +205,7 @@ processModifierKey(key, state)
     }
 }
 
+
 getActiveModifiers(key)
 {
     result = 
@@ -224,6 +229,7 @@ getActiveModifiers(key)
     return result
 }
 
+
 addToActivePressedKeys(key)
 {
     setTimer TimerStickyActivePressedKeys, 0
@@ -244,6 +250,7 @@ addToActivePressedKeys(key)
             activePressedKeys.Push(key)
     }
 }
+
 
 manageLayoutKeyDown(key)
 {
@@ -273,6 +280,7 @@ manageLayoutKeyDown(key)
     }
 }
 
+
 TimerTimeoutSendLayoutKey:
     SetTimer, TimerTimeoutSendLayoutKey, OFF
     sendLayoutKey := false
@@ -286,6 +294,7 @@ TimerTimeoutSendLayoutKey:
         debug(key . "|---*** on alternative layout hard pressed and send key on up")            
     }
 return
+
 
 manageLayoutKeyUp(key)
 {
@@ -317,6 +326,7 @@ manageLayoutKeyUp(key)
     
     debug(key . "|NOT SENT CAUSE CONSUMED")
 }
+
 
 processKeyUp(key) 
 {
@@ -362,6 +372,7 @@ processKeyUp(key)
     }
 }
 
+
 removeFromActivePressedKeys(key)
 {
     For index, value in activePressedKeys
@@ -375,6 +386,7 @@ TimerProcessLayoutOnRelease:
     SetTimer, TimerProcessLayoutOnRelease, OFF
     layoutKeyActivatesProcessKeyOnRelease := false 
 return
+
 
 processAhkKeyboardShortcuts(activeModifiers, key)
 {
