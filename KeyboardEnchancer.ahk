@@ -178,6 +178,7 @@ processKeyToSend(key)
     if (!processAhkKeyboardShortcuts(activeModifiers, key))
     {
         send {blind}%activeModifiers%{%key%}
+        ;showtooltip(activeModifiers . "|" . key)
     }
 }
 
@@ -648,8 +649,8 @@ debugSet()
     *delete::processKeyDown("delete")
     *delete up::processKeyUp("delete")
         
-    *sc029::processKeyDown("``")	
-    *sc029 up::processKeyUp("``")        
+    *sc029::processKeyDown("``")
+    ;*sc029 up::processKeyUp("``")        
     
     *1::processKeyDown("1")	
     *1 up::processKeyUp("1")
@@ -845,5 +846,11 @@ debugSet()
     
     *rshift::processKeyDown("rshift")
     *rshift up::processKeyUp("rshift")
+    
+    *lwin::processKeyDown("lwin")
+    *lwin up::processKeyUp("lwin")
+        
+    *rwin::processKeyDown("rwin")
+    *rwin up::processKeyUp("rwin")
 ;-------------------- END OF keys that will be processed
 #if

@@ -1,2 +1,2 @@
 Set app = CreateObject("Shell.Application")
-app.ShellExecute """c:\Dropbox\PORTABLE_PROGRAMS\ahk\Navigare\KeyboardEnchancer\""", , , "runas", 3
+app.ShellExecute """d:\sync\cipi\Dropbox\PORTABLE_PROGRAMS\ahk\Navigare\KeyboardEnchancer\keyboardenchancer.exe""", , , "runas", 3

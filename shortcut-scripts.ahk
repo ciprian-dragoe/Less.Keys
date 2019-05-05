@@ -734,7 +734,7 @@ processShortcut(index)
     
     if (index = 106)
     {
-        if (A_ComputerName = DEBUG_COMPUTER_1 || A_ComputerName = DEBUG_COMPUTER_2)
+        if (A_ComputerName = DEBUG_COMPUTER_11 || A_ComputerName = DEBUG_COMPUTER_21)
         {
             toggleMaximizeMloWindow()
             return
@@ -882,4 +882,90 @@ processShortcut(index)
         return
     }
 
+
+    if (index = 220)
+    {
+        Send +^{left}
+        return
+    }
+        
+        
+    if (index = 221)
+    {
+        Send +^{down}
+        return
+    }
+        
+        
+    if (index = 222)
+    {
+        Send +^{up}
+        return
+    }
+        
+        
+    if (index = 223)
+    {
+        Send +^{right}
+        return
+    }
+        
+        
+    if (index = 224)
+    {
+        Send +{left}
+        return
+    }
+        
+        
+    if (index = 225)
+    {
+        Send +{down}
+        return
+    }
+        
+        
+    if (index = 226)
+    {
+        Send +{up}
+        return
+    }
+        
+        
+    if (index = 227)
+    {
+        Send +{right}
+        return
+    }
+        
+    
+    if (index = 228)
+    {
+        Send +!^{left}
+        return
+    }
+        
+    
+    if (index = 229)
+    {
+        Send +!^{down}
+        return
+    }
+        
+    
+    if (index = 230)
+    {
+        Send +!^{up}
+        return
+    }
+        
+    
+    if (index = 231)
+    {
+        Send +!^{right}
+        return
+    }
+        
+    
+    
 }
