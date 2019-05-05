@@ -12,3 +12,4 @@ my-settings.cfg
 NOT_SYNC/
 *.DotSettings.user
 RunAsAdminStartupX230.vbs
+RunAsAdminStartupROG.vbs
