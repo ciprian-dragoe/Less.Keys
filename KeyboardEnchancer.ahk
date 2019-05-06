@@ -197,7 +197,7 @@ processModifierKey(key, state)
         } else if (modifierKey == "shift") {
             send {shift %pressedState%}
             shiftActive := state
-        } else if (modifierKey == "lwin") {       
+        } else if (modifierKey == "lwin") {
             send {lwin %pressedState%}
             winActive := state
         }
@@ -350,7 +350,7 @@ processKeyUp(key)
         layoutKeyActivatesProcessKeyOnRelease := false
         keyToSendOnUp := ""
         sendLayoutKey := false        
-        debug(key . "|***^^^ key up & process release")        
+        debug(key . "|***^^^ key up & process release")      
     }
     else
     {
@@ -369,7 +369,7 @@ processKeyUp(key)
             SetTimer, TimerProcessLayoutOnRelease, %timeoutProcessLayoutOnRelease%
         }
         
-         debug(key . "|up")
+        debug(key . "|up")
     }
 }
 
@@ -532,54 +532,7 @@ writeMemoryStream(value)
 
 
 ;-------------------- DEBUGGING KEYS -------------------- 
-#f9::
-    processDebugData()
-return
-
-^printscreen::
-#printscreen::
-!printscreen::
-+printscreen::
-^+printscreen::
-^!printscreen::
-^#printscreen::
-!#printscreen::
-!+printscreen::
-+#printscreen::
-+!^printscreen::
-+!#printscreen::
-^!+#printscreen::
-printscreen::
-    debugSet()
-return
-
-debugSet()
-{
-    showtooltip("activating debugTemp")
-    if (debugTemp)
-        debugTemp := 0
-    else
-        debugTemp := 1
-}
-
 #if debugComputer
-    #SC029::
-    	if navigationMode = 0 
-    	{
-    		tooltip alternative layout
-    		sleep 600
-    		tooltip
-    		navigationMode = 1
-    		return
-    	}
-    	
-    	tooltip off
-    	sleep 600
-    	tooltip
-    	navigationMode = 0
-    	return
-    return
-    
     #f7::
         showToolTip("RELOADING")
     	reload
@@ -847,10 +800,5 @@ debugSet()
     *rshift::processKeyDown("rshift")
     *rshift up::processKeyUp("rshift")
     
-    *lwin::processKeyDown("lwin")
-    *lwin up::processKeyUp("lwin")
-        
-    *rwin::processKeyDown("rwin")
-    *rwin up::processKeyUp("rwin")
 ;-------------------- END OF keys that will be processed
 #if
