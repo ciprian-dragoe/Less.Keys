@@ -13,6 +13,7 @@ SetKeyDelay -1
 
 global timeoutStillSendLayoutKey
 global timeoutProcessLayoutOnRelease
+global keepAlternativeLayoutOnModifierPressed
 global logInput
 
 global alternativeLayout
@@ -39,8 +40,9 @@ global altActive
 global shiftActive
 global winActive
 
-global timerTimeoutStickyKeys := 1000
-global debugTemp
+global deactivateAlternativeLayoutWithLastModiferUp
+
+global timerTimeoutStickyKeys := 5000
 
 if (A_ComputerName = DEBUG_COMPUTER_1) {
 	debugComputer := true
@@ -72,31 +74,23 @@ if (A_ComputerName = DEBUG_COMPUTER_1) {
 ; this is a fail safe for such situations
 SetTimer, FixStickyKeys, %timerTimeoutStickyKeys%
 FixStickyKeys: 
-    resetKeys = 1
-    resetCapsLock = 0
+    resetKeys = true
+    resetCapsLock = false
     for key in modifierKeys
     {
         if ("capslock" = key)
         {
-            resetCapsLock = 1
-        }
-        if (debugTemp)
-        {
-            showToolTip(key . "|" . GetKeyState(key, "P"))
+            resetCapsLock = true
         }
         if (GetKeyState(key, "P")) 
         {
-            resetKeys = 0
+            resetKeys = false
             break
         }
     }
     
     if (resetKeys) 
     {
-        if (debugTemp)
-        {
-            showToolTip("-----------reset")
-        }
         ctrlActive := false
         send {ctrl up}
         shiftActive := false
@@ -109,14 +103,19 @@ FixStickyKeys:
         {
             SetCapsLockState, off  
         }
+        deactivateAlternativeLayoutWithLastModiferUp := false
+        ;showToolTip("\\deactivez sticky modifier")
     }
     
-    if (!GetKeyState(layoutChangeKey, "P"))
+    if (!GetKeyState(layoutChangeKey, "P") && !deactivateAlternativeLayoutWithLastModiferUp && !getActiveModifiers(1))
     {
+        ;showToolTip("\\deactivez sticky space")
         layoutKeyPressed := false
         alternativeLayoutActive := false
         stopManagingLayoutKey := false
     }
+    
+    SetTimer, FixStickyKeys, OFF
 return
 
 
@@ -144,6 +143,9 @@ processKeyDown(key)
 
 processNormalKeyDown(key)
 {
+    setTimer TimerStickyActivePressedKeys, 0
+    setTimer TimerStickyActivePressedKeys, %timerTimeoutStickyKeys%
+    
     if (processKeyOnRelease)
     {
         keyToSendOnUp := key
@@ -187,22 +189,35 @@ processModifierKey(key, state)
 {
     pressedState := state ? "downR" : "up"
     modifierKey := modifierKeys[key]
-    if (modifierKey) { 
-        if (modifierKey == "ctrl") {
+    if (modifierKey) 
+    { 
+        if (modifierKey == "ctrl") 
+        {
             send {ctrl %pressedState%}
             ctrlActive := state
-        } else if (modifierKey == "alt") {
+        } 
+        else if (modifierKey == "alt")
+        {
             send {alt %pressedState%}
             altActive := state
-        } else if (modifierKey == "shift") {
+        }
+        else if (modifierKey == "shift")
+        {
             send {shift %pressedState%}
             shiftActive := state
-        } else if (modifierKey == "lwin") {
+        }
+        else if (modifierKey == "lwin")
+        {
             send {lwin %pressedState%}
             winActive := state
         }
         
         return true
+    }
+    
+    if (deactivateAlternativeLayoutWithLastModiferUp && !state && !layoutKeyPressed && !getActiveModifiers(key)) {
+        deactivateAlternativeLayoutWithLastModiferUp := false
+        alternativeLayoutActive := false
     }
 }
 
@@ -233,8 +248,6 @@ getActiveModifiers(key)
 
 addToActivePressedKeys(key)
 {
-    setTimer TimerStickyActivePressedKeys, 0
-    setTimer TimerStickyActivePressedKeys, %timerTimeoutStickyKeys%
     if (activePressedKeys.Length() = 0)
     {
         activePressedKeys.Push(key)
@@ -302,35 +315,45 @@ manageLayoutKeyUp(key)
     SetTimer, TimerTimeoutSendLayoutKey, OFF
     stopManagingLayoutKey := false
     layoutKeyPressed := false
-    alternativeLayoutActive := false
     processKeyOnRelease := false
     layoutKeyActivatesProcessKeyOnRelease := false
-     
-    if (sendLayoutKey)
-    {   
-        activeModifiers := getActiveModifiers(key)
-        if (!processAhkKeyboardShortcuts(activeModifiers, key))
-        {
-            send {blind}%activeModifiers%{%key%}
-        }
-        debug(key . "|UP")
-        
-        if (keyToSendOnUp)
-        {
-            processKeyToSend(keyToSendOnUp)
-            keyToSendOnUp := ""
-            debug(keyToSendOnUp . "|^^^^^^ on alternative layout released before")
-        }
-        
-        return
-    }
     
+    if (keepAlternativeLayoutOnModifierPressed && getActiveModifiers(key))
+    {
+        deactivateAlternativeLayoutWithLastModiferUp := true
+    }
+    else
+    {
+        alternativeLayoutActive := false
+         
+        if (sendLayoutKey)
+        {   
+            activeModifiers := getActiveModifiers(key)
+            if (!processAhkKeyboardShortcuts(activeModifiers, key))
+            {
+                send {blind}%activeModifiers%{%key%}
+            }
+            debug(key . "|UP")
+            
+            if (keyToSendOnUp)
+            {
+                processKeyToSend(keyToSendOnUp)
+                keyToSendOnUp := ""
+                debug(keyToSendOnUp . "|^^^^^^ on alternative layout released before")
+            }
+            
+            return
+        }
+    }
     debug(key . "|NOT SENT CAUSE CONSUMED")
 }
 
 
 processKeyUp(key) 
 {
+    SetTimer, FixStickyKeys, OFF
+    SetTimer, FixStickyKeys, %timerTimeoutStickyKeys%
+    
     if (processModifierKey(key, 0))
     {
         return
@@ -462,6 +485,7 @@ readTimingsFile(path)
 {
     IniRead, timeoutStillSendLayoutKey, %path%, timings, timeoutStillSendLayoutKey
     IniRead, timeoutProcessLayoutOnRelease, %path%, timings, timeoutProcessLayoutOnRelease
+    IniRead, keepAlternativeLayoutOnModifierPressed, %path%, modifiers, keepAlternativeLayoutOnModifierPressed
     IniRead, logInput, %path%, logging, logInput
 }
 ;-------------------- END OF READ SETTING FILES --------------------
@@ -533,6 +557,11 @@ writeMemoryStream(value)
 
 ;-------------------- DEBUGGING KEYS -------------------- 
 #if debugComputer
+    #f6::
+        showToolTip("RELOADING")
+    	msgbox % debugStoredData
+    return
+    
     #f7::
         showToolTip("RELOADING")
     	reload
