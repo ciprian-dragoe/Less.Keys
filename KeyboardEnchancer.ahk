@@ -104,12 +104,10 @@ FixStickyKeys:
             SetCapsLockState, off  
         }
         deactivateAlternativeLayoutWithLastModiferUp := false
-        ;showToolTip("\\deactivez sticky modifier")
     }
     
     if (!GetKeyState(layoutChangeKey, "P") && !deactivateAlternativeLayoutWithLastModiferUp && !getActiveModifiers(1))
     {
-        ;showToolTip("\\deactivez sticky space")
         layoutKeyPressed := false
         alternativeLayoutActive := false
         stopManagingLayoutKey := false
@@ -211,14 +209,14 @@ processModifierKey(key, state)
             send {lwin %pressedState%}
             winActive := state
         }
-        
-        return true
     }
     
     if (deactivateAlternativeLayoutWithLastModiferUp && !state && !layoutKeyPressed && !getActiveModifiers(key)) {
         deactivateAlternativeLayoutWithLastModiferUp := false
         alternativeLayoutActive := false
     }
+    
+    return modifierKey
 }
 
 

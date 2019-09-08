@@ -41,7 +41,12 @@ processShortcut(index)
         }
     	IfInString, ACTIVE_WINDOW_NAME, %SIMPLEMIND_WINDOW_NAME%
         {
-            ShowFreeplaneNotes(SIMPLEMIND_WINDOW_NAME)
+            ShowSimplemindNotes(SIMPLEMIND_NOTE_WINDOW_NAME)
+            return
+        }
+    	IfInString, ACTIVE_WINDOW_NAME, %SIMPLEMIND_NOTE_WINDOW_NAME%
+        {
+            CloseSimplemindNotes()
             return
         }
     	
