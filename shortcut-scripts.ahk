@@ -4,17 +4,18 @@ global SCREEN_SLEEP_PATH
 
 
 if (A_ComputerName = DEBUG_COMPUTER_1) {
-	SCREEN_SLEEP_PATH := "c:\Dropbox\PORTABLE_PROGRAMS\ahk\AHK KIT\ahk_kit\nircmd"
+	SCREEN_SLEEP_PATH := "c:\Users\cipri\OneDrive\PORTABLE_PROGRAMS\ahk\Navigare\KeyboardEnchancer\NOT_SYNC\nircmd"
 } else if (A_ComputerName = DEBUG_COMPUTER_2) {
-    SCREEN_SLEEP_PATH := "d:\SYNC\Cipi\Dropbox\PORTABLE_PROGRAMS\ahk\AHK KIT\ahk_kit\nircmd"
+    SCREEN_SLEEP_PATH := "c:\Users\cipri\OneDrive\PORTABLE_PROGRAMS\ahk\Navigare\KeyboardEnchancer\NOT_SYNC\nircmd"
 } else if (A_ComputerName = DEBUG_COMPUTER_3){
-	SCREEN_SLEEP_PATH := "c:\Dropbox\PORTABLE_PROGRAMS\ahk\AHK KIT\ahk_kit\nircmd"
+	SCREEN_SLEEP_PATH := "c:\Users\cipri\OneDrive\PORTABLE_PROGRAMS\ahk\Navigare\KeyboardEnchancer\NOT_SYNC\nircmd"
 }
 
 
 #include  %A_ScriptDir%\NOT_SYNC\mlo-shortcut-scripts.ahk
 #include  %A_ScriptDir%\NOT_SYNC\freeplane-shortcut-scripts.ahk
 #include  %A_ScriptDir%\NOT_SYNC\concepts-shortcut-scripts.ahk
+#include  %A_ScriptDir%\NOT_SYNC\simplemind-shortcut-scripts.ahk
 
 
 processShortcut(index)
@@ -36,6 +37,11 @@ processShortcut(index)
         IfInString, ACTIVE_WINDOW_NAME, %FREEPLANE_WINDOW_NAME%
         {
             ShowFreeplaneNotes(FREEPLANE_NOTE_WINDOW_NAME)
+            return
+        }
+    	IfInString, ACTIVE_WINDOW_NAME, %SIMPLEMIND_WINDOW_NAME%
+        {
+            ShowFreeplaneNotes(SIMPLEMIND_WINDOW_NAME)
             return
         }
     	
@@ -114,7 +120,7 @@ processShortcut(index)
             return
         }
     
-        send ^up
+        send ^{up}
         return
     }
     
@@ -127,7 +133,7 @@ processShortcut(index)
             return
         }
     
-        send ^down
+        send ^{down}
         return
     }
     
@@ -963,6 +969,13 @@ processShortcut(index)
     if (index = 231)
     {
         Send +!^{right}
+        return
+    }
+        
+    
+    if (index = 300)
+    {
+        toggleMaximizeMloWindow()
         return
     }
         
