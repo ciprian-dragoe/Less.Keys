@@ -13,7 +13,9 @@ SetKeyDelay -1
 
 global timeoutStillSendLayoutKey
 global timeoutProcessLayoutOnRelease
-global keepAlternativeLayoutOnModifierPressed
+global ctrlKeepsAlternativeLayoutUntilRelease
+global altKeepsAlternativeLayoutUntilRelease
+global shiftKeepsAlternativeLayoutUntilRelease
 global logInput
 
 global alternativeLayout
@@ -42,7 +44,7 @@ global winActive
 
 global deactivateAlternativeLayoutWithLastModiferUp
 
-global timerTimeoutStickyKeys := 5000
+global timerTimeoutStickyKeys := 8000
 
 if (A_ComputerName = DEBUG_COMPUTER_1) {
 	debugComputer := true
@@ -106,7 +108,7 @@ FixStickyKeys:
         deactivateAlternativeLayoutWithLastModiferUp := false
     }
     
-    if (!GetKeyState(layoutChangeKey, "P") && !deactivateAlternativeLayoutWithLastModiferUp && !getActiveModifiers(1))
+    if (!GetKeyState(layoutChangeKey, "P") && !deactivateAlternativeLayoutWithLastModiferUp && !isAlternativeLayoutDeactivatedOnModifierRelease())
     {
         layoutKeyPressed := false
         alternativeLayoutActive := false
@@ -211,7 +213,7 @@ processModifierKey(key, state)
         }
     }
     
-    if (deactivateAlternativeLayoutWithLastModiferUp && !state && !layoutKeyPressed && !getActiveModifiers(key)) {
+    if (deactivateAlternativeLayoutWithLastModiferUp && !state && !layoutKeyPressed && !isAlternativeLayoutDeactivatedOnModifierRelease()) {
         deactivateAlternativeLayoutWithLastModiferUp := false
         alternativeLayoutActive := false
     }
@@ -316,7 +318,7 @@ manageLayoutKeyUp(key)
     processKeyOnRelease := false
     layoutKeyActivatesProcessKeyOnRelease := false
     
-    if (keepAlternativeLayoutOnModifierPressed && getActiveModifiers(key))
+    if (isAlternativeLayoutDeactivatedOnModifierRelease())
     {
         deactivateAlternativeLayoutWithLastModiferUp := true
     }
@@ -344,6 +346,12 @@ manageLayoutKeyUp(key)
         }
     }
     debug(key . "|NOT SENT CAUSE CONSUMED")
+}
+
+
+isAlternativeLayoutDeactivatedOnModifierRelease()
+{
+    return (ctrlKeepsAlternativeLayoutUntilRelease && ctrlActive) || (altKeepsAlternativeLayoutUntilRelease && altActive) || (shiftKeepsAlternativeLayoutUntilRelease && shiftActive) 
 }
 
 
@@ -483,7 +491,9 @@ readTimingsFile(path)
 {
     IniRead, timeoutStillSendLayoutKey, %path%, timings, timeoutStillSendLayoutKey
     IniRead, timeoutProcessLayoutOnRelease, %path%, timings, timeoutProcessLayoutOnRelease
-    IniRead, keepAlternativeLayoutOnModifierPressed, %path%, modifiers, keepAlternativeLayoutOnModifierPressed
+    IniRead, ctrlKeepsAlternativeLayoutUntilRelease, %path%, modifiers, ctrlKeepsAlternativeLayoutUntilRelease
+    IniRead, shiftKeepsAlternativeLayoutUntilRelease, %path%, modifiers, shiftKeepsAlternativeLayoutUntilRelease
+    IniRead, altKeepsAlternativeLayoutUntilRelease, %path%, modifiers, altKeepsAlternativeLayoutUntilRelease
     IniRead, logInput, %path%, logging, logInput
 }
 ;-------------------- END OF READ SETTING FILES --------------------
@@ -556,8 +566,7 @@ writeMemoryStream(value)
 ;-------------------- DEBUGGING KEYS -------------------- 
 #if debugComputer
     #f6::
-        showToolTip("RELOADING")
-    	msgbox % debugStoredData
+        msgbox % debugStoredData
     return
     
     #f7::
