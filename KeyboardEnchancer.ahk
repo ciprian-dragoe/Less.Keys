@@ -43,6 +43,7 @@ global shiftActive
 global winActive
 
 global deactivateAlternativeLayoutWithLastModiferUp
+global modifiersPressedBeforeLayoutChangeKey
 
 global timerTimeoutStickyKeys := 8000
 
@@ -218,6 +219,16 @@ processModifierKey(key, state)
         alternativeLayoutActive := false
     }
     
+    if (!layoutKeyPressed && isAlternativeLayoutDeactivatedOnModifierRelease())
+    {
+        modifiersPressedBeforeLayoutChangeKey := true
+    }
+    
+    if (!getActiveModifiers(key))
+    {
+        modifiersPressedBeforeLayoutChangeKey := false
+    } 
+    
     return modifierKey
 }
 
@@ -318,7 +329,7 @@ manageLayoutKeyUp(key)
     processKeyOnRelease := false
     layoutKeyActivatesProcessKeyOnRelease := false
     
-    if (isAlternativeLayoutDeactivatedOnModifierRelease())
+    if (isAlternativeLayoutDeactivatedOnModifierRelease() && !modifiersPressedBeforeLayoutChangeKey)
     {
         deactivateAlternativeLayoutWithLastModiferUp := true
     }
