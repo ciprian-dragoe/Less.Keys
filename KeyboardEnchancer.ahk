@@ -16,6 +16,8 @@ global timeoutProcessLayoutOnRelease
 global ctrlKeepsAlternativeLayoutUntilRelease
 global altKeepsAlternativeLayoutUntilRelease
 global shiftKeepsAlternativeLayoutUntilRelease
+global timeoutResetLastActivatedModifier
+global lastActivatedModifier
 global logInput
 
 global alternativeLayout
@@ -212,9 +214,21 @@ processModifierKey(key, state)
             send {lwin %pressedState%}
             winActive := state
         }
+        if (timeoutResetLastActivatedModifier > 0 && !state)
+        {
+            lastActivatedModifier := modifierKey 
+            setTimer, timerResetLastActivatedModified, OFF
+            setTimer, timerResetLastActivatedModified, %timeoutResetLastActivatedModifier%
+        }
+        
+        if (lastActivatedModifier = modifierKey &&  state)
+        {
+            alternativeLayoutActive := true
+        }
     }
     
-    if (deactivateAlternativeLayoutWithLastModiferUp && !state && !layoutKeyPressed && !isAlternativeLayoutDeactivatedOnModifierRelease()) {
+    if (deactivateAlternativeLayoutWithLastModiferUp && !state && !layoutKeyPressed && !isAlternativeLayoutDeactivatedOnModifierRelease())
+    {
         deactivateAlternativeLayoutWithLastModiferUp := false
         alternativeLayoutActive := false
     }
@@ -227,10 +241,20 @@ processModifierKey(key, state)
     if (!getActiveModifiers(key))
     {
         modifiersPressedBeforeLayoutChangeKey := false
+        if (!layoutKeyPressed)
+        {
+            alternativeLayoutActive := false
+        }
     } 
     
     return modifierKey
 }
+
+
+timerResetLastActivatedModified:
+    setTimer, timerResetLastActivatedModified, OFF
+    lastActivatedModifier := ""
+return
 
 
 getActiveModifiers(key)
@@ -505,6 +529,7 @@ readTimingsFile(path)
     IniRead, ctrlKeepsAlternativeLayoutUntilRelease, %path%, modifiers, ctrlKeepsAlternativeLayoutUntilRelease
     IniRead, shiftKeepsAlternativeLayoutUntilRelease, %path%, modifiers, shiftKeepsAlternativeLayoutUntilRelease
     IniRead, altKeepsAlternativeLayoutUntilRelease, %path%, modifiers, altKeepsAlternativeLayoutUntilRelease
+    IniRead, timeoutResetLastActivatedModifier, %path%, modifiers, timeoutResetLastActivatedModifier
     IniRead, logInput, %path%, logging, logInput
 }
 ;-------------------- END OF READ SETTING FILES --------------------
