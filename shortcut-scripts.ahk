@@ -893,97 +893,109 @@ processShortcut(index)
         return
     }
 
-
-    if (index = 220)
-    {
-        Send +^{left}
-        return
-    }
-        
-        
-    if (index = 221)
-    {
-        Send +^{down}
-        return
-    }
-        
-        
-    if (index = 222)
-    {
-        Send +^{up}
-        return
-    }
-        
-        
-    if (index = 223)
-    {
-        Send +^{right}
-        return
-    }
-        
-        
-    if (index = 224)
-    {
-        Send +{left}
-        return
-    }
-        
-        
-    if (index = 225)
-    {
-        Send +{down}
-        return
-    }
-        
-        
-    if (index = 226)
-    {
-        Send +{up}
-        return
-    }
-        
-        
-    if (index = 227)
-    {
-        Send +{right}
-        return
-    }
-        
-    
-    if (index = 228)
-    {
-        Send +!^{left}
-        return
-    }
-        
-    
-    if (index = 229)
-    {
-        Send +!^{down}
-        return
-    }
-        
-    
-    if (index = 230)
-    {
-        Send +!^{up}
-        return
-    }
-        
-    
-    if (index = 231)
-    {
-        Send +!^{right}
-        return
-    }
-        
     
     if (index = 300)
     {
         toggleMaximizeMloWindow()
         return
     }
+	
         
+    if (index = 1000)
+    {
+		Send +^{left}
+        return
+    }
+        
+        
+    if (index = 1001)
+    {
+        Send +^{down}
+        return
+    }
+        
+        
+    if (index = 1002)
+    {
+        Send +^{right}
+        return
+    }
+	
+	
+    if (index = 1003)
+    {
+        Send +^{up}
+        return
+    }
     
     
+    if (index = 1004)
+    {
+        Send +^{home}
+        return
+    }
+        
+    if (index = 1005)
+    {
+        Send +^{end}
+        return
+    }
+    
+	
+    if (index = 1010)
+    {
+		Send !^{left}
+        return
+    }
+        
+        
+    if (index = 1011)
+    {
+        Send !^{down}
+        return
+    }
+        
+        
+    if (index = 1012)
+    {
+        Send !^{right}
+        return
+    }
+	
+	
+    if (index = 1013)
+    {
+        Send !^{up}
+        return
+    }
+	
+	
+	if (index = 1020)
+    {
+        Send ^z
+        return
+    }
+	
+	
+	if (index = 1021)
+    {
+        Send ^x
+        return
+    }
+	
+	
+	if (index = 1022)
+    {
+        Send ^c
+        return
+    }
+	
+	
+	if (index = 1023)
+    {
+        Send ^v
+        return
+    }
+	
+	
 }
