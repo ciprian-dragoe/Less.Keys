@@ -619,7 +619,22 @@ writeMemoryStream(value)
 
 
 
-
+^+SC029::
+	if navigationMode = 0 
+	{
+		navigationMode = 1
+		showToolTip("AlternativeMode ON")
+		resetStates()
+		return
+	}
+	else
+	{
+		navigationMode = 0
+		showToolTip("NORMAL")
+		resetStates()
+		return
+	}
+return
 ;-------------------- keys that will be processed --------------------
 #If navigationMode = 1
     
