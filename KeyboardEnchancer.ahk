@@ -690,7 +690,7 @@ return
     *delete up::processKeyUp("delete")
         
     *sc029::processKeyDown("``")
-    ;*sc029 up::processKeyUp("``")        
+    *sc029 up::processKeyUp("``")        
     
     *1::processKeyDown("1")	
     *1 up::processKeyUp("1")
