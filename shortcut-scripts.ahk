@@ -57,18 +57,18 @@ processShortcut(index)
     
     if (index = 2)
     {
-        IfInString, ACTIVE_WINDOW_NAME, %MLO_WINDOW_NAME%
+		IfInString, ACTIVE_WINDOW_NAME, %MLO_WINDOW_NAME%
         {
-            send !w
+			send !w
             return
         }
         IfInString, ACTIVE_WINDOW_NAME, %FREEPLANE_WINDOW_NAME%
         {
-            send !w
+			send !w
             return
         }
     	
-    	send ^e 
+		send ^e 
     	return
     }
     

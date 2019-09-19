@@ -221,10 +221,15 @@ processModifierKey(key, state)
             setTimer, timerResetLastActivatedModified, %timeoutResetLastActivatedModifier%
         }
         
-        if (lastActivatedModifier = modifierKey &&  state)
+        if (lastActivatedModifier = modifierKey && state)
         {
             alternativeLayoutActive := true
         }
+		
+		if (debugComputer && !state)
+		{
+			debug(modifierKey . "|up")
+		}
     }
     
     if (deactivateAlternativeLayoutWithLastModiferUp && !state && !layoutKeyPressed && !isAlternativeLayoutDeactivatedOnModifierRelease())
