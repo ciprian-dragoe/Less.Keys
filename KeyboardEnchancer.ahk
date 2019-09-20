@@ -47,7 +47,7 @@ global winActive
 global deactivateAlternativeLayoutWithLastModiferUp
 global modifiersPressedBeforeLayoutChangeKey
 
-global timerTimeoutStickyKeys := 8000
+global timerTimeoutStickyKeys := 1000
 
 if (A_ComputerName = DEBUG_COMPUTER_1) {
 	debugComputer := true
@@ -90,7 +90,7 @@ FixStickyKeys:
         if (GetKeyState(key, "P")) 
         {
             resetKeys = false
-            break
+            return
         }
     }
     
@@ -111,13 +111,14 @@ FixStickyKeys:
         deactivateAlternativeLayoutWithLastModiferUp := false
     }
     
-    if (!GetKeyState(layoutChangeKey, "P") && !deactivateAlternativeLayoutWithLastModiferUp && !isAlternativeLayoutDeactivatedOnModifierRelease())
+    if (GetKeyState(layoutChangeKey, "P"))
     {
-        layoutKeyPressed := false
-        alternativeLayoutActive := false
-        stopManagingLayoutKey := false
+        return
     }
-    
+
+	layoutKeyPressed := false
+	alternativeLayoutActive := false
+	stopManagingLayoutKey := false
     SetTimer, FixStickyKeys, OFF
 return
 
