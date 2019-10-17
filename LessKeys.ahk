@@ -1,15 +1,13 @@
-﻿;----------------------------------- CONFIGURATION SECTION -----------------------------------
-global DEBUG_COMPUTER_1 := "lenovo-x230"
-global DEBUG_COMPUTER_2 := "SURFACE-STUDIO"
-global DEBUG_COMPUTER_3 := "CIPI-ASUS-ROG"
-;----------------------------------- END OF CONFIGURATION SECTION -----------------------------------
-
-
-#SingleInstance
+﻿#SingleInstance
 #Persistent
 #MaxHotkeysPerInterval 400
-#include shortcut-scripts.ahk
 SetKeyDelay -1
+
+
+
+#include shortcut-scripts.ahk
+
+
 
 global timeoutStillSendLayoutKey
 global timeoutProcessLayoutOnRelease
@@ -24,7 +22,6 @@ global alternativeLayout
 global modifierKeys
 
 global debugStoredData := ""
-global debugComputer := false
 global navigationMode = 1
 global keyboardShortcuts
 
@@ -49,29 +46,13 @@ global modifiersPressedBeforeLayoutChangeKey
 
 global timerTimeoutStickyKeys := 1000
 
-if (A_ComputerName = DEBUG_COMPUTER_1) {
-	debugComputer := true
-    readLayoutFile("my-alternative-layout.cfg")
-    readTimingsFile("my-settings.cfg")
-    readKeyboardShortcutsFile("my-keyboard-shortcuts.cfg")
-    resetStates()
-} else if (A_ComputerName = DEBUG_COMPUTER_2) {
-	debugComputer := true
-    readLayoutFile("my-alternative-layout.cfg")
-    readTimingsFile("my-settings.cfg")
-    readKeyboardShortcutsFile("my-keyboard-shortcuts.cfg")
-    resetStates()
-} else if (A_ComputerName = DEBUG_COMPUTER_3){
-	debugComputer := true
-    readLayoutFile("my-alternative-layout.cfg")
-    readTimingsFile("my-settings.cfg")
-    readKeyboardShortcutsFile("my-keyboard-shortcuts.cfg")
-    resetStates()
-} else {
-    readLayoutFile("configure-alternative-layout.cfg")
-    readTimingsFile("configure-settings.cfg")
-    readKeyboardShortcutsFile("configure-keyboard-shortcuts.cfg")
-}
+
+
+readLayoutFile("my-alternative-layout.cfg")
+readSettingsFile("my-settings.cfg")
+readKeyboardShortcutsFile("my-keyboard-shortcuts.cfg")
+resetStates()
+
 
 
 ; if the cpu is executing intensive tasks then the lift key up command may not be processed for 
@@ -227,7 +208,7 @@ processModifierKey(key, state)
             alternativeLayoutActive := true
         }
 		
-		if (debugComputer && !state)
+		if (logInput && !state)
 		{
 			debug(modifierKey . "|up")
 		}
@@ -528,7 +509,7 @@ readKeyboardShortcutsFile(path)
     }
 }
 
-readTimingsFile(path)
+readSettingsFile(path)
 {
     IniRead, timeoutStillSendLayoutKey, %path%, timings, timeoutStillSendLayoutKey
     IniRead, timeoutProcessLayoutOnRelease, %path%, timings, timeoutProcessLayoutOnRelease
@@ -606,7 +587,7 @@ writeMemoryStream(value)
 
 
 ;-------------------- DEBUGGING KEYS -------------------- 
-#if debugComputer
+#if logInput
     #f6::
         msgbox % debugStoredData
     return

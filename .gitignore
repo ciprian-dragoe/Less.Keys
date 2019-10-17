@@ -3,14 +3,6 @@ logs
 .idea
 .vs
 *.ahk.bak
-my-alternative-layout.cfg
-my-keyboard-shortcuts-script.ahk
-my-keyboard-shortcuts-script.exe
-my-keyboard-shortcuts.cfg
-my-settings.cfg
 *.lnk
 NOT_SYNC/
 *.DotSettings.user
-RunAsAdminStartupX230.vbs
-RunAsAdminStartupROG.vbs
-RunAsAdminStartupSurface.vbs

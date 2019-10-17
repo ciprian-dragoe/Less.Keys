@@ -1,15 +1,10 @@
+global DEBUG_COMPUTER_1 := "lenovo-x230"
+global DEBUG_COMPUTER_2 := "SURFACE-STUDIO"
+global DEBUG_COMPUTER_3 := "CIPI-ASUS-ROG"
+
 global ACTIVE_WINDOW_CLASS
 global ACTIVE_WINDOW_NAME
 global SCREEN_SLEEP_PATH
-
-
-if (A_ComputerName = DEBUG_COMPUTER_1) {
-	SCREEN_SLEEP_PATH := "c:\Users\cipri\OneDrive\PORTABLE_PROGRAMS\ahk\Navigare\KeyboardEnchancer\NOT_SYNC\nircmd"
-} else if (A_ComputerName = DEBUG_COMPUTER_2) {
-    SCREEN_SLEEP_PATH := "c:\Users\cipri\OneDrive\PORTABLE_PROGRAMS\ahk\Navigare\KeyboardEnchancer\NOT_SYNC\nircmd"
-} else if (A_ComputerName = DEBUG_COMPUTER_3){
-	SCREEN_SLEEP_PATH := "c:\Users\cipri\OneDrive\PORTABLE_PROGRAMS\ahk\Navigare\KeyboardEnchancer\NOT_SYNC\nircmd"
-}
 
 
 #include  %A_ScriptDir%\NOT_SYNC\mlo-shortcut-scripts.ahk
@@ -833,63 +828,63 @@ processShortcut(index)
     
     if (index = 201)
     {
-        Send !{NumPad1}
+		Send #{NumPad1}
         return
     }
     
     
     if (index = 202)
     {
-        Send !{NumPad2}
+        Send #{NumPad2}
         return
     }
     
     
     if (index = 203)
     {
-        Send !{NumPad3}
+        Send #{NumPad3}
         return
     }
     
     
     if (index = 204)
     {
-        Send !{NumPad4}
+        Send #{NumPad4}
         return
     }
     
     
     if (index = 205)
     {
-        Send !{NumPad5}
+        Send #{NumPad5}
         return
     }
     
     
     if (index = 206)
     {
-        Send !{NumPad6}
+        Send #{NumPad6}
         return
     }
     
     
     if (index = 207)
     {
-        Send !{NumPad7}
+        Send #{NumPad7}
         return
     }
     
     
     if (index = 208)
     {
-        Send !{NumPad8}
+        Send #{NumPad8}
         return
     }
     
     
     if (index = 209)
     {
-        Send !{NumPad9}
+        Send #{NumPad9}
         return
     }
 
@@ -994,6 +989,20 @@ processShortcut(index)
 	if (index = 1023)
     {
         Send ^v
+        return
+    }
+	
+	
+	if (index = 1024)
+    {
+        Send ^!{insert}
+        return
+    }
+	
+	
+	if (index = 1025)
+    {
+        Send ^+z
         return
     }
 	
