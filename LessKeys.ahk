@@ -11,11 +11,6 @@ SetKeyDelay -1
 
 global timeoutStillSendLayoutKey
 global timeoutProcessLayoutOnRelease
-global ctrlKeepsAlternativeLayoutUntilRelease
-global altKeepsAlternativeLayoutUntilRelease
-global shiftKeepsAlternativeLayoutUntilRelease
-global timeoutResetLastActivatedModifier
-global lastActivatedModifier
 global logInput
 
 global alternativeLayout
@@ -42,9 +37,6 @@ global altActive
 global shiftActive
 global winActive
 
-global deactivateAlternativeLayoutWithLastModiferUp
-global modifiersPressedBeforeLayoutChangeKey
-
 global timerTimeoutStickyKeys := 1000
 
 
@@ -62,7 +54,6 @@ resetStates()
 ; this is a fail safe for such situations
 SetTimer, FixStickyKeys, %timerTimeoutStickyKeys%
 FixStickyKeys: 
-    resetKeys = true
     resetCapsLock = false
     for key in modifierKeys
     {
@@ -72,26 +63,8 @@ FixStickyKeys:
         }
         if (GetKeyState(key, "P")) 
         {
-            resetKeys = false
             return
         }
-    }
-    
-    if (resetKeys) 
-    {
-        ctrlActive := false
-        send {ctrl up}
-        shiftActive := false
-        send {shift up}
-        altActive := false
-        send {alt up}
-        winActive := false
-        send {lwin up}
-        if (resetCapsLock)
-        {
-            SetCapsLockState, off  
-        }
-        deactivateAlternativeLayoutWithLastModiferUp := false
     }
     
     if (GetKeyState(layoutChangeKey, "P"))
@@ -99,6 +72,19 @@ FixStickyKeys:
         return
     }
 
+    ctrlActive := false
+    send {ctrl up}
+    shiftActive := false
+    send {shift up}
+    altActive := false
+    send {alt up}
+    winActive := false
+    send {lwin up}
+    if (resetCapsLock)
+    {
+        SetCapsLockState, off  
+    }
+    
 	layoutKeyPressed := false
 	alternativeLayoutActive := false
 	stopManagingLayoutKey := false
@@ -471,10 +457,6 @@ readSettingsFile(path)
 {
     IniRead, timeoutStillSendLayoutKey, %path%, timings, timeoutStillSendLayoutKey
     IniRead, timeoutProcessLayoutOnRelease, %path%, timings, timeoutProcessLayoutOnRelease
-    IniRead, ctrlKeepsAlternativeLayoutUntilRelease, %path%, modifiers, ctrlKeepsAlternativeLayoutUntilRelease
-    IniRead, shiftKeepsAlternativeLayoutUntilRelease, %path%, modifiers, shiftKeepsAlternativeLayoutUntilRelease
-    IniRead, altKeepsAlternativeLayoutUntilRelease, %path%, modifiers, altKeepsAlternativeLayoutUntilRelease
-    IniRead, timeoutResetLastActivatedModifier, %path%, modifiers, timeoutResetLastActivatedModifier
     IniRead, logInput, %path%, logging, logInput
 }
 ;-------------------- END OF READ SETTING FILES --------------------
@@ -638,35 +620,35 @@ return
     *sc029::processKeyDown(layout["``"])
     *sc029 up::processKeyUp(layout["``"])        
     
-    *1::processKeyDown(layout["1"])
-    *1 up::processKeyUp(layout["1"])
+    *1::processKeyDown(layout[1])
+    *1 up::processKeyUp(layout[1])
     
-    *2::processKeyDown(layout["2"])
-    *2 up::processKeyUp(layout["2"])
+    *2::processKeyDown(layout[2])
+    *2 up::processKeyUp(layout[2])
         
-    *3::processKeyDown(layout["3"])
-    *3 up::processKeyUp(layout["3"])
+    *3::processKeyDown(layout[3])
+    *3 up::processKeyUp(layout[3])
     
-    *4::processKeyDown(layout["4"])
-    *4 up::processKeyUp(layout["4"])
+    *4::processKeyDown(layout[4])
+    *4 up::processKeyUp(layout[4])
     
-    *5::processKeyDown(layout["5"])
-    *5 up::processKeyUp(layout["5"])
+    *5::processKeyDown(layout[5])
+    *5 up::processKeyUp(layout[5])
     
-    *6::processKeyDown(layout["6"])
-    *6 up::processKeyUp(layout["6"])
+    *6::processKeyDown(layout[6])
+    *6 up::processKeyUp(layout[6])
             
-    *7::processKeyDown(layout["7"])
-    *7 up::processKeyUp(layout["7"])
+    *7::processKeyDown(layout[7])
+    *7 up::processKeyUp(layout[7])
     
-    *8::processKeyDown(layout["8"])
-    *8 up::processKeyUp(layout["8"])
+    *8::processKeyDown(layout[8])
+    *8 up::processKeyUp(layout[8])
         
-    *9::processKeyDown(layout["9"])
-    *9 up::processKeyUp(layout["9"])
+    *9::processKeyDown(layout[9])
+    *9 up::processKeyUp(layout[9])
     
-    *0::processKeyDown(layout["0"])
-    *0 up::processKeyUp(layout["0"])
+    *0::processKeyDown(layout[0])
+    *0 up::processKeyUp(layout[0])
     
     *-::processKeyDown(layout["-"])
     *- up::processKeyUp(layout["-"])
@@ -826,12 +808,24 @@ return
         
     *ralt::processKeyDown(layout["ralt"])
     *ralt up::processKeyUp(layout["ralt"])
-        
+    
     *lshift::processKeyDown(layout["lshift"])
     *lshift up::processKeyUp(layout["lshift"])
     
     *rshift::processKeyDown(layout["rshift"])
     *rshift up::processKeyUp(layout["rshift"])
     
+    *lwin::processKeyDown("lwin")
+    *lwin up::processKeyUp("lwin")
+    
+    *rwin::processKeyDown("lwin")
+    *rwin up::processKeyUp("lwin")    
+    
 ;-------------------- END OF keys that will be processed
 #if
+
+
+
+
+
+
