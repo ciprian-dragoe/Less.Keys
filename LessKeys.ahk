@@ -20,6 +20,7 @@ global logInput
 
 global alternativeLayout
 global modifierKeys
+global layout
 
 global debugStoredData := ""
 global navigationMode = 1
@@ -48,7 +49,8 @@ global timerTimeoutStickyKeys := 1000
 
 
 
-readLayoutFile("my-alternative-layout.cfg")
+readLayoutFile("my-layout.cfg")
+readAlternativeLayoutFile("my-alternative-layout.cfg")
 readSettingsFile("my-settings.cfg")
 readKeyboardShortcutsFile("my-keyboard-shortcuts.cfg")
 resetStates()
@@ -460,10 +462,7 @@ processAhkKeyboardShortcuts(activeModifiers, key)
 ;-------------------- READ SETTING FILES --------------------
 readLayoutFile(path)
 {
-    FileReadLine, layoutChangeKey, %path%, 1
-    layoutChangeKey := StrSplit(layoutChangeKey, "`:").2 
-    alternativeLayout:=Object()
-    modifierKeys:=Object()
+    layout:=Object()
     Loop, read, %path%
     {
         IfInString, A_LoopReadLine, ### ;if line has ### in it, is a comment and skip
@@ -471,27 +470,23 @@ readLayoutFile(path)
             continue
         }
         remappedKey := StrSplit(A_LoopReadLine, "`:").2
-        
-        if (remappedKey = "ctrl")
-        {
-            modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := "ctrl"
-        } 
-        else if (remappedKey = "alt")
-        {
-            modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := "alt"
+        layout[StrSplit(A_LoopReadLine, "`:").1] := remappedKey
+    }
+}
+
+readAlternativeLayoutFile(path)
+{
+    FileReadLine, layoutChangeKey, %path%, 1
+    layoutChangeKey := StrSplit(layoutChangeKey, "`:").2 
+    alternativeLayout:=Object()
+    Loop, read, %path%
+    {
+        IfInString, A_LoopReadLine, ### ;if line has ### in it, is a comment and skip
+        { 
+            continue
         }
-        else if (remappedKey = "shift")
-        {
-            modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := "shift"
-        }
-        else if (remappedKey = "lwin")
-        {
-            modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := "lwin"
-        }
-        else
-        {
-            alternativeLayout[StrSplit(A_LoopReadLine, "`:").1] := remappedKey
-        }
+        remappedKey := StrSplit(A_LoopReadLine, "`:").2
+        alternativeLayout[StrSplit(A_LoopReadLine, "`:").1] := remappedKey
     }
 }
 
@@ -628,251 +623,251 @@ return
     *escape::processKeyDown("escape")
     *escape up::processKeyUp("escape")
     
-    *f1::processKeyDown("f1")
-    *f1 up::processKeyUp("f1")
+    *f1::processKeyDown(layout["F1"])
+    *f1 up::processKeyUp(layout["F1"])
     
-    *f2::processKeyDown("f2")
-    *f2 up::processKeyUp("f2")
+    *f2::processKeyDown(layout["F2"])
+    *f2 up::processKeyUp(layout["F2"])
     
-    *f3::processKeyDown("f3")
-    *f3 up::processKeyUp("f3")
+    *f3::processKeyDown(layout["F3"])
+    *f3 up::processKeyUp(layout["F3"])
     
-    *f4::processKeyDown("f4")
-    *f4 up::processKeyUp("f4")
+    *f4::processKeyDown(layout["F4"])
+    *f4 up::processKeyUp(layout["F4"])
     
-    *f5::processKeyDown("f5")
-    *f5 up::processKeyUp("f5")
+    *f5::processKeyDown(layout["F5"])
+    *f5 up::processKeyUp(layout["F5"])
     
-    *f6::processKeyDown("f6")
-    *f6 up::processKeyUp("f6")
+    *f6::processKeyDown(layout["F6"])
+    *f6 up::processKeyUp(layout["F6"])
     
-    *f7::processKeyDown("f7")
-    *f7 up::processKeyUp("f7")
+    *f7::processKeyDown(layout["F7"])
+    *f7 up::processKeyUp(layout["F7"])
     
-    *f8::processKeyDown("f8")
-    *f8 up::processKeyUp("f8")
+    *f8::processKeyDown(layout["F8"])
+    *f8 up::processKeyUp(layout["F8"])
     
-    *f9::processKeyDown("f9")
-    *f9 up::processKeyUp("f9")
+    *f9::processKeyDown(layout["F9"])
+    *f9 up::processKeyUp(layout["F9"])
     
-    *f10::processKeyDown("f10")
-    *f10 up::processKeyUp("f10")
+    *f10::processKeyDown(layout["F10"])
+    *f10 up::processKeyUp(layout["F10"])
     
-    *f11::processKeyDown("f11")
-    *f11 up::processKeyUp("f11")
+    *f11::processKeyDown(layout["F11"])
+    *f11 up::processKeyUp(layout["F11"])
     
-    *f12::processKeyDown("f12")
-    *f12 up::processKeyUp("f12")
+    *f12::processKeyDown(layout["F12"])
+    *f12 up::processKeyUp(layout["F12"])
     
-    *home::processKeyDown("home")
-    *home up::processKeyUp("home")
+    *home::processKeyDown(layout["home"])
+    *home up::processKeyUp(layout["home"])
             
-    *end::processKeyDown("end")
-    *end up::processKeyUp("end")
+    *end::processKeyDown(layout["end"])
+    *end up::processKeyUp(layout["end"])
         
-    *insert::processKeyDown("insert")
-    *insert up::processKeyUp("insert")
+    *insert::processKeyDown(layout["insert"])
+    *insert up::processKeyUp(layout["insert"])
             
-    *delete::processKeyDown("delete")
-    *delete up::processKeyUp("delete")
+    *delete::processKeyDown(layout["delete"])
+    *delete up::processKeyUp(layout["delete"])
         
-    *sc029::processKeyDown("``")
-    *sc029 up::processKeyUp("``")        
+    *sc029::processKeyDown(layout["``"])
+    *sc029 up::processKeyUp(layout["``"])        
     
-    *1::processKeyDown("1")	
-    *1 up::processKeyUp("1")
+    *1::processKeyDown(layout["1"])
+    *1 up::processKeyUp(layout["1"])
     
-    *2::processKeyDown("2")	
-    *2 up::processKeyUp("2")
+    *2::processKeyDown(layout["2"])
+    *2 up::processKeyUp(layout["2"])
         
-    *3::processKeyDown("3")	
-    *3 up::processKeyUp("3")
+    *3::processKeyDown(layout["3"])
+    *3 up::processKeyUp(layout["3"])
     
-    *4::processKeyDown("4")	
-    *4 up::processKeyUp("4")
+    *4::processKeyDown(layout["4"])
+    *4 up::processKeyUp(layout["4"])
     
-    *5::processKeyDown("5")	
-    *5 up::processKeyUp("5")
+    *5::processKeyDown(layout["5"])
+    *5 up::processKeyUp(layout["5"])
     
-    *6::processKeyDown("6")	
-    *6 up::processKeyUp("6")
+    *6::processKeyDown(layout["6"])
+    *6 up::processKeyUp(layout["6"])
             
-    *7::processKeyDown("7")	
-    *7 up::processKeyUp("7")
+    *7::processKeyDown(layout["7"])
+    *7 up::processKeyUp(layout["7"])
     
-    *8::processKeyDown("8")	
-    *8 up::processKeyUp("8")
+    *8::processKeyDown(layout["8"])
+    *8 up::processKeyUp(layout["8"])
         
-    *9::processKeyDown("9")	
-    *9 up::processKeyUp("9")
+    *9::processKeyDown(layout["9"])
+    *9 up::processKeyUp(layout["9"])
     
-    *0::processKeyDown("0")	
-    *0 up::processKeyUp("0")
+    *0::processKeyDown(layout["0"])
+    *0 up::processKeyUp(layout["0"])
     
-    *-::processKeyDown("-")	
-    *- up::processKeyUp("-")
+    *-::processKeyDown(layout["-"])
+    *- up::processKeyUp(layout["-"])
     
-    *=::processKeyDown("=")	
-    *= up::processKeyUp("=")
+    *=::processKeyDown(layout["="])	
+    *= up::processKeyUp(layout["="])
             
-    *backspace::processKeyDown("backspace")
-    *backspace up::processKeyUp("backspace")
+    *backspace::processKeyDown(layout["backspace"])
+    *backspace up::processKeyUp(layout["backspace"])
         
-    *tab::processKeyDown("tab")
-    *tab up::processKeyUp("tab")
+    *tab::processKeyDown(layout["tab"])
+    *tab up::processKeyUp(layout["tab"])
     
-    *q::processKeyDown("q")	
-    *q up::processKeyUp("q")
+    *q::processKeyDown(layout["q"])
+    *q up::processKeyUp(layout["q"])
     
-    *w::processKeyDown("w")	
-    *w up::processKeyUp("w")
+    *w::processKeyDown(layout["w"])
+    *w up::processKeyUp(layout["w"])
     
-    *e::processKeyDown("e")	
-    *e up::processKeyUp("e")
+    *e::processKeyDown(layout["e"])
+    *e up::processKeyUp(layout["e"])
     
-    *r::processKeyDown("r")	
-    *r up::processKeyUp("r")
+    *r::processKeyDown(layout["r"])
+    *r up::processKeyUp(layout["r"])
     
-    *t::processKeyDown("t")	
-    *t up::processKeyUp("t")
+    *t::processKeyDown(layout["t"])
+    *t up::processKeyUp(layout["t"])
     
-    *y::processKeyDown("y")	
-    *y up::processKeyUp("y")
+    *y::processKeyDown(layout["y"])
+    *y up::processKeyUp(layout["y"])
     
-    *u::processKeyDown("u")	
-    *u up::processKeyUp("u")
+    *u::processKeyDown(layout["u"])
+    *u up::processKeyUp(layout["u"])
     
-    *i::processKeyDown("i")	
-    *i up::processKeyUp("i")
+    *i::processKeyDown(layout["i"])
+    *i up::processKeyUp(layout["i"])
     
-    *o::processKeyDown("o")	
-    *o up::processKeyUp("o")
+    *o::processKeyDown(layout["o"])
+    *o up::processKeyUp(layout["o"])
     
-    *p::processKeyDown("p")	
-    *p up::processKeyUp("p")
+    *p::processKeyDown(layout["p"])
+    *p up::processKeyUp(layout["p"])
     
-    *[::processKeyDown("[")	
-    *[ up::processKeyUp("[")
+    *[::processKeyDown(layout["["])
+    *[ up::processKeyUp(layout["["])
     
-    *]::processKeyDown("]")	
-    *] up::processKeyUp("]")
+    *]::processKeyDown(layout["]"])	
+    *] up::processKeyUp(layout["]"])
     
-    *\::processKeyDown("\")	
-    *\ up::processKeyUp("\")
+    *\::processKeyDown(layout["\"])	
+    *\ up::processKeyUp(layout["\"])
             
-    *capslock::processKeyDown("capslock")
-    *capslock up::processKeyUp("capslock")
+    *capslock::processKeyDown(layout["capslock"])
+    *capslock up::processKeyUp(layout["capslock"])
     
-    *a::processKeyDown("a")	
-    *a up::processKeyUp("a")
+    *a::processKeyDown(layout["a"])
+    *a up::processKeyUp(layout["a"])
     
-    *s::processKeyDown("s")	
-    *s up::processKeyUp("s")
+    *s::processKeyDown(layout["s"])
+    *s up::processKeyUp(layout["s"])
     
-    *d::processKeyDown("d")	
-    *d up::processKeyUp("d")
+    *d::processKeyDown(layout["d"])
+    *d up::processKeyUp(layout["d"])
     
-    *f::processKeyDown("f")	
-    *f up::processKeyUp("f")
+    *f::processKeyDown(layout["f"])
+    *f up::processKeyUp(layout["f"])
     
-    *g::processKeyDown("g")	
-    *g up::processKeyUp("g")
+    *g::processKeyDown(layout["g"])
+    *g up::processKeyUp(layout["g"])
     
-    *h::processKeyDown("h")	
-    *h up::processKeyUp("h")
+    *h::processKeyDown(layout["h"])
+    *h up::processKeyUp(layout["h"])
     
-    *j::processKeyDown("j")	
-    *j up::processKeyUp("j")
+    *j::processKeyDown(layout["j"])
+    *j up::processKeyUp(layout["j"])
     
-    *k::processKeyDown("k")	
-    *k up::processKeyUp("k")
+    *k::processKeyDown(layout["k"])
+    *k up::processKeyUp(layout["k"])
     
-    *l::processKeyDown("l")	
-    *l up::processKeyUp("l")
+    *l::processKeyDown(layout["l"])
+    *l up::processKeyUp(layout["l"])
     
-    *`;::processKeyDown(";")	
-    *`; up::processKeyUp(";")
+    *`;::processKeyDown(layout[";"])
+    *`; up::processKeyUp(layout[";"])
     
-    *'::processKeyDown("'")	
-    *' up::processKeyUp("'")
+    *'::processKeyDown(layout["'"])
+    *' up::processKeyUp(layout["'"])
         
-    *enter::processKeyDown("enter")
-    *enter up::processKeyUp("enter")
+    *enter::processKeyDown(layout["enter"])
+    *enter up::processKeyUp(layout["enter"])
             
-    *z::processKeyDown("z")	
-    *z up::processKeyUp("z")
+    *z::processKeyDown(layout["z"])
+    *z up::processKeyUp(layout["z"])
     
-    *x::processKeyDown("x")	
-    *x up::processKeyUp("x")
+    *x::processKeyDown(layout["x"])
+    *x up::processKeyUp(layout["x"])
     
-    *c::processKeyDown("c")	
-    *c up::processKeyUp("c")
+    *c::processKeyDown(layout["c"])
+    *c up::processKeyUp(layout["c"])
     
-    *v::processKeyDown("v")	
-    *v up::processKeyUp("v")
+    *v::processKeyDown(layout["v"])
+    *v up::processKeyUp(layout["v"])
     
-    *b::processKeyDown("b")	
-    *b up::processKeyUp("b")
+    *b::processKeyDown(layout["b"])
+    *b up::processKeyUp(layout["b"])
     
-    *n::processKeyDown("n")	
-    *n up::processKeyUp("n")
+    *n::processKeyDown(layout["n"])
+    *n up::processKeyUp(layout["n"])
     
-    *m::processKeyDown("m")	
-    *m up::processKeyUp("m")
+    *m::processKeyDown(layout["m"])
+    *m up::processKeyUp(layout["m"])
     
-    *sc033::processKeyDown(",")
-    *sc033 up::processKeyUp(",")
+    *sc033::processKeyDown(layout[","])
+    *sc033 up::processKeyUp(layout[","])
     
-    *sc034::processKeyDown(".")	
-    *sc034 up::processKeyUp(".")
+    *sc034::processKeyDown(layout["."])
+    *sc034 up::processKeyUp(layout["."])
     
-    *sc035::processKeyDown("/")	
-    *sc035 up::processKeyUp("/")
+    *sc035::processKeyDown(layout["/"])
+    *sc035 up::processKeyUp(layout["/"])
     
-    *space::processKeyDown("space")
-    *space up::processKeyUp("space")
+    *space::processKeyDown(layout["space"])
+    *space up::processKeyUp(layout["space"])
     
-    *left::processKeyDown("left")
-    *left up::processKeyUp("left")
+    *left::processKeyDown(layout["left"])
+    *left up::processKeyUp(layout["left"])
     
-    *down::processKeyDown("down")
-    *down up::processKeyUp("down")
+    *down::processKeyDown(layout["down"])
+    *down up::processKeyUp(layout["down"])
     
-    *right::processKeyDown("right")
-    *right up::processKeyUp("right")
+    *right::processKeyDown(layout["right"])
+    *right up::processKeyUp(layout["right"])
     
-    *up::processKeyDown("up")
-    *up up::processKeyUp("up")
+    *up::processKeyDown(layout["up"])
+    *up up::processKeyUp(layout["up"])
     
-    *pgdn::processKeyDown("pgdn")
-    *pgdn up::processKeyUp("pgdn")
+    *pgdn::processKeyDown(layout["pgdn"])
+    *pgdn up::processKeyUp(layout["pgdn"])
     
-    *pgup::processKeyDown("pgup")
-    *pgup up::processKeyUp("pgup")
+    *pgup::processKeyDown(layout["pgup"])
+    *pgup up::processKeyUp(layout["pgup"])
     
-    *appskey::processKeyDown("appskey")
-    *appskey up::processKeyUp("appskey")
+    *appskey::processKeyDown(layout["appskey"])
+    *appskey up::processKeyUp(layout["appskey"])
     
-    *printscreen::processKeyDown("printscreen")
-    *printscreen up::processKeyUp("printscreen")
+    *printscreen::processKeyDown(layout["printscreen"])
+    *printscreen up::processKeyUp(layout["printscreen"])
     
-    *lctrl::processKeyDown("lctrl")
-    *lctrl up::processKeyUp("lctrl")
+    *lctrl::processKeyDown(layout["lctrl"])
+    *lctrl up::processKeyUp(layout["lctrl"])
         
-    *rctrl::processKeyDown("rctrl")
-    *rctrl up::processKeyUp("rctrl")
+    *rctrl::processKeyDown(layout["rctrl"])
+    *rctrl up::processKeyUp(layout["rctrl"])
         
-    *lalt::processKeyDown("lalt")
-    *lalt up::processKeyUp("lalt")
+    *lalt::processKeyDown(layout["lalt"])
+    *lalt up::processKeyUp(layout["lalt"])
         
-    *ralt::processKeyDown("ralt")
-    *ralt up::processKeyUp("ralt")
+    *ralt::processKeyDown(layout["ralt"])
+    *ralt up::processKeyUp(layout["ralt"])
         
-    *lshift::processKeyDown("lshift")
-    *lshift up::processKeyUp("lshift")
+    *lshift::processKeyDown(layout["lshift"])
+    *lshift up::processKeyUp(layout["lshift"])
     
-    *rshift::processKeyDown("rshift")
-    *rshift up::processKeyUp("rshift")
+    *rshift::processKeyDown(layout["rshift"])
+    *rshift up::processKeyUp(layout["rshift"])
     
 ;-------------------- END OF keys that will be processed
 #if
