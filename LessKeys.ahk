@@ -175,75 +175,33 @@ processKeyToSend(key)
 processModifierKey(key, state)
 {
     pressedState := state ? "downR" : "up"
-    modifierKey := modifierKeys[key]
-    if (modifierKey) 
-    { 
-        if (modifierKey == "ctrl") 
-        {
-            send {ctrl %pressedState%}
-            ctrlActive := state
-        } 
-        else if (modifierKey == "alt")
-        {
-            send {alt %pressedState%}
-            altActive := state
-        }
-        else if (modifierKey == "shift")
-        {
-            send {shift %pressedState%}
-            shiftActive := state
-        }
-        else if (modifierKey == "lwin")
-        {
-            send {lwin %pressedState%}
-            winActive := state
-        }
-        if (timeoutResetLastActivatedModifier > 0 && !state)
-        {
-            lastActivatedModifier := modifierKey 
-            setTimer, timerResetLastActivatedModified, OFF
-            setTimer, timerResetLastActivatedModified, %timeoutResetLastActivatedModifier%
-        }
-        
-        if (lastActivatedModifier = modifierKey && state)
-        {
-            alternativeLayoutActive := true
-        }
-		
-		if (logInput && !state)
-		{
-			debug(modifierKey . "|up")
-		}
-    }
-    
-    if (deactivateAlternativeLayoutWithLastModiferUp && !state && !layoutKeyPressed && !isAlternativeLayoutDeactivatedOnModifierRelease())
+    if (key == "ctrl") 
     {
-        deactivateAlternativeLayoutWithLastModiferUp := false
-        alternativeLayoutActive := false
-    }
-    
-    if (!layoutKeyPressed && isAlternativeLayoutDeactivatedOnModifierRelease())
-    {
-        modifiersPressedBeforeLayoutChangeKey := true
-    }
-    
-    if (!getActiveModifiers(key))
-    {
-        modifiersPressedBeforeLayoutChangeKey := false
-        if (!layoutKeyPressed)
-        {
-            alternativeLayoutActive := false
-        }
+        send {ctrl %pressedState%}
+        ctrlActive := state
+        return true
     } 
+    else if (key == "alt")
+    {
+        send {alt %pressedState%}
+        altActive := state
+        return true
+    }
+    else if (key == "shift")
+    {
+        send {shift %pressedState%}
+        shiftActive := state
+        return true
+    }
+    else if (key == "lwin")
+    {
+        send {lwin %pressedState%}
+        winActive := state
+        return true
+    }
     
-    return modifierKey
+    return false
 }
-
-
-timerResetLastActivatedModified:
-    setTimer, timerResetLastActivatedModified, OFF
-    lastActivatedModifier := ""
-return
 
 
 getActiveModifiers(key)
@@ -340,42 +298,29 @@ manageLayoutKeyUp(key)
     stopManagingLayoutKey := false
     layoutKeyPressed := false
     processKeyOnRelease := false
-    layoutKeyActivatesProcessKeyOnRelease := false
-    
-    if (isAlternativeLayoutDeactivatedOnModifierRelease() && !modifiersPressedBeforeLayoutChangeKey)
-    {
-        deactivateAlternativeLayoutWithLastModiferUp := true
-    }
-    else
-    {
-        alternativeLayoutActive := false
-         
-        if (sendLayoutKey)
-        {   
-            activeModifiers := getActiveModifiers(key)
-            if (!processAhkKeyboardShortcuts(activeModifiers, key))
-            {
-                send {blind}%activeModifiers%{%key%}
-            }
-            debug(key . "|UP")
-            
-            if (keyToSendOnUp)
-            {
-                processKeyToSend(keyToSendOnUp)
-                keyToSendOnUp := ""
-                debug(keyToSendOnUp . "|^^^^^^ on alternative layout released before")
-            }
-            
-            return
+    layoutKeyActivatesProcessKeyOnRelease := false    
+    alternativeLayoutActive := false
+     
+    if (sendLayoutKey)
+    {   
+        activeModifiers := getActiveModifiers(key)
+        if (!processAhkKeyboardShortcuts(activeModifiers, key))
+        {
+            send {blind}%activeModifiers%{%key%}
         }
+        debug(key . "|UP")
+        
+        if (keyToSendOnUp)
+        {
+            processKeyToSend(keyToSendOnUp)
+            keyToSendOnUp := ""
+            debug(keyToSendOnUp . "|^^^^^^ on alternative layout released before")
+        }
+        
+        return
     }
+
     debug(key . "|NOT SENT CAUSE CONSUMED")
-}
-
-
-isAlternativeLayoutDeactivatedOnModifierRelease()
-{
-    return (ctrlKeepsAlternativeLayoutUntilRelease && ctrlActive) || (altKeepsAlternativeLayoutUntilRelease && altActive) || (shiftKeepsAlternativeLayoutUntilRelease && shiftActive) 
 }
 
 
@@ -462,14 +407,32 @@ processAhkKeyboardShortcuts(activeModifiers, key)
 ;-------------------- READ SETTING FILES --------------------
 readLayoutFile(path)
 {
+    modifierKeys:=Object()
     layout:=Object()
     Loop, read, %path%
     {
         IfInString, A_LoopReadLine, ### ;if line has ### in it, is a comment and skip
-        { 
+        {
             continue
         }
         remappedKey := StrSplit(A_LoopReadLine, "`:").2
+        if (remappedKey = "ctrl")
+        {
+            modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := "ctrl"
+        } 
+        else if (remappedKey = "alt")
+        {
+            modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := "alt"
+        }
+        else if (remappedKey = "shift")
+        {
+            modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := "shift"
+        }
+        else if (remappedKey = "lwin")
+        {
+            modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := "lwin"
+        }
+        
         layout[StrSplit(A_LoopReadLine, "`:").1] := remappedKey
     }
 }
@@ -597,10 +560,9 @@ writeMemoryStream(value)
         showToolTip("STATES RESTORED")
     return
 #if
+
+
 ;-------------------- END OF DEBUGGING SHORTCUTS --------------------
-
-
-
 ^+SC029::
 	if navigationMode = 0 
 	{
@@ -618,6 +580,8 @@ writeMemoryStream(value)
 	}
 return
 ;-------------------- keys that will be processed --------------------
+
+
 #If navigationMode = 1
     
     *escape::processKeyDown("escape")

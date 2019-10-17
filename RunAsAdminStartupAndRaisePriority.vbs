@@ -12,7 +12,7 @@ Else
     strComputer = "."
     Const HIGH_PRIORITY = 128
     processName = "KeyboardEnchancer.exe"   ' The process name of your app
-    appName = "d:\SYNC\Dropbox\PORTABLE_PROGRAMS\ahk\Navigare\KeyboardEnchancer\KeyboardEnchancer.exe" ' The app you want to run
+    appName = "d:\SYNC\Dropbox\PORTABLE_PROGRAMS\ahk\Navigare\LessKeys\LessKeys.exe" ' The app you want to run
 
     objShell.ShellExecute appName, , , "runas", 1
 
