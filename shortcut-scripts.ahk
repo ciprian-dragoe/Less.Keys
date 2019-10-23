@@ -12,7 +12,8 @@ global SCREEN_SLEEP_PATH
 #include  %A_ScriptDir%\NOT_SYNC\concepts-shortcut-scripts.ahk
 #include  %A_ScriptDir%\NOT_SYNC\simplemind-shortcut-scripts.ahk
 
-
+acesta este un mic test si intradevar, parca obsrerv un fel de lag dar nu e chiar atat de rau precum observam de pe laptop si imi place acest lucru si vreausa il fac mai bine, cu mult mai bine fata de ceea ce fac acuma si ma intreb daca este ceva ce 
+intru-un fel mi se pare ca se misca cu mult mai bine fata de cum era dincolo si acest lucru imi palce, in final pare sa fie o solutie ok de lucru atata timp 
 processShortcut(index)
 {
     WinGetClass, ACTIVE_WINDOW_CLASS, A

@@ -1,5 +1,4 @@
 *.sln
-logs
 .idea
 .vs
 *.ahk.bak

@@ -5,7 +5,9 @@ SetKeyDelay -1
 
 
 
-#include shortcut-scripts.ahk
+#include shortcuts.ahk
+#include  %A_ScriptDir%\app\debug.ahk
+
 
 
 
@@ -17,7 +19,7 @@ global alternativeLayout
 global modifierKeys
 global layout
 
-global debugStoredData := ""
+
 global navigationMode = 1
 global keyboardShortcuts
 
@@ -38,8 +40,6 @@ global shiftActive
 global winActive
 
 global timerTimeoutStickyKeys := 1000
-
-
 
 readLayoutFile("my-layout.cfg")
 readAlternativeLayoutFile("my-alternative-layout.cfg")
@@ -465,105 +465,6 @@ readSettingsFile(path)
 
 
 
-;-------------------- DEBUGGING --------------------
-processDebugData()
-{
-    showToolTip("DEBUG FILES STORED")
-    FileDelete, %A_Desktop%\debugKeyboardHack.txt
-    msgbox % debugStoredData
-    FileAppend, %debugStoredData%, %A_Desktop%\debugKeyboardHack.txt
-    resetStates()
-}
-
-resetStates()
-{
-    send {lwin up}{ctrl up}{alt up}{shift up}
-    activePressedKeys := []
-    processKeyOnRelease := false
-    layoutKeyPressed := false
-    alternativeLayoutActive := false 
-    sendLayoutKey := false
-    stopManagingLayoutKey :=false 
-    keyToSendOnUp := ""
-    lastKeyProcessedAsAlternative := ""
-    ctrlActive := false
-    altActive := false
-    shiftActive := false
-    winActive := false
-}
-
-debug(value)
-{
-    if (logInput)
-        writeMemoryStream(value)
-}
-
-showToolTip(value)
-{
-    tooltip, |%value%|
-    sleep 600
-    tooltip
-}
-
-send(value)
-{
-	send % value
-}
-
-writeMemoryStream(value)
-{
-    keyPressNr := activePressedKeys.Length()
-	textToSend = %A_Hour%:%A_Min%:%A_Sec%:%A_MSec%|%value%|layoutPressed=%layoutKeyPressed%|alternativeLayout=%alternativeLayoutActive%|PressedKeysNr=%keyPressNr%|ProcessKeyOnRelease=%processKeyOnRelease%|keyToSendOnUp=%keyToSendOnUp%|^=%ctrlActive%`|!=%altActive%|+=%shiftActive%`n
-    debugStoredData .= textToSend
-    if (StrLen(debugStoredData) > 8000)
-    {
-        StringTrimLeft, debugStoredData, debugStoredData, 4000     
-    }
-}
-;-------------------- END OF DEBUGGING --------------------
-
-
-
-
-
-;-------------------- DEBUGGING KEYS -------------------- 
-#if logInput
-    #f6::
-        msgbox % debugStoredData
-    return
-    
-    #f7::
-        showToolTip("RELOADING")
-    	reload
-    return
-    
-    #f8::
-        resetStates()
-        showToolTip("STATES RESTORED")
-    return
-#if
-
-
-;-------------------- END OF DEBUGGING SHORTCUTS --------------------
-^+SC029::
-	if navigationMode = 0 
-	{
-		navigationMode = 1
-		showToolTip("AlternativeMode ON")
-		resetStates()
-		return
-	}
-	else
-	{
-		navigationMode = 0
-		showToolTip("NORMAL")
-		resetStates()
-		return
-	}
-return
-;-------------------- keys that will be processed --------------------
-
-
 #If navigationMode = 1
     
     *escape::processKeyDown("escape")
@@ -823,9 +724,3 @@ return
     
 ;-------------------- END OF keys that will be processed
 #if
-
-
-
-
-
-
