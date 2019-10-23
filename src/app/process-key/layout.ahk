@@ -81,10 +81,6 @@ manageLayoutKeyUp(key)
     debug(key . "|NOT SENT CAUSE CONSUMED")
 }
 
-
-
-
-
 TimerProcessLayoutOnRelease:
     SetTimer, TimerProcessLayoutOnRelease, OFF
     layoutKeyActivatesProcessKeyOnRelease := false 

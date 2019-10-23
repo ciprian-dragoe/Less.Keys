@@ -1,9 +1,11 @@
 global navigationMode = 1
 
+
+
 #If navigationMode = 1
     
-    *escape::processKeyDown("escape")
-    *escape up::processKeyUp("escape")
+    *escape::processKeyDown(layout["escape"])
+    *escape up::processKeyUp(layout["escape"])
     
     *f1::processKeyDown(layout["F1"])
     *f1 up::processKeyUp(layout["F1"])
@@ -256,6 +258,6 @@ global navigationMode = 1
     
     *rwin::processKeyDown("lwin")
     *rwin up::processKeyUp("lwin")    
-    
+
 ;-------------------- END OF keys that will be processed
 #if

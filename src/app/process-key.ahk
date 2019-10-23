@@ -1,5 +1,11 @@
-global keyToSendOnUp
+#include  %A_ScriptDir%\app\process-key\normal.ahk
+#include  %A_ScriptDir%\app\process-key\modifier.ahk
+#include  %A_ScriptDir%\app\process-key\layout.ahk
+#include  %A_ScriptDir%\app\process-key\sticky.ahk
 
+
+
+global keyToSendOnUp
 global sendLayoutKey
 global lastKeyProcessedAsAlternative
 global activePressedKeys := []
@@ -19,7 +25,7 @@ processKeyDown(key)
         return
     }
     
-    processNormalKeydown(key)
+    processNormalKey(key)
 }
 
 processKeyUp(key) 
@@ -76,27 +82,4 @@ removeFromActivePressedKeys(key)
         if (value = key)
             activePressedKeys.Remove(index)
     }
-}
-
-processKeyToSend(key)
-{
-    activeModifiers := getActiveModifiers(key)
-    if (!processAhkKeyboardShortcuts(activeModifiers, key))
-    {
-        send {blind}%activeModifiers%{%key%}
-        ;showtooltip(activeModifiers . "|" . key)
-    }
-}
-
-processAhkKeyboardShortcuts(activeModifiers, key)
-{
-    combination := activeModifiers . key
-    index := keyboardShortcuts[combination]
-    if (index)
-    {
-        processShortcut(index)
-        return true
-    }
-    
-    return false
 }

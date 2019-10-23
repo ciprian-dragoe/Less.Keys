@@ -1,19 +1,19 @@
-deactivateLayout()
+activateDeactivateLayout()
 {
 	if navigationMode = 0 
-    	{
-    		navigationMode = 1
-    		showToolTip("AlternativeMode ON")
-    		resetStates()
-    		return
-    	}
-    	else
-    	{
-    		navigationMode = 0
-    		showToolTip("NORMAL")
-    		resetStates()
-    		return
-    	}
+    {
+        navigationMode = 1
+        showToolTip("Less.Keys - ON")
+        sleep 1000
+        resetStates()
+    }
+    else
+    {
+        navigationMode = 0
+        showToolTip("NORMAL LAYOUT")
+        sleep 1000
+        resetStates()
+    }
 }
 
 reloadApp()

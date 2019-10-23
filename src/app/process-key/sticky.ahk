@@ -45,7 +45,6 @@ FixStickyKeys:
     SetTimer, FixStickyKeys, OFF
 return
 
-
 TimerStickyActivePressedKeys:
     activePressedKeys := []
 return

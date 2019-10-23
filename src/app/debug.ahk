@@ -2,7 +2,6 @@ global debugStoredData := ""
 
 
 
-
 resetStates()
 {
     send {lwin up}{ctrl up}{alt up}{shift up}
