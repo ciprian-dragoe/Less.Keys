@@ -5,7 +5,8 @@ global alternativeLayoutActive
 global stopManagingLayoutKey
 global initialMousePositionXAxis
 global initialMousePositionYAxis
-CoordMode, Mouse, Screen
+
+
 
 manageLayoutKeyDown(key)
 {
@@ -20,6 +21,7 @@ manageLayoutKeyDown(key)
             send {blind}{%key%}
             sendLayoutKey := false
             stopManagingLayoutKey := true
+            debug(key . "|because other keys pressed")
         }
         else
         {
@@ -32,6 +34,7 @@ manageLayoutKeyDown(key)
             {
                 processKeyOnRelease := true
             }
+            debug(key . "|activates alternative layout")
         }
     }
 }
@@ -41,7 +44,8 @@ TimerGetMouseMovement:
     CoordMode, Mouse, Screen
     MouseGetPos, xpos, ypos
     differenceY := initialMousePositionYAxis - ypos
-    if (differenceY) {
+    differenceX := initialMousePositionXAxis - xpos
+    if (abs(differenceY) > abs(differenceX)) {
         systemCursor(0)
         sendLayoutKey := false
         if (differenceY > 0) {
@@ -49,6 +53,16 @@ TimerGetMouseMovement:
         }
         else {
             SendInput {wheeldown}
+        }
+    }
+    if (abs(differenceX) > abs(differenceY)) {
+        systemCursor(0)
+        sendLayoutKey := false
+        if (differenceX > 0) {
+            SendInput {WheelLeft}
+        }
+        else {
+            SendInput {WheelRight}
         }
     }
     DllCall("SetCursorPos", "int", initialMousePositionXAxis, "int", initialMousePositionYAxis) 
@@ -99,6 +113,7 @@ TimerTimeoutSendLayoutKey:
         processKeyOnRelease := false
         layoutKeyActivatesProcessKeyOnRelease := false
         keyToSendOnUp := ""
+        debug(key . "|---*** on alternative layout hard pressed and send key on up")            
     }
 return
 
@@ -120,15 +135,19 @@ manageLayoutKeyUp(key)
         {
             send {blind}%activeModifiers%{%key%}
         }
+        debug(key . "|UP")
         
         if (keyToSendOnUp)
         {
             processKeyToSend(keyToSendOnUp)
             keyToSendOnUp := ""
+            debug(keyToSendOnUp . "|^^^^^^ on alternative layout released before")
         }
         
         return
     }
+
+    debug(key . "|NOT SENT CAUSE CONSUMED")
 }
 
 

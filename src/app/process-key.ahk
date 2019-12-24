@@ -52,6 +52,7 @@ processKeyUp(key)
         layoutKeyActivatesProcessKeyOnRelease := false
         keyToSendOnUp := ""
         sendLayoutKey := false        
+        debug(key . "|***^^^ key up & process release")      
     }
     else
     {
@@ -68,7 +69,9 @@ processKeyUp(key)
             layoutKeyActivatesProcessKeyOnRelease := true
             SetTimer, TimerProcessLayoutOnRelease, OFF
             SetTimer, TimerProcessLayoutOnRelease, %timeoutProcessLayoutOnRelease%
-        }    
+        }
+        
+        debug(key . "|up")
     }
 }
 

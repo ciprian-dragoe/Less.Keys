@@ -12,7 +12,7 @@ Else
     strComputer = "."
     Const HIGH_PRIORITY = 128
     processName = "LessKeys.exe"   ' The process name of your app
-    appName = "c:\Users\cipri\OneDrive\PORTABLE_PROGRAMS\ahk\Navigare\LessKeys\\LessKeys.exe" ' The app you want to run
+    appName = "d:\sync\cipi\PROGRAMS\ahk\Navigare\LessKeys\LessKeys.exe" ' The app you want to run
 
     objShell.ShellExecute appName, , , "runas", 1
 

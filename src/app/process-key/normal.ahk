@@ -6,6 +6,7 @@ processNormalKey(key)
     if (processKeyOnRelease)
     {
         keyToSendOnUp := key
+        debug(key . "|>>>>>> will be processed on release")
     }
     else
     {   
@@ -15,6 +16,7 @@ processNormalKey(key)
             key := alternativeLayout[key]
             sendLayoutKey := false
             processKeyToSend(key)
+            debug(key . "|------ key down with alternative layout")
             
             return
         }
@@ -23,6 +25,7 @@ processNormalKey(key)
         {
             addToActivePressedKeys(key)
             processKeyToSend(key)
+            debug(key . "|key down")
         }
     }
 }
