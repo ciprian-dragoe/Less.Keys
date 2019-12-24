@@ -3,7 +3,6 @@ global navigationMode = 1
 
 
 #If navigationMode = 1
-    
     *escape::processKeyDown(layout["escape"])
     *escape up::processKeyUp(layout["escape"])
     
@@ -100,57 +99,17 @@ global navigationMode = 1
     *tab::processKeyDown(layout["tab"])
     *tab up::processKeyUp(layout["tab"])
     
-    *q::
-        if (GetKeyState("Capslock", "P")) {
-            processKeyDown("7")
-        }
-        else {
-            processKeyDown(layout["q"])
-        }
-    return
-    *q up::
-        processKeyUp("6")
-        processKeyUp(layout["q"])
-    return
+    *q::processKeyDown(layout["q"])
+    *q up::processKeyUp(layout["q"])
     
-    *w::
-        if (GetKeyState("Capslock", "P")) {
-            processKeyDown("8")
-        }
-        else {
-            processKeyDown(layout["w"])
-        }
-    return
-    *w up::
-        processKeyUp("8")
-        processKeyUp(layout["w"])
-    return
+    *w::processKeyDown(layout["w"])
+    *w up::processKeyUp(layout["w"])
     
-    *e::
-        if (GetKeyState("Capslock", "P")) {
-            processKeyDown("9")
-        }
-        else {
-            processKeyDown(layout["e"])
-        }
-    return
-    *e up::
-        processKeyUp("9")
-        processKeyUp(layout["e"])
-    return
+    *e::processKeyDown(layout["e"])
+    *e up::processKeyUp(layout["e"])
     
-    *r::
-        if (GetKeyState("Capslock", "P")) {
-            processKeyDown("0")
-        }
-        else {
-            processKeyDown(layout["r"])
-        }
-    return
-    *r up::
-        processKeyUp("0")
-        processKeyUp(layout["r"])
-    return
+    *r::processKeyDown(layout["r"])
+    *r up::processKeyUp(layout["r"])
     
     *t::processKeyDown(layout["t"])
     *t up::processKeyUp(layout["t"])
@@ -179,47 +138,17 @@ global navigationMode = 1
     *\::processKeyDown(layout["\"])	
     *\ up::processKeyUp(layout["\"])
             
-    *capslock::return
-    *capslock up::return
+    *capslock::processKeyDown(layout["capslock"])
+    *capslock up::processKeyUp(layout["capslock"])
     
-    *a::
-        if (GetKeyState("Capslock", "P")) {
-            processKeyDown("4")
-        }
-        else {
-            processKeyDown(layout["a"])
-        }
-    return
-    *a up::
-        processKeyUp("4")
-        processKeyUp(layout["a"])
-    return
+    *a::processKeyDown(layout["a"])
+    *a up::processKeyUp(layout["a"])
     
-    *s::
-        if (GetKeyState("Capslock", "P")) {
-            processKeyDown("5")
-        }
-        else {
-            processKeyDown(layout["s"])
-        }
-    return
-    *s up::
-        processKeyUp("5")
-        processKeyUp(layout["s"])
-    return
+    *s::processKeyDown(layout["s"])
+    *s up::processKeyUp(layout["s"])
     
-    *d::
-        if (GetKeyState("Capslock", "P")) {
-            processKeyDown("6")
-        }
-        else {
-            processKeyDown(layout["d"])
-        }
-    return
-    *d up::
-        processKeyUp("6")
-        processKeyUp(layout["d"])
-    return
+    *d::processKeyDown(layout["d"])
+    *d up::processKeyUp(layout["d"])
     
     *f::processKeyDown(layout["f"])
     *f up::processKeyUp(layout["f"])
@@ -248,44 +177,14 @@ global navigationMode = 1
     *enter::processKeyDown(layout["enter"])
     *enter up::processKeyUp(layout["enter"])
             
-    *z::
-        if (GetKeyState("Capslock", "P")) {
-            processKeyDown("1")
-        }
-        else {
-            processKeyDown(layout["z"])
-        }
-    return
-    *z up::
-        processKeyUp("1")
-        processKeyUp(layout["z"])
-    return
+    *z::processKeyDown(layout["z"])
+    *z up::processKeyUp(layout["z"])
     
-    *x::
-        if (GetKeyState("Capslock", "P")) {
-            processKeyDown("2")
-        }
-        else {
-            processKeyDown(layout["x"])
-        }
-    return
-    *x up::
-        processKeyUp("2")
-        processKeyUp(layout["x"])
-    return
+    *x::processKeyDown(layout["x"])
+    *x up::processKeyUp(layout["x"])
     
-    *c::
-        if (GetKeyState("Capslock", "P")) {
-            processKeyDown("3")
-        }
-        else {
-            processKeyDown(layout["c"])
-        }
-    return
-    *c up::
-        processKeyUp("3")
-        processKeyUp(layout["c"])
-    return
+    *c::processKeyDown(layout["c"])
+    *c up::processKeyUp(layout["c"])
     
     *v::processKeyDown(layout["v"])
     *v up::processKeyUp(layout["v"])
@@ -353,6 +252,12 @@ global navigationMode = 1
     *rshift::processKeyDown(layout["rshift"])
     *rshift up::processKeyUp(layout["rshift"])
     
+    *lwin::processKeyDown("lwin")
+    *lwin up::processKeyUp("lwin")
+    
+    *rwin::processKeyDown("lwin")
+    *rwin up::processKeyUp("lwin")
+
 	*pause::processKeyDown(layout["pause"])
     *pause up::processKeyUp(layout["pause"])
 
