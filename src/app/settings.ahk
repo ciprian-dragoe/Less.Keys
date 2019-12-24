@@ -84,4 +84,14 @@ readSettingsFile(path)
     IniRead, timeoutStillSendLayoutKey, %path%, timings, timeoutStillSendLayoutKey
     IniRead, timeoutProcessLayoutOnRelease, %path%, timings, timeoutProcessLayoutOnRelease
     IniRead, logInput, %path%, logging, logInput
+    IniRead, appNames, %path%, disable, appNames
+    IniRead, appClasses, %path%, disable, appAhkClasses
+    disabledApps := StrSplit(appNames, "~~~")
+    for index, app in disabledApps {
+        GroupAdd, IgnoredApps, %app%
+    }
+    disabledAppClasses := StrSplit(appClasses, "~~~")
+    for index, class in disabledAppClasses {
+        GroupAdd, IgnoredApps, ahk_class %class%
+    }
 }

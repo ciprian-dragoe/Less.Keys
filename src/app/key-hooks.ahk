@@ -1,9 +1,5 @@
-global navigationMode = 1
+#IfWinNotActive ahk_group IgnoredApps
 
-
-
-#If navigationMode = 1
-    
     *escape::processKeyDown(layout["escape"])
     *escape up::processKeyUp(layout["escape"])
     
@@ -257,7 +253,17 @@ global navigationMode = 1
     *lwin up::processKeyUp("lwin")
     
     *rwin::processKeyDown("lwin")
-    *rwin up::processKeyUp("lwin")    
+    *rwin up::processKeyUp("lwin")
 
-;-------------------- END OF keys that will be processed
-#if
+	*pause::processKeyDown(layout["pause"])
+    *pause up::processKeyUp(layout["pause"])
+
+	*MButton::processKeyDown(layout["MButton"])
+    *MButton up::processKeyUp(layout["MButton"])
+
+	*XButton1::processKeyDown(layout["XButton1"])
+    *XButton1 up::processKeyUp(layout["XButton1"])
+
+	*XButton2::processKeyDown(layout["XButton2"])
+    *XButton2 up::processKeyUp(layout["XButton2"])
+#IfWinNotActive
