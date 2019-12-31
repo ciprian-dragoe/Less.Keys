@@ -1,5 +1,9 @@
-#IfWinNotActive ahk_group IgnoredApps
+global navigationMode = 1
 
+
+
+#If navigationMode = 1
+    
     *escape::processKeyDown(layout["escape"])
     *escape up::processKeyUp(layout["escape"])
     
@@ -266,4 +270,7 @@
 
 	*XButton2::processKeyDown(layout["XButton2"])
     *XButton2 up::processKeyUp(layout["XButton2"])
-#IfWinNotActive
+
+
+;-------------------- END OF keys that will be processed
+#if

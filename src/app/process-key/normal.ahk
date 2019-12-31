@@ -14,6 +14,9 @@ processNormalKey(key)
         {
             lastKeyProcessedAsAlternative := key
             key := alternativeLayout[key]
+            if (keyToSendOnUp = key) {
+                send {%layoutChangeKey%}
+            }
             sendLayoutKey := false
             processKeyToSend(key)
             debug(key . "|------ key down with alternative layout")
@@ -30,6 +33,7 @@ processNormalKey(key)
     }
 }
 
+
 processKeyToSend(key)
 {
     activeModifiers := getActiveModifiers(key)
@@ -39,6 +43,7 @@ processKeyToSend(key)
         ;showtooltip(activeModifiers . "|" . key)
     }
 }
+
 
 processAhkKeyboardShortcuts(activeModifiers, key)
 {

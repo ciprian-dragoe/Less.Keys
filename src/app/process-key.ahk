@@ -2,6 +2,7 @@
 #include  %A_ScriptDir%\app\process-key\modifier.ahk
 #include  %A_ScriptDir%\app\process-key\layout.ahk
 #include  %A_ScriptDir%\app\process-key\sticky.ahk
+#include  %A_ScriptDir%\app\process-key\mouse.ahk
 
 
 
@@ -28,6 +29,7 @@ processKeyDown(key)
     processNormalKey(key)
 }
 
+
 processKeyUp(key) 
 {
     SetTimer, FixStickyKeys, OFF
@@ -47,11 +49,13 @@ processKeyUp(key)
     if (keyToSendOnUp)
     {
         key := alternativeLayout[keyToSendOnUp]
+        if (keyToSendOnUp = key) {
+            send {%layoutChangeKey%}
+        }
         processKeyToSend(key)
         processKeyOnRelease := false
         layoutKeyActivatesProcessKeyOnRelease := false
         keyToSendOnUp := ""
-        sendLayoutKey := false        
         debug(key . "|***^^^ key up & process release")      
     }
     else
@@ -74,6 +78,7 @@ processKeyUp(key)
         debug(key . "|up")
     }
 }
+
 
 removeFromActivePressedKeys(key)
 {
