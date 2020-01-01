@@ -16,16 +16,19 @@ activateDeactivateLayout()
     }
 }
 
+
 reloadApp()
 {
 	showToolTip("RELOADING")
     reload
 }
 
+
 displayDebugData()
 {
 	msgbox % debugStoredData
 }
+
 
 storeDebugData()
 {

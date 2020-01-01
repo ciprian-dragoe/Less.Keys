@@ -56,6 +56,7 @@ processKeyUp(key)
         processKeyOnRelease := false
         layoutKeyActivatesProcessKeyOnRelease := false
         keyToSendOnUp := ""
+        sendLayoutKey := false
         debug(key . "|***^^^ key up & process release")      
     }
     else

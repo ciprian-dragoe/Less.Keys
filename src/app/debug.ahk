@@ -19,11 +19,13 @@ resetStates()
     winActive := false
 }
 
+
 debug(value)
 {
     if (logInput)
         writeMemoryStream(value)
 }
+
 
 showToolTip(value)
 {
@@ -32,10 +34,6 @@ showToolTip(value)
     tooltip
 }
 
-send(value)
-{
-	send % value
-}
 
 writeMemoryStream(value)
 {
