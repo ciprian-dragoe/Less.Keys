@@ -1,6 +1,6 @@
 processNormalKey(key)
 {
-    setTimer TimerStickyActivePressedKeys, 0
+    setTimer TimerStickyActivePressedKeys, OFF
     setTimer TimerStickyActivePressedKeys, %timerTimeoutStickyKeys%
     
     if (processKeyOnRelease)
