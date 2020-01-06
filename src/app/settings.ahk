@@ -6,6 +6,7 @@ global modifierKeys
 global layout
 global keyboardShortcuts
 global layoutChangeKey
+global timerTimeoutStickyKeys := 2000
 
 
 
@@ -14,6 +15,7 @@ readAlternativeLayoutFile("my-alternative-layout.cfg")
 readSettingsFile("my-settings.cfg")
 readKeyboardShortcutsFile("my-keyboard-shortcuts.cfg")
 resetStates()
+SetTimer, FixStickyKeys, %timerTimeoutStickyKeys%
 
 
 

@@ -10,6 +10,7 @@ global keyToSendOnUp
 global sendLayoutKey
 global lastKeyProcessedAsAlternative
 global activePressedKeys := []
+global processKeyOnRelease
 
 
 
@@ -32,9 +33,6 @@ processKeyDown(key)
 
 processKeyUp(key) 
 {
-    SetTimer, FixStickyKeys, OFF
-    SetTimer, FixStickyKeys, %timerTimeoutStickyKeys%
-    
     if (processModifierKey(key, 0))
     {
         return

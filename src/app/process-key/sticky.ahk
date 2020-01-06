@@ -1,12 +1,6 @@
-global timerTimeoutStickyKeys := 1000
-global processKeyOnRelease
-
-
-
 ; if the cpu is executing intensive tasks then the lift key up command may not be processed for 
 ; modifier keys (ctrl, shift, alt, win) and they are still registered by the os as pressed.
 ; this is a fail safe for such situations
-SetTimer, FixStickyKeys, %timerTimeoutStickyKeys%
 FixStickyKeys: 
     resetCapsLock = false
     for key in modifierKeys
@@ -42,7 +36,6 @@ FixStickyKeys:
 	layoutKeyPressed := false
 	alternativeLayoutActive := false
 	stopManagingLayoutKey := false
-    SetTimer, FixStickyKeys, OFF
 return
 
 
