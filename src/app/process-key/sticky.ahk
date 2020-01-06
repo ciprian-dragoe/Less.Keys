@@ -36,6 +36,7 @@ FixStickyKeys:
 	layoutKeyPressed := false
 	alternativeLayoutActive := false
 	stopManagingLayoutKey := false
+	systemCursor(1)
 return
 
 
