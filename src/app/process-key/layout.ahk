@@ -13,7 +13,9 @@ manageLayoutKeyDown(key)
     {
         CoordMode, Mouse, Screen
         MouseGetPos, initialMousePositionXAxis, initialMousePositionYAxis
-        SetTimer, TimerGetMouseMovement, 100
+        if (timeoutMouseScrollPoll) {
+            SetTimer, TimerGetMouseMovement, %timeoutMouseScrollPoll%
+        }
         stopManagingLayoutKey := true
         if (activePressedKeys.Length() > 0)
         {

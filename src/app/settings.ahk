@@ -1,5 +1,6 @@
 global timeoutStillSendLayoutKey
 global timeoutProcessLayoutOnRelease
+global timeoutMouseScrollPoll
 global logInput
 global alternativeLayout
 global modifierKeys
@@ -85,6 +86,7 @@ readSettingsFile(path)
 {
     IniRead, timeoutStillSendLayoutKey, %path%, timings, timeoutStillSendLayoutKey
     IniRead, timeoutProcessLayoutOnRelease, %path%, timings, timeoutProcessLayoutOnRelease
+    IniRead, timeoutMouseScrollPoll, %path%, mouse, scrollSpeed
     IniRead, logInput, %path%, logging, logInput
     IniRead, appNames, %path%, disable, appNames
     IniRead, appClasses, %path%, disable, appAhkClasses

@@ -9,8 +9,7 @@ TimerGetMouseMovement:
     differenceY := initialMousePositionYAxis - ypos
     differenceX := initialMousePositionXAxis - xpos
     if (abs(differenceY) > abs(differenceX)) {
-        systemCursor(0)
-        sendLayoutKey := false
+        scrollStateInit()
         if (differenceY > 0) {
             SendInput {wheelup}
         }
@@ -19,8 +18,7 @@ TimerGetMouseMovement:
         }
     }
     if (abs(differenceX) > abs(differenceY)) {
-        systemCursor(0)
-        sendLayoutKey := false
+        scrollStateInit()
         if (differenceX > 0) {
             SendInput {WheelLeft}
         }
@@ -28,7 +26,21 @@ TimerGetMouseMovement:
             SendInput {WheelRight}
         }
     }
+
     DllCall("SetCursorPos", "int", initialMousePositionXAxis, "int", initialMousePositionYAxis) 
+return
+
+
+scrollStateInit() {
+    systemCursor(0)
+    sendLayoutKey := false
+    SetTimer, TimerShowMouse, OFF        
+    SetTimer, TimerShowMouse, 300        
+}
+
+
+TimerShowMouse:
+    systemCursor(1)
 return
 
 
