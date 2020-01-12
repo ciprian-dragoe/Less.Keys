@@ -27,10 +27,10 @@ debug(value)
 }
 
 
-showToolTip(value)
+showToolTip(value, time = 600)
 {
     tooltip, |%value%|
-    sleep 600
+    sleep %time%
     tooltip
 }
 

@@ -1,6 +1,6 @@
 global initialMousePositionXAxis
 global initialMousePositionYAxis
-
+ 
 
 
 TimerGetMouseMovement:
@@ -8,34 +8,60 @@ TimerGetMouseMovement:
     MouseGetPos, xpos, ypos
     differenceY := initialMousePositionYAxis - ypos
     differenceX := initialMousePositionXAxis - xpos
-    if (abs(differenceY) > abs(differenceX)) {
-        scrollStateInit()
-        if (differenceY > 0) {
-            SendInput {wheelup}
-        }
-        else {
-            SendInput {wheeldown}
-        }
+    if (differenceY != 0 || differenceY != 0) {
+        systemCursor(0)
+        SetTimer, TimerShowMouse, OFF
+        SetTimer, TimerShowMouse, 300
+        direction := getScrollDirection(differenceY, differenceX)
+        amount := getScrollAmount()
+        initiateScroll(direction, amount)
     }
-    if (abs(differenceX) > abs(differenceY)) {
-        scrollStateInit()
-        if (differenceX > 0) {
-            SendInput {WheelLeft}
-        }
-        else {
-            SendInput {WheelRight}
-        }
-    }
-
+    
     DllCall("SetCursorPos", "int", initialMousePositionXAxis, "int", initialMousePositionYAxis) 
 return
 
 
-scrollStateInit() {
-    systemCursor(0)
-    sendLayoutKey := false
-    SetTimer, TimerShowMouse, OFF        
-    SetTimer, TimerShowMouse, 300        
+getScrollDirection(differenceY, differenceX) {
+    if (abs(differenceY) > abs(differenceX)) {
+        if (totalDifferenceYAxis * differenceY < 0) {
+            totalDifferenceYAxis := 0
+        }
+        totalDifferenceYAxis := totalDifferenceYAxis + differenceY
+        if (totalDifferenceYAxis > 0) {
+            return "wheelup"
+        } else {
+            return "wheeldown"
+        }
+    } else {
+        if (totalDifferenceXAxis * differenceX < 0) {
+            totalDifferenceXAxis := 0
+        }
+        totalDifferenceXAxis := totalDifferenceXAxis + differenceX
+        if (totalDifferenceXAxis > 0) {
+            return "wheelleft"
+        } else {
+            return "wheelright"
+        }
+    }
+}
+
+
+getScrollAmount() {
+    ;showToolTip(totalDifferenceYAxis // mouseScrollAcceleration . "|" . totalDifferenceYAxis)
+    return abs(max(abs(totalDifferenceXAxis // mouseScrollAcceleration), abs(totalDifferenceYAxis // mouseScrollAcceleration)))
+}
+
+
+initiateScroll(direction, amount) {
+    ;showToolTip(totalDifferenceYAxis // mouseScrollAcceleration)
+    loop %amount% {
+        SendInput {%direction%}
+    }
+    if (amount) {
+        totalDifferenceYAxis := 0
+        totalDifferenceXAxis := 0
+        sendLayoutKey := false
+    }
 }
 
 

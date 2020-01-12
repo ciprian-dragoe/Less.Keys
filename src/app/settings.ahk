@@ -7,7 +7,10 @@ global modifierKeys
 global layout
 global keyboardShortcuts
 global layoutChangeKey
+global mouseScrollAcceleration
 global timerTimeoutStickyKeys := 2000
+global totalDifferenceXAxis := 0
+global totalDifferenceYAxis := 0
 
 
 
@@ -86,7 +89,8 @@ readSettingsFile(path)
 {
     IniRead, timeoutStillSendLayoutKey, %path%, timings, timeoutStillSendLayoutKey
     IniRead, timeoutProcessLayoutOnRelease, %path%, timings, timeoutProcessLayoutOnRelease
-    IniRead, timeoutMouseScrollPoll, %path%, mouse, scrollSpeed
+    IniRead, timeoutMouseScrollPoll, %path%, mouse, scrollPoll
+    IniRead, mouseScrollAcceleration, %path%, mouse, scrollAcceleration
     IniRead, logInput, %path%, logging, logInput
     IniRead, appNames, %path%, disable, appNames
     IniRead, appClasses, %path%, disable, appAhkClasses
