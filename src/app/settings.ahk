@@ -11,6 +11,10 @@ global mouseScrollAcceleration
 global timerTimeoutStickyKeys := 2000
 global totalDifferenceXAxis := 0
 global totalDifferenceYAxis := 0
+global checkStickyKeyList := ["lshift", "rshift", "lctrl", "rctrl", "ralt", "lalt", "lwin", "rwin"]
+global activeProgramWindowName := ""
+global activeProgramWindowClass := ""
+global ignoredPrograms := []
 
 
 
@@ -36,29 +40,36 @@ readLayoutFile(path)
         remappedKey := StrSplit(A_LoopReadLine, "`:").2
         if (remappedKey = "ctrl")
         {
-            modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := "ctrl"
+            addModifier(A_LoopReadLine, "ctrl")
         } 
         else if (remappedKey = "alt")
         {
-            modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := "alt"
+            addModifier(A_LoopReadLine, "alt")
         }
         else if (remappedKey = "shift")
         {
-            modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := "shift"
+            addModifier(A_LoopReadLine, "shift")
         }
         else if (remappedKey = "lwin")
         {
-            modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := "lwin"
+            addModifier(A_LoopReadLine, "lwin")
         }
         
         layout[StrSplit(A_LoopReadLine, "`:").1] := remappedKey
     }
 }
 
+addModifier(alternative, forModifier) {
+    modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := forModifier
+    checkStickyKeyList.Push(StrSplit(A_LoopReadLine, "`:").1)
+}
+
+
 readAlternativeLayoutFile(path)
 {
     FileReadLine, layoutChangeKey, %path%, 1
-    layoutChangeKey := StrSplit(layoutChangeKey, "`:").2 
+    layoutChangeKey := StrSplit(layoutChangeKey, "`:").2
+    checkStickyKeyList.Push(layoutChangeKey)
     alternativeLayout:=Object()
     Loop, read, %path%
     {
@@ -70,6 +81,7 @@ readAlternativeLayoutFile(path)
         alternativeLayout[StrSplit(A_LoopReadLine, "`:").1] := remappedKey
     }
 }
+
 
 readKeyboardShortcutsFile(path)
 {
@@ -85,6 +97,7 @@ readKeyboardShortcutsFile(path)
     }
 }
 
+
 readSettingsFile(path)
 {
     IniRead, timeoutStillSendLayoutKey, %path%, timings, timeoutStillSendLayoutKey
@@ -93,13 +106,9 @@ readSettingsFile(path)
     IniRead, mouseScrollAcceleration, %path%, mouse, scrollAcceleration
     IniRead, logInput, %path%, logging, logInput
     IniRead, appNames, %path%, disable, appNames
-    IniRead, appClasses, %path%, disable, appAhkClasses
     disabledApps := StrSplit(appNames, "~~~")
     for index, app in disabledApps {
         GroupAdd, IgnoredApps, %app%
-    }
-    disabledAppClasses := StrSplit(appClasses, "~~~")
-    for index, class in disabledAppClasses {
-        GroupAdd, IgnoredApps, ahk_class %class%
+        ignoredPrograms.Push(app)
     }
 }
