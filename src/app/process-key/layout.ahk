@@ -76,8 +76,8 @@ manageLayoutKeyUp(key)
         if (keyToSendOnUp)
         {
             processKeyToSend(keyToSendOnUp)
-            keyToSendOnUp := ""
             debug(keyToSendOnUp . "|^^^^^^ on alternative layout released before")
+            keyToSendOnUp := ""
         }
         
         return
