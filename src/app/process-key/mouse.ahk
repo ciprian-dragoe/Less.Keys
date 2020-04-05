@@ -1,9 +1,12 @@
 global initialMousePositionXAxis
 global initialMousePositionYAxis
- 
+global mouseScrollAcceleration
+global totalDifferenceXAxis := 0
+global totalDifferenceYAxis := 0
+global timeoutMouseScrollPoll
 
-
-TimerGetMouseMovement:
+timerGetMouseMovement()
+{
     CoordMode, Mouse, Screen
     MouseGetPos, xpos, ypos
     differenceY := initialMousePositionYAxis - ypos
@@ -17,9 +20,8 @@ TimerGetMouseMovement:
         initiateScroll(direction, amount)
     }
     
-    DllCall("SetCursorPos", "int", initialMousePositionXAxis, "int", initialMousePositionYAxis) 
-return
-
+    DllCall("SetCursorPos", "int", initialMousePositionXAxis, "int", initialMousePositionYAxis)
+}
 
 getScrollDirection(differenceY, differenceX) {
     if (abs(differenceY) > abs(differenceX)) {
@@ -45,15 +47,11 @@ getScrollDirection(differenceY, differenceX) {
     }
 }
 
-
 getScrollAmount() {
-    ;showToolTip(totalDifferenceYAxis // mouseScrollAcceleration . "|" . totalDifferenceYAxis)
     return abs(max(abs(totalDifferenceXAxis // mouseScrollAcceleration), abs(totalDifferenceYAxis // mouseScrollAcceleration)))
 }
 
-
 initiateScroll(direction, amount) {
-    ;showToolTip(totalDifferenceYAxis // mouseScrollAcceleration)
     loop %amount% {
         SendInput {%direction%}
     }
@@ -63,12 +61,6 @@ initiateScroll(direction, amount) {
         sendLayoutKey := false
     }
 }
-
-
-TimerShowMouse:
-    systemCursor(1)
-return
-
 
 systemCursor(OnOff) {
     static AndMask, XorMask, $, h_cursor

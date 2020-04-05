@@ -1,4 +1,5 @@
 global debugStoredData := ""
+global logInput
 
 
 
@@ -17,8 +18,8 @@ resetStates()
     altActive := false
     shiftActive := false
     winActive := false
+    systemCursor(1)
 }
-
 
 debug(value)
 {
@@ -26,14 +27,12 @@ debug(value)
         writeMemoryStream(value)
 }
 
-
 showToolTip(value, time = 600)
 {
     tooltip, |%value%|
     sleep %time%
     tooltip
 }
-
 
 writeMemoryStream(value)
 {

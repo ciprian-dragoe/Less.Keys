@@ -1,7 +1,6 @@
 #include  %A_ScriptDir%\app\process-key\normal.ahk
 #include  %A_ScriptDir%\app\process-key\modifier.ahk
 #include  %A_ScriptDir%\app\process-key\layout.ahk
-#include  %A_ScriptDir%\app\process-key\sticky.ahk
 #include  %A_ScriptDir%\app\process-key\mouse.ahk
 
 

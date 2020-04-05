@@ -1,7 +1,7 @@
 processNormalKey(key)
 {
-    setTimer TimerStickyActivePressedKeys, OFF
-    setTimer TimerStickyActivePressedKeys, %timerTimeoutStickyKeys%
+    setTimer TimerActivePressedKeysReset, OFF
+    setTimer TimerActivePressedKeysReset, %timerTimeoutStickyKeys%
     
     if (processKeyOnRelease)
     {
@@ -33,17 +33,14 @@ processNormalKey(key)
     }
 }
 
-
 processKeyToSend(key)
 {
     activeModifiers := getActiveModifiers(key)
     if (!processAhkKeyboardShortcuts(activeModifiers, key))
     {
         send {blind}%activeModifiers%{%key%}
-        ;showtooltip(activeModifiers . "|" . key)
     }
 }
-
 
 processAhkKeyboardShortcuts(activeModifiers, key)
 {
@@ -58,7 +55,6 @@ processAhkKeyboardShortcuts(activeModifiers, key)
     
     return false
 }
-
 
 addToActivePressedKeys(key)
 {
