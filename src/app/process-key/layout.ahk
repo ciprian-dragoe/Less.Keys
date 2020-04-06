@@ -19,7 +19,12 @@ manageLayoutKeyDown(key)
             alternativeLayoutActive := true
             SetTimer, TimerTimeoutSpaceAsMouseClick, off
             return
-        }        
+        }
+        if (timeoutMouseScrollPoll) {
+            CoordMode, Mouse, Screen
+            MouseGetPos, initialMousePositionXAxis, initialMousePositionYAxis
+            SetTimer, TimerGetMouseMovement, %timeoutMouseScrollPoll%
+        }
         if (activePressedKeys.Length() > 0)
         {
             send {blind}{%key%}
@@ -46,6 +51,8 @@ manageLayoutKeyUp(key)
 {
     SendInput {Blind}{LButton Up}
     SetTimer, TimerTimeoutSpaceAsMouseClick, %timeoutSpaceAsClick%
+    SetTimer, TimerGetMouseMovement, OFF
+    systemCursor(1)
     layoutKeyPressed := false
     processKeyOnRelease := false
     layoutKeyActivatesProcessKeyOnRelease := false
