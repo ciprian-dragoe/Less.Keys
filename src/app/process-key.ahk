@@ -17,6 +17,8 @@ processKeyDown(key)
 {
     if (processModifierKey(key, 1))
     {
+        ;showtooltip(spaceAsClick . " processKeyDown")
+        spaceAsClick := false
         return
     }
     

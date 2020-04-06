@@ -6,7 +6,7 @@ global timerTimeoutStickyKeys := 2000
 
 
 
-applyDisabledAppsSettings()
+applyDisabledAppsSettings(path)
 {
     IniRead, appNames, %path%, disable, appNames
     disabledApps := StrSplit(appNames, "~~~")

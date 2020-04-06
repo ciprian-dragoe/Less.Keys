@@ -2,7 +2,6 @@ global alternativeLayoutActive
 global layoutKeyActivatesProcessKeyOnRelease
 global layoutKeyPressed
 global alternativeLayoutActive
-global stopManagingLayoutKey
 global timeoutStillSendLayoutKey
 global timeoutProcessLayoutOnRelease
 
@@ -10,15 +9,26 @@ global timeoutProcessLayoutOnRelease
 
 manageLayoutKeyDown(key)
 {
-    layoutKeyPressed := true
-    if (!stopManagingLayoutKey)
+    if (!layoutKeyPressed)
     {
-        CoordMode, Mouse, Screen
-        MouseGetPos, initialMousePositionXAxis, initialMousePositionYAxis
-        if (timeoutMouseScrollPoll) {
-            SetTimer, TimerGetMouseMovement, %timeoutMouseScrollPoll%
-        }
-        stopManagingLayoutKey := true
+        layoutKeyPressed := true
+        if (spaceAsClick)
+        {
+            if (timerDelaySpaceAsClick)
+            {
+                SetTimer, CheckRecentMouseMovemet, off
+                SetTimer, TimerSendDelayMouseClick, %timerDelaySpaceAsClick%
+                timerDelaySpaceAsClick := 0
+            }
+            else
+            {
+                SendInput {Blind}{LButton Down}
+            }
+            sendLayoutKey := false
+            alternativeLayoutActive := true
+            SetTimer, TimerTimeoutSpaceAsMouseClick, off
+            return
+        }        
         if (activePressedKeys.Length() > 0)
         {
             send {blind}{%key%}
@@ -41,30 +51,18 @@ manageLayoutKeyDown(key)
 }
 
 
-TimerTimeoutSendLayoutKey:
-    SetTimer, TimerTimeoutSendLayoutKey, OFF
-    sendLayoutKey := false
-    if (keyToSendOnUp)
-    {
-        key := alternativeLayout[keyToSendOnUp]
-        processKeyToSend(key)
-        processKeyOnRelease := false
-        layoutKeyActivatesProcessKeyOnRelease := false
-        keyToSendOnUp := ""
-        debug(key . "|---*** on alternative layout hard pressed and send key on up")            
-    }
-return
-
-
 manageLayoutKeyUp(key)
 {
-    SetTimer, TimerGetMouseMovement, OFF
-    systemCursor(1)
-    SetTimer, TimerTimeoutSendLayoutKey, OFF
-    stopManagingLayoutKey := false
+    SendInput {Blind}{LButton Up}
+    SetTimer, TimerTimeoutSpaceAsMouseClick, %timeoutSpaceAsClick%
+    SetTimer, TimerSendDelayMouseClick, off
+    SetTimer, CheckRecentMouseMovemet, 100
+    timerDelaySpaceAsClick := 100
+    SetTimer, TimerResetDelaySpaceAsClick, off
+    SetTimer, TimerResetDelaySpaceAsClick, %timerDelaySpaceAsClick%
     layoutKeyPressed := false
     processKeyOnRelease := false
-    layoutKeyActivatesProcessKeyOnRelease := false    
+    layoutKeyActivatesProcessKeyOnRelease := false
     alternativeLayoutActive := false
     if (sendLayoutKey)
     {   
@@ -88,9 +86,40 @@ manageLayoutKeyUp(key)
     debug(key . "|NOT SENT CAUSE CONSUMED")
 }
 
+timerTimeoutSendLayoutKey()
+{
+    SetTimer, TimerTimeoutSendLayoutKey, OFF
+    sendLayoutKey := false
+    if (keyToSendOnUp)
+    {
+        key := alternativeLayout[keyToSendOnUp]
+        processKeyToSend(key)
+        processKeyOnRelease := false
+        layoutKeyActivatesProcessKeyOnRelease := false
+        keyToSendOnUp := ""
+        debug(key . "|---*** on alternative layout hard pressed and send key on up")            
+    }
+
+}
+
 timerProcessLayoutOnRelease()
 {
     SetTimer, TimerProcessLayoutOnRelease, OFF
     layoutKeyActivatesProcessKeyOnRelease := false
 }
 
+timerSendDelayMouseClick()
+{
+    ;showtooltip("timerSendDelayMouseClick")
+    SetTimer, TimerSendDelayMouseClick, OFF
+    if (spaceAsClick)
+    {
+        SendInput {Blind}{LButton Down}
+    }
+}
+
+timerResetDelaySpaceAsClick()
+{
+    timerDelaySpaceAsClick := 0
+    SetTimer TimerResetDelaySpaceAsClick, off
+}

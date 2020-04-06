@@ -1,5 +1,7 @@
 processNormalKey(key)
 {
+    ;showtooltip(spaceAsClick . " processNormalKey")
+    spaceAsClick := false
     setTimer TimerActivePressedKeysReset, OFF
     setTimer TimerActivePressedKeysReset, %timerTimeoutStickyKeys%
     

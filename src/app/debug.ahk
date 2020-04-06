@@ -11,7 +11,6 @@ resetStates()
     layoutKeyPressed := false
     alternativeLayoutActive := false 
     sendLayoutKey := false
-    stopManagingLayoutKey :=false 
     keyToSendOnUp := ""
     lastKeyProcessedAsAlternative := ""
     ctrlActive := false

@@ -27,3 +27,19 @@ return
 TimerActivePressedKeysReset:
     activePressedKeys := []
 return
+
+TimerTimeoutSpaceAsMouseClick:
+    timerTimeoutSpaceAsMouseClick()
+return
+
+TimerTimeoutSendLayoutKey:
+    timerTimeoutSendLayoutKey()
+return
+
+TimerSendDelayMouseClick:
+    timerSendDelayMouseClick()
+return
+
+TimerResetDelaySpaceAsClick:
+    timerResetDelaySpaceAsClick()
+return

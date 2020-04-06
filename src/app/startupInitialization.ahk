@@ -1,7 +1,7 @@
 #include  %A_ScriptDir%\app\settings\alternativeLayout.ahk
 #include  %A_ScriptDir%\app\settings\keyboardShortcuts.ahk
 #include  %A_ScriptDir%\app\settings\layout.ahk
-#include  %A_ScriptDir%\app\settings\spaceAsMouse.ahk
+#include  %A_ScriptDir%\app\settings\spaceAsClick.ahk
 #include  %A_ScriptDir%\app\settings\stickyFailBack.ahk
 
 
@@ -20,6 +20,6 @@ readSettingsFile(path)
     IniRead, timeoutMouseScrollPoll, %path%, mouse, scrollPoll
     IniRead, mouseScrollAcceleration, %path%, mouse, scrollAcceleration
     IniRead, logInput, %path%, logging, logInput
-    applyDisabledAppsSettings()
-    applySpaceAsClickSettings()
+    applyDisabledAppsSettings(path)
+    applySpaceAsClickSettings(path)
 }
