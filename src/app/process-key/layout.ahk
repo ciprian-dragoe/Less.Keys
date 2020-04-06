@@ -14,16 +14,7 @@ manageLayoutKeyDown(key)
         layoutKeyPressed := true
         if (spaceAsClick)
         {
-            if (timerDelaySpaceAsClick)
-            {
-                SetTimer, CheckRecentMouseMovemet, off
-                SetTimer, TimerSendDelayMouseClick, %timerDelaySpaceAsClick%
-                timerDelaySpaceAsClick := 0
-            }
-            else
-            {
-                SendInput {Blind}{LButton Down}
-            }
+            SendInput {Blind}{LButton Down}
             sendLayoutKey := false
             alternativeLayoutActive := true
             SetTimer, TimerTimeoutSpaceAsMouseClick, off
@@ -55,11 +46,6 @@ manageLayoutKeyUp(key)
 {
     SendInput {Blind}{LButton Up}
     SetTimer, TimerTimeoutSpaceAsMouseClick, %timeoutSpaceAsClick%
-    SetTimer, TimerSendDelayMouseClick, off
-    SetTimer, CheckRecentMouseMovemet, 100
-    timerDelaySpaceAsClick := 100
-    SetTimer, TimerResetDelaySpaceAsClick, off
-    SetTimer, TimerResetDelaySpaceAsClick, %timerDelaySpaceAsClick%
     layoutKeyPressed := false
     processKeyOnRelease := false
     layoutKeyActivatesProcessKeyOnRelease := false
@@ -106,20 +92,4 @@ timerProcessLayoutOnRelease()
 {
     SetTimer, TimerProcessLayoutOnRelease, OFF
     layoutKeyActivatesProcessKeyOnRelease := false
-}
-
-timerSendDelayMouseClick()
-{
-    ;showtooltip("timerSendDelayMouseClick")
-    SetTimer, TimerSendDelayMouseClick, OFF
-    if (spaceAsClick)
-    {
-        SendInput {Blind}{LButton Down}
-    }
-}
-
-timerResetDelaySpaceAsClick()
-{
-    timerDelaySpaceAsClick := 0
-    SetTimer TimerResetDelaySpaceAsClick, off
 }

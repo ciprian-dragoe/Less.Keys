@@ -2,7 +2,7 @@ global recentMouseMovementXaxis := 0
 global recentMouseMovementYaxis := 0
 global timeoutSpaceAsClick
 global spaceAsClick := false
-global timerDelaySpaceAsClick := 0
+
 
 applySpaceAsClickSettings(path)
 {
@@ -31,6 +31,6 @@ checkRecentMouseMovement() {
 timerTimeoutSpaceAsMouseClick()
 {
     spaceAsClick := false
-    showtooltip(spaceAsClick . " timerTimeoutSpaceAsMouseClick")
+    ;showtooltip(spaceAsClick . " timerTimeoutSpaceAsMouseClick")
     SetTimer, TimerTimeoutSpaceAsMouseClick, off
 }

@@ -35,11 +35,3 @@ return
 TimerTimeoutSendLayoutKey:
     timerTimeoutSendLayoutKey()
 return
-
-TimerSendDelayMouseClick:
-    timerSendDelayMouseClick()
-return
-
-TimerResetDelaySpaceAsClick:
-    timerResetDelaySpaceAsClick()
-return
