@@ -79,7 +79,6 @@ processKeyUp(key)
     }
 }
 
-
 removeFromActivePressedKeys(key)
 {
     For index, value in activePressedKeys

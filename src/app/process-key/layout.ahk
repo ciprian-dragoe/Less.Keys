@@ -14,10 +14,10 @@ manageLayoutKeyDown(key)
         layoutKeyPressed := true
         if (spaceAsClick)
         {
-            SendInput {Blind}{LButton Down}
-            sendLayoutKey := false
+            MOUSE_DRAG_ACTIVE := false
+            SetTimer, timerTimeoutSpaceAsMouseClick, off
+            SetTimer, TimerClickDrag, 10
             alternativeLayoutActive := true
-            SetTimer, TimerTimeoutSpaceAsMouseClick, off
             return
         }
         if (timeoutMouseScrollPoll) {
@@ -49,10 +49,21 @@ manageLayoutKeyDown(key)
 
 manageLayoutKeyUp(key)
 {
-    SendInput {Blind}{LButton Up}
-    SetTimer, TimerTimeoutSpaceAsMouseClick, %timeoutSpaceAsClick%
+    SetTimer, timerTimeoutSpaceAsMouseClick, %timeoutSpaceAsClick%
+    SetTimer, TimerClickDrag, off
+    if (MOUSE_DRAG_ACTIVE)
+    {
+        send {blind}{LButton up}
+    }
+    else if (spaceAsClick)
+    {
+        send {blind}{LButton}
+    }
+    MOUSE_DRAG_ACTIVE := false
+    
     SetTimer, TimerGetMouseMovement, OFF
     systemCursor(1)
+    
     layoutKeyPressed := false
     processKeyOnRelease := false
     layoutKeyActivatesProcessKeyOnRelease := false

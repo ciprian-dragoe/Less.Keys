@@ -35,3 +35,7 @@ return
 TimerTimeoutSendLayoutKey:
     timerTimeoutSendLayoutKey()
 return
+
+TimerClickDrag:
+    timerClickDrag()
+return

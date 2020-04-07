@@ -1,7 +1,7 @@
 #include  %A_ScriptDir%\app\settings\alternativeLayout.ahk
 #include  %A_ScriptDir%\app\settings\keyboardShortcuts.ahk
 #include  %A_ScriptDir%\app\settings\layout.ahk
-#include  %A_ScriptDir%\app\settings\spaceAsClick.ahk
+#include  %A_ScriptDir%\app\settings\layoutAsClick.ahk
 #include  %A_ScriptDir%\app\settings\stickyFailBack.ahk
 
 

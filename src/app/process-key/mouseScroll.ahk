@@ -48,12 +48,12 @@ getScrollDirection(differenceY, differenceX) {
 }
 
 getScrollAmount() {
-    return abs(max(abs(totalDifferenceXAxis // mouseScrollAcceleration), abs(totalDifferenceYAxis // mouseScrollAcceleration)))
+    return max(ceil(abs(totalDifferenceXAxis / mouseScrollAcceleration)), ceil(abs(totalDifferenceYAxis / mouseScrollAcceleration)))
 }
 
 initiateScroll(direction, amount) {
     loop %amount% {
-        SendInput {%direction%}
+        SendInput {blind}{%direction%}
     }
     if (amount) {
         totalDifferenceYAxis := 0
