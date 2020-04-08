@@ -1,6 +1,11 @@
 processNormalKey(key)
 {
-    spaceAsClick := false
+    if (timeoutSpaceAsClick)
+    {
+        spaceAsClick := false
+        systemCursor(0)
+    }
+
     setTimer TimerActivePressedKeysReset, OFF
     setTimer TimerActivePressedKeysReset, %timerTimeoutStickyKeys%
     

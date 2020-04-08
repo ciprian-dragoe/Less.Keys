@@ -12,6 +12,7 @@ manageLayoutKeyDown(key)
     if (!layoutKeyPressed)
     {
         layoutKeyPressed := true
+        showCursorOnLayoutUp := false
         if (spaceAsClick)
         {
             MOUSE_DRAG_ACTIVE := false
@@ -61,7 +62,10 @@ manageLayoutKeyUp(key)
     MOUSE_DRAG_ACTIVE := false
     
     SetTimer, TimerGetMouseMovement, OFF
-    systemCursor(1)
+    if (showCursorOnLayoutUp)
+    {
+        systemCursor(1)
+    }
     
     layoutKeyPressed := false
     processKeyOnRelease := false

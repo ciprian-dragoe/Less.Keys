@@ -17,7 +17,6 @@ resetStates()
     altActive := false
     shiftActive := false
     winActive := false
-    systemCursor(1)
 }
 
 debug(value)

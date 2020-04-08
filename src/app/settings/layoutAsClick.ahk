@@ -21,6 +21,7 @@ checkRecentMouseMovement() {
     if (recentMouseMovementXaxis != lastX || recentMouseMovementYaxis != lastY)
     {
         spaceAsClick := true
+        systemCursor(1)
     }
 }
 

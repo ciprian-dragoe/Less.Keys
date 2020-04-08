@@ -5,6 +5,8 @@ global totalDifferenceXAxis := 0
 global totalDifferenceYAxis := 0
 global timeoutMouseScrollPoll
 global sendRightMouseButton
+global showCursorOnLayoutUp
+global lastScrollState
 
 timerGetMouseMovement()
 {
@@ -60,11 +62,18 @@ initiateScroll(direction, amount) {
         totalDifferenceYAxis := 0
         totalDifferenceXAxis := 0
         sendLayoutKey := false
+        showCursorOnLayoutUp := true
         sendRightMouseButton := false
     }
 }
 
 systemCursor(OnOff) {
+    if (OnOff = lastScrollState)
+    {
+        return
+    }
+
+    lastScrollState := OnOff
     static AndMask, XorMask, $, h_cursor
         ,c0,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13 ; system cursors
         , b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13   ; blank cursors

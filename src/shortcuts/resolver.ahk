@@ -17,5 +17,20 @@ processShortcut(index)
         storeDebugData()
         return
     }
+    if (index = 1026)
+    {
+        sendRightMouseButton := true
+        CoordMode, Mouse, Screen
+        MouseGetPos, initialMousePositionXAxis, initialMousePositionYAxis
+        SetTimer, TimerGetMouseMovement, %timeoutMouseScrollPoll%
+        keywait, %keyRemappedAsRightButton%
+        SetTimer, TimerGetMouseMovement, OFF
+        systemCursor(1)
+        if (sendRightMouseButton)
+        {
+            send {rbutton}
+        }
+        return
+    }
     
 }
