@@ -4,6 +4,7 @@ global mouseScrollAcceleration
 global totalDifferenceXAxis := 0
 global totalDifferenceYAxis := 0
 global timeoutMouseScrollPoll
+global sendRightMouseButton
 
 timerGetMouseMovement()
 {
@@ -59,6 +60,7 @@ initiateScroll(direction, amount) {
         totalDifferenceYAxis := 0
         totalDifferenceXAxis := 0
         sendLayoutKey := false
+        sendRightMouseButton := false
     }
 }
 

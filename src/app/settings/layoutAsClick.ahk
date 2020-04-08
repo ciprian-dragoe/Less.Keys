@@ -28,7 +28,6 @@ timerTimeoutSpaceAsMouseClick()
 {
     spaceAsClick := false
     MOUSE_DRAG_ACTIVE := false
-    ;showtooltip(spaceAsClick . " timerTimeoutSpaceAsMouseClick")
     SetTimer, TimerTimeoutSpaceAsMouseClick, off
 }
 

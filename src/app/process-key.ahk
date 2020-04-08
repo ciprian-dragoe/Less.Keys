@@ -64,7 +64,9 @@ processKeyUp(key)
         }
         
         removeFromActivePressedKeys(key)
-        send {Blind}{%key% Up}
+        if (key != "rbutton") {
+            send {Blind}{%key% Up}
+        }
         
         if (activePressedKeys.Length() = 0 && !alternativeLayoutActive)
         {

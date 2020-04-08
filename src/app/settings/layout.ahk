@@ -1,5 +1,6 @@
 global modifierKeys
 global layout
+global keyRemappedAsRightButton
 
 
 
@@ -29,6 +30,9 @@ readLayoutFile(path)
         else if (remappedKey = "lwin")
         {
             addModifier(A_LoopReadLine, "lwin")
+        } else if (remappedKey = "rbutton")
+        {
+            keyRemappedAsRightButton := StrSplit(A_LoopReadLine, "`:").1
         }
         
         layout[StrSplit(A_LoopReadLine, "`:").1] := remappedKey
