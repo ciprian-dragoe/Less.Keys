@@ -21,11 +21,6 @@ checkRecentMouseMovement() {
     if (recentMouseMovementXaxis != lastX || recentMouseMovementYaxis != lastY)
     {
         spaceAsClick := true
-        if (layoutKeyPressed)
-        {
-            return
-        }
-        SetTimer, TimerTimeoutSpaceAsMouseClick, %timeoutSpaceAsClick%
     }
 }
 

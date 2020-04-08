@@ -49,7 +49,6 @@ manageLayoutKeyDown(key)
 
 manageLayoutKeyUp(key)
 {
-    SetTimer, timerTimeoutSpaceAsMouseClick, %timeoutSpaceAsClick%
     SetTimer, TimerClickDrag, off
     if (MOUSE_DRAG_ACTIVE)
     {
