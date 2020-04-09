@@ -1,11 +1,5 @@
 processNormalKey(key)
 {
-    if (timeoutSpaceAsClick)
-    {
-        spaceAsClick := false
-        systemCursor(0)
-    }
-
     setTimer TimerActivePressedKeysReset, OFF
     setTimer TimerActivePressedKeysReset, %timerTimeoutStickyKeys%
     
@@ -15,15 +9,16 @@ processNormalKey(key)
         debug(key . "|>>>>>> will be processed on release")
     }
     else
-    {   
+    {
+        sendLayoutKey := false
+        
         if (alternativeLayoutActive)
         {
             lastKeyProcessedAsAlternative := key
             key := alternativeLayout[key]
-            if (keyToSendOnUp = key) {
+            if (keyToSendOnUp && keyToSendOnUp = key) {
                 send {%layoutChangeKey%}
             }
-            sendLayoutKey := false
             processKeyToSend(key)
             debug(key . "|------ key down with alternative layout")
             
@@ -32,8 +27,10 @@ processNormalKey(key)
         
         if (key != lastKeyProcessedAsAlternative)
         {
-            addToActivePressedKeys(key)
-            processKeyToSend(key)
+            if (processKeyToSend(key))
+            {
+                addToActivePressedKeys(key)
+            }
             debug(key . "|key down")
         }
     }
@@ -45,7 +42,10 @@ processKeyToSend(key)
     if (!processAhkKeyboardShortcuts(activeModifiers, key))
     {
         send {blind}%activeModifiers%{%key%}
+        return true
     }
+    
+    return false
 }
 
 processAhkKeyboardShortcuts(activeModifiers, key)

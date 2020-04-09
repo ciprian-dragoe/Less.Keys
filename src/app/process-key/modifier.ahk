@@ -1,7 +1,7 @@
-global ctrlActive
-global altActive
-global shiftActive
-global winActive
+global ctrlActive := false
+global altActive := false
+global shiftActive := false
+global winActive := false
 
 
 
@@ -38,7 +38,7 @@ processModifierKey(key, state)
 
 getActiveModifiers(key)
 {
-    result = 
+    result := ""
     if (ctrlActive)
     {
         result .= "^"

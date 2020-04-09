@@ -22,9 +22,9 @@ processShortcut(index)
         sendRightMouseButton := true
         CoordMode, Mouse, Screen
         MouseGetPos, initialMousePositionXAxis, initialMousePositionYAxis
-        SetTimer, TimerGetMouseMovement, %timeoutMouseScrollPoll%
+        SetTimer, TimerScrollWithMouseMovement, %timeoutMouseScrollPoll%
         keywait, %keyRemappedAsRightButton%
-        SetTimer, TimerGetMouseMovement, OFF
+        SetTimer, TimerScrollWithMouseMovement, OFF
         systemCursor(1)
         if (sendRightMouseButton)
         {

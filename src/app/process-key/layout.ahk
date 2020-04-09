@@ -12,19 +12,10 @@ manageLayoutKeyDown(key)
     if (!layoutKeyPressed)
     {
         layoutKeyPressed := true
-        showCursorOnLayoutUp := false
-        if (spaceAsClick)
-        {
-            MOUSE_DRAG_ACTIVE := false
-            SetTimer, timerTimeoutSpaceAsMouseClick, off
-            SetTimer, TimerClickDrag, 10
-            alternativeLayoutActive := true
-            return
-        }
         if (timeoutMouseScrollPoll) {
             CoordMode, Mouse, Screen
             MouseGetPos, initialMousePositionXAxis, initialMousePositionYAxis
-            SetTimer, TimerGetMouseMovement, %timeoutMouseScrollPoll%
+            SetTimer, TimerScrollWithMouseMovement, %timeoutMouseScrollPoll%
         }
         if (activePressedKeys.Length() > 0)
         {
@@ -50,22 +41,8 @@ manageLayoutKeyDown(key)
 
 manageLayoutKeyUp(key)
 {
-    SetTimer, TimerClickDrag, off
-    if (MOUSE_DRAG_ACTIVE)
-    {
-        send {blind}{LButton up}
-    }
-    else if (spaceAsClick)
-    {
-        send {blind}{LButton}
-    }
-    MOUSE_DRAG_ACTIVE := false
-    
-    SetTimer, TimerGetMouseMovement, OFF
-    if (showCursorOnLayoutUp)
-    {
-        systemCursor(1)
-    }
+    SetTimer, TimerScrollWithMouseMovement, OFF
+    systemCursor(1)
     
     layoutKeyPressed := false
     processKeyOnRelease := false

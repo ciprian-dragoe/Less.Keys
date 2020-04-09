@@ -4,10 +4,6 @@
 ; contain function declarations, some also contain variable initialization and this will 
 ; not happen anymore
 
-CheckRecentMouseMovemet:
-    checkRecentMouseMovement()
-return
-
 FixStickyKeys: 
     fixStickyKeys()
 return
@@ -16,8 +12,8 @@ TimerProcessLayoutOnRelease:
     timerProcessLayoutOnRelease()     
 return
 
-TimerGetMouseMovement:
-    timerGetMouseMovement()     
+TimerScrollWithMouseMovement:
+    timerScrollWithMouseMovement()     
 return
 
 TimerShowMouse:
@@ -28,14 +24,6 @@ TimerActivePressedKeysReset:
     activePressedKeys := []
 return
 
-TimerTimeoutSpaceAsMouseClick:
-    timerTimeoutSpaceAsMouseClick()
-return
-
 TimerTimeoutSendLayoutKey:
     timerTimeoutSendLayoutKey()
-return
-
-TimerClickDrag:
-    timerClickDrag()
 return

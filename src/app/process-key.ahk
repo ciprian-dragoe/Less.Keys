@@ -29,7 +29,6 @@ processKeyDown(key)
     processNormalKey(key)
 }
 
-
 processKeyUp(key) 
 {
     if (processModifierKey(key, 0))

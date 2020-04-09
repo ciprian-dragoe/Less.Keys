@@ -28,6 +28,10 @@ fixStickyKeys() {
         }
     }
     
+    
+    /*
+    showtooltip("dezactivat stick reset fail back")
+    
     resetCapsLock = false
     for index, key in checkStickyKeyList
     {
@@ -46,4 +50,5 @@ fixStickyKeys() {
     {
         SetCapsLockState, off  
     }
+    */
 }

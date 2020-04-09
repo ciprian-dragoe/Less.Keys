@@ -5,10 +5,9 @@ global totalDifferenceXAxis := 0
 global totalDifferenceYAxis := 0
 global timeoutMouseScrollPoll
 global sendRightMouseButton
-global showCursorOnLayoutUp
 global lastScrollState
 
-timerGetMouseMovement()
+timerScrollWithMouseMovement()
 {
     CoordMode, Mouse, Screen
     MouseGetPos, xpos, ypos
@@ -62,7 +61,6 @@ initiateScroll(direction, amount) {
         totalDifferenceYAxis := 0
         totalDifferenceXAxis := 0
         sendLayoutKey := false
-        showCursorOnLayoutUp := true
         sendRightMouseButton := false
     }
 }
