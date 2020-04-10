@@ -15,7 +15,6 @@ timerScrollWithMouseMovement()
     differenceX := initialMousePositionXAxis - xpos
     if (differenceY != 0 || differenceY != 0) {
         systemCursor(0)
-        SetTimer, TimerShowMouse, OFF
         SetTimer, TimerShowMouse, 300
         direction := getScrollDirection(differenceY, differenceX)
         amount := getScrollAmount()

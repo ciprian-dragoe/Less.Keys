@@ -4,8 +4,8 @@
 ; contain function declarations, some also contain variable initialization and this will 
 ; not happen anymore
 
-FixStickyKeys: 
-    fixStickyKeys()
+TimerStickyFailBack: 
+    timerStickyFailBack()
 return
 
 TimerProcessLayoutOnRelease:

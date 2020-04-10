@@ -1,6 +1,5 @@
 processNormalKey(key)
 {
-    setTimer TimerActivePressedKeysReset, OFF
     setTimer TimerActivePressedKeysReset, %timerTimeoutStickyKeys%
     
     if (processKeyOnRelease)
@@ -74,7 +73,10 @@ addToActivePressedKeys(key)
         For index, value in activePressedKeys
         {
             if (value = key)
+            {
                 itemNotPresent := false
+                break
+            }
         }
         if (itemNotPresent)
             activePressedKeys.Push(key)

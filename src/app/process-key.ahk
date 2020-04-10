@@ -2,6 +2,7 @@
 #include  %A_ScriptDir%\app\process-key\modifier.ahk
 #include  %A_ScriptDir%\app\process-key\layout.ahk
 #include  %A_ScriptDir%\app\process-key\mouseScroll.ahk
+#include  %A_ScriptDir%\app\process-key\stickyFailBack.ahk
 
 
 
@@ -70,7 +71,6 @@ processKeyUp(key)
         if (activePressedKeys.Length() = 0 && !alternativeLayoutActive)
         {
             layoutKeyActivatesProcessKeyOnRelease := true
-            SetTimer, TimerProcessLayoutOnRelease, OFF
             SetTimer, TimerProcessLayoutOnRelease, %timeoutProcessLayoutOnRelease%
         }
         
@@ -83,6 +83,9 @@ removeFromActivePressedKeys(key)
     For index, value in activePressedKeys
     {
         if (value = key)
+        {
             activePressedKeys.Remove(index)
+            break
+        }
     }
 }

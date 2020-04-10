@@ -1,11 +1,15 @@
 global debugStoredData := ""
 global logInput
+global showRealTimeDebugInfo := false
 
 
 
 resetStates()
 {
-    send {lwin up}{ctrl up}{alt up}{shift up}
+    sendPlay {shift up}
+    sendPlay {alt up}
+    sendPlay {ctrl up}
+    sendPlay {lwin up}
     activePressedKeys := []
     processKeyOnRelease := false
     layoutKeyPressed := false

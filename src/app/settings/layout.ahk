@@ -1,4 +1,4 @@
-global modifierKeys
+global monitoredStickyKeys := []
 global layout
 global keyRemappedAsRightButton
 
@@ -6,40 +6,41 @@ global keyRemappedAsRightButton
 
 readLayoutFile(path)
 {
-    modifierKeys:=Object()
     layout:=Object()
+    commentPattern := "###"
     Loop, read, %path%
     {
-        IfInString, A_LoopReadLine, ### ;if line has ### in it, is a comment and skip
+        IfInString, A_LoopReadLine, %commentPattern%
         {
             continue
         }
-        remappedKey := StrSplit(A_LoopReadLine, "`:").2
-        if (remappedKey = "ctrl")
+        originalKey := StrSplit(A_LoopReadLine, "`:").1
+        newValueForKey := StrSplit(A_LoopReadLine, "`:").2
+        if (newValueForKey = "ctrl")
         {
-            addModifier(A_LoopReadLine, "ctrl")
+            addToMonitoredStickyKeys(originalKey, newValueForKey)
         } 
-        else if (remappedKey = "alt")
+        else if (newValueForKey = "alt")
         {
-            addModifier(A_LoopReadLine, "alt")
+            addToMonitoredStickyKeys(originalKey, newValueForKey)
         }
-        else if (remappedKey = "shift")
+        else if (newValueForKey = "shift")
         {
-            addModifier(A_LoopReadLine, "shift")
+            addToMonitoredStickyKeys(originalKey, newValueForKey)
         }
-        else if (remappedKey = "lwin")
+        else if (newValueForKey = "lwin")
         {
-            addModifier(A_LoopReadLine, "lwin")
-        } else if (remappedKey = "rbutton")
+            addToMonitoredStickyKeys(originalKey, newValueForKey)
+        } else if (newValueForKey = "rbutton")
         {
-            keyRemappedAsRightButton := StrSplit(A_LoopReadLine, "`:").1
+            keyRemappedAsRightButton := originalKey
         }
         
-        layout[StrSplit(A_LoopReadLine, "`:").1] := remappedKey
+        layout[originalKey] := newValueForKey
     }
 }
 
-addModifier(alternative, forModifier) {
-    modifierKeys[StrSplit(A_LoopReadLine, "`:").1] := forModifier
-    checkStickyKeyList.Push(StrSplit(A_LoopReadLine, "`:").1)
+addToMonitoredStickyKeys(originalKey, newValueForKey)
+{
+    monitoredStickyKeys.Push(originalKey)
 }

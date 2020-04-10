@@ -6,18 +6,18 @@
 
 
 resetStates()
-readLayoutFile("my-layout.cfg")
-readAlternativeLayoutFile("my-alternative-layout.cfg")
 readSettingsFile("my-settings.cfg")
-readKeyboardShortcutsFile("my-keyboard-shortcuts.cfg")
-SetTimer, FixStickyKeys, %timerTimeoutStickyKeys%
 
 readSettingsFile(path)
 {
+    readLayoutFile("my-layout.cfg")
+    readAlternativeLayoutFile("my-alternative-layout.cfg")
+    readKeyboardShortcutsFile("my-keyboard-shortcuts.cfg")
+    readDisabledAppsSettings(path)
+    
     IniRead, timeoutStillSendLayoutKey, %path%, timings, timeoutStillSendLayoutKey
     IniRead, timeoutProcessLayoutOnRelease, %path%, timings, timeoutProcessLayoutOnRelease
     IniRead, timeoutMouseScrollPoll, %path%, mouse, scrollPoll
     IniRead, mouseScrollAcceleration, %path%, mouse, scrollAcceleration
     IniRead, logInput, %path%, logging, logInput
-    applyDisabledAppsSettings(path)
 }

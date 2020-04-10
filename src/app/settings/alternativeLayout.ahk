@@ -9,7 +9,7 @@ readAlternativeLayoutFile(path)
 {
     FileReadLine, layoutChangeKey, %path%, 1
     layoutChangeKey := StrSplit(layoutChangeKey, "`:").2
-    checkStickyKeyList.Push(layoutChangeKey)
+    monitoredStickyKeys.Push(layoutChangeKey)
     alternativeLayout:=Object()
     Loop, read, %path%
     {

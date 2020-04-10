@@ -249,12 +249,11 @@
     *rshift::processKeyDown(layout["rshift"])
     *rshift up::processKeyUp(layout["rshift"])
     
-    *lwin::processKeyDown("lwin")
-    *lwin up::processKeyUp("lwin")
+    *lwin::
+        showRealTimeDebugInfo := !showRealTimeDebugInfo
+        showtoolTip("showRealTimeDebugInfo = " . showRealTimeDebugInfo)
+    return
     
-    *rwin::processKeyDown("lwin")
-    *rwin up::processKeyUp("lwin")
-
 	*pause::processKeyDown(layout["pause"])
     *pause up::processKeyUp(layout["pause"])
 

@@ -10,24 +10,28 @@ processModifierKey(key, state)
     pressedState := state ? "downR" : "up"
     if (key == "ctrl") 
     {
+        trackStickyKey(key, state)
         send {ctrl %pressedState%}
         ctrlActive := state
         return true
     } 
     else if (key == "alt")
     {
+        trackStickyKey(key, state)
         send {alt %pressedState%}
         altActive := state
         return true
     }
     else if (key == "shift")
     {
+        trackStickyKey(key, state)
         send {shift %pressedState%}
         shiftActive := state
         return true
     }
     else if (key == "lwin")
     {
+        trackStickyKey(key, state)
         send {lwin %pressedState%}
         winActive := state
         return true
