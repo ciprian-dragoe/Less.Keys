@@ -1,5 +1,5 @@
 #IfWinNotActive ahk_group IgnoredApps
-    
+
     *escape::processKeyDown(layout["escape"])
     *escape up::processKeyUp(layout["escape"])
     
@@ -231,28 +231,28 @@
     *printscreen::processKeyDown(layout["printscreen"])
     *printscreen up::processKeyUp(layout["printscreen"])
     
-    *lctrl::processKeyDown(layout["lctrl"])
-    *lctrl up::processKeyUp(layout["lctrl"])
-        
-    *rctrl::processKeyDown(layout["rctrl"])
-    *rctrl up::processKeyUp(layout["rctrl"])
-        
-    *lalt::processKeyDown(layout["lalt"])
-    *lalt up::processKeyUp(layout["lalt"])
-        
-    *ralt::processKeyDown(layout["ralt"])
-    *ralt up::processKeyUp(layout["ralt"])
+    *lctrl::processModifierWhenKeyPhysicalDown("lctrl")
+    *lctrl up::processModifierWhenKeyPhysicalUp("lctrl")
     
-    *lshift::processKeyDown(layout["lshift"])
-    *lshift up::processKeyUp(layout["lshift"])
+    *rctrl::processModifierWhenKeyPhysicalDown("rctrl")
+    *rctrl up::processModifierWhenKeyPhysicalUp("rctrl")
     
-    *rshift::processKeyDown(layout["rshift"])
-    *rshift up::processKeyUp(layout["rshift"])
+    *lalt::processModifierWhenKeyPhysicalDown("lalt")
+    *lalt up::processModifierWhenKeyPhysicalUp("lalt")
     
-    *lwin::
-        showRealTimeDebugInfo := !showRealTimeDebugInfo
-        showtoolTip("showRealTimeDebugInfo = " . showRealTimeDebugInfo)
-    return
+    *ralt::processModifierWhenKeyPhysicalDown("ralt")
+    *ralt up::processModifierWhenKeyPhysicalUp("ralt")
+    
+    *lshift::processModifierWhenKeyPhysicalDown("lshift")
+    *lshift up::processModifierWhenKeyPhysicalUp("lshift")
+    
+    *rshift::processModifierWhenKeyPhysicalDown("rshift")
+    *rshift up::processModifierWhenKeyPhysicalUp("rshift")
+    
+    *rwin::processModifierWhenKeyPhysicalDown("rwin")
+    *rwin up::processModifierWhenKeyPhysicalUp("rwin")
+    
+    *lwin::toggleRealTimeDebug(showRealTimeDebugInfo)
     
 	*pause::processKeyDown(layout["pause"])
     *pause up::processKeyUp(layout["pause"])
@@ -267,3 +267,21 @@
     *XButton2 up::processKeyUp(layout["XButton2"])
 
 #IfWinNotActive
+
+processModifierWhenKeyPhysicalDown(key)
+{
+    if (GetKeyState(key, "P"))
+    {
+        processKeyDown(layout[key])
+    }
+}
+
+processModifierWhenKeyPhysicalUp(key)
+{           
+    modifier := SubStr(key, 2)
+    remappedWithKey := layout[key]
+    if (GetKeyState(modifier) || GetKeyState(remappedWithKey))
+    {
+        processKeyUp(remappedWithKey)
+    }
+}

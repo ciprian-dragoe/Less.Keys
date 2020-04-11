@@ -1,5 +1,7 @@
 #include  %A_ScriptDir%\shortcuts\debug.ahk
 
+
+
 processShortcut(index)
 {
     if (index = 1)
@@ -28,7 +30,7 @@ processShortcut(index)
         systemCursor(1)
         if (sendRightMouseButton)
         {
-            send {rbutton}
+            send {blind}{rbutton}
         }
         return
     }

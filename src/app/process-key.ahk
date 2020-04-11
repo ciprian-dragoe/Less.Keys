@@ -47,7 +47,7 @@ processKeyUp(key)
     {
         key := alternativeLayout[keyToSendOnUp]
         if (keyToSendOnUp = key) {
-            send {%layoutChangeKey%}
+            send {blind}{%layoutChangeKey%}
         }
         processKeyToSend(key)
         processKeyOnRelease := false
@@ -64,28 +64,13 @@ processKeyUp(key)
         }
         
         removeFromActivePressedKeys(key)
-        if (key != "rbutton") {
-            send {Blind}{%key% Up}
-        }
         
-        if (activePressedKeys.Length() = 0 && !alternativeLayoutActive)
+        if (!alternativeLayoutActive && activePressedKeys.Length() = 0)
         {
             layoutKeyActivatesProcessKeyOnRelease := true
             SetTimer, TimerProcessLayoutOnRelease, %timeoutProcessLayoutOnRelease%
         }
         
         debug(key . "|up")
-    }
-}
-
-removeFromActivePressedKeys(key)
-{
-    For index, value in activePressedKeys
-    {
-        if (value = key)
-        {
-            activePressedKeys.Remove(index)
-            break
-        }
     }
 }

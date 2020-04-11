@@ -8,6 +8,10 @@ TimerStickyFailBack:
     timerStickyFailBack()
 return
 
+TimerRealTimeDebug: 
+    timerRealTimeDebug()
+return
+
 TimerProcessLayoutOnRelease:
     timerProcessLayoutOnRelease()     
 return
@@ -18,10 +22,6 @@ return
 
 TimerShowMouse:
     systemCursor(1)
-return
-
-TimerActivePressedKeysReset:
-    activePressedKeys := []
 return
 
 TimerTimeoutSendLayoutKey:

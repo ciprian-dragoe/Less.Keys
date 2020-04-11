@@ -20,11 +20,6 @@ timerStickyFailBack()
             resetCapsLock = true
         }
         
-        if (showRealTimeDebugInfo)
-        {
-            showDebugData(key)
-        }
-        
         if (GetKeyState(key, "P"))
         {
             return
@@ -34,7 +29,7 @@ timerStickyFailBack()
     resetStates()
     if (resetCapsLock)
     {
-        SetCapsLockState, off  
+        SetCapsLockState, off
     }
     Loop, % activeStickyKeys.Length()
     {
@@ -42,17 +37,6 @@ timerStickyFailBack()
     }
     
     SetTimer, TimerStickyFailBack, off
-}
-
-showDebugData(key)
-{
-    allActiveKeys := ""
-    for index, value in activeStickyKeys
-    {
-        allActiveKeys .= " " . value
-    } 
-    value := key . "=" . GetKeyState(key, "P") . "|activeStickyKeys= " . allActiveKeys
-    showtooltip(value, 1000)
 }
 
 trackStickyKey(key, state)

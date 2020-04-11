@@ -7,33 +7,33 @@ global winActive := false
 
 processModifierKey(key, state)
 {
-    pressedState := state ? "downR" : "up"
-    if (key == "ctrl") 
+    pressedState := state ? "down" : "up"
+    if (key = "ctrl") 
     {
         trackStickyKey(key, state)
-        send {ctrl %pressedState%}
         ctrlActive := state
+        send {blind}{ctrl %pressedState%}
         return true
     } 
-    else if (key == "alt")
+    else if (key = "alt")
     {
         trackStickyKey(key, state)
-        send {alt %pressedState%}
         altActive := state
+        send {blind}{alt %pressedState%}
         return true
     }
-    else if (key == "shift")
+    else if (key = "shift")
     {
         trackStickyKey(key, state)
-        send {shift %pressedState%}
         shiftActive := state
+        send {blind}{shift %pressedState%}
         return true
     }
-    else if (key == "lwin")
+    else if (key = "lwin")
     {
         trackStickyKey(key, state)
-        send {lwin %pressedState%}
         winActive := state
+        send {blind}{lwin %pressedState%}
         return true
     }
     

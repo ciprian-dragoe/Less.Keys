@@ -38,7 +38,6 @@ manageLayoutKeyDown(key)
     }
 }
 
-
 manageLayoutKeyUp(key)
 {
     trackStickyKey("layoutKey", false)

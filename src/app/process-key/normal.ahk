@@ -1,7 +1,5 @@
 processNormalKey(key)
-{
-    setTimer TimerActivePressedKeysReset, %timerTimeoutStickyKeys%
-    
+{ 
     if (processKeyOnRelease)
     {
         keyToSendOnUp := key
@@ -16,7 +14,7 @@ processNormalKey(key)
             lastKeyProcessedAsAlternative := key
             key := alternativeLayout[key]
             if (keyToSendOnUp && keyToSendOnUp = key) {
-                send {%layoutChangeKey%}
+                send {blind}{%layoutChangeKey%}
             }
             processKeyToSend(key)
             debug(key . "|------ key down with alternative layout")
@@ -80,5 +78,17 @@ addToActivePressedKeys(key)
         }
         if (itemNotPresent)
             activePressedKeys.Push(key)
+    }
+}
+
+removeFromActivePressedKeys(key)
+{
+    For index, value in activePressedKeys
+    {
+        if (value = key)
+        {
+            activePressedKeys.Remove(index)
+            break
+        }
     }
 }
