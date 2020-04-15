@@ -1,0 +1,1 @@
+#include  %A_ScriptDir%\shortcuts\resolver\resolver.ahk
