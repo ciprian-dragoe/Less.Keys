@@ -18,7 +18,7 @@ printTestResults(testResults)
     result := ""
     for index , test in testResults
     {
-        result .= test.description . "`n"
+        result .= StrReplace(test.description, "_", A_Space) . "`n"
         result .= "Result: " . test.result . "`n"
         result .= "Exp: " . test.expected . "`n"
         result .= "Act: " . test.actual . "`n"
@@ -26,5 +26,5 @@ printTestResults(testResults)
     }
     clipboard := result
     send ^v
-    sleep 400
+    sleep 100
 }

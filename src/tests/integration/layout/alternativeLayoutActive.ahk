@@ -1,4 +1,4 @@
-When_layout_key_is_pressed_a_key_is_reMapped_as_left_key_#1()
+When_layout_key_is_pressed_a_key_is_reMapped_as_left_key_#001()
 {
     simulateTyping("hello ")
     simulateKeyDown("space", 50)
@@ -23,7 +23,7 @@ When_layout_key_is_pressed_a_key_is_reMapped_as_left_key_#1()
     clearText()
 }
 
-When_layout_key_is_pressed_a_key_does_not_introduce_letter_a_#2()
+When_layout_key_is_pressed_a_key_does_not_introduce_letter_a_#002()
 {
     simulateTyping("hello ")
     simulateKeyDown("space", 50)
@@ -34,7 +34,7 @@ When_layout_key_is_pressed_a_key_does_not_introduce_letter_a_#2()
     validateTestOutput(A_ThisFunc , expected)
 }
 
-When_layout_key_is_pressed_less_then_timeoutStillSendLayoutKey_and_during_this_time_no_non_modifier_key_is_pressed_space_is_sent_on_layout_key_up_#3()
+When_layout_key_is_pressed_less_then_timeoutStillSendLayoutKey_and_during_this_time_no_non_modifier_key_is_pressed_space_is_sent_on_layout_key_up_#003()
 {
     simulateTyping("hello ")
     simulateKeyDown("space", 50)
@@ -44,7 +44,7 @@ When_layout_key_is_pressed_less_then_timeoutStillSendLayoutKey_and_during_this_t
     validateTestOutput(A_ThisFunc , expected)
 }
 
-When_layout_key_is_pressed_more_then_timeoutStillSendLayoutKey_and_during_this_time_no_non_modifier_key_is_pressed_space_is_not_sent_on_layout_key_up_#4()
+When_layout_key_is_pressed_more_then_timeoutStillSendLayoutKey_and_during_this_time_no_non_modifier_key_is_pressed_space_is_not_sent_on_layout_key_up_#004()
 {
     simulateTyping("hello ")
     simulateKeyDown("space", timeoutStillSendLayoutKey + 100)
@@ -54,7 +54,7 @@ When_layout_key_is_pressed_more_then_timeoutStillSendLayoutKey_and_during_this_t
     validateTestOutput(A_ThisFunc , expected)
 }
 
-When_layout_key_is_pressed_less_then_timeoutStillSendLayoutKey_and_during_this_time_non_modifier_key_is_pressed_space_is_not_sent_on_layout_key_up_#5()
+When_layout_key_is_pressed_less_then_timeoutStillSendLayoutKey_and_during_this_time_non_modifier_key_is_pressed_space_is_not_sent_on_layout_key_up_#005()
 {
     simulateTyping("hello ")
     simulateKeyDown("space", 50)
@@ -65,7 +65,7 @@ When_layout_key_is_pressed_less_then_timeoutStillSendLayoutKey_and_during_this_t
     validateTestOutput(A_ThisFunc , expected)
 }
 
-When_layout_key_is_pressed_less_then_timeoutStillSendLayoutKey_and_during_this_time_modifier_key_is_pressed_space_is_sent_on_layout_key_up_#6()
+When_layout_key_is_pressed_less_then_timeoutStillSendLayoutKey_and_during_this_time_modifier_key_is_pressed_space_is_sent_on_layout_key_up_#006()
 {
     simulateTyping("hello ")
     simulateKeyDown("space", 50)
@@ -77,7 +77,7 @@ When_layout_key_is_pressed_less_then_timeoutStillSendLayoutKey_and_during_this_t
     validateTestOutput(A_ThisFunc , expected)
 }
 
-When_layout_key_is_pressed_continously_for_3_seconds_and_during_this_time_no_non_modifier_key_is_pressed_space_is_not_sent_on_layout_key_up_#7()
+When_layout_key_is_pressed_continously_for_3_seconds_and_during_this_time_no_non_modifier_key_is_pressed_space_is_not_sent_on_layout_key_up_#007()
 {
     simulateTyping("hello ")
     simulateKeyDown("space", 500)
@@ -92,7 +92,7 @@ When_layout_key_is_pressed_continously_for_3_seconds_and_during_this_time_no_non
     validateTestOutput(A_ThisFunc , expected)
 }
 
-When_non_modifier_key_is_already_pressed_and_layout_key_is_pressed_space_is_sent_before_layout_key_released_#8()
+When_non_modifier_key_is_already_pressed_and_layout_key_is_pressed_space_is_sent_before_layout_key_released_#008()
 {
     simulateKeyDown("w", 50)
     simulateKeyUp("w", 50)
@@ -102,5 +102,60 @@ When_non_modifier_key_is_already_pressed_and_layout_key_is_pressed_space_is_sent
     simulateKeyUp("space", 50)
     
     expected := "we "
+    validateTestOutput(A_ThisFunc , expected)
+}
+
+When_non_modifier_key_is_released_followed_by_layout_key_press_in_less_than_timeoutProcessLayoutOnRelease_followed_by_non_modifier_key_press_followed_by_same_non_modifier_key_release_remapped_key_is_sent_#009()
+{
+    simulateKeyDown("w", 50)
+    simulateKeyUp("w", 50)
+    simulateKeyDown("space", 50)
+    simulateKeyDown("a", 10)
+    simulateKeyUp("a", 50)
+    simulateKeyUp("space", 50)
+    
+    expected := "w"
+    validateTestOutput(A_ThisFunc , expected)
+}
+
+When_non_modifier_key_is_released_followed_by_layout_key_press_in_less_than_timeoutProcessLayoutOnRelease_followed_by_non_modifier_key_press_followed_layout_key_release_space_is_sent_followed_by_non_modifier_key_#010()
+{
+    simulateKeyDown("w", 50)
+    simulateKeyUp("w", 50)
+    simulateKeyDown("space", 50)
+    simulateKeyDown("e", 10)
+    simulateKeyUp("space", 50)
+    simulateKeyUp("e", 50)
+    
+    expected := "w e"
+    validateTestOutput(A_ThisFunc , expected)
+}
+
+When_layout_key_is_pressed_followed_by_non_modifier_key_press_without_release_followed_by_layout_key_release_followed_by_same_non_modifier_key_press_remapped_key_is_sent_only_once_and_no_other_key_#011()
+{
+    simulateKeyDown("w", 50)
+    simulateKeyUp("w", 1000)
+    simulateKeyDown("space", 50)
+    simulateKeyDown("a", 50)
+    simulateKeyUp("space", 50)
+    simulateKeyDown("a", 50)
+    simulateKeyUp("a", 50)
+    
+    expected := "w"
+    validateTestOutput(A_ThisFunc , expected)
+}
+
+When_layout_key_is_pressed_followed_by_non_modifier_key_press_followed_by_layout_key_release_followed_by_other_non_modifier_key_press_remapped_key_is_sent_followed_last_non_modifier_key_pressed_#012()
+{
+    simulateKeyDown("w", 50)
+    simulateKeyUp("w", 1000)
+    simulateKeyDown("space", 50)
+    simulateKeyDown("a", 50)
+    simulateKeyUp("a", 50)
+    simulateKeyUp("space", 50)
+    simulateKeyDown("d", 50)
+    simulateKeyUp("d", 50)
+    
+    expected := "dw"
     validateTestOutput(A_ThisFunc , expected)
 }
