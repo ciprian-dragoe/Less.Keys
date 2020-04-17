@@ -1,4 +1,3 @@
-global activeStickyKeys := []
 global timerTimeoutStickyKeys := 2000
 
 ; if the cpu is executing intensive tasks then the lift key up command may not be processed for 
@@ -6,18 +5,12 @@ global timerTimeoutStickyKeys := 2000
 ; This is a fail safe for such situations
 timerStickyFailBack() 
 {
-    if (activeStickyKeys.Length() = 0)
-    {
-        SetTimer, TimerStickyFailBack, off
-        return
-    }
-    
-    resetCapsLock = false
+    resetCapsLock := false
     for index, key in monitoredStickyKeys
     {
         if (key = "capslock")
         {
-            resetCapsLock = true
+            resetCapsLock := true
         }
         
         if (GetKeyState(key, "P"))
@@ -31,43 +24,32 @@ timerStickyFailBack()
     {
         SetCapsLockState, off
     }
-    Loop, % activeStickyKeys.Length()
-    {
-        activeStickyKeys.Pop()
-    }
     
     SetTimer, TimerStickyFailBack, off
 }
 
-trackStickyKey(key, state)
+resetStates()
 {
-    if (state)
+    if (showRealTimeDebugInfo)
     {
-        itemNotPresent := true
-        for index, value in activeStickyKeys
-        {
-            if (value = key)
-            {
-                itemNotPresent := false
-                break
-            }
-        }
-        if (itemNotPresent)
-        {
-            activeStickyKeys.Push(key)
-        }
-        
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+        showToolTip("reset states")
     }
-    else
+    send {shift up}
+    send {alt up}
+    send {ctrl up}
+    if (winActive)
     {
-        for index, value in activeStickyKeys
-        {
-            if (value = key)
-            {
-                activeStickyKeys.Remove(index)
-                break
-            }
-        }
+        send {lwin up}
     }
+    activePressedKeys := []
+    processKeyOnRelease := false
+    layoutKeyPressed := false
+    alternativeLayoutActive := false 
+    sendLayoutKey := false
+    keyToSendOnUp := ""
+    lastKeyProcessedAsAlternative := ""
+    ctrlActive := false
+    altActive := false
+    shiftActive := false
+    winActive := false
 }

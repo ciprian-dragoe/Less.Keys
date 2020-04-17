@@ -1,0 +1,31 @@
+prepareTestEnvironment()
+{
+    showtooltip("RUNNING INTEGRATION TESTS", 1000)
+    run notepad
+    WinWaitActive, ahk_class Notepad, , 2
+    WinActivate, ahk_class Notepad, , 2
+    IfWinActive, ahk_class Notepad
+    {
+       WinMaximize
+       return true
+    }
+    
+    return false
+}
+
+printTestResults()
+{
+    result := ""
+    for index , test in testResults
+    {
+        result .= StrReplace(test.description, "_", A_Space) . "`n"
+        result .= "Result: " . test.result . "`n"
+        result .= "Exp: " . test.expected . "`n"
+        result .= "Act: " . test.expected . "`n"
+        result .=  "`n`n`n"
+    }
+    clipboard := result
+    send ^v
+    
+    testResults := []
+}

@@ -1,5 +1,4 @@
-#include  %A_ScriptDir%\shortcuts\resolver\modules\debug.ahk
-
+#include %A_ScriptDir%\app\environmentDependent\shortcuts\live\resolver\debug.ahk
 
 
 processShortcut(index)

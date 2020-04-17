@@ -9,7 +9,7 @@ global timeoutProcessLayoutOnRelease
 
 manageLayoutKeyDown(key)
 {
-    trackStickyKey("layoutKey", true)
+    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
     if (!layoutKeyPressed)
     {
         layoutKeyPressed := true
@@ -40,8 +40,6 @@ manageLayoutKeyDown(key)
 
 manageLayoutKeyUp(key)
 {
-    trackStickyKey("layoutKey", false)
-    
     SetTimer, TimerScrollWithMouseMovement, OFF
     systemCursor(1)
     

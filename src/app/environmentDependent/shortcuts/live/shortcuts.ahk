@@ -1,1 +1,1 @@
-#include  %A_ScriptDir%\shortcuts\resolver\resolver.ahk
+#include %A_ScriptDir%\app\environmentDependent\shortcuts\live\resolver.ahk

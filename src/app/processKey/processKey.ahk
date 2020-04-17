@@ -26,7 +26,7 @@ processKeyDown(key)
         manageLayoutKeyDown(key)
         return
     }
-    
+
     processNormalKey(key)
 }
 

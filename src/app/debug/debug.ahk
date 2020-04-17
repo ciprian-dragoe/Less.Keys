@@ -4,33 +4,12 @@ global showRealTimeDebugInfo := false
 
 
 
-resetStates()
-{
-    if (showRealTimeDebugInfo)
-    {
-        showToolTip("reset states")
-    }
-    send {shift up}
-    send {alt up}
-    send {ctrl up}
-    send {lwin up}
-    activePressedKeys := []
-    processKeyOnRelease := false
-    layoutKeyPressed := false
-    alternativeLayoutActive := false 
-    sendLayoutKey := false
-    keyToSendOnUp := ""
-    lastKeyProcessedAsAlternative := ""
-    ctrlActive := false
-    altActive := false
-    shiftActive := false
-    winActive := false
-}
-
 debug(value)
 {
     if (logInput)
+    {
         writeMemoryStream(value)
+    }
 }
 
 showToolTip(value, time = 600)
@@ -43,7 +22,8 @@ showToolTip(value, time = 600)
 writeMemoryStream(value)
 {
     keysPressed := ""
-    for index , key in activePressedKeys {
+    for index , key in activePressedKeys
+    {
         keysPressed .= key
     }
 	result = %A_Hour%:%A_Min%:%A_Sec%:%A_MSec%|%value%|layoutPressed=%layoutKeyPressed%|alternativeLayout=%alternativeLayoutActive%|keysPressed=%keysPressed%|ProcessKeyOnRelease=%processKeyOnRelease%|keyToSendOnUp=%keyToSendOnUp%|lastKeyProcessedAsAlternative=%lastKeyProcessedAsAlternative%|^=%ctrlActive%`|!=%altActive%|+=%shiftActive%|#=%winActive%`n
@@ -69,7 +49,7 @@ toggleRealTimeDebug(onOff)
     showtoolTip("showRealTimeDebugInfo = " . showRealTimeDebugInfo)
 }
 
-timerRealTimeDebug()
+timerRealTimeDebug(displayTime = 1000)
 {
     info := "`n"
     info .= "is shift down " . GetKeyState("shift") . " shiftActive=" . shiftActive . "`n"
@@ -79,6 +59,7 @@ timerRealTimeDebug()
     info .= "is rwin down " . GetKeyState("rwin") . " winActive=" . winActive . "`n"
     info .= "layoutPressed=" . layoutKeyPressed . "`n"
     info .= "alternativeLayout=" . alternativeLayoutActive . "`n"
+    info .= "stickyWinReset=" . stickyWinReset . "`n"
     result := ""
     for index, value in activePressedKeys
     {
@@ -91,11 +72,6 @@ timerRealTimeDebug()
         result .= value . "=" . GetKeyState(value, "P") . "`n" 
     }
     info .= result
-    result := ""
-    for index, value in activeStickyKeys
-    {
-        result .= " " . value 
-    }
-    info .= "activePressedStickyKeys=|" . result . "|`n"
-    showToolTip(info, 1000)
+    
+    showToolTip(info, displayTime)
 }

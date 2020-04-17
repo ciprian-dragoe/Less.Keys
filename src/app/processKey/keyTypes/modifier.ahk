@@ -10,28 +10,28 @@ processModifierKey(key, state)
     pressedState := state ? "down" : "up"
     if (key = "ctrl") 
     {
-        trackStickyKey(key, state)
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         ctrlActive := state
         send {blind}{ctrl %pressedState%}
         return true
     } 
     else if (key = "alt")
     {
-        trackStickyKey(key, state)
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         altActive := state
         send {blind}{alt %pressedState%}
         return true
     }
     else if (key = "shift")
     {
-        trackStickyKey(key, state)
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         shiftActive := state
         send {blind}{shift %pressedState%}
         return true
     }
     else if (key = "lwin")
     {
-        trackStickyKey(key, state)
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         winActive := state
         send {blind}{lwin %pressedState%}
         return true
