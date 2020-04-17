@@ -13,19 +13,18 @@ prepareTestEnvironment()
     return false
 }
 
-printTestResults()
+printTestResults(testResults)
 {
     result := ""
     for index , test in testResults
     {
-        result .= StrReplace(test.description, "_", A_Space) . "`n"
+        result .= test.description . "`n"
         result .= "Result: " . test.result . "`n"
         result .= "Exp: " . test.expected . "`n"
-        result .= "Act: " . test.expected . "`n"
+        result .= "Act: " . test.actual . "`n"
         result .=  "`n`n`n"
     }
     clipboard := result
     send ^v
-    
-    testResults := []
+    sleep 400
 }
