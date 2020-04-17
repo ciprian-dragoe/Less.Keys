@@ -1,6 +1,7 @@
 #include %A_ScriptDir%\tests\helpers\simulators.ahk
 #include %A_ScriptDir%\tests\helpers\validators.ahk
-#include %A_ScriptDir%\tests\integration\layout\alternativeLayoutActive.ahk
+#include %A_ScriptDir%\tests\integration\contexts\layoutKey.ahk
+#include %A_ScriptDir%\tests\integration\contexts\remappedLayout.ahk
 
 
 
@@ -21,4 +22,9 @@ runIntegrationTests()
     When_non_modifier_key_is_released_followed_by_layout_key_press_in_less_than_timeoutProcessLayoutOnRelease_followed_by_non_modifier_key_press_followed_layout_key_release_space_is_sent_followed_by_non_modifier_key_#010()
     When_layout_key_is_pressed_followed_by_non_modifier_key_press_without_release_followed_by_layout_key_release_followed_by_same_non_modifier_key_press_remapped_key_is_sent_only_once_and_no_other_key_#011()
     When_layout_key_is_pressed_followed_by_non_modifier_key_press_followed_by_layout_key_release_followed_by_other_non_modifier_key_press_remapped_key_is_sent_followed_last_non_modifier_key_pressed_#012()
+    
+    When_key_which_has_been_remapped_is_pressed_remapped_key_is_sent_instead_#013()
+    When_layout_key_is_pressed_followed_by_key_which_has_been_remapped_is_pressed_alternative_of_remapped_key_is_sent_#014()
+    When_key_which_has_been_remapped_as_modifier_key_is_pressed_modifier_key_is_sent_instead_#015()
+    When_key_which_has_been_remapped_as_modifier_key_is_pressed_followed_by_layout_key_press_followed_by_key_which_has_alternative_mapping_the_alternative_mapped_key_is_sent_#016()
 }

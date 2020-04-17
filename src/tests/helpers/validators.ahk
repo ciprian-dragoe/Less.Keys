@@ -39,4 +39,7 @@ addTestResult(testDescription, expected, actual, result)
     {
         failureTestResults.push(testResult)
     }
+    
+    timeGreaterTimeoutProcessLayoutOnRelease := 200
+    sleep %timeGreaterTimeoutProcessLayoutOnRelease%
 }
