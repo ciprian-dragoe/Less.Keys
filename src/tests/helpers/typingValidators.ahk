@@ -1,17 +1,9 @@
 validateTestOutput(testDescription, expectedResult)
 {
     testOutput := clearText()
-    evaluateResult(expectedResult, testOutput)
-    addTestResult(testDescription, expectedResult, testOutput, evaluateResult(expectedResult, testOutput))
-}
-
-clearText()
-{
-    send ^a
-    sleep 10
-    send ^x
-    sleep 100
-    return %clipboard%
+    result := evaluateResult(expectedResult, testOutput)
+    addTestResult(testDescription, expectedResult, testOutput, result)
+    setDefaultTestEnvironment()
 }
 
 evaluateResult(expected, actual)
@@ -39,7 +31,4 @@ addTestResult(testDescription, expected, actual, result)
     {
         failureTestResults.push(testResult)
     }
-    
-    timeGreaterTimeoutProcessLayoutOnRelease := 200
-    sleep %timeGreaterTimeoutProcessLayoutOnRelease%
 }

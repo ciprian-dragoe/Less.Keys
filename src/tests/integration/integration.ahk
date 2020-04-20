@@ -1,7 +1,8 @@
 #include %A_ScriptDir%\tests\helpers\simulators.ahk
-#include %A_ScriptDir%\tests\helpers\validators.ahk
+#include %A_ScriptDir%\tests\helpers\typingValidators.ahk
 #include %A_ScriptDir%\tests\integration\contexts\layoutKey.ahk
 #include %A_ScriptDir%\tests\integration\contexts\remappedLayout.ahk
+#include %A_ScriptDir%\tests\integration\contexts\shortcuts.ahk
 
 
 
@@ -10,7 +11,7 @@ global failureTestResults := []
 
 runIntegrationTests()
 {
-    When_layout_key_is_pressed_a_key_is_reMapped_as_left_key_#001()
+    When_layout_key_is_pressed_and_key_which_is_reMapped_as_left_key_is_sent_cursor_is_moved_to_left_#001()
     When_layout_key_is_pressed_a_key_does_not_introduce_letter_a_#002()
     When_layout_key_is_pressed_less_then_timeoutStillSendLayoutKey_and_during_this_time_no_non_modifier_key_is_pressed_space_is_sent_on_layout_key_up_#003()
     When_layout_key_is_pressed_more_then_timeoutStillSendLayoutKey_and_during_this_time_no_non_modifier_key_is_pressed_space_is_not_sent_on_layout_key_up_#004()
@@ -27,4 +28,7 @@ runIntegrationTests()
     When_layout_key_is_pressed_followed_by_key_which_has_been_remapped_is_pressed_alternative_of_remapped_key_is_sent_#014()
     When_key_which_has_been_remapped_as_modifier_key_is_pressed_modifier_key_is_sent_instead_#015()
     When_key_which_has_been_remapped_as_modifier_key_is_pressed_followed_by_layout_key_press_followed_by_key_which_has_alternative_mapping_the_alternative_mapped_key_is_sent_#016()
+ 
+    When_key_matches_shortcut_pattern_shortcut_action_is_executed_instead_of_key_#017()
+    When_key_matches_shortcut_pattern_and_is_kept_pressed_after_shortcut_action_is_sent_next_layout_key_press_is_not_without_release_is_not_processed_as_space_#018()
 }

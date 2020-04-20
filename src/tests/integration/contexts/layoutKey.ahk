@@ -1,25 +1,15 @@
-When_layout_key_is_pressed_a_key_is_reMapped_as_left_key_#001()
+When_layout_key_is_pressed_and_key_which_is_reMapped_as_left_key_is_sent_cursor_is_moved_to_left_#001()
 {
-    simulateTyping("hello ")
+    simulateTyping("hello")
+    setMousePositionToCaret()
+    simulateTyping(" ")
     simulateKeyDown("space", 50)
-    beforeMoveCarretXaxis := A_CaretX
-    beforeMoveCarretYaxis := A_CaretY
-    simulateTyping("a")
+    simulateKeyDown("a", 50)
+    expected := getCurrentCaretPosition()
     simulateKeyUp("space", 50)
-    afterMoveCarretXaxis := A_CaretX
-    afterMoveCarretYaxis := A_CaretY
-        
-    if (beforeMoveCarretXaxis > afterMoveCarretXaxis && beforeMoveCarretYaxis == afterMoveCarretYaxis)
-    {
-        result := "PASS"
-    }
-    else
-    {
-        result := "FAIL"
-    }
-    expected := "afterMoveCarretXaxis to be less then beforeMoveCarretXaxis and afterMoveCarretYaxis to equal beforeMoveCarretYaxis"
-    actual := afterMoveCarretXaxis . " < " . beforeMoveCarretXaxis . " and " afterMoveCarretYaxis . " = " . beforeMoveCarretYaxis
-    addTestResult(A_ThisFunc, expected, actual, result)
+    simulateKeyUp("a", 50)
+
+    validateCaretOutput(A_ThisFunc, expected)
     clearText()
 }
 

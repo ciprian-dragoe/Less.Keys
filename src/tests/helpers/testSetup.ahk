@@ -28,3 +28,23 @@ printTestResults(testResults)
     send ^v
     sleep 100
 }
+
+setDefaultTestEnvironment()
+{
+    send {escape}
+    sleep 100
+    clearText()
+    MouseMove, 500, 500
+    
+    timeGreaterTimeoutProcessLayoutOnRelease := 500
+    sleep %timeGreaterTimeoutProcessLayoutOnRelease%
+}
+
+clearText()
+{
+    send ^a
+    sleep 10
+    send ^x
+    sleep 100
+    return %clipboard%
+}

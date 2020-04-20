@@ -33,5 +33,11 @@ processShortcut(index)
         }
         return
     }
+    if (index = 9999)
+    {
+        send INTEGRATION_TEST
+        return
+    }
+    
     
 }

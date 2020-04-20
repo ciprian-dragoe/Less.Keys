@@ -41,7 +41,7 @@ When_key_which_has_been_remapped_as_modifier_key_is_pressed_followed_by_layout_k
     simulateKeyUp("a", 50)
     simulateKeyUp("capslock", 50)
     simulateKeyUp("space", 50)
-    simulateKeyDownK("w", 50)
+    simulateKeyDown("w", 50)
     simulateKeyUp("w", 50)
         
     expected := "whello"
