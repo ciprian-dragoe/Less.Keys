@@ -39,6 +39,7 @@ turnCaretAsString(caret)
 setMousePositionToCaret()
 {
     position := getCurrentCaretPosition()
+    CoordMode, Mouse, Window
     MouseMove, position.x, position.y
     return position
 }

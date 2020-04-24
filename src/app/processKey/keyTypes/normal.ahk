@@ -1,5 +1,6 @@
 processNormalKey(key)
-{ 
+{
+    cancelDoubledModifier()
     if (processKeyOnRelease)
     {
         keyToSendOnUp := key
@@ -48,7 +49,6 @@ processKeyToSend(key)
 processAhkKeyboardShortcuts(activeModifiers, key)
 {
     combination := activeModifiers . key
-
     index := keyboardShortcuts[combination]
     if (index)
     {

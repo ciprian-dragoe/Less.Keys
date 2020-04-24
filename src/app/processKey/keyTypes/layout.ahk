@@ -13,6 +13,7 @@ manageLayoutKeyDown(key)
     if (!layoutKeyPressed)
     {
         layoutKeyPressed := true
+        cancelDoubledModifier()
         if (timeoutMouseScrollPoll) {
             CoordMode, Mouse, Screen
             MouseGetPos, initialMousePositionXAxis, initialMousePositionYAxis

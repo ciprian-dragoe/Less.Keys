@@ -31,9 +31,18 @@ readLayoutFile(path)
         else if (newValueForKey = "lwin")
         {
             addToMonitoredStickyKeys(originalKey, newValueForKey)
-        } else if (newValueForKey = "rbutton")
+        }
+        else if (newValueForKey = "rbutton")
         {
             keyRemappedAsRightButton := originalKey
+        }
+        else if (newValueForKey = "shiftClick")
+        {
+            monitoredStickyKeys.Push(originalKey)
+        }
+        else if (newValueForKey = "ctrlClick")
+        {
+            monitoredStickyKeys.Push(originalKey)
         }
         
         layout[originalKey] := newValueForKey

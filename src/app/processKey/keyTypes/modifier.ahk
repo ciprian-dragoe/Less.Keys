@@ -1,43 +1,97 @@
+#include %A_ScriptDir%\app\processKey\keyTypes\shiftDoubledAsClick.ahk
+#include %A_ScriptDir%\app\processKey\keyTypes\ctrlDoubledAsClick.ahk
+
+
+
 global ctrlActive := false
 global altActive := false
 global shiftActive := false
 global winActive := false
+global winActive := false
+global modifierActions := object()
+global modifierDoubledAsClick := object()
 
 
+
+modifierActions["ctrl"] := func("setCtrlState")  
+modifierActions["alt"] := func("setAltState")  
+modifierActions["shift"] := func("setShiftState")  
+modifierActions["lwin"] := func("setWinState")  
+modifierActions["ctrlClick"] := func("processCtrlDoubledAsClick")  
+modifierActions["shiftClick"] := func("processShiftDoubledAsClick")  
+
+modifierDoubledAsClick["shiftClick"] := "lbutton"
+modifierDoubledAsClick["ctrlClick"] := "rbutton"
 
 processModifierKey(key, state)
 {
-    pressedState := state ? "down" : "up"
-    if (key = "ctrl") 
+    action := modifierActions[key]
+    if (action)
     {
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-        ctrlActive := state
-        send {blind}{ctrl %pressedState%}
-        return true
-    } 
-    else if (key = "alt")
-    {
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-        altActive := state
-        send {blind}{alt %pressedState%}
-        return true
-    }
-    else if (key = "shift")
-    {
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-        shiftActive := state
-        send {blind}{shift %pressedState%}
-        return true
-    }
-    else if (key = "lwin")
-    {
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-        winActive := state
-        send {blind}{lwin %pressedState%}
+        action.call(state)
         return true
     }
     
     return false
+}
+
+setCtrlState(state)
+{
+    if (isShiftDoubledAsClickPressed)
+    {
+        cancelDoubledModifier()
+    }
+    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+    ctrlActive := state
+    pressedState := state ? "down" : "up"
+    send {blind}{ctrl %pressedState%}
+}
+
+setAltState(state)
+{
+    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+    altActive := state
+    pressedState := state ? "down" : "up"
+    send {blind}{alt %pressedState%}
+}
+
+setShiftState(state)
+{
+    if (isCtrlDoubledAsClickPressed)
+    {
+        cancelDoubledModifier()
+    }
+    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+    shiftActive := state
+    pressedState := state ? "down" : "up"
+    send {blind}{shift %pressedState%}
+}
+
+setWinState(state)
+{
+    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+    winActive := state
+    pressedState := state ? "down" : "up"
+    send {blind}{lwin %pressedState%}
+}
+
+cancelDoubledModifier()
+{
+    cancelMouseHook(doubledShiftMouseHook)
+    cancelMouseHook(doubledCtrlMouseHook)
+    sendClickOnShiftClickRelease := false
+    sendClickOnCtrlClickRelease := false
+    resetShiftClickDrag(modifierDoubledAsClick["shiftClick"])
+    resetCtrlClickDrag(modifierDoubledAsClick["ctrlClick"])
+}
+
+cancelMouseHook(ByRef id)
+{
+    if (id)
+    {
+        DllCall("UnhookWindowsHookEx", "uint", id)
+        id := 0
+    }
 }
 
 getActiveModifiers(key)

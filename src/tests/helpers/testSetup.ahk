@@ -32,19 +32,27 @@ printTestResults(testResults)
 setDefaultTestEnvironment()
 {
     send {escape}
-    sleep 100
     clearText()
     MouseMove, 500, 500
     
     timeGreaterTimeoutProcessLayoutOnRelease := 500
     sleep %timeGreaterTimeoutProcessLayoutOnRelease%
+    clipboard := ""
 }
 
 clearText()
 {
     send ^a
-    sleep 10
+    sleep 100
     send ^x
+    sleep 100
+    return %clipboard%
+}
+
+getSelectedText()
+{
+    sleep 100
+    send ^c
     sleep 100
     return %clipboard%
 }
