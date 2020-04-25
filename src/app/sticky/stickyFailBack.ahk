@@ -43,6 +43,8 @@ resetStates()
     }
     resetShiftClickDrag()
     resetCtrlClickDrag()
+    isCtrlDoubledAsClickPressed := false
+    isShiftDoubledAsClickPressed := false
     activePressedKeys := []
     processKeyOnRelease := false
     layoutKeyPressed := false
