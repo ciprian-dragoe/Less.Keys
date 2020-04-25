@@ -3,8 +3,10 @@ When_shiftClick_is_pressed_at_release_left_click_is_sent_#301()
     simulateTyping("he")
     expected := setMousePositionToCaret()
     simulateTyping("llo")
-    simulateModifierClick("shiftClick", 1)
-    simulateModifierClick("shiftClick", 0)
+    processKeyDown("shiftClick")
+    sleep 100
+    processKeyUp("shiftClick")
+    sleep 100
     
     validateCaretOutput(A_ThisFunc, expected)    
 }
@@ -12,10 +14,12 @@ When_shiftClick_is_pressed_at_release_left_click_is_sent_#301()
 When_shiftClick_is_continously_pressed_and_layout_key_is_pressed_but_not_release_space_is_not_sent_#302()
 {
     simulateTyping("hello")
-    simulateModifierClick("shiftClick", 1)
+    processKeyDown("shiftClick")
+    sleep 100
     simulateKeyDown("space", 1000)
     simulateKeyUp("space", 50)
-    simulateModifierClick("shiftClick", 0)
+    processKeyUp("shiftClick")
+    sleep 100
         
     expected := "hello"
     validateTestOutput(A_ThisFunc , expected)
@@ -24,9 +28,11 @@ When_shiftClick_is_continously_pressed_and_layout_key_is_pressed_but_not_release
 When_shiftClick_is_continously_pressed_and_letter_key_is_pressed_capitalized_letter_is_sent_#303()
 {
     simulateTyping("hello ")
-    simulateModifierClick("shiftClick", 1)
+    processKeyDown("shiftClick")
+    sleep 100
     simulateTyping("world")
-    simulateModifierClick("shiftClick", 0)
+    processKeyUp("shiftClick")
+    sleep 100
         
     expected := "hello WORLD"
     validateTestOutput(A_ThisFunc , expected)
@@ -36,10 +42,12 @@ When_shiftClick_is_continously_pressed_and_letter_key_is_pressed_left_click_is_n
 {
     simulateTyping("he")
     setMousePositionToCaret()
-    simulateModifierClick("shiftClick", 1)
+    processKeyDown("shiftClick")
+    sleep 100
     simulateTyping("llo")
     expected := getCurrentCaretPosition()
-    simulateModifierClick("shiftClick", 0)
+    processKeyUp("shiftClick")
+    sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)    
 }
@@ -48,11 +56,13 @@ When_shiftClick_is_continously_pressed_and_layout_key_is_pressed_and_key_remappe
 {
     simulateTyping("hello ")
     setMousePositionToCaret()
-    simulateModifierClick("shiftClick", 1)
+    processKeyDown("shiftClick")
+    sleep 100
     simulateKeyDown("space", 50)
     simulateKeyDown("a", 50)
     expected := getCurrentCaretPosition()
-    simulateModifierClick("shiftClick", 0)
+    processKeyUp("shiftClick")
+    sleep 100
     simulateKeyUp("space", 50)
     simulateKeyUp("a", 50)
 
@@ -64,10 +74,12 @@ When_shiftClick_is_pressed_and_ctrl_key_is_pressed_click_is_not_sent_on_shiftCli
     simulateTyping("he")
     setMousePositionToCaret()
     simulateTyping("llo")
-    simulateModifierClick("shiftClick", 1)
-    simulateKeyDown("lctrl", 50)
     expected := getCurrentCaretPosition()
-    simulateModifierClick("shiftClick", 0)
+    processKeyDown("shiftClick")
+    sleep 100
+    simulateKeyDown("lctrl", 50)
+    processKeyUp("shiftClick")
+    sleep 100
     simulateKeyUp("lctrl", 50)
 
     validateCaretOutput(A_ThisFunc, expected)
@@ -79,12 +91,14 @@ When_shiftClick_is_pressed_and_alt_key_is_pressed_click_is_not_sent_on_shiftClic
     setMousePositionToCaret()
     simulateTyping("llo")
     expected := getCurrentCaretPosition()
-    simulateModifierClick("shiftClick", 1)
+    processKeyDown("shiftClick")
+    sleep 100
     simulateKeyDown("ralt", 50)
     simulateKeyUp("ralt", 50)
     simulateKeyDown("ralt", 50)
     simulateKeyUp("ralt", 50)
-    simulateModifierClick("shiftClick", 0)
+    processKeyUp("shiftClick")
+    sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
 }
@@ -95,10 +109,12 @@ When_shiftClick_is_pressed_and_shift_key_is_pressed_click_is_not_sent_on_shiftCl
     setMousePositionToCaret()
     simulateTyping("llo")
     expected := getCurrentCaretPosition()
-    simulateModifierClick("shiftClick", 1)
+    processKeyDown("shiftClick")
+    sleep 100
     simulateKeyDown("lshift", 50)
     simulateKeyUp("lshift", 50)
-    simulateModifierClick("shiftClick", 0)
+    processKeyUp("shiftClick")
+    sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
 }
@@ -109,7 +125,8 @@ When_shiftClick_is_pressed_and_win_key_is_pressed_click_is_not_sent_on_shiftClic
     setMousePositionToCaret()
     simulateTyping("llo")
     expected := getCurrentCaretPosition()
-    simulateModifierClick("shiftClick", 1)
+    processKeyDown("shiftClick")
+    sleep 100
     processKeyDown("lwin")
     sleep 50
     processKeyUp("lwin")
@@ -118,7 +135,8 @@ When_shiftClick_is_pressed_and_win_key_is_pressed_click_is_not_sent_on_shiftClic
     sleep 50
     processKeyUp("lwin")
     sleep 50
-    simulateModifierClick("shiftClick", 0)
+    processKeyUp("shiftClick")
+    sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
 }
@@ -128,14 +146,16 @@ When_shiftClick_is_pressed_and_ctrl_key_is_pressed_and_layout_key_continous_pres
     simulateTyping("hello")
     setMousePositionToCaret()
     simulateTyping(" world")
-    simulateModifierClick("shiftClick", 1)
+    processKeyDown("shiftClick")
+    sleep 100
     simulateKeyDown("lctrl", 50)
     simulateKeyDown("space", 50)
     simulateKeyDown("a", 50)
     simulateKeyUp("space", 50)
     simulateKeyUp("a", 50)
     simulateKeyUp("lctrl", 50)
-    simulateModifierClick("shiftClick", 0)
+    processKeyUp("shiftClick")
+    sleep 100
     actual := getSelectedText()
     expected := "world"
     
@@ -148,11 +168,13 @@ When_shiftClick_is_continously_pressed_and_layout_key_is_pressed_after_release_l
     simulateTyping("he")
     setMousePositionToCaret()
     simulateTyping("llo")
-    simulateModifierClick("shiftClick", 1)
+    processKeyDown("shiftClick")
+    sleep 100
     simulateKeyDown("space", 50)
     simulateKeyUp("space", 50)
     expected := getCurrentCaretPosition()
-    simulateModifierClick("shiftClick", 0)
+    processKeyUp("shiftClick")
+    sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
 }    
@@ -162,9 +184,11 @@ When_shiftClick_is_continously_pressed_and_mouse_is_moved_the_text_is_selected_#
     startingPosition := setMousePositionToCaret()
     simulateTyping("hello ")
     setMousePositionToCaret()
-    simulateModifierClick("shiftClick", 1)
+    processKeyDown("shiftClick")
+    sleep 100
     MouseMove startingPosition.x, startingPosition.y
-    simulateModifierClick("shiftClick", 0)
+    processKeyUp("shiftClick")
+    sleep 100
     
     actual := getSelectedText()
     expected := "hello "
@@ -178,10 +202,12 @@ When_shiftClick_is_continously_pressed_and_mouse_is_moved_and_a_letter_is_typed_
     startingPosition := setMousePositionToCaret()
     simulateTyping("hello")
     setMousePositionToCaret()
-    simulateModifierClick("shiftClick", 1)
+    processKeyDown("shiftClick")
+    sleep 100
     MouseMove startingPosition.x, startingPosition.y
     simulateTyping("a")
-    simulateModifierClick("shiftClick", 0)
+    processKeyUp("shiftClick")
+    sleep 100
 
     expected := "a"
     validateTestOutput(A_ThisFunc , expected)
@@ -192,10 +218,12 @@ When_shiftClick_is_continously_pressed_and_mouse_is_moved_and_layout_key_is_pres
     startingPosition := setMousePositionToCaret()
     simulateTyping("hello")
     setMousePositionToCaret()
-    simulateModifierClick("shiftClick", 1)
+    processKeyDown("shiftClick")
+    sleep 100
     MouseMove startingPosition.x, startingPosition.y
     simulateTyping(" ")
-    simulateModifierClick("shiftClick", 0)
+    processKeyUp("shiftClick")
+    sleep 100
 
     actual := clearText()
     expected := " "
@@ -209,11 +237,13 @@ When_shiftClick_is_continously_pressed_and_mouse_is_moved_and_layout_key_is_pres
     startingPosition := setMousePositionToCaret()
     simulateTyping("hello ")
     setMousePositionToCaret()
-    simulateModifierClick("shiftClick", 1)
+    processKeyDown("shiftClick")
+    sleep 100
     MouseMove startingPosition.x, startingPosition.y
     simulateKeyDown("space", timeoutStillSendLayoutKey + 100)
     simulateKeyUp("space", 100)
-    simulateModifierClick("shiftClick", 0)
+    processKeyUp("shiftClick")
+    sleep 100
 
     actual := clearText()
     expected := "hello "
@@ -227,10 +257,12 @@ When_non_modifier_letter_is_released_and_layout_key_continous_press_in_less_then
     simulateKeyDown("a", 20)
     simulateKeyUp("a", 20)
     simulateKeyDown("space", 100)
-    simulateModifierClick("shiftClick", 1)
+    processKeyDown("shiftClick")
+    sleep 100
     simulateTyping("y")
     simulateKeyUp("space", 100)
-    simulateModifierClick("shiftClick", 0)
+    processKeyUp("shiftClick")
+    sleep 100
     
     expected := "a Y"
     validateTestOutput(A_ThisFunc , expected)
@@ -241,10 +273,12 @@ When_non_modifier_letter_is_released_and_layout_key_continous_press_in_less_then
     simulateKeyDown("b", 20)
     simulateKeyUp("b", 20)
     simulateKeyDown("space", 100)
-    simulateModifierClick("shiftClick", 1)
+    processKeyDown("shiftClick")
+    sleep 100
     simulateTyping("a")
     simulateKeyUp("space", 100)
-    simulateModifierClick("shiftClick", 0)
+    processKeyUp("shiftClick")
+    sleep 100
     
     actual := getSelectedText()
     expected := "b"
@@ -258,10 +292,12 @@ When_non_modifier_letter_is_released_and_layout_key_continous_press_in_less_then
     simulateKeyDown("a", 20)
     simulateKeyUp("a", 20)
     simulateKeyDown("space", 100)
-    simulateModifierClick("shiftClick", 1)
+    processKeyDown("shiftClick")
+    sleep 100
     simulateTyping("y")
     simulateKeyUp("space", 100)
-    simulateModifierClick("shiftClick", 0)
+    processKeyUp("shiftClick")
+    sleep 100
     
     expected := setMousePositionToCaret()
     validateCaretOutput(A_ThisFunc, expected)
@@ -272,8 +308,10 @@ When_shift_key_is_pressed_followed_by_shiftClick_is_press_and_release_text_is_se
     startingPosition := setMousePositionToCaret()
     simulateTyping("hello ")
     simulateKeyDown("lshift", 100)
-    simulateModifierClick("shiftClick", 1)
-    simulateModifierClick("shiftClick", 0)
+    processKeyDown("shiftClick")
+    sleep 100
+    processKeyUp("shiftClick")
+    sleep 100
     simulateKeyUp("lshift", 100)
     
     actual := getSelectedText()
@@ -284,29 +322,29 @@ When_shift_key_is_pressed_followed_by_shiftClick_is_press_and_release_text_is_se
 
 When_shiftClick_is_pressed_more_then_timeoutStillSendLayoutKey_left_click_is_not_sent_on_shiftClick_release_#320()
 {
-    startingPosition := setMousePositionToCaret()
+    setMousePositionToCaret()
     simulateTyping("hello ")
+    expected := getCurrentCaretPosition()
     processKeyDown("shiftClick")
     sleep 1000
     processKeyUp("shiftClick")
     sleep 100
     
-    expected := getCurrentCaretPosition()
     validateCaretOutput(A_ThisFunc, expected)
 }
 
 When_layout_key_is_pressed_followed_by_shiftClick_left_click_is_not_sent_on_shiftClick_release_#321()
 {
-    startingPosition := setMousePositionToCaret()
+    setMousePositionToCaret()
     simulateTyping("hello ")
+    expected := getCurrentCaretPosition()
     processKeyDown("space")
+    sleep 1000
     processKeyDown("shiftClick")
-    sleep 100
     processKeyUp("shiftClick")
     sleep 100
     processKeyUp("space")
     
-    expected := getCurrentCaretPosition()
     validateCaretOutput(A_ThisFunc, expected)
 }
 
@@ -315,11 +353,11 @@ When_non_modifier_key_is_pressed_followed_by_shiftClick_left_click_is_not_sent_o
     startingPosition := setMousePositionToCaret()
     simulateTyping("hello ")
     simulateKeyDown("a", 100)
+    expected := getCurrentCaretPosition()
     processKeyDown("shiftClick")
     sleep 100
     processKeyUp("shiftClick")
     simulateKeyUp("a", 100)
     
-    expected := getCurrentCaretPosition()
     validateCaretOutput(A_ThisFunc, expected)
 }
