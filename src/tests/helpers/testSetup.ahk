@@ -34,10 +34,9 @@ setDefaultTestEnvironment()
     send {escape}
     clearText()
     MouseMove, 500, 500
-    
+    clipboard :=
     timeGreaterTimeoutProcessLayoutOnRelease := 500
     sleep %timeGreaterTimeoutProcessLayoutOnRelease%
-    clipboard := ""
 }
 
 clearText()

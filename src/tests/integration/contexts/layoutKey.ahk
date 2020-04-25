@@ -95,7 +95,7 @@ When_non_modifier_key_is_already_pressed_and_layout_key_is_pressed_space_is_sent
     validateTestOutput(A_ThisFunc , expected)
 }
 
-When_non_modifier_key_is_released_followed_by_layout_key_press_in_less_than_timeoutProcessLayoutOnRelease_followed_by_non_modifier_key_press_followed_by_same_non_modifier_key_release_remapped_key_is_sent_#009()
+When_non_modifier_key_is_released_followed_by_layout_key_press_in_less_than_timeoutProcessLayoutOnRelease_followed_by_non_modifier_key_press_which_has_alternative_mapping_followed_by_same_non_modifier_key_release_remapped_key_is_sent_#009()
 {
     simulateKeyDown("w", 50)
     simulateKeyUp("w", 50)
@@ -147,5 +147,18 @@ When_layout_key_is_pressed_followed_by_non_modifier_key_press_followed_by_layout
     simulateKeyUp("d", 50)
     
     expected := "dw"
+    validateTestOutput(A_ThisFunc , expected)
+}
+
+When_non_modifier_key_is_released_followed_by_layout_key_press_in_less_than_timeoutProcessLayoutOnRelease_followed_by_non_modifier_key_press_without_alternative_mapping_followed_by_same_release_the_key_is_sent_followed_by_space_#013()
+{
+    simulateKeyDown("w", 50)
+    simulateKeyUp("w", 50)
+    simulateKeyDown("space", 50)
+    simulateKeyDown("y", 10)
+    simulateKeyUp("y", 50)
+    simulateKeyUp("space", 50)
+    
+    expected := "w y"
     validateTestOutput(A_ThisFunc , expected)
 }

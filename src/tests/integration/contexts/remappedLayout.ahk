@@ -1,4 +1,4 @@
-When_key_which_has_been_remapped_is_pressed_remapped_key_is_sent_instead_#013()
+When_key_which_has_been_remapped_is_pressed_remapped_key_is_sent_instead_#101()
 {
     simulateKeyDown("pause", 50)
     simulateKeyUp("pause", 50)
@@ -7,7 +7,7 @@ When_key_which_has_been_remapped_is_pressed_remapped_key_is_sent_instead_#013()
     validateTestOutput(A_ThisFunc , expected)
 }
 
-When_layout_key_is_pressed_followed_by_key_which_has_been_remapped_is_pressed_alternative_of_remapped_key_is_sent_#014()
+When_layout_key_is_pressed_followed_by_key_which_has_been_remapped_is_pressed_alternative_of_remapped_key_is_sent_#102()
 {
     simulateKeyDown("space", 50)
     simulateKeyDown("pause", 50)
@@ -18,7 +18,7 @@ When_layout_key_is_pressed_followed_by_key_which_has_been_remapped_is_pressed_al
     validateTestOutput(A_ThisFunc , expected)
 }
 
-When_key_which_has_been_remapped_as_modifier_key_is_pressed_modifier_key_is_sent_instead_#015()
+When_key_which_has_been_remapped_as_modifier_key_is_pressed_modifier_key_is_sent_instead_#103()
 {
     simulateTyping("hello")
     simulateKeyDown("capslock", 50)
@@ -32,7 +32,7 @@ When_key_which_has_been_remapped_as_modifier_key_is_pressed_modifier_key_is_sent
     validateTestOutput(A_ThisFunc , expected)
 }
 
-When_key_which_has_been_remapped_as_modifier_key_is_pressed_followed_by_layout_key_press_followed_by_key_which_has_alternative_mapping_the_alternative_mapped_key_is_sent_#016()
+When_key_which_has_been_remapped_as_modifier_key_is_pressed_followed_by_layout_key_press_followed_by_key_which_has_alternative_mapping_the_alternative_mapped_key_is_sent_#104()
 {
     simulateTyping("hello")
     simulateKeyDown("space", 50)
