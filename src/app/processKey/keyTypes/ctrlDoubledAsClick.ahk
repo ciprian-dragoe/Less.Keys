@@ -1,6 +1,7 @@
 global sendClickOnCtrlClickRelease := false
 global sendUnClickOnCtrlClickRelease := false
 global isCtrlDoubledAsClickPressed := false
+
 global doubledCtrlMouseHook
 
 
@@ -23,10 +24,21 @@ doubledCtrlDown()
     {
         return
     }
+    
     isCtrlDoubledAsClickPressed := true
-    sendClickOnCtrlClickRelease := true
-    doubledCtrlMouseHook := DllCall("SetWindowsHookEx", "int", 14, "uint", RegisterCallback("MouseDragCtrlActivate"), "uint", 0, "uint", 0)
+    if (ctrlActive)
+    {
+        ctrlActiveBeforeCtrlClickPress := true
+    }
+    
     setCtrlState(1)
+    
+    if (!layoutKeyPressed && activePressedKeys.Length() = 0 && !isShiftDoubledAsClickPressed)
+    {
+        doubledCtrlMouseHook := DllCall("SetWindowsHookEx", "int", 14, "uint", RegisterCallback("MouseDragCtrlActivate"), "uint", 0, "uint", 0)
+        SetTimer, TimerResetSentClickOnModifierRelease, %timeoutStillSendLayoutKey%
+        sendClickOnCtrlClickRelease := true
+    }
 }
 
 MouseDragCtrlActivate(nCode, wParam, lParam)
@@ -45,12 +57,19 @@ MouseDragCtrlActivate(nCode, wParam, lParam)
 doubledCtrlUp()
 {
     cancelMouseHook(doubledCtrlMouseHook)
-    setCtrlState(0)
+    if (ctrlActiveBeforeCtrlClickPress)
+    {
+        ctrlActiveBeforeCtrlClickPress := false
+    }
+    else
+    {
+        setCtrlState(0)
+    }
+    
     isCtrlDoubledAsClickPressed := false
     
     doubledAction := modifierDoubledAsClick["ctrlClick"]
     resetCtrlClickDrag(doubledAction)
-    
     if (sendClickOnCtrlClickRelease)
     {
         send {blind}{%doubledAction%}

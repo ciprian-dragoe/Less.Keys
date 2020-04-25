@@ -27,3 +27,7 @@ return
 TimerTimeoutSendLayoutKey:
     timerTimeoutSendLayoutKey()
 return
+
+TimerResetSentClickOnModifierRelease:
+    timerResetSentClickOnModifierRelease()
+return

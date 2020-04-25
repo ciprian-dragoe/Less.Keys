@@ -1,6 +1,7 @@
 global sendClickOnShiftClickRelease := false
 global sendUnClickOnShiftClickRelease := false
 global isShiftDoubledAsClickPressed := false
+global shiftActiveBeforeShiftClickPress
 global doubledShiftMouseHook
 
 
@@ -23,10 +24,21 @@ doubledShiftDown()
     {
         return
     }
+    
     isShiftDoubledAsClickPressed := true
-    sendClickOnShiftClickRelease := true
-    doubledShiftMouseHook := DllCall("SetWindowsHookEx", "int", 14, "uint", RegisterCallback("MouseDragShiftActivate"), "uint", 0, "uint", 0)
+    if (shiftActive)
+    {
+        shiftActiveBeforeShiftClickPress := true
+    }
+    
     setShiftState(1)
+    
+    if (!layoutKeyPressed && activePressedKeys.Length() = 0 && !isCtrlDoubledAsClickPressed)
+    {
+        doubledShiftMouseHook := DllCall("SetWindowsHookEx", "int", 14, "uint", RegisterCallback("MouseDragShiftActivate"), "uint", 0, "uint", 0)
+        SetTimer, TimerResetSentClickOnModifierRelease, %timeoutStillSendLayoutKey%
+        sendClickOnShiftClickRelease := true
+    }
 }
 
 MouseDragShiftActivate(nCode, wParam, lParam)
@@ -45,7 +57,14 @@ MouseDragShiftActivate(nCode, wParam, lParam)
 doubledShiftUp()
 {
     cancelMouseHook(doubledShiftMouseHook)
-    setShiftState(0)
+    if (shiftActiveBeforeShiftClickPress)
+    {
+        shiftActiveBeforeShiftClickPress := false
+    }
+    else
+    {
+        setShiftState(0)
+    }
     isShiftDoubledAsClickPressed := false
     
     doubledAction := modifierDoubledAsClick["shiftClick"]
@@ -66,4 +85,3 @@ resetShiftClickDrag(action)
         sendUnClickOnShiftClickRelease := false
     }
 }
-

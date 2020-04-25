@@ -12,8 +12,8 @@ manageLayoutKeyDown(key)
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
     if (!layoutKeyPressed)
     {
-        layoutKeyPressed := true
         cancelDoubledModifier()
+        layoutKeyPressed := true
         if (timeoutMouseScrollPoll) {
             CoordMode, Mouse, Screen
             MouseGetPos, initialMousePositionXAxis, initialMousePositionYAxis

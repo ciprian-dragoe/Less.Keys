@@ -37,10 +37,11 @@ processModifierKey(key, state)
 
 setCtrlState(state)
 {
-    if (isShiftDoubledAsClickPressed)
+    if (state)
     {
         cancelDoubledModifier()
     }
+    
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
     ctrlActive := state
     pressedState := state ? "down" : "up"
@@ -49,6 +50,11 @@ setCtrlState(state)
 
 setAltState(state)
 {
+    if (state)
+    {
+        cancelDoubledModifier()
+    }
+    
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
     altActive := state
     pressedState := state ? "down" : "up"
@@ -57,10 +63,11 @@ setAltState(state)
 
 setShiftState(state)
 {
-    if (isCtrlDoubledAsClickPressed)
+    if (state)
     {
         cancelDoubledModifier()
     }
+        
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
     shiftActive := state
     pressedState := state ? "down" : "up"
@@ -69,6 +76,11 @@ setShiftState(state)
 
 setWinState(state)
 {
+    if (state)
+    {
+        cancelDoubledModifier()
+    }
+    
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
     winActive := state
     pressedState := state ? "down" : "up"
@@ -115,4 +127,11 @@ getActiveModifiers(key)
     }
 
     return result
+}
+
+timerResetSentClickOnModifierRelease()
+{
+    SetTimer, TimerResetSentClickOnModifierRelease, OFF
+    sendClickOnShiftClickRelease := false
+    sendClickOnCtrlClickRelease := false
 }
