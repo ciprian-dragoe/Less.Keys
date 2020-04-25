@@ -68,19 +68,20 @@ doubledCtrlUp()
     
     isCtrlDoubledAsClickPressed := false
     
-    doubledAction := modifierDoubledAsClick["ctrlClick"]
-    resetCtrlClickDrag(doubledAction)
+    resetCtrlClickDrag()
     if (sendClickOnCtrlClickRelease)
     {
+        doubledAction := modifierDoubledAsClick["ctrlClick"]
         send {blind}{%doubledAction%}
         sendClickOnCtrlClickRelease := false
     }
 }
 
-resetCtrlClickDrag(action)
+resetCtrlClickDrag()
 {
     if (sendUnClickOnCtrlClickRelease)
     {
+        action := modifierDoubledAsClick["ctrlClick"]
         send {blind}{%action% up}
         sendUnClickOnCtrlClickRelease := false
     }

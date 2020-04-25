@@ -41,6 +41,8 @@ resetStates()
     {
         send {lwin up}
     }
+    resetShiftClickDrag()
+    resetCtrlClickDrag()
     activePressedKeys := []
     processKeyOnRelease := false
     layoutKeyPressed := false

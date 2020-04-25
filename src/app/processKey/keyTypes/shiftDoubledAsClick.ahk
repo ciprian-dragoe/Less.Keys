@@ -67,20 +67,20 @@ doubledShiftUp()
     }
     isShiftDoubledAsClickPressed := false
     
-    doubledAction := modifierDoubledAsClick["shiftClick"]
-    resetShiftClickDrag(doubledAction)
-    
+    resetShiftClickDrag()
     if (sendClickOnShiftClickRelease)
     {
+        doubledAction := modifierDoubledAsClick["shiftClick"]
         send {blind}{%doubledAction%}
         sendClickOnShiftClickRelease := false
     }
 }
 
-resetShiftClickDrag(action)
+resetShiftClickDrag()
 {
     if (sendUnClickOnShiftClickRelease)
     {
+        action := modifierDoubledAsClick["shiftClick"]
         send {blind}{%action% up}
         sendUnClickOnShiftClickRelease := false
     }

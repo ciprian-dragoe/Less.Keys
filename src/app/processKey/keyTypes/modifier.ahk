@@ -93,8 +93,8 @@ cancelDoubledModifier()
     cancelMouseHook(doubledCtrlMouseHook)
     sendClickOnShiftClickRelease := false
     sendClickOnCtrlClickRelease := false
-    resetShiftClickDrag(modifierDoubledAsClick["shiftClick"])
-    resetCtrlClickDrag(modifierDoubledAsClick["ctrlClick"])
+    resetShiftClickDrag()
+    resetCtrlClickDrag()
 }
 
 cancelMouseHook(ByRef id)
