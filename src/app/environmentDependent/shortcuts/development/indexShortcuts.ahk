@@ -1,0 +1,1 @@
+#include %A_ScriptDir%\app\environmentDependent\shortcuts\development\resolver.ahk
