@@ -252,9 +252,6 @@
     *rwin::processModifierWhenKeyPhysicalDown("rwin")
     *rwin up::processModifierWhenKeyPhysicalUp("rwin")
     
-    *lwin::processModifierWhenKeyPhysicalDown("lwin")
-    *lwin up::processModifierWhenKeyPhysicalUp("lwin")
-    
     *pause::processKeyDown(layout["pause"])
     *pause up::processKeyUp(layout["pause"])
 
