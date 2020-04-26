@@ -48,6 +48,8 @@ resetStates()
     activePressedKeys := []
     processKeyOnRelease := false
     layoutKeyPressed := false
+    SetTimer, TimerScrollWithMouseMovement, OFF
+    systemCursor(1)
     alternativeLayoutActive := false 
     sendLayoutKey := false
     keyToSendOnUp := ""
