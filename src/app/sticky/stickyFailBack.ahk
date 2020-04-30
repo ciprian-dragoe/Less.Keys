@@ -35,7 +35,10 @@ resetStates()
         showToolTip("reset states")
     }
     send {shift up}
-    send {alt up}
+    if (altActive)
+    {
+        send {alt up}
+    }
     send {ctrl up}
     if (winActive)
     {
