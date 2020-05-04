@@ -228,7 +228,10 @@
     *appskey::processKeyDown(layout["appskey"])
     *appskey up::processKeyUp(layout["appskey"])
     
-    *printscreen::processKeyDown(layout["printscreen"])
+    *printscreen::
+        showtooltip("Exit")
+        exitApp
+    return
     *printscreen up::processKeyUp(layout["printscreen"])
     
     *lctrl::processModifierWhenKeyPhysicalDown("lctrl")
