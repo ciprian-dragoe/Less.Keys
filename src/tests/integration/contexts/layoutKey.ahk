@@ -162,3 +162,48 @@ When_non_modifier_key_is_released_followed_by_layout_key_press_in_less_than_time
     expected := "w y"
     validateTestOutput(A_ThisFunc , expected)
 }
+
+When_letter_is_released_followed_by_layout_key_press_in_less_than_timeoutProcessLayoutOnRelease_followed_by_letter_press_followed_by_different_letter_press_and_release_alternative_key_for_first_and_second_letter_is_sent_#614()
+{
+    simulateKeyDown("w", 50)
+    simulateKeyUp("w", 50)
+    simulateKeyDown("space", 50)
+    simulateKeyDown("n", 10)
+    simulateKeyDown("m", 10)
+    simulateKeyUp("n", 50)
+    simulateKeyUp("m", 50)
+    simulateKeyUp("space", 50)
+    
+    expected := "w-="
+    validateTestOutput(A_ThisFunc , expected)
+}
+
+When_letter_is_released_followed_by_layout_key_press_in_less_than_timeoutProcessLayoutOnRelease_followed_by_letter_press_followed_by_different_letter_press_followed_by_layout_release_space_is_not_sent_#615()
+{
+    simulateKeyDown("w", 50)
+    simulateKeyUp("w", 50)
+    simulateKeyDown("space", 50)
+    simulateKeyDown("n", 10)
+    simulateKeyDown("m", 10)
+    simulateKeyUp("space", 50)
+    simulateKeyUp("n", 50)
+    simulateKeyUp("m", 50)
+    
+    expected := "w-="
+    validateTestOutput(A_ThisFunc , expected)
+}
+
+When_letter_is_released_followed_by_layout_key_press_in_less_than_timeoutProcessLayoutOnRelease_followed_by_letter_press_followed_by_different_letter_press_followed_by_layout_release_alternative_keys_are_sent_for_both_letters_#616()
+{
+    simulateKeyDown("w", 50)
+    simulateKeyUp("w", 50)
+    simulateKeyDown("space", 50)
+    simulateKeyDown("n", 10)
+    simulateKeyDown("m", 10)
+    simulateKeyUp("space", 50)
+    simulateKeyUp("n", 50)
+    simulateKeyUp("m", 50)
+    
+    expected := "w-="
+    validateTestOutput(A_ThisFunc , expected)
+}

@@ -1,36 +1,42 @@
 processNormalKey(key)
 {
     cancelDoubledModifier()
+    if (keyToSendOnUp)
+    {
+        sendLayoutKey := false
+        discardKeyBecauseSecondKeyIsPressedInLessTimeoutProcessLayoutOnRelease := alternativeLayout[keyToSendOnUp]
+        processKeyToSend(discardKeyBecauseSecondKeyIsPressedInLessTimeoutProcessLayoutOnRelease)
+        debug(discardKeyBecauseSecondKeyIsPressedInLessTimeoutProcessLayoutOnRelease . "|sent because second key press in less then timeoutProcessLayoutOnRelease")
+    }
+    
     if (processKeyOnRelease)
     {
         keyToSendOnUp := key
         debug(key . "|>>>>>> will be processed on release")
+        return
     }
-    else
+    
+    sendLayoutKey := false    
+    if (alternativeLayoutActive)
     {
-        sendLayoutKey := false
-        
-        if (alternativeLayoutActive)
-        {
-            lastKeyProcessedAsAlternative := key
-            key := alternativeLayout[key]
-            if (keyToSendOnUp && keyToSendOnUp = key) {
-                send {blind}{%layoutChangeKey%}
-            }
-            processKeyToSend(key)
-            debug(key . "|------ key down with alternative layout")
-            
-            return
+        lastKeyProcessedAsAlternative := key
+        key := alternativeLayout[key]
+        if (keyToSendOnUp && keyToSendOnUp = key) {
+            send {blind}{%layoutChangeKey%}
         }
+        processKeyToSend(key)
+        debug(key . "|------ key down with alternative layout")
         
-        if (key != lastKeyProcessedAsAlternative)
+        return
+    }
+    
+    if (key != lastKeyProcessedAsAlternative)
+    {
+        if (processKeyToSend(key))
         {
-            if (processKeyToSend(key))
-            {
-                addToActivePressedKeys(key)
-            }
-            debug(key . "|key down")
+            addToActivePressedKeys(key)
         }
+        debug(key . "|key down")
     }
 }
 
