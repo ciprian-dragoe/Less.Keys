@@ -47,3 +47,47 @@ When_key_which_has_been_remapped_as_modifier_key_is_pressed_followed_by_layout_k
     expected := "whello"
     validateTestOutput(A_ThisFunc , expected)
 }
+
+When_modifer_key_remapped_as_letter_is_pressed_on_release_activePressedKeys_is_reset_#705()
+{
+    simulateKeyDown("rshift")
+    processModifierWhenKeyPhysicalUp("rshift")
+    sleep 50
+    
+    result := ""
+    for index, value in activePressedKeys
+    {
+        result .= value
+    }
+    addTestResult(A_ThisFunc, expected, result, evaluateResult(expected, result))
+    setDefaultTestEnvironment()
+}
+
+When_layout_key_pressed_and_modifer_key_remapped_as_letter_is_pressed_on_modifier_key_release_activePressedKeys_is_reset_#706()
+{
+    simulateKeyDown("space", 50)
+    simulateKeyDown("rshift", 50)
+    processModifierWhenKeyPhysicalUp("rshift")
+    sleep 50
+    simulateKeyUp("space", 50)
+    
+    result := ""
+    for index, value in activePressedKeys
+    {
+        result .= value
+    }
+    addTestResult(A_ThisFunc, expected, result, evaluateResult(expected, result))
+    setDefaultTestEnvironment()
+}
+
+When_layout_key_pressed_and_modifer_key_remapped_as_letter_is_pressed_on_modifier_key_release_alternative_key_is_sent_#707()
+{
+    simulateKeyDown("space", 50)
+    simulateKeyDown("rshift", 50)
+    processModifierWhenKeyPhysicalUp("rshift")
+    sleep 50
+    simulateKeyUp("space", 50)
+    
+    expected := "="
+    validateTestOutput(A_ThisFunc , expected)
+}

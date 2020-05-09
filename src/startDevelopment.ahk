@@ -26,4 +26,4 @@ if (A_ScriptName == "LessKeys.exe")
 #include %A_ScriptDir%\app\environmentDependent\keyHooks\development\keyHooks.ahk
 
 ; if you want to add your custom labels, add them here  
-#include %A_ScriptDir%\app\environmentDependent\labels\1development\custom.ahk
+#include %A_ScriptDir%\app\environmentDependent\labels\development\custom.ahk
