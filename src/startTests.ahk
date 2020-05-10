@@ -6,7 +6,7 @@ SetTitleMatchMode 2
 
 
 
-global PATH_APP_CONFIGURATION := A_ScriptDir .  ".\compile\binaries\tests\"
+global PATH_APP_CONFIGURATION := A_ScriptDir .  "\app\environmentDependent\binaries\tests\"
 
 
 

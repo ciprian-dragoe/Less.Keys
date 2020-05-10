@@ -287,4 +287,8 @@ processModifierWhenKeyPhysicalUp(key)
     {
         processKeyUp(remappedWithKey)
     }
+    else
+    {
+        removeFromActivePressedKeys(remappedWithKey)
+    }
 }

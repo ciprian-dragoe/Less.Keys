@@ -168,10 +168,10 @@ When_letter_is_released_followed_by_layout_key_press_in_less_than_timeoutProcess
     simulateKeyDown("w", 50)
     simulateKeyUp("w", 50)
     simulateKeyDown("space", 50)
-    simulateKeyDown("n", 10)
-    simulateKeyDown("m", 10)
-    simulateKeyUp("n", 50)
-    simulateKeyUp("m", 50)
+    simulateKeyDown("o", 10)
+    simulateKeyDown("l", 10)
+    simulateKeyUp("o", 50)
+    simulateKeyUp("l", 50)
     simulateKeyUp("space", 50)
     
     expected := "w-="
@@ -183,11 +183,11 @@ When_letter_is_released_followed_by_layout_key_press_in_less_than_timeoutProcess
     simulateKeyDown("w", 50)
     simulateKeyUp("w", 50)
     simulateKeyDown("space", 50)
-    simulateKeyDown("n", 10)
-    simulateKeyDown("m", 10)
+    simulateKeyDown("o", 10)
+    simulateKeyDown("l", 10)
     simulateKeyUp("space", 50)
-    simulateKeyUp("n", 50)
-    simulateKeyUp("m", 50)
+    simulateKeyUp("o", 50)
+    simulateKeyUp("l", 50)
     
     expected := "w-="
     validateTestOutput(A_ThisFunc , expected)
@@ -198,11 +198,11 @@ When_letter_is_released_followed_by_layout_key_press_in_less_than_timeoutProcess
     simulateKeyDown("w", 50)
     simulateKeyUp("w", 50)
     simulateKeyDown("space", 50)
-    simulateKeyDown("n", 10)
-    simulateKeyDown("m", 10)
+    simulateKeyDown("o", 10)
+    simulateKeyDown("l", 10)
     simulateKeyUp("space", 50)
-    simulateKeyUp("n", 50)
-    simulateKeyUp("m", 50)
+    simulateKeyUp("o", 50)
+    simulateKeyUp("l", 50)
     
     expected := "w-="
     validateTestOutput(A_ThisFunc , expected)

@@ -6,7 +6,7 @@ To reduce wrist movement for accessing certain keys (for example the arrow keys)
 Example: you are writing the text "Helo, how are you doing?" and notice that you misspelled the word "hello". You press the left key until you reach the word "helo" and correct it. Alternatively  you could press the "space" key and while it is pressed you press the "a" key which would be translated into left arrow key instead of the letter "a". After releasing the "space" key, when you press again the "a" key, the "a" letter will be sent.
        
 ## Who is it for ?
-1. People who want to reduce the amount of wrist movement (similar results as having a kinesis advantage can be reached with certain alternative layouts, copy the layouts from `ALTERNATIVE_LAYOUTS_ARCHIVE\programmers\` or `ALTERNATIVE_LAYOUTS_ARCHIVE\trackpoint\` to the root program path for an example)
+1. People who want to reduce the amount of wrist movement (similar results as having a kinesis advantage can be reached with certain alternative layouts, copy the layouts from `.\src\app\environmentDependent\kinesisReplacer\` to the root program path for an example)
 1. Power users who want to type faster (especially for programmers who extensively use the ctrl/alt/shift modifiers for shortcut combinations)
 
 ## Editing the layout

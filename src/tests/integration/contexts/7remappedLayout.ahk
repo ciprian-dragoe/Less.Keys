@@ -59,6 +59,7 @@ When_modifer_key_remapped_as_letter_is_pressed_on_release_activePressedKeys_is_r
     {
         result .= value
     }
+    expected:= ""
     addTestResult(A_ThisFunc, expected, result, evaluateResult(expected, result))
     setDefaultTestEnvironment()
 }
@@ -76,6 +77,7 @@ When_layout_key_pressed_and_modifer_key_remapped_as_letter_is_pressed_on_modifie
     {
         result .= value
     }
+    expected := ""
     addTestResult(A_ThisFunc, expected, result, evaluateResult(expected, result))
     setDefaultTestEnvironment()
 }
@@ -88,6 +90,6 @@ When_layout_key_pressed_and_modifer_key_remapped_as_letter_is_pressed_on_modifie
     sleep 50
     simulateKeyUp("space", 50)
     
-    expected := "="
+    expected := "-"
     validateTestOutput(A_ThisFunc , expected)
 }

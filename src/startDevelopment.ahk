@@ -6,7 +6,7 @@ SetTitleMatchMode 2
 
 
 
-global PATH_APP_CONFIGURATION := A_ScriptDir .  ".\compile\binaries\development\"
+global PATH_APP_CONFIGURATION := A_ScriptDir .  "\app\environmentDependent\binaries\development\"
 if (A_ScriptName == "LessKeys.exe")
 {
     PATH_APP_CONFIGURATION := A_ScriptDir .  ".\"
