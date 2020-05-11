@@ -2,7 +2,7 @@ tooltip Compile started
 
 compilerPath := A_WorkingDir . "\..\externalTools\Ahk2Exe.exe"
 iconPath := A_WorkingDir . "\..\externalTools\icon.ico"
-sourcePath := A_WorkingDir . "\_startDevelopment.ahk"
+sourcePath := A_WorkingDir . "\startLive.ahk"
 outputPath := A_WorkingDir . "\..\LessKeys.exe"
 runwait, %compilerPath% /in %sourcePath% /out %outputPath% /icon  %iconPath%
 

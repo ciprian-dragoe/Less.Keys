@@ -13,12 +13,12 @@ global modifierDoubledAsClick := object()
 
 
 
-modifierActions["ctrl"] := func("setCtrlState")  
-modifierActions["alt"] := func("setAltState")  
-modifierActions["shift"] := func("setShiftState")  
-modifierActions["lwin"] := func("setWinState")  
-modifierActions["ctrlClick"] := func("processCtrlDoubledAsClick")  
-modifierActions["shiftClick"] := func("processShiftDoubledAsClick")  
+modifierActions["ctrl"] := func("setCtrlState")
+modifierActions["alt"] := func("setAltState")
+modifierActions["shift"] := func("setShiftState")
+modifierActions["lwin"] := func("setWinState")
+modifierActions["ctrlClick"] := func("processCtrlDoubledAsClick")
+modifierActions["shiftClick"] := func("processShiftDoubledAsClick")
 
 modifierDoubledAsClick["shiftClick"] := "lbutton"
 modifierDoubledAsClick["ctrlClick"] := "rbutton"

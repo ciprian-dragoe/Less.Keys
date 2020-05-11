@@ -1,37 +1,17 @@
 #include %A_ScriptDir%\app\environmentDependent\live\shortcuts\resolver\debug.ahk
+#include %A_ScriptDir%\app\environmentDependent\live\shortcuts\resolver\rightClick.ahk
 
+
+
+global resolverAction := object()
+resolverAction[1] := func("reloadApp")
+resolverAction[2] := func("displayDebugData")
+resolverAction[3] := func("storeDebugData")
+resolverAction[1026] := func("rightClick")
+resolverAction[9999] := func("sendTestMessage")
 
 processShortcut(index)
 {
-    if (index = 1)
-    {
-        reloadApp()
-        return
-    }
-    if (index = 2)
-    {
-        displayDebugData()
-        return
-    }
-    if (index = 3)
-    {
-        storeDebugData()
-        return
-    }
-    if (index = 1026)
-    {
-        sendRightMouseButton := true
-        CoordMode, Mouse, Screen
-        MouseGetPos, initialMousePositionXAxis, initialMousePositionYAxis
-        SetTimer, TimerScrollWithMouseMovement, %timeoutMouseScrollPoll%
-        keywait, %keyRemappedAsRightButton%
-        SetTimer, TimerScrollWithMouseMovement, OFF
-        systemCursor(1)
-        if (sendRightMouseButton)
-        {
-            send {blind}{rbutton}
-        }
-        return
-    }
-    
+    resolverAction[index]()
+    return
 }

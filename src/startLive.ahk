@@ -15,7 +15,7 @@ if (A_ScriptName == "LessKeys.exe")
 
 #include %A_ScriptDir%\app\startup\startup.ahk
 #include %A_ScriptDir%\app\processKey\processKey.ahk
-#include %A_ScriptDir%\app\environmentDependent\live\shortcuts\indexShortcuts.ahk
+#include %A_ScriptDir%\app\environmentDependent\live\shortcuts\resolver.ahk
 #include %A_ScriptDir%\app\debug\debug.ahk
 #include %A_ScriptDir%\app\environmentDependent\live\postStartup\postStartup.ahk
 

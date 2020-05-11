@@ -12,7 +12,7 @@ global PATH_APP_CONFIGURATION := A_ScriptDir .  "\app\environmentDependent\test\
 
 #include %A_ScriptDir%\app\startup\startup.ahk
 #include %A_ScriptDir%\app\processKey\processKey.ahk
-#include %A_ScriptDir%\app\environmentDependent\test\shortcuts\indexShortcuts.ahk
+#include %A_ScriptDir%\app\environmentDependent\test\shortcuts\resolver.ahk
 #include %A_ScriptDir%\app\debug\debug.ahk
 #include %A_ScriptDir%\app\environmentDependent\test\postStartup\postStartup.ahk
 
