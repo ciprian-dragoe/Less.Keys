@@ -1,5 +1,10 @@
 tooltip Compile started
-runwait, ".\compile\externalTools\Ahk2Exe.exe" /in startDevelopment.ahk /out ".\compile\binaries\development\LessKeys.exe" /icon ".\compile\icon.ico"
+
+compilerPath := A_WorkingDir . "\..\externalTools\Ahk2Exe.exe"
+iconPath := A_WorkingDir . "\..\externalTools\icon.ico"
+sourcePath := A_WorkingDir . "\startDevelopment.ahk"
+outputPath := A_WorkingDir . "\app\environmentDependent\development\binaries\LessKeys.exe"
+runwait, %compilerPath% /in %sourcePath% /out %outputPath% /icon  %iconPath%
 
 if (ErrorLevel)
 {

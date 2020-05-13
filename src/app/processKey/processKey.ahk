@@ -45,15 +45,16 @@ processKeyUp(key)
     
     if (keyToSendOnUp)
     {
-        key := alternativeLayout[keyToSendOnUp]
-        if (keyToSendOnUp = key) {
+        temp := keyToSendOnUp
+        processKeyOnRelease := false
+        layoutKeyActivatesProcessKeyOnRelease := false
+        sendLayoutKey := false
+        keyToSendOnUp := ""
+        key := alternativeLayout[temp]
+        if (temp = key) {
             send {blind}{%layoutChangeKey%}
         }
         processKeyToSend(key)
-        processKeyOnRelease := false
-        layoutKeyActivatesProcessKeyOnRelease := false
-        keyToSendOnUp := ""
-        sendLayoutKey := false
         debug(key . "|***^^^ key up & process release")      
     }
     else

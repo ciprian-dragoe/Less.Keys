@@ -59,9 +59,10 @@ manageLayoutKeyUp(key)
         
         if (keyToSendOnUp)
         {
-            processKeyToSend(keyToSendOnUp)
-            debug(keyToSendOnUp . "|^^^^^^ on alternative layout released before")
+            temp := keyToSendOnUp
             keyToSendOnUp := ""
+            processKeyToSend(temp)
+            debug(temp . "|^^^^^^ on alternative layout released before")
         }
         
         return
@@ -76,11 +77,12 @@ timerTimeoutSendLayoutKey()
     sendLayoutKey := false
     if (keyToSendOnUp)
     {
-        key := alternativeLayout[keyToSendOnUp]
+        temp := keyToSendOnUp
+        keyToSendOnUp := ""
+        key := alternativeLayout[temp]
         processKeyToSend(key)
         processKeyOnRelease := false
         layoutKeyActivatesProcessKeyOnRelease := false
-        keyToSendOnUp := ""
         debug(key . "|---*** on alternative layout hard pressed and send key on up")            
     }
 
