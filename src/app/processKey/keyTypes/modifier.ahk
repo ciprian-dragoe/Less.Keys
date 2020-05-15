@@ -9,7 +9,6 @@ global shiftActive := false
 global winActive := false
 global winActive := false
 global modifierActions := object()
-global modifierDoubledAsClick := object()
 
 
 
@@ -19,9 +18,6 @@ modifierActions["shift"] := func("setShiftState")
 modifierActions["lwin"] := func("setWinState")
 modifierActions["ctrlClick"] := func("processCtrlDoubledAsClick")
 modifierActions["shiftClick"] := func("processShiftDoubledAsClick")
-
-modifierDoubledAsClick["shiftClick"] := "lbutton"
-modifierDoubledAsClick["ctrlClick"] := "rbutton"
 
 processModifierKey(key, state)
 {

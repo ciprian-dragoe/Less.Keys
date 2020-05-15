@@ -1,7 +1,7 @@
 global sendClickOnCtrlClickRelease := false
 global sendUnClickOnCtrlClickRelease := false
 global isCtrlDoubledAsClickPressed := false
-
+global ctrlActiveBeforeCtrlClickPress := false
 global doubledCtrlMouseHook
 
 

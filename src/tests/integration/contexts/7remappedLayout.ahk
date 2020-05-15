@@ -93,3 +93,17 @@ When_layout_key_pressed_and_modifer_key_remapped_as_letter_is_pressed_on_modifie
     expected := "-"
     validateTestOutput(A_ThisFunc , expected)
 }
+
+When_layout_key_pressed_followed_by_modifer_key_remapped_as_letter_pressed_followed_by_layout_release_followed_by_same_modifier_press_remapped_letter_is_sent_#708()
+{
+    simulateKeyDown("space", 50)
+    simulateKeyDown("rshift", 50)
+    processModifierWhenKeyPhysicalUp("rshift")
+    sleep 50
+    simulateKeyUp("space", 50)
+    simulateKeyDown("rshift", 50)
+    simulateKeyUp("rshift", 50)
+    
+    expected := "-o"
+    validateTestOutput(A_ThisFunc , expected)
+}

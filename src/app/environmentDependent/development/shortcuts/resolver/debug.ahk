@@ -7,6 +7,7 @@ reloadApp()
 displayDebugData()
 {
 	msgbox % debugStoredData
+	clipboard := debugStoredData
 }
 
 storeDebugData()
