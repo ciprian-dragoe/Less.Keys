@@ -21,5 +21,6 @@ storeDebugData()
 
 sendTestMessage()
 {
+    send {ctrl up}
     send INTEGRATION_TEST
 }

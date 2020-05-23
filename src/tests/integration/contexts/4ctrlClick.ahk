@@ -134,11 +134,11 @@ When_ctrlClick_is_pressed_and_win_key_is_pressed_click_is_not_sent_on_ctrlClick_
     processKeyDown("lwin")
     sleep 50
     processKeyUp("lwin")
-    sleep 50
+    sleep 200
     processKeyDown("lwin")
-    sleep 50
+    sleep 100
     processKeyUp("lwin")
-    sleep 50
+    sleep 400
     processKeyUp("ctrlClick")
     sleep 100
 

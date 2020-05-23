@@ -2,7 +2,7 @@
 #include  %A_ScriptDir%\app\startup\load\logging.ahk
 #include  %A_ScriptDir%\app\startup\load\mouse.ahk
 #include  %A_ScriptDir%\app\startup\load\alternativeLayout.ahk
-#include  %A_ScriptDir%\app\startup\load\alternativeLayout.ahk
+#include  %A_ScriptDir%\app\startup\load\doubledModifier.ahk
 #include  %A_ScriptDir%\app\startup\load\keyboardShortcuts.ahk
 #include  %A_ScriptDir%\app\startup\load\layout.ahk
 #include  %A_ScriptDir%\app\startup\load\stickyFailBack.ahk
@@ -20,6 +20,7 @@ readSettingsFile(basePath)
     readDisabledAppsSettings(settings)
     readMouseSettings(settings)
     readLoggingSettings(settings)
+    readDoubledModifierSettings(settings)
     readLayoutFile(basePath . "my-layout.cfg")
     readAlternativeLayoutFile(basePath . "my-alternative-layout.cfg")
     readKeyboardShortcutsFile(basePath . "my-keyboard-shortcuts.cfg")

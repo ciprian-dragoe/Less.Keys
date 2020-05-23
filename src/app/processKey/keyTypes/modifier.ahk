@@ -1,5 +1,7 @@
 #include %A_ScriptDir%\app\processKey\keyTypes\shiftDoubledAsClick.ahk
 #include %A_ScriptDir%\app\processKey\keyTypes\ctrlDoubledAsClick.ahk
+#include %A_ScriptDir%\app\processKey\keyTypes\winDoubledAsClick.ahk
+#include %A_ScriptDir%\app\processKey\keyTypes\altDoubledAsClick.ahk
 
 
 
@@ -18,6 +20,8 @@ modifierActions["shift"] := func("setShiftState")
 modifierActions["lwin"] := func("setWinState")
 modifierActions["ctrlClick"] := func("processCtrlDoubledAsClick")
 modifierActions["shiftClick"] := func("processShiftDoubledAsClick")
+modifierActions["winClick"] := func("processWinDoubledAsClick")
+modifierActions["altClick"] := func("processAltDoubledAsClick")
 
 processModifierKey(key, state)
 {
@@ -87,10 +91,16 @@ cancelDoubledModifier()
 {
     cancelMouseHook(doubledShiftMouseHook)
     cancelMouseHook(doubledCtrlMouseHook)
+    cancelMouseHook(doubledWinMouseHook)
+    cancelMouseHook(doubledAltMouseHook)
     sendClickOnShiftClickRelease := false
     sendClickOnCtrlClickRelease := false
+    sendClickOnWinClickRelease := false
+    sendClickOnAltClickRelease := false
     resetShiftClickDrag()
+    resetWinClickDrag()
     resetCtrlClickDrag()
+    resetAltClickDrag()
 }
 
 cancelMouseHook(ByRef id)
@@ -130,4 +140,6 @@ timerResetSentClickOnModifierRelease()
     SetTimer, TimerResetSentClickOnModifierRelease, OFF
     sendClickOnShiftClickRelease := false
     sendClickOnCtrlClickRelease := false
+    sendClickOnWinClickRelease := false
+    sendClickOnAltClickRelease := false
 }

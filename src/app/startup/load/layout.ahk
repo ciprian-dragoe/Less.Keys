@@ -44,6 +44,14 @@ readLayoutFile(path)
         {
             monitoredStickyKeys.Push(originalKey)
         }
+        else if (newValueForKey = "altClick")
+        {
+            monitoredStickyKeys.Push(originalKey)
+        }
+        else if (newValueForKey = "winClick")
+        {
+            monitoredStickyKeys.Push(originalKey)
+        }
         
         layout[originalKey] := newValueForKey
     }

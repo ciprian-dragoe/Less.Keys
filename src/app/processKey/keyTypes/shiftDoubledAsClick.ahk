@@ -33,7 +33,7 @@ doubledShiftDown()
     
     setShiftState(1)
     
-    if (!layoutKeyPressed && activePressedKeys.Length() = 0 && !isCtrlDoubledAsClickPressed)
+    if (!layoutKeyPressed && activePressedKeys.Length() = 0 && !isCtrlDoubledAsClickPressed && !isWinDoubledAsClickPressed && !isAltDoubledAsClickPressed)
     {
         doubledShiftMouseHook := DllCall("SetWindowsHookEx", "int", 14, "uint", RegisterCallback("MouseDragShiftActivate"), "uint", 0, "uint", 0)
         SetTimer, TimerResetSentClickOnModifierRelease, %timeoutStillSendLayoutKey%

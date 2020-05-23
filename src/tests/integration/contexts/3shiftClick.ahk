@@ -128,13 +128,13 @@ When_shiftClick_is_pressed_and_win_key_is_pressed_click_is_not_sent_on_shiftClic
     processKeyDown("shiftClick")
     sleep 100
     processKeyDown("lwin")
-    sleep 50
+    sleep 100
     processKeyUp("lwin")
-    sleep 50
+    sleep 100
     processKeyDown("lwin")
-    sleep 50
+    sleep 200
     processKeyUp("lwin")
-    sleep 50
+    sleep 400
     processKeyUp("shiftClick")
     sleep 100
 
