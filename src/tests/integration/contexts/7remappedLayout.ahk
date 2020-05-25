@@ -107,3 +107,29 @@ When_layout_key_pressed_followed_by_modifer_key_remapped_as_letter_pressed_follo
     expected := "-o"
     validateTestOutput(A_ThisFunc , expected)
 }
+
+When_layout_key_continuously_pressed_followed_by_letter_alternatively_mapped_as_accented_character_accented_character_is_sent_#709()
+{
+    send {Asc 0224}
+    expected := clearText()
+    simulateKeyDown("space", 50)
+    simulateKeyDown("appskey", 50)
+    simulateKeyUp("appskey", 50)
+    simulateKeyUp("space", 50)
+    
+    validateTestOutput(A_ThisFunc , expected)
+}
+
+When_layout_key_continuously_pressed_followed_by_shift_key_press_followed_by_letter_alternatively_mapped_as_accented_character_sibling_accented_character_is_sent_#710()
+{
+    send {Asc 0192}
+    expected := clearText()
+    simulateKeyDown("space", 50)
+    simulateKeyDown("lshift", 50)
+    simulateKeyDown("appskey", 50)
+    simulateKeyUp("appskey", 50)
+    simulateKeyUp("lshift", 50)
+    simulateKeyUp("space", 50)
+    
+    validateTestOutput(A_ThisFunc , expected)
+}

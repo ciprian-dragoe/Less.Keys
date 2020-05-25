@@ -6,6 +6,7 @@
 #include  %A_ScriptDir%\app\startup\load\keyboardShortcuts.ahk
 #include  %A_ScriptDir%\app\startup\load\layout.ahk
 #include  %A_ScriptDir%\app\startup\load\stickyFailBack.ahk
+#include  %A_ScriptDir%\app\startup\load\accentedCharacters.ahk
 
 
 

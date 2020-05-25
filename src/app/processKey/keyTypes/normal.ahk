@@ -21,7 +21,8 @@ processNormalKey(key)
     {
         lastKeyProcessedAsAlternative := key
         key := alternativeLayout[key]
-        if (keyToSendOnUp && keyToSendOnUp = key) {
+        if (keyToSendOnUp && keyToSendOnUp = key)
+        {
             send {blind}{%layoutChangeKey%}
         }
         processKeyToSend(key)
@@ -58,7 +59,7 @@ processAhkKeyboardShortcuts(activeModifiers, key)
     index := keyboardShortcuts[combination]
     if (index)
     {
-        processShortcut(index)
+        processShortcut(index, combination)
         return true
     }
     

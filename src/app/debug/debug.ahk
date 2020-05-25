@@ -28,7 +28,7 @@ writeMemoryStream(value)
     }
 	result = %A_Hour%:%A_Min%:%A_Sec%:%A_MSec%|%value%|layoutPressed=%layoutKeyPressed%|alternativeLayout=%alternativeLayoutActive%|keysPressed=%keysPressed%|ProcessKeyOnRelease=%processKeyOnRelease%|keyToSendOnUp=%keyToSendOnUp%|lastKeyProcessedAsAlternative=%lastKeyProcessedAsAlternative%|^=%ctrlActive%`|!=%altActive%|+=%shiftActive%|#=%winActive%`n
     debugStoredData .= result
-    if (StrLen(debugStoredData) > 10000)
+    if (StrLen(debugStoredData) > 100000)
     {
         StringTrimLeft, debugStoredData, debugStoredData, 5000  
     }
