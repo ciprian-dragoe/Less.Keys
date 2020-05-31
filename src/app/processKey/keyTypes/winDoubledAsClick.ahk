@@ -37,9 +37,12 @@ doubledWinDown()
     
     if (!layoutKeyPressed && activePressedKeys.Length() = 0 && !isShiftDoubledAsClickPressed && !isCtrlDoubledAsClickPressed && !isAltDoubledAsClickPressed)
     {
-        doubledWinMouseHook := DllCall("SetWindowsHookEx", "int", 14, "uint", RegisterCallback("MouseDragWinActivate"), "uint", 0, "uint", 0)
-        SetTimer, TimerResetSentClickOnModifierRelease, %timeoutStillSendLayoutKey%
         sendClickOnWinClickRelease := true
+		if (modifierDoubledAsClick["winClick"] = "lbutton")
+		{
+			doubledWinMouseHook := DllCall("SetWindowsHookEx", "int", 14, "uint", RegisterCallback("MouseDragWinActivate"), "uint", 0, "uint", 0)
+		}
+		SetTimer, TimerResetSentClickOnModifierRelease, %timeoutStillSendLayoutKey%
     }
 }
 

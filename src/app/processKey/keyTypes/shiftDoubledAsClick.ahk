@@ -35,9 +35,12 @@ doubledShiftDown()
     
     if (!layoutKeyPressed && activePressedKeys.Length() = 0 && !isCtrlDoubledAsClickPressed && !isWinDoubledAsClickPressed && !isAltDoubledAsClickPressed)
     {
-        doubledShiftMouseHook := DllCall("SetWindowsHookEx", "int", 14, "uint", RegisterCallback("MouseDragShiftActivate"), "uint", 0, "uint", 0)
-        SetTimer, TimerResetSentClickOnModifierRelease, %timeoutStillSendLayoutKey%
         sendClickOnShiftClickRelease := true
+		if (modifierDoubledAsClick["shiftClick"] = "lbutton")
+		{
+			doubledShiftMouseHook := DllCall("SetWindowsHookEx", "int", 14, "uint", RegisterCallback("MouseDragShiftActivate"), "uint", 0, "uint", 0)
+		}
+		SetTimer, TimerResetSentClickOnModifierRelease, %timeoutStillSendLayoutKey%
     }
 }
 

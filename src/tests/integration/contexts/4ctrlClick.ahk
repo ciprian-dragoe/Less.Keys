@@ -331,3 +331,20 @@ When_non_modifier_key_is_pressed_followed_by_ctrlClick_left_click_is_not_sent_on
     
     validateCaretOutput(A_ThisFunc, expected)
 }
+
+When_ctrlClick_action_is_not_lbutton_and_mouse_is_moved_on_release_action_is_sent_instead_of_mouse_click_#421()
+{
+	modifierDoubledAsClick["ctrlClick"] := "c"
+    startingPosition := setMousePositionToCaret()
+    simulateTyping("hello ")
+	setMousePositionToCaret()
+    processKeyDown("ctrlClick")
+	sleep 50
+    MouseMove startingPosition.x, startingPosition.y
+    processKeyUp("ctrlClick")
+    sleep 100
+    
+    expected := "hello c"
+    validateTestOutput(A_ThisFunc , expected)
+	modifierDoubledAsClick["ctrlClick"] := "lbutton"
+}

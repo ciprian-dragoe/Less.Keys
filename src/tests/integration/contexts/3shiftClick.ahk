@@ -361,3 +361,20 @@ When_non_modifier_key_is_pressed_followed_by_shiftClick_left_click_is_not_sent_o
     
     validateCaretOutput(A_ThisFunc, expected)
 }
+
+When_shiftClick_action_is_not_lbutton_and_mouse_is_moved_on_release_action_is_sent_instead_of_mouse_click_#323()
+{
+	modifierDoubledAsClick["shiftClick"] := "c"
+    startingPosition := setMousePositionToCaret()
+    simulateTyping("hello ")
+	setMousePositionToCaret()
+    processKeyDown("shiftClick")
+	sleep 50
+    MouseMove startingPosition.x, startingPosition.y
+    processKeyUp("shiftClick")
+    sleep 100
+    
+    expected := "hello c"
+    validateTestOutput(A_ThisFunc , expected)
+	modifierDoubledAsClick["shiftClick"] := "lbutton"
+}

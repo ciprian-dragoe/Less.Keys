@@ -292,3 +292,20 @@ When_non_modifier_key_is_pressed_followed_by_winClick_left_click_is_not_sent_on_
     
     validateCaretOutput(A_ThisFunc, expected)
 }
+
+When_winClick_action_is_not_lbutton_and_mouse_is_moved_on_release_action_is_sent_instead_of_mouse_click_#819()
+{
+	modifierDoubledAsClick["winClick"] := "c"
+    startingPosition := setMousePositionToCaret()
+    simulateTyping("hello ")
+	setMousePositionToCaret()
+    processKeyDown("winClick")
+	sleep 50
+    MouseMove startingPosition.x, startingPosition.y
+    processKeyUp("winClick")
+    sleep 100
+    
+    expected := "hello c"
+    validateTestOutput(A_ThisFunc , expected)
+	modifierDoubledAsClick["winClick"] := "lbutton"
+}

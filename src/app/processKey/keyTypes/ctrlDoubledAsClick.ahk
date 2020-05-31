@@ -34,10 +34,13 @@ doubledCtrlDown()
     setCtrlState(1)
     
     if (!layoutKeyPressed && activePressedKeys.Length() = 0 && !isShiftDoubledAsClickPressed && !isWinDoubledAsClickPressed && !isAltDoubledAsClickPressed)
-    {
-        doubledCtrlMouseHook := DllCall("SetWindowsHookEx", "int", 14, "uint", RegisterCallback("MouseDragCtrlActivate"), "uint", 0, "uint", 0)
-        SetTimer, TimerResetSentClickOnModifierRelease, %timeoutStillSendLayoutKey%
+    {        
         sendClickOnCtrlClickRelease := true
+		if (modifierDoubledAsClick["ctrlClick"] = "lbutton")
+		{			
+			doubledCtrlMouseHook := DllCall("SetWindowsHookEx", "int", 14, "uint", RegisterCallback("MouseDragCtrlActivate"), "uint", 0, "uint", 0)
+		}
+		SetTimer, TimerResetSentClickOnModifierRelease, %timeoutStillSendLayoutKey%
     }
 }
 

@@ -65,6 +65,7 @@ runIntegrationTests()
     When_shiftClick_is_pressed_more_then_timeoutStillSendLayoutKey_left_click_is_not_sent_on_shiftClick_release_#320()
     When_layout_key_is_pressed_followed_by_shiftClick_left_click_is_not_sent_on_shiftClick_release_#321()
     When_non_modifier_key_is_pressed_followed_by_shiftClick_left_click_is_not_sent_on_shiftClick_release_#322()
+	When_shiftClick_action_is_not_lbutton_and_mouse_is_moved_on_release_action_is_sent_instead_of_mouse_click_#323()
     
     ; CTRL CLICK
     When_ctrlClick_is_pressed_at_release_left_click_is_sent_#401()
@@ -87,6 +88,7 @@ runIntegrationTests()
     When_ctrlClick_is_pressed_more_then_timeoutStillSendLayoutKey_left_click_is_not_sent_on_ctrlClick_release_#418()
     When_layout_key_is_pressed_followed_by_ctrlClick_left_click_is_not_sent_on_ctrlClick_release_#419()
     When_non_modifier_key_is_pressed_followed_by_ctrlClick_left_click_is_not_sent_on_ctrlClick_release_#420()
+	When_ctrlClick_action_is_not_lbutton_and_mouse_is_moved_on_release_action_is_sent_instead_of_mouse_click_#421()
     
     ; SHIFT CLICK & CTRL CLICK
     When_shiftClick_is_pressed_and_ctrlClick_is_pressed_left_click_is_not_sent_on_shiftClick_release_#501()
@@ -145,6 +147,7 @@ runIntegrationTests()
     When_winClick_is_pressed_more_then_timeoutStillSendLayoutKey_left_click_is_not_sent_on_winClick_release_#816()
     When_layout_key_is_pressed_followed_by_winClick_left_click_is_not_sent_on_winClick_release_#817()
     When_non_modifier_key_is_pressed_followed_by_winClick_left_click_is_not_sent_on_winClick_release_#818()
+	When_winClick_action_is_not_lbutton_and_mouse_is_moved_on_release_action_is_sent_instead_of_mouse_click_#819()
     
     ; WIN CLICK CTRL CLICK
     When_winClick_is_pressed_and_ctrlClick_is_pressed_left_click_is_not_sent_on_winClick_release_#901()
@@ -175,6 +178,7 @@ runIntegrationTests()
     When_altClick_is_pressed_more_then_timeoutStillSendLayoutKey_left_click_is_not_sent_on_altClick_release_#1115()
     When_layout_key_is_pressed_followed_by_altClick_left_click_is_not_sent_on_altClick_release_#1116()
     When_non_modifier_key_is_pressed_followed_by_altClick_left_click_is_not_sent_on_altClick_release_#1117()
+	When_altClick_action_is_not_lbutton_and_mouse_is_moved_on_release_action_is_sent_instead_of_mouse_click_#1118()
     
     ; ALT CLICK CTRL CLICK
     When_altClick_is_pressed_and_ctrlClick_is_pressed_left_click_is_not_sent_on_altClick_release_#1201()

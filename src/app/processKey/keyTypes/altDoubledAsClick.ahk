@@ -37,9 +37,12 @@ doubledAltDown()
     
     if (!layoutKeyPressed && activePressedKeys.Length() = 0 && !isShiftDoubledAsClickPressed && !isCtrlDoubledAsClickPressed && !isWinDoubledAsClickPressed)
     {
-        doubledAltMouseHook := DllCall("SetWindowsHookEx", "int", 14, "uint", RegisterCallback("MouseDragAltActivate"), "uint", 0, "uint", 0)
-        SetTimer, TimerResetSentClickOnModifierRelease, %timeoutStillSendLayoutKey%
         sendClickOnAltClickRelease := true
+		if (modifierDoubledAsClick["altClick"] = "lbutton")
+		{
+			doubledAltMouseHook := DllCall("SetWindowsHookEx", "int", 14, "uint", RegisterCallback("MouseDragAltActivate"), "uint", 0, "uint", 0)
+		}
+		SetTimer, TimerResetSentClickOnModifierRelease, %timeoutStillSendLayoutKey%
     }
 }
 
