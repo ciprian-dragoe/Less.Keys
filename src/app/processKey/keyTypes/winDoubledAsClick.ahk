@@ -70,7 +70,6 @@ doubledWinUp()
     {
         winActive := 0
     }
-    
     isWinDoubledAsClickPressed := false
     
     resetWinClickDrag()
@@ -89,5 +88,24 @@ resetWinClickDrag()
         action := modifierDoubledAsClick["winClick"]
         send {blind}{%action% up}
         sendUnClickOnWinClickRelease := false
+    }
+}
+
+activateWinWithKey(key)
+{
+    if (!GetKeyState("lwin"))
+    {
+        send {lwin down}
+        setTimer TimerMonitorWinModifierLift, 20
+    }
+    send {blind}%key%
+}
+
+timerMonitorWinModifierLift()
+{
+    if (!winActive)
+    {
+        send {lwin up}
+        setTimer TimerMonitorWinModifierLift, off
     }
 }

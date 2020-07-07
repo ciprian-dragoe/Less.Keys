@@ -91,3 +91,22 @@ resetAltClickDrag()
         sendUnClickOnAltClickRelease := false
     }
 }
+
+activateAltWithKey(key)
+{
+    if (!GetKeyState("alt"))
+    {
+        send {alt down}
+        setTimer TimerMonitorAltModifierLift, 20
+    }
+    send {blind}%key%
+}
+
+timerMonitorAltModifierLift()
+{
+    if (!altActive)
+    {
+        send {alt up}
+        setTimer TimerMonitorAltModifierLift, off
+    }
+}

@@ -31,7 +31,9 @@ doubledCtrlDown()
         ctrlActiveBeforeCtrlClickPress := true
     }
     
-    setCtrlState(1)
+    cancelDoubledModifier()
+    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+    ctrlActive := 1
     
     if (!layoutKeyPressed && activePressedKeys.Length() = 0 && !isShiftDoubledAsClickPressed && !isWinDoubledAsClickPressed && !isAltDoubledAsClickPressed)
     {        
@@ -66,7 +68,7 @@ doubledCtrlUp()
     }
     else
     {
-        setCtrlState(0)
+        ctrlActive := 0
     }
     
     isCtrlDoubledAsClickPressed := false
@@ -90,3 +92,21 @@ resetCtrlClickDrag()
     }
 }
 
+activateCtrlWithKey(key)
+{
+    if (!GetKeyState("ctrl"))
+    {
+        send {ctrl down}
+        setTimer TimerMonitorCtrlModifierLift, 20
+    }
+    send {blind}%key%
+}
+
+timerMonitorCtrlModifierLift()
+{
+    if (!ctrlActive)
+    {
+        send {ctrl up}
+        setTimer TimerMonitorCtrlModifierLift, off
+    }
+}

@@ -31,3 +31,19 @@ return
 TimerResetSentClickOnModifierRelease:
     timerResetSentClickOnModifierRelease()
 return
+
+TimerMonitorWinModifierLift:
+    timerMonitorWinModifierLift()
+return
+
+TimerMonitorAltModifierLift:
+    timerMonitorAltModifierLift()
+return
+
+TimerMonitorCtrlModifierLift:
+    timerMonitorCtrlModifierLift()
+return
+
+TimerMonitorShiftModifierLift:
+    timerMonitorShiftModifierLift()
+return

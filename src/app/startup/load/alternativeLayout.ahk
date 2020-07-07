@@ -21,7 +21,7 @@ readAlternativeLayoutFile(path)
         specialCharacter := accentedCharacter[alternativeKey]
         if (specialCharacter)
         {
-            keyboardShortcuts["+" . specialCharacter] := 1027
+            keyboardShortcuts["+" . specialCharacter] := 500
             alternativeLayout[normalKey] := specialCharacter
         }
         else

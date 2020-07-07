@@ -31,7 +31,9 @@ doubledShiftDown()
         shiftActiveBeforeShiftClickPress := true
     }
     
-    setShiftState(1)
+    cancelDoubledModifier()
+    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+    shiftActive := 1
     
     if (!layoutKeyPressed && activePressedKeys.Length() = 0 && !isCtrlDoubledAsClickPressed && !isWinDoubledAsClickPressed && !isAltDoubledAsClickPressed)
     {
@@ -66,7 +68,7 @@ doubledShiftUp()
     }
     else
     {
-        setShiftState(0)
+        shiftActive := 0
     }
     isShiftDoubledAsClickPressed := false
     
@@ -86,5 +88,24 @@ resetShiftClickDrag()
         action := modifierDoubledAsClick["shiftClick"]
         send {blind}{%action% up}
         sendUnClickOnShiftClickRelease := false
+    }
+}
+
+activateShiftWithKey(key)
+{
+    if (!GetKeyState("shift"))
+    {
+        send {shift down}
+        setTimer TimerMonitorShiftModifierLift, 20
+    }
+    send {blind}%key%
+}
+
+timerMonitorShiftModifierLift()
+{
+    if (!shiftActive)
+    {
+        send {shift up}
+        setTimer TimerMonitorShiftModifierLift, off
     }
 }
