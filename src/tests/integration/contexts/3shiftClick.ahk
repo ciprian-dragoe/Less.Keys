@@ -93,10 +93,10 @@ When_shiftClick_is_pressed_and_alt_key_is_pressed_click_is_not_sent_on_shiftClic
     expected := getCurrentCaretPosition()
     processKeyDown("shiftClick")
     sleep 100
-    simulateKeyDown("ralt", 50)
-    simulateKeyUp("ralt", 50)
-    simulateKeyDown("ralt", 50)
-    simulateKeyUp("ralt", 50)
+    simulateKeyDown("lalt", 50)
+    simulateKeyUp("lalt", 50)
+    simulateKeyDown("lalt", 50)
+    simulateKeyUp("lalt", 50)
     processKeyUp("shiftClick")
     sleep 100
 

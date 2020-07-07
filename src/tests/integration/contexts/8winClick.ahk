@@ -95,10 +95,10 @@ When_winClick_is_pressed_and_alt_key_is_pressed_click_is_not_sent_on_winClick_re
     expected := getCurrentCaretPosition()
     processKeyDown("winClick")
     sleep 100
-    simulateKeyDown("ralt", 50)
-    simulateKeyUp("ralt", 50)
-    simulateKeyDown("ralt", 50)
-    simulateKeyUp("ralt", 50)
+    simulateKeyDown("lalt", 50)
+    simulateKeyUp("lalt", 50)
+    simulateKeyDown("lalt", 50)
+    simulateKeyUp("lalt", 50)
     processKeyUp("winClick")
     sleep 100
 
