@@ -1,8 +1,8 @@
-When_shiftClick_is_pressed_and_ctrlClick_is_pressed_left_click_is_not_sent_on_shiftClick_release_#501()
+When_shiftClick_is_pressed_and_ctrlClick_is_pressed_left_click_is_sent_on_shiftClick_release_#501()
 {
     setMousePositionToCaret()
-    simulateTyping("hello ")
     expected := getCurrentCaretPosition()
+    simulateTyping("hello ")
     processKeyDown("shiftClick")
     sleep 100
     processKeyDown("ctrlClick")
@@ -14,7 +14,7 @@ When_shiftClick_is_pressed_and_ctrlClick_is_pressed_left_click_is_not_sent_on_sh
     validateCaretOutput(A_ThisFunc, expected)
 }
 
-When_ctrlClick_is_pressed_and_shiftClick_is_pressed_right_click_is_not_sent_on_ctrlClick_release_#502()
+When_ctrlClick_is_pressed_and_shiftClick_is_pressed_click_is_sent_on_ctrlClick_release_#502()
 {
     setMousePositionToCaret()
     simulateTyping("hello ")
@@ -66,6 +66,54 @@ When_shiftClick_is_continously_pressed_and_ctrlClick_is_continously_pressed_and_
     processKeyUp("shiftClick")
     processKeyUp("ctrlClick")
     processKeyUp("space")
+    
+    validateCaretOutput(A_ThisFunc, expected)
+}
+
+When_shiftClick_is_continously_pressed_and_ctrlClick_is_continously_pressed_more_then_timeoutStillSendLayoutKey_left_click_is_not_sent_on_ctrlClick_release_#505()
+{
+    setMousePositionToCaret()
+    simulateTyping("hello ")
+    expected := getCurrentCaretPosition()
+    processKeyDown("shiftClick")
+    sleep 100
+    processKeyDown("ctrlClick")
+    sleep 1000
+    processKeyUp("shiftClick")
+    sleep 100
+    processKeyUp("ctrlClick")
+    
+    validateCaretOutput(A_ThisFunc, expected)
+}
+
+When_shiftClick_is_pressed_and_ctrlClick_is_pressed_and_released_left_click_is_sent_on_shiftClick_release_#506()
+{
+    setMousePositionToCaret()
+    expected := getCurrentCaretPosition()
+    simulateTyping("hello ")
+    processKeyDown("shiftClick")
+    sleep 100
+    processKeyDown("ctrlClick")
+    sleep 100
+    processKeyUp("ctrlClick")
+    sleep 100
+    processKeyUp("shiftClick")
+    
+    validateCaretOutput(A_ThisFunc, expected)
+}
+
+When_ctrlClick_is_pressed_and_shiftClick_is_pressed_and_released_left_click_is_sent_on_ctrlClick_release_#507()
+{
+    setMousePositionToCaret()
+    expected := getCurrentCaretPosition()
+    simulateTyping("hello ")
+    processKeyDown("ctrlClick")
+    sleep 100
+    processKeyDown("shiftClick")
+    sleep 100
+    processKeyUp("shiftClick")
+    sleep 100
+    processKeyUp("ctrlClick")
     
     validateCaretOutput(A_ThisFunc, expected)
 }

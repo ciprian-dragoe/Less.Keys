@@ -18,7 +18,7 @@ timerStickyFailBack()
             return
         }
     }
-    
+
     resetStates()
     if (resetCapsLock)
     {
@@ -44,14 +44,18 @@ resetStates()
     {
         send {lwin up}
     }
-    resetShiftClickDrag()
     resetDoubledModifierClickDrag("ctrlClick", sendUnClickOnCtrlClickRelease)
-    resetWinClickDrag()
-    resetAltClickDrag()
+    resetDoubledModifierClickDrag("shiftClick", sendUnClickOnShiftClickRelease)
+    resetDoubledModifierClickDrag("altClick", sendUnClickOnAltClickRelease)
+    resetDoubledModifierClickDrag("winClick", sendUnClickOnWinClickRelease)
     isCtrlDoubledAsClickPressed := false
     isAltDoubledAsClickPressed := false
     isWinlDoubledAsClickPressed := false
     isShiftDoubledAsClickPressed := false
+    sendUnClickOnCtrlClickRelease := false
+    sendUnClickOnAltClickRelease := false
+    sendUnClickOnShiftClickRelease := false
+    sendUnClickOnWinClickRelease := false
     activePressedKeys := []
     processKeyOnRelease := false
     layoutKeyPressed := false

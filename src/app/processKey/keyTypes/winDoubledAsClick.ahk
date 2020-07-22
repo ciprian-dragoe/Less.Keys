@@ -26,23 +26,29 @@ doubledWinDown()
     }
     
     isWinDoubledAsClickPressed := true
+    
+    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+
+    if (isShiftDoubledAsClickPressed || isCtrlDoubledAsClickPressed || isAltDoubledAsClickPressed) {
+        setWinState(1)
+        setTimer TimerMonitorWinModifierLift, 20
+        return
+    }
+
     if (winActive)
     {
         winActiveBeforeWinClickPress := true
+        sendDoubledValueAndReset("winClick", sendClickOnWinClickRelease)
+        chooseClickDragActivation("winClick", "MouseDragWinActivate")
+        return
     }
     
-    cancelDoubledModifier()
-    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
     winActive := 1
-    
-    if (!layoutKeyPressed && activePressedKeys.Length() = 0 && !isShiftDoubledAsClickPressed && !isCtrlDoubledAsClickPressed && !isAltDoubledAsClickPressed)
-    {
+
+    if (!layoutKeyPressed && activePressedKeys.Length() = 0)
+    {        
         sendClickOnWinClickRelease := true
-		if (modifierDoubledAsClick["winClick"] = "lbutton")
-		{
-			doubledWinMouseHook := DllCall("SetWindowsHookEx", "int", 14, "uint", RegisterCallback("MouseDragWinActivate"), "uint", 0, "uint", 0)
-		}
-		SetTimer, TimerResetSentClickOnModifierRelease, %timeoutStillSendLayoutKey%
+        chooseClickDragActivation("winClick", "MouseDragWinActivate")
     }
 }
 
@@ -51,7 +57,6 @@ MouseDragWinActivate(nCode, wParam, lParam)
     cancelMouseHook(doubledWinMouseHook)
     if (wParam = 0x200)
     {
-        winActive := 0
         sendClickOnWinClickRelease := false
         sendUnClickOnWinClickRelease := true
         doubledAction := modifierDoubledAsClick["winClick"]
@@ -62,6 +67,8 @@ MouseDragWinActivate(nCode, wParam, lParam)
 doubledWinUp()
 {
     cancelMouseHook(doubledWinMouseHook)
+    isWinDoubledAsClickPressed := false
+
     if (winActiveBeforeWinClickPress)
     {
         winActiveBeforeWinClickPress := false
@@ -70,24 +77,12 @@ doubledWinUp()
     {
         winActive := 0
     }
-    isWinDoubledAsClickPressed := false
     
-    resetWinClickDrag()
+    resetDoubledModifierClickDrag("winClick", sendUnClickOnWinClickRelease)
+
     if (sendClickOnWinClickRelease)
     {
-        doubledAction := modifierDoubledAsClick["winClick"]
-        send {blind}{%doubledAction%}
-        sendClickOnWinClickRelease := false
-    }
-}
-
-resetWinClickDrag()
-{
-    if (sendUnClickOnWinClickRelease)
-    {
-        action := modifierDoubledAsClick["winClick"]
-        send {blind}{%action% up}
-        sendUnClickOnWinClickRelease := false
+        sendDoubledValueAndReset("winClick", sendClickOnWinClickRelease)
     }
 }
 

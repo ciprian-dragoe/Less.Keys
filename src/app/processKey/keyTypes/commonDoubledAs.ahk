@@ -8,10 +8,10 @@ cancelDoubledModifier()
     sendClickOnCtrlClickRelease := false
     sendClickOnWinClickRelease := false
     sendClickOnAltClickRelease := false
-    resetShiftClickDrag()
-    resetWinClickDrag()
-    resetDoubledModifierClickDrag("ctrlClick", sendUnClickOnCtrlClickRelease)
-    resetAltClickDrag()
+    ctrlActiveBeforeCtrlClickPress := false
+    altActiveBeforeAltClickPress := false
+    shiftActiveBeforeShiftClickPress := false
+    winActiveBeforeWinClickPress := false
 }
 
 cancelMouseHook(ByRef id)

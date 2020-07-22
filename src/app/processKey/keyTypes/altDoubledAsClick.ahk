@@ -26,23 +26,29 @@ doubledAltDown()
     }
     
     isAltDoubledAsClickPressed := true
+    
+    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+
+    if (isShiftDoubledAsClickPressed || isWinDoubledAsClickPressed || isCtrlDoubledAsClickPressed) {
+        setAltState(1)
+        setTimer TimerMonitorAltModifierLift, 20
+        return
+    }
+
     if (altActive)
     {
         altActiveBeforeAltClickPress := true
+        sendDoubledValueAndReset("altClick", sendClickOnAltClickRelease)
+        chooseClickDragActivation("altClick", "MouseDragAltActivate")
+        return
     }
     
-    cancelDoubledModifier()
-    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
     altActive := 1
-    
-    if (!layoutKeyPressed && activePressedKeys.Length() = 0 && !isShiftDoubledAsClickPressed && !isCtrlDoubledAsClickPressed && !isWinDoubledAsClickPressed)
-    {
+
+    if (!layoutKeyPressed && activePressedKeys.Length() = 0)
+    {        
         sendClickOnAltClickRelease := true
-		if (modifierDoubledAsClick["altClick"] = "lbutton")
-		{
-			doubledAltMouseHook := DllCall("SetWindowsHookEx", "int", 14, "uint", RegisterCallback("MouseDragAltActivate"), "uint", 0, "uint", 0)
-		}
-		SetTimer, TimerResetSentClickOnModifierRelease, %timeoutStillSendLayoutKey%
+        chooseClickDragActivation("altClick", "MouseDragAltActivate")
     }
 }
 
@@ -51,7 +57,6 @@ MouseDragAltActivate(nCode, wParam, lParam)
     cancelMouseHook(doubledAltMouseHook)
     if (wParam = 0x200)
     {
-        altActive := 0
         sendClickOnAltClickRelease := false
         sendUnClickOnAltClickRelease := true
         doubledAction := modifierDoubledAsClick["altClick"]
@@ -62,6 +67,8 @@ MouseDragAltActivate(nCode, wParam, lParam)
 doubledAltUp()
 {
     cancelMouseHook(doubledAltMouseHook)
+    isAltDoubledAsClickPressed := false
+
     if (altActiveBeforeAltClickPress)
     {
         altActiveBeforeAltClickPress := false
@@ -71,24 +78,11 @@ doubledAltUp()
         altActive := 0
     }
     
-    isAltDoubledAsClickPressed := false
-    
-    resetAltClickDrag()
+    resetDoubledModifierClickDrag("altClick", sendUnClickOnAltClickRelease)
+ 
     if (sendClickOnAltClickRelease)
     {
-        doubledAction := modifierDoubledAsClick["altClick"]
-        send {blind}{%doubledAction%}
-        sendClickOnAltClickRelease := false
-    }
-}
-
-resetAltClickDrag()
-{
-    if (sendUnClickOnAltClickRelease)
-    {
-        action := modifierDoubledAsClick["altClick"]
-        send {blind}{%action% up}
-        sendUnClickOnAltClickRelease := false
+        sendDoubledValueAndReset("altClick", sendClickOnAltClickRelease)
     }
 }
 

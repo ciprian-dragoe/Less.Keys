@@ -32,6 +32,7 @@ doubledCtrlDown()
     if (isShiftDoubledAsClickPressed || isWinDoubledAsClickPressed || isAltDoubledAsClickPressed) {
         setCtrlState(1)
         setTimer TimerMonitorCtrlModifierLift, 20
+        return
     }
 
     if (ctrlActive)
@@ -45,7 +46,7 @@ doubledCtrlDown()
     ctrlActive := 1
 
     if (!layoutKeyPressed && activePressedKeys.Length() = 0)
-    {        
+    {
         sendClickOnCtrlClickRelease := true
         chooseClickDragActivation("ctrlClick", "MouseDragCtrlActivate")
     }
