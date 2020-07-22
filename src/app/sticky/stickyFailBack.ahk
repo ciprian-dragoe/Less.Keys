@@ -45,7 +45,7 @@ resetStates()
         send {lwin up}
     }
     resetShiftClickDrag()
-    resetCtrlClickDrag()
+    resetDoubledModifierClickDrag("ctrlClick", sendUnClickOnCtrlClickRelease)
     resetWinClickDrag()
     resetAltClickDrag()
     isCtrlDoubledAsClickPressed := false

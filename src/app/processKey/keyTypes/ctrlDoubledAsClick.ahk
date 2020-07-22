@@ -26,23 +26,28 @@ doubledCtrlDown()
     }
     
     isCtrlDoubledAsClickPressed := true
+    
+    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+
+    if (isShiftDoubledAsClickPressed || isWinDoubledAsClickPressed || isAltDoubledAsClickPressed) {
+        setCtrlState(1)
+        setTimer TimerMonitorCtrlModifierLift, 20
+    }
+
     if (ctrlActive)
     {
         ctrlActiveBeforeCtrlClickPress := true
+        sendDoubledValueAndReset("ctrlClick", sendClickOnCtrlClickRelease)
+        chooseClickDragActivation("ctrlClick", "MouseDragCtrlActivate")
+        return
     }
     
-    cancelDoubledModifier()
-    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
     ctrlActive := 1
-    
-    if (!layoutKeyPressed && activePressedKeys.Length() = 0 && !isShiftDoubledAsClickPressed && !isWinDoubledAsClickPressed && !isAltDoubledAsClickPressed)
+
+    if (!layoutKeyPressed && activePressedKeys.Length() = 0)
     {        
         sendClickOnCtrlClickRelease := true
-		if (modifierDoubledAsClick["ctrlClick"] = "lbutton")
-		{			
-			doubledCtrlMouseHook := DllCall("SetWindowsHookEx", "int", 14, "uint", RegisterCallback("MouseDragCtrlActivate"), "uint", 0, "uint", 0)
-		}
-		SetTimer, TimerResetSentClickOnModifierRelease, %timeoutStillSendLayoutKey%
+        chooseClickDragActivation("ctrlClick", "MouseDragCtrlActivate")
     }
 }
 
@@ -51,7 +56,6 @@ MouseDragCtrlActivate(nCode, wParam, lParam)
     cancelMouseHook(doubledCtrlMouseHook)
     if (wParam = 0x200)
     {
-        setCtrlState(0)
         sendClickOnCtrlClickRelease := false
         sendUnClickOnCtrlClickRelease := true
         doubledAction := modifierDoubledAsClick["ctrlClick"]
@@ -62,6 +66,8 @@ MouseDragCtrlActivate(nCode, wParam, lParam)
 doubledCtrlUp()
 {
     cancelMouseHook(doubledCtrlMouseHook)
+    isCtrlDoubledAsClickPressed := false
+
     if (ctrlActiveBeforeCtrlClickPress)
     {
         ctrlActiveBeforeCtrlClickPress := false
@@ -71,24 +77,11 @@ doubledCtrlUp()
         ctrlActive := 0
     }
     
-    isCtrlDoubledAsClickPressed := false
-    
-    resetCtrlClickDrag()
+    resetDoubledModifierClickDrag("ctrlClick", sendUnClickOnCtrlClickRelease)
+
     if (sendClickOnCtrlClickRelease)
     {
-        doubledAction := modifierDoubledAsClick["ctrlClick"]
-        send {blind}{%doubledAction%}
-        sendClickOnCtrlClickRelease := false
-    }
-}
-
-resetCtrlClickDrag()
-{
-    if (sendUnClickOnCtrlClickRelease)
-    {
-        action := modifierDoubledAsClick["ctrlClick"]
-        send {blind}{%action% up}
-        sendUnClickOnCtrlClickRelease := false
+        sendDoubledValueAndReset("ctrlClick", sendClickOnCtrlClickRelease)
     }
 }
 
