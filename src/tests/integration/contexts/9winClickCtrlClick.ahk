@@ -1,4 +1,4 @@
-When_winClick_is_pressed_and_ctrlClick_is_pressed_left_click_is_sent_on_winClick_release_#501()
+When_winClick_is_pressed_and_ctrlClick_is_pressed_left_click_is_sent_on_winClick_release_#901()
 {
     setMousePositionToCaret()
     expected := getCurrentCaretPosition()
@@ -14,11 +14,11 @@ When_winClick_is_pressed_and_ctrlClick_is_pressed_left_click_is_sent_on_winClick
     validateCaretOutput(A_ThisFunc, expected)
 }
 
-When_ctrlClick_is_pressed_and_winClick_is_pressed_click_is_sent_on_ctrlClick_release_#502()
+When_ctrlClick_is_pressed_and_winClick_is_pressed_click_is_sent_on_ctrlClick_release_#902()
 {
     setMousePositionToCaret()
-    simulateTyping("hello ")
     expected := getCurrentCaretPosition()
+    simulateTyping("hello ")
     processKeyDown("ctrlClick")
     sleep 100
     processKeyDown("winClick")
@@ -30,7 +30,7 @@ When_ctrlClick_is_pressed_and_winClick_is_pressed_click_is_sent_on_ctrlClick_rel
     validateCaretOutput(A_ThisFunc, expected)
 }
 
-When_winClick_is_continously_pressed_and_ctrlClick_is_continously_pressed_and_backtick_pressed_keyboard_shortcut_is_sent#503()
+When_winClick_is_continously_pressed_and_ctrlClick_is_continously_pressed_and_backtick_pressed_keyboard_shortcut_is_sent#903()
 {
     setMousePositionToCaret()
     simulateTyping("hello ")
@@ -46,11 +46,12 @@ When_winClick_is_continously_pressed_and_ctrlClick_is_continously_pressed_and_ba
     processKeyUp("``")
     
     expected := "hello INTEGRATION_TEST"
+    actual := clearText()
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
     setDefaultTestEnvironment()
 }
 
-When_winClick_is_continously_pressed_and_ctrlClick_is_continously_pressed_and_backtick_pressed_click_is_not_sent_winClick_release#504()
+When_winClick_is_continously_pressed_and_ctrlClick_is_continously_pressed_and_backtick_pressed_click_is_not_sent_winClick_release#904()
 {
     setMousePositionToCaret()
     simulateTyping("hello ")
@@ -68,7 +69,7 @@ When_winClick_is_continously_pressed_and_ctrlClick_is_continously_pressed_and_ba
     validateCaretOutput(A_ThisFunc, expected)
 }
 
-When_winClick_is_continously_pressed_and_ctrlClick_is_continously_pressed_more_then_timeoutStillSendLayoutKey_left_click_is_not_sent_on_ctrlClick_release_#505()
+When_winClick_is_continously_pressed_and_ctrlClick_is_continously_pressed_more_then_timeoutStillSendLayoutKey_left_click_is_not_sent_on_ctrlClick_release_#905()
 {
     setMousePositionToCaret()
     simulateTyping("hello ")
@@ -76,7 +77,8 @@ When_winClick_is_continously_pressed_and_ctrlClick_is_continously_pressed_more_t
     processKeyDown("winClick")
     sleep 100
     processKeyDown("ctrlClick")
-    sleep 1000
+    sleep timeoutStillSendLayoutKey
+    sleep 100
     processKeyUp("winClick")
     sleep 100
     processKeyUp("ctrlClick")
@@ -84,7 +86,7 @@ When_winClick_is_continously_pressed_and_ctrlClick_is_continously_pressed_more_t
     validateCaretOutput(A_ThisFunc, expected)
 }
 
-When_winClick_is_pressed_and_ctrlClick_is_pressed_and_released_left_click_is_sent_on_winClick_release_#506()
+When_winClick_is_pressed_and_ctrlClick_is_pressed_and_released_left_click_is_sent_on_winClick_release_#906()
 {
     setMousePositionToCaret()
     expected := getCurrentCaretPosition()
@@ -100,7 +102,7 @@ When_winClick_is_pressed_and_ctrlClick_is_pressed_and_released_left_click_is_sen
     validateCaretOutput(A_ThisFunc, expected)
 }
 
-When_ctrlClick_is_pressed_and_winClick_is_pressed_and_released_left_click_is_sent_on_ctrlClick_release_#507()
+When_ctrlClick_is_pressed_and_winClick_is_pressed_and_released_left_click_is_sent_on_ctrlClick_release_#907()
 {
     setMousePositionToCaret()
     expected := getCurrentCaretPosition()
@@ -110,7 +112,11 @@ When_ctrlClick_is_pressed_and_winClick_is_pressed_and_released_left_click_is_sen
     processKeyDown("winClick")
     sleep 100
     processKeyUp("winClick")
+    sleep 300
+    processKeyDown("winClick")
     sleep 100
+    processKeyUp("winClick")
+    sleep 300
     processKeyUp("ctrlClick")
     
     validateCaretOutput(A_ThisFunc, expected)

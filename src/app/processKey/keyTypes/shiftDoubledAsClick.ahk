@@ -39,7 +39,7 @@ doubledShiftDown()
     {
         shiftActiveBeforeShiftClickPress := true
         sendDoubledValueAndReset("shiftClick", sendClickOnShiftClickRelease)
-        chooseClickDragActivation("shiftClick", "MouseDragShiftActivate")
+        chooseClickDragActivation("shiftClick", "MouseDragShiftActivate", doubledShiftMouseHook)
         return
     }
     
@@ -48,7 +48,7 @@ doubledShiftDown()
     if (!layoutKeyPressed && activePressedKeys.Length() = 0)
     {        
         sendClickOnShiftClickRelease := true
-        chooseClickDragActivation("shiftClick", "MouseDragShiftActivate")
+        chooseClickDragActivation("shiftClick", "MouseDragShiftActivate", doubledShiftMouseHook)
     }
 }
 

@@ -17,8 +17,8 @@ When_shiftClick_is_pressed_and_ctrlClick_is_pressed_left_click_is_sent_on_shiftC
 When_ctrlClick_is_pressed_and_shiftClick_is_pressed_click_is_sent_on_ctrlClick_release_#502()
 {
     setMousePositionToCaret()
-    simulateTyping("hello ")
     expected := getCurrentCaretPosition()
+    simulateTyping("hello ")
     processKeyDown("ctrlClick")
     sleep 100
     processKeyDown("shiftClick")
@@ -78,7 +78,8 @@ When_shiftClick_is_continously_pressed_and_ctrlClick_is_continously_pressed_more
     processKeyDown("shiftClick")
     sleep 100
     processKeyDown("ctrlClick")
-    sleep 1000
+    sleep timeoutStillSendLayoutKey
+    sleep 100
     processKeyUp("shiftClick")
     sleep 100
     processKeyUp("ctrlClick")

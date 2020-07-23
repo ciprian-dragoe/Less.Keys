@@ -39,7 +39,7 @@ doubledCtrlDown()
     {
         ctrlActiveBeforeCtrlClickPress := true
         sendDoubledValueAndReset("ctrlClick", sendClickOnCtrlClickRelease)
-        chooseClickDragActivation("ctrlClick", "MouseDragCtrlActivate")
+        chooseClickDragActivation("ctrlClick", "MouseDragCtrlActivate", doubledCtrlMouseHook)
         return
     }
     
@@ -48,7 +48,7 @@ doubledCtrlDown()
     if (!layoutKeyPressed && activePressedKeys.Length() = 0)
     {
         sendClickOnCtrlClickRelease := true
-        chooseClickDragActivation("ctrlClick", "MouseDragCtrlActivate")
+        chooseClickDragActivation("ctrlClick", "MouseDragCtrlActivate", doubledCtrlMouseHook)
     }
 }
 

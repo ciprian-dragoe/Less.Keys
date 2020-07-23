@@ -30,10 +30,6 @@ timerStickyFailBack()
 
 resetStates()
 {
-    if (showRealTimeDebugInfo)
-    {
-        showToolTip("reset states")
-    }
     send {shift up}
     if (altActive)
     {

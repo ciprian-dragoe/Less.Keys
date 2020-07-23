@@ -11,7 +11,7 @@ When_ctrlClick_is_pressed_at_release_left_click_is_sent_#401()
     validateCaretOutput(A_ThisFunc, expected)    
 }
 
-When_ctrlClick_is_continously_pressed_and_layout_key_is_pressed_but_not_release_space_is_not_sent_#402()
+When_ctrlClick_is_continously_pressed_and_layout_key_is_pressed_but_not_releases_space_is_sent_#402()
 {
     simulateTyping("hello")
     processKeyDown("ctrlClick")
@@ -21,7 +21,7 @@ When_ctrlClick_is_continously_pressed_and_layout_key_is_pressed_but_not_release_
     processKeyUp("ctrlClick")
     sleep 100
         
-    expected := "hello"
+    expected := "hello "
     validateTestOutput(A_ThisFunc , expected)
 }
 
@@ -150,7 +150,7 @@ When_ctrlClick_is_pressed_and_win_key_is_pressed_and_released_click_is_sent_on_c
     processKeyDown("lwin")
     sleep 50
     processKeyUp("lwin")
-    sleep 200
+    sleep 400
     processKeyDown("lwin")
     sleep 100
     processKeyUp("lwin")
@@ -192,8 +192,8 @@ When_ctrlClick_is_pressed_and_shift_is_pressed_and_released_click_is_sent_on_ctr
     simulateTyping("llo")
     processKeyDown("ctrlClick")
     sleep 100
-    simulateKeyDown("shift", 100)
-    simulateKeyUp("shift", 100)
+    simulateKeyDown("lshift", 100)
+    simulateKeyUp("lshift", 100)
     processKeyUp("ctrlClick")
     sleep 100
 
@@ -208,10 +208,10 @@ When_ctrlClick_is_pressed_and_shift_is_pressed_click_is_sent_on_ctrlClick_releas
     simulateTyping("llo")
     processKeyDown("ctrlClick")
     sleep 100
-    simulateKeyDown("shift", 100)
+    simulateKeyDown("lshift", 100)
     processKeyUp("ctrlClick")
     sleep 100
-    simulateKeyUp("shift", 100)
+    simulateKeyUp("lshift", 100)
 
     validateCaretOutput(A_ThisFunc, expected)
 }
@@ -366,7 +366,8 @@ When_ctrlClick_is_pressed_more_then_timeoutStillSendLayoutKey_left_click_is_not_
     simulateTyping("hello ")
     expected := getCurrentCaretPosition()
     processKeyDown("ctrlClick")
-    sleep 1000
+    sleep timeoutStillSendLayoutKey
+    sleep 100
     processKeyUp("ctrlClick")
     sleep 100
     
@@ -422,9 +423,9 @@ When_ctrlClick_action_is_not_lbutton_and_mouse_is_moved_on_release_action_is_sen
 
 When_ctrl_is_pressed_and_ctrlClick_is_continously_pressed_and_mouse_is_moved_the_text_is_selected_#426()
 {
-    simulateKeyDown("lctrl", 100)
     startingPosition := setMousePositionToCaret()
     simulateTyping("hello ")
+    simulateKeyDown("lctrl", 100)
     setMousePositionToCaret()
     processKeyDown("ctrlClick")
     sleep 100

@@ -32,10 +32,10 @@ timerResetSentClickOnModifierRelease()
     sendClickOnAltClickRelease := false
 }
 
-chooseClickDragActivation(modifierValue, callbackMethodName) {
+chooseClickDragActivation(modifierValue, callbackMethodName, ByRef hookStoreLocation) {
     if (modifierDoubledAsClick[modifierValue] = "lbutton")
     {
-        doubledCtrlMouseHook := DllCall("SetWindowsHookEx", "int", 14, "uint", RegisterCallback(callbackMethodName), "uint", 0, "uint", 0)
+        hookStoreLocation := DllCall("SetWindowsHookEx", "int", 14, "uint", RegisterCallback(callbackMethodName), "uint", 0, "uint", 0)
     }
     SetTimer, TimerResetSentClickOnModifierRelease, %timeoutStillSendLayoutKey%
 }
