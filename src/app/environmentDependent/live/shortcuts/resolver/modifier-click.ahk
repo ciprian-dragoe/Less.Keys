@@ -17,3 +17,13 @@ ctrlShiftTab()
 {
     activateCtrlWithKey("+{tab}")
 }
+
+winShiftTab()
+{
+    activateWinWithKey("+{tab}")
+}
+
+winTab()
+{
+    activateWinWithKey("{tab}")
+}

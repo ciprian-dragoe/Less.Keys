@@ -17,3 +17,14 @@ ctrlShiftTab()
 {
     activateCtrlWithKey("+{tab}")
 }
+
+winShiftTab()
+{
+    activateWinWithKey("+{tab}")
+}
+
+winTab()
+{
+    showtooltip("merge")
+    activateWinWithKey("{tab}")
+}
