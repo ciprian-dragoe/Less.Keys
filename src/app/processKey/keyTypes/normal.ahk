@@ -1,6 +1,7 @@
 processNormalKey(key)
 {
     cancelDoubledModifier()
+    
     if (keyToSendOnUp)
     {
         sendLayoutKey := false

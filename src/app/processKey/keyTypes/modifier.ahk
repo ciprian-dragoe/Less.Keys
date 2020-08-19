@@ -30,6 +30,7 @@ processModifierKey(key, state)
     if (action)
     {
         action.call(state)
+        processKeyOnRelease := falses
         return true
     }
     

@@ -130,7 +130,8 @@ runIntegrationTests()
     When_letter_is_released_followed_by_layout_key_press_in_less_than_timeoutProcessLayoutOnRelease_followed_by_letter_press_followed_by_different_letter_press_followed_by_layout_release_alternative_keys_are_sent_for_both_letters_#616()
     When_letter_is_remapped_as_accented_character_is_pressed_accented_character_is_sent_#617()
     When_shift_key_is_pressed_followed_by_letter_remapped_as_accented_character_sibling_accented_character_is_sent_#618()
-    
+    When_letter_is_released_followed_by_layout_key_press_in_less_than_timeoutProcessLayoutOnRelease_followed_by_modifier_key_followed_by_letter_shortcut_is_sent_before_letter_release_#619()
+
     ; REMAPPED LAYOUT
     When_key_which_has_been_remapped_is_pressed_remapped_key_is_sent_instead_#701()
     When_layout_key_is_pressed_followed_by_key_which_has_been_remapped_is_pressed_alternative_of_remapped_key_is_sent_#702()
@@ -248,4 +249,3 @@ runIntegrationTests()
     When_altClick_is_pressed_and_ctrlClick_is_pressed_and_released_left_click_is_sent_on_altClick_release_#1406()
     When_ctrlClick_is_pressed_and_altClick_is_pressed_and_released_left_click_is_sent_on_ctrlClick_release_#1407()
 }
-
