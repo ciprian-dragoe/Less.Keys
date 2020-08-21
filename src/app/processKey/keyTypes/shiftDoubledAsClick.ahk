@@ -26,18 +26,29 @@ doubledShiftDown()
     }
     
     isShiftDoubledAsClickPressed := true
+    
+    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+
+    if (isCtrlDoubledAsClickPressed || isWinDoubledAsClickPressed || isAltDoubledAsClickPressed) {
+        setShiftState(1)
+        setTimer TimerMonitorShiftModifierLift, 20
+        return
+    }
+
     if (shiftActive)
     {
         shiftActiveBeforeShiftClickPress := true
+        sendDoubledValueAndReset("shiftClick", sendClickOnShiftClickRelease)
+        chooseClickDragActivation("shiftClick", "MouseDragShiftActivate", doubledShiftMouseHook)
+        return
     }
     
-    setShiftState(1)
-    
-    if (!layoutKeyPressed && activePressedKeys.Length() = 0 && !isCtrlDoubledAsClickPressed)
-    {
-        doubledShiftMouseHook := DllCall("SetWindowsHookEx", "int", 14, "uint", RegisterCallback("MouseDragShiftActivate"), "uint", 0, "uint", 0)
-        SetTimer, TimerResetSentClickOnModifierRelease, %timeoutStillSendLayoutKey%
+    shiftActive := 1
+
+    if (!layoutKeyPressed && activePressedKeys.Length() = 0)
+    {        
         sendClickOnShiftClickRelease := true
+        chooseClickDragActivation("shiftClick", "MouseDragShiftActivate", doubledShiftMouseHook)
     }
 }
 
@@ -46,7 +57,6 @@ MouseDragShiftActivate(nCode, wParam, lParam)
     cancelMouseHook(doubledShiftMouseHook)
     if (wParam = 0x200)
     {
-        setShiftState(0)
         sendClickOnShiftClickRelease := false
         sendUnClickOnShiftClickRelease := true
         doubledAction := modifierDoubledAsClick["shiftClick"]
@@ -57,31 +67,40 @@ MouseDragShiftActivate(nCode, wParam, lParam)
 doubledShiftUp()
 {
     cancelMouseHook(doubledShiftMouseHook)
+    isShiftDoubledAsClickPressed := false
+
     if (shiftActiveBeforeShiftClickPress)
     {
         shiftActiveBeforeShiftClickPress := false
     }
     else
     {
-        setShiftState(0)
+        shiftActive := 0
     }
-    isShiftDoubledAsClickPressed := false
-    
-    resetShiftClickDrag()
+
+    resetDoubledModifierClickDrag("shiftClick", sendUnClickOnShiftClickRelease)
+
     if (sendClickOnShiftClickRelease)
     {
-        doubledAction := modifierDoubledAsClick["shiftClick"]
-        send {blind}{%doubledAction%}
-        sendClickOnShiftClickRelease := false
+        sendDoubledValueAndReset("shiftClick", sendClickOnShiftClickRelease)
     }
 }
 
-resetShiftClickDrag()
+activateShiftWithKey(key)
 {
-    if (sendUnClickOnShiftClickRelease)
+    if (!GetKeyState("shift"))
     {
-        action := modifierDoubledAsClick["shiftClick"]
-        send {blind}{%action% up}
-        sendUnClickOnShiftClickRelease := false
+        send {shift down}
+        setTimer TimerMonitorShiftModifierLift, 20
+    }
+    send {blind}%key%
+}
+
+timerMonitorShiftModifierLift()
+{
+    if (!shiftActive)
+    {
+        send {shift up}
+        setTimer TimerMonitorShiftModifierLift, off
     }
 }

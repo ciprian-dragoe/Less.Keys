@@ -3,8 +3,6 @@ global alternativeLayout
 
 
 
-
-
 readAlternativeLayoutFile(path)
 {
     FileReadLine, layoutChangeKey, %path%, 1
@@ -17,7 +15,18 @@ readAlternativeLayoutFile(path)
         { 
             continue
         }
-        remappedKey := StrSplit(A_LoopReadLine, "`:").2
-        alternativeLayout[StrSplit(A_LoopReadLine, "`:").1] := remappedKey
+        normalKey := StrSplit(A_LoopReadLine, "`:").1
+        alternativeKey := StrSplit(A_LoopReadLine, "`:").2
+        
+        specialCharacter := accentedCharacter[alternativeKey]
+        if (specialCharacter)
+        {
+            keyboardShortcuts["+" . specialCharacter] := 500
+            alternativeLayout[normalKey] := specialCharacter
+        }
+        else
+        {
+            alternativeLayout[normalKey] := alternativeKey
+        }
     }
 }

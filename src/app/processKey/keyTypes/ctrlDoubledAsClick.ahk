@@ -1,7 +1,7 @@
 global sendClickOnCtrlClickRelease := false
 global sendUnClickOnCtrlClickRelease := false
 global isCtrlDoubledAsClickPressed := false
-
+global ctrlActiveBeforeCtrlClickPress := false
 global doubledCtrlMouseHook
 
 
@@ -26,18 +26,29 @@ doubledCtrlDown()
     }
     
     isCtrlDoubledAsClickPressed := true
+    
+    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+
+    if (isShiftDoubledAsClickPressed || isWinDoubledAsClickPressed || isAltDoubledAsClickPressed) {
+        setCtrlState(1)
+        setTimer TimerMonitorCtrlModifierLift, 20
+        return
+    }
+
     if (ctrlActive)
     {
         ctrlActiveBeforeCtrlClickPress := true
+        sendDoubledValueAndReset("ctrlClick", sendClickOnCtrlClickRelease)
+        chooseClickDragActivation("ctrlClick", "MouseDragCtrlActivate", doubledCtrlMouseHook)
+        return
     }
     
-    setCtrlState(1)
-    
-    if (!layoutKeyPressed && activePressedKeys.Length() = 0 && !isShiftDoubledAsClickPressed)
+    ctrlActive := 1
+
+    if (!layoutKeyPressed && activePressedKeys.Length() = 0)
     {
-        doubledCtrlMouseHook := DllCall("SetWindowsHookEx", "int", 14, "uint", RegisterCallback("MouseDragCtrlActivate"), "uint", 0, "uint", 0)
-        SetTimer, TimerResetSentClickOnModifierRelease, %timeoutStillSendLayoutKey%
         sendClickOnCtrlClickRelease := true
+        chooseClickDragActivation("ctrlClick", "MouseDragCtrlActivate", doubledCtrlMouseHook)
     }
 }
 
@@ -46,7 +57,6 @@ MouseDragCtrlActivate(nCode, wParam, lParam)
     cancelMouseHook(doubledCtrlMouseHook)
     if (wParam = 0x200)
     {
-        setCtrlState(0)
         sendClickOnCtrlClickRelease := false
         sendUnClickOnCtrlClickRelease := true
         doubledAction := modifierDoubledAsClick["ctrlClick"]
@@ -57,33 +67,40 @@ MouseDragCtrlActivate(nCode, wParam, lParam)
 doubledCtrlUp()
 {
     cancelMouseHook(doubledCtrlMouseHook)
+    isCtrlDoubledAsClickPressed := false
+
     if (ctrlActiveBeforeCtrlClickPress)
     {
         ctrlActiveBeforeCtrlClickPress := false
     }
     else
     {
-        setCtrlState(0)
+        ctrlActive := 0
     }
     
-    isCtrlDoubledAsClickPressed := false
-    
-    resetCtrlClickDrag()
+    resetDoubledModifierClickDrag("ctrlClick", sendUnClickOnCtrlClickRelease)
+
     if (sendClickOnCtrlClickRelease)
     {
-        doubledAction := modifierDoubledAsClick["ctrlClick"]
-        send {blind}{%doubledAction%}
-        sendClickOnCtrlClickRelease := false
+        sendDoubledValueAndReset("ctrlClick", sendClickOnCtrlClickRelease)
     }
 }
 
-resetCtrlClickDrag()
+activateCtrlWithKey(key)
 {
-    if (sendUnClickOnCtrlClickRelease)
+    if (!GetKeyState("ctrl"))
     {
-        action := modifierDoubledAsClick["ctrlClick"]
-        send {blind}{%action% up}
-        sendUnClickOnCtrlClickRelease := false
+        send {ctrl down}
+        setTimer TimerMonitorCtrlModifierLift, 20
     }
+    send {blind}%key%
 }
 
+timerMonitorCtrlModifierLift()
+{
+    if (!ctrlActive)
+    {
+        send {ctrl up}
+        setTimer TimerMonitorCtrlModifierLift, off
+    }
+}

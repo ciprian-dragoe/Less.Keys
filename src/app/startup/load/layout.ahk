@@ -3,7 +3,6 @@ global layout
 global keyRemappedAsRightButton
 
 
-
 readLayoutFile(path)
 {
     layout:=Object()
@@ -16,40 +15,29 @@ readLayoutFile(path)
         }
         originalKey := StrSplit(A_LoopReadLine, "`:").1
         newValueForKey := StrSplit(A_LoopReadLine, "`:").2
-        if (newValueForKey = "ctrl")
+        if (isModifierKey(newValueForKey))
         {
-            addToMonitoredStickyKeys(originalKey, newValueForKey)
+            monitoredStickyKeys.Push(originalKey)
         } 
-        else if (newValueForKey = "alt")
-        {
-            addToMonitoredStickyKeys(originalKey, newValueForKey)
-        }
-        else if (newValueForKey = "shift")
-        {
-            addToMonitoredStickyKeys(originalKey, newValueForKey)
-        }
-        else if (newValueForKey = "lwin")
-        {
-            addToMonitoredStickyKeys(originalKey, newValueForKey)
-        }
         else if (newValueForKey = "rbutton")
         {
             keyRemappedAsRightButton := originalKey
         }
-        else if (newValueForKey = "shiftClick")
-        {
-            monitoredStickyKeys.Push(originalKey)
-        }
-        else if (newValueForKey = "ctrlClick")
-        {
-            monitoredStickyKeys.Push(originalKey)
-        }
         
-        layout[originalKey] := newValueForKey
+        specialCharacter := accentedCharacter[newValueForKey]
+        if (specialCharacter)
+        {
+            keyboardShortcuts["+" . specialCharacter] := 500
+            layout[originalKey] := specialCharacter
+        }
+        else
+        {
+            layout[originalKey] := newValueForKey
+        }
     }
 }
 
-addToMonitoredStickyKeys(originalKey, newValueForKey)
+isModifierKey(key)
 {
-    monitoredStickyKeys.Push(originalKey)
+    return key = "ctrl" || key = "alt" || key = "shift" || key = "lwin" || key = "shiftClick" || key = "ctrlClick" || key = "altClick" || key = "winClick"
 }

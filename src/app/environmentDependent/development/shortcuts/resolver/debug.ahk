@@ -7,6 +7,7 @@ reloadApp()
 displayDebugData()
 {
 	msgbox % debugStoredData
+	clipboard := debugStoredData
 }
 
 storeDebugData()
@@ -20,5 +21,6 @@ storeDebugData()
 
 sendTestMessage()
 {
+    send {ctrl up}
     send INTEGRATION_TEST
 }

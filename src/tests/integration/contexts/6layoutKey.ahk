@@ -207,3 +207,43 @@ When_letter_is_released_followed_by_layout_key_press_in_less_than_timeoutProcess
     expected := "w-="
     validateTestOutput(A_ThisFunc , expected)
 }
+
+When_letter_is_remapped_as_accented_character_is_pressed_accented_character_is_sent_#617()
+{
+    send {Asc 0192}
+    expected := clearText()
+    simulateKeyDown("pgup", 50)
+    simulateKeyUp("pgup", 50)
+    
+    validateTestOutput(A_ThisFunc , expected)
+}
+
+When_shift_key_is_pressed_followed_by_letter_remapped_as_accented_character_sibling_accented_character_is_sent_#618()
+{
+    send {Asc 0224}
+    expected := clearText()
+    simulateKeyDown("lshift", 50)
+    simulateKeyDown("pgup", 50)
+    simulateKeyUp("pgup", 50)
+    simulateKeyUp("lshift", 50)
+    
+    validateTestOutput(A_ThisFunc , expected)
+}
+
+
+When_letter_is_released_followed_by_layout_key_press_in_less_than_timeoutProcessLayoutOnRelease_followed_by_modifier_key_followed_by_letter_shortcut_is_sent_before_letter_release_#619()
+{
+    simulateKeyDown("w", 50)
+    simulateKeyUp("w", 50)
+    simulateKeyDown("space", 50)
+    simulateKeyDown("lshift", 50)
+    simulateKeyDown("``", 10)
+    actual := clearText()
+    simulateKeyUp("``", 10)
+    simulateKeyUp("space", 50)
+    simulateKeyUp("lshift", 50)
+    
+    expected := "wINTEGRATION_TEST"
+    addTestResult(A_ThisFunc, expected, actual, evaluateResult(actual, expected))
+    setDefaultTestEnvironment()
+}
