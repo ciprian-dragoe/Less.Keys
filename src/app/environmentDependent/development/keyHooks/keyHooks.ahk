@@ -290,5 +290,6 @@ processModifierWhenKeyPhysicalUp(key)
     else
     {
         removeFromActivePressedKeys(remappedWithKey)
+        lastKeyProcessedAsAlternative := ""
     }
 }

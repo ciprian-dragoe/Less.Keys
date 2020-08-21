@@ -1,10 +1,9 @@
-global keyboardShortcuts
+global keyboardShortcuts := Object()
 
 
 
 readKeyboardShortcutsFile(path)
 {
-    keyboardShortcuts:=Object()
     Loop, read, %path%
     {
         IfInString, A_LoopReadLine, ### ;if line has ### in it, is a comment and skip
