@@ -40,7 +40,7 @@
         display: grid;
         align-items: center;
         height: 100%;
-        grid-template-columns: 1fr 100px 100px 100px;
+        grid-template-columns: 1fr 100px 100px 100px 100px;
       }
 
       .logo {
@@ -67,7 +67,7 @@
         justify-items: center;
       }
 
-      .story {
+      .center-text {
         text-align: center;
       }
 
@@ -145,6 +145,13 @@
       .tutorial {
         background: gray;
       }
+
+      .donate-section {
+        display: grid;
+        grid-template-rows: 200px auto;
+        justify-items: center;
+        align-content: center;
+      }
     </style>
   </head>
   <body>
@@ -154,11 +161,12 @@
         <a class="link" href="#video">Benefits</a>
         <a class="link" href="#cta">Download</a>
         <a class="link" href="#tutorial">Tutorials</a>
+        <a class="link" href="#donate">Donate</a>
       </div>
     </nav>
 
     <div id="header" class="header-section section horizonal-size">
-      <div class="story">
+      <div class="center-text">
         <div class="headline">
           Reduce wrist movement and type faster on any keyboard
         </div>
@@ -208,18 +216,14 @@
       </div>
       <div class="benefits">
         <div class="benefit benefit1">
-          <div>
-            Free and open source
-          </div>
+          <div>Free and open source</div>
           <div>
             You can download the app free off charge and if there is a feature
             you want to add you can easily tweak the source code
           </div>
         </div>
         <div class="benefit benefit2">
-          <div>
-            Adaptable learning curve
-          </div>
+          <div>Adaptable learning curve</div>
           <div>
             Unlike the kinesis advantage which requires you to learn a whole new
             layout from the beginning, you can choose to learn in incremental
@@ -227,9 +231,7 @@
           </div>
         </div>
         <div class="benefit benefit3">
-          <div>
-            Highly customizeable for power users
-          </div>
+          <div>Highly customizeable for power users</div>
           <div>
             Want to create your own layout for your custom scenario, no problem,
             easily modify the config files
@@ -246,52 +248,26 @@
       <div class="download">
         <button class="download-button">DOWNLOAD</button>
       </div>
-      <div class="unzip">
-        Unzip
-      </div>
-      <div class="run">
-        Run LessKeys
-      </div>
+      <div class="unzip">Unzip</div>
+      <div class="run">Run LessKeys</div>
       <div class="shortcuts">
-        <div class="title">
-          Start typing with these shortcuts
-        </div>
+        <div class="title">Start typing with these shortcuts</div>
         <div class="shortcut-list">
-          <div class="shortcut shortcut1">
-            space↓ + a = left
-          </div>
-          <div class="shortcut shortcut1">
-            space↓ + d = right
-          </div>
-          <div class="shortcut shortcut1">
-            space↓ + w = up
-          </div>
-          <div class="shortcut shortcut1">
-            space↓ + s = down
-          </div>
-          <div class="shortcut shortcut1">
-            space↓ + q = home
-          </div>
-          <div class="shortcut shortcut1">
-            space↓ + e = end
-          </div>
-          <div class="shortcut shortcut1">
-            space↓ + f = backspace
-          </div>
-          <div class="shortcut shortcut1">
-            space↓ + c = enter
-          </div>
-          <div class="shortcut shortcut1">
-            space↓ + r = tab
-          </div>
+          <div class="shortcut shortcut1">space↓ + a = left</div>
+          <div class="shortcut shortcut1">space↓ + d = right</div>
+          <div class="shortcut shortcut1">space↓ + w = up</div>
+          <div class="shortcut shortcut1">space↓ + s = down</div>
+          <div class="shortcut shortcut1">space↓ + q = home</div>
+          <div class="shortcut shortcut1">space↓ + e = end</div>
+          <div class="shortcut shortcut1">space↓ + f = backspace</div>
+          <div class="shortcut shortcut1">space↓ + c = enter</div>
+          <div class="shortcut shortcut1">space↓ + r = tab</div>
         </div>
       </div>
     </div>
 
     <div id="tutorial" class="tutorial-section section horizonal-size">
-      <div class="title">
-        Tutorials to get the most out of LessKeys
-      </div>
+      <div class="title">Tutorials to get the most out of LessKeys</div>
       <div class="tutorials">
         <div class="tutorial tutorial1">general presentation</div>
         <div class="tutorial tutorial1">my layout</div>
@@ -299,6 +275,37 @@
         <div class="tutorial tutorial1">my shortcuts</div>
         <div class="tutorial tutorial1">my settings</div>
       </div>
+    </div>
+
+    <div id="donate" class="donate-section section horizonal-size">
+      <div class="center-text">
+        Want to accelerate the development of LessKeys ?<br />
+        You can do this via a small donation
+      </div>
+      <form
+        action="https://www.paypal.com/cgi-bin/webscr"
+        method="post"
+        target="_top"
+        class="donate-button"
+      >
+        <input type="hidden" name="cmd" value="_s-xclick" />
+        <input type="hidden" name="hosted_button_id" value="CDKCEDX6B6ZPL" />
+        <input
+          type="image"
+          src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"
+          border="0"
+          name="submit"
+          title="PayPal - The safer, easier way to pay online!"
+          alt="Donate with PayPal button"
+        />
+        <img
+          alt=""
+          border="0"
+          src="https://www.paypal.com/en_US/i/scr/pixel.gif"
+          width="1"
+          height="1"
+        />
+      </form>
     </div>
   </body>
 </html>
