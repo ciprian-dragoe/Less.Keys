@@ -37,7 +37,7 @@ When_ctrlClick_is_continously_pressed_and_a_letter_is_pressed_all_text_is_select
     actual := getSelectedText()
     expected := "hello "
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_ctrlClick_is_continously_pressed_and_a_key_is_pressed_left_click_is_not_sent_on_ctrlClick_release_#404()
@@ -235,7 +235,7 @@ When_ctrlClick_is_pressed_and_shift_key_is_pressed_and_layout_key_pressed_and_ke
     expected := "world"
     
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }    
 
 When_ctrlClick_is_continously_pressed_and_layout_key_is_pressed_after_release_left_click_is_not_sent_#415()
@@ -269,7 +269,7 @@ When_ctrlClick_is_continously_pressed_and_mouse_is_moved_the_text_is_selected_#4
     expected := "hello "
     
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_ctrlClick_is_continously_pressed_and_mouse_is_moved_and_a_letter_is_typed_a_letter_is_not_sent_#417()
@@ -304,7 +304,7 @@ When_ctrlClick_is_continously_pressed_and_mouse_is_moved_and_layout_key_is_press
     expected := "hello"
 
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }    
 
 When_ctrlClick_pressed_and_mouse_is_moved_and_layout_key_is_pressed_longer_then_timeoutStillSendLayoutKey_space_is_not_sent_on_layout_key_release_#419()
@@ -324,7 +324,7 @@ When_ctrlClick_pressed_and_mouse_is_moved_and_layout_key_is_pressed_longer_then_
     expected := "hello "
 
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }    
 
 When_non_modifier_letter_is_released_and_layout_key_continous_press_in_less_then_timeoutProcessLayoutOnRelease_and_ctrlClick_pressed_and_letter_key_alternative_mapped_as_left_key_pressed_and_released_caret_is_moved_#420()
@@ -438,7 +438,7 @@ When_ctrl_is_pressed_and_ctrlClick_is_continously_pressed_and_mouse_is_moved_the
     expected := "hello "
     
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_ctrlClick_is_continously_pressed_and_mouse_is_moved_and_ctrl_is_pressed_the_text_remains_selected_#427()
@@ -458,7 +458,7 @@ When_ctrlClick_is_continously_pressed_and_mouse_is_moved_and_ctrl_is_pressed_the
     expected := "hello "
     
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_ctrlClick_is_continously_pressed_and_mouse_is_moved_and_ctrl_is_pressed_and_released_the_text_remains_selected_#428()
@@ -478,5 +478,25 @@ When_ctrlClick_is_continously_pressed_and_mouse_is_moved_and_ctrl_is_pressed_and
     expected := "hello "
     
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
+}
+
+When_ctrlClick_is_pressed_and_backspace_pressed_and_released_and_ctrl_pressed_and_ctrlClick_released_and_backspace_pressed_then_ctrl_and_backspace_is_sent_#429()
+{
+    startingPosition := setMousePositionToCaret()
+    simulateTyping("hello world again")
+    processKeyDown("ctrlClick")
+    sleep 100
+    simulateKeyDown("backspace", 100)
+    simulateKeyUp("backspace", 100)
+    simulateKeyDown("lctrl", 100)
+    processKeyUp("ctrlClick")
+    sleep 100
+    simulateKeyDown("backspace", 100)
+    simulateKeyUp("backspace", 100)
+
+    sleep 100
+    simulateKeyUp("lctrl", 100)
+    expected := "hello "
+    validateTestOutput(A_ThisFunc , expected)
 }

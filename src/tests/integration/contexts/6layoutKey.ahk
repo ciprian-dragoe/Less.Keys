@@ -245,5 +245,5 @@ When_letter_is_released_followed_by_layout_key_press_in_less_than_timeoutProcess
     
     expected := "wINTEGRATION_TEST"
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(actual, expected))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }

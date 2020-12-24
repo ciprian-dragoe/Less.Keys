@@ -61,7 +61,7 @@ When_modifer_key_remapped_as_letter_is_pressed_on_release_activePressedKeys_is_r
     }
     expected:= ""
     addTestResult(A_ThisFunc, expected, result, evaluateResult(expected, result))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_layout_key_pressed_and_modifer_key_remapped_as_letter_is_pressed_on_modifier_key_release_activePressedKeys_is_reset_#706()
@@ -79,7 +79,7 @@ When_layout_key_pressed_and_modifer_key_remapped_as_letter_is_pressed_on_modifie
     }
     expected := ""
     addTestResult(A_ThisFunc, expected, result, evaluateResult(expected, result))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_layout_key_pressed_and_modifer_key_remapped_as_letter_is_pressed_on_modifier_key_release_alternative_key_is_sent_#707()

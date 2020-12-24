@@ -21,5 +21,5 @@ When_key_matches_shortcut_pattern_and_is_kept_pressed_after_shortcut_action_is_s
     
     expected := "INTEGRATION_TEST"
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(actual, expected))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }

@@ -48,7 +48,7 @@ When_winClick_is_continously_pressed_and_ctrlClick_is_continously_pressed_and_ba
     expected := "hello INTEGRATION_TEST"
     actual := clearText()
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_winClick_is_continously_pressed_and_ctrlClick_is_continously_pressed_and_backtick_pressed_click_is_not_sent_winClick_release#904()

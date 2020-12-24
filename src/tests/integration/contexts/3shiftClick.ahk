@@ -38,7 +38,7 @@ When_shiftClick_is_continously_pressed_and_backtick_is_pressed_keyboard_shortcut
     actual := clearText()
     expected := "hello INTEGRATION_TEST"
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_shiftClick_is_continously_pressed_and_backtick_is_pressed_left_click_is_not_sent_on_shiftClick_release_#304()
@@ -225,7 +225,7 @@ When_shiftClick_is_pressed_and_shift_key_is_pressed_and_layout_key_pressed_and_b
     expected := "hello worldINTEGRATION_TEST"
     
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }    
 
 When_shiftClick_is_continously_pressed_and_layout_key_is_pressed_after_release_left_click_is_not_sent_#315()
@@ -259,7 +259,7 @@ When_shiftClick_is_continously_pressed_and_mouse_is_moved_the_text_is_selected_#
     expected := "hello "
     
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_shiftClick_is_continously_pressed_and_mouse_is_moved_and_a_letter_is_typed_a_letter_is_not_sent_#317()
@@ -296,7 +296,7 @@ When_shiftClick_is_continously_pressed_and_mouse_is_moved_and_layout_key_is_pres
     expected := "hello"
 
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }    
 
 When_shiftClick_pressed_and_mouse_is_moved_and_layout_key_is_pressed_longer_then_timeoutStillSendLayoutKey_space_is_not_sent_on_layout_key_release_#319()
@@ -316,7 +316,7 @@ When_shiftClick_pressed_and_mouse_is_moved_and_layout_key_is_pressed_longer_then
     expected := "hello "
 
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }    
 
 When_non_modifier_letter_is_released_and_layout_key_continous_press_in_less_then_timeoutProcessLayoutOnRelease_and_shiftClick_pressed_and_backtick_pressed_and_released_click_is_not_sent_#320()
@@ -436,7 +436,7 @@ When_shift_is_pressed_and_shiftClick_is_continously_pressed_and_mouse_is_moved_t
     expected := "hello "
     
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_shiftClick_is_continously_pressed_and_mouse_is_moved_and_ctrl_is_pressed_the_text_remains_selected_#327()
@@ -456,7 +456,7 @@ When_shiftClick_is_continously_pressed_and_mouse_is_moved_and_ctrl_is_pressed_th
     expected := "hello "
     
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_shiftClick_is_continously_pressed_and_mouse_is_moved_and_shift_is_pressed_and_released_the_text_remains_selected_#328()
@@ -478,5 +478,19 @@ When_shiftClick_is_continously_pressed_and_mouse_is_moved_and_shift_is_pressed_a
     expected := "hello "
     
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
+}
+
+When_shiftClick_is_pressed_and_a_letter_pressed_and_released_and_shift_pressed_and_shiftClick_released_and_a_letter_pressed_then_caps_a_letter_is_sent_#329()
+{
+    processKeyDown("shiftClick")
+    sleep 100
+    simulateTyping("a")
+    simulateKeyDown("lshift", 100)
+    processKeyUp("shiftClick")
+    sleep 100
+    simulateTyping("a")
+    simulateKeyUp("lshift", 100)
+    expected := "AA"
+    validateTestOutput(A_ThisFunc , expected)
 }

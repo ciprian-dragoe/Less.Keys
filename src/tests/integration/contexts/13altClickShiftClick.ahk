@@ -50,7 +50,7 @@ When_altClick_is_continously_pressed_and_shiftClick_is_continously_pressed_and_b
     expected := "hello INTEGRATION_TEST"
     actual := clearText()
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_altClick_is_continously_pressed_and_shiftClick_is_continously_pressed_and_backtick_pressed_click_is_not_sent_altClick_release_#1304()

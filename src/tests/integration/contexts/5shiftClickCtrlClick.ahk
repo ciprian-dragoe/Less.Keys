@@ -48,7 +48,7 @@ When_shiftClick_is_continously_pressed_and_ctrlClick_is_continously_pressed_and_
     
     expected := "hello "
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_shiftClick_is_continously_pressed_and_ctrlClick_is_continously_pressed_and_layout_key_continously_pressed_and_key_remapped_as_left_key_left_click_is_not_sent_on_shiftClick_release_#504()

@@ -29,8 +29,9 @@ processModifierKey(key, state)
     action := modifierActions[key]
     if (action)
     {
+        debug(key . " modifier |" . state . "|")
         action.call(state)
-        processKeyOnRelease := falses
+        processKeyOnRelease := false
         return true
     }
     
@@ -40,6 +41,10 @@ processModifierKey(key, state)
 setCtrlState(state)
 {
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+    if (ctrlActive && isCtrlDoubledAsClickPressed)
+    {
+        ctrlActiveBeforeCtrlClickPress := true
+    }
     ctrlActive := state
     pressedState := state ? "down" : "up"
     send {blind}{ctrl %pressedState%}
@@ -48,6 +53,10 @@ setCtrlState(state)
 setAltState(state)
 {
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+    if (altActive && isAltDoubledAsClickPressed)
+    {
+        altActiveBeforeAltClickPress := true
+    }
     altActive := state
     pressedState := state ? "down" : "up"
     send {blind}{alt %pressedState%}
@@ -56,6 +65,10 @@ setAltState(state)
 setShiftState(state)
 {
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+    if (shiftActive && isShiftDoubledAsClickPressed)
+    {
+        shiftActiveBeforeShiftClickPress := true
+    }
     shiftActive := state
     pressedState := state ? "down" : "up"
     send {blind}{shift %pressedState%}
@@ -64,6 +77,10 @@ setShiftState(state)
 setWinState(state)
 {
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+    if (winActive && isWinDoubledAsClickPressed)
+    {
+        winActiveBeforeWinClickPress := true
+    }
     winActive := state
     pressedState := state ? "down" : "up"
     send {blind}{lwin %pressedState%}

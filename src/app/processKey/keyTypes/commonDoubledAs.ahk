@@ -32,7 +32,8 @@ timerResetSentClickOnModifierRelease()
     sendClickOnAltClickRelease := false
 }
 
-chooseClickDragActivation(modifierValue, callbackMethodName, ByRef hookStoreLocation) {
+chooseClickDragActivation(modifierValue, callbackMethodName, ByRef hookStoreLocation)
+{
     if (modifierDoubledAsClick[modifierValue] = "lbutton")
     {
         hookStoreLocation := DllCall("SetWindowsHookEx", "int", 14, "uint", RegisterCallback(callbackMethodName), "uint", 0, "uint", 0)
@@ -40,13 +41,15 @@ chooseClickDragActivation(modifierValue, callbackMethodName, ByRef hookStoreLoca
     SetTimer, TimerResetSentClickOnModifierRelease, %timeoutStillSendLayoutKey%
 }
 
-sendDoubledValueAndReset(modifierValue, ByRef resetValue) {
+sendDoubledValueAndReset(modifierValue, ByRef resetValue)
+{
     doubledAction := modifierDoubledAsClick[modifierValue]
     send {blind}{%doubledAction%}
     resetValue := false
 }
 
-resetDoubledModifierClickDrag(modifierValue, ByRef resetValue) {
+resetDoubledModifierClickDrag(modifierValue, ByRef resetValue)
+{
     if (resetValue)
     {
         action := modifierDoubledAsClick[modifierValue]

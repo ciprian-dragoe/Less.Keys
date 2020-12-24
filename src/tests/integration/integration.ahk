@@ -71,6 +71,7 @@ runIntegrationTests()
     When_shift_is_pressed_and_shiftClick_is_continously_pressed_and_mouse_is_moved_the_text_is_selected_#326()
     When_shiftClick_is_continously_pressed_and_mouse_is_moved_and_ctrl_is_pressed_the_text_remains_selected_#327()
     When_shiftClick_is_continously_pressed_and_mouse_is_moved_and_shift_is_pressed_and_released_the_text_remains_selected_#328()
+    When_shiftClick_is_pressed_and_a_letter_pressed_and_released_and_shift_pressed_and_shiftClick_released_and_a_letter_pressed_then_caps_a_letter_is_sent_#329()
     
     ; CTRL CLICK
     When_ctrlClick_is_pressed_at_release_left_click_is_sent_#401()
@@ -101,6 +102,7 @@ runIntegrationTests()
     When_ctrl_is_pressed_and_ctrlClick_is_continously_pressed_and_mouse_is_moved_the_text_is_selected_#426()
     When_ctrlClick_is_continously_pressed_and_mouse_is_moved_and_ctrl_is_pressed_the_text_remains_selected_#427()
     When_ctrlClick_is_continously_pressed_and_mouse_is_moved_and_ctrl_is_pressed_and_released_the_text_remains_selected_#428()
+    When_ctrlClick_is_pressed_and_backspace_pressed_and_released_and_ctrl_pressed_and_ctrlClick_released_and_backspace_pressed_then_ctrl_and_backspace_is_sent_#429()
     
     ; SHIFT CLICK & CTRL CLICK
     When_shiftClick_is_pressed_and_ctrlClick_is_pressed_left_click_is_sent_on_shiftClick_release_#501()
@@ -248,4 +250,5 @@ runIntegrationTests()
     When_altClick_is_continously_pressed_and_ctrlClick_is_continously_pressed_more_then_timeoutStillSendLayoutKey_left_click_is_not_sent_on_ctrlClick_release_#1405()
     When_altClick_is_pressed_and_ctrlClick_is_pressed_and_released_left_click_is_sent_on_altClick_release_#1406()
     When_ctrlClick_is_pressed_and_altClick_is_pressed_and_released_left_click_is_sent_on_ctrlClick_release_#1407()
+
 }

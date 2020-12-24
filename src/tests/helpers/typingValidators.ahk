@@ -3,7 +3,7 @@ validateTestOutput(testDescription, expectedResult)
     testOutput := clearText()
     result := evaluateResult(expectedResult, testOutput)
     addTestResult(testDescription, expectedResult, testOutput, result)
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(testDescription)
 }
 
 evaluateResult(expected, actual)

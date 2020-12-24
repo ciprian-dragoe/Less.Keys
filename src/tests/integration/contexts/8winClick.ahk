@@ -39,7 +39,7 @@ When_winClick_is_continously_pressed_and_backtick_is_pressed_keyboard_shortcut_i
     actual := clearText()
     expected := "hello INTEGRATION_TEST"
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_winClick_is_continously_pressed_and_backtick_is_pressed_left_click_is_not_sent_on_winClick_release_#804()
@@ -240,7 +240,7 @@ When_winClick_is_pressed_and_shift_key_is_pressed_and_layout_key_pressed_and_bac
     expected := "hello worldINTEGRATION_TEST"
     
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }    
 
 When_winClick_is_continously_pressed_and_layout_key_is_pressed_after_release_left_click_is_not_sent_#815()
@@ -274,7 +274,7 @@ When_winClick_is_continously_pressed_and_mouse_is_moved_the_text_is_selected_#81
     expected := "hello "
     
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_winClick_is_continously_pressed_and_mouse_is_moved_and_a_letter_is_typed_a_letter_is_not_sent_#817()
@@ -311,7 +311,7 @@ When_winClick_is_continously_pressed_and_mouse_is_moved_and_layout_key_is_presse
     expected := "hello"
 
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }    
 
 When_winClick_pressed_and_mouse_is_moved_and_layout_key_is_pressed_longer_then_timeoutStillSendLayoutKey_space_is_not_sent_on_layout_key_release_#819()
@@ -331,7 +331,7 @@ When_winClick_pressed_and_mouse_is_moved_and_layout_key_is_pressed_longer_then_t
     expected := "hello "
 
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }    
 
 When_non_modifier_letter_is_released_and_layout_key_continous_press_in_less_then_timeoutProcessLayoutOnRelease_and_winClick_pressed_and_backtick_pressed_and_released_click_is_not_sent_#820()
@@ -452,7 +452,7 @@ When_win_is_pressed_and_winClick_is_continously_pressed_and_mouse_is_moved_the_t
     expected := "hello "
     
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_winClick_is_continously_pressed_and_mouse_is_moved_and_ctrl_is_pressed_the_text_remains_selected_#827()
@@ -472,7 +472,7 @@ When_winClick_is_continously_pressed_and_mouse_is_moved_and_ctrl_is_pressed_the_
     expected := "hello "
     
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_winClick_is_continously_pressed_and_mouse_is_moved_and_win_is_pressed_and_released_the_text_remains_selected_#828()
@@ -494,5 +494,5 @@ When_winClick_is_continously_pressed_and_mouse_is_moved_and_win_is_pressed_and_r
     expected := "hello "
     
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }

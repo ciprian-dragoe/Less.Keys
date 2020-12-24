@@ -29,14 +29,16 @@ printTestResults(testResults)
     sleep 100
 }
 
-setDefaultTestEnvironment()
+setDefaultTestEnvironment(testName)
 {
-    send {escape 2}
+    send {escape}
+    sleep 200
+    send {escape}
     clearText()
     MouseMove, 500, 500
-    clipboard :=
+    clipboard := ""
     timeGreaterTimeoutProcessLayoutOnRelease := 500
-    sleep %timeGreaterTimeoutProcessLayoutOnRelease%
+    showToolTip("CLEANING |" . testName . "|", 1000)
 }
 
 clearText()

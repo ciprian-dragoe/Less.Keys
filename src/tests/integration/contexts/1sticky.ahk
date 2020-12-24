@@ -5,7 +5,7 @@ When_shift_key_is_logically_pressed_and_not_released_for_more_then_stickyTime_sh
     
     actual := "" . (!shiftActive && !GetKeyState("shift"))
     addTestResult(A_ThisFunc, "1", actual, evaluateResult(actual, "1"))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_shiftClick_key_is_logically_pressed_and_not_released_for_more_then_stickyTime_shift_is_reset_after_stickyTime_#102()
@@ -17,7 +17,7 @@ When_shiftClick_key_is_logically_pressed_and_not_released_for_more_then_stickyTi
     
     actual := "" . (!shiftActive && !GetKeyState("shift"))
     addTestResult(A_ThisFunc, "1", actual, evaluateResult(actual, "1"))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_ctrl_key_is_logically_pressed_and_not_released_for_more_then_stickyTime_ctrl_and_ctrlActive_is_reset_after_stickyTime_#103()
@@ -27,7 +27,7 @@ When_ctrl_key_is_logically_pressed_and_not_released_for_more_then_stickyTime_ctr
     
     actual := "" . (!ctrlActive && !GetKeyState("ctrl"))
     addTestResult(A_ThisFunc, "1", actual, evaluateResult(actual, "1"))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_ctrlClick_key_is_logically_pressed_and_not_released_for_more_then_stickyTime_ctrl_is_reset_after_stickyTime_#104()
@@ -39,7 +39,7 @@ When_ctrlClick_key_is_logically_pressed_and_not_released_for_more_then_stickyTim
     
     actual := "" . (!ctrlActive && !GetKeyState("ctrl"))
     addTestResult(A_ThisFunc, "1", actual, evaluateResult(actual, "1"))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_alt_key_is_logically_pressed_and_not_released_for_more_then_stickyTime_alt_and_altActive_is_reset_after_stickyTime_#105()
@@ -51,7 +51,7 @@ When_alt_key_is_logically_pressed_and_not_released_for_more_then_stickyTime_alt_
     addTestResult(A_ThisFunc, "1", actual, evaluateResult(actual, "1"))
     simulateKeyDown("lalt", 100)
     simulateKeyUp("lalt", 100)
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_lwin_key_is_logically_pressed_and_not_released_for_more_then_stickyTime_lwin_and_winActive_is_reset_after_stickyTime_#106()
@@ -63,7 +63,7 @@ When_lwin_key_is_logically_pressed_and_not_released_for_more_then_stickyTime_lwi
     addTestResult(A_ThisFunc, "1", actual, evaluateResult(actual, "1"))
     simulateKeyDown("lalt", 100)
     simulateKeyUp("lalt", 100)
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_layout_key_is_logically_pressed_and_not_released_for_more_then_stickyTime_alternativeLayout_is_reset_after_stickyTime_#107()
@@ -73,7 +73,7 @@ When_layout_key_is_logically_pressed_and_not_released_for_more_then_stickyTime_a
     
     actual := "" . !alternativeLayoutActive
     addTestResult(A_ThisFunc, "1", actual, evaluateResult(actual, "1"))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_processKeyOnRelease_is_set_after_stickyTime_it_is_reset_#108()
@@ -84,7 +84,7 @@ When_processKeyOnRelease_is_set_after_stickyTime_it_is_reset_#108()
     
     actual := "" . !processKeyOnRelease
     addTestResult(A_ThisFunc, "1", actual, evaluateResult(actual, "1"))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_shiftClick_key_is_logically_pressed_and_mouse_moved_and_stickyTime_passes_left_click_is_released_#109()
@@ -106,7 +106,7 @@ When_shiftClick_key_is_logically_pressed_and_mouse_moved_and_stickyTime_passes_l
     expected := "sticky"
     
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_ctrlClick_key_is_logically_pressed_and_mouse_moved_and_stickyTime_passes_left_click_is_released_#110()
@@ -128,7 +128,7 @@ When_ctrlClick_key_is_logically_pressed_and_mouse_moved_and_stickyTime_passes_le
     expected := "sticky"
     
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_non_modifier_key_is_logically_pressed_and_not_released_after_stickyTime_passes_activePressedKeys_is_reset_to_empty_array_#111()
@@ -139,7 +139,7 @@ When_non_modifier_key_is_logically_pressed_and_not_released_after_stickyTime_pas
 
     actual := "" . activePressedKeys.Length()
     addTestResult(A_ThisFunc, "0", actual, evaluateResult(actual, "0"))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_lastKeyProcessedAsAlternative_is_set_after_stickyTime_it_is_reset_#112()
@@ -149,7 +149,7 @@ When_lastKeyProcessedAsAlternative_is_set_after_stickyTime_it_is_reset_#112()
     
     actual := "" . lastKeyProcessedAsAlternative = ""
     addTestResult(A_ThisFunc, "1", actual, evaluateResult(actual, "1"))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_keyToSendOnUp_is_set_after_stickyTime_it_is_reset_#113()
@@ -159,5 +159,5 @@ When_keyToSendOnUp_is_set_after_stickyTime_it_is_reset_#113()
     
     actual := "" . keyToSendOnUp = ""
     addTestResult(A_ThisFunc, "1", actual, evaluateResult(actual, "1"))
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(A_ThisFunc)
 }

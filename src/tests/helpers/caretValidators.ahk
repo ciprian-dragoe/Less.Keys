@@ -4,7 +4,7 @@ validateCaretOutput(testDescription, expected)
     result := evaluateCaretPosition(expected, actual)
     clearText()
     addTestResult(testDescription, turnCaretAsString(expected), turnCaretAsString(actual), result)
-    setDefaultTestEnvironment()
+    setDefaultTestEnvironment(testDescription)
 }
 
 getCurrentCaretPosition(delay = 100)
