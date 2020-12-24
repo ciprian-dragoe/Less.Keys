@@ -3,16 +3,21 @@ global timerTimeoutStickyKeys := 2000
 ; if the cpu is executing intensive tasks then the lift key up command may not be processed for 
 ; modifier keys (ctrl, shift, alt, win) and they are still registered by the os as pressed.
 ; This is a fail safe for such situations
-timerStickyFailBack() 
+timerStickyFailBack()
 {
-    resetCapsLock := false
+    WinGetTitle, activeProgramWindowName, A
+    for index,key in disabledApps
+    {
+        IfInString, activeProgramWindowName, %key%
+        {
+            resetStates()
+            SetTimer, TimerStickyFailBack, off
+            return
+        }
+    }
+
     for index, key in monitoredStickyKeys
     {
-        if (key = "capslock")
-        {
-            resetCapsLock := true
-        }
-        
         if (GetKeyState(key, "P"))
         {
             return
@@ -20,22 +25,27 @@ timerStickyFailBack()
     }
 
     resetStates()
-    if (resetCapsLock)
-    {
-        SetCapsLockState, off
-    }
-    
     SetTimer, TimerStickyFailBack, off
 }
 
 resetStates()
 {
-    send {shift up}
+    if (shiftActive)
+    {
+        send {shift up}
+    }
+
     if (altActive)
     {
         send {alt up}
     }
+
     send {ctrl up}
+    if (winActive)
+    {
+        send {lwin up}
+    }
+
     if (winActive)
     {
         send {lwin up}
@@ -46,7 +56,7 @@ resetStates()
     resetDoubledModifierClickDrag("winClick", sendUnClickOnWinClickRelease)
     isCtrlDoubledAsClickPressed := false
     isAltDoubledAsClickPressed := false
-    isWinlDoubledAsClickPressed := false
+    isWinDoubledAsClickPressed := false
     isShiftDoubledAsClickPressed := false
     sendUnClickOnCtrlClickRelease := false
     sendUnClickOnAltClickRelease := false
@@ -65,4 +75,12 @@ resetStates()
     altActive := false
     shiftActive := false
     winActive := false
+
+    for index, key in monitoredStickyKeys
+    {
+        if (key = "capslock")
+        {
+            SetCapsLockState, off
+        }
+    }
 }

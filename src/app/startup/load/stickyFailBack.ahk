@@ -1,3 +1,5 @@
+global disabledApps
+
 readDisabledAppsSettings(path)
 {
     delimiter := "~~~"

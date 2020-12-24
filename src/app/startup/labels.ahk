@@ -47,3 +47,7 @@ return
 TimerMonitorShiftModifierLift:
     timerMonitorShiftModifierLift()
 return
+
+TimerFixRemoteDesktopOverwritesLessKeys:
+    timerFixRemoteDesktopOverwritesLessKeys()
+return
