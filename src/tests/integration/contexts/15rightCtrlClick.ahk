@@ -11,7 +11,7 @@ When_rightCtrlClick_is_pressed_at_release_left_click_is_sent_#1501()
     validateCaretOutput(A_ThisFunc, expected)    
 }
 
-When_rightCtrlClick_is_continuously_pressed_and_layout_key_is_pressed_but_not_releases_space_is_sent_#1502()
+When_rightCtrlClick_is_continuously_pressed_and_layout_key_is_pressed_but_not_released_space_is_sent_#1502()
 {
     simulateTyping("hello")
     processKeyDown("rightCtrlClick")

@@ -38,7 +38,15 @@ setDefaultTestEnvironment(testName)
     MouseMove, 500, 500
     clipboard :=
     timeGreaterTimeoutProcessLayoutOnRelease := 500
-    showToolTip("CLEANING |" . testName . "|", 1000)
+    modifierDoubledAsClick["leftCtrlClick"] := "lbutton"
+    modifierDoubledAsClick["leftShiftClick"] := "lbutton"
+    modifierDoubledAsClick["leftWinClick"] := "lbutton"
+    modifierDoubledAsClick["leftAltClick"] := "lbutton"
+    modifierDoubledAsClick["rightCtrlClick"] := "lbutton"
+    modifierDoubledAsClick["rightShiftClick"] := "lbutton"
+    modifierDoubledAsClick["rightWinClick"] := "lbutton"
+    modifierDoubledAsClick["rightAltClick"] := "lbutton"
+    showToolTip("CLEANING | " . testName . " |", 1000)
 }
 
 clearText()

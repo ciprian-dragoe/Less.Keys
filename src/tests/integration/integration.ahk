@@ -77,7 +77,7 @@ runIntegrationTests()
     
     ; CTRL CLICK
     When_leftCtrlClick_is_pressed_at_release_left_click_is_sent_#401()
-    When_leftCtrlClick_is_continuously_pressed_and_layout_key_is_pressed_but_not_releases_space_is_sent_#402()
+    When_leftCtrlClick_is_continuously_pressed_and_layout_key_is_pressed_but_not_released_space_is_sent_#402()
     When_leftCtrlClick_is_continuously_pressed_and_a_letter_is_pressed_all_text_is_selected_#403()
     When_leftCtrlClick_is_continuously_pressed_and_a_key_is_pressed_left_click_is_not_sent_on_leftCtrlClick_release_#404()
     When_leftCtrlClick_is_continuously_pressed_and_layout_key_is_pressed_and_key_remapped_as_left_is_sent_on_leftCtrlClick_release_click_is_not_sent_#405()
@@ -252,12 +252,9 @@ runIntegrationTests()
     When_altClick_is_continously_pressed_and_ctrlClick_is_continously_pressed_more_then_timeoutStillSendLayoutKey_left_click_is_not_sent_on_ctrlClick_release_#1405()
     When_altClick_is_pressed_and_ctrlClick_is_pressed_and_released_left_click_is_sent_on_altClick_release_#1406()
     When_ctrlClick_is_pressed_and_altClick_is_pressed_and_released_left_click_is_sent_on_ctrlClick_release_#1407()
-    */
 
-    /*
     When_rightCtrlClick_is_pressed_at_release_left_click_is_sent_#1501()
-    When_rightCtrlClick_is_continuously_pressed_and_layout_key_is_pressed_but_not_releases_space_is_sent_#1502()
-    */
+    When_rightCtrlClick_is_continuously_pressed_and_layout_key_is_pressed_but_not_released_space_is_sent_#1502()
     When_rightCtrlClick_is_continuously_pressed_and_a_letter_is_pressed_all_text_is_selected_#1503()
     When_rightCtrlClick_is_continuously_pressed_and_a_key_is_pressed_left_click_is_not_sent_on_rightCtrlClick_release_#1504()
     When_rightCtrlClick_is_continuously_pressed_and_layout_key_is_pressed_and_key_remapped_as_right_is_sent_on_rightCtrlClick_release_click_is_not_sent_#1505()
@@ -285,6 +282,11 @@ runIntegrationTests()
     When_rightCtrlClick_is_continuously_pressed_and_mouse_is_moved_and_ctrl_is_pressed_the_text_remains_selected_#1527()
     When_rightCtrlClick_is_continuously_pressed_and_mouse_is_moved_and_ctrl_is_pressed_and_released_the_text_remains_selected_#1528()
     When_rightCtrlClick_is_pressed_and_backspace_pressed_and_released_and_ctrl_pressed_and_rightCtrlClick_released_and_backspace_pressed_then_ctrl_and_backspace_is_sent_#1529()
+    */
+
+    /*
+    */
+
     /*
     */
 }
