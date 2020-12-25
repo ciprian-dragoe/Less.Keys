@@ -50,15 +50,15 @@ resetStates()
     {
         send {lwin up}
     }
-    resetDoubledModifierClickDrag("ctrlClick", sendUnClickOnCtrlClickRelease)
+    resetDoubledModifierClickDrag("leftCtrlClick", sendUnClickOnLeftCtrlClickRelease)
     resetDoubledModifierClickDrag("shiftClick", sendUnClickOnShiftClickRelease)
     resetDoubledModifierClickDrag("altClick", sendUnClickOnAltClickRelease)
     resetDoubledModifierClickDrag("winClick", sendUnClickOnWinClickRelease)
-    isCtrlDoubledAsClickPressed := false
+    isLeftCtrlDoubledAsClickPressed := false
     isAltDoubledAsClickPressed := false
     isWinDoubledAsClickPressed := false
     isShiftDoubledAsClickPressed := false
-    sendUnClickOnCtrlClickRelease := false
+    sendUnClickOnLeftCtrlClickRelease := false
     sendUnClickOnAltClickRelease := false
     sendUnClickOnShiftClickRelease := false
     sendUnClickOnWinClickRelease := false

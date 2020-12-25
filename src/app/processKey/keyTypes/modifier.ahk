@@ -1,6 +1,6 @@
 #include %A_ScriptDir%\app\processKey\keyTypes\commonDoubledAs.ahk
 #include %A_ScriptDir%\app\processKey\keyTypes\shiftDoubledAsClick.ahk
-#include %A_ScriptDir%\app\processKey\keyTypes\ctrlDoubledAsClick.ahk
+#include %A_ScriptDir%\app\processKey\keyTypes\leftCtrlDoubledAsClick.ahk
 #include %A_ScriptDir%\app\processKey\keyTypes\winDoubledAsClick.ahk
 #include %A_ScriptDir%\app\processKey\keyTypes\altDoubledAsClick.ahk
 
@@ -19,10 +19,14 @@ modifierActions["ctrl"] := func("setCtrlState")
 modifierActions["alt"] := func("setAltState")
 modifierActions["shift"] := func("setShiftState")
 modifierActions["lwin"] := func("setWinState")
-modifierActions["ctrlClick"] := func("processCtrlDoubledAsClick")
-modifierActions["shiftClick"] := func("processShiftDoubledAsClick")
-modifierActions["winClick"] := func("processWinDoubledAsClick")
-modifierActions["altClick"] := func("processAltDoubledAsClick")
+modifierActions["leftCtrlClick"] := func("processLeftCtrlDoubledAsClick")
+modifierActions["leftShiftClick"] := func("processLeftShiftDoubledAsClick")
+modifierActions["leftWinClick"] := func("processLeftWinDoubledAsClick")
+modifierActions["leftAltClick"] := func("processLeftAltDoubledAsClick")
+modifierActions["rightCtrlClick"] := func("processRightCtrlDoubledAsClick")
+modifierActions["rightShiftClick"] := func("processRightShiftDoubledAsClick")
+modifierActions["rightWinClick"] := func("processRightWinDoubledAsClick")
+modifierActions["rightAltClick"] := func("processRightAltDoubledAsClick")
 
 processModifierKey(key, state)
 {
@@ -41,9 +45,9 @@ processModifierKey(key, state)
 setCtrlState(state)
 {
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-    if (ctrlActive && isCtrlDoubledAsClickPressed)
+    if (ctrlActive && isLeftCtrlDoubledAsClickPressed)
     {
-        ctrlActiveBeforeCtrlClickPress := true
+        leftCtrlActiveBeforeCtrlClickPress := true
     }
     ctrlActive := state
     pressedState := state ? "down" : "up"

@@ -1,14 +1,14 @@
 cancelDoubledModifier()
 {
     cancelMouseHook(doubledShiftMouseHook)
-    cancelMouseHook(doubledCtrlMouseHook)
+    cancelMouseHook(doubledLeftCtrlMouseHook)
     cancelMouseHook(doubledWinMouseHook)
     cancelMouseHook(doubledAltMouseHook)
     sendClickOnShiftClickRelease := false
-    sendClickOnCtrlClickRelease := false
+    sendClickOnLeftCtrlClickRelease := false
     sendClickOnWinClickRelease := false
     sendClickOnAltClickRelease := false
-    ctrlActiveBeforeCtrlClickPress := false
+    leftCtrlActiveBeforeCtrlClickPress := false
     altActiveBeforeAltClickPress := false
     shiftActiveBeforeShiftClickPress := false
     winActiveBeforeWinClickPress := false
@@ -27,7 +27,7 @@ timerResetSentClickOnModifierRelease()
 {
     SetTimer, TimerResetSentClickOnModifierRelease, OFF
     sendClickOnShiftClickRelease := false
-    sendClickOnCtrlClickRelease := false
+    sendClickOnLeftCtrlClickRelease := false
     sendClickOnWinClickRelease := false
     sendClickOnAltClickRelease := false
 }

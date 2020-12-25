@@ -36,7 +36,7 @@ setDefaultTestEnvironment(testName)
     send {escape}
     clearText()
     MouseMove, 500, 500
-    clipboard := ""
+    clipboard :=
     timeGreaterTimeoutProcessLayoutOnRelease := 500
     showToolTip("CLEANING |" . testName . "|", 1000)
 }

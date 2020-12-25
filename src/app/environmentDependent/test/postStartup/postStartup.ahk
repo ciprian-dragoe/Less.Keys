@@ -2,10 +2,14 @@
 
 
 
-global defaultCtrlClickAction
-global defaultShiftClickAction
-global defaultWinClickAction
-global defaultAltClickAction
+global defaultLeftCtrlClickAction
+global defaultLeftShiftClickAction
+global defaultLeftWinClickAction
+global defaultLeftAltClickAction
+global defaultRightCtrlClickAction
+global defaultRightShiftClickAction
+global defaultRightWinClickAction
+global defaultRightAltClickAction
 
 
 if (prepareTestEnvironment())
@@ -21,20 +25,33 @@ if (prepareTestEnvironment())
 
 initTestEnvironment()
 {
-    defaultCtrlClickAction := modifierDoubledAsClick["ctrlClick"]
-    defaultShiftClickAction := modifierDoubledAsClick["shiftClick"]
-    defaultWinClickAction := modifierDoubledAsClick["winClick"]
-    defaultAltClickAction := modifierDoubledAsClick["altClick"]
-    modifierDoubledAsClick["ctrlClick"] := "lbutton"
-    modifierDoubledAsClick["shiftClick"] := "lbutton"
-    modifierDoubledAsClick["winClick"] := "lbutton"
-    modifierDoubledAsClick["altClick"] := "lbutton"
+    clipboard :=
+    defaultLeftCtrlClickAction := modifierDoubledAsClick["leftCtrlClick"]
+    defaultLeftShiftClickAction := modifierDoubledAsClick["leftShiftClick"]
+    defaultLeftWinClickAction := modifierDoubledAsClick["leftWinClick"]
+    defaultLeftAltClickAction := modifierDoubledAsClick["leftAltClick"]
+    defaultRightCtrlClickAction := modifierDoubledAsClick["rightCtrlClick"]
+    defaultRightShiftClickAction := modifierDoubledAsClick["rightShiftClick"]
+    defaultRightWinClickAction := modifierDoubledAsClick["rightWinClick"]
+    defaultRightAltClickAction := modifierDoubledAsClick["rightAltClick"]
+    modifierDoubledAsClick["leftCtrlClick"] := "lbutton"
+    modifierDoubledAsClick["leftShiftClick"] := "lbutton"
+    modifierDoubledAsClick["leftWinClick"] := "lbutton"
+    modifierDoubledAsClick["leftAltClick"] := "lbutton"
+    modifierDoubledAsClick["rightCtrlClick"] := "lbutton"
+    modifierDoubledAsClick["rightShiftClick"] := "lbutton"
+    modifierDoubledAsClick["rightWinClick"] := "lbutton"
+    modifierDoubledAsClick["rightAltClick"] := "lbutton"
 }
 
 finalizeTestEnvironment()
 {
-    modifierDoubledAsClick["ctrlClick"] := defaultCtrlClickAction
-    modifierDoubledAsClick["shiftClick"] := defaultShiftClickAction
-    modifierDoubledAsClick["winClick"] := defaultWinClickAction
-    modifierDoubledAsClick["altClick"] := defaultAltClickAction
+    modifierDoubledAsClick["leftCtrlClick"] := defaultLeftCtrlClickAction
+    modifierDoubledAsClick["leftShiftClick"] := defaultLeftShiftClickAction
+    modifierDoubledAsClick["leftWinClick"] := defaultLeftWinClickAction
+    modifierDoubledAsClick["leftAltClick"] := defaultLeftAltClickAction
+    modifierDoubledAsClick["rightCtrlClick"] := defaultRightCtrlClickAction
+    modifierDoubledAsClick["rightShiftClick"] := defaultRightShiftClickAction
+    modifierDoubledAsClick["rightWinClick"] := defaultRightWinClickAction
+    modifierDoubledAsClick["rightAltClick"] := defaultRightAltClickAction
 }
