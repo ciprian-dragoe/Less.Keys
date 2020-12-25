@@ -1,6 +1,7 @@
 #include %A_ScriptDir%\app\processKey\keyTypes\commonDoubledAs.ahk
 #include %A_ScriptDir%\app\processKey\keyTypes\shiftDoubledAsClick.ahk
 #include %A_ScriptDir%\app\processKey\keyTypes\leftCtrlDoubledAsClick.ahk
+#include %A_ScriptDir%\app\processKey\keyTypes\rightCtrlDoubledAsClick.ahk
 #include %A_ScriptDir%\app\processKey\keyTypes\winDoubledAsClick.ahk
 #include %A_ScriptDir%\app\processKey\keyTypes\altDoubledAsClick.ahk
 

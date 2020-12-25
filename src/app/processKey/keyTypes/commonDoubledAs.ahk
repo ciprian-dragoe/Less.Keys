@@ -2,13 +2,16 @@ cancelDoubledModifier()
 {
     cancelMouseHook(doubledShiftMouseHook)
     cancelMouseHook(doubledLeftCtrlMouseHook)
+    cancelMouseHook(doubledRightCtrlMouseHook)
     cancelMouseHook(doubledWinMouseHook)
     cancelMouseHook(doubledAltMouseHook)
     sendClickOnShiftClickRelease := false
     sendClickOnLeftCtrlClickRelease := false
+    sendClickOnRightCtrlClickRelease := false
     sendClickOnWinClickRelease := false
     sendClickOnAltClickRelease := false
     leftCtrlActiveBeforeCtrlClickPress := false
+    rightCtrlActiveBeforeCtrlClickPress := false
     altActiveBeforeAltClickPress := false
     shiftActiveBeforeShiftClickPress := false
     winActiveBeforeWinClickPress := false
@@ -28,6 +31,7 @@ timerResetSentClickOnModifierRelease()
     SetTimer, TimerResetSentClickOnModifierRelease, OFF
     sendClickOnShiftClickRelease := false
     sendClickOnLeftCtrlClickRelease := false
+    sendClickOnRightCtrlClickRelease := false
     sendClickOnWinClickRelease := false
     sendClickOnAltClickRelease := false
 }
@@ -55,5 +59,24 @@ resetDoubledModifierClickDrag(modifierValue, ByRef resetValue)
         action := modifierDoubledAsClick[modifierValue]
         send {blind}{%action% up}
         resetValue := false
+    }
+}
+
+activateCtrlWithKey(key)
+{
+    if (!GetKeyState("ctrl"))
+    {
+        send {ctrl down}
+        setTimer TimerMonitorCtrlModifierLift, 20
+    }
+    send {blind}%key%
+}
+
+timerMonitorCtrlModifierLift()
+{
+    if (!ctrlActive)
+    {
+        send {ctrl up}
+        setTimer TimerMonitorCtrlModifierLift, off
     }
 }

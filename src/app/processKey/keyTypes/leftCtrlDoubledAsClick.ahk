@@ -87,22 +87,3 @@ doubledLeftCtrlUp()
         sendDoubledValueAndReset("leftCtrlClick", sendClickOnLeftCtrlClickRelease)
     }
 }
-
-activateCtrlWithKey(key)
-{
-    if (!GetKeyState("ctrl"))
-    {
-        send {ctrl down}
-        setTimer TimerMonitorCtrlModifierLift, 20
-    }
-    send {blind}%key%
-}
-
-timerMonitorCtrlModifierLift()
-{
-    if (!ctrlActive)
-    {
-        send {ctrl up}
-        setTimer TimerMonitorCtrlModifierLift, off
-    }
-}

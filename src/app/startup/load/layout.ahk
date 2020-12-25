@@ -39,5 +39,5 @@ readLayoutFile(path)
 
 isModifierKey(key)
 {
-    return key = "ctrl" || key = "alt" || key = "shift" || key = "lwin" || key = "shiftClick" || key = "ctrlClick" || key = "altClick" || key = "winClick"
+    return key = "ctrl" || key = "alt" || key = "shift" || key = "lwin" || key = "shiftClick" || key = "leftCtrlClick" || key = "rightCtrlClick" || key = "altClick" || key = "winClick"
 }
