@@ -1,7 +1,7 @@
 When_winClick_is_pressed_at_release_left_click_is_sent_#801()
 {
     simulateTyping("he")
-    expected := setMousePositionToCaret()
+    `expected := setMousePositionToCaret()`
     simulateTyping("llo")
     processKeyDown("winClick")
     sleep 100

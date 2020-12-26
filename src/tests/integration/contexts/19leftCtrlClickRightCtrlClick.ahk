@@ -35,3 +35,45 @@ When_leftCtrlClick_doubled_as_b_is_pressed_rightCtrlClick_doubled_as_a_is_presse
     expected := "hello "
     validateTestOutput(A_ThisFunc , expected)
 }
+
+When_leftCtrlClick_pressed_rightCtrlClick_pressed_w_letter_typed_THEN_w_is_sent_at_the_beginning_#1903()
+{
+    setMousePositionToCaret()
+    simulateTyping("hello ")
+    processKeyDown("leftCtrlClick")
+    sleep 100
+    processKeyDown("rightCtrlClick")
+    sleep 100
+    processKeyUp("leftCtrlClick")
+    sleep 100
+    processKeyUp("rightCtrlClick")
+    sleep 100
+    simulateTyping("w")
+    actual := clearText()
+
+    expected := "whello "
+    addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
+    setDefaultTestEnvironment(A_ThisFunc)
+}
+
+When_leftCtrlClick_pressed_rightCtrlClick_pressed_mouse_moved_until_second_word_THEN_only_first_word_is_selected_#1904()
+{
+    setMousePositionToCaret()
+    simulateTyping("hello")
+    destination := getCurrentCaretPosition()
+    simulateTyping(" world")
+    processKeyDown("leftCtrlClick")
+    sleep 100
+    processKeyDown("rightCtrlClick")
+    sleep 100
+    MouseMove destination.x, destination.y
+    processKeyUp("leftCtrlClick")
+    sleep 100
+    processKeyUp("rightCtrlClick")
+    sleep 100
+    actual := getSelectedText()
+
+    expected := "hello "
+    addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
+    setDefaultTestEnvironment(A_ThisFunc)
+}

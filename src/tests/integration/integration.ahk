@@ -18,9 +18,11 @@
 #include %A_ScriptDir%\tests\integration\contexts\15rightCtrlClick.ahk
 #include %A_ScriptDir%\tests\integration\contexts\16rightCtrlClickLeftCtrlClick.ahk
 #include %A_ScriptDir%\tests\integration\contexts\17rightCtrlClickShiftLeftCtrlClick.ahk
-#include %A_ScriptDir%\tests\integration\contexts\18leftCtrlClickShiftRightCtrlClick
-#include %A_ScriptDir%\tests\integration\contexts\19leftCtrlClickRightCtrlClick
-#include %A_ScriptDir%\tests\integration\contexts\20rightShiftClick
+#include %A_ScriptDir%\tests\integration\contexts\18leftCtrlClickShiftRightCtrlClick.ahk
+#include %A_ScriptDir%\tests\integration\contexts\19leftCtrlClickRightCtrlClick.ahk
+#include %A_ScriptDir%\tests\integration\contexts\20rightShiftClick.ahk
+#include %A_ScriptDir%\tests\integration\contexts\21rightShiftClickLeftShiftClick.ahk
+#include %A_ScriptDir%\tests\integration\contexts\22leftShiftClickRightShiftClick.ahk
 
 
 
@@ -49,7 +51,7 @@ runIntegrationTests()
     When_key_matches_shortcut_pattern_shortcut_action_is_executed_instead_of_key_#201()
     When_key_matches_shortcut_pattern_and_is_kept_pressed_after_shortcut_action_is_sent_next_layout_key_press_without_release_is_not_processed_as_space_#202()
     
-    ; SHIFT CLICK
+    ; LEFT SHIFT CLICK
     When_leftShiftClick_is_pressed_at_release_left_click_is_sent_#301()
     When_leftShiftClick_is_continuously_pressed_and_layout_key_is_pressed_and_released_space_is_sent_#302()
     When_leftShiftClick_is_continuously_pressed_and_backtick_is_pressed_keyboard_shortcut_is_sent_#303()
@@ -183,7 +185,7 @@ runIntegrationTests()
     When_winClick_is_continously_pressed_and_mouse_is_moved_and_ctrl_is_pressed_the_text_remains_selected_#827()
     When_winClick_is_continously_pressed_and_mouse_is_moved_and_win_is_pressed_and_released_the_text_remains_selected_#828()
 
-    ; WIN CLICK CTRL CLICK
+    ; WIN CLICK & CTRL CLICK
     When_winClick_is_pressed_and_ctrlClick_is_pressed_left_click_is_sent_on_winClick_release_#901()
     When_ctrlClick_is_pressed_and_winClick_is_pressed_click_is_sent_on_ctrlClick_release_#902()
     When_winClick_is_continously_pressed_and_ctrlClick_is_continously_pressed_and_backtick_pressed_keyboard_shortcut_is_sent#903()
@@ -192,7 +194,7 @@ runIntegrationTests()
     When_winClick_is_pressed_and_ctrlClick_is_pressed_and_released_left_click_is_sent_on_winClick_release_#906()
     When_ctrlClick_is_pressed_and_winClick_is_pressed_and_released_left_click_is_sent_on_ctrlClick_release_#907()
 
-    ; WIN CLICK SHIFT CLICK
+    ; WIN CLICK & SHIFT CLICK
     When_winClick_is_pressed_and_shiftClick_is_pressed_left_click_is_sent_on_winClick_release_#1001()
     When_shiftClick_is_pressed_and_winClick_is_pressed_click_is_sent_on_shiftClick_release_#1002()
     When_winClick_is_continously_pressed_and_shiftClick_is_continously_pressed_and_backtick_pressed_keyboard_shortcut_is_sent_#1003()
@@ -231,7 +233,7 @@ runIntegrationTests()
     When_altClick_is_continously_pressed_and_mouse_is_moved_and_ctrl_is_pressed_the_text_remains_selected_#1127()
     When_altClick_is_continously_pressed_and_mouse_is_moved_and_alt_is_pressed_and_released_the_text_remains_selected_#1128()
 
-    ; ALT CLICK CTRL CLICK
+    ; ALT CLICK & CTRL CLICK
     When_altClick_is_pressed_and_ctrlClick_is_pressed_left_click_is_sent_on_altClick_release_#1201()
     When_ctrlClick_is_pressed_and_altClick_is_pressed_click_is_sent_on_ctrlClick_release_#1202()
     When_altClick_is_continously_pressed_and_ctrlClick_is_continously_pressed_and_backtick_pressed_keyboard_shortcut_is_sent#1203()
@@ -240,7 +242,7 @@ runIntegrationTests()
     When_altClick_is_pressed_and_ctrlClick_is_pressed_and_released_left_click_is_sent_on_altClick_release_#1206()
     When_ctrlClick_is_pressed_and_altClick_is_pressed_and_released_left_click_is_sent_on_ctrlClick_release_#1207()
     
-    ; ALT CLICK SHIFT CLICK
+    ; ALT CLICK & SHIFT CLICK
     When_altClick_is_pressed_and_shiftClick_is_pressed_left_click_is_sent_on_altClick_release_#1301()
     When_shiftClick_is_pressed_and_altClick_is_pressed_click_is_sent_on_shiftClick_release_#1302()
     When_altClick_is_continously_pressed_and_shiftClick_is_continously_pressed_and_backtick_pressed_keyboard_shortcut_is_sent_#1303()
@@ -249,7 +251,7 @@ runIntegrationTests()
     When_altClick_is_pressed_and_shiftClick_is_pressed_and_released_left_click_is_sent_on_altClick_release_#1306()
     When_shiftClick_is_pressed_and_altClick_is_pressed_and_released_left_click_is_sent_on_shiftClick_release_#1307()
     
-    ; ALT CLICK WIN CLICK
+    ; ALT CLICK & WIN CLICK
     When_altClick_is_pressed_and_ctrlClick_is_pressed_left_click_is_sent_on_altClick_release_#1401()
     When_ctrlClick_is_pressed_and_altClick_is_pressed_click_is_sent_on_ctrlClick_release_#1402()
     When_altClick_is_continously_pressed_and_ctrlClick_is_continously_pressed_and_backtick_pressed_keyboard_shortcut_is_sent_#1403()
@@ -289,24 +291,82 @@ runIntegrationTests()
     When_rightCtrlClick_is_continuously_pressed_and_mouse_is_moved_and_ctrl_is_pressed_and_released_the_text_remains_selected_#1528()
     When_rightCtrlClick_is_pressed_and_backspace_pressed_and_released_and_ctrl_pressed_and_rightCtrlClick_released_and_backspace_pressed_then_ctrl_and_backspace_is_sent_#1529()
 
-    ; RIGHT CONTROL LEFT CONTROL
+    ; RIGHT CONTROL & LEFT CONTROL
     When_rightCtrlClick_is_pressed_leftCtrlClick_doubled_as_a_is_pressed_all_text_is_selected_before_a_leftCtrlClickRelease_#1601()
-    When_rightCtrlClick_doubled_as_b_is_pressed_leftCtrlClick_doubled_as_a_is_pressed_and_released_b_is_not_sent_on_RightCtrlClickRelease_1602()
+    When_rightCtrlClick_doubled_as_b_is_pressed_leftCtrlClick_doubled_as_a_is_pressed_and_released_b_is_not_sent_on_RightCtrlClickRelease_#1602()
+    When_rightCtrlClick_pressed_leftCtrlClick_pressed_w_letter_typed_THEN_w_is_sent_at_the_beginning_#1603()
+    When_rightCtrlClick_pressed_leftCtrlClick_pressed_mouse_moved_until_second_word_THEN_only_first_word_is_selected_#1604()
 
-    ; RIGHT CONTROL NORMAL SHIFT LEFT CONTROL
+    ; RIGHT CONTROL & NORMAL SHIFT & LEFT CONTROL
     When_rightCtrlClick_pressed_shift_pressed_leftCtrlClick_doubled_as_left_pressed_a_word_is_selected_before_a_leftCtrlClick_released_#1701()
 
-    ; LEFT CONTROL NORMAL SHIFT RIGHT CONTROL
+    ; LEFT CONTROL & NORMAL SHIFT & RIGHT CONTROL
     When_leftCtrlClick_pressed_shift_pressed_rightCtrlClick_doubled_as_left_pressed_a_word_is_selected_before_a_rightCtrlClick_released_#1801()
     When_leftCtrlClick_pressed_shift_pressed_rightCtrlClick_doubled_as_left_pressed_nothing_is_typed_when_a_rightCtrlClick_and_leftCtrlClick_released_#1802()
 
-    ; LEFT CONTROL NORMAL SHIFT RIGHT CONTROL
+    ; LEFT CONTROL & NORMAL SHIFT & RIGHT CONTROL
     When_leftCtrlClick_is_pressed_rightCtrlClick_doubled_as_a_is_pressed_all_text_is_selected_before_a_rightCtrlClickRelease_#1901()
     When_leftCtrlClick_doubled_as_b_is_pressed_rightCtrlClick_doubled_as_a_is_pressed_and_released_b_is_not_sent_on_LeftCtrlClickRelease_1902()
+    When_leftCtrlClick_pressed_rightCtrlClick_pressed_w_letter_typed_THEN_w_is_sent_at_the_beginning_#1903()
+    When_leftCtrlClick_pressed_rightCtrlClick_pressed_mouse_moved_until_second_word_THEN_only_first_word_is_selected_#1904()
+
+    ; RIGHT SHIFT CLICK
+    When_rightShiftClick_is_pressed_at_release_right_click_is_sent_#2001()
+    When_rightShiftClick_is_continuously_pressed_and_layout_key_is_pressed_and_released_space_is_sent_#2002()
+    When_rightShiftClick_is_continuously_pressed_and_backtick_is_pressed_keyboard_shortcut_is_sent_#2003()
+    When_rightShiftClick_is_continuously_pressed_and_backtick_is_pressed_right_click_is_not_sent_on_rightShiftClick_release_#2004()
+    When_rightShiftClick_is_continuously_pressed_and_layout_key_is_pressed_and_backtick_is_sent_on_rightShiftClick_release_click_is_not_sent_#2005()
+    When_rightShiftClick_is_pressed_and_shift_key_is_pressed_and_released_click_is_sent_on_rightShiftClick_release_#2006()
+    When_rightShiftClick_is_pressed_and_alt_key_is_pressed_click_is_sent_on_rightShiftClick_release_#2007()
+    When_rightShiftClick_is_pressed_and_ctrl_key_is_pressed_and_released_click_is_sent_on_rightShiftClick_release_#2008()
+    When_rightShiftClick_is_pressed_and_ctrl_key_is_pressed_click_is_sent_on_rightShiftClick_release_#2009()
+    When_rightShiftClick_is_pressed_and_shift_key_is_pressed_and_released_click_is_sent_on_rightShiftClick_release_#2010()
+    When_rightShiftClick_is_pressed_and_shift_key_is_pressed_click_is_sent_on_rightShiftClick_release_#2011()
+    When_rightShiftClick_is_pressed_and_shift_is_pressed_and_released_click_is_sent_on_rightShiftClick_release_#2012()
+    When_rightShiftClick_is_pressed_and_shift_is_pressed_click_is_sent_on_rightShiftClick_release_#2013()
+    When_rightShiftClick_is_pressed_and_shift_key_is_pressed_and_layout_key_pressed_and_backtick_pressed_keyboard_shortcut_is_sent_#2014()
+    When_rightShiftClick_is_continuously_pressed_and_layout_key_is_pressed_after_release_right_click_is_not_sent_#2015()
+    When_rightShiftClick_is_continuously_pressed_and_mouse_is_moved_the_text_is_selected_#2016()
+    When_rightShiftClick_is_continuously_pressed_and_mouse_is_moved_and_a_letter_is_typed_a_letter_is_not_sent_#2017()
+    When_rightShiftClick_is_continuously_pressed_and_mouse_is_moved_and_layout_key_is_pressed_space_is_not_sent_on_layout_key_release_#2018()
+    When_rightShiftClick_pressed_and_mouse_is_moved_and_layout_key_is_pressed_longer_then_timeoutStillSendLayoutKey_space_is_not_sent_on_layout_key_release_#2019()
+    When_non_modifier_letter_is_released_and_layout_key_continuous_press_in_less_then_timeoutProcessLayoutOnRelease_and_rightShiftClick_pressed_and_backtick_pressed_and_released_click_is_not_sent_#2020()
+    When_non_modifier_letter_is_released_and_layout_key_continuous_press_in_less_then_timeoutProcessLayoutOnRelease_and_rightShiftClick_continuous_press_and_backtick_pressed_and_rightShiftClick_released_right_click_is_not_sent_#2021()
+    When_rightShiftClick_is_pressed_more_then_timeoutStillSendLayoutKey_right_click_is_not_sent_on_rightShiftClick_release_#2022()
+	When_layout_key_is_pressed_followed_by_rightShiftClick_right_click_is_not_sent_on_rightShiftClick_release_#2023()
+    When_non_modifier_key_is_pressed_followed_by_rightShiftClick_right_click_is_not_sent_on_rightShiftClick_release_#2024()
+    When_rightShiftClick_action_is_not_lbutton_and_mouse_is_moved_on_release_action_is_sent_instead_of_mouse_click_#2025()
+    When_shift_is_pressed_and_rightShiftClick_is_continuously_pressed_and_mouse_is_moved_the_text_is_selected_#2026()
+    When_rightShiftClick_is_continuously_pressed_and_mouse_is_moved_and_ctrl_is_pressed_the_text_remains_selected_#2027()
+    When_rightShiftClick_is_continuously_pressed_and_mouse_is_moved_and_shift_is_pressed_and_released_the_text_remains_selected_#2028()
+    When_rightShiftClick_is_pressed_and_a_letter_pressed_and_released_and_shift_pressed_and_rightShiftClick_released_and_a_letter_pressed_then_caps_a_letter_is_sent_#2029()
+
+    ; RIGHT SHIFT CLICK & LEFT SHIFT CLICK
+    When_rightShiftClick_is_pressed_leftShiftClick_doubled_as_d_is_pressed_THEN_D_is_sent_before_a_leftShiftClickRelease_#2101()
+    When_rightShiftClick_pressed_leftShiftClick_pressed_THEN_whole_text_is_selected_before_rightShiftClick_release_#2102()
+    When_rightShiftClick_doubled_as_d_pressed_leftShiftClick_pressed_rightShiftClick_release_leftShiftClick_release_THEN_d_is_not_sent_#2103()
+    When_rightShiftClick_pressed_leftShiftClick_pressed_mouse_moved_until_second_word_THEN_only_first_word_is_selected_#2104()
+
+    ; LEFT SHIFT CLICK & RIGHT SHIFT CLICK
+    When_leftShiftClick_is_pressed_rightShiftClick_doubled_as_d_is_pressed_THEN_D_is_sent_before_a_rightShiftClickRelease_#2201()
+    When_leftShiftClick_pressed_rightShiftClick_pressed_THEN_whole_text_is_selected_before_leftShiftClick_release_#2202()
+    When_leftShiftClick_doubled_as_d_pressed_rightShiftClick_pressed_leftShiftClick_release_rightShiftClick_release_THEN_d_is_not_sent_#2203()
+    When_leftShiftClick_pressed_rightShiftClick_pressed_mouse_moved_until_second_word_THEN_only_first_word_is_selected_#2204()
+
     */
+
+
 
     /*
     */
+
+
+When_leftCtrlClick_is_pressed_rightCtrlClick_doubled_as_a_is_pressed_all_text_is_selected_before_a_rightCtrlClickRelease_#1901()
+    When_leftCtrlClick_doubled_as_b_is_pressed_rightCtrlClick_doubled_as_a_is_pressed_and_released_b_is_not_sent_on_LeftCtrlClickRelease_1902()
+    When_leftCtrlClick_pressed_rightCtrlClick_pressed_w_letter_typed_THEN_w_is_sent_at_the_beginning_#1903()
+    When_leftCtrlClick_pressed_rightCtrlClick_pressed_mouse_moved_until_second_word_THEN_only_first_word_is_selected_#1904()
+
+
     /*
     */
 }

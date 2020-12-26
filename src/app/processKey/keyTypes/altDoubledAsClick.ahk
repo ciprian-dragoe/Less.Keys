@@ -39,7 +39,7 @@ doubledAltDown()
     {
         altActiveBeforeAltClickPress := true
         sendDoubledValueAndReset("altClick", sendClickOnAltClickRelease)
-        chooseClickDragActivation("altClick", "MouseDragAltActivate", doubledAltMouseHook)
+        chooseClickDragActivation("altClick", "mouseDragAltActivate", doubledAltMouseHook)
         return
     }
     
@@ -48,11 +48,11 @@ doubledAltDown()
     if (!layoutKeyPressed && activePressedKeys.Length() = 0)
     {        
         sendClickOnAltClickRelease := true
-        chooseClickDragActivation("altClick", "MouseDragAltActivate", doubledAltMouseHook)
+        chooseClickDragActivation("altClick", "mouseDragAltActivate", doubledAltMouseHook)
     }
 }
 
-MouseDragAltActivate(nCode, wParam, lParam)
+mouseDragAltActivate(nCode, wParam, lParam)
 {
     cancelMouseHook(doubledAltMouseHook)
     if (wParam = 0x200)

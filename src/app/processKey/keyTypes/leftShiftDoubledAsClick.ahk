@@ -35,11 +35,19 @@ doubledLeftShiftDown()
         return
     }
 
-    if (shiftActive)
+    if (shiftActive || isRightAltDoubledAsClickPressed || isRightCtrlDoubledAsClickPressed || isRightWinDoubledAsClickPressed)
     {
         leftShiftActiveBeforeShiftClickPress := true
-        sendDoubledValueAndReset("leftShiftClick", sendClickOnLeftShiftClickRelease)
-        chooseClickDragActivation("leftShiftClick", "MouseDragLeftShiftActivate", doubledLeftShiftMouseHook)
+        resetSendClickOnRightModifierRelease(1)
+        if (doubledAction != "lbutton" && doubledAction != "rbutton")
+        {
+            sendDoubledValueAndReset("leftShiftClick", sendClickOnLeftShiftClickRelease)
+        }
+        else
+        {
+            sendClickOnLeftShiftClickRelease := true
+        }
+        chooseClickDragActivation("leftShiftClick", "mouseDragLeftShiftActivate", doubledLeftShiftMouseHook)
         return
     }
     

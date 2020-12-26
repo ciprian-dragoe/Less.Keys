@@ -41,8 +41,15 @@ doubledLeftCtrlDown()
     {
         leftCtrlActiveBeforeCtrlClickPress := true
         resetSendClickOnRightModifierRelease(1)
-        sendDoubledValueAndReset("leftCtrlClick", sendClickOnLeftCtrlClickRelease)
-        chooseClickDragActivation("leftCtrlClick", "MouseDragLeftCtrlActivate", doubledLeftCtrlMouseHook)
+        if (doubledAction != "lbutton" && doubledAction != "rbutton")
+        {
+            sendDoubledValueAndReset("leftCtrlClick", sendClickOnLeftCtrlClickRelease)
+        }
+        else
+        {
+            sendClickOnLeftCtrlClickRelease := true
+        }
+        chooseClickDragActivation("leftCtrlClick", "mouseDragLeftCtrlActivate", doubledLeftCtrlMouseHook)
         return
     }
     
@@ -60,6 +67,7 @@ mouseDragLeftCtrlActivate(nCode, wParam, lParam)
     cancelMouseHook(doubledLeftCtrlMouseHook)
     if (wParam = 0x200)
     {
+        showtooltip("incep misc")
         sendClickOnLeftCtrlClickRelease := false
         sendUnClickOnLeftCtrlClickRelease := true
         doubledAction := modifierDoubledAsClick["leftCtrlClick"]

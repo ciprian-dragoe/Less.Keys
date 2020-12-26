@@ -39,7 +39,7 @@ doubledWinDown()
     {
         winActiveBeforeWinClickPress := true
         sendDoubledValueAndReset("winClick", sendClickOnWinClickRelease)
-        chooseClickDragActivation("winClick", "MouseDragWinActivate", doubledWinMouseHook)
+        chooseClickDragActivation("winClick", "mouseDragWinActivate", doubledWinMouseHook)
         return
     }
     
@@ -48,11 +48,11 @@ doubledWinDown()
     if (!layoutKeyPressed && activePressedKeys.Length() = 0)
     {        
         sendClickOnWinClickRelease := true
-        chooseClickDragActivation("winClick", "MouseDragWinActivate", doubledWinMouseHook)
+        chooseClickDragActivation("winClick", "mouseDragWinActivate", doubledWinMouseHook)
     }
 }
 
-MouseDragWinActivate(nCode, wParam, lParam)
+mouseDragWinActivate(nCode, wParam, lParam)
 {
     cancelMouseHook(doubledWinMouseHook)
     if (wParam = 0x200)

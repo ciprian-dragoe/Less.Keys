@@ -41,8 +41,15 @@ doubledRightCtrlDown()
     {
         rightCtrlActiveBeforeCtrlClickPress := true
         resetSendClickOnLeftModifierRelease(1)
-        sendDoubledValueAndReset("rightCtrlClick", sendClickOnRightCtrlClickRelease)
-        chooseClickDragActivation("rightCtrlClick", "MouseDragRightCtrlActivate", doubledRightCtrlMouseHook)
+        if (doubledAction != "lbutton" && doubledAction != "rbutton")
+        {
+            sendDoubledValueAndReset("rightCtrlClick", sendClickOnRightCtrlClickRelease)
+        }
+        else
+        {
+            sendClickOnRightCtrlClickRelease := true
+        }
+        chooseClickDragActivation("rightCtrlClick", "mouseDragRightCtrlActivate", doubledRightCtrlMouseHook)
         return
     }
     
