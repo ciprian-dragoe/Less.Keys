@@ -85,22 +85,3 @@ doubledLeftShiftUp()
         sendDoubledValueAndReset("leftShiftClick", sendClickOnLeftShiftClickRelease)
     }
 }
-
-activateShiftWithKey(key)
-{
-    if (!GetKeyState("shift"))
-    {
-        send {shift down}
-        setTimer TimerMonitorShiftModifierLift, 20
-    }
-    send {blind}%key%
-}
-
-timerMonitorShiftModifierLift()
-{
-    if (!shiftActive)
-    {
-        send {shift up}
-        setTimer TimerMonitorShiftModifierLift, off
-    }
-}

@@ -18,6 +18,9 @@
 #include %A_ScriptDir%\tests\integration\contexts\15rightCtrlClick.ahk
 #include %A_ScriptDir%\tests\integration\contexts\16rightCtrlClickLeftCtrlClick.ahk
 #include %A_ScriptDir%\tests\integration\contexts\17rightCtrlClickShiftLeftCtrlClick.ahk
+#include %A_ScriptDir%\tests\integration\contexts\18leftCtrlClickShiftRightCtrlClick
+#include %A_ScriptDir%\tests\integration\contexts\19leftCtrlClickRightCtrlClick
+#include %A_ScriptDir%\tests\integration\contexts\20rightShiftClick
 
 
 
@@ -292,19 +295,18 @@ runIntegrationTests()
 
     ; RIGHT CONTROL NORMAL SHIFT LEFT CONTROL
     When_rightCtrlClick_pressed_shift_pressed_leftCtrlClick_doubled_as_left_pressed_a_word_is_selected_before_a_leftCtrlClick_released_#1701()
-    When_leftCtrlClick_pressed_shift_pressed_rightCtrlClick_doubled_as_left_pressed_a_word_is_selected_before_a_rightCtrlClick_released_#1702()
-    When_leftCtrlClick_pressed_shift_pressed_rightCtrlClick_doubled_as_left_pressed_nothing_is_typed_when_a_rightCtrlClick_and_leftCtrlClick_released_#1703()
+
+    ; LEFT CONTROL NORMAL SHIFT RIGHT CONTROL
+    When_leftCtrlClick_pressed_shift_pressed_rightCtrlClick_doubled_as_left_pressed_a_word_is_selected_before_a_rightCtrlClick_released_#1801()
+    When_leftCtrlClick_pressed_shift_pressed_rightCtrlClick_doubled_as_left_pressed_nothing_is_typed_when_a_rightCtrlClick_and_leftCtrlClick_released_#1802()
+
+    ; LEFT CONTROL NORMAL SHIFT RIGHT CONTROL
+    When_leftCtrlClick_is_pressed_rightCtrlClick_doubled_as_a_is_pressed_all_text_is_selected_before_a_rightCtrlClickRelease_#1901()
+    When_leftCtrlClick_doubled_as_b_is_pressed_rightCtrlClick_doubled_as_a_is_pressed_and_released_b_is_not_sent_on_LeftCtrlClickRelease_1902()
     */
 
     /*
     */
-    When_leftShiftClick_is_pressed_and_leftCtrlClick_is_pressed_left_click_is_sent_on_leftShiftClick_release_#501()
-    When_leftCtrlClick_is_pressed_and_leftShiftClick_is_pressed_click_is_sent_on_leftCtrlClick_release_#502()
-    When_leftShiftClick_is_continuously_pressed_and_leftCtrlClick_is_continuously_pressed_and_layout_key_continuously_pressed_and_key_remapped_as_left_key_a_word_is_selected_#503()
-    When_leftShiftClick_is_continuously_pressed_and_leftCtrlClick_is_continuously_pressed_and_layout_key_continuously_pressed_and_key_remapped_as_left_key_left_click_is_not_sent_on_leftShiftClick_release_#504()
-    When_leftShiftClick_is_continuously_pressed_and_leftCtrlClick_is_continuously_pressed_more_then_timeoutStillSendLayoutKey_left_click_is_not_sent_on_leftCtrlClick_release_#505()
-    When_leftShiftClick_is_pressed_and_leftCtrlClick_is_pressed_and_released_left_click_is_sent_on_leftShiftClick_release_#506()
-    When_leftCtrlClick_is_pressed_and_leftShiftClick_is_pressed_and_released_left_click_is_sent_on_leftCtrlClick_release_#507()
     /*
     */
 }

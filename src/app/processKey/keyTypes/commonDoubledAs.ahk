@@ -76,6 +76,25 @@ timerMonitorCtrlModifierLift()
     }
 }
 
+activateShiftWithKey(key)
+{
+    if (!GetKeyState("shift"))
+    {
+        send {shift down}
+        setTimer TimerMonitorShiftModifierLift, 20
+    }
+    send {blind}%key%
+}
+
+timerMonitorShiftModifierLift()
+{
+    if (!shiftActive)
+    {
+        send {shift up}
+        setTimer TimerMonitorShiftModifierLift, off
+    }
+}
+
 resetSendClickOnLeftModifierRelease(shouldResetMouseHook = 0)
 {
     sendClickOnLeftCtrlClickRelease := false
