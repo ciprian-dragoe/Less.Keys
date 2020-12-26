@@ -51,20 +51,29 @@ resetStates()
         send {lwin up}
     }
     resetDoubledModifierClickDrag("leftCtrlClick", sendUnClickOnLeftCtrlClickRelease)
-    resetDoubledModifierClickDrag("rightCtrlClick", sendUnClickOnRightCtrlClickRelease)
-    resetDoubledModifierClickDrag("shiftClick", sendUnClickOnShiftClickRelease)
+    resetDoubledModifierClickDrag("leftShiftClick", sendUnClickOnLeftShiftClickRelease)
     resetDoubledModifierClickDrag("altClick", sendUnClickOnAltClickRelease)
     resetDoubledModifierClickDrag("winClick", sendUnClickOnWinClickRelease)
+    resetDoubledModifierClickDrag("rightWinClick", sendUnClickOnRightWinClickRelease)
+    resetDoubledModifierClickDrag("rightCtrlClick", sendUnClickOnRightCtrlClickRelease)
+    resetDoubledModifierClickDrag("rightShiftClick", sendUnClickOnRightShiftClickRelease)
+    resetDoubledModifierClickDrag("rightAltClick", sendUnClickOnRightAltClickRelease)
     isLeftCtrlDoubledAsClickPressed := false
-    isRightCtrlDoubledAsClickPressed := false
+    isLeftShiftDoubledAsClickPressed := false
     isAltDoubledAsClickPressed := false
     isWinDoubledAsClickPressed := false
-    isShiftDoubledAsClickPressed := false
+    isRightAltDoubledAsClickPressed := false
+    isRightWinDoubledAsClickPressed := false
+    isRightCtrlDoubledAsClickPressed := false
+    isRightShiftDoubledAsClickPressed := false
     sendUnClickOnLeftCtrlClickRelease := false
-    sendUnClickOnRightCtrlClickRelease := false
+    sendUnClickOnLeftShiftClickRelease := false
     sendUnClickOnAltClickRelease := false
-    sendUnClickOnShiftClickRelease := false
     sendUnClickOnWinClickRelease := false
+    sendUnClickOnRightAltClickRelease := false
+    sendUnClickOnRightWinClickRelease := false
+    sendUnClickOnRightCtrlClickRelease := false
+    sendUnClickOnRightShiftClickRelease := false
     activePressedKeys := []
     processKeyOnRelease := false
     layoutKeyPressed := false

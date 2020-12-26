@@ -1,9 +1,9 @@
 #include %A_ScriptDir%\app\processKey\keyTypes\commonDoubledAs.ahk
-#include %A_ScriptDir%\app\processKey\keyTypes\shiftDoubledAsClick.ahk
+#include %A_ScriptDir%\app\processKey\keyTypes\leftShiftDoubledAsClick.ahk
 #include %A_ScriptDir%\app\processKey\keyTypes\leftCtrlDoubledAsClick.ahk
-#include %A_ScriptDir%\app\processKey\keyTypes\rightCtrlDoubledAsClick.ahk
 #include %A_ScriptDir%\app\processKey\keyTypes\winDoubledAsClick.ahk
 #include %A_ScriptDir%\app\processKey\keyTypes\altDoubledAsClick.ahk
+#include %A_ScriptDir%\app\processKey\keyTypes\rightCtrlDoubledAsClick.ahk
 
 
 
@@ -77,9 +77,16 @@ setAltState(state)
 setShiftState(state)
 {
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-    if (shiftActive && isShiftDoubledAsClickPressed)
+    if (shiftActive)
     {
-        shiftActiveBeforeShiftClickPress := true
+        if (isShiftCtrlDoubledAsClickPressed)
+        {
+            leftShiftActiveBeforeShiftClickPress := true
+        }
+        else if (isRightShiftDoubledAsClickPressed)
+        {
+            rightShiftActiveBeforeShiftClickPress := true
+        }
     }
     shiftActive := state
     pressedState := state ? "down" : "up"

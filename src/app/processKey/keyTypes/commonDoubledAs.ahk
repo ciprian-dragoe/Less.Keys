@@ -5,7 +5,7 @@ cancelDoubledModifier()
 
     leftCtrlActiveBeforeCtrlClickPress := false
     altActiveBeforeAltClickPress := false
-    shiftActiveBeforeShiftClickPress := false
+    leftShiftActiveBeforeShiftClickPress := false
     winActiveBeforeWinClickPress := false
 
     rightCtrlActiveBeforeCtrlClickPress := false
@@ -79,12 +79,12 @@ timerMonitorCtrlModifierLift()
 resetSendClickOnLeftModifierRelease(shouldResetMouseHook = 0)
 {
     sendClickOnLeftCtrlClickRelease := false
-    sendClickOnShiftClickRelease := false
+    sendClickOnLeftShiftClickRelease := false
     sendClickOnWinClickRelease := false
     sendClickOnAltClickRelease := false
-    if (chooseClickDragActivation)
+    if (shouldResetMouseHook)
     {
-        cancelMouseHook(doubledShiftMouseHook)
+        cancelMouseHook(doubledLeftShiftMouseHook)
         cancelMouseHook(doubledLeftCtrlMouseHook)
         cancelMouseHook(doubledWinMouseHook)
         cancelMouseHook(doubledAltMouseHook)
@@ -97,7 +97,7 @@ resetSendClickOnRightModifierRelease(shouldResetMouseHook = 0)
     sendClickOnRightCtrlClickRelease := false
     sendClickOnRightWinClickRelease := false
     sendClickOnRightAltClickRelease := false
-    if (chooseClickDragActivation)
+    if (shouldResetMouseHook)
     {
         cancelMouseHook(doubledRightShiftMouseHook)
         cancelMouseHook(doubledRightCtrlMouseHook)

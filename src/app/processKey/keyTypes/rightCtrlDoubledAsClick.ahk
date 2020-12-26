@@ -30,7 +30,7 @@ doubledRightCtrlDown()
     
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
 
-    if (isShiftDoubledAsClickPressed || isWinDoubledAsClickPressed || isAltDoubledAsClickPressed)
+    if (isLeftShiftDoubledAsClickPressed || isWinDoubledAsClickPressed || isAltDoubledAsClickPressed)
     {
         setCtrlState(1)
         setTimer TimerMonitorCtrlModifierLift, 20

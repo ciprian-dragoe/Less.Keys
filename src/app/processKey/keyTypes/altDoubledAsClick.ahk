@@ -29,7 +29,7 @@ doubledAltDown()
     
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
 
-    if (isShiftDoubledAsClickPressed || isWinDoubledAsClickPressed || isLeftCtrlDoubledAsClickPressed) {
+    if (isLeftShiftDoubledAsClickPressed || isWinDoubledAsClickPressed || isLeftCtrlDoubledAsClickPressed) {
         setAltState(1)
         setTimer TimerMonitorAltModifierLift, 20
         return
