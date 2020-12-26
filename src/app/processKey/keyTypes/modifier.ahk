@@ -46,9 +46,16 @@ processModifierKey(key, state)
 setCtrlState(state)
 {
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-    if (ctrlActive && isLeftCtrlDoubledAsClickPressed)
+    if (ctrlActive)
     {
-        leftCtrlActiveBeforeCtrlClickPress := true
+        if (isLeftCtrlDoubledAsClickPressed)
+        {
+            leftCtrlActiveBeforeCtrlClickPress := true
+        }
+        else if (isRightCtrlDoubledAsClickPressed)
+        {
+            rightCtrlActiveBeforeCtrlClickPress := true
+        }
     }
     ctrlActive := state
     pressedState := state ? "down" : "up"
@@ -91,7 +98,7 @@ setWinState(state)
     send {blind}{lwin %pressedState%}
 }
 
-getActiveModifiers(key)
+getActiveModifiers(key = "")
 {
     result := ""
     if (ctrlActive)

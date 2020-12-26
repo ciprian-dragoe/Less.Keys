@@ -37,9 +37,10 @@ doubledLeftCtrlDown()
         return
     }
 
-    if (ctrlActive)
+    if (ctrlActive || isRightAltDoubledAsClickPressed || isRightShiftDoubledAsClickPressed || isRightWinDoubledAsClickPressed)
     {
         leftCtrlActiveBeforeCtrlClickPress := true
+        resetSendClickOnRightModifierRelease(1)
         sendDoubledValueAndReset("leftCtrlClick", sendClickOnLeftCtrlClickRelease)
         chooseClickDragActivation("leftCtrlClick", "MouseDragLeftCtrlActivate", doubledLeftCtrlMouseHook)
         return

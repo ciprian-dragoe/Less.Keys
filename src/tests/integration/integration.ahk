@@ -5,7 +5,6 @@
 #include %A_ScriptDir%\tests\integration\contexts\2shortcuts.ahk
 #include %A_ScriptDir%\tests\integration\contexts\3shiftClick.ahk
 #include %A_ScriptDir%\tests\integration\contexts\4leftCtrlClick.ahk
-#include %A_ScriptDir%\tests\integration\contexts\15rightCtrlClick.ahk
 #include %A_ScriptDir%\tests\integration\contexts\5shiftClickCtrlClick.ahk
 #include %A_ScriptDir%\tests\integration\contexts\6layoutKey.ahk
 #include %A_ScriptDir%\tests\integration\contexts\7remappedLayout.ahk
@@ -16,6 +15,9 @@
 #include %A_ScriptDir%\tests\integration\contexts\12altClickCtrlClick.ahk
 #include %A_ScriptDir%\tests\integration\contexts\13altClickShiftClick.ahk
 #include %A_ScriptDir%\tests\integration\contexts\14altClickWinClick.ahk
+#include %A_ScriptDir%\tests\integration\contexts\15rightCtrlClick.ahk
+#include %A_ScriptDir%\tests\integration\contexts\16rightCtrlClickLeftCtrlClick.ahk
+#include %A_ScriptDir%\tests\integration\contexts\17rightCtrlClickShiftLeftCtrlClick.ahk
 
 
 
@@ -75,7 +77,7 @@ runIntegrationTests()
     When_shiftClick_is_continously_pressed_and_mouse_is_moved_and_shift_is_pressed_and_released_the_text_remains_selected_#328()
     When_shiftClick_is_pressed_and_a_letter_pressed_and_released_and_shift_pressed_and_shiftClick_released_and_a_letter_pressed_then_caps_a_letter_is_sent_#329()
     
-    ; CTRL CLICK
+    ; LEFT CTRL CLICK
     When_leftCtrlClick_is_pressed_at_release_left_click_is_sent_#401()
     When_leftCtrlClick_is_continuously_pressed_and_layout_key_is_pressed_but_not_released_space_is_sent_#402()
     When_leftCtrlClick_is_continuously_pressed_and_a_letter_is_pressed_all_text_is_selected_#403()
@@ -253,6 +255,7 @@ runIntegrationTests()
     When_altClick_is_pressed_and_ctrlClick_is_pressed_and_released_left_click_is_sent_on_altClick_release_#1406()
     When_ctrlClick_is_pressed_and_altClick_is_pressed_and_released_left_click_is_sent_on_ctrlClick_release_#1407()
 
+    ; RIGHT CONTROL CLICK
     When_rightCtrlClick_is_pressed_at_release_left_click_is_sent_#1501()
     When_rightCtrlClick_is_continuously_pressed_and_layout_key_is_pressed_but_not_released_space_is_sent_#1502()
     When_rightCtrlClick_is_continuously_pressed_and_a_letter_is_pressed_all_text_is_selected_#1503()
@@ -282,10 +285,20 @@ runIntegrationTests()
     When_rightCtrlClick_is_continuously_pressed_and_mouse_is_moved_and_ctrl_is_pressed_the_text_remains_selected_#1527()
     When_rightCtrlClick_is_continuously_pressed_and_mouse_is_moved_and_ctrl_is_pressed_and_released_the_text_remains_selected_#1528()
     When_rightCtrlClick_is_pressed_and_backspace_pressed_and_released_and_ctrl_pressed_and_rightCtrlClick_released_and_backspace_pressed_then_ctrl_and_backspace_is_sent_#1529()
+
+    ; RIGHT CONTROL LEFT CONTROL
+    When_rightCtrlClick_is_pressed_leftCtrlClick_doubled_as_a_is_pressed_all_text_is_selected_before_a_leftCtrlClickRelease_#1601()
+    When_rightCtrlClick_doubled_as_b_is_pressed_leftCtrlClick_doubled_as_a_is_pressed_and_released_b_is_not_sent_on_RightCtrlClickRelease_1602()
+
+    ; RIGHT CONTROL NORMAL SHIFT LEFT CONTROL
+    When_rightCtrlClick_pressed_shift_pressed_leftCtrlClick_doubled_as_left_pressed_a_word_is_selected_before_a_leftCtrlClick_released_#1701()
+    When_leftCtrlClick_pressed_shift_pressed_rightCtrlClick_doubled_as_left_pressed_a_word_is_selected_before_a_rightCtrlClick_released_#1702()
+    When_leftCtrlClick_pressed_shift_pressed_rightCtrlClick_doubled_as_left_pressed_nothing_is_typed_when_a_rightCtrlClick_and_leftCtrlClick_released_#1703()
     */
 
     /*
     */
+
 
     /*
     */

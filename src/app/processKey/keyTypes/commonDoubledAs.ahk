@@ -1,20 +1,17 @@
 cancelDoubledModifier()
 {
-    cancelMouseHook(doubledShiftMouseHook)
-    cancelMouseHook(doubledLeftCtrlMouseHook)
-    cancelMouseHook(doubledRightCtrlMouseHook)
-    cancelMouseHook(doubledWinMouseHook)
-    cancelMouseHook(doubledAltMouseHook)
-    sendClickOnShiftClickRelease := false
-    sendClickOnLeftCtrlClickRelease := false
-    sendClickOnRightCtrlClickRelease := false
-    sendClickOnWinClickRelease := false
-    sendClickOnAltClickRelease := false
+    resetSendClickOnLeftModifierRelease(1)
+    resetSendClickOnRightModifierRelease(1)
+
     leftCtrlActiveBeforeCtrlClickPress := false
-    rightCtrlActiveBeforeCtrlClickPress := false
     altActiveBeforeAltClickPress := false
     shiftActiveBeforeShiftClickPress := false
     winActiveBeforeWinClickPress := false
+
+    rightCtrlActiveBeforeCtrlClickPress := false
+    rightAltActiveBeforeCtrlClickPress := false
+    rightWinActiveBeforeCtrlClickPress := false
+    rightShiftActiveBeforeCtrlClickPress := false
 }
 
 cancelMouseHook(ByRef id)
@@ -29,11 +26,8 @@ cancelMouseHook(ByRef id)
 timerResetSentClickOnModifierRelease()
 {
     SetTimer, TimerResetSentClickOnModifierRelease, OFF
-    sendClickOnShiftClickRelease := false
-    sendClickOnLeftCtrlClickRelease := false
-    sendClickOnRightCtrlClickRelease := false
-    sendClickOnWinClickRelease := false
-    sendClickOnAltClickRelease := false
+    resetSendClickOnLeftModifierRelease()
+    resetSendClickOnRightModifierRelease()
 }
 
 chooseClickDragActivation(modifierValue, callbackMethodName, ByRef hookStoreLocation)
@@ -48,7 +42,8 @@ chooseClickDragActivation(modifierValue, callbackMethodName, ByRef hookStoreLoca
 sendDoubledValueAndReset(modifierValue, ByRef resetValue)
 {
     doubledAction := modifierDoubledAsClick[modifierValue]
-    send {blind}{%doubledAction%}
+    activeModifiers := getActiveModifiers()
+    send {blind}%activeModifiers%{%doubledAction%}
     resetValue := false
 }
 
@@ -78,5 +73,35 @@ timerMonitorCtrlModifierLift()
     {
         send {ctrl up}
         setTimer TimerMonitorCtrlModifierLift, off
+    }
+}
+
+resetSendClickOnLeftModifierRelease(shouldResetMouseHook = 0)
+{
+    sendClickOnLeftCtrlClickRelease := false
+    sendClickOnShiftClickRelease := false
+    sendClickOnWinClickRelease := false
+    sendClickOnAltClickRelease := false
+    if (chooseClickDragActivation)
+    {
+        cancelMouseHook(doubledShiftMouseHook)
+        cancelMouseHook(doubledLeftCtrlMouseHook)
+        cancelMouseHook(doubledWinMouseHook)
+        cancelMouseHook(doubledAltMouseHook)
+    }
+}
+
+resetSendClickOnRightModifierRelease(shouldResetMouseHook = 0)
+{
+    sendClickOnRightShiftClickRelease := false
+    sendClickOnRightCtrlClickRelease := false
+    sendClickOnRightWinClickRelease := false
+    sendClickOnRightAltClickRelease := false
+    if (chooseClickDragActivation)
+    {
+        cancelMouseHook(doubledRightShiftMouseHook)
+        cancelMouseHook(doubledRightCtrlMouseHook)
+        cancelMouseHook(doubledRightWinMouseHook)
+        cancelMouseHook(doubledRightAltMouseHook)
     }
 }
