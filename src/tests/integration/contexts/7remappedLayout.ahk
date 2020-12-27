@@ -48,7 +48,7 @@ When_key_which_has_been_remapped_as_modifier_key_is_pressed_followed_by_layout_k
     validateTestOutput(A_ThisFunc , expected)
 }
 
-When_modifer_key_remapped_as_letter_is_pressed_on_release_activePressedKeys_is_reset_#705()
+When_modifier_key_remapped_as_letter_is_pressed_on_release_activePressedKeys_is_reset_#705()
 {
     simulateKeyDown("rshift")
     processModifierWhenKeyPhysicalUp("rshift")
@@ -64,7 +64,7 @@ When_modifer_key_remapped_as_letter_is_pressed_on_release_activePressedKeys_is_r
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
-When_layout_key_pressed_and_modifer_key_remapped_as_letter_is_pressed_on_modifier_key_release_activePressedKeys_is_reset_#706()
+When_layout_key_pressed_and_modifier_key_remapped_as_letter_is_pressed_on_modifier_key_release_activePressedKeys_is_reset_#706()
 {
     simulateKeyDown("space", 50)
     simulateKeyDown("rshift", 50)
@@ -82,7 +82,7 @@ When_layout_key_pressed_and_modifer_key_remapped_as_letter_is_pressed_on_modifie
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
-When_layout_key_pressed_and_modifer_key_remapped_as_letter_is_pressed_on_modifier_key_release_alternative_key_is_sent_#707()
+When_layout_key_pressed_and_modifier_key_remapped_as_letter_is_pressed_on_modifier_key_release_alternative_key_is_sent_#707()
 {
     simulateKeyDown("space", 50)
     simulateKeyDown("rshift", 50)
@@ -94,7 +94,7 @@ When_layout_key_pressed_and_modifer_key_remapped_as_letter_is_pressed_on_modifie
     validateTestOutput(A_ThisFunc , expected)
 }
 
-When_layout_key_pressed_followed_by_modifer_key_remapped_as_letter_pressed_followed_by_layout_release_followed_by_same_modifier_press_remapped_letter_is_sent_#708()
+When_layout_key_pressed_followed_by_modifier_key_remapped_as_letter_pressed_followed_by_layout_release_followed_by_same_modifier_press_remapped_letter_is_sent_#708()
 {
     simulateKeyDown("space", 50)
     simulateKeyDown("rshift", 50)

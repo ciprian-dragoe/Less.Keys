@@ -27,7 +27,8 @@ doubledLeftAltDown()
 
     isLeftAltDoubledAsClickPressed := true
 
-    if (isLeftShiftDoubledAsClickPressed || isWinDoubledAsClickPressed || isLeftCtrlDoubledAsClickPressed) {
+    if (isLeftShiftDoubledAsClickPressed || isLeftWinDoubledAsClickPressed || isLeftCtrlDoubledAsClickPressed) {
+        resetSendClickOnLeftModifierRelease(1)
         setAltState(1)
         setTimer TimerMonitorAltModifierLift, 20
         return

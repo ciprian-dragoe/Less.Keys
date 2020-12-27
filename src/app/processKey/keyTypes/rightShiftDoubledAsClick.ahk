@@ -28,6 +28,7 @@ doubledRightShiftDown()
     isRightShiftDoubledAsClickPressed := true
 
     if (isRightCtrlDoubledAsClickPressed || isRightWinDoubledAsClickPressed || isRightAltDoubledAsClickPressed) {
+        resetSendClickOnRightModifierRelease(1)
         setShiftState(1)
         setTimer TimerMonitorShiftModifierLift, 20
         return

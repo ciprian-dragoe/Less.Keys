@@ -29,9 +29,9 @@ doubledRightCtrlDown()
     
     if (isRightShiftDoubledAsClickPressed || isRightWinDoubledAsClickPressed || isRightAltDoubledAsClickPressed)
     {
+        resetSendClickOnRightModifierRelease(1)
         setCtrlState(1)
         setTimer TimerMonitorCtrlModifierLift, 20
-        return
         return
     }
 

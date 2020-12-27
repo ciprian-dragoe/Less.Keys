@@ -27,7 +27,8 @@ doubledRightAltDown()
     
     isRightAltDoubledAsClickPressed := true
     
-    if (isRightShiftDoubledAsClickPressed || isWinDoubledAsClickPressed || isRightCtrlDoubledAsClickPressed) {
+    if (isRightShiftDoubledAsClickPressed || isLeftWinDoubledAsClickPressed || isRightCtrlDoubledAsClickPressed) {
+        resetSendClickOnRightModifierRelease(1)
         setAltState(1)
         setTimer TimerMonitorAltModifierLift, 20
         return

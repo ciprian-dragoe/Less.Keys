@@ -11,7 +11,6 @@ timerStickyFailBack()
         IfInString, activeProgramWindowName, %key%
         {
             resetStates()
-            SetTimer, TimerStickyFailBack, off
             return
         }
     }
@@ -25,7 +24,6 @@ timerStickyFailBack()
     }
 
     resetStates()
-    SetTimer, TimerStickyFailBack, off
 }
 
 resetStates()
@@ -63,7 +61,7 @@ resetStates()
     isLeftCtrlDoubledAsClickPressed := false
     isLeftShiftDoubledAsClickPressed := false
     isLeftAltDoubledAsClickPressed := false
-    isWinDoubledAsClickPressed := false
+    isLeftWinDoubledAsClickPressed := false
     isRightAltDoubledAsClickPressed := false
     isRightWinDoubledAsClickPressed := false
     isRightCtrlDoubledAsClickPressed := false

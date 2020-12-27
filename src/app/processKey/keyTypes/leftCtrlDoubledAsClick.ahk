@@ -27,8 +27,9 @@ doubledLeftCtrlDown()
     
     isLeftCtrlDoubledAsClickPressed := true
     
-    if (isLeftShiftDoubledAsClickPressed || isWinDoubledAsClickPressed || isLeftAltDoubledAsClickPressed)
+    if (isLeftShiftDoubledAsClickPressed || isLeftWinDoubledAsClickPressed || isLeftAltDoubledAsClickPressed)
     {
+        resetSendClickOnLeftModifierRelease(1)
         setCtrlState(1)
         setTimer TimerMonitorCtrlModifierLift, 20
         return

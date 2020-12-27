@@ -67,7 +67,7 @@ When_layout_key_is_pressed_less_then_timeoutStillSendLayoutKey_and_during_this_t
     validateTestOutput(A_ThisFunc , expected)
 }
 
-When_layout_key_is_pressed_continously_for_3_seconds_and_during_this_time_no_non_modifier_key_is_pressed_space_is_not_sent_on_layout_key_up_#607()
+When_layout_key_is_pressed_continuously_for_3_seconds_and_during_this_time_no_non_modifier_key_is_pressed_space_is_not_sent_on_layout_key_up_#607()
 {
     simulateTyping("hello ")
     simulateKeyDown("space", 500)

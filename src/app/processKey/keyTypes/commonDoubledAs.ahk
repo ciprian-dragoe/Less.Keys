@@ -1,12 +1,12 @@
 cancelDoubledModifier()
 {
-    resetSendClickOnLeftModifierRelease(1)
-    resetSendClickOnRightModifierRelease(1)
+    resetSendClickOnLeftModifierRelease()
+    resetSendClickOnRightModifierRelease()
 
     leftCtrlActiveBeforeCtrlClickPress := false
     leftAltActiveBeforeAltClickPress := false
     leftShiftActiveBeforeShiftClickPress := false
-    winActiveBeforeWinClickPress := false
+    leftWinActiveBeforeWinClickPress := false
 
     rightCtrlActiveBeforeCtrlClickPress := false
     rightAltActiveBeforeCtrlClickPress := false
@@ -113,13 +113,13 @@ resetSendClickOnLeftModifierRelease(shouldResetMouseHook = 0)
 {
     sendClickOnLeftCtrlClickRelease := false
     sendClickOnLeftShiftClickRelease := false
-    sendClickOnWinClickRelease := false
+    sendClickOnLeftWinClickRelease := false
     sendClickOnLeftAltClickRelease := false
     if (shouldResetMouseHook)
     {
         cancelMouseHook(doubledLeftShiftMouseHook)
         cancelMouseHook(doubledLeftCtrlMouseHook)
-        cancelMouseHook(doubledWinMouseHook)
+        cancelMouseHook(doubledLeftWinMouseHook)
         cancelMouseHook(doubledLeftAltMouseHook)
     }
 }
@@ -155,5 +155,24 @@ timerMonitorAltModifierLift()
     {
         send {alt up}
         setTimer TimerMonitorAltModifierLift, off
+    }
+}
+
+activateWinWithKey(key)
+{
+    if (!GetKeyState("lwin"))
+    {
+        send {lwin down}
+        setTimer TimerMonitorWinModifierLift, 20
+    }
+    send {blind}%key%
+}
+
+timerMonitorWinModifierLift()
+{
+    if (!winActive)
+    {
+        send {lwin up}
+        setTimer TimerMonitorWinModifierLift, off
     }
 }
