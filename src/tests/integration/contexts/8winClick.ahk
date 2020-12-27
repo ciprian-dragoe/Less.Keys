@@ -392,7 +392,7 @@ When_layout_key_is_pressed_followed_by_winClick_left_click_is_not_sent_on_winCli
     simulateTyping("hello ")
     expected := getCurrentCaretPosition()
     processKeyDown("space")
-    sleep 1000
+    sleep 100
     processKeyDown("winClick")
     sleep 100
     processKeyUp("winClick")

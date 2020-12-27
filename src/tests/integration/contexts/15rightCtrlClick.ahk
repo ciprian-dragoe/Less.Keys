@@ -380,7 +380,7 @@ When_layout_key_is_pressed_followed_by_rightCtrlClick_left_click_is_not_sent_on_
     simulateTyping("hello ")
     expected := getCurrentCaretPosition()
     processKeyDown("space")
-    sleep 1000
+    sleep 100
     processKeyDown("rightCtrlClick")
     sleep 100
     processKeyUp("rightCtrlClick")

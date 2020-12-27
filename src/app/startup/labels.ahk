@@ -20,16 +20,16 @@ TimerScrollWithMouseMovement:
     timerScrollWithMouseMovement()     
 return
 
+TimerResetModifierReleaseAction:
+    timerResetModifierReleaseAction()
+return
+
 TimerShowMouse:
     systemCursor(1)
 return
 
 TimerTimeoutSendLayoutKey:
     timerTimeoutSendLayoutKey()
-return
-
-TimerResetSentClickOnModifierRelease:
-    timerResetSentClickOnModifierRelease()
 return
 
 TimerMonitorWinModifierLift:

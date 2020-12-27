@@ -1,4 +1,4 @@
-global timerTimeoutStickyKeys := 2000
+global timerTimeoutStickyKeys := 1000
 
 ; if the cpu is executing intensive tasks then the lift key up command may not be processed for 
 ; modifier keys (ctrl, shift, alt, win) and they are still registered by the os as pressed.
@@ -30,6 +30,8 @@ timerStickyFailBack()
 
 resetStates()
 {
+    SetTimer, TimerStickyFailBack, off
+
     if (shiftActive)
     {
         send {shift up}
@@ -50,30 +52,23 @@ resetStates()
     {
         send {lwin up}
     }
-    resetDoubledModifierClickDrag("leftCtrlClick", sendUnClickOnLeftCtrlClickRelease)
-    resetDoubledModifierClickDrag("leftShiftClick", sendUnClickOnLeftShiftClickRelease)
-    resetDoubledModifierClickDrag("altClick", sendUnClickOnAltClickRelease)
-    resetDoubledModifierClickDrag("winClick", sendUnClickOnWinClickRelease)
-    resetDoubledModifierClickDrag("rightWinClick", sendUnClickOnRightWinClickRelease)
-    resetDoubledModifierClickDrag("rightCtrlClick", sendUnClickOnRightCtrlClickRelease)
-    resetDoubledModifierClickDrag("rightShiftClick", sendUnClickOnRightShiftClickRelease)
-    resetDoubledModifierClickDrag("rightAltClick", sendUnClickOnRightAltClickRelease)
+    resetDoubledModifierClickDrag("leftCtrlClick", isLeftCtrlClickDown)
+    resetDoubledModifierClickDrag("leftShiftClick", isLeftShiftClickDown)
+    resetDoubledModifierClickDrag("leftAltClick", isLeftAltClickDown)
+    resetDoubledModifierClickDrag("leftWinClick", isLeftWinClickDown)
+    resetDoubledModifierClickDrag("rightWinClick", isRightWinClickDown)
+    resetDoubledModifierClickDrag("rightCtrlClick", isRightCtrlClickDown)
+    resetDoubledModifierClickDrag("rightShiftClick", isRightShiftClickDown)
+    resetDoubledModifierClickDrag("rightAltClick", isRightAltClickDown)
     isLeftCtrlDoubledAsClickPressed := false
     isLeftShiftDoubledAsClickPressed := false
-    isAltDoubledAsClickPressed := false
+    isLeftAltDoubledAsClickPressed := false
     isWinDoubledAsClickPressed := false
     isRightAltDoubledAsClickPressed := false
     isRightWinDoubledAsClickPressed := false
     isRightCtrlDoubledAsClickPressed := false
     isRightShiftDoubledAsClickPressed := false
     sendUnClickOnLeftCtrlClickRelease := false
-    sendUnClickOnLeftShiftClickRelease := false
-    sendUnClickOnAltClickRelease := false
-    sendUnClickOnWinClickRelease := false
-    sendUnClickOnRightAltClickRelease := false
-    sendUnClickOnRightWinClickRelease := false
-    sendUnClickOnRightCtrlClickRelease := false
-    sendUnClickOnRightShiftClickRelease := false
     activePressedKeys := []
     processKeyOnRelease := false
     layoutKeyPressed := false

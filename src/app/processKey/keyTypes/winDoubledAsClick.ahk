@@ -1,8 +1,8 @@
 global sendClickOnWinClickRelease := false
-global sendUnClickOnWinClickRelease := false
 global isWinDoubledAsClickPressed := false
 global winActiveBeforeWinClickPress := false
-global doubledWinMouseHook
+global doubledWinMouseHook := 0
+global isLeftWinDown := false
 
 
 
@@ -27,9 +27,7 @@ doubledWinDown()
     
     isWinDoubledAsClickPressed := true
     
-    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-
-    if (isLeftShiftDoubledAsClickPressed || isLeftCtrlDoubledAsClickPressed || isAltDoubledAsClickPressed) {
+    if (isLeftShiftDoubledAsClickPressed || isLeftCtrlDoubledAsClickPressed || isLeftAltDoubledAsClickPressed) {
         setWinState(1)
         setTimer TimerMonitorWinModifierLift, 20
         return
@@ -38,8 +36,12 @@ doubledWinDown()
     if (winActive)
     {
         winActiveBeforeWinClickPress := true
-        sendDoubledValueAndReset("winClick", sendClickOnWinClickRelease)
-        chooseClickDragActivation("winClick", "mouseDragWinActivate", doubledWinMouseHook)
+        resetSendClickOnLeftModifierRelease(1)
+        sendDoubledValueAndReset("winClick", sendClickOnWinClickRelease, isLeftWinDown)
+        if (!isLeftWinDown)
+        {
+            chooseClickDragActivation("winClick", "mouseDragWinActivate", doubledWinMouseHook)
+        }
         return
     }
     
@@ -49,6 +51,7 @@ doubledWinDown()
     {        
         sendClickOnWinClickRelease := true
         chooseClickDragActivation("winClick", "mouseDragWinActivate", doubledWinMouseHook)
+        setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
     }
 }
 
@@ -58,7 +61,7 @@ mouseDragWinActivate(nCode, wParam, lParam)
     if (wParam = 0x200)
     {
         sendClickOnWinClickRelease := false
-        sendUnClickOnWinClickRelease := true
+        isLeftWinDown := true
         doubledAction := modifierDoubledAsClick["winClick"]
         send {blind}{%doubledAction% down}
     }
@@ -78,11 +81,11 @@ doubledWinUp()
         winActive := 0
     }
     
-    resetDoubledModifierClickDrag("winClick", sendUnClickOnWinClickRelease)
+    resetDoubledModifierClickDrag("winClick", isLeftWinDown)
 
     if (sendClickOnWinClickRelease)
     {
-        sendDoubledValueAndReset("winClick", sendClickOnWinClickRelease)
+        sendDoubledValueAndReset("winClick", sendClickOnWinClickRelease, isLeftWinDown)
     }
 }
 

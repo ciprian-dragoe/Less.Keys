@@ -1,14 +1,13 @@
 global sendClickOnLeftCtrlClickRelease := false
-global sendUnClickOnLeftCtrlClickRelease := false
 global isLeftCtrlDoubledAsClickPressed := false
 global leftCtrlActiveBeforeCtrlClickPress := false
-global doubledLeftCtrlMouseHook
+global doubledLeftCtrlMouseHook := 0
+global isLeftCtrlClickDown := false
 
 
 
 processLeftCtrlDoubledAsClick(state)
 {
-
     if (state)
     {
         doubledLeftCtrlDown()
@@ -28,9 +27,7 @@ doubledLeftCtrlDown()
     
     isLeftCtrlDoubledAsClickPressed := true
     
-    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-
-    if (isLeftShiftDoubledAsClickPressed || isWinDoubledAsClickPressed || isAltDoubledAsClickPressed)
+    if (isLeftShiftDoubledAsClickPressed || isWinDoubledAsClickPressed || isLeftAltDoubledAsClickPressed)
     {
         setCtrlState(1)
         setTimer TimerMonitorCtrlModifierLift, 20
@@ -41,15 +38,11 @@ doubledLeftCtrlDown()
     {
         leftCtrlActiveBeforeCtrlClickPress := true
         resetSendClickOnRightModifierRelease(1)
-        if (doubledAction != "lbutton" && doubledAction != "rbutton")
+        sendDoubledValueAndReset("leftCtrlClick", sendClickOnLeftCtrlClickRelease, isLeftCtrlClickDown)
+        if (!isLeftCtrlClickDown)
         {
-            sendDoubledValueAndReset("leftCtrlClick", sendClickOnLeftCtrlClickRelease)
+            chooseClickDragActivation("leftCtrlClick", "mouseDragLeftCtrlActivate", doubledLeftCtrlMouseHook)
         }
-        else
-        {
-            sendClickOnLeftCtrlClickRelease := true
-        }
-        chooseClickDragActivation("leftCtrlClick", "mouseDragLeftCtrlActivate", doubledLeftCtrlMouseHook)
         return
     }
     
@@ -59,6 +52,7 @@ doubledLeftCtrlDown()
     {
         sendClickOnLeftCtrlClickRelease := true
         chooseClickDragActivation("leftCtrlClick", "mouseDragLeftCtrlActivate", doubledLeftCtrlMouseHook)
+        setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
     }
 }
 
@@ -67,9 +61,8 @@ mouseDragLeftCtrlActivate(nCode, wParam, lParam)
     cancelMouseHook(doubledLeftCtrlMouseHook)
     if (wParam = 0x200)
     {
-        showtooltip("incep misc")
         sendClickOnLeftCtrlClickRelease := false
-        sendUnClickOnLeftCtrlClickRelease := true
+        isLeftCtrlClickDown := true
         doubledAction := modifierDoubledAsClick["leftCtrlClick"]
         send {blind}{%doubledAction% down}
     }
@@ -89,10 +82,10 @@ doubledLeftCtrlUp()
         ctrlActive := 0
     }
     
-    resetDoubledModifierClickDrag("leftCtrlClick", sendUnClickOnLeftCtrlClickRelease)
+    resetDoubledModifierClickDrag("leftCtrlClick", isLeftCtrlClickDown)
 
     if (sendClickOnLeftCtrlClickRelease)
     {
-        sendDoubledValueAndReset("leftCtrlClick", sendClickOnLeftCtrlClickRelease)
+        sendDoubledValueAndReset("leftCtrlClick", sendClickOnLeftCtrlClickRelease, isLeftCtrlClickDown)
     }
 }

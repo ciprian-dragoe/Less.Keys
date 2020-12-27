@@ -16,6 +16,9 @@ global processKeyOnRelease
 
 processKeyDown(key)
 {
+    SetTimer TimerStickyFailBack, off
+    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+
     if (processModifierKey(key, 1))
     {
         return

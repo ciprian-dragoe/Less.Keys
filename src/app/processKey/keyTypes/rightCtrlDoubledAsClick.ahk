@@ -1,14 +1,13 @@
 global sendClickOnRightCtrlClickRelease := false
-global sendUnClickOnRightCtrlClickRelease := false
 global isRightCtrlDoubledAsClickPressed := false
 global rightCtrlActiveBeforeCtrlClickPress := false
-global doubledRightCtrlMouseHook
+global doubledRightCtrlMouseHook := 0
+global isRightCtrlClickDown := false
 
 
 
 processRightCtrlDoubledAsClick(state)
 {
-
     if (state)
     {
         doubledRightCtrlDown()
@@ -28,12 +27,11 @@ doubledRightCtrlDown()
 
     isRightCtrlDoubledAsClickPressed := true
     
-    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-
     if (isRightShiftDoubledAsClickPressed || isRightWinDoubledAsClickPressed || isRightAltDoubledAsClickPressed)
     {
         setCtrlState(1)
         setTimer TimerMonitorCtrlModifierLift, 20
+        return
         return
     }
 
@@ -41,15 +39,11 @@ doubledRightCtrlDown()
     {
         rightCtrlActiveBeforeCtrlClickPress := true
         resetSendClickOnLeftModifierRelease(1)
-        if (doubledAction != "lbutton" && doubledAction != "rbutton")
+        sendDoubledValueAndReset("rightCtrlClick", sendClickOnRightCtrlClickRelease, isRightCtrlClickDown)
+        if (!isRightCtrlClickDown)
         {
-            sendDoubledValueAndReset("rightCtrlClick", sendClickOnRightCtrlClickRelease)
+            chooseClickDragActivation("rightCtrlClick", "mouseDragRightCtrlActivate", doubledRightCtrlMouseHook)
         }
-        else
-        {
-            sendClickOnRightCtrlClickRelease := true
-        }
-        chooseClickDragActivation("rightCtrlClick", "mouseDragRightCtrlActivate", doubledRightCtrlMouseHook)
         return
     }
     
@@ -59,6 +53,7 @@ doubledRightCtrlDown()
     {
         sendClickOnRightCtrlClickRelease := true
         chooseClickDragActivation("rightCtrlClick", "mouseDragRightCtrlActivate", doubledRightCtrlMouseHook)
+        setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
     }
 }
 
@@ -68,7 +63,7 @@ mouseDragRightCtrlActivate(nCode, wParam, lParam)
     if (wParam = 0x200)
     {
         sendClickOnRightCtrlClickRelease := false
-        sendUnClickOnRightCtrlClickRelease := true
+        isRightCtrlClickDown := true
         doubledAction := modifierDoubledAsClick["rightCtrlClick"]
         send {blind}{%doubledAction% down}
     }
@@ -88,10 +83,10 @@ doubledRightCtrlUp()
         ctrlActive := 0
     }
     
-    resetDoubledModifierClickDrag("rightCtrlClick", sendUnClickOnRightCtrlClickRelease)
+    resetDoubledModifierClickDrag("rightCtrlClick", isRightCtrlClickDown)
 
     if (sendClickOnRightCtrlClickRelease)
     {
-        sendDoubledValueAndReset("rightCtrlClick", sendClickOnRightCtrlClickRelease)
+        sendDoubledValueAndReset("rightCtrlClick", sendClickOnRightCtrlClickRelease, isRightCtrlClickDown)
     }
 }

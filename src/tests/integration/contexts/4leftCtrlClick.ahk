@@ -380,7 +380,7 @@ When_layout_key_is_pressed_followed_by_leftCtrlClick_left_click_is_not_sent_on_l
     simulateTyping("hello ")
     expected := getCurrentCaretPosition()
     processKeyDown("space")
-    sleep 1000
+    sleep 100
     processKeyDown("leftCtrlClick")
     sleep 100
     processKeyUp("leftCtrlClick")

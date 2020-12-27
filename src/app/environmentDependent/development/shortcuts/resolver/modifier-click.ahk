@@ -25,6 +25,5 @@ winShiftTab()
 
 winTab()
 {
-    showtooltip("merge")
     activateWinWithKey("{tab}")
 }

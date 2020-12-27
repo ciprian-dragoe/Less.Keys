@@ -4,7 +4,7 @@ cancelDoubledModifier()
     resetSendClickOnRightModifierRelease(1)
 
     leftCtrlActiveBeforeCtrlClickPress := false
-    altActiveBeforeAltClickPress := false
+    leftAltActiveBeforeAltClickPress := false
     leftShiftActiveBeforeShiftClickPress := false
     winActiveBeforeWinClickPress := false
 
@@ -23,28 +23,35 @@ cancelMouseHook(ByRef id)
     }
 }
 
-timerResetSentClickOnModifierRelease()
-{
-    SetTimer, TimerResetSentClickOnModifierRelease, OFF
-    resetSendClickOnLeftModifierRelease()
-    resetSendClickOnRightModifierRelease()
-}
-
 chooseClickDragActivation(modifierValue, callbackMethodName, ByRef hookStoreLocation)
 {
     if (modifierDoubledAsClick[modifierValue] = "lbutton")
     {
         hookStoreLocation := DllCall("SetWindowsHookEx", "int", 14, "uint", RegisterCallback(callbackMethodName), "uint", 0, "uint", 0)
     }
-    SetTimer, TimerResetSentClickOnModifierRelease, %timeoutStillSendLayoutKey%
 }
 
-sendDoubledValueAndReset(modifierValue, ByRef resetValue)
+sendDoubledValueAndReset(modifierValue, ByRef resetValue, ByRef isModifierClickDown)
 {
     doubledAction := modifierDoubledAsClick[modifierValue]
     activeModifiers := getActiveModifiers()
-    send {blind}%activeModifiers%{%doubledAction%}
-    resetValue := false
+    if (doubledAction == "lbutton")
+    {
+        state := "down"
+        if (resetValue)
+        {
+            state := ""
+            resetValue := false
+        }
+        send {blind}%activeModifiers%{%doubledAction% %state%}
+        isModifierClickDown := true
+    }
+    else
+    {
+        send {blind}%activeModifiers%{%doubledAction%}
+        resetValue := false
+        isModifierClickDown := false
+    }
 }
 
 resetDoubledModifierClickDrag(modifierValue, ByRef resetValue)
@@ -55,6 +62,13 @@ resetDoubledModifierClickDrag(modifierValue, ByRef resetValue)
         send {blind}{%action% up}
         resetValue := false
     }
+}
+
+timerResetModifierReleaseAction()
+{
+    resetSendClickOnLeftModifierRelease()
+    resetSendClickOnRightModifierRelease()
+    setTimer TimerResetModifierReleaseAction, OFF
 }
 
 activateCtrlWithKey(key)
@@ -100,13 +114,13 @@ resetSendClickOnLeftModifierRelease(shouldResetMouseHook = 0)
     sendClickOnLeftCtrlClickRelease := false
     sendClickOnLeftShiftClickRelease := false
     sendClickOnWinClickRelease := false
-    sendClickOnAltClickRelease := false
+    sendClickOnLeftAltClickRelease := false
     if (shouldResetMouseHook)
     {
         cancelMouseHook(doubledLeftShiftMouseHook)
         cancelMouseHook(doubledLeftCtrlMouseHook)
         cancelMouseHook(doubledWinMouseHook)
-        cancelMouseHook(doubledAltMouseHook)
+        cancelMouseHook(doubledLeftAltMouseHook)
     }
 }
 
@@ -122,5 +136,24 @@ resetSendClickOnRightModifierRelease(shouldResetMouseHook = 0)
         cancelMouseHook(doubledRightCtrlMouseHook)
         cancelMouseHook(doubledRightWinMouseHook)
         cancelMouseHook(doubledRightAltMouseHook)
+    }
+}
+
+activateAltWithKey(key)
+{
+    if (!GetKeyState("alt"))
+    {
+        send {alt down}
+        setTimer TimerMonitorAltModifierLift, 20
+    }
+    send {blind}%key%
+}
+
+timerMonitorAltModifierLift()
+{
+    if (!altActive)
+    {
+        send {alt up}
+        setTimer TimerMonitorAltModifierLift, off
     }
 }

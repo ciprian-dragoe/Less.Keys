@@ -9,12 +9,12 @@ global timeoutProcessLayoutOnRelease
 
 manageLayoutKeyDown(key)
 {
-    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
     if (!layoutKeyPressed)
     {
         cancelDoubledModifier()
         layoutKeyPressed := true
-        if (timeoutMouseScrollPoll) {
+        if (timeoutMouseScrollPoll)
+        {
             CoordMode, Mouse, Screen
             MouseGetPos, initialMousePositionXAxis, initialMousePositionYAxis
             SetTimer, TimerScrollWithMouseMovement, %timeoutMouseScrollPoll%

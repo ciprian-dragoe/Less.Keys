@@ -1,8 +1,8 @@
 global sendClickOnLeftShiftClickRelease := false
-global sendUnClickOnLeftShiftClickRelease := false
 global isLeftShiftDoubledAsClickPressed := false
-global leftShiftActiveBeforeShiftClickPress
-global doubledLeftShiftMouseHook
+global leftShiftActiveBeforeShiftClickPress := false
+global doubledLeftShiftMouseHook := 0
+global isLeftShiftClickDown := false
 
 
 
@@ -27,9 +27,7 @@ doubledLeftShiftDown()
     
     isLeftShiftDoubledAsClickPressed := true
     
-    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-
-    if (isLeftCtrlDoubledAsClickPressed || isWinDoubledAsClickPressed || isAltDoubledAsClickPressed) {
+    if (isLeftCtrlDoubledAsClickPressed || isWinDoubledAsClickPressed || isLeftAltDoubledAsClickPressed) {
         setShiftState(1)
         setTimer TimerMonitorShiftModifierLift, 20
         return
@@ -39,15 +37,11 @@ doubledLeftShiftDown()
     {
         leftShiftActiveBeforeShiftClickPress := true
         resetSendClickOnRightModifierRelease(1)
-        if (doubledAction != "lbutton" && doubledAction != "rbutton")
+        sendDoubledValueAndReset("leftShiftClick", sendClickOnLeftShiftClickRelease, isLeftShiftClickDown)
+        if (!isLeftShiftClickDown)
         {
-            sendDoubledValueAndReset("leftShiftClick", sendClickOnLeftShiftClickRelease)
+            chooseClickDragActivation("leftShiftClick", "mouseDragLeftShiftActivate", doubledLeftShiftMouseHook)
         }
-        else
-        {
-            sendClickOnLeftShiftClickRelease := true
-        }
-        chooseClickDragActivation("leftShiftClick", "mouseDragLeftShiftActivate", doubledLeftShiftMouseHook)
         return
     }
     
@@ -57,6 +51,7 @@ doubledLeftShiftDown()
     {        
         sendClickOnLeftShiftClickRelease := true
         chooseClickDragActivation("leftShiftClick", "mouseDragLeftShiftActivate", doubledLeftShiftMouseHook)
+        setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
     }
 }
 
@@ -66,7 +61,7 @@ mouseDragLeftShiftActivate(nCode, wParam, lParam)
     if (wParam = 0x200)
     {
         sendClickOnLeftShiftClickRelease := false
-        sendUnClickOnLeftShiftClickRelease := true
+        isLeftShiftClickDown := true
         doubledAction := modifierDoubledAsClick["leftShiftClick"]
         send {blind}{%doubledAction% down}
     }
@@ -86,10 +81,10 @@ doubledLeftShiftUp()
         shiftActive := 0
     }
 
-    resetDoubledModifierClickDrag("leftShiftClick", sendUnClickOnLeftShiftClickRelease)
+    resetDoubledModifierClickDrag("leftShiftClick", isLeftShiftClickDown)
 
     if (sendClickOnLeftShiftClickRelease)
     {
-        sendDoubledValueAndReset("leftShiftClick", sendClickOnLeftShiftClickRelease)
+        sendDoubledValueAndReset("leftShiftClick", sendClickOnLeftShiftClickRelease, isLeftShiftClickDown)
     }
 }

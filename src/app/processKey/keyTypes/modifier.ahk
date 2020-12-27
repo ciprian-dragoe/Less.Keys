@@ -2,9 +2,10 @@
 #include %A_ScriptDir%\app\processKey\keyTypes\leftShiftDoubledAsClick.ahk
 #include %A_ScriptDir%\app\processKey\keyTypes\leftCtrlDoubledAsClick.ahk
 #include %A_ScriptDir%\app\processKey\keyTypes\winDoubledAsClick.ahk
-#include %A_ScriptDir%\app\processKey\keyTypes\altDoubledAsClick.ahk
+#include %A_ScriptDir%\app\processKey\keyTypes\leftAltDoubledAsClick.ahk
 #include %A_ScriptDir%\app\processKey\keyTypes\rightCtrlDoubledAsClick.ahk
 #include %A_ScriptDir%\app\processKey\keyTypes\rightShiftDoubledAsClick.ahk
+#include %A_ScriptDir%\app\processKey\keyTypes\rightAltDoubledAsClick.ahk
 
 
 
@@ -35,6 +36,7 @@ processModifierKey(key, state)
     action := modifierActions[key]
     if (action)
     {
+
         debug(key . " modifier |" . state . "|")
         action.call(state)
         processKeyOnRelease := false
@@ -66,9 +68,17 @@ setCtrlState(state)
 setAltState(state)
 {
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-    if (altActive && isAltDoubledAsClickPressed)
+
+    if (altActive)
     {
-        altActiveBeforeAltClickPress := true
+        if (isLeftAltDoubledAsClickPressed)
+        {
+            leftAltActiveBeforeCtrlClickPress := true
+        }
+        else if (isRightAltDoubledAsClickPressed)
+        {
+            rightAltActiveBeforeCtrlClickPress := true
+        }
     }
     altActive := state
     pressedState := state ? "down" : "up"
@@ -80,7 +90,7 @@ setShiftState(state)
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
     if (shiftActive)
     {
-        if (isShiftCtrlDoubledAsClickPressed)
+        if (isLeftShiftDoubledAsClickPressed)
         {
             leftShiftActiveBeforeShiftClickPress := true
         }
@@ -97,9 +107,16 @@ setShiftState(state)
 setWinState(state)
 {
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-    if (winActive && isWinDoubledAsClickPressed)
+    if (winActive)
     {
-        winActiveBeforeWinClickPress := true
+        if (isLeftWinDoubledAsClickPressed)
+        {
+            leftWinActiveBeforeCtrlClickPress := true
+        }
+        else if (isRightWinDoubledAsClickPressed)
+        {
+            rightWinActiveBeforeCtrlClickPress := true
+        }
     }
     winActive := state
     pressedState := state ? "down" : "up"
