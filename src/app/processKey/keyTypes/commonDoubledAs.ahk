@@ -43,8 +43,15 @@ sendDoubledValueAndReset(modifierValue, ByRef resetValue, ByRef isModifierClickD
             state := ""
             resetValue := false
         }
-        send {blind}%activeModifiers%{%doubledAction% %state%}
+        send {blind}%activeModifiers%{lbutton %state%}
         isModifierClickDown := true
+    }
+    else if (doubledAction == "rbutton")
+    {
+        send {blind}%activeModifiers%{rbutton down}
+        send {blind}%activeModifiers%{rbutton up}
+        isModifierClickDown := false
+        resetValue := false
     }
     else
     {

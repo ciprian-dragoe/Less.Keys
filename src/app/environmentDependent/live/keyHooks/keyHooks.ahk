@@ -278,8 +278,13 @@ processModifierWhenKeyPhysicalUp(key)
 {           
     modifier := SubStr(key, 2)
     remappedWithKey := layout[key]
-    if (GetKeyState(modifier) || GetKeyState(remappedWithKey))
+    if (GetKeyState(modifier) || GetKeyState(remappedWithKey) || isModifierKey(remappedWithKey))
     {
         processKeyUp(remappedWithKey)
+    }
+    else
+    {
+        removeFromActivePressedKeys(remappedWithKey)
+        lastKeyProcessedAsAlternative := ""
     }
 }

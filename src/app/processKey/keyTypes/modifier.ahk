@@ -37,7 +37,6 @@ processModifierKey(key, state)
     action := modifierActions[key]
     if (action)
     {
-
         debug(key . " modifier |" . state . "|")
         action.call(state)
         processKeyOnRelease := false
