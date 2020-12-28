@@ -39,10 +39,6 @@ doubledLeftAltDown()
         leftAltActiveBeforeAltClickPress := true
         resetSendClickOnRightModifierRelease(1)
         sendDoubledValueAndReset("leftAltClick", sendClickOnLeftAltClickRelease, isLeftAltClickDown)
-        if (!isLeftAltClickDown)
-        {
-            chooseClickDragActivation("leftAltClick", "mouseDragAltActivate", doubledLeftAltMouseHook)
-        }
         return
     }
 

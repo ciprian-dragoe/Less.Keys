@@ -40,10 +40,6 @@ doubledLeftCtrlDown()
         leftCtrlActiveBeforeCtrlClickPress := true
         resetSendClickOnRightModifierRelease(1)
         sendDoubledValueAndReset("leftCtrlClick", sendClickOnLeftCtrlClickRelease, isLeftCtrlClickDown)
-        if (!isLeftCtrlClickDown)
-        {
-            chooseClickDragActivation("leftCtrlClick", "mouseDragLeftCtrlActivate", doubledLeftCtrlMouseHook)
-        }
         return
     }
     

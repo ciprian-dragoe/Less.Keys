@@ -1,6 +1,6 @@
 global timerTimeoutStickyKeys := 1000
 
-; if the cpu is executing intensive tasks then the lift key up command may not be processed for 
+; if the cpu is executing intensive tasks then the lift key up command may not be processed for
 ; modifier keys (ctrl, shift, alt, win) and they are still registered by the os as pressed.
 ; This is a fail safe for such situations
 timerStickyFailBack()
@@ -72,7 +72,7 @@ resetStates()
     layoutKeyPressed := false
     SetTimer, TimerScrollWithMouseMovement, OFF
     systemCursor(1)
-    alternativeLayoutActive := false 
+    alternativeLayoutActive := false
     sendLayoutKey := false
     keyToSendOnUp := ""
     lastKeyProcessedAsAlternative := ""

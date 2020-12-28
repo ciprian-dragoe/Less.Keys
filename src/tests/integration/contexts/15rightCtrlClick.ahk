@@ -11,12 +11,12 @@ When_rightCtrlClick_is_pressed_at_release_left_click_is_sent_#1501()
     validateCaretOutput(A_ThisFunc, expected)    
 }
 
-When_rightCtrlClick_is_continuously_pressed_and_layout_key_is_pressed_but_not_released_space_is_sent_#1502()
+When_rightCtrlClick_is_continuously_pressed_and_layout_key_is_pressed_and_released_space_is_sent_#1502()
 {
     simulateTyping("hello")
     processKeyDown("rightCtrlClick")
     sleep 100
-    simulateKeyDown("space", 1000)
+    simulateKeyDown("space", 100)
     simulateKeyUp("space", 50)
     processKeyUp("rightCtrlClick")
     sleep 100
@@ -379,6 +379,10 @@ When_layout_key_is_pressed_followed_by_rightCtrlClick_left_click_is_not_sent_on_
     setMousePositionToCaret()
     simulateTyping("hello ")
     expected := getCurrentCaretPosition()
+    processKeyDown("left")
+    sleep 100
+    processKeyUp("left")
+    sleep 100
     processKeyDown("space")
     sleep 100
     processKeyDown("rightCtrlClick")

@@ -40,10 +40,6 @@ doubledLeftShiftDown()
         leftShiftActiveBeforeShiftClickPress := true
         resetSendClickOnRightModifierRelease(1)
         sendDoubledValueAndReset("leftShiftClick", sendClickOnLeftShiftClickRelease, isLeftShiftClickDown)
-        if (!isLeftShiftClickDown)
-        {
-            chooseClickDragActivation("leftShiftClick", "mouseDragLeftShiftActivate", doubledLeftShiftMouseHook)
-        }
         return
     }
     

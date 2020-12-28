@@ -24,6 +24,7 @@ When_leftShiftClick_pressed_rightShiftClick_pressed_THEN_whole_text_is_selected_
     processKeyDown("leftShiftClick")
     sleep 100
     processKeyDown("rightShiftClick")
+    sleep %timerTimeoutStickyKeys%
     actual := getSelectedText()
     processKeyUp("leftShiftClick")
     sleep 100
@@ -53,7 +54,7 @@ When_leftShiftClick_doubled_as_d_pressed_rightShiftClick_pressed_leftShiftClick_
     validateTestOutput(A_ThisFunc , expected)
 }
 
-When_leftShiftClick_pressed_rightShiftClick_pressed_mouse_moved_until_second_word_THEN_only_first_word_is_selected_#2204()
+When_leftShiftClick_pressed_rightShiftClick_pressed_mouse_moved_until_second_word_THEN_only_second_word_is_selected_#2204()
 {
     setMousePositionToCaret()
     simulateTyping("hello")
@@ -70,7 +71,7 @@ When_leftShiftClick_pressed_rightShiftClick_pressed_mouse_moved_until_second_wor
     sleep 100
     actual := getSelectedText()
 
-    expected := "hello "
+    expected := "world"
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
     setDefaultTestEnvironment(A_ThisFunc)
 }

@@ -376,6 +376,10 @@ When_layout_key_is_pressed_followed_by_leftShiftClick_left_click_is_not_sent_on_
     setMousePositionToCaret()
     simulateTyping("hello ")
     expected := getCurrentCaretPosition()
+    processKeyDown("left")
+    sleep 100
+    processKeyUp("left")
+    sleep 100
     processKeyDown("space")
     sleep 100
     processKeyDown("leftShiftClick")

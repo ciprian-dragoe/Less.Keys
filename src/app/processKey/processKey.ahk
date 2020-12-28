@@ -16,16 +16,17 @@ global processKeyOnRelease
 
 processKeyDown(key)
 {
-    SetTimer TimerStickyFailBack, off
-    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-
     if (processModifierKey(key, 1))
     {
+        SetTimer TimerStickyFailBack, off
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         return
     }
     
     if (key = layoutChangeKey)
     {
+        SetTimer TimerStickyFailBack, off
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         manageLayoutKeyDown(key)
         return
     }

@@ -39,10 +39,6 @@ doubledLeftWinDown()
         leftWinActiveBeforeWinClickPress := true
         resetSendClickOnRightModifierRelease(1)
         sendDoubledValueAndReset("leftWinClick", sendClickOnLeftWinClickRelease, isLeftWinClickDown)
-        if (!isLeftWinClickDown)
-        {
-            chooseClickDragActivation("leftWinClick", "mouseDragLeftWinActivate", doubledLeftWinMouseHook)
-        }
         return
     }
     

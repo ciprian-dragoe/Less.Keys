@@ -11,17 +11,17 @@ When_leftCtrlClick_is_pressed_at_release_left_click_is_sent_#401()
     validateCaretOutput(A_ThisFunc, expected)    
 }
 
-When_leftCtrlClick_is_continuously_pressed_and_layout_key_is_pressed_but_not_released_space_is_sent_#402()
+When_leftCtrlClick_is_continuously_pressed_and_layout_key_is_pressed_but_not_released_space_is_not_sent_#402()
 {
     simulateTyping("hello")
     processKeyDown("leftCtrlClick")
     sleep 100
-    simulateKeyDown("space", 1000)
+    simulateKeyDown("space", timerTimeoutStickyKeys)
     simulateKeyUp("space", 50)
     processKeyUp("leftCtrlClick")
     sleep 100
         
-    expected := "hello "
+    expected := "hello"
     validateTestOutput(A_ThisFunc , expected)
 }
 
@@ -379,6 +379,10 @@ When_layout_key_is_pressed_followed_by_leftCtrlClick_left_click_is_not_sent_on_l
     setMousePositionToCaret()
     simulateTyping("hello ")
     expected := getCurrentCaretPosition()
+    processKeyDown("left")
+    sleep 100
+    processKeyUp("left")
+    sleep 100
     processKeyDown("space")
     sleep 100
     processKeyDown("leftCtrlClick")

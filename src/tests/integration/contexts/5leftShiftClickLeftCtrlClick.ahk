@@ -1,8 +1,8 @@
-When_leftShiftClick_is_pressed_and_leftCtrlClick_is_pressed_left_click_is_sent_on_leftShiftClick_release_#501()
+When_leftShiftClick_is_pressed_and_leftCtrlClick_is_pressed_left_click_is_not_sent_on_leftShiftClick_release_#501()
 {
     setMousePositionToCaret()
-    expected := getCurrentCaretPosition()
     simulateTyping("hello ")
+    expected := getCurrentCaretPosition()
     processKeyDown("leftShiftClick")
     sleep 100
     processKeyDown("leftCtrlClick")
@@ -14,11 +14,11 @@ When_leftShiftClick_is_pressed_and_leftCtrlClick_is_pressed_left_click_is_sent_o
     validateCaretOutput(A_ThisFunc, expected)
 }
 
-When_leftCtrlClick_is_pressed_and_leftShiftClick_is_pressed_click_is_sent_on_leftCtrlClick_release_#502()
+When_leftCtrlClick_is_pressed_and_leftShiftClick_is_pressed_click_is_not_sent_on_leftCtrlClick_release_#502()
 {
     setMousePositionToCaret()
-    expected := getCurrentCaretPosition()
     simulateTyping("hello ")
+    expected := getCurrentCaretPosition()
     processKeyDown("leftCtrlClick")
     sleep 100
     processKeyDown("leftShiftClick")
@@ -79,38 +79,6 @@ When_leftShiftClick_is_continuously_pressed_and_leftCtrlClick_is_continuously_pr
     sleep 100
     processKeyDown("leftCtrlClick")
     sleep timeoutStillSendLayoutKey
-    sleep 100
-    processKeyUp("leftShiftClick")
-    sleep 100
-    processKeyUp("leftCtrlClick")
-    
-    validateCaretOutput(A_ThisFunc, expected)
-}
-
-When_leftShiftClick_is_pressed_and_leftCtrlClick_is_pressed_and_released_left_click_is_sent_on_leftShiftClick_release_#506()
-{
-    setMousePositionToCaret()
-    expected := getCurrentCaretPosition()
-    simulateTyping("hello ")
-    processKeyDown("leftShiftClick")
-    sleep 100
-    processKeyDown("leftCtrlClick")
-    sleep 100
-    processKeyUp("leftCtrlClick")
-    sleep 100
-    processKeyUp("leftShiftClick")
-    
-    validateCaretOutput(A_ThisFunc, expected)
-}
-
-When_leftCtrlClick_is_pressed_and_leftShiftClick_is_pressed_and_released_left_click_is_sent_on_leftCtrlClick_release_#507()
-{
-    setMousePositionToCaret()
-    expected := getCurrentCaretPosition()
-    simulateTyping("hello ")
-    processKeyDown("leftCtrlClick")
-    sleep 100
-    processKeyDown("leftShiftClick")
     sleep 100
     processKeyUp("leftShiftClick")
     sleep 100

@@ -19,6 +19,7 @@ manageLayoutKeyDown(key)
             MouseGetPos, initialMousePositionXAxis, initialMousePositionYAxis
             SetTimer, TimerScrollWithMouseMovement, %timeoutMouseScrollPoll%
         }
+
         if (activePressedKeys.Length() > 0)
         {
             send {blind}{%key%}

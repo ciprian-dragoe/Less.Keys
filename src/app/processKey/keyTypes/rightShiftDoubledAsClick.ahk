@@ -2,7 +2,7 @@ global sendClickOnRightShiftClickRelease := false
 global isRightShiftDoubledAsClickPressed := false
 global rightShiftActiveBeforeShiftClickPress
 global doubledRightShiftMouseHook := 0
-global isRightShiftDown := false
+global isRightShiftClickDown := false
 
 
 
@@ -38,11 +38,7 @@ doubledRightShiftDown()
     {
         rightShiftActiveBeforeShiftClickPress := true
         resetSendClickOnLeftModifierRelease(1)
-        sendDoubledValueAndReset("rightShiftClick", sendClickOnRightShiftClickRelease, isRightShiftDown)
-        if (!isRightShiftDown)
-        {
-            chooseClickDragActivation("rightShiftClick", "mouseDragRightShiftActivate", doubledRightShiftMouseHook)
-        }
+        sendDoubledValueAndReset("rightShiftClick", sendClickOnRightShiftClickRelease, isRightShiftClickDown)
         return
     }
     
@@ -62,7 +58,7 @@ mouseDragRightShiftActivate(nCode, wParam, lParam)
     if (wParam = 0x200)
     {
         sendClickOnRightShiftClickRelease := false
-        isRightShiftDown := true
+        isRightShiftClickDown := true
         doubledAction := modifierDoubledAsClick["rightShiftClick"]
         send {blind}{%doubledAction% down}
     }
@@ -82,10 +78,10 @@ doubledRightShiftUp()
         shiftActive := 0
     }
 
-    resetDoubledModifierClickDrag("rightShiftClick", isRightShiftDown)
+    resetDoubledModifierClickDrag("rightShiftClick", isRightShiftClickDown)
 
     if (sendClickOnRightShiftClickRelease)
     {
-        sendDoubledValueAndReset("rightShiftClick", sendClickOnRightShiftClickRelease, isRightShiftDown)
+        sendDoubledValueAndReset("rightShiftClick", sendClickOnRightShiftClickRelease, isRightShiftClickDown)
     }
 }
