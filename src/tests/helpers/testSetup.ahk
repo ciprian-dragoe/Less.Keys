@@ -31,6 +31,8 @@ printTestResults(testResults)
 
 setDefaultTestEnvironment(testName)
 {
+    output := "CLEANING | " . testName . " |"
+    tooltip % output
     send {escape}
     sleep 200
     send {escape}
@@ -46,7 +48,12 @@ setDefaultTestEnvironment(testName)
     modifierDoubledAsClick["rightShiftClick"] := "lbutton"
     modifierDoubledAsClick["rightWinClick"] := "lbutton"
     modifierDoubledAsClick["rightAltClick"] := "lbutton"
-    showToolTip("CLEANING | " . testName . " |", 1000)
+    send {lbutton up}
+    send {shift up}
+    send {ctrl up}
+    send {alt up}
+    send {win up}
+    tooltip
 }
 
 clearText()
