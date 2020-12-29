@@ -37,6 +37,11 @@ doubledRightCtrlDown()
 
     if (ctrlActive || isLeftAltDoubledAsClickPressed || isLeftShiftDoubledAsClickPressed || isLeftWinDoubledAsClickPressed)
     {
+        if (isLeftCtrlDoubledAsClickPressed)
+        {
+            setCtrlState(1)
+            setTimer TimerMonitorCtrlModifierLift, 20
+        }
         rightCtrlActiveBeforeCtrlClickPress := true
         resetSendClickOnLeftModifierRelease(1)
         sendDoubledValueAndReset("rightCtrlClick", sendClickOnRightCtrlClickRelease, isRightCtrlClickDown)
@@ -78,7 +83,7 @@ doubledRightCtrlUp()
     {
         ctrlActive := 0
     }
-    
+
     resetDoubledModifierClickDrag("rightCtrlClick", isRightCtrlClickDown)
 
     if (sendClickOnRightCtrlClickRelease)

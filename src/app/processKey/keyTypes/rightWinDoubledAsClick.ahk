@@ -36,6 +36,11 @@ doubledRightWinDown()
 
     if (winActive || isLeftAltDoubledAsClickPressed || isLeftCtrlDoubledAsClickPressed || isLeftShiftDoubledAsClickPressed)
     {
+        if (isLeftWinDoubledAsClickPressed)
+        {
+            setWinState(1)
+            setTimer TimerMonitorWinModifierLift, 20
+        }
         rightWinActiveBeforeWinClickPress := true
         resetSendClickOnLeftModifierRelease(1)
         sendDoubledValueAndReset("rightWinClick", sendClickOnRightWinClickRelease, isRightWinClickDown)

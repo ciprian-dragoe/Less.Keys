@@ -36,6 +36,11 @@ doubledLeftAltDown()
 
     if (altActive || isRightCtrlDoubledAsClickPressed || isRightShiftDoubledAsClickPressed || isRightWinDoubledAsClickPressed)
     {
+        if (isRightAltDoubledAsClickPressed)
+        {
+            setAltState(1)
+            setTimer TimerMonitorAltModifierLift, 20
+        }
         leftAltActiveBeforeAltClickPress := true
         resetSendClickOnRightModifierRelease(1)
         sendDoubledValueAndReset("leftAltClick", sendClickOnLeftAltClickRelease, isLeftAltClickDown)

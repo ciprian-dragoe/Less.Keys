@@ -29,6 +29,11 @@ doubledLeftShiftDown()
     
     if (isLeftCtrlDoubledAsClickPressed || isLeftWinDoubledAsClickPressed || isLeftAltDoubledAsClickPressed)
     {
+        if (isRightShiftDoubledAsClickPressed)
+        {
+            setShiftState(1)
+            setTimer TimerMonitorShiftModifierLift, 20
+        }
         resetSendClickOnLeftModifierRelease(1)
         setShiftState(1)
         setTimer TimerMonitorShiftModifierLift, 20
