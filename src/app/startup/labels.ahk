@@ -48,6 +48,6 @@ TimerMonitorShiftModifierLift:
     timerMonitorShiftModifierLift()
 return
 
-TimerFixRemoteDesktopOverwritesLessKeys:
-    timerFixRemoteDesktopOverwritesLessKeys()
+TimerFixAppsOverwriteLessKeysKeyboardHooks:
+    timerFixAppsOverwriteLessKeysKeyboardHooks()
 return

@@ -48,7 +48,6 @@ processModifierKey(key, state)
 
 setCtrlState(state)
 {
-    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
     if (ctrlActive)
     {
         if (isLeftCtrlDoubledAsClickPressed)
@@ -67,8 +66,6 @@ setCtrlState(state)
 
 setAltState(state)
 {
-    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-
     if (altActive)
     {
         if (isLeftAltDoubledAsClickPressed)
@@ -87,7 +84,6 @@ setAltState(state)
 
 setShiftState(state)
 {
-    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
     if (shiftActive)
     {
         if (isLeftShiftDoubledAsClickPressed)
@@ -106,7 +102,6 @@ setShiftState(state)
 
 setWinState(state)
 {
-    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
     if (winActive)
     {
         if (isLeftWinDoubledAsClickPressed)

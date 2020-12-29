@@ -5,10 +5,9 @@ global timerTimeoutStickyKeys := 1000
 ; This is a fail safe for such situations
 timerStickyFailBack()
 {
-    WinGetTitle, activeProgramWindowName, A
-    for index,key in disabledApps
+    for index,app in disabledApps
     {
-        IfInString, activeProgramWindowName, %key%
+        IfInString, lastActiveAppName, %app%
         {
             resetStates()
             return

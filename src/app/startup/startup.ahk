@@ -7,13 +7,13 @@
 #include  %A_ScriptDir%\app\startup\load\layout.ahk
 #include  %A_ScriptDir%\app\startup\load\stickyFailBack.ahk
 #include  %A_ScriptDir%\app\startup\load\accentedCharacters.ahk
-#include  %A_ScriptDir%\app\startup\load\remoteDesktopException.ahk
+#include  %A_ScriptDir%\app\sticky\fixAppsOverwriteLessKeysKeyboardHooks.ahk
 
 
 
 resetStates()
 readSettingsFile(PATH_APP_CONFIGURATION)
-SetTimer, TimerFixRemoteDesktopOverwritesLessKeys, 500
+SetTimer, TimerFixAppsOverwriteLessKeysKeyboardHooks, 500
 OnExit("resetStates")
 
 readSettingsFile(basePath)

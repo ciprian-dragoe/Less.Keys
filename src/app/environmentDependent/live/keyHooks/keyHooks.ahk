@@ -274,6 +274,7 @@ processModifierWhenKeyPhysicalDown(key)
     }
 }
 
+; avoids strange ahk bug where modifier key lift is not received
 processModifierWhenKeyPhysicalUp(key)
 {           
     modifier := SubStr(key, 2)
