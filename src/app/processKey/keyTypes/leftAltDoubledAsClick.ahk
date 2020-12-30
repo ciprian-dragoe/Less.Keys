@@ -1,6 +1,6 @@
 global sendClickOnLeftAltClickRelease := false
 global isLeftAltDoubledAsClickPressed := false
-global leftAltActiveBeforeAltClickPress := false
+global repressLeftAltReleaseCancelAltActive := false
 global doubledLeftAltMouseHook := 0
 global isLeftAltClickDown := false
 
@@ -27,34 +27,54 @@ doubledLeftAltDown()
 
     isLeftAltDoubledAsClickPressed := true
 
-    if (isLeftShiftDoubledAsClickPressed || isLeftWinDoubledAsClickPressed || isLeftCtrlDoubledAsClickPressed) {
+    if (isLeftWinDoubledAsClickPressed || isLeftShiftDoubledAsClickPressed || isLeftCtrlDoubledAsClickPressed)
+    {
         resetSendClickOnLeftModifierRelease(1)
         setAltState(1)
-        setTimer TimerMonitorAltModifierLift, 20
+        setTimer TimerMonitorAltModifierLift, %timeoutResetModifierContinuousPress%
         return
     }
 
-    if (altActive || isRightCtrlDoubledAsClickPressed || isRightShiftDoubledAsClickPressed || isRightWinDoubledAsClickPressed)
+    if (fixQuickTypeLeftRightDoubledModifiers || layoutKeyPressed || activePressedKeys.Length() > 0)
     {
-        if (isRightAltDoubledAsClickPressed)
+        if (isAnyRightModifierPressed())
         {
-            setAltState(1)
-            setTimer TimerMonitorAltModifierLift, 20
+            continuousPressLeftAlt()
         }
-        leftAltActiveBeforeAltClickPress := true
-        resetSendClickOnRightModifierRelease(1)
+        else if (altActive)
+        {
+            repressNormalAltRelease := true
+        }
+    }
+    else if (isAnyRightModifierPressed())
+    {
+        continuousPressLeftAlt()
         sendDoubledValueAndReset("leftAltClick", sendClickOnLeftAltClickRelease, isLeftAltClickDown)
+        return
+    }
+    else if (altActive)
+    {
+        sendDoubledValueAndReset("leftAltClick", sendClickOnLeftAltClickRelease, isLeftAltClickDown)
+        repressLeftAltReleaseCancelAltActive := true
         return
     }
 
     altActive := 1
 
-    if (!layoutKeyPressed && activePressedKeys.Length() = 0)
+    sendClickOnLeftAltClickRelease := true
+    chooseClickDragActivation("leftAltClick", "mouseDragLeftAltActivate", doubledLeftAltMouseHook)
+    setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
+}
+
+continuousPressLeftAlt()
+{
+    if (isRightAltDoubledAsClickPressed)
     {
-        sendClickOnLeftAltClickRelease := true
-        chooseClickDragActivation("leftAltClick", "mouseDragLeftAltActivate", doubledLeftAltMouseHook)
-        setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
+        setAltState(1)
+        setTimer TimerMonitorAltModifierLift, %timeoutResetModifierContinuousPress%
     }
+    resetSendClickOnRightModifierRelease(1)
+    repressRightAltReleaseCancelAltActive := true
 }
 
 mouseDragLeftAltActivate(nCode, wParam, lParam)
@@ -62,7 +82,7 @@ mouseDragLeftAltActivate(nCode, wParam, lParam)
     cancelMouseHook(doubledLeftAltMouseHook)
     if (wParam = 0x200)
     {
-        sendClickOnLeftAltClickRelease := false
+        sendClickOnLeftAltClickRelease := true
         isLeftAltClickDown := true
         doubledAction := modifierDoubledAsClick["leftAltClick"]
         send {blind}{%doubledAction% down}
@@ -74,19 +94,20 @@ doubledLeftAltUp()
     cancelMouseHook(doubledLeftAltMouseHook)
     isLeftAltDoubledAsClickPressed := false
 
-    if (leftAltActiveBeforeAltClickPress)
+    if (repressLeftAltReleaseCancelAltActive)
     {
-        leftAltActiveBeforeAltClickPress := false
+        repressLeftAltReleaseCancelAltActive := false
     }
     else
     {
         altActive := 0
+        repressNormalAltRelease := false
+        repressRightAltReleaseCancelAltActive := false
     }
-
-    resetDoubledModifierClickDrag("leftAltClick", isLeftAltClickDown)
 
     if (sendClickOnLeftAltClickRelease)
     {
+        sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("leftAltClick", sendClickOnLeftAltClickRelease, isLeftAltClickDown)
     }
 }

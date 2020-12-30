@@ -4,20 +4,24 @@
 ; contain function declarations, some also contain variable initialization and this will 
 ; not happen anymore
 
-TimerStickyFailBack: 
+TimerStickyFailBack:
     timerStickyFailBack()
 return
 
-TimerRealTimeDebug: 
+TimerRealTimeDebug:
     timerRealTimeDebug()
 return
 
 TimerProcessLayoutOnRelease:
-    timerProcessLayoutOnRelease()     
+    timerProcessLayoutOnRelease()
 return
 
 TimerScrollWithMouseMovement:
-    timerScrollWithMouseMovement()     
+    timerScrollWithMouseMovement()
+return
+
+TimerFixQuickTypeLeftRightDoubledModifiers:
+    timerFixQuickTypeLeftRightDoubledModifiers()
 return
 
 TimerResetModifierReleaseAction:

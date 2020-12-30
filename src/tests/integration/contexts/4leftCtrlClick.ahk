@@ -107,6 +107,7 @@ When_leftCtrlClick_is_pressed_and_ctrl_key_is_pressed_click_is_sent_on_leftCtrlC
 
 When_leftCtrlClick_is_pressed_and_alt_key_is_pressed_and_released_click_is_sent_on_leftCtrlClick_release_#408()
 {
+    timeoutStillSendLayoutKey := 2000
     simulateTyping("he")
     setMousePositionToCaret()
     expected := getCurrentCaretPosition()
@@ -141,6 +142,7 @@ When_leftCtrlClick_is_pressed_and_alt_key_is_pressed_click_is_sent_on_leftCtrlCl
 
 When_leftCtrlClick_is_pressed_and_win_key_is_pressed_and_released_click_is_sent_on_leftCtrlClick_release_#410()
 {
+    timeoutStillSendLayoutKey := 2000
     simulateTyping("he")
     setMousePositionToCaret()
     expected := getCurrentCaretPosition()
@@ -374,55 +376,21 @@ When_leftCtrlClick_is_pressed_more_then_timeoutStillSendLayoutKey_left_click_is_
     validateCaretOutput(A_ThisFunc, expected)
 }
 
-When_layout_key_is_pressed_followed_by_leftCtrlClick_left_click_is_not_sent_on_leftCtrlClick_release_#423()
-{
-    setMousePositionToCaret()
-    simulateTyping("hello ")
-    expected := getCurrentCaretPosition()
-    processKeyDown("left")
-    sleep 100
-    processKeyUp("left")
-    sleep 100
-    processKeyDown("space")
-    sleep 100
-    processKeyDown("leftCtrlClick")
-    sleep 100
-    processKeyUp("leftCtrlClick")
-    sleep 100
-    processKeyUp("space")
-    
-    validateCaretOutput(A_ThisFunc, expected)
-}
-
-When_non_modifier_key_is_pressed_followed_by_leftCtrlClick_left_click_is_not_sent_on_leftCtrlClick_release_#424()
-{
-    setMousePositionToCaret()
-    simulateTyping("hello ")
-    simulateKeyDown("a", 100)
-    expected := getCurrentCaretPosition()
-    processKeyDown("leftCtrlClick")
-    sleep 100
-    processKeyUp("leftCtrlClick")
-    simulateKeyUp("a", 100)
-    
-    validateCaretOutput(A_ThisFunc, expected)
-}
-
 When_leftCtrlClick_action_is_not_lbutton_and_mouse_is_moved_on_release_action_is_sent_instead_of_mouse_click_#425()
 {
-	modifierDoubledAsClick["leftCtrlClick"] := "c"
+    modifierDoubledAsClick["leftCtrlClick"] := "c"
     startingPosition := setMousePositionToCaret()
     simulateTyping("hello ")
-	setMousePositionToCaret()
+    setMousePositionToCaret()
     processKeyDown("leftCtrlClick")
-	sleep 50
+    sleep 50
     MouseMove startingPosition.x, startingPosition.y
     processKeyUp("leftCtrlClick")
     sleep 100
     
     expected := "hello c"
     validateTestOutput(A_ThisFunc , expected)
-	modifierDoubledAsClick["leftCtrlClick"] := "lbutton"
+    modifierDoubledAsClick["leftCtrlClick"] := "lbutton"
 }
 
 When_ctrl_is_pressed_and_leftCtrlClick_is_continuously_pressed_and_mouse_is_moved_the_text_is_selected_#426()

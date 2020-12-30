@@ -1,6 +1,6 @@
 global sendClickOnLeftWinClickRelease := false
 global isLeftWinDoubledAsClickPressed := false
-global leftWinActiveBeforeWinClickPress := false
+global repressLeftWinReleaseCancelWinActive := false
 global doubledLeftWinMouseHook := 0
 global isLeftWinClickDown := false
 
@@ -24,37 +24,57 @@ doubledLeftWinDown()
     {
         return
     }
-    
+
     isLeftWinDoubledAsClickPressed := true
-    
-    if (isLeftShiftDoubledAsClickPressed || isLeftCtrlDoubledAsClickPressed || isLeftAltDoubledAsClickPressed) {
+
+    if (isLeftCtrlDoubledAsClickPressed || isLeftShiftDoubledAsClickPressed || isLeftAltDoubledAsClickPressed)
+    {
         resetSendClickOnLeftModifierRelease(1)
         setWinState(1)
-        setTimer TimerMonitorWinModifierLift, 20
+        setTimer TimerMonitorWinModifierLift, %timeoutResetModifierContinuousPress%
         return
     }
 
-    if (winActive || isRightAltDoubledAsClickPressed || isRightCtrlDoubledAsClickPressed || isRightShiftDoubledAsClickPressed)
+    if (fixQuickTypeLeftRightDoubledModifiers || layoutKeyPressed || activePressedKeys.Length() > 0)
     {
-        if (isRightWinDoubledAsClickPressed)
+        if (isAnyRightModifierPressed())
         {
-            setWinState(1)
-            setTimer TimerMonitorWinModifierLift, 20
+            continuousPressLeftWin()
         }
-        leftWinActiveBeforeWinClickPress := true
-        resetSendClickOnRightModifierRelease(1)
+        else if (winActive)
+        {
+            repressNormalWinRelease := true
+        }
+    }
+    else if (isAnyRightModifierPressed())
+    {
+        continuousPressLeftWin()
         sendDoubledValueAndReset("leftWinClick", sendClickOnLeftWinClickRelease, isLeftWinClickDown)
         return
     }
-    
+    else if (winActive)
+    {
+        sendDoubledValueAndReset("leftWinClick", sendClickOnLeftWinClickRelease, isLeftWinClickDown)
+        repressLeftWinReleaseCancelWinActive := true
+        return
+    }
+
     winActive := 1
 
-    if (!layoutKeyPressed && activePressedKeys.Length() = 0)
-    {        
-        sendClickOnLeftWinClickRelease := true
-        chooseClickDragActivation("leftWinClick", "mouseDragLeftWinActivate", doubledLeftWinMouseHook)
-        setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
+    sendClickOnLeftWinClickRelease := true
+    chooseClickDragActivation("leftWinClick", "mouseDragLeftWinActivate", doubledLeftWinMouseHook)
+    setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
+}
+
+continuousPressLeftWin()
+{
+    if (isRightWinDoubledAsClickPressed)
+    {
+        setWinState(1)
+        setTimer TimerMonitorWinModifierLift, %timeoutResetModifierContinuousPress%
     }
+    resetSendClickOnRightModifierRelease(1)
+    repressRightWinReleaseCancelWinActive := true
 }
 
 mouseDragLeftWinActivate(nCode, wParam, lParam)
@@ -62,7 +82,7 @@ mouseDragLeftWinActivate(nCode, wParam, lParam)
     cancelMouseHook(doubledLeftWinMouseHook)
     if (wParam = 0x200)
     {
-        sendClickOnLeftWinClickRelease := false
+        sendClickOnLeftWinClickRelease := true
         isLeftWinClickDown := true
         doubledAction := modifierDoubledAsClick["leftWinClick"]
         send {blind}{%doubledAction% down}
@@ -74,19 +94,20 @@ doubledLeftWinUp()
     cancelMouseHook(doubledLeftWinMouseHook)
     isLeftWinDoubledAsClickPressed := false
 
-    if (leftWinActiveBeforeWinClickPress)
+    if (repressLeftWinReleaseCancelWinActive)
     {
-        leftWinActiveBeforeWinClickPress := false
+        repressLeftWinReleaseCancelWinActive := false
     }
     else
     {
         winActive := 0
+        repressNormalWinRelease := false
+        repressRightWinReleaseCancelWinActive := false
     }
-    
-    resetDoubledModifierClickDrag("leftWinClick", isLeftWinClickDown)
 
     if (sendClickOnLeftWinClickRelease)
     {
+        sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("leftWinClick", sendClickOnLeftWinClickRelease, isLeftWinClickDown)
     }
 }

@@ -37,7 +37,7 @@ processModifierKey(key, state)
     action := modifierActions[key]
     if (action)
     {
-        debug(key . " modifier |" . state . "|")
+        debug(key . " |" . state . "|")
         action.call(state)
         processKeyOnRelease := false
         return true
@@ -48,72 +48,52 @@ processModifierKey(key, state)
 
 setCtrlState(state)
 {
-    if (ctrlActive)
-    {
-        if (isLeftCtrlDoubledAsClickPressed)
-        {
-            leftCtrlActiveBeforeCtrlClickPress := true
-        }
-        else if (isRightCtrlDoubledAsClickPressed)
-        {
-            rightCtrlActiveBeforeCtrlClickPress := true
-        }
-    }
     ctrlActive := state
+    if (repressNormalCtrlRelease)
+    {
+        pressedState := "down"
+        ctrlActive := 1
+        repressNormalCtrlRelease := false
+    }
     pressedState := state ? "down" : "up"
     send {blind}{ctrl %pressedState%}
 }
 
 setAltState(state)
 {
-    if (altActive)
-    {
-        if (isLeftAltDoubledAsClickPressed)
-        {
-            leftAltActiveBeforeCtrlClickPress := true
-        }
-        else if (isRightAltDoubledAsClickPressed)
-        {
-            rightAltActiveBeforeCtrlClickPress := true
-        }
-    }
     altActive := state
+    if (repressNormalAltRelease)
+    {
+        pressedState := "down"
+        altActive := 1
+        repressNormalAltRelease := false
+    }
     pressedState := state ? "down" : "up"
     send {blind}{alt %pressedState%}
 }
 
 setShiftState(state)
 {
-    if (shiftActive)
-    {
-        if (isLeftShiftDoubledAsClickPressed)
-        {
-            leftShiftActiveBeforeShiftClickPress := true
-        }
-        else if (isRightShiftDoubledAsClickPressed)
-        {
-            rightShiftActiveBeforeShiftClickPress := true
-        }
-    }
     shiftActive := state
     pressedState := state ? "down" : "up"
+    if (repressNormalShiftRelease)
+    {
+        pressedState := "down"
+        shiftActive := 1
+        repressNormalShiftRelease := false
+    }
     send {blind}{shift %pressedState%}
 }
 
 setWinState(state)
 {
-    if (winActive)
-    {
-        if (isLeftWinDoubledAsClickPressed)
-        {
-            leftWinActiveBeforeCtrlClickPress := true
-        }
-        else if (isRightWinDoubledAsClickPressed)
-        {
-            rightWinActiveBeforeCtrlClickPress := true
-        }
-    }
     winActive := state
+    if (repressNormalWinRelease)
+    {
+        pressedState := "down"
+        winActive := 1
+        repressNormalWinRelease := false
+    }
     pressedState := state ? "down" : "up"
     send {blind}{lwin %pressedState%}
 }

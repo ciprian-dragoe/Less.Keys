@@ -384,55 +384,21 @@ When_rightAltClick_is_pressed_more_then_timeoutStillSendLayoutKey_left_click_is_
     validateCaretOutput(A_ThisFunc, expected)
 }
 
-When_layout_key_is_pressed_followed_by_rightAltClick_left_click_is_not_sent_on_rightAltClick_release_#3723()
-{
-    setMousePositionToCaret()
-    simulateTyping("hello ")
-    expected := getCurrentCaretPosition()
-    processKeyDown("left")
-    sleep 100
-    processKeyUp("left")
-    sleep 100
-    processKeyDown("space")
-    sleep 100
-    processKeyDown("rightAltClick")
-    sleep 100
-    processKeyUp("rightAltClick")
-    sleep 100
-    processKeyUp("space")
-    
-    validateCaretOutput(A_ThisFunc, expected)
-}
-
-When_non_modifier_key_is_pressed_followed_by_rightAltClick_left_click_is_not_sent_on_rightAltClick_release_#3724()
-{
-    setMousePositionToCaret()
-    simulateTyping("hello ")
-    simulateKeyDown("a", 100)
-    expected := getCurrentCaretPosition()
-    processKeyDown("rightAltClick")
-    sleep 100
-    processKeyUp("rightAltClick")
-    simulateKeyUp("a", 100)
-    
-    validateCaretOutput(A_ThisFunc, expected)
-}
-
 When_rightAltClick_action_is_not_lbutton_and_mouse_is_moved_on_release_action_is_sent_instead_of_mouse_click_#3725()
 {
-	modifierDoubledAsClick["rightAltClick"] := "c"
+        modifierDoubledAsClick["rightAltClick"] := "c"
     startingPosition := setMousePositionToCaret()
     simulateTyping("hello ")
-	setMousePositionToCaret()
+        setMousePositionToCaret()
     processKeyDown("rightAltClick")
-	sleep 50
+    sleep 50
     MouseMove startingPosition.x, startingPosition.y
     processKeyUp("rightAltClick")
     sleep 100
     
     expected := "hello c"
     validateTestOutput(A_ThisFunc , expected)
-	modifierDoubledAsClick["rightAltClick"] := "lbutton"
+    modifierDoubledAsClick["rightAltClick"] := "lbutton"
 }
 
 When_alt_is_pressed_and_rightAltClick_is_continuously_pressed_and_mouse_is_moved_the_text_is_selected_#3726()

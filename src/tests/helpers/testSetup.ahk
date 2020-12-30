@@ -38,21 +38,7 @@ setDefaultTestEnvironment(testName)
     send {escape}
     clearText()
     MouseMove, 500, 500
-    clipboard :=
-    timeGreaterTimeoutProcessLayoutOnRelease := 500
-    modifierDoubledAsClick["leftCtrlClick"] := "lbutton"
-    modifierDoubledAsClick["leftShiftClick"] := "lbutton"
-    modifierDoubledAsClick["leftWinClick"] := "lbutton"
-    modifierDoubledAsClick["leftAltClick"] := "lbutton"
-    modifierDoubledAsClick["rightCtrlClick"] := "lbutton"
-    modifierDoubledAsClick["rightShiftClick"] := "lbutton"
-    modifierDoubledAsClick["rightWinClick"] := "lbutton"
-    modifierDoubledAsClick["rightAltClick"] := "lbutton"
-    send {lbutton up}
-    send {shift up}
-    send {ctrl up}
-    send {alt up}
-    send {win up}
+    setTestVariables()
     tooltip
 }
 
@@ -71,4 +57,24 @@ getSelectedText()
     send ^c
     sleep 100
     return %clipboard%
+}
+
+setTestVariables()
+{
+    clipboard :=
+    timeGreaterTimeoutProcessLayoutOnRelease := 500
+    timeoutStillSendLayoutKey := 2000
+    modifierDoubledAsClick["leftCtrlClick"] := "lbutton"
+    modifierDoubledAsClick["leftShiftClick"] := "lbutton"
+    modifierDoubledAsClick["leftWinClick"] := "lbutton"
+    modifierDoubledAsClick["leftAltClick"] := "lbutton"
+    modifierDoubledAsClick["rightCtrlClick"] := "lbutton"
+    modifierDoubledAsClick["rightShiftClick"] := "lbutton"
+    modifierDoubledAsClick["rightWinClick"] := "lbutton"
+    modifierDoubledAsClick["rightAltClick"] := "lbutton"
+    send {lbutton up}
+    send {shift up}
+    send {ctrl up}
+    send {alt up}
+    send {win up}
 }

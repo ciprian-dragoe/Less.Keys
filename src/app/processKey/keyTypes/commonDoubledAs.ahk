@@ -1,3 +1,9 @@
+global fixQuickTypeLeftRightDoubledModifiers := 0
+global timeoutResetModifierContinuousPress := 20
+global repressNormalShiftRelease := false
+global repressNormalWinRelease := false
+
+
 cancelDoubledModifier()
 {
     resetSendClickOnLeftModifierRelease()
@@ -5,7 +11,7 @@ cancelDoubledModifier()
 
     leftCtrlActiveBeforeCtrlClickPress := false
     leftAltActiveBeforeAltClickPress := false
-    leftShiftActiveBeforeShiftClickPress := false
+    repressLeftShiftReleaseCancelShiftActive := false
     leftWinActiveBeforeWinClickPress := false
 
     rightCtrlActiveBeforeCtrlClickPress := false
@@ -31,44 +37,58 @@ chooseClickDragActivation(modifierValue, callbackMethodName, ByRef hookStoreLoca
     }
 }
 
-sendDoubledValueAndReset(modifierValue, ByRef resetValue, ByRef isModifierClickDown)
+sendDoubledValueAndReset(modifierValue, ByRef sendClickOnRelease, ByRef isModifierClickDown)
 {
     doubledAction := modifierDoubledAsClick[modifierValue]
     activeModifiers := getActiveModifiers()
+    debug("sendDoubledValueAndReset " . doubledAction)
     if (doubledAction == "lbutton")
     {
-        state := "down"
-        isModifierClickDown := true
-        if (resetValue)
+        if (isModifierClickDown)
         {
-            state := ""
-            resetValue := false
             isModifierClickDown := false
+            sendClickOnRelease := false
+            send {blind}%activeModifiers%{lbutton up}
         }
-        send {blind}%activeModifiers%{lbutton %state%}
+        else
+        {
+            if (sendClickOnRelease)
+            {
+                send {blind}%activeModifiers%{lbutton down}
+                send {blind}%activeModifiers%{lbutton up}
+                sendClickOnRelease := false
+                isModifierClickDown := false
+            }
+            else
+            {
+                send {blind}%activeModifiers%{lbutton down}
+                sendClickOnRelease := true
+                isModifierClickDown := true
+            }
+        }
     }
     else if (doubledAction == "rbutton")
     {
         send {blind}%activeModifiers%{rbutton down}
         send {blind}%activeModifiers%{rbutton up}
         isModifierClickDown := false
-        resetValue := false
+        sendClickOnRelease := false
     }
     else
     {
         send {blind}%activeModifiers%{%doubledAction%}
-        resetValue := false
+        sendClickOnRelease := false
         isModifierClickDown := false
     }
 }
 
-resetDoubledModifierClickDrag(modifierValue, ByRef resetValue)
+resetDoubledModifierClickDrag(modifierValue, ByRef sendClickOnRelease)
 {
-    if (resetValue)
+    if (sendClickOnRelease)
     {
         action := modifierDoubledAsClick[modifierValue]
         send {blind}{%action% up}
-        resetValue := false
+        sendClickOnRelease := false
     }
 }
 
@@ -84,7 +104,7 @@ activateCtrlWithKey(key)
     if (!GetKeyState("ctrl"))
     {
         send {ctrl down}
-        setTimer TimerMonitorCtrlModifierLift, 20
+        setTimer TimerMonitorCtrlModifierLift, %timeoutResetModifierContinuousPress%
     }
     send {blind}%key%
 }
@@ -103,7 +123,7 @@ activateShiftWithKey(key)
     if (!GetKeyState("shift"))
     {
         send {shift down}
-        setTimer TimerMonitorShiftModifierLift, 20
+        setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%
     }
     send {blind}%key%
 }
@@ -152,7 +172,7 @@ activateAltWithKey(key)
     if (!GetKeyState("alt"))
     {
         send {alt down}
-        setTimer TimerMonitorAltModifierLift, 20
+        setTimer TimerMonitorAltModifierLift, %timeoutResetModifierContinuousPress%
     }
     send {blind}%key%
 }
@@ -171,7 +191,7 @@ activateWinWithKey(key)
     if (!GetKeyState("lwin"))
     {
         send {lwin down}
-        setTimer TimerMonitorWinModifierLift, 20
+        setTimer TimerMonitorWinModifierLift, %timeoutResetModifierContinuousPress%
     }
     send {blind}%key%
 }
@@ -183,4 +203,20 @@ timerMonitorWinModifierLift()
         send {lwin up}
         setTimer TimerMonitorWinModifierLift, off
     }
+}
+
+timerFixQuickTypeLeftRightDoubledModifiers()
+{
+    SetTimer, TimerFixQuickTypeLeftRightDoubledModifiers, OFF
+    fixQuickTypeLeftRightDoubledModifiers := false
+}
+
+isAnyLeftModifierPressed()
+{
+    return isLeftAltDoubledAsClickPressed || isLeftCtrlDoubledAsClickPressed || isLeftWinDoubledAsClickPressed || isLeftShiftDoubledAsClickPressed
+}
+
+isAnyRightModifierPressed()
+{
+    return isRightAltDoubledAsClickPressed || isRightCtrlDoubledAsClickPressed || isRightWinDoubledAsClickPressed || isRightShiftDoubledAsClickPressed
 }

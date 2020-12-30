@@ -10,6 +10,8 @@ global defaultRightCtrlClickAction
 global defaultRightShiftClickAction
 global defaultRightWinClickAction
 global defaultRightAltClickAction
+global defaultTimeoutStillSendLayoutKey
+global defaultTimeGreaterTimeoutProcessLayoutOnRelease
 
 
 if (prepareTestEnvironment())
@@ -34,14 +36,9 @@ initTestEnvironment()
     defaultRightShiftClickAction := modifierDoubledAsClick["rightShiftClick"]
     defaultRightWinClickAction := modifierDoubledAsClick["rightWinClick"]
     defaultRightAltClickAction := modifierDoubledAsClick["rightAltClick"]
-    modifierDoubledAsClick["leftCtrlClick"] := "lbutton"
-    modifierDoubledAsClick["leftShiftClick"] := "lbutton"
-    modifierDoubledAsClick["leftWinClick"] := "lbutton"
-    modifierDoubledAsClick["leftAltClick"] := "lbutton"
-    modifierDoubledAsClick["rightCtrlClick"] := "lbutton"
-    modifierDoubledAsClick["rightShiftClick"] := "lbutton"
-    modifierDoubledAsClick["rightWinClick"] := "lbutton"
-    modifierDoubledAsClick["rightAltClick"] := "lbutton"
+    defaultTimeGreaterTimeoutProcessLayoutOnRelease := timeGreaterTimeoutProcessLayoutOnRelease
+    defaultTimeoutStillSendLayoutKey := timeoutStillSendLayoutKey
+    setTestVariables()
 }
 
 finalizeTestEnvironment()
@@ -54,4 +51,6 @@ finalizeTestEnvironment()
     modifierDoubledAsClick["rightShiftClick"] := defaultRightShiftClickAction
     modifierDoubledAsClick["rightWinClick"] := defaultRightWinClickAction
     modifierDoubledAsClick["rightAltClick"] := defaultRightAltClickAction
+    timeGreaterTimeoutProcessLayoutOnRelease := defaultTimeGreaterTimeoutProcessLayoutOnRelease
+    timeoutStillSendLayoutKey := defaultTimeoutStillSendLayoutKey
 }

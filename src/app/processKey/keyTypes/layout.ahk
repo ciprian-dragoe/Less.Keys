@@ -2,8 +2,6 @@ global alternativeLayoutActive
 global layoutKeyActivatesProcessKeyOnRelease
 global layoutKeyPressed
 global alternativeLayoutActive
-global timeoutStillSendLayoutKey
-global timeoutProcessLayoutOnRelease
 
 
 
@@ -69,7 +67,7 @@ manageLayoutKeyUp(key)
         return
     }
 
-    debug(key . "|NOT SENT CAUSE CONSUMED")
+    debug(key . "|UP NOT SENT CAUSE CONSUMED")
 }
 
 timerTimeoutSendLayoutKey()

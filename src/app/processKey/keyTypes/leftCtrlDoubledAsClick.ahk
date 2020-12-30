@@ -1,6 +1,6 @@
 global sendClickOnLeftCtrlClickRelease := false
 global isLeftCtrlDoubledAsClickPressed := false
-global leftCtrlActiveBeforeCtrlClickPress := false
+global repressLeftCtrlReleaseCancelCtrlActive := false
 global doubledLeftCtrlMouseHook := 0
 global isLeftCtrlClickDown := false
 
@@ -24,38 +24,57 @@ doubledLeftCtrlDown()
     {
         return
     }
-    
+
     isLeftCtrlDoubledAsClickPressed := true
-    
-    if (isLeftShiftDoubledAsClickPressed || isLeftWinDoubledAsClickPressed || isLeftAltDoubledAsClickPressed)
+
+    if (isLeftWinDoubledAsClickPressed || isLeftShiftDoubledAsClickPressed || isLeftAltDoubledAsClickPressed)
     {
         resetSendClickOnLeftModifierRelease(1)
         setCtrlState(1)
-        setTimer TimerMonitorCtrlModifierLift, 20
+        setTimer TimerMonitorCtrlModifierLift, %timeoutResetModifierContinuousPress%
         return
     }
 
-    if (ctrlActive || isRightAltDoubledAsClickPressed || isRightShiftDoubledAsClickPressed || isRightWinDoubledAsClickPressed)
+    if (fixQuickTypeLeftRightDoubledModifiers || layoutKeyPressed || activePressedKeys.Length() > 0)
     {
-        if (isRightCtrlDoubledAsClickPressed)
+        if (isAnyRightModifierPressed())
         {
-            setCtrlState(1)
-            setTimer TimerMonitorCtrlModifierLift, 20
+            continuousPressLeftCtrl()
         }
-        leftCtrlActiveBeforeCtrlClickPress := true
-        resetSendClickOnRightModifierRelease(1)
+        else if (ctrlActive)
+        {
+            repressNormalCtrlRelease := true
+        }
+    }
+    else if (isAnyRightModifierPressed())
+    {
+        continuousPressLeftCtrl()
         sendDoubledValueAndReset("leftCtrlClick", sendClickOnLeftCtrlClickRelease, isLeftCtrlClickDown)
         return
     }
-    
+    else if (ctrlActive)
+    {
+        sendDoubledValueAndReset("leftCtrlClick", sendClickOnLeftCtrlClickRelease, isLeftCtrlClickDown)
+        repressLeftCtrlReleaseCancelCtrlActive := true
+        return
+    }
+
     ctrlActive := 1
 
-    if (!layoutKeyPressed && activePressedKeys.Length() = 0)
+    sendClickOnLeftCtrlClickRelease := true
+    chooseClickDragActivation("leftCtrlClick", "mouseDragLeftCtrlActivate", doubledLeftCtrlMouseHook)
+    setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
+}
+
+continuousPressLeftCtrl()
+{
+    if (isRightCtrlDoubledAsClickPressed)
     {
-        sendClickOnLeftCtrlClickRelease := true
-        chooseClickDragActivation("leftCtrlClick", "mouseDragLeftCtrlActivate", doubledLeftCtrlMouseHook)
-        setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
+        setCtrlState(1)
+        setTimer TimerMonitorCtrlModifierLift, %timeoutResetModifierContinuousPress%
     }
+    resetSendClickOnRightModifierRelease(1)
+    repressRightCtrlReleaseCancelCtrlActive := true
 }
 
 mouseDragLeftCtrlActivate(nCode, wParam, lParam)
@@ -63,7 +82,7 @@ mouseDragLeftCtrlActivate(nCode, wParam, lParam)
     cancelMouseHook(doubledLeftCtrlMouseHook)
     if (wParam = 0x200)
     {
-        sendClickOnLeftCtrlClickRelease := false
+        sendClickOnLeftCtrlClickRelease := true
         isLeftCtrlClickDown := true
         doubledAction := modifierDoubledAsClick["leftCtrlClick"]
         send {blind}{%doubledAction% down}
@@ -75,19 +94,20 @@ doubledLeftCtrlUp()
     cancelMouseHook(doubledLeftCtrlMouseHook)
     isLeftCtrlDoubledAsClickPressed := false
 
-    if (leftCtrlActiveBeforeCtrlClickPress)
+    if (repressLeftCtrlReleaseCancelCtrlActive)
     {
-        leftCtrlActiveBeforeCtrlClickPress := false
+        repressLeftCtrlReleaseCancelCtrlActive := false
     }
     else
     {
         ctrlActive := 0
+        repressNormalCtrlRelease := false
+        repressRightCtrlReleaseCancelCtrlActive := false
     }
-
-    resetDoubledModifierClickDrag("leftCtrlClick", isLeftCtrlClickDown)
 
     if (sendClickOnLeftCtrlClickRelease)
     {
+        sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("leftCtrlClick", sendClickOnLeftCtrlClickRelease, isLeftCtrlClickDown)
     }
 }

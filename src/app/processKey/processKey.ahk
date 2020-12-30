@@ -40,13 +40,17 @@ processKeyUp(key)
     {
         return
     }
+
+    fixQuickTypeLeftRightDoubledModifiers := true
+    SetTimer, TimerFixQuickTypeLeftRightDoubledModifiers, OFF
+    SetTimer, TimerFixQuickTypeLeftRightDoubledModifiers, %timeoutFixQuickTypeLeftRightDoubledModifiers%
     
     if (key = layoutChangeKey)
     {
         manageLayoutKeyUp(key)
         return
     }
-    
+
     if (keyToSendOnUp)
     {
         temp := keyToSendOnUp

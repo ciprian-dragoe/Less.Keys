@@ -87,7 +87,7 @@
     *-::processKeyDown(layout["-"])
     *- up::processKeyUp(layout["-"])
     
-    *=::processKeyDown(layout["="])	
+    *=::processKeyDown(layout["="])
     *= up::processKeyUp(layout["="])
             
     *backspace::processKeyDown(layout["backspace"])
@@ -129,10 +129,10 @@
     *[::processKeyDown(layout["["])
     *[ up::processKeyUp(layout["["])
     
-    *]::processKeyDown(layout["]"])	
+    *]::processKeyDown(layout["]"])
     *] up::processKeyUp(layout["]"])
     
-    *\::processKeyDown(layout["\"])	
+    *\::processKeyDown(layout["\"])
     *\ up::processKeyUp(layout["\"])
             
     *capslock::processKeyDown(layout["capslock"])
@@ -257,16 +257,16 @@
     
     *lwin::toggleRealTimeDebug(showRealTimeDebugInfo)
     
-	*pause::processKeyDown(layout["pause"])
+    *pause::processKeyDown(layout["pause"])
     *pause up::processKeyUp(layout["pause"])
 
-	*MButton::processKeyDown(layout["MButton"])
+    *MButton::processKeyDown(layout["MButton"])
     *MButton up::processKeyUp(layout["MButton"])
 
-	*XButton1::processKeyDown(layout["XButton1"])
+    *XButton1::processKeyDown(layout["XButton1"])
     *XButton1 up::processKeyUp(layout["XButton1"])
 
-	*XButton2::processKeyDown(layout["XButton2"])
+    *XButton2::processKeyDown(layout["XButton2"])
     *XButton2 up::processKeyUp(layout["XButton2"])
 
 #IfWinNotActive

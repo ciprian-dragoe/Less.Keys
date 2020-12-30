@@ -1,14 +1,14 @@
 reloadApp()
 {
-	showToolTip("RELOADING")
+    showToolTip("RELOADING")
     reload
 }
 
 
 displayDebugData()
 {
-	msgbox % debugStoredData
-	clipboard := debugStoredData
+    msgbox % debugStoredData
+    clipboard := debugStoredData
 }
 
 

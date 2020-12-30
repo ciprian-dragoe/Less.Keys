@@ -1,6 +1,6 @@
 global sendClickOnRightWinClickRelease := false
 global isRightWinDoubledAsClickPressed := false
-global rightWinActiveBeforeWinClickPress := false
+global repressRightWinReleaseCancelWinActive := false
 global doubledRightWinMouseHook := 0
 global isRightWinClickDown := false
 
@@ -24,37 +24,57 @@ doubledRightWinDown()
     {
         return
     }
-    
+
     isRightWinDoubledAsClickPressed := true
-    
-    if (isRightShiftDoubledAsClickPressed || isRightCtrlDoubledAsClickPressed || isRightAltDoubledAsClickPressed) {
+
+    if (isRightShiftDoubledAsClickPressed || isRightAltDoubledAsClickPressed || isRightCtrlDoubledAsClickPressed)
+    {
         resetSendClickOnRightModifierRelease(1)
         setWinState(1)
-        setTimer TimerMonitorWinModifierLift, 20
+        setTimer TimerMonitorWinModifierLift, %timeoutResetModifierContinuousPress%
         return
     }
 
-    if (winActive || isLeftAltDoubledAsClickPressed || isLeftCtrlDoubledAsClickPressed || isLeftShiftDoubledAsClickPressed)
+    if (fixQuickTypeLeftRightDoubledModifiers || layoutKeyPressed || activePressedKeys.Length() > 0)
     {
-        if (isLeftWinDoubledAsClickPressed)
+        if (isAnyLeftModifierPressed())
         {
-            setWinState(1)
-            setTimer TimerMonitorWinModifierLift, 20
+            continuousPressRightWin()
         }
-        rightWinActiveBeforeWinClickPress := true
-        resetSendClickOnLeftModifierRelease(1)
+        else if (winActive)
+        {
+            repressNormalWinRelease := true
+        }
+    }
+    else if (isAnyLeftModifierPressed())
+    {
+        continuousPressRightWin()
         sendDoubledValueAndReset("rightWinClick", sendClickOnRightWinClickRelease, isRightWinClickDown)
         return
     }
-    
+    else if (winActive)
+    {
+        sendDoubledValueAndReset("rightWinClick", sendClickOnRightWinClickRelease, isRightWinClickDown)
+        repressRightWinReleaseCancelWinActive := true
+        return
+    }
+
     winActive := 1
 
-    if (!layoutKeyPressed && activePressedKeys.Length() = 0)
-    {        
-        sendClickOnRightWinClickRelease := true
-        chooseClickDragActivation("rightWinClick", "mouseDragRightWinActivate", doubledRightWinMouseHook)
-        setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
+    sendClickOnRightWinClickRelease := true
+    chooseClickDragActivation("rightWinClick", "mouseDragRightWinActivate", doubledRightWinMouseHook)
+    setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
+}
+
+continuousPressRightWin()
+{
+    if (isLeftWinDoubledAsClickPressed)
+    {
+        setWinState(1)
+        setTimer TimerMonitorWinModifierLift, %timeoutResetModifierContinuousPress%
     }
+    resetSendClickOnLeftModifierRelease(1)
+    repressLeftWinReleaseCancelWinActive := true
 }
 
 mouseDragRightWinActivate(nCode, wParam, lParam)
@@ -62,7 +82,7 @@ mouseDragRightWinActivate(nCode, wParam, lParam)
     cancelMouseHook(doubledRightWinMouseHook)
     if (wParam = 0x200)
     {
-        sendClickOnRightWinClickRelease := false
+        sendClickOnRightWinClickRelease := true
         isRightWinClickDown := true
         doubledAction := modifierDoubledAsClick["rightWinClick"]
         send {blind}{%doubledAction% down}
@@ -74,19 +94,20 @@ doubledRightWinUp()
     cancelMouseHook(doubledRightWinMouseHook)
     isRightWinDoubledAsClickPressed := false
 
-    if (rightWinActiveBeforeWinClickPress)
+    if (repressRightWinReleaseCancelWinActive)
     {
-        rightWinActiveBeforeWinClickPress := false
+        repressRightWinReleaseCancelWinActive := false
     }
     else
     {
         winActive := 0
+        repressNormalWinRelease := false
+        repressLeftWinReleaseCancelWinActive := false
     }
-    
-    resetDoubledModifierClickDrag("rightWinClick", isRightWinClickDown)
 
     if (sendClickOnRightWinClickRelease)
     {
+        sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("rightWinClick", sendClickOnRightWinClickRelease, isRightWinClickDown)
     }
 }

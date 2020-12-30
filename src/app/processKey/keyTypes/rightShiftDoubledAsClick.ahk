@@ -1,6 +1,6 @@
 global sendClickOnRightShiftClickRelease := false
 global isRightShiftDoubledAsClickPressed := false
-global rightShiftActiveBeforeShiftClickPress
+global repressRightShiftReleaseCancelShiftActive := false
 global doubledRightShiftMouseHook := 0
 global isRightShiftClickDown := false
 
@@ -27,34 +27,54 @@ doubledRightShiftDown()
     
     isRightShiftDoubledAsClickPressed := true
 
-    if (isRightCtrlDoubledAsClickPressed || isRightWinDoubledAsClickPressed || isRightAltDoubledAsClickPressed) {
+    if (isRightCtrlDoubledAsClickPressed || isRightWinDoubledAsClickPressed || isRightAltDoubledAsClickPressed)
+    {
         resetSendClickOnRightModifierRelease(1)
         setShiftState(1)
-        setTimer TimerMonitorShiftModifierLift, 20
+        setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%
         return
     }
 
-    if (shiftActive || isLeftAltDoubledAsClickPressed || isLeftCtrlDoubledAsClickPressed || isLeftWinDoubledAsClickPressed)
+    if (fixQuickTypeLeftRightDoubledModifiers || layoutKeyPressed || activePressedKeys.Length() > 0)
     {
-        if (isLeftShiftDoubledAsClickPressed)
+        if (isAnyLeftModifierPressed())
         {
-            setShiftState(1)
-            setTimer TimerMonitorShiftModifierLift, 20
+            continuousPressRightShift()
         }
-        rightShiftActiveBeforeShiftClickPress := true
-        resetSendClickOnLeftModifierRelease(1)
+        else if (shiftActive)
+        {
+            repressNormalShiftRelease := true
+        }
+    }
+    else if (isAnyLeftModifierPressed())
+    {
+        continuousPressRightShift()
         sendDoubledValueAndReset("rightShiftClick", sendClickOnRightShiftClickRelease, isRightShiftClickDown)
         return
     }
-    
+    else if (shiftActive)
+    {
+        sendDoubledValueAndReset("rightShiftClick", sendClickOnRightShiftClickRelease, isRightShiftClickDown)
+        repressRightShiftReleaseCancelShiftActive := true
+        return
+    }
+
     shiftActive := 1
 
-    if (!layoutKeyPressed && activePressedKeys.Length() = 0)
-    {        
-        sendClickOnRightShiftClickRelease := true
-        chooseClickDragActivation("rightShiftClick", "mouseDragRightShiftActivate", doubledRightShiftMouseHook)
-        setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
+    sendClickOnRightShiftClickRelease := true
+    chooseClickDragActivation("rightShiftClick", "mouseDragRightShiftActivate", doubledRightShiftMouseHook)
+    setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
+}
+
+continuousPressRightShift()
+{
+    if (isLeftShiftDoubledAsClickPressed)
+    {
+        setShiftState(1)
+        setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%
     }
+    resetSendClickOnLeftModifierRelease(1)
+    repressLeftShiftReleaseCancelShiftActive := true
 }
 
 mouseDragRightShiftActivate(nCode, wParam, lParam)
@@ -62,7 +82,7 @@ mouseDragRightShiftActivate(nCode, wParam, lParam)
     cancelMouseHook(doubledRightShiftMouseHook)
     if (wParam = 0x200)
     {
-        sendClickOnRightShiftClickRelease := false
+        sendClickOnRightShiftClickRelease := true
         isRightShiftClickDown := true
         doubledAction := modifierDoubledAsClick["rightShiftClick"]
         send {blind}{%doubledAction% down}
@@ -74,19 +94,20 @@ doubledRightShiftUp()
     cancelMouseHook(doubledRightShiftMouseHook)
     isRightShiftDoubledAsClickPressed := false
 
-    if (rightShiftActiveBeforeShiftClickPress)
+    if (repressRightShiftReleaseCancelShiftActive)
     {
-        rightShiftActiveBeforeShiftClickPress := false
+        repressRightShiftReleaseCancelShiftActive := false
     }
     else
     {
         shiftActive := 0
+        repressNormalShiftRelease := false
+        repressLeftShiftReleaseCancelShiftActive := false
     }
-
-    resetDoubledModifierClickDrag("rightShiftClick", isRightShiftClickDown)
 
     if (sendClickOnRightShiftClickRelease)
     {
+        sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("rightShiftClick", sendClickOnRightShiftClickRelease, isRightShiftClickDown)
     }
 }
