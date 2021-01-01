@@ -90,7 +90,7 @@ When_processKeyOnRelease_is_set_after_stickyTime_it_is_reset_#108()
 When_leftShiftClick_key_is_logically_pressed_and_mouse_moved_and_stickyTime_passes_left_click_is_released_#109()
 {
     startingPosition := setMousePositionToCaret()
-    simulateTyping("hello ")
+    simulateTyping("hello")
     expected := setMousePositionToCaret()
     simulateTyping("sticky")
     setMousePositionToCaret()
@@ -99,10 +99,10 @@ When_leftShiftClick_key_is_logically_pressed_and_mouse_moved_and_stickyTime_pass
     MouseMove expected.x, expected.y
     sleep %timerTimeoutStickyKeys%
     MouseMove startingPosition.x, startingPosition.y
+    actual := getSelectedText()
     processKeyUp("leftShiftClick")
     sleep 100
-    
-    actual := getSelectedText()
+
     expected := "sticky"
     
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
@@ -121,10 +121,10 @@ When_leftCtrlClick_key_is_logically_pressed_and_mouse_moved_and_stickyTime_passe
     MouseMove expected.x, expected.y
     sleep %timerTimeoutStickyKeys%
     MouseMove startingPosition.x, startingPosition.y
+    actual := getSelectedText()
     processKeyUp("leftCtrlClick")
     sleep 100
-    
-    actual := getSelectedText()
+
     expected := "sticky"
     
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))

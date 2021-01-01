@@ -82,21 +82,21 @@ sendDoubledValueAndReset(modifierValue, ByRef sendClickOnRelease, ByRef isModifi
     }
 }
 
-resetDoubledModifierClickDrag(modifierValue, ByRef sendClickOnRelease)
+resetDoubledModifierClickDrag(modifierValue, ByRef isClickDown)
 {
-    if (sendClickOnRelease)
+    if (isClickDown)
     {
         action := modifierDoubledAsClick[modifierValue]
         send {blind}{%action% up}
-        sendClickOnRelease := false
+        isClickDown := false
     }
 }
 
 timerResetModifierReleaseAction()
 {
+    setTimer TimerResetModifierReleaseAction, OFF
     resetSendClickOnLeftModifierRelease()
     resetSendClickOnRightModifierRelease()
-    setTimer TimerResetModifierReleaseAction, OFF
 }
 
 activateCtrlWithKey(key)

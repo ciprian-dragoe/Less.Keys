@@ -271,43 +271,6 @@ When_rightAltClick_is_continuously_pressed_and_mouse_is_moved_the_text_is_select
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
-When_rightAltClick_is_continuously_pressed_and_mouse_is_moved_and_a_letter_is_typed_a_letter_is_not_sent_#3717()
-{
-    startingPosition := setMousePositionToCaret()
-    simulateTyping("hello")
-    setMousePositionToCaret()
-    processKeyDown("rightAltClick")
-    sleep 100
-    MouseMove startingPosition.x, startingPosition.y
-    simulateTyping("z")
-    processKeyUp("rightAltClick")
-    sleep 100
-
-    expected := "hello"
-    validateTestOutput(A_ThisFunc , expected)
-}
-
-When_rightAltClick_is_continuously_pressed_and_mouse_is_moved_and_layout_key_is_pressed_space_is_not_sent_on_layout_key_release_#3718()
-{
-    startingPosition := setMousePositionToCaret()
-    simulateTyping("hello")
-    setMousePositionToCaret()
-    processKeyDown("rightAltClick")
-    sleep 100
-    MouseMove startingPosition.x, startingPosition.y
-    simulateTyping(" ")
-    processKeyUp("rightAltClick")
-    sleep 100
-    send {escape 2}
-    sleep 100
-
-    actual := clearText()
-    expected := "hello"
-
-    addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment(A_ThisFunc)
-}    
-
 When_rightAltClick_pressed_and_mouse_is_moved_and_layout_key_is_pressed_longer_then_timeoutStillSendLayoutKey_space_is_not_sent_on_layout_key_release_#3719()
 {
     default := timerTimeoutStickyKeys

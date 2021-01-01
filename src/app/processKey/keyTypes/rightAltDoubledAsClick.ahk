@@ -80,6 +80,7 @@ continuousPressRightAlt()
 mouseDragRightAltActivate(nCode, wParam, lParam)
 {
     cancelMouseHook(doubledRightAltMouseHook)
+    setTimer TimerResetModifierReleaseAction, OFF
     if (wParam = 0x200)
     {
         sendClickOnRightAltClickRelease := true
@@ -100,9 +101,15 @@ doubledRightAltUp()
     }
     else
     {
-        altActive := 0
-        repressNormalAltRelease := false
-        repressLeftAltReleaseCancelAltActive := false
+        if (repressNormalAltRelease || repressLeftAltReleaseCancelAltActive)
+        {
+            repressNormalAltRelease := false
+            repressLeftAltReleaseCancelAltActive := false
+        }
+        else
+        {
+            altActive := 0
+        }
     }
 
     if (sendClickOnRightAltClickRelease)

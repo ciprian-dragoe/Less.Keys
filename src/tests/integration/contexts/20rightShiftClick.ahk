@@ -262,43 +262,6 @@ When_rightShiftClick_is_continuously_pressed_and_mouse_is_moved_the_text_is_sele
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
-When_rightShiftClick_is_continuously_pressed_and_mouse_is_moved_and_a_letter_is_typed_a_letter_is_not_sent_#2017()
-{
-    startingPosition := setMousePositionToCaret()
-    simulateTyping("hello")
-    setMousePositionToCaret()
-    processKeyDown("rightShiftClick")
-    sleep 100
-    MouseMove startingPosition.x, startingPosition.y
-    simulateTyping("z")
-    processKeyUp("rightShiftClick")
-    sleep 100
-
-    expected := "hello"
-    validateTestOutput(A_ThisFunc , expected)
-}
-
-When_rightShiftClick_is_continuously_pressed_and_mouse_is_moved_and_layout_key_is_pressed_space_is_not_sent_on_layout_key_release_#2018()
-{
-    startingPosition := setMousePositionToCaret()
-    simulateTyping("hello")
-    setMousePositionToCaret()
-    processKeyDown("rightShiftClick")
-    sleep 100
-    MouseMove startingPosition.x, startingPosition.y
-    simulateTyping(" ")
-    processKeyUp("rightShiftClick")
-    sleep 100
-    send {escape 2}
-    sleep 100
-
-    actual := clearText()
-    expected := "hello"
-
-    addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment(A_ThisFunc)
-}    
-
 When_rightShiftClick_pressed_and_mouse_is_moved_and_layout_key_is_pressed_longer_then_timeoutStillSendLayoutKey_space_is_not_sent_on_layout_key_release_#2019()
 {
     startingPosition := setMousePositionToCaret()
@@ -463,4 +426,115 @@ When_rightShiftClick_is_pressed_and_a_letter_pressed_and_released_and_shift_pres
     simulateKeyUp("lshift", 100)
     expected := "AA"
     validateTestOutput(A_ThisFunc , expected)
+}
+
+When_shift_pressed_rightShiftClick_in_less_then_TimerFixQuickTypeLeftRightDoubledModifiers_after_letter_release_mouse_moved_until_second_word_THEN_only_second_word_is_selected_#2030()
+{
+    timeoutFixQuickTypeLeftRightDoubledModifiers := 1000
+    setMousePositionToCaret()
+    simulateTyping("hello")
+    destination := getCurrentCaretPosition()
+    simulateTyping(" world")
+    processKeyDown("shift")
+    sleep 100
+    processKeyDown("rightShiftClick")
+    sleep 100
+    MouseMove destination.x, destination.y
+    processKeyUp("shift")
+    sleep 100
+    processKeyUp("rightShiftClick")
+    sleep 100
+    actual := getSelectedText()
+
+    expected := "world"
+    addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
+    setDefaultTestEnvironment(A_ThisFunc)
+}
+
+When_shift_pressed_rightShiftClick_pressed_in_less_then_TimerFixQuickTypeLeftRightDoubledModifiers_after_letter_release_shift_released_mouse_moved_until_second_word_THEN_only_second_word_is_selected_#2031()
+{
+    timeoutFixQuickTypeLeftRightDoubledModifiers := 1000
+    setMousePositionToCaret()
+    simulateTyping("hello")
+    destination := getCurrentCaretPosition()
+    simulateTyping(" world")
+    processKeyDown("shift")
+    sleep 100
+    processKeyDown("rightShiftClick")
+    sleep 100
+    processKeyUp("shift")
+    sleep 100
+    MouseMove destination.x, destination.y
+    processKeyUp("rightShiftClick")
+    sleep 100
+    actual := getSelectedText()
+
+    expected := "world"
+    addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
+    setDefaultTestEnvironment(A_ThisFunc)
+}
+
+When_shift_pressed_rightShiftClick_pressed_in_less_then_TimerFixQuickTypeLeftRightDoubledModifiers_after_letter_release_rightShiftClick_doubled_as_w_released_THEN_W_is_typed_#2032()
+{
+    modifierDoubledAsClick["rightShiftClick"] := "w"
+    setMousePositionToCaret()
+    timeoutFixQuickTypeLeftRightDoubledModifiers := 1000
+    simulateTyping("hello")
+    processKeyDown("shift")
+    sleep 100
+    processKeyDown("rightShiftClick")
+    sleep 100
+    processKeyUp("rightShiftClick")
+    sleep 100
+    processKeyUp("shift")
+    sleep 100
+    actual := clearText()
+
+    expected := "helloW"
+    addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
+    setDefaultTestEnvironment(A_ThisFunc)
+}
+
+When_shift_pressed_leftShiftClick_pressed_in_less_then_TimerFixQuickTypeLeftRightDoubledModifiers_after_letter_release_rightShiftClick_doubled_as_w_pressed_shift_released_rightShiftClick_released_THEN_W_is_typed_#2033()
+{
+    modifierDoubledAsClick["rightShiftClick"] := "w"
+    setMousePositionToCaret()
+    timeoutFixQuickTypeLeftRightDoubledModifiers := 1000
+    simulateTyping("hello")
+    processKeyDown("shift")
+    sleep 100
+    processKeyDown("rightShiftClick")
+    sleep 100
+    processKeyUp("shift")
+    sleep 100
+    processKeyUp("rightShiftClick")
+    sleep 100
+    actual := clearText()
+
+    expected := "helloW"
+    addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
+    setDefaultTestEnvironment(A_ThisFunc)
+}
+
+When_shift_pressed_leftShiftClick_pressed_in_less_then_TimerFixQuickTypeLeftRightDoubledModifiers_after_letter_release_rightShiftClick_doubled_as_w_pressed_for_more_then_timeoutStillSendLayoutKey_THEN_nothing_typed_on_rightShiftClick_release_#2034()
+{
+    modifierDoubledAsClick["rightShiftClick"] := "w"
+    timerTimeoutStickyKeys := 4000
+    timeoutFixQuickTypeLeftRightDoubledModifiers := 1000
+    setMousePositionToCaret()
+    simulateTyping("hello")
+    processKeyDown("shift")
+    sleep 100
+    processKeyDown("rightShiftClick")
+    sleep 100
+    sleep %timeoutStillSendLayoutKey%
+    processKeyUp("rightShiftClick")
+    sleep 100
+    processKeyUp("shift")
+    sleep 100
+    actual := clearText()
+
+    expected := "hello"
+    addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
+    setDefaultTestEnvironment(A_ThisFunc)
 }

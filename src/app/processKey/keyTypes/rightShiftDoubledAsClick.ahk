@@ -60,7 +60,6 @@ doubledRightShiftDown()
     }
 
     shiftActive := 1
-
     sendClickOnRightShiftClickRelease := true
     chooseClickDragActivation("rightShiftClick", "mouseDragRightShiftActivate", doubledRightShiftMouseHook)
     setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
@@ -80,6 +79,7 @@ continuousPressRightShift()
 mouseDragRightShiftActivate(nCode, wParam, lParam)
 {
     cancelMouseHook(doubledRightShiftMouseHook)
+    setTimer TimerResetModifierReleaseAction, OFF
     if (wParam = 0x200)
     {
         sendClickOnRightShiftClickRelease := true
@@ -100,9 +100,15 @@ doubledRightShiftUp()
     }
     else
     {
-        shiftActive := 0
-        repressNormalShiftRelease := false
-        repressLeftShiftReleaseCancelShiftActive := false
+        if (repressNormalShiftRelease || repressLeftShiftReleaseCancelShiftActive)
+        {
+            repressNormalShiftRelease := false
+            repressLeftShiftReleaseCancelShiftActive := false
+        }
+        else
+        {
+            shiftActive := 0
+        }
     }
 
     if (sendClickOnRightShiftClickRelease)

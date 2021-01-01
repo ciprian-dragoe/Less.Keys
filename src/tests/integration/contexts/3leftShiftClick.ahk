@@ -263,43 +263,6 @@ When_leftShiftClick_is_continuously_pressed_and_mouse_is_moved_the_text_is_selec
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
-When_leftShiftClick_is_continuously_pressed_and_mouse_is_moved_and_a_letter_is_typed_a_letter_is_not_sent_#317()
-{
-    startingPosition := setMousePositionToCaret()
-    simulateTyping("hello")
-    setMousePositionToCaret()
-    processKeyDown("leftShiftClick")
-    sleep 100
-    MouseMove startingPosition.x, startingPosition.y
-    simulateTyping("z")
-    processKeyUp("leftShiftClick")
-    sleep 100
-
-    expected := "hello"
-    validateTestOutput(A_ThisFunc , expected)
-}
-
-When_leftShiftClick_is_continuously_pressed_and_mouse_is_moved_and_layout_key_is_pressed_space_is_not_sent_on_layout_key_release_#318()
-{
-    startingPosition := setMousePositionToCaret()
-    simulateTyping("hello")
-    setMousePositionToCaret()
-    processKeyDown("leftShiftClick")
-    sleep 100
-    MouseMove startingPosition.x, startingPosition.y
-    simulateTyping(" ")
-    processKeyUp("leftShiftClick")
-    sleep 100
-    send {escape 2}
-    sleep 100
-
-    actual := clearText()
-    expected := "hello"
-
-    addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment(A_ThisFunc)
-}    
-
 When_leftShiftClick_pressed_and_mouse_is_moved_and_layout_key_is_pressed_longer_then_timeoutStillSendLayoutKey_space_is_not_sent_on_layout_key_release_#319()
 {
     startingPosition := setMousePositionToCaret()
@@ -339,7 +302,7 @@ When_non_modifier_letter_is_released_and_layout_key_continuous_press_in_less_the
     validateCaretOutput(A_ThisFunc, expected)
 }
 
-When_non_modifier_letter_is_released_and_layout_key_continuous_press_in_less_then_timeoutProcessLayoutOnRelease_and_leftShiftClick_continous_press_and_backtick_pressed_and_leftShiftClick_released_left_click_is_not_sent_#321()
+When_non_modifier_letter_is_released_and_layout_key_continuous_press_in_less_then_timeoutProcessLayoutOnRelease_and_leftShiftClick_continuous_press_and_backtick_pressed_and_leftShiftClick_released_left_click_is_not_sent_#321()
 {
     simulateTyping("hello ")
     setMousePositionToCaret()
@@ -465,3 +428,4 @@ When_leftShiftClick_is_pressed_and_a_letter_pressed_and_released_and_shift_press
     expected := "AA"
     validateTestOutput(A_ThisFunc , expected)
 }
+

@@ -80,6 +80,7 @@ continuousPressRightCtrl()
 mouseDragRightCtrlActivate(nCode, wParam, lParam)
 {
     cancelMouseHook(doubledRightCtrlMouseHook)
+    setTimer TimerResetModifierReleaseAction, OFF
     if (wParam = 0x200)
     {
         sendClickOnRightCtrlClickRelease := true
@@ -100,9 +101,15 @@ doubledRightCtrlUp()
     }
     else
     {
-        ctrlActive := 0
-        repressNormalCtrlRelease := false
-        repressLeftCtrlReleaseCancelCtrlActive := false
+        if (repressNormalCtrlRelease || repressLeftCtrlReleaseCancelCtrlActive)
+        {
+            repressNormalCtrlRelease := false
+            repressLeftCtrlReleaseCancelCtrlActive := false
+        }
+        else
+        {
+            ctrlActive := 0
+        }
     }
 
     if (sendClickOnRightCtrlClickRelease)

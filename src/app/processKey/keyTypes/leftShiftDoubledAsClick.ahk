@@ -80,6 +80,7 @@ continuousPressLeftShift()
 mouseDragLeftShiftActivate(nCode, wParam, lParam)
 {
     cancelMouseHook(doubledLeftShiftMouseHook)
+    setTimer TimerResetModifierReleaseAction, OFF
     if (wParam = 0x200)
     {
         sendClickOnLeftShiftClickRelease := true
@@ -100,9 +101,15 @@ doubledLeftShiftUp()
     }
     else
     {
-        shiftActive := 0
-        repressNormalShiftRelease := false
-        repressRightShiftReleaseCancelShiftActive := false
+        if (repressNormalShiftRelease || repressRightShiftReleaseCancelShiftActive)
+        {
+            repressNormalShiftRelease := false
+            repressRightShiftReleaseCancelShiftActive := false
+        }
+        else
+        {
+            shiftActive := 0
+        }
     }
 
     if (sendClickOnLeftShiftClickRelease)

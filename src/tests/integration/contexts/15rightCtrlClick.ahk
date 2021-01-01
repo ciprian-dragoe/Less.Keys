@@ -272,41 +272,6 @@ When_rightCtrlClick_is_continuously_pressed_and_mouse_is_moved_the_text_is_selec
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
-When_rightCtrlClick_is_continuously_pressed_and_mouse_is_moved_and_a_letter_is_typed_a_letter_is_not_sent_#1517()
-{
-    startingPosition := setMousePositionToCaret()
-    simulateTyping("hello")
-    setMousePositionToCaret()
-    processKeyDown("rightCtrlClick")
-    sleep 100
-    MouseMove startingPosition.x, startingPosition.y
-    simulateTyping("a")
-    processKeyUp("rightCtrlClick")
-    sleep 100
-
-    expected := "hello"
-    validateTestOutput(A_ThisFunc , expected)
-}
-
-When_rightCtrlClick_is_continuously_pressed_and_mouse_is_moved_and_layout_key_is_pressed_space_is_not_sent_on_layout_key_release_#1518()
-{
-    startingPosition := setMousePositionToCaret()
-    simulateTyping("hello")
-    setMousePositionToCaret()
-    processKeyDown("rightCtrlClick")
-    sleep 100
-    MouseMove startingPosition.x, startingPosition.y
-    simulateTyping(" ")
-    processKeyUp("rightCtrlClick")
-    sleep 100
-
-    actual := clearText()
-    expected := "hello"
-
-    addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment(A_ThisFunc)
-}    
-
 When_rightCtrlClick_pressed_and_mouse_is_moved_and_layout_key_is_pressed_longer_then_timeoutStillSendLayoutKey_space_is_not_sent_on_layout_key_release_#1519()
 {
     startingPosition := setMousePositionToCaret()

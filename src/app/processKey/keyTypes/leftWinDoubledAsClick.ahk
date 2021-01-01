@@ -80,6 +80,7 @@ continuousPressLeftWin()
 mouseDragLeftWinActivate(nCode, wParam, lParam)
 {
     cancelMouseHook(doubledLeftWinMouseHook)
+    setTimer TimerResetModifierReleaseAction, OFF
     if (wParam = 0x200)
     {
         sendClickOnLeftWinClickRelease := true
@@ -100,9 +101,15 @@ doubledLeftWinUp()
     }
     else
     {
-        winActive := 0
-        repressNormalWinRelease := false
-        repressRightWinReleaseCancelWinActive := false
+        if (repressNormalWinRelease || repressRightWinReleaseCancelWinActive)
+        {
+            repressNormalWinRelease := false
+            repressRightWinReleaseCancelWinActive := false
+        }
+        else
+        {
+            winActive := 0
+        }
     }
 
     if (sendClickOnLeftWinClickRelease)

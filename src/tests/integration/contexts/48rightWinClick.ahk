@@ -277,63 +277,6 @@ When_rightWinClick_is_continuously_pressed_and_mouse_is_moved_the_text_is_select
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
-When_rightWinClick_is_continuously_pressed_and_mouse_is_moved_and_a_letter_is_typed_a_letter_is_not_sent_#4817()
-{
-    startingPosition := setMousePositionToCaret()
-    simulateTyping("hello")
-    setMousePositionToCaret()
-    processKeyDown("rightWinClick")
-    sleep 100
-    MouseMove startingPosition.x, startingPosition.y
-    simulateTyping("z")
-    processKeyUp("rightWinClick")
-    sleep 100
-
-    expected := "hello"
-    validateTestOutput(A_ThisFunc , expected)
-}
-
-When_rightWinClick_is_continuously_pressed_and_mouse_is_moved_and_layout_key_is_pressed_space_is_not_sent_on_layout_key_release_#4818()
-{
-    startingPosition := setMousePositionToCaret()
-    simulateTyping("hello")
-    setMousePositionToCaret()
-    processKeyDown("rightWinClick")
-    sleep 100
-    MouseMove startingPosition.x, startingPosition.y
-    simulateTyping(" ")
-    processKeyUp("rightWinClick")
-    sleep 100
-    send {escape 2}
-    sleep 100
-
-    actual := clearText()
-    expected := "hello"
-
-    addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment(A_ThisFunc)
-}    
-
-When_rightWinClick_pressed_and_mouse_is_moved_and_layout_key_is_pressed_longer_then_timeoutStillSendLayoutKey_space_is_not_sent_on_layout_key_release_#4819()
-{
-    startingPosition := setMousePositionToCaret()
-    simulateTyping("hello ")
-    setMousePositionToCaret()
-    processKeyDown("rightWinClick")
-    sleep 100
-    MouseMove startingPosition.x, startingPosition.y
-    simulateKeyDown("space", timeoutStillSendLayoutKey + 100)
-    simulateKeyUp("space", 100)
-    processKeyUp("rightWinClick")
-    sleep 100
-
-    actual := clearText()
-    expected := "hello "
-
-    addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment(A_ThisFunc)
-}    
-
 When_non_modifier_letter_is_released_and_layout_key_continuous_press_in_less_then_timeoutProcessLayoutOnRelease_and_rightWinClick_pressed_and_backtick_pressed_and_released_click_is_not_sent_#4820()
 {
     simulateTyping("hello ")
@@ -437,28 +380,6 @@ When_rightWinClick_is_continuously_pressed_and_mouse_is_moved_and_ctrl_is_presse
     processKeyUp("rightWinClick")
     sleep 100
     simulateKeyUp("lctrl", 100)
-    
-    actual := getSelectedText()
-    expected := "hello "
-    
-    addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment(A_ThisFunc)
-}
-
-When_rightWinClick_is_continuously_pressed_and_mouse_is_moved_and_win_is_pressed_and_released_the_text_remains_selected_#4828()
-{
-    startingPosition := setMousePositionToCaret()
-    simulateTyping("hello ")
-    setMousePositionToCaret()
-    processKeyDown("rightWinClick")
-    sleep 100
-    MouseMove startingPosition.x, startingPosition.y
-    simulateKeyDown("lwin", 100)
-    simulateKeyUp("lwin", 300)
-    simulateKeyDown("lwin", 100)
-    simulateKeyUp("lwin", 300)
-    processKeyUp("rightWinClick")
-    sleep 100
     
     actual := getSelectedText()
     expected := "hello "
