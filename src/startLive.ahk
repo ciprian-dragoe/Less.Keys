@@ -7,7 +7,7 @@ SetTitleMatchMode 2
 
 
 global PATH_APP_CONFIGURATION := "..\"
-if (A_ScriptName == "LessKeys.exe")
+if (A_ScriptName = "LessKeys.exe")
 {
     PATH_APP_CONFIGURATION := A_ScriptDir .  ".\"
 }

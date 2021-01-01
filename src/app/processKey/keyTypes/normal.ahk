@@ -4,16 +4,36 @@ processNormalKey(key)
     
     if (keyToSendOnUp)
     {
+        processKeyOnRelease := false
+        layoutKeyActivatesProcessKeyOnRelease := false
         sendLayoutKey := false
-        discardKeyBecauseSecondKeyIsPressedInLessTimeoutProcessLayoutOnRelease := alternativeLayout[keyToSendOnUp]
-        processKeyToSend(discardKeyBecauseSecondKeyIsPressedInLessTimeoutProcessLayoutOnRelease)
-        debug(discardKeyBecauseSecondKeyIsPressedInLessTimeoutProcessLayoutOnRelease . "|sent because second key press in less then timeoutProcessLayoutOnRelease")
+
+        firstKeyPress := alternativeLayout[keyToSendOnUp]
+        secondKeyPressed := alternativeLayout[key]
+        lastKeyProcessedAsAlternative := key
+        if (firstKeyPress = keyToSendOnUp)
+        {
+            secondKeyPressed := key
+            lastKeyProcessedAsAlternative := ""
+
+            modifiers := getActiveModifiers()
+            send {blind}%modifiers%{%layoutChangeKey%}
+        }
+        processKeyToSend(firstKeyPress)
+        keyToSendOnUp := ""
+        debug(sendFirstKeyAsAlternative . "|first key typed because 2 keys pressed while alternative key pressed in less timeoutProcessLayoutOnRelease")
+
+        processKeyToSend(secondKeyPressed)
+        debug(sendFirstKeyAsAlternative . "|second key typed because 2 keys pressed while alternative key pressed in less timeoutProcessLayoutOnRelease")
+
+        return
     }
     
     if (processKeyOnRelease)
     {
         keyToSendOnUp := key
         debug(key . "|>>>>>> will be processed on release")
+
         return
     }
     
@@ -21,17 +41,19 @@ processNormalKey(key)
     if (alternativeLayoutActive)
     {
         lastKeyProcessedAsAlternative := key
-        key := alternativeLayout[key]
-        if (keyToSendOnUp && keyToSendOnUp = key)
+        alternativeValue := alternativeLayout[key]
+        if (alternativeValue = key)
         {
-            send {blind}{%layoutChangeKey%}
+            lastKeyProcessedAsAlternative := ""
+            modifiers := getActiveModifiers()
+            send {blind}%modifiers%{%layoutChangeKey%}
         }
-        processKeyToSend(key)
-        debug(key . "|------ key down with alternative layout")
-        
+        processKeyToSend(alternativeValue)
+        debug(key . " => " . alternativeValue)
+
         return
     }
-    
+
     if (key != lastKeyProcessedAsAlternative)
     {
         if (processKeyToSend(key))

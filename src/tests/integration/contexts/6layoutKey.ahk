@@ -229,21 +229,3 @@ When_shift_key_is_pressed_followed_by_letter_remapped_as_accented_character_sibl
     
     validateTestOutput(A_ThisFunc , expected)
 }
-
-
-When_letter_is_released_followed_by_layout_key_press_in_less_than_timeoutProcessLayoutOnRelease_followed_by_modifier_key_followed_by_letter_shortcut_is_sent_before_letter_release_#619()
-{
-    simulateKeyDown("w", 50)
-    simulateKeyUp("w", 50)
-    simulateKeyDown("space", 50)
-    simulateKeyDown("lshift", 50)
-    simulateKeyDown("``", 10)
-    actual := clearText()
-    simulateKeyUp("``", 10)
-    simulateKeyUp("space", 50)
-    simulateKeyUp("lshift", 50)
-    
-    expected := "wINTEGRATION_TEST"
-    addTestResult(A_ThisFunc, expected, actual, evaluateResult(actual, expected))
-    setDefaultTestEnvironment(A_ThisFunc)
-}

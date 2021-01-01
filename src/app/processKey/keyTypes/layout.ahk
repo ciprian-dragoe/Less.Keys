@@ -18,23 +18,14 @@ manageLayoutKeyDown(key)
             SetTimer, TimerScrollWithMouseMovement, %timeoutMouseScrollPoll%
         }
 
-        if (activePressedKeys.Length() > 0)
+        alternativeLayoutActive := true
+        sendLayoutKey := true
+        SetTimer, TimerTimeoutSendLayoutKey, %timeoutStillSendLayoutKey%
+        if (layoutKeyActivatesProcessKeyOnRelease)
         {
-            send {blind}{%key%}
-            sendLayoutKey := false
-            debug(key . "|because other keys pressed")
+            processKeyOnRelease := true
         }
-        else
-        {
-            alternativeLayoutActive := true
-            sendLayoutKey := true
-            SetTimer, TimerTimeoutSendLayoutKey, %timeoutStillSendLayoutKey%
-            if (layoutKeyActivatesProcessKeyOnRelease)
-            {
-                processKeyOnRelease := true
-            }
-            debug(key . "|activates alternative layout")
-        }
+        debug(key . "|activates alternative layout")
     }
 }
 
@@ -52,10 +43,10 @@ manageLayoutKeyUp(key)
         activeModifiers := getActiveModifiers(key)
         if (!processAhkKeyboardShortcuts(activeModifiers, key))
         {
+            debug(key . " sent on up")
             send {blind}%activeModifiers%{%key%}
         }
-        debug(key . "|UP")
-        
+
         if (keyToSendOnUp)
         {
             temp := keyToSendOnUp
@@ -76,13 +67,13 @@ timerTimeoutSendLayoutKey()
     sendLayoutKey := false
     if (keyToSendOnUp)
     {
+        processKeyOnRelease := false
+        layoutKeyActivatesProcessKeyOnRelease := false
         temp := keyToSendOnUp
         keyToSendOnUp := ""
         key := alternativeLayout[temp]
         processKeyToSend(key)
-        processKeyOnRelease := false
-        layoutKeyActivatesProcessKeyOnRelease := false
-        debug(key . "|---*** on alternative layout hard pressed and send key on up")            
+        debug(key . "|---*** on alternative layout hard pressed and send key on up")
     }
 
 }

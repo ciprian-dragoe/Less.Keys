@@ -8,7 +8,7 @@ validateTestOutput(testDescription, expectedResult)
 
 evaluateResult(expected, actual)
 {
-    if (expected == actual)
+    if (expected = actual)
     {
         return "PASS"
     }
@@ -23,7 +23,7 @@ addTestResult(testDescription, expected, actual, result)
     testResult.result := result 
     testResult.expected := expected
     testResult.actual := actual
-    if (result == "PASS")
+    if (result = "PASS")
     {
         successTestResults.push(testResult)
     }

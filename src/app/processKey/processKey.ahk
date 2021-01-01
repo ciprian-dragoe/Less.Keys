@@ -31,6 +31,12 @@ processKeyDown(key)
         return
     }
 
+    if (!alternativeLayoutActive)
+    {
+        layoutKeyActivatesProcessKeyOnRelease := true
+        SetTimer, TimerProcessLayoutOnRelease, OFF
+        SetTimer, TimerProcessLayoutOnRelease, %timeoutProcessLayoutOnRelease%
+    }
     processNormalKey(key)
 }
 
@@ -53,17 +59,19 @@ processKeyUp(key)
 
     if (keyToSendOnUp)
     {
-        temp := keyToSendOnUp
         processKeyOnRelease := false
         layoutKeyActivatesProcessKeyOnRelease := false
         sendLayoutKey := false
+        temp := keyToSendOnUp
         keyToSendOnUp := ""
         key := alternativeLayout[temp]
-        if (temp = key) {
-            send {blind}{%layoutChangeKey%}
+        if (temp = key)
+        {
+            modifiers := getActiveModifiers()
+            send {blind}%modifiers%{%layoutChangeKey%}
         }
         processKeyToSend(key)
-        debug(key . "|***^^^ key up & process release")      
+        debug(temp . " => " . temp . " on release")
     }
     else
     {
@@ -73,12 +81,6 @@ processKeyUp(key)
         }
         
         removeFromActivePressedKeys(key)
-        
-        if (!alternativeLayoutActive && activePressedKeys.Length() = 0)
-        {
-            layoutKeyActivatesProcessKeyOnRelease := true
-            SetTimer, TimerProcessLayoutOnRelease, %timeoutProcessLayoutOnRelease%
-        }
         
         debug(key . "|up")
     }

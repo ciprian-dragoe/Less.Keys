@@ -42,7 +42,7 @@ sendDoubledValueAndReset(modifierValue, ByRef sendClickOnRelease, ByRef isModifi
     doubledAction := modifierDoubledAsClick[modifierValue]
     activeModifiers := getActiveModifiers()
     debug("sendDoubledValueAndReset " . doubledAction)
-    if (doubledAction == "lbutton")
+    if (doubledAction = "lbutton")
     {
         if (isModifierClickDown)
         {
@@ -67,7 +67,7 @@ sendDoubledValueAndReset(modifierValue, ByRef sendClickOnRelease, ByRef isModifi
             }
         }
     }
-    else if (doubledAction == "rbutton")
+    else if (doubledAction = "rbutton")
     {
         send {blind}%activeModifiers%{rbutton down}
         send {blind}%activeModifiers%{rbutton up}
