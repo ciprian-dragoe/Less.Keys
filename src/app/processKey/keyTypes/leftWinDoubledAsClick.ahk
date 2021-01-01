@@ -30,8 +30,7 @@ doubledLeftWinDown()
     if (isLeftCtrlDoubledAsClickPressed || isLeftShiftDoubledAsClickPressed || isLeftAltDoubledAsClickPressed)
     {
         resetSendClickOnLeftModifierRelease(1)
-        setWinState(1)
-        setTimer TimerMonitorWinModifierLift, %timeoutResetModifierContinuousPress%
+        winActive := 1
         return
     }
 
