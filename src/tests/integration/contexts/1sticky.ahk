@@ -131,17 +131,6 @@ When_leftCtrlClick_key_is_logically_pressed_and_mouse_moved_and_stickyTime_passe
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
-When_non_modifier_key_is_logically_pressed_and_not_released_after_stickyTime_passes_activePressedKeys_is_reset_to_empty_array_#111()
-{
-    simulateKeyDown("lshift", 100)
-    simulateKeyDown("a", timerTimeoutStickyKeys + 100)
-    simulateKeyUp("lshift", 100)
-
-    actual := "" . activePressedKeys.Length()
-    addTestResult(A_ThisFunc, "0", actual, evaluateResult(actual, "0"))
-    setDefaultTestEnvironment(A_ThisFunc)
-}
-
 When_lastKeyProcessedAsAlternative_is_set_after_stickyTime_it_is_reset_#112()
 {
     lastKeyProcessedAsAlternative := "a"

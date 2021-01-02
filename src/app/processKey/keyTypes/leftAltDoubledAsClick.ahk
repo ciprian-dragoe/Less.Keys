@@ -35,7 +35,7 @@ doubledLeftAltDown()
         return
     }
 
-    if (fixQuickTypeLeftRightDoubledModifiers || layoutKeyPressed || activePressedKeys.Length() > 0)
+    if (layoutKeyActivatesProcessKeyOnRelease || layoutKeyPressed)
     {
         if (isAnyRightModifierPressed())
         {

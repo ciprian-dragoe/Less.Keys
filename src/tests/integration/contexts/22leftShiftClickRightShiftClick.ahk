@@ -76,9 +76,9 @@ When_leftShiftClick_pressed_rightShiftClick_pressed_mouse_moved_until_second_wor
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
-When_leftShiftClick_pressed_in_less_then_TimerFixQuickTypeLeftRightDoubledModifiers_after_letter_release_rightShiftClick_pressed_mouse_moved_until_second_word_THEN_only_second_word_is_selected_#2205()
+When_leftShiftClick_pressed_in_less_then_timeoutProcessLayoutOnRelease_after_letter_release_rightShiftClick_pressed_mouse_moved_until_second_word_THEN_only_second_word_is_selected_#2205()
 {
-    timeoutFixQuickTypeLeftRightDoubledModifiers := 1000
+    timeoutProcessLayoutOnRelease := 1000
     setMousePositionToCaret()
     simulateTyping("hello")
     destination := getCurrentCaretPosition()
@@ -99,9 +99,9 @@ When_leftShiftClick_pressed_in_less_then_TimerFixQuickTypeLeftRightDoubledModifi
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
-When_leftShiftClick_pressed_in_less_then_TimerFixQuickTypeLeftRightDoubledModifiers_after_letter_release_rightShiftClick_pressed_mouse_moved_until_second_word_leftShiftClick_release_THEN_only_second_word_is_selected_#2206()
+When_leftShiftClick_pressed_in_less_then_timeoutProcessLayoutOnRelease_after_letter_release_rightShiftClick_pressed_mouse_moved_until_second_word_leftShiftClick_release_THEN_only_second_word_is_selected_#2206()
 {
-    timeoutFixQuickTypeLeftRightDoubledModifiers := 1000
+    timeoutProcessLayoutOnRelease := 1000
     setMousePositionToCaret()
     simulateTyping("hello")
     destination := getCurrentCaretPosition()
@@ -122,9 +122,9 @@ When_leftShiftClick_pressed_in_less_then_TimerFixQuickTypeLeftRightDoubledModifi
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
-When_leftShiftClick_pressed_in_less_then_TimerFixQuickTypeLeftRightDoubledModifiers_after_letter_release_rightShiftClick_pressed_leftShiftClick_release_mouse_moved_until_second_word_THEN_only_second_word_is_selected_#2207()
+When_leftShiftClick_pressed_in_less_then_timeoutProcessLayoutOnRelease_after_letter_release_rightShiftClick_pressed_leftShiftClick_release_mouse_moved_until_second_word_THEN_only_second_word_is_selected_#2207()
 {
-    timeoutFixQuickTypeLeftRightDoubledModifiers := 1000
+    timeoutProcessLayoutOnRelease := 1000
     setMousePositionToCaret()
     simulateTyping("hello")
     destination := getCurrentCaretPosition()
@@ -145,11 +145,11 @@ When_leftShiftClick_pressed_in_less_then_TimerFixQuickTypeLeftRightDoubledModifi
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
-When_leftShiftClick_pressed_in_less_then_TimerFixQuickTypeLeftRightDoubledModifiers_after_letter_release_rightShiftClick_doubled_as_w_pressed_leftShiftClick_release_THEN_w_is_typed_#2208()
+When_leftShiftClick_pressed_in_less_then_timeoutProcessLayoutOnRelease_after_letter_release_rightShiftClick_doubled_as_w_pressed_leftShiftClick_release_THEN_w_is_typed_#2208()
 {
     modifierDoubledAsClick["rightShiftClick"] := "w"
     setMousePositionToCaret()
-    timeoutFixQuickTypeLeftRightDoubledModifiers := 1000
+    timeoutProcessLayoutOnRelease := 1000
     simulateTyping("hello")
     processKeyDown("leftShiftClick")
     sleep 100
@@ -166,11 +166,11 @@ When_leftShiftClick_pressed_in_less_then_TimerFixQuickTypeLeftRightDoubledModifi
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
-When_leftShiftClick_pressed_in_less_then_TimerFixQuickTypeLeftRightDoubledModifiers_after_letter_release_rightShiftClick_doubled_as_w_pressed_THEN_W_is_typed_#2209()
+When_leftShiftClick_pressed_in_less_then_timeoutProcessLayoutOnRelease_after_letter_release_rightShiftClick_doubled_as_w_pressed_THEN_W_is_typed_#2209()
 {
     modifierDoubledAsClick["rightShiftClick"] := "w"
     setMousePositionToCaret()
-    timeoutFixQuickTypeLeftRightDoubledModifiers := 1000
+    timeoutProcessLayoutOnRelease := 1000
     simulateTyping("hello")
     processKeyDown("leftShiftClick")
     sleep 100
@@ -187,11 +187,11 @@ When_leftShiftClick_pressed_in_less_then_TimerFixQuickTypeLeftRightDoubledModifi
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
-When_leftShiftClick_pressed_before_typing_rightShiftClick_doubled_as_w_pressed_in_less_then_TimerFixQuickTypeLeftRightDoubledModifiers_rightShiftClick_release_THEN_W_is_typed_#2210()
+When_leftShiftClick_pressed_before_typing_rightShiftClick_doubled_as_w_pressed_in_less_then_timeoutProcessLayoutOnRelease_rightShiftClick_release_THEN_W_is_typed_#2210()
 {
     modifierDoubledAsClick["rightShiftClick"] := "w"
     timerTimeoutStickyKeys := 4000
-    timeoutFixQuickTypeLeftRightDoubledModifiers := 1000
+    timeoutProcessLayoutOnRelease := 1000
     setMousePositionToCaret()
     processKeyDown("leftShiftClick")
     simulateTyping("hello")

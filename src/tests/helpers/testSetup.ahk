@@ -62,7 +62,7 @@ getSelectedText()
 setTestVariables()
 {
     clipboard :=
-    timeoutFixQuickTypeLeftRightDoubledModifiers := 100
+    timeoutProcessLayoutOnRelease := 110
     timeGreaterTimeoutProcessLayoutOnRelease := 500
     timeoutStillSendLayoutKey := 2000
     timerTimeoutStickyKeys := 1000

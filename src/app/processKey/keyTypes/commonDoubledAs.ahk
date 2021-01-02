@@ -1,4 +1,3 @@
-global fixQuickTypeLeftRightDoubledModifiers := 0
 global timeoutResetModifierContinuousPress := 20
 global repressNormalShiftRelease := false
 global repressNormalWinRelease := false
@@ -203,12 +202,6 @@ timerMonitorWinModifierLift()
         send {lwin up}
         setTimer TimerMonitorWinModifierLift, off
     }
-}
-
-timerFixQuickTypeLeftRightDoubledModifiers()
-{
-    SetTimer, TimerFixQuickTypeLeftRightDoubledModifiers, OFF
-    fixQuickTypeLeftRightDoubledModifiers := false
 }
 
 isAnyLeftModifierPressed()
