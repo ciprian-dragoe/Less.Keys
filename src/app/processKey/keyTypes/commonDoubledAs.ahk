@@ -40,7 +40,7 @@ sendDoubledValueAndReset(modifierValue, ByRef sendClickOnRelease, ByRef isModifi
 {
     doubledAction := modifierDoubledAsClick[modifierValue]
     activeModifiers := getActiveModifiers()
-    debug("sendDoubledValueAndReset " . doubledAction)
+    debug("doubled " . modifierValue . " => " . doubledAction)
     if (doubledAction = "lbutton")
     {
         if (isModifierClickDown)

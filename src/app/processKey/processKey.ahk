@@ -46,10 +46,11 @@ processKeyDown(key)
     processNormalKey(key)
 }
 
-processKeyUp(key) 
+processKeyUp(key)
 {
     if (isAhkBugMisreadKeyUp(key))
     {
+        debug(key . " BUG IGNORED RELEASE")
         return
     }
 
