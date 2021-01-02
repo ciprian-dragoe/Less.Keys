@@ -65,6 +65,7 @@ resetStates()
     isRightCtrlDoubledAsClickPressed := false
     isRightShiftDoubledAsClickPressed := false
     sendUnClickOnLeftCtrlClickRelease := false
+    activePressedKeys := []
     processKeyOnRelease := false
     layoutKeyPressed := false
     SetTimer, TimerScrollWithMouseMovement, OFF

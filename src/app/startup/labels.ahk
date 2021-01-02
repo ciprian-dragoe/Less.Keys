@@ -20,6 +20,10 @@ TimerScrollWithMouseMovement:
     timerScrollWithMouseMovement()
 return
 
+TimerFixQuickTypeLeftRightDoubledModifiers:
+    timerFixQuickTypeLeftRightDoubledModifiers()
+return
+
 TimerResetModifierReleaseAction:
     timerResetModifierReleaseAction()
 return
