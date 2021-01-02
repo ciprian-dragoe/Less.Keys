@@ -229,3 +229,29 @@ When_shift_key_is_pressed_followed_by_letter_remapped_as_accented_character_sibl
     
     validateTestOutput(A_ThisFunc , expected)
 }
+
+When_key_pressed_and_released_in_less_then_minimumDelayBetweenSameKeyUpAndDown_THEN_key_up_is_not_processed_#619()
+{
+    simulateTyping("hello")
+    processKeyDown("space")
+    sleep 10
+    processKeyUp("space")
+    sleep 1000
+    processKeyUp("space")
+
+    expected := "hello"
+    validateTestOutput(A_ThisFunc , expected)
+}
+
+When_key_pressed_and_released_after_minimumDelayBetweenSameKeyUpAndDown_THEN_key_up_is_processed_#620()
+{
+    simulateTyping("hello")
+    processKeyDown("space")
+    sleep % minimumDelayBetweenSameKeyUpAndDown / 1000
+    sleep 10
+    processKeyUp("space")
+
+    expected := "hello "
+    validateTestOutput(A_ThisFunc , expected)
+}
+

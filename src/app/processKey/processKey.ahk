@@ -11,11 +11,18 @@ global sendLayoutKey
 global lastKeyProcessedAsAlternative
 global activePressedKeys := []
 global processKeyOnRelease
-
+global lastPressedKey := ""
+global lastPressedKeyTime := 0
 
 
 processKeyDown(key)
 {
+    if (lastPressedKey != key)
+    {
+        lastPressedKey := key
+        DllCall("QueryPerformanceCounter", "Int64*", lastPressedKeyTime)
+    }
+
     if (processModifierKey(key, 1))
     {
         SetTimer TimerStickyFailBack, off
@@ -42,6 +49,11 @@ processKeyDown(key)
 
 processKeyUp(key) 
 {
+    if (isAhkBugMisreadKeyUp(key))
+    {
+        return
+    }
+
     if (processModifierKey(key, 0))
     {
         return
@@ -84,4 +96,20 @@ processKeyUp(key)
         
         debug(key . "|up")
     }
+}
+
+isAhkBugMisreadKeyUp(currentKeyUp)
+{
+    DllCall("QueryPerformanceCounter", "Int64*", now)
+    minimumTimePassBetweenSameKeyDownAndUp := now - lastPressedKeyTime
+    if (minimumTimePassBetweenSameKeyDownAndUp > minimumDelayBetweenSameKeyUpAndDown)
+    {
+        return false
+    }
+    if (currentKeyUp = lastPressedKey)
+    {
+        return true
+    }
+
+    return false
 }
