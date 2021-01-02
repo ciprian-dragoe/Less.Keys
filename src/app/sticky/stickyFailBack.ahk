@@ -39,10 +39,9 @@ resetStates()
         send {alt up}
     }
 
-    send {ctrl up}
-    if (winActive)
+    if (ctrlActive)
     {
-        send {lwin up}
+        send {ctrl up}
     }
 
     if (winActive)
@@ -79,12 +78,4 @@ resetStates()
     altActive := false
     shiftActive := false
     winActive := false
-
-    for index, key in monitoredStickyKeys
-    {
-        if (key = "capslock")
-        {
-            SetCapsLockState, off
-        }
-    }
 }

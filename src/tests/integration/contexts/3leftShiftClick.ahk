@@ -222,7 +222,7 @@ When_leftShiftClick_is_pressed_and_shift_key_is_pressed_and_layout_key_pressed_a
     processKeyUp("leftShiftClick")
     sleep 100
     actual := clearText()
-    expected := "hello worldINTEGRATION_TEST"
+    expected := "hello world INTEGRATION_TEST"
     
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
     setDefaultTestEnvironment(A_ThisFunc)

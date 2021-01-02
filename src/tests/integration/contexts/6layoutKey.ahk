@@ -110,9 +110,9 @@ When_non_modifier_key_is_released_followed_by_layout_key_press_in_less_than_time
 
 When_non_modifier_key_is_released_followed_by_layout_key_press_in_less_than_timeoutProcessLayoutOnRelease_followed_by_non_modifier_key_press_followed_layout_key_release_space_is_sent_followed_by_non_modifier_key_#610()
 {
-    simulateKeyDown("w", 50)
-    simulateKeyUp("w", 50)
-    simulateKeyDown("space", 50)
+    simulateKeyDown("w", 10)
+    simulateKeyUp("w", 10)
+    simulateKeyDown("space", 10)
     simulateKeyDown("e", 10)
     simulateKeyUp("space", 50)
     simulateKeyUp("e", 50)

@@ -71,7 +71,7 @@ processKeyUp(key)
             send {blind}%modifiers%{%layoutChangeKey%}
         }
         processKeyToSend(key)
-        debug(temp . " => " . temp . " on release")
+        debug(temp . " => " . key . " on release")
     }
     else
     {

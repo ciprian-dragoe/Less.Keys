@@ -57,23 +57,6 @@ When_leftAltClick_is_continuously_pressed_and_backtick_is_pressed_left_click_is_
     validateCaretOutput(A_ThisFunc, expected)    
 }
 
-When_leftAltClick_is_continuously_pressed_and_layout_key_is_pressed_and_backtick_is_sent_on_leftAltClick_release_click_is_not_sent_#1105()
-{
-    simulateTyping("he")
-    simulateTyping("llo ")
-    processKeyDown("leftAltClick")
-    sleep 100
-    simulateKeyDown("space", 50)
-    simulateKeyDown("``", 50)
-    processKeyUp("leftAltClick")
-    sleep 100
-    simulateKeyUp("space", 50)
-    simulateKeyUp("``", 50)
-    expected := setMousePositionToCaret()
-
-    validateCaretOutput(A_ThisFunc, expected)
-}
-
 When_leftAltClick_is_pressed_and_alt_key_is_pressed_and_released_click_is_sent_on_leftAltClick_release_#1106()
 {
     simulateTyping("he")
@@ -215,28 +198,6 @@ When_leftAltClick_is_pressed_and_shift_is_pressed_click_is_sent_on_leftAltClick_
     validateCaretOutput(A_ThisFunc, expected)
 }
 
-When_leftAltClick_is_pressed_and_shift_key_is_pressed_and_layout_key_pressed_and_backtick_pressed_keyboard_shortcut_is_sent_#1114()
-{
-    simulateTyping("hello")
-    setMousePositionToCaret()
-    simulateTyping(" world")
-    processKeyDown("leftAltClick")
-    sleep 100
-    simulateKeyDown("lshift", 50)
-    simulateKeyDown("space", 50)
-    simulateKeyDown("``", 50)
-    simulateKeyUp("space", 50)
-    simulateKeyUp("``", 50)
-    simulateKeyUp("lshift", 50)
-    processKeyUp("leftAltClick")
-    sleep 100
-    actual := clearText()
-    expected := "hello worldINTEGRATION_TEST"
-    
-    addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment(A_ThisFunc)
-}    
-
 When_leftAltClick_is_continuously_pressed_and_layout_key_is_pressed_after_release_left_click_is_not_sent_#1115()
 {
     simulateTyping("he")
@@ -294,44 +255,6 @@ When_leftAltClick_pressed_and_mouse_is_moved_and_layout_key_is_pressed_longer_th
     setDefaultTestEnvironment(A_ThisFunc)
     timerTimeoutStickyKeys := default
 }    
-
-When_non_modifier_letter_is_released_and_layout_key_continuous_press_in_less_then_timeoutProcessLayoutOnRelease_and_leftAltClick_pressed_and_backtick_pressed_and_released_click_is_not_sent_#1120()
-{
-    simulateTyping("hello ")
-    setMousePositionToCaret()
-    simulateTyping("world")
-    simulateKeyDown("space", 50)
-    processKeyDown("leftAltClick")
-    sleep 50
-    simulateKeyDown("``", 100)
-    simulateKeyUp("``", 100)
-    expected := getCurrentCaretPosition()
-    simulateKeyUp("space", 100)
-    processKeyUp("leftAltClick")
-    
-    sleep 100
-    
-    validateCaretOutput(A_ThisFunc, expected)
-}
-
-When_non_modifier_letter_is_released_and_layout_key_continuous_press_in_less_then_timeoutProcessLayoutOnRelease_and_leftAltClick_continuous_press_and_backtick_pressed_and_leftAltClick_released_left_click_is_not_sent_#1121()
-{
-    simulateTyping("hello ")
-    setMousePositionToCaret()
-    simulateTyping("world")
-    simulateKeyDown("space", 50)
-    processKeyDown("leftAltClick")
-    sleep 50
-    simulateKeyDown("``", 100)
-    simulateKeyUp("``", 100)
-    simulateKeyUp("space", 100)
-    processKeyUp("leftAltClick")
-    expected := getCurrentCaretPosition()
-    
-    sleep 100
-    
-    validateCaretOutput(A_ThisFunc, expected)
-}
 
 When_leftAltClick_is_pressed_more_then_timeoutStillSendLayoutKey_left_click_is_not_sent_on_leftAltClick_release_#1122()
 {
