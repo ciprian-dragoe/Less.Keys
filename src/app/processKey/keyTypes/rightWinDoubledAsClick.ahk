@@ -73,7 +73,10 @@ continuousPressRightWin()
         setTimer TimerMonitorWinModifierLift, %timeoutResetModifierContinuousPress%
     }
     resetSendClickOnLeftModifierRelease(1)
-    repressLeftWinReleaseCancelWinActive := true
+    if (isLeftWinDoubledAsClickPressed)
+    {
+        repressLeftWinReleaseCancelWinActive := true
+    }
 }
 
 mouseDragRightWinActivate(nCode, wParam, lParam)

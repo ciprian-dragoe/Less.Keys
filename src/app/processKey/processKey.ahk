@@ -9,6 +9,7 @@
 global keyToSendOnUp
 global sendLayoutKey
 global lastKeyProcessedAsAlternative
+global activePressedKeys := []
 global processKeyOnRelease
 global lastPressedKey := ""
 global lastPressedKeyTime := 0
@@ -59,6 +60,10 @@ processKeyUp(key)
         return
     }
 
+    fixQuickTypeLeftRightDoubledModifiers := true
+    SetTimer, TimerFixQuickTypeLeftRightDoubledModifiers, OFF
+    SetTimer, TimerFixQuickTypeLeftRightDoubledModifiers, %timeoutFixQuickTypeLeftRightDoubledModifiers%
+    
     if (key = layoutChangeKey)
     {
         manageLayoutKeyUp(key)
@@ -87,6 +92,9 @@ processKeyUp(key)
         {
             lastKeyProcessedAsAlternative := ""
         }
+        
+        removeFromActivePressedKeys(key)
+        
         debug(key . "|up")
     }
 }

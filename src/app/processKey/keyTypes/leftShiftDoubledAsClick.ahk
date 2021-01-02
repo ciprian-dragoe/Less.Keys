@@ -74,7 +74,10 @@ continuousPressLeftShift()
         setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%
     }
     resetSendClickOnRightModifierRelease(1)
-    repressRightShiftReleaseCancelShiftActive := true
+    if (isRightShiftDoubledAsClickPressed)
+    {
+        repressRightShiftReleaseCancelShiftActive := true
+    }
 }
 
 mouseDragLeftShiftActivate(nCode, wParam, lParam)

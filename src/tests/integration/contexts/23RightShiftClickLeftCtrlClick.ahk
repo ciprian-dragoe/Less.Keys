@@ -78,3 +78,26 @@ When_rightShiftClick_pressed_leftCtrlClick_pressed_mouse_moved_until_second_word
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
     setDefaultTestEnvironment(A_ThisFunc)
 }
+
+When_rightShiftClick_pressed_layoutKey_pressed_leftCtrlClick_pressed_THEN_ctrlActive_is_reset_on_leftCtrlClick_release_#2305()
+{
+    setMousePositionToCaret()
+    simulateTyping("hello")
+    processKeyDown("rightShiftClick")
+    sleep 100
+    processKeyDown("space")
+    sleep 100
+    processKeyDown("leftCtrlClick")
+    sleep 100
+    processKeyUp("rightShiftClick")
+    sleep 100
+    processKeyUp("leftCtrlClick")
+    sleep 100
+    processKeyUp("space")
+    sleep 100
+
+    actual := "" . ctrlActive
+    addTestResult(A_ThisFunc, "0", actual, evaluateResult(actual, "0"))
+    setDefaultTestEnvironment(A_ThisFunc)
+}
+

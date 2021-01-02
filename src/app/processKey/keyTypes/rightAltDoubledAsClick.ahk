@@ -74,7 +74,10 @@ continuousPressRightAlt()
         setTimer TimerMonitorAltModifierLift, %timeoutResetModifierContinuousPress%
     }
     resetSendClickOnLeftModifierRelease(1)
-    repressLeftAltReleaseCancelAltActive := true
+    if (isLeftAltDoubledAsClickPressed)
+    {
+        repressLeftAltReleaseCancelAltActive := true
+    }
 }
 
 mouseDragRightAltActivate(nCode, wParam, lParam)

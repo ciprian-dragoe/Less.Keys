@@ -74,7 +74,10 @@ continuousPressLeftCtrl()
         setTimer TimerMonitorCtrlModifierLift, %timeoutResetModifierContinuousPress%
     }
     resetSendClickOnRightModifierRelease(1)
-    repressRightCtrlReleaseCancelCtrlActive := true
+    if (isRightCtrlDoubledAsClickPressed)
+    {
+        repressRightCtrlReleaseCancelCtrlActive := true
+    }
 }
 
 mouseDragLeftCtrlActivate(nCode, wParam, lParam)

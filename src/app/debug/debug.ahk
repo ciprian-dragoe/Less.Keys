@@ -21,7 +21,12 @@ showToolTip(value, time = 600)
 
 writeMemoryStream(value)
 {
-    result = %A_Hour%:%A_Min%:%A_Sec%:%A_MSec%|%value%|layoutPressed=%layoutKeyPressed%|alternativeLayout=%alternativeLayoutActive%|ProcessKeyOnRelease=%processKeyOnRelease%|keyToSendOnUp=%keyToSendOnUp%|lastKeyProcessedAsAlternative=%lastKeyProcessedAsAlternative%|^=%ctrlActive%`|!=%altActive%|+=%shiftActive%|#=%winActive%|sendClickOnRightShiftClickRelease%sendClickOnRightShiftClickRelease%|sendClickOnLeftShiftClickRelease=%sendClickOnLeftShiftClickRelease%|lastPressedKey=%lastPressedKey%|lastPressedKeyTime=%lastPressedKeyTime%`n
+    keysPressed := ""
+    for index , key in activePressedKeys
+    {
+        keysPressed .= key
+    }
+    result = %A_Hour%:%A_Min%:%A_Sec%:%A_MSec%|%value%|layoutPressed=%layoutKeyPressed%|alternativeLayout=%alternativeLayoutActive%|keysPressed=%keysPressed%|ProcessKeyOnRelease=%processKeyOnRelease%|keyToSendOnUp=%keyToSendOnUp%|lastKeyProcessedAsAlternative=%lastKeyProcessedAsAlternative%|^=%ctrlActive%`|!=%altActive%|+=%shiftActive%|#=%winActive%|sendClickOnRightShiftClickRelease%sendClickOnRightShiftClickRelease%|sendClickOnLeftShiftClickRelease=%sendClickOnLeftShiftClickRelease%|fixQuickTypeLeftRightDoubledModifiers=%fixQuickTypeLeftRightDoubledModifiers%|lastPressedKey=%lastPressedKey%|lastPressedKeyTime=%lastPressedKeyTime%`n
     debugStoredData .= result
     if (StrLen(debugStoredData) > 100000)
     {
@@ -53,7 +58,7 @@ timerRealTimeDebug(displayTime = 1000)
     info .= "lwin down " . GetKeyState("lwin") . " winActive=" . winActive . "`n"
     info .= "rwin down " . GetKeyState("rwin") . " winActive=" . winActive . "`n"
     info .= "layoutPressed=" . layoutKeyPressed . "`n"
-    info .= "alternativeLayoutActive=" . alternativeLayoutActive . "`n"
+    info .= "alternativeLayout=" . alternativeLayoutActive . "`n"
 
     result := ""
     for index, value in monitoredStickyKeys
