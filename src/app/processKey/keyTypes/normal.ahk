@@ -8,24 +8,28 @@ processNormalKey(key)
         layoutKeyActivatesProcessKeyOnRelease := false
         sendLayoutKey := false
 
-        firstKeyPress := alternativeLayout[keyToSendOnUp]
-        secondKeyPressed := alternativeLayout[key]
-        lastKeyProcessedAsAlternative := key
-        if (firstKeyPress = keyToSendOnUp)
+        if (keyToSendOnUp = key)
         {
-            secondKeyPressed := key
-            lastKeyProcessedAsAlternative := ""
-
-            modifiers := getActiveModifiers()
-            send {blind}%modifiers%{%layoutChangeKey%}
+            lastKeyProcessedAsAlternative := key
+            alternativeKey := alternativeLayout[key]
+            debug(key . " => " . alternativeKey . "| timeoutProcessLayoutOnRelease deep press keyToSendOnUp")
+            if (key = alternativeKey)
+            {
+                lastKeyProcessedAsAlternative := ""
+                debug(layoutChangeKey . " sent because keyToSendOnUp without alternative value")
+                send {blind}{%layoutChangeKey%}
+            }
+            processKeyToSend(alternativeKey)
         }
-        processKeyToSend(firstKeyPress)
+        else
+        {
+            debug(keyToSendOnUp . " & " . key . "| timeoutProcessLayoutOnRelease 2 keys pressed")
+            send {blind}{%layoutChangeKey%}
+            processKeyToSend(keyToSendOnUp)
+            processKeyToSend(key)
+        }
+
         keyToSendOnUp := ""
-        debug(sendFirstKeyAsAlternative . "|first key typed because 2 keys pressed while alternative key pressed in less timeoutProcessLayoutOnRelease")
-
-        processKeyToSend(secondKeyPressed)
-        debug(sendFirstKeyAsAlternative . "|second key typed because 2 keys pressed while alternative key pressed in less timeoutProcessLayoutOnRelease")
-
         return
     }
     

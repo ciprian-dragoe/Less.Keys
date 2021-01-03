@@ -133,3 +133,64 @@ When_layout_key_continuously_pressed_followed_by_shift_key_press_followed_by_let
     
     validateTestOutput(A_ThisFunc , expected)
 }
+
+When_letter_pressed_and_released_layoutKey_press_in_less_then_timeoutProcessLayoutOnRelease_letter_a_press_THEN_layoutKey_letter_a_letter_b_sent_on_letter_b_press_#711()
+{
+    processKeyDown("w")
+    sleep 10
+    processKeyUp("w")
+    sleep 10
+    processKeyDown("space")
+    sleep 10
+    processKeyDown("a")
+    sleep 10
+    processKeyDown("a")
+    sleep 100
+    sleep %timerTimeoutStickyKeys%
+    processKeyUp("space")
+    processKeyUp("a")
+    processKeyUp("b")
+
+    expected := "w ab"
+    validateTestOutput(A_ThisFunc , expected)
+}
+
+When_letter_pressed_and_released_layoutKey_press_in_less_then_timeoutProcessLayoutOnRelease_letter_o_continuous_press_two_times_THEN_alternative_value_of_o_is_sent_once_#712()
+{
+    processKeyDown("w")
+    sleep 10
+    processKeyUp("w")
+    sleep 10
+    processKeyDown("space")
+    sleep 10
+    processKeyDown("o")
+    sleep 10
+    processKeyDown("o")
+    sleep 100
+    sleep %timerTimeoutStickyKeys%
+    processKeyUp("space")
+    processKeyUp("o")
+
+    expected := "w-"
+    validateTestOutput(A_ThisFunc , expected)
+}
+
+When_letter_pressed_and_released_layoutKey_press_in_less_then_timeoutProcessLayoutOnRelease_letter_h_continuous_press_two_times_THEN_layoutKey_letter_h_is_sent_once_#713()
+{
+    processKeyDown("w")
+    sleep 10
+    processKeyUp("w")
+    sleep 10
+    processKeyDown("space")
+    sleep 10
+    processKeyDown("h")
+    sleep 10
+    processKeyDown("h")
+    sleep 100
+    sleep %timerTimeoutStickyKeys%
+    processKeyUp("space")
+    processKeyUp("h")
+
+    expected := "w h"
+    validateTestOutput(A_ThisFunc , expected)
+}

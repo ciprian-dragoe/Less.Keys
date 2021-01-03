@@ -11,7 +11,7 @@ global defaultRightShiftClickAction
 global defaultRightWinClickAction
 global defaultRightAltClickAction
 global defaultTimeoutStillSendLayoutKey
-global defaultTimeGreaterTimeoutProcessLayoutOnRelease
+global defaultTimeoutProcessLayoutOnRelease
 global defaultTimerTimeoutStickyKeys
 global defaultTimeoutFixQuickTypeLeftRightDoubledModifiers
 
@@ -38,7 +38,7 @@ initTestEnvironment()
     defaultRightShiftClickAction := modifierDoubledAsClick["rightShiftClick"]
     defaultRightWinClickAction := modifierDoubledAsClick["rightWinClick"]
     defaultRightAltClickAction := modifierDoubledAsClick["rightAltClick"]
-    defaultTimeGreaterTimeoutProcessLayoutOnRelease := timeGreaterTimeoutProcessLayoutOnRelease
+    defaultTimeoutProcessLayoutOnRelease := timeoutProcessLayoutOnRelease
     defaultTimeoutStillSendLayoutKey := timeoutStillSendLayoutKey
     defaultTimerTimeoutStickyKeys := timerTimeoutStickyKeys
     defaultTimeoutFixQuickTypeLeftRightDoubledModifiers := timeoutFixQuickTypeLeftRightDoubledModifiers
@@ -55,7 +55,7 @@ finalizeTestEnvironment()
     modifierDoubledAsClick["rightShiftClick"] := defaultRightShiftClickAction
     modifierDoubledAsClick["rightWinClick"] := defaultRightWinClickAction
     modifierDoubledAsClick["rightAltClick"] := defaultRightAltClickAction
-    timeGreaterTimeoutProcessLayoutOnRelease := defaultTimeGreaterTimeoutProcessLayoutOnRelease
+    timeoutProcessLayoutOnRelease := defaultTimeoutProcessLayoutOnRelease
     timeoutStillSendLayoutKey := defaultTimeoutStillSendLayoutKey
     timerTimeoutStickyKeys := defaultTimerTimeoutStickyKeys
     timeoutFixQuickTypeLeftRightDoubledModifiers := defaultTimeoutFixQuickTypeLeftRightDoubledModifiers

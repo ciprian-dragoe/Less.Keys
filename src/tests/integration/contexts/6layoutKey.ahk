@@ -254,4 +254,3 @@ When_key_pressed_and_released_after_minimumDelayBetweenSameKeyUpAndDown_THEN_key
     expected := "hello "
     validateTestOutput(A_ThisFunc , expected)
 }
-

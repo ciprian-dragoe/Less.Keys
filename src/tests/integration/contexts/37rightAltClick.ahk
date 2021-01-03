@@ -108,6 +108,7 @@ When_rightAltClick_is_pressed_and_ctrl_key_is_pressed_click_is_sent_on_rightAltC
 
 When_rightAltClick_is_pressed_and_win_key_is_pressed_and_released_click_is_sent_on_rightAltClick_release_#3710()
 {
+    timerTimeoutStickyKeys := 3000
     simulateTyping("he")
     setMousePositionToCaret()
     expected := getCurrentCaretPosition()
@@ -117,11 +118,11 @@ When_rightAltClick_is_pressed_and_win_key_is_pressed_and_released_click_is_sent_
     processKeyDown("lwin")
     sleep 50
     processKeyUp("lwin")
-    sleep 400
+    sleep 700
     processKeyDown("lwin")
     sleep 100
     processKeyUp("lwin")
-    sleep 400
+    sleep 700
     processKeyUp("rightAltClick")
     sleep 100
 
@@ -130,6 +131,7 @@ When_rightAltClick_is_pressed_and_win_key_is_pressed_and_released_click_is_sent_
 
 When_rightAltClick_is_pressed_and_win_key_is_pressed_click_is_sent_on_rightAltClick_release_#3711()
 {
+    timerTimeoutStickyKeys := 3000
     simulateTyping("he")
     setMousePositionToCaret()
     expected := getCurrentCaretPosition()
@@ -142,11 +144,11 @@ When_rightAltClick_is_pressed_and_win_key_is_pressed_click_is_sent_on_rightAltCl
     processKeyUp("rightAltClick")
     sleep 100
     processKeyUp("lwin")
-    sleep 200
+    sleep 700
     processKeyDown("lwin")
     sleep 100
     processKeyUp("lwin")
-    sleep 500
+    sleep 700
 
     validateCaretOutput(A_ThisFunc, expected)
 }

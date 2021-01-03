@@ -76,6 +76,7 @@ When_rightWinClick_is_continuously_pressed_and_layout_key_is_pressed_and_backtic
 
 When_rightWinClick_is_pressed_and_win_key_is_pressed_and_released_click_is_sent_on_rightWinClick_release_#4806()
 {
+    timerTimeoutStickyKeys := 3000
     simulateTyping("he")
     expected := setMousePositionToCaret()
     simulateTyping("llo")
@@ -84,11 +85,11 @@ When_rightWinClick_is_pressed_and_win_key_is_pressed_and_released_click_is_sent_
     processKeyDown("lwin")
     sleep 50
     processKeyUp("lwin")
-    sleep 400
+    sleep 700
     processKeyDown("lwin")
     sleep 100
     processKeyUp("lwin")
-    sleep 400
+    sleep 700
     processKeyUp("rightWinClick")
     sleep 100
 
@@ -146,6 +147,7 @@ When_rightWinClick_is_pressed_and_ctrl_key_is_pressed_click_is_sent_on_rightWinC
 
 When_rightWinClick_is_pressed_and_win_key_is_pressed_and_released_click_is_sent_on_rightWinClick_release_#4810()
 {
+    timerTimeoutStickyKeys := 3000
     simulateTyping("he")
     setMousePositionToCaret()
     expected := getCurrentCaretPosition()
@@ -155,11 +157,11 @@ When_rightWinClick_is_pressed_and_win_key_is_pressed_and_released_click_is_sent_
     processKeyDown("lwin")
     sleep 50
     processKeyUp("lwin")
-    sleep 400
+    sleep 700
     processKeyDown("lwin")
     sleep 100
     processKeyUp("lwin")
-    sleep 400
+    sleep 700
     processKeyUp("rightWinClick")
     sleep 100
 
@@ -168,6 +170,7 @@ When_rightWinClick_is_pressed_and_win_key_is_pressed_and_released_click_is_sent_
 
 When_rightWinClick_is_pressed_and_win_key_is_pressed_click_is_sent_on_rightWinClick_release_#4811()
 {
+    timerTimeoutStickyKeys := 3000
     simulateTyping("he")
     setMousePositionToCaret()
     expected := getCurrentCaretPosition()
@@ -180,11 +183,11 @@ When_rightWinClick_is_pressed_and_win_key_is_pressed_click_is_sent_on_rightWinCl
     processKeyUp("rightWinClick")
     sleep 100
     processKeyUp("lwin")
-    sleep 200
+    sleep 700
     processKeyDown("lwin")
     sleep 100
     processKeyUp("lwin")
-    sleep 500
+    sleep 700
 
     validateCaretOutput(A_ThisFunc, expected)
 }
@@ -348,6 +351,7 @@ When_rightWinClick_action_is_not_lbutton_and_mouse_is_moved_on_release_action_is
 
 When_win_is_pressed_and_rightWinClick_is_continuously_pressed_and_mouse_is_moved_the_text_is_selected_#4826()
 {
+    timerTimeoutStickyKeys := 3000
     startingPosition := setMousePositionToCaret()
     simulateTyping("hello ")
     simulateKeyDown("lwin", 100)
@@ -357,7 +361,7 @@ When_win_is_pressed_and_rightWinClick_is_continuously_pressed_and_mouse_is_moved
     MouseMove startingPosition.x, startingPosition.y
     processKeyUp("rightWinClick")
     sleep 100
-    simulateKeyUp("lwin", 100)
+    simulateKeyUp("lwin", 700)
     send {escape 2}
     sleep 300
     

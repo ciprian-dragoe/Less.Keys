@@ -63,7 +63,7 @@ setTestVariables()
 {
     clipboard :=
     timeoutFixQuickTypeLeftRightDoubledModifiers := 100
-    timeGreaterTimeoutProcessLayoutOnRelease := 500
+    timeoutProcessLayoutOnRelease := 500
     timeoutStillSendLayoutKey := 2000
     timerTimeoutStickyKeys := 1000
     modifierDoubledAsClick["leftCtrlClick"] := "lbutton"

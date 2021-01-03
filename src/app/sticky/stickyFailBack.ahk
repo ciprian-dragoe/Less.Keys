@@ -28,6 +28,7 @@ timerStickyFailBack()
 resetStates()
 {
     SetTimer, TimerStickyFailBack, off
+    debug("resetSticky")
 
     if (shiftActive)
     {
