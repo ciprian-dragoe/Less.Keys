@@ -46,6 +46,7 @@ processNormalKey(key)
     {
         lastKeyProcessedAsAlternative := key
         alternativeValue := alternativeLayout[key]
+        debug(key . " => " . alternativeValue)
         if (alternativeValue = key)
         {
             lastKeyProcessedAsAlternative := ""
@@ -53,7 +54,6 @@ processNormalKey(key)
             send {blind}%modifiers%{%layoutChangeKey%}
         }
         processKeyToSend(alternativeValue)
-        debug(key . " => " . alternativeValue)
 
         return
     }

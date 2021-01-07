@@ -54,25 +54,26 @@ sendDoubledValueAndReset(modifierValue, ByRef sendClickOnRelease, ByRef isModifi
         {
             if (sendClickOnRelease)
             {
-                send {blind}%activeModifiers%{lbutton down}
-                send {blind}%activeModifiers%{lbutton up}
                 sendClickOnRelease := false
                 isModifierClickDown := false
+                send {blind}%activeModifiers%{lbutton down}
+                send {blind}%activeModifiers%{lbutton up}
             }
             else
             {
-                send {blind}%activeModifiers%{lbutton down}
                 sendClickOnRelease := true
                 isModifierClickDown := true
+                debug("deep pressed mouse")
+                send {blind}%activeModifiers%{lbutton down}
             }
         }
     }
     else if (doubledAction = "rbutton")
     {
-        send {blind}%activeModifiers%{rbutton down}
-        send {blind}%activeModifiers%{rbutton up}
         isModifierClickDown := false
         sendClickOnRelease := false
+        send {blind}%activeModifiers%{rbutton down}
+        send {blind}%activeModifiers%{rbutton up}
     }
     else
     {
