@@ -41,12 +41,12 @@ manageLayoutKeyUp(key)
     if (sendLayoutKey)
     {   
         activeModifiers := getActiveModifiers(key)
+        temp := keyToSendOnUp
+        keyToSendOnUp := ""
         if (!processAhkKeyboardShortcuts(activeModifiers, key))
         {
             if (keyToSendOnUp)
             {
-                temp := keyToSendOnUp
-                keyToSendOnUp := ""
                 debug(key . " sent on up")
                 debug(temp . "|^^^^^^ on alternative layout released before")
                 send {blind}%activeModifiers%{%key%}
