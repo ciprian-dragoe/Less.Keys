@@ -91,6 +91,7 @@ resetStates()
     resetDoubledModifierClickDrag("rightShiftClick", isRightShiftClickDown)
     resetDoubledModifierClickDrag("rightAltClick", isRightAltClickDown)
     if (tempShiftState || tempAltState || tempCtrlState || tempWinState || isLeftCtrlClickDown || isLeftShiftClickDown || isLeftAltClickDown || isLeftWinClickDown || isRightWinClickDown || isRightCtrlClickDown || isRightShiftClickDown || isRightShiftClickDown) {
+        debug("tempShiftState " . tempShiftState . "|tempAltState " . tempAltState . "|tempCtrlState " . tempCtrlState . "|tempWinState " . tempWinState . "|isLeftCtrlClickDown " . isLeftCtrlClickDown . "|isLeftShiftClickDown " . isLeftShiftClickDown . "|isLeftAltClickDown " . isLeftAltClickDown . "|isLeftWinClickDown " . isLeftWinClickDown . "|isRightWinClickDown " . isRightWinClickDown . "|isRightCtrlClickDown " . isRightCtrlClickDown . "|isRightShiftClickDown " . isRightShiftClickDown . "|tempShiftState " . tempShiftState . "|tempAltState " . tempAltState . "|tempCtrlState " . tempCtrlState . "|tempWinState " . tempWinState)
         storeDebugData()
     }
 }

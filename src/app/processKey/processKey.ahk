@@ -57,11 +57,11 @@ processKeyUp(key)
         processKeyOnRelease := false
         layoutKeyActivatesProcessKeyOnRelease := false
         sendLayoutKey := false
-        temp := keyToSendOnUp
+        buffer := keyToSendOnUp
         keyToSendOnUp := ""
-        key := alternativeLayout[temp]
-        debug(temp . " => " . key . " on release")
-        if (temp = key)
+        key := alternativeLayout[buffer]
+        debug(buffer . " => " . key . " on release")
+        if (buffer = key)
         {
             modifiers := getActiveModifiers()
             send {blind}%modifiers%{%layoutChangeKey%}
