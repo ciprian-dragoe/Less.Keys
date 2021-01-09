@@ -51,7 +51,7 @@ When_key_which_has_been_remapped_as_modifier_key_is_pressed_followed_by_layout_k
 When_modifier_key_remapped_as_letter_is_pressed_on_release_activePressedKeys_is_reset_#705()
 {
     simulateKeyDown("rshift")
-    processModifierWhenKeyPhysicalUp("rshift")
+    simulateKeyUp("rshift")
     sleep 50
     
     result := ""
@@ -68,7 +68,7 @@ When_layout_key_pressed_and_modifier_key_remapped_as_letter_is_pressed_on_modifi
 {
     simulateKeyDown("space", 50)
     simulateKeyDown("rshift", 50)
-    processModifierWhenKeyPhysicalUp("rshift")
+    simulateKeyUp("rshift")
     sleep 50
     simulateKeyUp("space", 50)
     
@@ -86,7 +86,7 @@ When_layout_key_pressed_and_modifier_key_remapped_as_letter_is_pressed_on_modifi
 {
     simulateKeyDown("space", 50)
     simulateKeyDown("rshift", 50)
-    processModifierWhenKeyPhysicalUp("rshift")
+    simulateKeyUp("rshift")
     sleep 50
     simulateKeyUp("space", 50)
     
@@ -98,7 +98,7 @@ When_layout_key_pressed_followed_by_modifier_key_remapped_as_letter_pressed_foll
 {
     simulateKeyDown("space", 50)
     simulateKeyDown("rshift", 50)
-    processModifierWhenKeyPhysicalUp("rshift")
+    simulateKeyUp("rshift")
     sleep 50
     simulateKeyUp("space", 50)
     simulateKeyDown("rshift", 50)
