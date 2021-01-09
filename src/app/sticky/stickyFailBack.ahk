@@ -1,5 +1,3 @@
-global timerTimeoutStickyKeys := 1000
-
 ; if the cpu is executing intensive tasks then the lift key up command may not be processed for
 ; modifier keys (ctrl, shift, alt, win) and they are still registered by the os as pressed.
 ; This is a fail safe for such situations

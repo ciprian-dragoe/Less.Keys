@@ -47,14 +47,15 @@ doubledLeftShiftDown()
     }
     else if (isAnyRightModifierPressed())
     {
+        setTimer TimerResetModifierReleaseAction, OFF
         continuousPressLeftShift()
         sendDoubledValueAndReset("leftShiftClick", sendClickOnLeftShiftClickRelease, isLeftShiftClickDown)
         return
     }
     else if (shiftActive)
     {
-        sendDoubledValueAndReset("leftShiftClick", sendClickOnLeftShiftClickRelease, isLeftShiftClickDown)
         repressLeftShiftReleaseCancelShiftActive := true
+        sendDoubledValueAndReset("leftShiftClick", sendClickOnLeftShiftClickRelease, isLeftShiftClickDown)
         return
     }
 
@@ -62,6 +63,7 @@ doubledLeftShiftDown()
 
     sendClickOnLeftShiftClickRelease := true
     chooseClickDragActivation("leftShiftClick", "mouseDragLeftShiftActivate", doubledLeftShiftMouseHook)
+    setTimer TimerResetModifierReleaseAction, OFF
     setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
 }
 
@@ -69,12 +71,12 @@ continuousPressLeftShift()
 {
     if (isRightShiftDoubledAsClickPressed)
     {
-        setShiftState(1)
+        repressRightShiftReleaseCancelShiftActive := true
     }
     resetSendClickOnRightModifierRelease(1)
     if (isRightShiftDoubledAsClickPressed)
     {
-        repressRightShiftReleaseCancelShiftActive := true
+        setShiftState(1)
     }
 }
 

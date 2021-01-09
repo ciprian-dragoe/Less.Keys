@@ -47,14 +47,15 @@ doubledRightAltDown()
     }
     else if (isAnyLeftModifierPressed())
     {
+        setTimer TimerResetModifierReleaseAction, OFF
         continuousPressRightAlt()
         sendDoubledValueAndReset("rightAltClick", sendClickOnRightAltClickRelease, isRightAltClickDown)
         return
     }
     else if (altActive)
     {
-        sendDoubledValueAndReset("rightAltClick", sendClickOnRightAltClickRelease, isRightAltClickDown)
         repressRightAltReleaseCancelAltActive := true
+        sendDoubledValueAndReset("rightAltClick", sendClickOnRightAltClickRelease, isRightAltClickDown)
         return
     }
 
@@ -62,6 +63,7 @@ doubledRightAltDown()
 
     sendClickOnRightAltClickRelease := true
     chooseClickDragActivation("rightAltClick", "mouseDragRightAltActivate", doubledRightAltMouseHook)
+    setTimer TimerResetModifierReleaseAction, OFF
     setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
 }
 
@@ -69,12 +71,12 @@ continuousPressRightAlt()
 {
     if (isLeftAltDoubledAsClickPressed)
     {
-        setAltState(1)
+        repressLeftAltReleaseCancelAltActive := true
     }
     resetSendClickOnLeftModifierRelease(1)
     if (isLeftAltDoubledAsClickPressed)
     {
-        repressLeftAltReleaseCancelAltActive := true
+        setAltState(1)
     }
 }
 

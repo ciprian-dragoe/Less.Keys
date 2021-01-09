@@ -26,7 +26,7 @@ writeMemoryStream(value)
     {
         keysPressed .= key
     }
-    result = %A_Hour%:%A_Min%:%A_Sec%:%A_MSec%|%value%|layoutPressed=%layoutKeyPressed%|alternativeLayout=%alternativeLayoutActive%|keysPressed=%keysPressed%|ProcessKeyOnRelease=%processKeyOnRelease%|keyToSendOnUp=%keyToSendOnUp%|sendClickOnLeftCtrlClickRelease=%sendClickOnLeftCtrlClickRelease%|isLeftCtrlClickDown=%isLeftCtrlClickDown%|sendClickOnLeftWinClickRelease=%sendClickOnLeftWinClickRelease%|sendClickOnRightCtrlClickRelease=%sendClickOnRightCtrlClickRelease%|sendClickOnRightShiftClickRelease=%sendClickOnRightShiftClickRelease%|sendClickOnRightAltClickRelease=%sendClickOnRightAltClickRelease%|sendClickOnRightWinClickRelease=%sendClickOnRightWinClickRelease%|^=%ctrlActive%`|!=%altActive%|+=%shiftActive%|#=%winActive%|fixQuickTypeLeftRightDoubledModifiers=%fixQuickTypeLeftRightDoubledModifiers%|lastPressedKey=%lastPressedKey%|lastPressedKeyTime=%lastPressedKeyTime%`n
+    result = %A_Hour%:%A_Min%:%A_Sec%:%A_MSec%|%value%|layoutPressed=%layoutKeyPressed%|alternativeLayout=%alternativeLayoutActive%|keysPressed=%keysPressed%|ProcessKeyOnRelease=%processKeyOnRelease%|keyToSendOnUp=%keyToSendOnUp%|sendClickOnLeftCtrlClickRelease=%sendClickOnLeftCtrlClickRelease%|isLeftCtrlClickDown=%isLeftCtrlClickDown%|sendClickOnRightCtrlClickRelease=%sendClickOnRightCtrlClickRelease%|sendClickOnRightShiftClickRelease=%sendClickOnRightShiftClickRelease%|^=%ctrlActive%`|!=%altActive%|+=%shiftActive%|#=%winActive%|fixQuickTypeLeftRightDoubledModifiers=%fixQuickTypeLeftRightDoubledModifiers%|lastPressedKey=%lastPressedKey%|lastPressedKeyTime=%lastPressedKeyTime%`n
     debugStoredData .= result
     if (StrLen(debugStoredData) > 100000)
     {

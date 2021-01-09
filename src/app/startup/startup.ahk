@@ -10,6 +10,9 @@
 #include  %A_ScriptDir%\app\sticky\fixAppsOverwriteLessKeysKeyboardHooks.ahk
 
 
+global timerTimeoutStickyKeys := 2000
+
+
 
 resetStates()
 readSettingsFile(PATH_APP_CONFIGURATION)

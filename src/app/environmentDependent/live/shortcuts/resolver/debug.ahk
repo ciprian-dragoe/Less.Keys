@@ -11,12 +11,9 @@ displayDebugData()
     clipboard := debugStoredData
 }
 
-
 storeDebugData()
 {
-    showToolTip("DEBUG FILES STORED")
-    FileDelete, %A_Desktop%\log.txt
-    msgbox % debugStoredData
-    FileAppend, %debugStoredData%, %A_Desktop%\debugKeyboardHack.txt
-    resetStates()
+    if (logInput) {
+        FileAppend, %debugStoredData%, %A_Desktop%\%A_Hour%-%A_Min%-%A_Sec%-%A_MSec%-log.txt
+    }
 }

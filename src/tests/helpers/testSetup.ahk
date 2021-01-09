@@ -67,7 +67,7 @@ setTestVariables()
     timeoutFixQuickTypeLeftRightDoubledModifiers := 100
     timeoutProcessLayoutOnRelease := 500
     timeoutStillSendLayoutKey := 2000
-    timerTimeoutStickyKeys := 1000
+    timerTimeoutStickyKeys := 4000
     modifierDoubledAsClick["leftCtrlClick"] := "lbutton"
     modifierDoubledAsClick["leftShiftClick"] := "lbutton"
     modifierDoubledAsClick["leftWinClick"] := "lbutton"

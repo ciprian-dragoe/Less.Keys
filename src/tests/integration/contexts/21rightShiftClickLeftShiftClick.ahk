@@ -75,3 +75,26 @@ When_rightShiftClick_pressed_leftShiftClick_pressed_mouse_moved_until_second_wor
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
     setDefaultTestEnvironment(A_ThisFunc)
 }
+
+When_rightShiftClick_pressed_leftShiftClick_pressed_wait_timeoutStillSendLayoutKey_leftShiftClick_released_THEN_text_is_not_deselected_on_mouse_move_#2105()
+{
+    timeoutStillSendLayoutKey := 300
+    setMousePositionToCaret()
+    simulateTyping("he")
+    destination := getCurrentCaretPosition()
+    simulateTyping("llo")
+    processKeyDown("rightShiftClick")
+    sleep 30
+    processKeyDown("leftShiftClick")
+    sleep %timeoutStillSendLayoutKey%
+    processKeyUp("leftShiftClick")
+    sleep 30
+    MouseMove destination.x, destination.y
+    processKeyUp("rightShiftClick")
+    sleep 100
+    actual := getSelectedText()
+
+    expected := "hello"
+    addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
+    setDefaultTestEnvironment(A_ThisFunc)
+}

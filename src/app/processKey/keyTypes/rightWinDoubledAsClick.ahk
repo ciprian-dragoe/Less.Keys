@@ -47,14 +47,15 @@ doubledRightWinDown()
     }
     else if (isAnyLeftModifierPressed())
     {
+        setTimer TimerResetModifierReleaseAction, OFF
         continuousPressRightWin()
         sendDoubledValueAndReset("rightWinClick", sendClickOnRightWinClickRelease, isRightWinClickDown)
         return
     }
     else if (winActive)
     {
-        sendDoubledValueAndReset("rightWinClick", sendClickOnRightWinClickRelease, isRightWinClickDown)
         repressRightWinReleaseCancelWinActive := true
+        sendDoubledValueAndReset("rightWinClick", sendClickOnRightWinClickRelease, isRightWinClickDown)
         return
     }
 
@@ -62,6 +63,7 @@ doubledRightWinDown()
 
     sendClickOnRightWinClickRelease := true
     chooseClickDragActivation("rightWinClick", "mouseDragRightWinActivate", doubledRightWinMouseHook)
+    setTimer TimerResetModifierReleaseAction, OFF
     setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
 }
 
@@ -69,12 +71,12 @@ continuousPressRightWin()
 {
     if (isLeftWinDoubledAsClickPressed)
     {
-        setWinState(1)
+        repressLeftWinReleaseCancelWinActive := true
     }
     resetSendClickOnLeftModifierRelease(1)
     if (isLeftWinDoubledAsClickPressed)
     {
-        repressLeftWinReleaseCancelWinActive := true
+        setWinState(1)
     }
 }
 

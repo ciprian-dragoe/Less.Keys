@@ -47,14 +47,15 @@ doubledLeftCtrlDown()
     }
     else if (isAnyRightModifierPressed())
     {
+        setTimer TimerResetModifierReleaseAction, OFF
         continuousPressLeftCtrl()
         sendDoubledValueAndReset("leftCtrlClick", sendClickOnLeftCtrlClickRelease, isLeftCtrlClickDown)
         return
     }
     else if (ctrlActive)
     {
-        sendDoubledValueAndReset("leftCtrlClick", sendClickOnLeftCtrlClickRelease, isLeftCtrlClickDown)
         repressLeftCtrlReleaseCancelCtrlActive := true
+        sendDoubledValueAndReset("leftCtrlClick", sendClickOnLeftCtrlClickRelease, isLeftCtrlClickDown)
         return
     }
 
@@ -62,6 +63,7 @@ doubledLeftCtrlDown()
 
     sendClickOnLeftCtrlClickRelease := true
     chooseClickDragActivation("leftCtrlClick", "mouseDragLeftCtrlActivate", doubledLeftCtrlMouseHook)
+    setTimer TimerResetModifierReleaseAction, OFF
     setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
 }
 
@@ -69,12 +71,12 @@ continuousPressLeftCtrl()
 {
     if (isRightCtrlDoubledAsClickPressed)
     {
-        setCtrlState(1)
+        repressRightCtrlReleaseCancelCtrlActive := true
     }
     resetSendClickOnRightModifierRelease(1)
     if (isRightCtrlDoubledAsClickPressed)
     {
-        repressRightCtrlReleaseCancelCtrlActive := true
+        setCtrlState(1)
     }
 }
 
