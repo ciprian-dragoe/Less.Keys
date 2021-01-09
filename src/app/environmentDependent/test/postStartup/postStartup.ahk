@@ -45,7 +45,7 @@ initTestEnvironment()
     setTestVariables()
     SetTimer TimerStickyFailBack, OFF
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-    logInput := 1
+    logInput := 0
 }
 
 finalizeTestEnvironment()
