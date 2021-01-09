@@ -31,6 +31,7 @@ doubledLeftShiftDown()
     {
         resetSendClickOnLeftModifierRelease(1)
         setShiftState(1)
+        setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%
         return
     }
 
@@ -77,6 +78,7 @@ continuousPressLeftShift()
     if (isRightShiftDoubledAsClickPressed)
     {
         setShiftState(1)
+        setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%
     }
 }
 
@@ -112,12 +114,12 @@ doubledLeftShiftUp()
         else
         {
             shiftActive := 0
-            timerMonitorShiftModifierLift()
         }
     }
 
     if (sendClickOnLeftShiftClickRelease)
     {
+        sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("leftShiftClick", sendClickOnLeftShiftClickRelease, isLeftShiftClickDown)
     }
 }

@@ -411,26 +411,3 @@ When_leftWinClick_is_continuously_pressed_and_mouse_is_moved_and_ctrl_is_pressed
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
     setDefaultTestEnvironment(A_ThisFunc)
 }
-
-When_leftWinClick_is_continuously_pressed_and_mouse_is_moved_and_win_is_pressed_and_released_the_text_remains_selected_#828()
-{
-    timerTimeoutStickyKeys := 3000
-    startingPosition := setMousePositionToCaret()
-    simulateTyping("hello ")
-    setMousePositionToCaret()
-    processKeyDown("leftWinClick")
-    sleep 100
-    MouseMove startingPosition.x, startingPosition.y
-    simulateKeyDown("lwin", 100)
-    simulateKeyUp("lwin", 700)
-    simulateKeyDown("lwin", 100)
-    simulateKeyUp("lwin", 700)
-    processKeyUp("leftWinClick")
-    sleep 100
-    
-    actual := getSelectedText()
-    expected := "hello "
-    
-    addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment(A_ThisFunc)
-}

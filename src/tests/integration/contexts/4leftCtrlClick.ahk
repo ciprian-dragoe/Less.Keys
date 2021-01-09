@@ -230,8 +230,8 @@ When_leftCtrlClick_is_pressed_and_shift_key_is_pressed_and_layout_key_pressed_an
     simulateKeyDown("lshift", 50)
     simulateKeyDown("space", 50)
     simulateKeyDown("a", 50)
-    simulateKeyUp("space", 50)
     simulateKeyUp("a", 50)
+    simulateKeyUp("space", 50)
     simulateKeyUp("lshift", 50)
     processKeyUp("leftCtrlClick")
     sleep 100

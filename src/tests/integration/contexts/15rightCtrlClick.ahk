@@ -162,30 +162,6 @@ When_rightCtrlClick_is_pressed_and_win_key_is_pressed_and_released_click_is_sent
     validateCaretOutput(A_ThisFunc, expected)
 }
 
-When_rightCtrlClick_is_pressed_and_win_key_is_pressed_click_is_sent_on_rightCtrlClick_release_#1511()
-{
-    timerTimeoutStickyKeys := 3000
-    simulateTyping("he")
-    setMousePositionToCaret()
-    expected := getCurrentCaretPosition()
-    simulateTyping("llo")
-    processKeyDown("rightCtrlClick")
-    sleep 100
-    processKeyDown("lwin")
-    sleep 50
-    
-    processKeyUp("rightCtrlClick")
-    sleep 100
-    processKeyUp("lwin")
-    sleep 700
-    processKeyDown("lwin")
-    sleep 100
-    processKeyUp("lwin")
-    sleep 700
-
-    validateCaretOutput(A_ThisFunc, expected)
-}
-
 When_rightCtrlClick_is_pressed_and_shift_is_pressed_and_released_click_is_sent_on_rightCtrlClick_release_#1512()
 {
     simulateTyping("he")
@@ -228,8 +204,8 @@ When_rightCtrlClick_is_pressed_and_shift_key_is_pressed_and_layout_key_pressed_a
     simulateKeyDown("lshift", 50)
     simulateKeyDown("space", 50)
     simulateKeyDown("a", 50)
-    simulateKeyUp("space", 50)
     simulateKeyUp("a", 50)
+    simulateKeyUp("space", 50)
     simulateKeyUp("lshift", 50)
     processKeyUp("rightCtrlClick")
     sleep 100

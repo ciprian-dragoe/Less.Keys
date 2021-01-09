@@ -31,6 +31,7 @@ doubledLeftCtrlDown()
     {
         resetSendClickOnLeftModifierRelease(1)
         setCtrlState(1)
+        setTimer TimerMonitorCtrlModifierLift, %timeoutResetModifierContinuousPress%
         return
     }
 
@@ -77,6 +78,7 @@ continuousPressLeftCtrl()
     if (isRightCtrlDoubledAsClickPressed)
     {
         setCtrlState(1)
+        setTimer TimerMonitorCtrlModifierLift, %timeoutResetModifierContinuousPress%
     }
 }
 
@@ -112,12 +114,12 @@ doubledLeftCtrlUp()
         else
         {
             ctrlActive := 0
-            timerMonitorCtrlModifierLift()
         }
     }
 
     if (sendClickOnLeftCtrlClickRelease)
     {
+        sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("leftCtrlClick", sendClickOnLeftCtrlClickRelease, isLeftCtrlClickDown)
     }
 }

@@ -97,12 +97,12 @@ When_non_modifier_key_is_already_pressed_and_layout_key_is_pressed_space_is_sent
 
 When_non_modifier_key_is_released_followed_by_layout_key_press_in_less_than_timeoutProcessLayoutOnRelease_followed_by_non_modifier_key_press_which_has_alternative_mapping_followed_by_same_non_modifier_key_release_remapped_key_is_sent_#609()
 {
-    simulateKeyDown("w", 50)
-    simulateKeyUp("w", 50)
-    simulateKeyDown("space", 50)
-    simulateKeyDown("a", 10)
-    simulateKeyUp("a", 50)
-    simulateKeyUp("space", 50)
+    simulateKeyDown("w", 40)
+    simulateKeyUp("w", 40)
+    simulateKeyDown("space", 40)
+    simulateKeyDown("a", 40)
+    simulateKeyUp("a", 40)
+    simulateKeyUp("space", 40)
     
     expected := "w"
     validateTestOutput(A_ThisFunc , expected)
@@ -110,12 +110,12 @@ When_non_modifier_key_is_released_followed_by_layout_key_press_in_less_than_time
 
 When_non_modifier_key_is_released_followed_by_layout_key_press_in_less_than_timeoutProcessLayoutOnRelease_followed_by_non_modifier_key_press_followed_layout_key_release_space_is_sent_followed_by_non_modifier_key_#610()
 {
-    simulateKeyDown("w", 10)
-    simulateKeyUp("w", 10)
-    simulateKeyDown("space", 10)
-    simulateKeyDown("e", 10)
-    simulateKeyUp("space", 50)
-    simulateKeyUp("e", 50)
+    simulateKeyDown("w", 40)
+    simulateKeyUp("w", 40)
+    simulateKeyDown("space", 40)
+    simulateKeyDown("e", 40)
+    simulateKeyUp("space", 40)
+    simulateKeyUp("e", 40)
     
     expected := "w e"
     validateTestOutput(A_ThisFunc , expected)
@@ -163,48 +163,18 @@ When_non_modifier_key_is_released_followed_by_layout_key_press_in_less_than_time
     validateTestOutput(A_ThisFunc , expected)
 }
 
-When_letter_is_released_followed_by_layout_key_press_in_less_than_timeoutProcessLayoutOnRelease_followed_by_letter_press_followed_by_different_letter_press_and_release_alternative_key_for_first_and_second_letter_is_sent_#614()
+When_letter_is_released_followed_by_layout_key_press_in_less_than_timeoutProcessLayoutOnRelease_followed_by_letter_press_followed_by_different_letter_press_and_release_space_and_normal_key_for_first_and_second_letter_is_sent_#614()
 {
-    simulateKeyDown("w", 50)
-    simulateKeyUp("w", 50)
-    simulateKeyDown("space", 50)
-    simulateKeyDown("o", 10)
-    simulateKeyDown("l", 10)
-    simulateKeyUp("o", 50)
-    simulateKeyUp("l", 50)
-    simulateKeyUp("space", 50)
+    simulateKeyDown("w", 40)
+    simulateKeyUp("w", 40)
+    simulateKeyDown("space", 40)
+    simulateKeyDown("o", 40)
+    simulateKeyDown("l", 40)
+    simulateKeyUp("o", 40)
+    simulateKeyUp("l", 40)
+    simulateKeyUp("space", 40)
     
-    expected := "w-="
-    validateTestOutput(A_ThisFunc , expected)
-}
-
-When_letter_is_released_followed_by_layout_key_press_in_less_than_timeoutProcessLayoutOnRelease_followed_by_letter_press_followed_by_different_letter_press_followed_by_layout_release_space_is_not_sent_#615()
-{
-    simulateKeyDown("w", 50)
-    simulateKeyUp("w", 50)
-    simulateKeyDown("space", 50)
-    simulateKeyDown("o", 10)
-    simulateKeyDown("l", 10)
-    simulateKeyUp("space", 50)
-    simulateKeyUp("o", 50)
-    simulateKeyUp("l", 50)
-    
-    expected := "w-="
-    validateTestOutput(A_ThisFunc , expected)
-}
-
-When_letter_is_released_followed_by_layout_key_press_in_less_than_timeoutProcessLayoutOnRelease_followed_by_letter_press_followed_by_different_letter_press_followed_by_layout_release_alternative_keys_are_sent_for_both_letters_#616()
-{
-    simulateKeyDown("w", 50)
-    simulateKeyUp("w", 50)
-    simulateKeyDown("space", 50)
-    simulateKeyDown("o", 10)
-    simulateKeyDown("l", 10)
-    simulateKeyUp("space", 50)
-    simulateKeyUp("o", 50)
-    simulateKeyUp("l", 50)
-    
-    expected := "w-="
+    expected := "w ol"
     validateTestOutput(A_ThisFunc , expected)
 }
 
@@ -234,9 +204,8 @@ When_key_pressed_and_released_in_less_then_minimumDelayBetweenSameKeyUpAndDown_T
 {
     simulateTyping("hello")
     processKeyDown("space")
-    sleep 10
     processKeyUp("space")
-    sleep 1000
+    sleep %timeoutStillSendLayoutKey% + 100
     processKeyUp("space")
 
     expected := "hello"

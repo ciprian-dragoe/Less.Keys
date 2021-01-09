@@ -74,12 +74,12 @@ processKeyUp(key)
         temp := keyToSendOnUp
         keyToSendOnUp := ""
         key := alternativeLayout[temp]
+        debug(temp . " => " . key . " on release")
         if (temp = key)
         {
             modifiers := getActiveModifiers()
             send {blind}%modifiers%{%layoutChangeKey%}
         }
-        debug(temp . " => " . key . " on release")
         processKeyToSend(key)
     }
     else
@@ -88,9 +88,7 @@ processKeyUp(key)
         {
             lastKeyProcessedAsAlternative := ""
         }
-        
         removeFromActivePressedKeys(key)
-        
         debug(key . "|up")
     }
 }

@@ -137,14 +137,14 @@ When_layout_key_continuously_pressed_followed_by_shift_key_press_followed_by_let
 When_letter_pressed_and_released_layoutKey_press_in_less_then_timeoutProcessLayoutOnRelease_letter_a_press_THEN_layoutKey_letter_a_letter_b_sent_on_letter_b_press_#711()
 {
     processKeyDown("w")
-    sleep 10
+    sleep 40
     processKeyUp("w")
-    sleep 10
+    sleep 40
     processKeyDown("space")
-    sleep 10
+    sleep 40
     processKeyDown("a")
-    sleep 10
-    processKeyDown("a")
+    sleep 40
+    processKeyDown("b")
     sleep 100
     sleep %timerTimeoutStickyKeys%
     processKeyUp("space")

@@ -45,7 +45,7 @@ manageLayoutKeyUp(key)
         keyToSendOnUp := ""
         if (!processAhkKeyboardShortcuts(activeModifiers, key))
         {
-            if (keyToSendOnUp)
+            if (temp)
             {
                 debug(key . " sent on up")
                 debug(temp . "|^^^^^^ on alternative layout released before")

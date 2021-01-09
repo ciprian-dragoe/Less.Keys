@@ -1,7 +1,7 @@
 processNormalKey(key)
 {
     cancelDoubledModifier()
-    
+
     if (keyToSendOnUp)
     {
         processKeyOnRelease := false

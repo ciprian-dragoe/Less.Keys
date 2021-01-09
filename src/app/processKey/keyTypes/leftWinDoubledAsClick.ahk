@@ -77,6 +77,7 @@ continuousPressLeftWin()
     if (isRightWinDoubledAsClickPressed)
     {
         setWinState(1)
+        setTimer TimerMonitorWinModifierLift, %timeoutResetModifierContinuousPress%
     }
 }
 
@@ -112,12 +113,12 @@ doubledLeftWinUp()
         else
         {
             winActive := 0
-            timerMonitorWinModifierLift()
         }
     }
 
     if (sendClickOnLeftWinClickRelease)
     {
+        sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("leftWinClick", sendClickOnLeftWinClickRelease, isLeftWinClickDown)
     }
 }

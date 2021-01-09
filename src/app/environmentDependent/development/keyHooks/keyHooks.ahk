@@ -18,9 +18,8 @@
     *f5::processKeyDown(layout["F5"])
     *f5 up::processKeyUp(layout["F5"])
     
-    *f6::processKeyDown(layout["F6"])
-    *f6 up::processKeyUp(layout["F6"])
-    
+    *f6::toggleRealTimeDebug(showRealTimeDebugInfo)
+
     *f7::processKeyDown(layout["F7"])
     *f7 up::processKeyUp(layout["F7"])
     
@@ -251,12 +250,7 @@
     
     *rshift::processModifierWhenKeyPhysicalDown("rshift")
     *rshift up::processModifierWhenKeyPhysicalUp("rshift")
-    
-    *rwin::processModifierWhenKeyPhysicalDown("rwin")
-    *rwin up::processModifierWhenKeyPhysicalUp("rwin")
-    
-    *lwin::toggleRealTimeDebug(showRealTimeDebugInfo)
-    
+
     *pause::processKeyDown(layout["pause"])
     *pause up::processKeyUp(layout["pause"])
 

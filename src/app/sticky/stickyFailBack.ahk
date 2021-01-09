@@ -25,7 +25,6 @@ timerStickyFailBack()
 
 resetStates()
 {
-    debug("resetSticky")
     tempShiftState := shiftActive
     tempCtrlState := ctrlActive
     tempWinState := WinActive

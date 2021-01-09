@@ -31,6 +31,7 @@ doubledRightAltDown()
     {
         resetSendClickOnRightModifierRelease(1)
         setAltState(1)
+        setTimer TimerMonitorAltModifierLift, %timeoutResetModifierContinuousPress%
         return
     }
 
@@ -77,6 +78,7 @@ continuousPressRightAlt()
     if (isLeftAltDoubledAsClickPressed)
     {
         setAltState(1)
+        setTimer TimerMonitorAltModifierLift, %timeoutResetModifierContinuousPress%
     }
 }
 
@@ -112,12 +114,12 @@ doubledRightAltUp()
         else
         {
             altActive := 0
-            timerMonitorAltModifierLift()
         }
     }
 
     if (sendClickOnRightAltClickRelease)
     {
+        sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("rightAltClick", sendClickOnRightAltClickRelease, isRightAltClickDown)
     }
 }
