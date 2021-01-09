@@ -48,6 +48,7 @@ sendDoubledValueAndReset(modifierValue, ByRef sendClickOnRelease, ByRef isModifi
         {
             isModifierClickDown := false
             sendClickOnRelease := false
+            debug("release button")
             send {blind}%activeModifiers%{lbutton up}
         }
         else
@@ -56,6 +57,7 @@ sendDoubledValueAndReset(modifierValue, ByRef sendClickOnRelease, ByRef isModifi
             {
                 sendClickOnRelease := false
                 isModifierClickDown := false
+                debug("button up & down")
                 send {blind}%activeModifiers%{lbutton down}
                 send {blind}%activeModifiers%{lbutton up}
             }
@@ -96,6 +98,7 @@ resetDoubledModifierClickDrag(modifierValue, ByRef isClickDown)
 timerResetModifierReleaseAction()
 {
     setTimer TimerResetModifierReleaseAction, OFF
+    debug("timerResetModifierReleaseAction")
     resetSendClickOnLeftModifierRelease()
     resetSendClickOnRightModifierRelease()
 }

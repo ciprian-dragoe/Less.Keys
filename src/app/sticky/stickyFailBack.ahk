@@ -27,36 +27,22 @@ timerStickyFailBack()
 
 resetStates()
 {
-    SetTimer, TimerStickyFailBack, off
     debug("resetSticky")
+    tempShiftState := shiftActive
+    tempCtrlState := ctrlActive
+    tempWinState := WinActive
+    tempAltState := altActive
+    tempShiftState := shiftActive
+    tempShiftState := shiftActive
+    tempLeftCtrlDownState := isLeftCtrlClickDown
+    tempLeftAltDownState := isLeftAltClickDown
+    tempLeftShiftDownState := isLeftShiftClickDown
+    tempLeftWinDownState := isLeftWinClickDown
+    tempRightCtrlDownState := isRightCtrlClickDown
+    tempRightAltDownState := isRightAltClickDown
+    tempRightShiftDownState := isRightShiftClickDown
+    tempRightWinDownState := isRightWinClickDown
 
-    if (shiftActive)
-    {
-        send {shift up}
-    }
-
-    if (altActive)
-    {
-        send {alt up}
-    }
-
-    if (ctrlActive)
-    {
-        send {ctrl up}
-    }
-
-    if (winActive)
-    {
-        send {lwin up}
-    }
-    resetDoubledModifierClickDrag("leftCtrlClick", isLeftCtrlClickDown)
-    resetDoubledModifierClickDrag("leftShiftClick", isLeftShiftClickDown)
-    resetDoubledModifierClickDrag("leftAltClick", isLeftAltClickDown)
-    resetDoubledModifierClickDrag("leftWinClick", isLeftWinClickDown)
-    resetDoubledModifierClickDrag("rightWinClick", isRightWinClickDown)
-    resetDoubledModifierClickDrag("rightCtrlClick", isRightCtrlClickDown)
-    resetDoubledModifierClickDrag("rightShiftClick", isRightShiftClickDown)
-    resetDoubledModifierClickDrag("rightAltClick", isRightAltClickDown)
     isLeftCtrlDoubledAsClickPressed := false
     isLeftShiftDoubledAsClickPressed := false
     isLeftAltDoubledAsClickPressed := false
@@ -69,8 +55,6 @@ resetStates()
     activePressedKeys := []
     processKeyOnRelease := false
     layoutKeyPressed := false
-    SetTimer, TimerScrollWithMouseMovement, OFF
-    systemCursor(1)
     alternativeLayoutActive := false
     sendLayoutKey := false
     keyToSendOnUp := ""
@@ -79,4 +63,37 @@ resetStates()
     altActive := false
     shiftActive := false
     winActive := false
+
+    systemCursor(1)
+    SetTimer, TimerScrollWithMouseMovement, OFF
+    if (tempShiftState)
+    {
+        send {shift up}
+    }
+
+    if (tempAltState)
+    {
+        send {alt up}
+    }
+
+    if (tempCtrlState)
+    {
+        send {ctrl up}
+    }
+
+    if (tempWinState)
+    {
+        send {lwin up}
+    }
+    resetDoubledModifierClickDrag("leftCtrlClick", isLeftCtrlClickDown)
+    resetDoubledModifierClickDrag("leftShiftClick", isLeftShiftClickDown)
+    resetDoubledModifierClickDrag("leftAltClick", isLeftAltClickDown)
+    resetDoubledModifierClickDrag("leftWinClick", isLeftWinClickDown)
+    resetDoubledModifierClickDrag("rightWinClick", isRightWinClickDown)
+    resetDoubledModifierClickDrag("rightCtrlClick", isRightCtrlClickDown)
+    resetDoubledModifierClickDrag("rightShiftClick", isRightShiftClickDown)
+    resetDoubledModifierClickDrag("rightAltClick", isRightAltClickDown)
+    if (tempShiftState || tempAltState || tempCtrlState || tempWinState || isLeftCtrlClickDown || isLeftShiftClickDown || isLeftAltClickDown || isLeftWinClickDown || isRightWinClickDown || isRightCtrlClickDown || isRightShiftClickDown || isRightShiftClickDown) {
+        storeDebugData()
+    }
 }

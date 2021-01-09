@@ -14,6 +14,7 @@
 resetStates()
 readSettingsFile(PATH_APP_CONFIGURATION)
 SetTimer, TimerFixAppsOverwriteLessKeysKeyboardHooks, 500
+SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
 OnExit("resetStates")
 
 readSettingsFile(basePath)
