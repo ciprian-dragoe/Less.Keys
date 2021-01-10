@@ -32,6 +32,7 @@ addTestResult(testDescription, expected, actual, result)
         failureTestResults.push(testResult)
         testNumber := SubStr(testDescription, InStr(testDescription, "#")+1, 10)
         info := geStickyKeys()
-        FileAppend, %info%, %A_Desktop%\%testNumber%.txt
+        final := debugStoredData . "`n`n`n" . info
+        FileAppend, %final%, %A_Desktop%\%testNumber%.txt
     }
 }

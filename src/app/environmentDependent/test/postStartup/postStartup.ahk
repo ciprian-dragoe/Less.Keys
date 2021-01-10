@@ -19,7 +19,7 @@ global defaultTimeoutFixQuickTypeLeftRightDoubledModifiers
 if (prepareTestEnvironment())
 {
     initTestEnvironment()
-    
+
     runIntegrationTests()
     printTestResults(successTestResults)
     printTestResults(failureTestResults)
@@ -45,7 +45,7 @@ initTestEnvironment()
     setTestVariables()
     SetTimer TimerStickyFailBack, OFF
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-    logInput := 0
+    logStickyKeys := 0
 }
 
 finalizeTestEnvironment()
@@ -62,5 +62,5 @@ finalizeTestEnvironment()
     timeoutStillSendLayoutKey := defaultTimeoutStillSendLayoutKey
     timerTimeoutStickyKeys := defaultTimerTimeoutStickyKeys
     timeoutFixQuickTypeLeftRightDoubledModifiers := defaultTimeoutFixQuickTypeLeftRightDoubledModifiers
-    logInput := 1
+    logStickyKeys := 1
 }

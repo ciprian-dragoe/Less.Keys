@@ -1,5 +1,4 @@
 global debugStoredData := ""
-global logInput
 global showRealTimeDebugInfo := false
 
 
@@ -65,7 +64,7 @@ geStickyKeys()
     info .= "alt down " . GetKeyState("alt") . " |altActive=" . altActive . "`n"
     info .= "lwin down " . GetKeyState("lwin") . " |winActive=" . winActive . "`n"
     info .= "rwin down " . GetKeyState("rwin") . " |winActive=" . winActive . "`n"
-    info .= "lbuttone=" . GetKeyState("lbutton") . "`n"
+    info .= "lbutton=" . GetKeyState("lbutton") . "`n"
     info .= "|isLeftCtrlClickDown " . isLeftCtrlClickDown . "|isLeftShiftClickDown " . isLeftShiftClickDown . "|isLeftAltClickDown " . isLeftAltClickDown . "|isLeftWinClickDown " . isLeftWinClickDown . "`n"
     info .= "|isRightWinClickDown " . isRightWinClickDown . "|isRightCtrlClickDown " . isRightCtrlClickDown . "|isRightShiftClickDown " . isRightShiftClickDown . "|isRightAltClickDown " . isRightAltClickDown . "`n"
     info .= "layoutPressed=" . layoutKeyPressed . "`n"

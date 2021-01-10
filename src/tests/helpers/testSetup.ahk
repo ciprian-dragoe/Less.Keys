@@ -64,6 +64,7 @@ getSelectedText()
 setTestVariables()
 {
     clipboard :=
+    debugStoredData := ""
     timeoutFixQuickTypeLeftRightDoubledModifiers := 130
     timeoutProcessLayoutOnRelease := 500
     timeoutStillSendLayoutKey := 2000
