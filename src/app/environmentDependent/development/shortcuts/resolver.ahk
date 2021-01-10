@@ -1,8 +1,8 @@
-#include %A_ScriptDir%\app\environmentDependent\development\shortcuts\resolver\debug.ahk
-#include %A_ScriptDir%\app\environmentDependent\development\shortcuts\resolver\rightClick.ahk
-#include %A_ScriptDir%\app\environmentDependent\development\shortcuts\resolver\accentedCharacters.ahk
-#include %A_ScriptDir%\app\environmentDependent\development\shortcuts\resolver\modifierClick.ahk
-#include %A_ScriptDir%\app\environmentDependent\development\shortcuts\resolver\functionKeys.ahk
+#include %A_ScriptDir%\app\environmentDependent\COMMON\debug.ahk
+#include %A_ScriptDir%\app\environmentDependent\COMMON\rightClick.ahk
+#include %A_ScriptDir%\app\environmentDependent\COMMON\accentedCharacters.ahk
+#include %A_ScriptDir%\app\environmentDependent\COMMON\modifierClick.ahk
+#include %A_ScriptDir%\app\environmentDependent\COMMON\functionKeys.ahk
 
 
 

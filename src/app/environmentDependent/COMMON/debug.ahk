@@ -6,8 +6,8 @@ reloadApp()
 
 displayDebugData()
 {
-    msgbox % debugStoredData
     clipboard := debugStoredData
+    msgbox % debugStoredData
 }
 
 storeDebugData()
@@ -21,4 +21,10 @@ sendTestMessage()
 {
     send {ctrl up}
     send INTEGRATION_TEST
+}
+
+exit()
+{
+    showToolTip("EXIT")
+    exitApp
 }
