@@ -119,6 +119,8 @@ doubledLeftAltUp()
 
     if (sendClickOnLeftAltClickRelease)
     {
+        SetTimer TimerStickyFailBack, OFF
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("leftAltClick", sendClickOnLeftAltClickRelease, isLeftAltClickDown)
     }

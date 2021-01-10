@@ -118,6 +118,8 @@ doubledLeftWinUp()
 
     if (sendClickOnLeftWinClickRelease)
     {
+        SetTimer TimerStickyFailBack, OFF
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("leftWinClick", sendClickOnLeftWinClickRelease, isLeftWinClickDown)
     }

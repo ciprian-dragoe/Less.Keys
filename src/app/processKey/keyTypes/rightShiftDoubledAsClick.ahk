@@ -118,6 +118,8 @@ doubledRightShiftUp()
 
     if (sendClickOnRightShiftClickRelease)
     {
+        SetTimer TimerStickyFailBack, OFF
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("rightShiftClick", sendClickOnRightShiftClickRelease, isRightShiftClickDown)
     }

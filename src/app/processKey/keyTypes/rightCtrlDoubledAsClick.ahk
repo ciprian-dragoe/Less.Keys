@@ -119,6 +119,8 @@ doubledRightCtrlUp()
 
     if (sendClickOnRightCtrlClickRelease)
     {
+        SetTimer TimerStickyFailBack, OFF
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("rightCtrlClick", sendClickOnRightCtrlClickRelease, isRightCtrlClickDown)
     }
