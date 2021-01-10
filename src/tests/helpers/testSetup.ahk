@@ -36,6 +36,10 @@ setDefaultTestEnvironment(testName)
     send {escape}
     sleep 200
     send {escape}
+    if (!WinActive("ahk_class Notepad"))
+    {
+        WinActivate ahk_class Notepad
+    }
     clearText()
     MouseMove, 500, 500
     setTestVariables()
@@ -77,7 +81,6 @@ setTestVariables()
     modifierDoubledAsClick["rightShiftClick"] := "lbutton"
     modifierDoubledAsClick["rightWinClick"] := "lbutton"
     modifierDoubledAsClick["rightAltClick"] := "lbutton"
-    send {lbutton up}
     send {shift up}
     send {ctrl up}
     send {alt up}

@@ -32,7 +32,8 @@ addTestResult(testDescription, expected, actual, result)
         failureTestResults.push(testResult)
         testNumber := SubStr(testDescription, InStr(testDescription, "#")+1, 10)
         info := geStickyKeys()
-        final := debugStoredData . "`n`n`n" . info
+        final := testResult . "`n`n`n" . debugStoredData . "`n`n`n" . info
         FileAppend, %final%, %A_Desktop%\%testNumber%.txt
+        showtooltip( "==========================" . "`n`n`n" . testDescription . "`n`n`n" . "==========================", 3000)
     }
 }
