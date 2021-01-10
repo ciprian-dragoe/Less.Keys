@@ -25,6 +25,7 @@ timerStickyFailBack()
 
 resetStates()
 {
+    debug("--- REST STICKY")
     tempShiftState := shiftActive
     tempCtrlState := ctrlActive
     tempWinState := WinActive
@@ -61,8 +62,8 @@ resetStates()
     shiftActive := false
     winActive := false
 
-    systemCursor(1)
     SetTimer, TimerScrollWithMouseMovement, OFF
+    systemCursor(1)
     if (tempShiftState)
     {
         send {shift up}
@@ -90,8 +91,8 @@ resetStates()
     resetDoubledModifierClickDrag("rightCtrlClick", isRightCtrlClickDown)
     resetDoubledModifierClickDrag("rightShiftClick", isRightShiftClickDown)
     resetDoubledModifierClickDrag("rightAltClick", isRightAltClickDown)
-    if (tempShiftState || tempAltState || tempCtrlState || tempWinState || isLeftCtrlClickDown || isLeftShiftClickDown || isLeftAltClickDown || isLeftWinClickDown || isRightWinClickDown || isRightCtrlClickDown || isRightShiftClickDown || isRightShiftClickDown) {
-        debug("tempShiftState " . tempShiftState . "|tempAltState " . tempAltState . "|tempCtrlState " . tempCtrlState . "|tempWinState " . tempWinState . "|isLeftCtrlClickDown " . isLeftCtrlClickDown . "|isLeftShiftClickDown " . isLeftShiftClickDown . "|isLeftAltClickDown " . isLeftAltClickDown . "|isLeftWinClickDown " . isLeftWinClickDown . "|isRightWinClickDown " . isRightWinClickDown . "|isRightCtrlClickDown " . isRightCtrlClickDown . "|isRightShiftClickDown " . isRightShiftClickDown . "|tempShiftState " . tempShiftState . "|tempAltState " . tempAltState . "|tempCtrlState " . tempCtrlState . "|tempWinState " . tempWinState)
+    if (tempShiftState || tempAltState || tempCtrlState || tempWinState || tempLeftCtrlDownState || tempLeftShiftDownState || tempLeftAltDownState || tempLeftWinDownState || tempRightWinState || tempRightCtrlState || tempRightShiftState || tempRightAltState) {
+        debug("================================= shiftState " . tempShiftState . "|altState " . tempAltState . "|ctrlState " . tempCtrlState . "|winState " . tempWinState . "|isLeftCtrlClickDown " . tempLeftCtrlDownState . "|isLeftShiftClickDown " . tempLeftShiftDownState . "|isLeftAltClickDown " . tempLeftShiftDownState . "|isLeftWinClickDown " . tempLeftWinDownState . "|isRightWinClickDown " . tempRightWinDownState . "|isRightCtrlClickDown " . tempRightCtrlDownState . "|isRightShiftClickDown " . tempRightShiftDownState)
         storeDebugData()
     }
 }

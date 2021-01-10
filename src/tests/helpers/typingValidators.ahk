@@ -30,5 +30,8 @@ addTestResult(testDescription, expected, actual, result)
     else
     {
         failureTestResults.push(testResult)
+        testNumber := SubStr(testDescription, InStr(testDescription, "#")+1, 10)
+        info := geStickyKeys()
+        FileAppend, %info%, %A_Desktop%\%testNumber%.txt
     }
 }
