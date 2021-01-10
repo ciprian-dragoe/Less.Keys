@@ -99,6 +99,10 @@ doubledLeftCtrlUp()
 {
     cancelMouseHook(doubledLeftCtrlMouseHook)
     isLeftCtrlDoubledAsClickPressed := false
+    if (!isAnyRightModifierPressed())
+    {
+        setTimer TimerResetModifierReleaseAction, OFF
+    }
 
     if (repressLeftCtrlReleaseCancelCtrlActive)
     {

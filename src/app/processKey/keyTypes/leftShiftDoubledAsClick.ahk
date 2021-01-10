@@ -99,6 +99,10 @@ doubledLeftShiftUp()
 {
     cancelMouseHook(doubledLeftShiftMouseHook)
     isLeftShiftDoubledAsClickPressed := false
+    if (!isAnyRightModifierPressed())
+    {
+        setTimer TimerResetModifierReleaseAction, OFF
+    }
 
     if (repressLeftShiftReleaseCancelShiftActive)
     {

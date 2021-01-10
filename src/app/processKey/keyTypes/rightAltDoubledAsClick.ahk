@@ -99,6 +99,10 @@ doubledRightAltUp()
 {
     cancelMouseHook(doubledRightAltMouseHook)
     isRightAltDoubledAsClickPressed := false
+    if (!isAnyLeftModifierPressed())
+    {
+        setTimer TimerResetModifierReleaseAction, OFF
+    }
 
     if (repressRightAltReleaseCancelAltActive)
     {

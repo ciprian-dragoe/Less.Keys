@@ -98,6 +98,10 @@ doubledRightWinUp()
 {
     cancelMouseHook(doubledRightWinMouseHook)
     isRightWinDoubledAsClickPressed := false
+    if (!isAnyLeftModifierPressed())
+    {
+        setTimer TimerResetModifierReleaseAction, OFF
+    }
 
     if (repressRightWinReleaseCancelWinActive)
     {

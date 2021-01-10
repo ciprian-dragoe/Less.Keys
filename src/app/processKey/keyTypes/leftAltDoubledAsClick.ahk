@@ -29,6 +29,7 @@ doubledLeftAltDown()
 
     if (isLeftWinDoubledAsClickPressed || isLeftShiftDoubledAsClickPressed || isLeftCtrlDoubledAsClickPressed)
     {
+        setTimer TimerResetModifierReleaseAction, OFF
         resetSendClickOnLeftModifierRelease(1)
         setAltState(1)
         setTimer TimerMonitorAltModifierLift, %timeoutResetModifierContinuousPress%
@@ -99,6 +100,10 @@ doubledLeftAltUp()
 {
     cancelMouseHook(doubledLeftAltMouseHook)
     isLeftAltDoubledAsClickPressed := false
+    if (!isAnyRightModifierPressed())
+    {
+        setTimer TimerResetModifierReleaseAction, OFF
+    }
 
     if (repressLeftAltReleaseCancelAltActive)
     {
