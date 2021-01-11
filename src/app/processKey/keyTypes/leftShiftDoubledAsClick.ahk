@@ -88,6 +88,7 @@ mouseDragLeftShiftActivate(nCode, wParam, lParam)
     setTimer TimerResetModifierReleaseAction, OFF
     if (wParam = 0x200)
     {
+        debug("mouseDragLeftShiftActivate")
         sendClickOnLeftShiftClickRelease := true
         isLeftShiftClickDown := true
         doubledAction := modifierDoubledAsClick["leftShiftClick"]

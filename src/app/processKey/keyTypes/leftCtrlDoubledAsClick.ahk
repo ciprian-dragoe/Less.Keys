@@ -88,6 +88,7 @@ mouseDragLeftCtrlActivate(nCode, wParam, lParam)
     setTimer TimerResetModifierReleaseAction, OFF
     if (wParam = 0x200)
     {
+        debug("mouseDragLeftCtrlActivate")
         sendClickOnLeftCtrlClickRelease := true
         isLeftCtrlClickDown := true
         doubledAction := modifierDoubledAsClick["leftCtrlClick"]

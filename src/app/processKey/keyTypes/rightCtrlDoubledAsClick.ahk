@@ -88,6 +88,7 @@ mouseDragRightCtrlActivate(nCode, wParam, lParam)
     setTimer TimerResetModifierReleaseAction, OFF
     if (wParam = 0x200)
     {
+        debug("mouseDragRightCtrlActivate")
         sendClickOnRightCtrlClickRelease := true
         isRightCtrlClickDown := true
         doubledAction := modifierDoubledAsClick["rightCtrlClick"]

@@ -27,7 +27,7 @@ writeMemoryStream(value)
     }
     realShift := GetKeyState("shift")
     realCtrl := GetKeyState("ctrl")
-    result = %A_Hour%:%A_Min%:%A_Sec%:%A_MSec%|%value%|layoutPressed=%layoutKeyPressed%|alternativeLayout=%alternativeLayoutActive%|keysPressed=%keysPressed%|ProcessKeyOnRelease=%processKeyOnRelease%|keyToSendOnUp=%keyToSendOnUp%|sendClickOnLeftCtrlClickRelease=%sendClickOnLeftCtrlClickRelease%|isLeftCtrlClickDown=%isLeftCtrlClickDown%|sendClickOnRightCtrlClickRelease=%sendClickOnRightCtrlClickRelease%|sendClickOnRightShiftClickRelease=%sendClickOnRightShiftClickRelease%|RealShift=%realShift%|RealCtrl=%realCtrl%|^=%ctrlActive%`|!=%altActive%|+=%shiftActive%|#=%winActive%|fixQuickTypeLeftRightDoubledModifiers=%fixQuickTypeLeftRightDoubledModifiers%|`n
+    result = %A_Hour%:%A_Min%:%A_Sec%:%A_MSec%|%value%|layoutPressed=%layoutKeyPressed%|alternativeLayout=%alternativeLayoutActive%|keysPressed=%keysPressed%|ProcessKeyOnRelease=%processKeyOnRelease%|keyToSendOnUp=%keyToSendOnUp%|sendClickOnLeftCtrlClickRelease=%sendClickOnLeftCtrlClickRelease%|isLeftCtrlClickDown=%isLeftCtrlClickDown%|sendClickOnRightCtrlClickRelease=%sendClickOnRightCtrlClickRelease%|sendClickOnRightShiftClickRelease=%sendClickOnRightShiftClickRelease%|RealShift=%realShift%|RealCtrl=%realCtrl%|^=%ctrlActive%`|!=%altActive%|+=%shiftActive%|#=%winActive%|fixQuickTypeLeftRightDoubledModifiers=%fixQuickTypeLeftRightDoubledModifiers%|isRightAltDoubledAsClickPressed=%isRightAltDoubledAsClickPressed%|isRightCtrlDoubledAsClickPressed=%isRightCtrlDoubledAsClickPressed%|isRightWinDoubledAsClickPressed=%isRightWinDoubledAsClickPressed%|isRightShiftDoubledAsClickPressed=%isRightShiftDoubledAsClickPressed%`n
     debugStoredData .= result
     if (StrLen(debugStoredData) > 150000)
     {

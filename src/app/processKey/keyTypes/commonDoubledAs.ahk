@@ -6,8 +6,8 @@ global repressNormalWinRelease := false
 
 cancelDoubledModifier()
 {
-    resetSendClickOnLeftModifierRelease()
-    resetSendClickOnRightModifierRelease()
+    resetSendClickOnLeftModifierRelease(1)
+    resetSendClickOnRightModifierRelease(1)
 
     leftCtrlActiveBeforeCtrlClickPress := false
     leftAltActiveBeforeAltClickPress := false
@@ -99,8 +99,8 @@ timerResetModifierReleaseAction()
 {
     setTimer TimerResetModifierReleaseAction, OFF
     debug("timerResetModifierReleaseAction")
-    resetSendClickOnLeftModifierRelease()
-    resetSendClickOnRightModifierRelease()
+    resetSendClickOnLeftModifierRelease(1)
+    resetSendClickOnRightModifierRelease(1)
 }
 
 activateCtrlWithKey(key)

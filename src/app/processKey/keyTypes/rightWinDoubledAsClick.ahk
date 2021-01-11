@@ -87,6 +87,7 @@ mouseDragRightWinActivate(nCode, wParam, lParam)
     setTimer TimerResetModifierReleaseAction, OFF
     if (wParam = 0x200)
     {
+        debug("mouseDragRightWinActivate")
         sendClickOnRightWinClickRelease := true
         isRightWinClickDown := true
         doubledAction := modifierDoubledAsClick["rightWinClick"]

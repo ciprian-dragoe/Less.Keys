@@ -89,6 +89,7 @@ mouseDragLeftAltActivate(nCode, wParam, lParam)
     setTimer TimerResetModifierReleaseAction, OFF
     if (wParam = 0x200)
     {
+        debug("mouseDragLeftAltActivate")
         sendClickOnLeftAltClickRelease := true
         isLeftAltClickDown := true
         doubledAction := modifierDoubledAsClick["leftAltClick"]
