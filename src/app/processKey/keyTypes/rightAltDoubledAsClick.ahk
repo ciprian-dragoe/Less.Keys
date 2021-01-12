@@ -31,7 +31,7 @@ doubledRightAltDown()
     {
         resetSendClickOnRightModifierRelease(1)
         setAltState(1)
-        setTimer TimerMonitorAltModifierLift, %timeoutResetModifierContinuousPress%
+        setTimer TimerMonitorAltModifierLift, %timeoutResetModifierContinuousPress%, -2147483648
         return
     }
 
@@ -65,7 +65,7 @@ doubledRightAltDown()
     sendClickOnRightAltClickRelease := true
     chooseClickDragActivation("rightAltClick", "mouseDragRightAltActivate", doubledRightAltMouseHook)
     setTimer TimerResetModifierReleaseAction, OFF
-    setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
+    setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%, -2147483648
 }
 
 continuousPressRightAlt()
@@ -78,7 +78,7 @@ continuousPressRightAlt()
     if (isLeftAltDoubledAsClickPressed)
     {
         setAltState(1)
-        setTimer TimerMonitorAltModifierLift, %timeoutResetModifierContinuousPress%
+        setTimer TimerMonitorAltModifierLift, %timeoutResetModifierContinuousPress%, -2147483648
     }
 }
 

@@ -44,7 +44,7 @@ setDefaultTestEnvironment(testName)
     MouseMove, 500, 500
     setTestVariables()
     SetTimer, TimerStickyFailBack, off
-    SetTimer, TimerStickyFailBack, %timerTimeoutStickyKeys%
+    SetTimer, TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
     tooltip
 }
 

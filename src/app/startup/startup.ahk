@@ -16,8 +16,8 @@ global timerTimeoutStickyKeys := 2000
 
 resetStates()
 readSettingsFile(PATH_APP_CONFIGURATION)
-SetTimer, TimerFixAppsOverwriteLessKeysKeyboardHooks, 500
-SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+SetTimer, TimerFixAppsOverwriteLessKeysKeyboardHooks, 500, -2147483648
+SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
 OnExit("resetStates")
 
 readSettingsFile(basePath)

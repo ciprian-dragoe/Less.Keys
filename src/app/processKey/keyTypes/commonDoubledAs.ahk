@@ -108,7 +108,7 @@ activateCtrlWithKey(key)
     if (!GetKeyState("ctrl"))
     {
         send {ctrl down}
-        setTimer TimerMonitorCtrlModifierLift, %timeoutResetModifierContinuousPress%
+        setTimer TimerMonitorCtrlModifierLift, %timeoutResetModifierContinuousPress%, -2147483648
     }
     send {blind}%key%
 }
@@ -127,7 +127,7 @@ activateShiftWithKey(key)
     if (!GetKeyState("shift"))
     {
         send {shift down}
-        setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%
+        setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%, -2147483648
     }
     send {blind}%key%
 }
@@ -176,7 +176,7 @@ activateAltWithKey(key)
     if (!GetKeyState("alt"))
     {
         send {alt down}
-        setTimer TimerMonitorAltModifierLift, %timeoutResetModifierContinuousPress%
+        setTimer TimerMonitorAltModifierLift, %timeoutResetModifierContinuousPress%, -2147483648
     }
     send {blind}%key%
 }
@@ -195,7 +195,7 @@ activateWinWithKey(key)
     if (!GetKeyState("lwin"))
     {
         send {lwin down}
-        setTimer TimerMonitorWinModifierLift, %timeoutResetModifierContinuousPress%
+        setTimer TimerMonitorWinModifierLift, %timeoutResetModifierContinuousPress%, -2147483648
     }
     send {blind}%key%
 }

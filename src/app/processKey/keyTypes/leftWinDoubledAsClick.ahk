@@ -64,7 +64,7 @@ doubledLeftWinDown()
     sendClickOnLeftWinClickRelease := true
     chooseClickDragActivation("leftWinClick", "mouseDragLeftWinActivate", doubledLeftWinMouseHook)
     setTimer TimerResetModifierReleaseAction, OFF
-    setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
+    setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%, -2147483648
 }
 
 continuousPressLeftWin()
@@ -77,7 +77,7 @@ continuousPressLeftWin()
     if (isRightWinDoubledAsClickPressed)
     {
         setWinState(1)
-        setTimer TimerMonitorWinModifierLift, %timeoutResetModifierContinuousPress%
+        setTimer TimerMonitorWinModifierLift, %timeoutResetModifierContinuousPress%, -2147483648
     }
 }
 
@@ -124,7 +124,7 @@ doubledLeftWinUp()
     if (sendClickOnLeftWinClickRelease)
     {
         SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
         sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("leftWinClick", sendClickOnLeftWinClickRelease, isLeftWinClickDown)
     }

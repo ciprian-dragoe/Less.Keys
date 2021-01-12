@@ -31,7 +31,7 @@ doubledRightCtrlDown()
     {
         resetSendClickOnRightModifierRelease(1)
         setCtrlState(1)
-        setTimer TimerMonitorCtrlModifierLift, %timeoutResetModifierContinuousPress%
+        setTimer TimerMonitorCtrlModifierLift, %timeoutResetModifierContinuousPress%, -2147483648
         return
     }
 
@@ -65,7 +65,7 @@ doubledRightCtrlDown()
     sendClickOnRightCtrlClickRelease := true
     chooseClickDragActivation("rightCtrlClick", "mouseDragRightCtrlActivate", doubledRightCtrlMouseHook)
     setTimer TimerResetModifierReleaseAction, OFF
-    setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
+    setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%, -2147483648
 }
 
 continuousPressRightCtrl()
@@ -78,7 +78,7 @@ continuousPressRightCtrl()
     if (isLeftCtrlDoubledAsClickPressed)
     {
         setCtrlState(1)
-        setTimer TimerMonitorCtrlModifierLift, %timeoutResetModifierContinuousPress%
+        setTimer TimerMonitorCtrlModifierLift, %timeoutResetModifierContinuousPress%, -2147483648
     }
 }
 
@@ -125,7 +125,7 @@ doubledRightCtrlUp()
     if (sendClickOnRightCtrlClickRelease)
     {
         SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
         sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("rightCtrlClick", sendClickOnRightCtrlClickRelease, isRightCtrlClickDown)
     }

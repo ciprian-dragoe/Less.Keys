@@ -31,7 +31,7 @@ doubledRightShiftDown()
     {
         resetSendClickOnRightModifierRelease(1)
         setShiftState(1)
-        setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%
+        setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%, -2147483648
         return
     }
 
