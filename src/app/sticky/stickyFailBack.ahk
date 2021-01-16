@@ -61,6 +61,30 @@ resetStates()
     altActive := false
     shiftActive := false
     winActive := false
+    if (!tempShiftState && GetKeyState("shift") && !GetKeyState("lshift", "P") && !GetKeyState("rshift", "P"))
+    {
+        debug("================================= shift sticky")
+        send {shift up}
+        storeDebugData()
+    }
+    if (!tempCtrlState && GetKeyState("ctrl") && !GetKeyState("lctrl", "P") && !GetKeyState("rctrl", "P"))
+    {
+        debug("================================= ctrl sticky")
+        send {ctrl up}
+        storeDebugData()
+    }
+    if (!tempAltState && GetKeyState("alt") && !GetKeyState("lalt", "P") && !GetKeyState("ralt", "P"))
+    {
+        debug("================================= alt sticky")
+        send {alt up}
+        storeDebugData()
+    }
+    if (!tempWinState && GetKeyState("lwin") && !GetKeyState("lwin", "P") && !GetKeyState("win", "P"))
+    {
+        debug("================================= win sticky")
+        send {win up}
+        storeDebugData()
+    }
 
     SetTimer, TimerScrollWithMouseMovement, OFF
     systemCursor(1)

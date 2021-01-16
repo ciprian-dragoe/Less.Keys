@@ -33,6 +33,7 @@ resolverAction[522] := func("sendFunctionKey")
 
 processShortcut(index, combination)
 {
+    debug("shortcut: " . combination)
     resolverAction[index].call(combination, index)
     return
 }

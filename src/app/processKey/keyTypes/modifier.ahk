@@ -37,7 +37,6 @@ processModifierKey(key, state)
     action := modifierActions[key]
     if (action)
     {
-
         debug(key . " |" . state . "|")
         action.call(state)
         processKeyOnRelease := false
@@ -50,26 +49,28 @@ processModifierKey(key, state)
 setCtrlState(state)
 {
     ctrlActive := state
+    pressedState := state ? "down" : "up"
     if (repressNormalCtrlRelease)
     {
         pressedState := "down"
         ctrlActive := 1
         repressNormalCtrlRelease := false
     }
-    pressedState := state ? "down" : "up"
+    debug("ctrl " . state)
     send {blind}{ctrl %pressedState%}
 }
 
 setAltState(state)
 {
     altActive := state
+    pressedState := state ? "down" : "up"
     if (repressNormalAltRelease)
     {
         pressedState := "down"
         altActive := 1
         repressNormalAltRelease := false
     }
-    pressedState := state ? "down" : "up"
+    debug("alt " . state)
     send {blind}{alt %pressedState%}
 }
 
@@ -89,13 +90,14 @@ setShiftState(state)
 setWinState(state)
 {
     winActive := state
+    pressedState := state ? "down" : "up"
     if (repressNormalWinRelease)
     {
         pressedState := "down"
         winActive := 1
         repressNormalWinRelease := false
     }
-    pressedState := state ? "down" : "up"
+    debug("win " . state)
     send {blind}{lwin %pressedState%}
 }
 
