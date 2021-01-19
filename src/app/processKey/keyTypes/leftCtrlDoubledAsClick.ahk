@@ -122,7 +122,15 @@ doubledLeftCtrlUp()
         }
     }
 
-    if (sendClickOnLeftCtrlClickRelease)
+    if (isLeftCtrlClickDown)
+    {
+        sendClickOnLeftCtrlClickRelease := true
+        SetTimer TimerStickyFailBack, OFF
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+        sleep % timeoutResetModifierContinuousPress + 5
+        sendDoubledValueAndReset("leftCtrlClick", sendClickOnLeftCtrlClickRelease, isLeftCtrlClickDown)
+    }
+    else if (sendClickOnLeftCtrlClickRelease)
     {
         SetTimer TimerStickyFailBack, OFF
         SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%

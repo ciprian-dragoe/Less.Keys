@@ -121,7 +121,15 @@ doubledLeftWinUp()
         }
     }
 
-    if (sendClickOnLeftWinClickRelease)
+    if (isLeftWinClickDown)
+    {
+        sendClickOnLeftWinClickRelease := true
+        SetTimer TimerStickyFailBack, OFF
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+        sleep % timeoutResetModifierContinuousPress + 5
+        sendDoubledValueAndReset("leftWinClick", sendClickOnLeftWinClickRelease, isLeftWinClickDown)
+    }
+    else if (sendClickOnLeftWinClickRelease)
     {
         SetTimer TimerStickyFailBack, OFF
         SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648

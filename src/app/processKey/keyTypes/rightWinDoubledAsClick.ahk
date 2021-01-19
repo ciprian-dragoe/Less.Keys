@@ -121,6 +121,14 @@ doubledRightWinUp()
         }
     }
 
+    if (isRightShiftClickDown)
+    {
+        sendClickOnRightShiftClickRelease := true
+        SetTimer TimerStickyFailBack, OFF
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+        sleep % timeoutResetModifierContinuousPress + 5
+        sendDoubledValueAndReset("rightShiftClick", sendClickOnRightShiftClickRelease, isLeftShiftClickDown)
+    }
     if (sendClickOnRightWinClickRelease)
     {
         SetTimer TimerStickyFailBack, OFF

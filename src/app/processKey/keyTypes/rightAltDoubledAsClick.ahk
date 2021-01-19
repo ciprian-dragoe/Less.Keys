@@ -122,6 +122,14 @@ doubledRightAltUp()
         }
     }
 
+    if (isRightAltClickDown)
+    {
+        sendClickOnRightAltClickRelease := true
+        SetTimer TimerStickyFailBack, OFF
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+        sleep % timeoutResetModifierContinuousPress + 5
+        sendDoubledValueAndReset("rightAltClick", sendClickOnRightAltClickRelease, isLeftAltClickDown)
+    }
     if (sendClickOnRightAltClickRelease)
     {
         SetTimer TimerStickyFailBack, OFF

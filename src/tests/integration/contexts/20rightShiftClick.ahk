@@ -406,10 +406,10 @@ When_rightShiftClick_is_continuously_pressed_and_mouse_is_moved_and_shift_is_pre
     simulateKeyUp("lshift", 300)
     processKeyUp("rightShiftClick")
     sleep 100
-    
+
     actual := getSelectedText()
     expected := "hello "
-    
+
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
     setDefaultTestEnvironment(A_ThisFunc)
 }

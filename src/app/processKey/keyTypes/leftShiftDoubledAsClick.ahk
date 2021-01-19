@@ -122,7 +122,15 @@ doubledLeftShiftUp()
         }
     }
 
-    if (sendClickOnLeftShiftClickRelease)
+    if (isLeftShiftClickDown)
+    {
+        sendClickOnLeftShiftClickRelease := true
+        SetTimer TimerStickyFailBack, OFF
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+        sleep % timeoutResetModifierContinuousPress + 5
+        sendDoubledValueAndReset("leftShiftClick", sendClickOnLeftShiftClickRelease, isLeftShiftClickDown)
+    }
+    else if (sendClickOnLeftShiftClickRelease)
     {
         SetTimer TimerStickyFailBack, OFF
         SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648

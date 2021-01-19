@@ -122,6 +122,14 @@ doubledRightCtrlUp()
         }
     }
 
+    if (isRightCtrlClickDown)
+    {
+        sendClickOnRightCtrlClickRelease := true
+        SetTimer TimerStickyFailBack, OFF
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+        sleep % timeoutResetModifierContinuousPress + 5
+        sendDoubledValueAndReset("rightCtrlClick", sendClickOnRightCtrlClickRelease, isLeftCtrlClickDown)
+    }
     if (sendClickOnRightCtrlClickRelease)
     {
         SetTimer TimerStickyFailBack, OFF
