@@ -119,6 +119,8 @@ doubledLeftAltUp()
         }
         else
         {
+            SetTimer TimerStickyFailBack, OFF
+            SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
             altActive := 0
         }
     }
@@ -127,14 +129,14 @@ doubledLeftAltUp()
     {
         sendClickOnLeftAltClickRelease := true
         SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
         sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("leftAltClick", sendClickOnLeftAltClickRelease, isLeftAltClickDown)
     }
     else if (sendClickOnLeftAltClickRelease)
     {
         SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
         sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("leftAltClick", sendClickOnLeftAltClickRelease, isLeftAltClickDown)
     }

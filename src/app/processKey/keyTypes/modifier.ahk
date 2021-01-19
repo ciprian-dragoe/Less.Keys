@@ -84,6 +84,7 @@ setShiftState(state)
         shiftActive := 1
         repressNormalShiftRelease := false
     }
+    debug("shift " . state)
     send {blind}{shift %pressedState%}
 }
 

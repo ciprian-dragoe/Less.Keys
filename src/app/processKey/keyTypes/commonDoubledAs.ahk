@@ -107,6 +107,7 @@ activateCtrlWithKey(key)
 {
     if (!GetKeyState("ctrl"))
     {
+        debug("ctrl with key 1")
         send {ctrl down}
         setTimer TimerMonitorCtrlModifierLift, %timeoutResetModifierContinuousPress%, -2147483648
     }
@@ -117,6 +118,7 @@ timerMonitorCtrlModifierLift()
 {
     if (!ctrlActive)
     {
+        debug("ctrl with key 0")
         send {ctrl up}
         setTimer TimerMonitorCtrlModifierLift, off
     }
@@ -126,6 +128,7 @@ activateShiftWithKey(key)
 {
     if (!GetKeyState("shift"))
     {
+        debug("shift with key 1")
         send {shift down}
         setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%, -2147483648
     }
@@ -136,6 +139,7 @@ timerMonitorShiftModifierLift()
 {
     if (!shiftActive)
     {
+        debug("shift with key 0")
         send {shift up}
         setTimer TimerMonitorShiftModifierLift, off
     }
@@ -175,6 +179,7 @@ activateAltWithKey(key)
 {
     if (!GetKeyState("alt"))
     {
+        debug("alt with key 1")
         send {alt down}
         setTimer TimerMonitorAltModifierLift, %timeoutResetModifierContinuousPress%, -2147483648
     }
@@ -185,6 +190,7 @@ timerMonitorAltModifierLift()
 {
     if (!altActive)
     {
+        debug("alt with key 0")
         send {alt up}
         setTimer TimerMonitorAltModifierLift, off
     }
@@ -194,6 +200,7 @@ activateWinWithKey(key)
 {
     if (!GetKeyState("lwin"))
     {
+        debug("win with key 1")
         send {lwin down}
         setTimer TimerMonitorWinModifierLift, %timeoutResetModifierContinuousPress%, -2147483648
     }
@@ -204,6 +211,7 @@ timerMonitorWinModifierLift()
 {
     if (!winActive)
     {
+        debug("win with key 0")
         send {lwin up}
         setTimer TimerMonitorWinModifierLift, off
     }

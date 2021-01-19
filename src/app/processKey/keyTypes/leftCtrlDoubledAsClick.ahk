@@ -118,6 +118,8 @@ doubledLeftCtrlUp()
         }
         else
         {
+            SetTimer TimerStickyFailBack, OFF
+            SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
             ctrlActive := 0
         }
     }
@@ -126,14 +128,14 @@ doubledLeftCtrlUp()
     {
         sendClickOnLeftCtrlClickRelease := true
         SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
         sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("leftCtrlClick", sendClickOnLeftCtrlClickRelease, isLeftCtrlClickDown)
     }
     else if (sendClickOnLeftCtrlClickRelease)
     {
         SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
         sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("leftCtrlClick", sendClickOnLeftCtrlClickRelease, isLeftCtrlClickDown)
     }

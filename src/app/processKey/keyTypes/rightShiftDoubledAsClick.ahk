@@ -117,6 +117,8 @@ doubledRightShiftUp()
         }
         else
         {
+            SetTimer TimerStickyFailBack, OFF
+            SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
             shiftActive := 0
         }
     }
@@ -125,14 +127,14 @@ doubledRightShiftUp()
     {
         sendClickOnRightShiftClickRelease := true
         SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
         sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("rightShiftClick", sendClickOnRightShiftClickRelease, isLeftShiftClickDown)
     }
     if (sendClickOnRightShiftClickRelease)
     {
         SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
         sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("rightShiftClick", sendClickOnRightShiftClickRelease, isRightShiftClickDown)
     }

@@ -117,6 +117,8 @@ doubledLeftWinUp()
         }
         else
         {
+            SetTimer TimerStickyFailBack, OFF
+            SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
             winActive := 0
         }
     }
@@ -125,7 +127,7 @@ doubledLeftWinUp()
     {
         sendClickOnLeftWinClickRelease := true
         SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
         sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("leftWinClick", sendClickOnLeftWinClickRelease, isLeftWinClickDown)
     }
