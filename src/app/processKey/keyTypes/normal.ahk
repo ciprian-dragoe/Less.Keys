@@ -1,6 +1,7 @@
 processNormalKey(key)
 {
     cancelDoubledModifier()
+    SetTimer, TimerTimeoutSendLayoutKey, OFF
 
     if (keyToSendOnUp)
     {

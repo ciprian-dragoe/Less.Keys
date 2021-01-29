@@ -32,6 +32,7 @@ manageLayoutKeyDown(key)
 manageLayoutKeyUp(key)
 {
     SetTimer, TimerScrollWithMouseMovement, OFF
+    SetTimer, TimerTimeoutSendLayoutKey, OFF
     systemCursor(1)
     
     layoutKeyPressed := false
