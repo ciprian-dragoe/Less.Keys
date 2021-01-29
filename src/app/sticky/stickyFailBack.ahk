@@ -3,15 +3,6 @@
 ; This is a fail safe for such situations
 timerStickyFailBack()
 {
-    for index,app in disabledApps
-    {
-        IfInString, lastActiveAppName, %app%
-        {
-            resetStates()
-            return
-        }
-    }
-
     for index, key in monitoredStickyKeys
     {
         if (GetKeyState(key, "P"))
