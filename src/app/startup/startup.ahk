@@ -26,6 +26,7 @@ readSettingsFile(basePath)
     
     readTimingSettings(settings)
     readDisabledAppsSettings(settings)
+    readRestartAppsSettings(settings)
     readMouseSettings(settings)
     readLoggingSettings(settings)
     readDoubledModifierSettings(settings)

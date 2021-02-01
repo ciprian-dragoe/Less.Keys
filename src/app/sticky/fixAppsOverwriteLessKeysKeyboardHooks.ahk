@@ -1,13 +1,12 @@
 global isAppWhichOverWritesLessKeysActive := false
 global lastActiveAppName := ""
-global appNamesOverwriteKeyboardHooks := ["Remote Desktop Connection"]
 
 timerFixAppsOverwriteLessKeysKeyboardHooks()
 {
     WinGetTitle, lastActiveAppName, A
     for index, appName in appNamesOverwriteKeyboardHooks
     {
-        IfInString, activeProgramWindowName, %appName%
+        IfInString, lastActiveAppName, %appName%
         {
             if (isAppWhichOverWritesLessKeysActive)
             {
