@@ -15,6 +15,7 @@ timerFixAppsOverwriteLessKeysKeyboardHooks()
             isAppWhichOverWritesLessKeysActive := true
             Suspend, On
             Suspend, Off
+            return
         }
     }
     isAppWhichOverWritesLessKeysActive := false
