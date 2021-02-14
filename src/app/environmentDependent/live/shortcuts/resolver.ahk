@@ -3,6 +3,7 @@
 #include %A_ScriptDir%\app\environmentDependent\COMMON\accentedCharacters.ahk
 #include %A_ScriptDir%\app\environmentDependent\COMMON\modifierClick.ahk
 #include %A_ScriptDir%\app\environmentDependent\COMMON\functionKeys.ahk
+#include %A_ScriptDir%\app\environmentDependent\COMMON\random.ahk
 
 
 
@@ -30,6 +31,7 @@ resolverAction[519] := func("sendFunctionKey")
 resolverAction[520] := func("sendFunctionKey")
 resolverAction[521] := func("sendFunctionKey")
 resolverAction[522] := func("sendFunctionKey")
+resolverAction[523] := func("ignoreShortcut")
 
 processShortcut(index, combination)
 {

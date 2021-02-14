@@ -79,9 +79,9 @@ sendDoubledValueAndReset(modifierValue, ByRef sendClickOnRelease, ByRef isModifi
     }
     else
     {
-        send {blind}%activeModifiers%{%doubledAction%}
         sendClickOnRelease := false
         isModifierClickDown := false
+        processKeyToSend(doubledAction)
     }
 }
 

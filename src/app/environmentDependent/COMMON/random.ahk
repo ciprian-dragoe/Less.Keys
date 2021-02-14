@@ -1,0 +1,4 @@
+ignoreShortcut()
+{
+    return
+}
