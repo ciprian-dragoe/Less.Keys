@@ -31,7 +31,7 @@ doubledRightAltDown()
     {
         resetSendClickOnRightModifierRelease(1)
         setAltState(1)
-        setTimer TimerMonitorAltModifierLift, %timeoutResetModifierContinuousPress%, -2147483648
+        setTimer TimerMonitorAltModifierLift, %timeoutResetModifierContinuousPress%
         return
     }
 
@@ -50,8 +50,6 @@ doubledRightAltDown()
     {
         setTimer TimerResetModifierReleaseAction, OFF
         continuousPressRightAlt()
-        sendDoubledValueAndReset("rightAltClick", sendClickOnRightAltClickRelease, isRightAltClickDown)
-        return
     }
     else if (altActive)
     {
@@ -65,20 +63,17 @@ doubledRightAltDown()
     sendClickOnRightAltClickRelease := true
     chooseClickDragActivation("rightAltClick", "mouseDragRightAltActivate", doubledRightAltMouseHook)
     setTimer TimerResetModifierReleaseAction, OFF
-    setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%, -2147483648
+    setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
 }
 
 continuousPressRightAlt()
 {
-    if (isLeftAltDoubledAsClickPressed)
-    {
-        repressLeftAltReleaseCancelAltActive := true
-    }
     resetSendClickOnLeftModifierRelease(1)
     if (isLeftAltDoubledAsClickPressed)
     {
+        repressLeftAltReleaseCancelAltActive := true
         setAltState(1)
-        setTimer TimerMonitorAltModifierLift, %timeoutResetModifierContinuousPress%, -2147483648
+        setTimer TimerMonitorAltModifierLift, %timeoutResetModifierContinuousPress%
     }
 }
 
@@ -119,7 +114,7 @@ doubledRightAltUp()
         else
         {
             SetTimer TimerStickyFailBack, OFF
-            SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
+            SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
             altActive := 0
         }
     }
@@ -128,14 +123,14 @@ doubledRightAltUp()
     {
         sendClickOnRightAltClickRelease := true
         SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("rightAltClick", sendClickOnRightAltClickRelease, isLeftAltClickDown)
     }
     if (sendClickOnRightAltClickRelease)
     {
         SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("rightAltClick", sendClickOnRightAltClickRelease, isRightAltClickDown)
     }

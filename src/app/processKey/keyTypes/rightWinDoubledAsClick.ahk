@@ -49,8 +49,6 @@ doubledRightWinDown()
     {
         setTimer TimerResetModifierReleaseAction, OFF
         continuousPressRightWin()
-        sendDoubledValueAndReset("rightWinClick", sendClickOnRightWinClickRelease, isRightWinClickDown)
-        return
     }
     else if (winActive)
     {
@@ -64,20 +62,17 @@ doubledRightWinDown()
     sendClickOnRightWinClickRelease := true
     chooseClickDragActivation("rightWinClick", "mouseDragRightWinActivate", doubledRightWinMouseHook)
     setTimer TimerResetModifierReleaseAction, OFF
-    setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%, -2147483648
+    setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
 }
 
 continuousPressRightWin()
 {
-    if (isLeftWinDoubledAsClickPressed)
-    {
-        repressLeftWinReleaseCancelWinActive := true
-    }
     resetSendClickOnLeftModifierRelease(1)
     if (isLeftWinDoubledAsClickPressed)
     {
+        repressLeftWinReleaseCancelWinActive := true
         setWinState(1)
-        setTimer TimerMonitorWinModifierLift, %timeoutResetModifierContinuousPress%, -2147483648
+        setTimer TimerMonitorWinModifierLift, %timeoutResetModifierContinuousPress%
     }
 }
 
@@ -118,7 +113,7 @@ doubledRightWinUp()
         else
         {
             SetTimer TimerStickyFailBack, OFF
-            SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
+            SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
             winActive := 0
         }
     }
@@ -127,14 +122,14 @@ doubledRightWinUp()
     {
         sendClickOnRightShiftClickRelease := true
         SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("rightShiftClick", sendClickOnRightShiftClickRelease, isLeftShiftClickDown)
     }
     if (sendClickOnRightWinClickRelease)
     {
         SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("rightWinClick", sendClickOnRightWinClickRelease, isRightWinClickDown)
     }

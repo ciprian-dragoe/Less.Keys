@@ -31,7 +31,7 @@ doubledLeftShiftDown()
     {
         resetSendClickOnLeftModifierRelease(1)
         setShiftState(1)
-        setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%, -2147483648
+        setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%
         return
     }
 
@@ -50,8 +50,6 @@ doubledLeftShiftDown()
     {
         setTimer TimerResetModifierReleaseAction, OFF
         continuousPressLeftShift()
-        sendDoubledValueAndReset("leftShiftClick", sendClickOnLeftShiftClickRelease, isLeftShiftClickDown)
-        return
     }
     else if (shiftActive)
     {
@@ -65,20 +63,17 @@ doubledLeftShiftDown()
     sendClickOnLeftShiftClickRelease := true
     chooseClickDragActivation("leftShiftClick", "mouseDragLeftShiftActivate", doubledLeftShiftMouseHook)
     setTimer TimerResetModifierReleaseAction, OFF
-    setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%, -2147483648
+    setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
 }
 
 continuousPressLeftShift()
 {
-    if (isRightShiftDoubledAsClickPressed)
-    {
-        repressRightShiftReleaseCancelShiftActive := true
-    }
     resetSendClickOnRightModifierRelease(1)
     if (isRightShiftDoubledAsClickPressed)
     {
+        repressRightShiftReleaseCancelShiftActive := true
         setShiftState(1)
-        setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%, -2147483648
+        setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%
     }
 }
 
@@ -119,7 +114,7 @@ doubledLeftShiftUp()
         else
         {
             SetTimer TimerStickyFailBack, OFF
-            SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
+            SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
             shiftActive := 0
         }
     }
@@ -128,14 +123,14 @@ doubledLeftShiftUp()
     {
         sendClickOnLeftShiftClickRelease := true
         SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("leftShiftClick", sendClickOnLeftShiftClickRelease, isLeftShiftClickDown)
     }
     else if (sendClickOnLeftShiftClickRelease)
     {
         SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("leftShiftClick", sendClickOnLeftShiftClickRelease, isLeftShiftClickDown)
     }

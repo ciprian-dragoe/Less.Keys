@@ -31,7 +31,7 @@ doubledRightShiftDown()
     {
         resetSendClickOnRightModifierRelease(1)
         setShiftState(1)
-        setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%, -2147483648
+        setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%
         return
     }
 
@@ -50,8 +50,6 @@ doubledRightShiftDown()
     {
         setTimer TimerResetModifierReleaseAction, OFF
         continuousPressRightShift()
-        sendDoubledValueAndReset("rightShiftClick", sendClickOnRightShiftClickRelease, isRightShiftClickDown)
-        return
     }
     else if (shiftActive)
     {
@@ -69,13 +67,10 @@ doubledRightShiftDown()
 
 continuousPressRightShift()
 {
-    if (isLeftShiftDoubledAsClickPressed)
-    {
-        repressLeftShiftReleaseCancelShiftActive := true
-    }
     resetSendClickOnLeftModifierRelease(1)
     if (isLeftShiftDoubledAsClickPressed)
     {
+        repressLeftShiftReleaseCancelShiftActive := true
         setShiftState(1)
         setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%
     }
@@ -118,7 +113,7 @@ doubledRightShiftUp()
         else
         {
             SetTimer TimerStickyFailBack, OFF
-            SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
+            SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
             shiftActive := 0
         }
     }
@@ -127,14 +122,14 @@ doubledRightShiftUp()
     {
         sendClickOnRightShiftClickRelease := true
         SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("rightShiftClick", sendClickOnRightShiftClickRelease, isLeftShiftClickDown)
     }
     if (sendClickOnRightShiftClickRelease)
     {
         SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("rightShiftClick", sendClickOnRightShiftClickRelease, isRightShiftClickDown)
     }

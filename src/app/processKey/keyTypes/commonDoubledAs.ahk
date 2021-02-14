@@ -109,7 +109,7 @@ activateCtrlWithKey(key)
     {
         debug("ctrl with key 1")
         send {ctrl down}
-        setTimer TimerMonitorCtrlModifierLift, %timeoutResetModifierContinuousPress%, -2147483648
+        setTimer TimerMonitorCtrlModifierLift, %timeoutResetModifierContinuousPress%
     }
     send {blind}%key%
 }
@@ -130,7 +130,7 @@ activateShiftWithKey(key)
     {
         debug("shift with key 1")
         send {shift down}
-        setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%, -2147483648
+        setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%
     }
     send {blind}%key%
 }
@@ -181,7 +181,7 @@ activateAltWithKey(key)
     {
         debug("alt with key 1")
         send {alt down}
-        setTimer TimerMonitorAltModifierLift, %timeoutResetModifierContinuousPress%, -2147483648
+        setTimer TimerMonitorAltModifierLift, %timeoutResetModifierContinuousPress%
     }
     send {blind}%key%
 }
@@ -202,7 +202,7 @@ activateWinWithKey(key)
     {
         debug("win with key 1")
         send {lwin down}
-        setTimer TimerMonitorWinModifierLift, %timeoutResetModifierContinuousPress%, -2147483648
+        setTimer TimerMonitorWinModifierLift, %timeoutResetModifierContinuousPress%
     }
     send {blind}%key%
 }

@@ -31,7 +31,7 @@ doubledLeftCtrlDown()
     {
         resetSendClickOnLeftModifierRelease(1)
         setCtrlState(1)
-        setTimer TimerMonitorCtrlModifierLift, %timeoutResetModifierContinuousPress%, -2147483648
+        setTimer TimerMonitorCtrlModifierLift, %timeoutResetModifierContinuousPress%
         return
     }
 
@@ -50,8 +50,7 @@ doubledLeftCtrlDown()
     {
         setTimer TimerResetModifierReleaseAction, OFF
         continuousPressLeftCtrl()
-        sendDoubledValueAndReset("leftCtrlClick", sendClickOnLeftCtrlClickRelease, isLeftCtrlClickDown)
-        return
+
     }
     else if (ctrlActive)
     {
@@ -65,20 +64,17 @@ doubledLeftCtrlDown()
     sendClickOnLeftCtrlClickRelease := true
     chooseClickDragActivation("leftCtrlClick", "mouseDragLeftCtrlActivate", doubledLeftCtrlMouseHook)
     setTimer TimerResetModifierReleaseAction, OFF
-    setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%, -2147483648
+    setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
 }
 
 continuousPressLeftCtrl()
 {
-    if (isRightCtrlDoubledAsClickPressed)
-    {
-        repressRightCtrlReleaseCancelCtrlActive := true
-    }
     resetSendClickOnRightModifierRelease(1)
     if (isRightCtrlDoubledAsClickPressed)
     {
+        repressRightCtrlReleaseCancelCtrlActive := true
         setCtrlState(1)
-        setTimer TimerMonitorCtrlModifierLift, %timeoutResetModifierContinuousPress%, -2147483648
+        setTimer TimerMonitorCtrlModifierLift, %timeoutResetModifierContinuousPress%
     }
 }
 
@@ -119,7 +115,7 @@ doubledLeftCtrlUp()
         else
         {
             SetTimer TimerStickyFailBack, OFF
-            SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
+            SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
             ctrlActive := 0
         }
     }
@@ -128,14 +124,14 @@ doubledLeftCtrlUp()
     {
         sendClickOnLeftCtrlClickRelease := true
         SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("leftCtrlClick", sendClickOnLeftCtrlClickRelease, isLeftCtrlClickDown)
     }
     else if (sendClickOnLeftCtrlClickRelease)
     {
         SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("leftCtrlClick", sendClickOnLeftCtrlClickRelease, isLeftCtrlClickDown)
     }

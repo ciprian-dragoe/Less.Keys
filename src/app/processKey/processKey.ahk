@@ -30,7 +30,7 @@ processKeyDown(key)
     {
         layoutKeyActivatesProcessKeyOnRelease := true
         SetTimer, TimerProcessLayoutOnRelease, OFF
-        SetTimer, TimerProcessLayoutOnRelease, %timeoutProcessLayoutOnRelease%, -2147483648
+        SetTimer, TimerProcessLayoutOnRelease, %timeoutProcessLayoutOnRelease%
     }
     processNormalKey(key)
 }
@@ -44,7 +44,7 @@ processKeyUp(key)
 
     fixQuickTypeLeftRightDoubledModifiers := true
     SetTimer, TimerFixQuickTypeLeftRightDoubledModifiers, OFF
-    SetTimer, TimerFixQuickTypeLeftRightDoubledModifiers, %timeoutFixQuickTypeLeftRightDoubledModifiers%, -2147483648
+    SetTimer, TimerFixQuickTypeLeftRightDoubledModifiers, %timeoutFixQuickTypeLeftRightDoubledModifiers%
     
     if (key = layoutChangeKey)
     {

@@ -15,12 +15,12 @@ manageLayoutKeyDown(key)
         {
             CoordMode, Mouse, Screen
             MouseGetPos, initialMousePositionXAxis, initialMousePositionYAxis
-            SetTimer, TimerScrollWithMouseMovement, %timeoutMouseScrollPoll%, -2147483648
+            SetTimer, TimerScrollWithMouseMovement, %timeoutMouseScrollPoll%
         }
 
         alternativeLayoutActive := true
         sendLayoutKey := true
-        SetTimer, TimerTimeoutSendLayoutKey, %timeoutStillSendLayoutKey%, -2147483648
+        SetTimer, TimerTimeoutSendLayoutKey, %timeoutStillSendLayoutKey%
         if (layoutKeyActivatesProcessKeyOnRelease)
         {
             processKeyOnRelease := true

@@ -70,15 +70,16 @@ global failureTestResults := []
 
 runIntegrationTests()
 {
+    /*
     ; RIGHT SHIFT CLICK & LEFT ALT CLICK
-    When_rightShiftClick_doubles_as_b_pressed_leftAltClick_doubled_as_c_pressed_rightShiftClick_released_leftAltClick_released_THEN_no_letter_is_sent_#4301()
-    When_rightShiftClick_pressed_leftAltClick_THEN_word_is_selected_before_leftAltClickRelease_#4302()
-    When_rightShiftClick_pressed_leftAltClick_doubled_as_left_pressed_THEN_letter_is_selected_before_leftAltClick_release_#4303()
+    When_rightShiftClick_doubles_as_b_pressed_leftAltClick_doubled_as_c_pressed_rightShiftClick_released_leftAltClick_released_THEN_c_letter_is_sent_#4301()
+    When_rightShiftClick_pressed_leftAltClick_pressed_THEN_word_is_selected_on_leftAltClick_release_#4302()
+    When_rightShiftClick_pressed_leftAltClick_doubled_as_b_pressed_THEN_letter_is_not_selected_before_leftAltClick_release_#4303()
 
     ; RIGHT SHIFT CLICK & LEFT WIN CLICK
-    When_rightShiftClick_pressed_leftWinClick_doubled_as_left_pressed_THEN_letter_is_selected_before_leftWinClickRelease_#5901()
-    When_rightShiftClick_doubles_as_b_pressed_leftWinClick_doubled_as_c_pressed_rightShiftClick_released_leftWinClick_released_THEN_no_letter_is_sent_#5902()
-    When_rightShiftClick_pressed_leftWinClick_THEN_word_is_selected_before_leftWinClickRelease_#5903()
+    When_rightShiftClick_pressed_leftWinClick_doubled_as_left_pressed_THEN_letter_is_selected_after_leftWinClick_release_#5901()
+    When_rightShiftClick_doubles_as_b_pressed_leftWinClick_doubled_as_c_pressed_rightShiftClick_released_leftWinClick_released_THEN_c_letter_is_sent_#5902()
+    When_rightShiftClick_pressed_leftWinClick_pressed_THEN_word_is_selected_after_leftWinClick_release_#5903()
     When_rightShiftClick_pressed_leftWinClick_pressed_mouse_moved_until_second_word_THEN_only_first_second_is_selected_#5904()
 
     ; STICKY
@@ -127,7 +128,6 @@ runIntegrationTests()
     When_leftShiftClick_is_continuously_pressed_and_mouse_is_moved_and_shift_is_pressed_and_released_the_text_remains_selected_#328()
     When_leftShiftClick_is_pressed_and_a_letter_pressed_and_released_and_shift_pressed_and_leftShiftClick_released_and_a_letter_pressed_then_caps_a_letter_is_sent_#329()
 
-    ; LEFT CTRL CLICK
     When_leftCtrlClick_is_pressed_at_release_left_click_is_sent_#401()
     When_leftCtrlClick_is_continuously_pressed_and_layout_key_is_pressed_but_not_released_space_is_not_sent_#402()
     When_leftCtrlClick_is_continuously_pressed_and_a_letter_is_pressed_all_text_is_selected_#403()
@@ -153,13 +153,16 @@ runIntegrationTests()
     When_leftCtrlClick_is_continuously_pressed_and_mouse_is_moved_and_ctrl_is_pressed_the_text_remains_selected_#427()
     When_leftCtrlClick_is_continuously_pressed_and_mouse_is_moved_and_ctrl_is_pressed_and_released_the_text_remains_selected_#428()
     When_leftCtrlClick_is_pressed_and_backspace_pressed_and_released_and_ctrl_pressed_and_leftCtrlClick_released_and_backspace_pressed_then_ctrl_and_backspace_is_sent_#429()
+    ; LEFT CTRL CLICK
 
+    */
     ; LEFT SHIFT CLICK & LEFT CTRL CLICK
     When_leftShiftClick_is_pressed_and_leftCtrlClick_is_pressed_left_click_is_not_sent_on_leftShiftClick_release_#501()
     When_leftCtrlClick_is_pressed_and_leftShiftClick_is_pressed_click_is_not_sent_on_leftCtrlClick_release_#502()
     When_leftShiftClick_is_continuously_pressed_and_leftCtrlClick_is_continuously_pressed_and_layout_key_continuously_pressed_and_key_remapped_as_left_key_a_word_is_selected_#503()
     When_leftShiftClick_is_continuously_pressed_and_leftCtrlClick_is_continuously_pressed_and_layout_key_continuously_pressed_and_key_remapped_as_left_key_left_click_is_not_sent_on_leftShiftClick_release_#504()
     When_leftShiftClick_is_continuously_pressed_and_leftCtrlClick_is_continuously_pressed_more_then_timeoutStillSendLayoutKey_left_click_is_not_sent_on_leftCtrlClick_release_#505()
+    /*
 
     ; LAYOUT
     When_layout_key_is_pressed_and_key_which_is_reMapped_as_left_key_is_sent_cursor_is_moved_to_left_#601()
@@ -371,7 +374,6 @@ runIntegrationTests()
     When_leftShiftClick_pressed_in_less_then_TimerFixQuickTypeLeftRightDoubledModifiers_after_letter_release_rightShiftClick_doubled_as_w_pressed_THEN_W_is_typed_#2209()
     When_leftShiftClick_pressed_before_typing_rightShiftClick_doubled_as_w_pressed_in_less_then_TimerFixQuickTypeLeftRightDoubledModifiers_rightShiftClick_release_THEN_W_is_typed_#2210()
 
-
     ; RIGHT SHIFT CLICK & LEFT CTRL CLICK
     When_rightShiftClick_pressed_leftCtrlClick_doubled_as_left_pressed_THEN_letter_is_selected_before_leftCtrlClickRelease_#2301()
     When_rightShiftClick_doubles_as_b_pressed_leftCtrlClick_doubled_as_c_pressed_rightShiftClick_released_leftCtrlClick_released_THEN_no_letter_is_sent_#2302()
@@ -580,4 +582,5 @@ runIntegrationTests()
     ; RIGHT CTRL CLICK & SHIFT & LEFT WIN CLICK
     When_rightCtrlClick_pressed_shift_pressed_leftWinClick_THEN_word_is_selected_before_leftWinClickRelease_#6101()
     When_rightCtrlClick_doubled_as_d_pressed_shift_pressed_leftWinClick_rightCtrlClick_release_shift_leftWinClick_release_THEN_text_not_modified_#6102()
+    */
 }

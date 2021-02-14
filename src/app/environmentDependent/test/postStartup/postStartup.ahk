@@ -44,7 +44,7 @@ initTestEnvironment()
     defaultTimeoutFixQuickTypeLeftRightDoubledModifiers := timeoutFixQuickTypeLeftRightDoubledModifiers
     setTestVariables()
     SetTimer TimerStickyFailBack, OFF
-    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%, -2147483648
+    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
     logStickyKeys := 0
 }
 
