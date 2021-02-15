@@ -1,24 +1,25 @@
-When_rightCtrlClick_pressed_leftShiftClick_doubled_as_left_pressed_leftShiftClick_released_THEN_letter_is_typed_at_beginning_#3301()
+When_rightCtrlClick_doubled_as_b_pressed_leftShiftClick_doubled_as_a_pressed_timeout_pass_leftShiftClick_released_THEN_letter_is_not_sent_#3301()
 {
-    modifierDoubledAsClick["leftShiftClick"] := "left"
+    modifierDoubledAsClick["leftShiftClick"] := "a"
+    modifierDoubledAsClick["rightCtrlClick"] := "b"
     simulateTyping("hello")
     processKeyDown("rightCtrlClick")
     sleep 100
     processKeyDown("leftShiftClick")
     sleep 100
+    sleep %timeoutStillSendLayoutKey%
     processKeyUp("rightCtrlClick")
     sleep 100
     processKeyUp("leftShiftClick")
     sleep 100
-    simulateTyping("w")
-    expected := "whello"
+    expected := "hello"
 
     validateTestOutput(A_ThisFunc , expected)
 }
 
-When_rightCtrlClick_doubles_as_b_pressed_leftShiftClick_doubled_as_c_pressed_rightCtrlClick_released_leftShiftClick_released_THEN_no_letter_is_sent_#3302()
+When_rightCtrlClick_doubles_as_b_pressed_leftShiftClick_doubled_as_c_pressed_rightCtrlClick_released_leftShiftClick_released_THEN_c_letter_is_sent_#3302()
 {
-    modifierDoubledAsClick["leftShiftClick"] := "left"
+    modifierDoubledAsClick["leftShiftClick"] := "c"
     modifierDoubledAsClick["rightCtrlClick"] := "b"
     simulateTyping("hello")
     processKeyDown("rightCtrlClick")
@@ -27,15 +28,14 @@ When_rightCtrlClick_doubles_as_b_pressed_leftShiftClick_doubled_as_c_pressed_rig
     sleep 100
     processKeyUp("rightCtrlClick")
     sleep 100
-    modifierDoubledAsClick["leftShiftClick"] := "c"
     processKeyUp("leftShiftClick")
     sleep 100
-    expected := "hello"
+    expected := "helloc"
 
     validateTestOutput(A_ThisFunc , expected)
 }
 
-When_rightCtrlClick_pressed_leftShiftClick_press_and_releasedTHEN_word_is_typed_at_beginning_#3303()
+When_rightCtrlClick_pressed_leftShiftClick_press_and_released_THEN_word_is_typed_at_beginning_#3303()
 {
     setMousePositionToCaret()
     simulateTyping("hello")

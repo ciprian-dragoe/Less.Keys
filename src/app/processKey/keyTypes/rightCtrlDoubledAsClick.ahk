@@ -48,7 +48,6 @@ doubledRightCtrlDown()
     }
     else if (isAnyLeftModifierPressed())
     {
-        setTimer TimerResetModifierReleaseAction, OFF
         continuousPressRightCtrl()
     }
     else if (ctrlActive)
@@ -118,14 +117,13 @@ doubledRightCtrlUp()
             ctrlActive := 0
         }
     }
-
     if (isRightCtrlClickDown)
     {
         sendClickOnRightCtrlClickRelease := true
         SetTimer TimerStickyFailBack, OFF
         SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         sleep % timeoutResetModifierContinuousPress + 5
-        sendDoubledValueAndReset("rightCtrlClick", sendClickOnRightCtrlClickRelease, isLeftCtrlClickDown)
+        sendDoubledValueAndReset("rightCtrlClick", sendClickOnRightCtrlClickRelease, isRightCtrlClickDown)
     }
     if (sendClickOnRightCtrlClickRelease)
     {

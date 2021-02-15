@@ -1,4 +1,4 @@
-When_leftShiftClick_pressed_rightAltClick_doubled_as_left_pressed_THEN_letter_is_selected_before_rightAltClickRelease_#4201()
+When_leftShiftClick_pressed_rightAltClick_doubled_as_left_pressed_THEN_letter_is_selected_after_rightAltClickRelease_#4201()
 {
     modifierDoubledAsClick["rightAltClick"] := "left"
     simulateTyping("hello")
@@ -6,11 +6,10 @@ When_leftShiftClick_pressed_rightAltClick_doubled_as_left_pressed_THEN_letter_is
     sleep 100
     processKeyDown("rightAltClick")
     sleep 100
+    processKeyUp("rightAltClick")
     sleep %timerTimeoutStickyKeys%
     actual := getSelectedText()
     processKeyUp("leftShiftClick")
-    sleep 100
-    processKeyUp("rightAltClick")
     sleep 100
     expected := "o"
 
@@ -18,10 +17,10 @@ When_leftShiftClick_pressed_rightAltClick_doubled_as_left_pressed_THEN_letter_is
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
-When_leftShiftClick_doubles_as_b_pressed_rightAltClick_doubled_as_c_pressed_leftShiftClick_released_rightAltClick_released_THEN_no_letter_is_sent_#4202()
+When_leftShiftClick_doubles_as_b_pressed_rightAltClick_doubled_as_c_pressed_leftShiftClick_released_rightAltClick_released_THEN_c_letter_is_sent_#4202()
 {
-    modifierDoubledAsClick["rightAltClick"] := "left"
     modifierDoubledAsClick["leftShiftClick"] := "b"
+    modifierDoubledAsClick["rightAltClick"] := "c"
     simulateTyping("hello")
     processKeyDown("leftShiftClick")
     sleep 100
@@ -29,15 +28,14 @@ When_leftShiftClick_doubles_as_b_pressed_rightAltClick_doubled_as_c_pressed_left
     sleep 100
     processKeyUp("leftShiftClick")
     sleep 100
-    modifierDoubledAsClick["rightAltClick"] := "c"
     processKeyUp("rightAltClick")
     sleep 100
-    expected := "hello"
+    expected := "helloc"
 
     validateTestOutput(A_ThisFunc , expected)
 }
 
-When_leftShiftClick_pressed_rightAltClick_THEN_word_is_selected_before_rightAltClickRelease_#4203()
+When_leftShiftClick_pressed_rightAltClick_THEN_word_is_selected_after_rightAltClickRelease_#4203()
 {
     setMousePositionToCaret()
     simulateTyping("hello ")
@@ -45,11 +43,10 @@ When_leftShiftClick_pressed_rightAltClick_THEN_word_is_selected_before_rightAltC
     sleep 100
     processKeyDown("rightAltClick")
     sleep 100
+    processKeyUp("rightAltClick")
     sleep %timerTimeoutStickyKeys%
     actual := getSelectedText()
     processKeyUp("leftShiftClick")
-    sleep 100
-    processKeyUp("rightAltClick")
     sleep 100
     expected := "hello "
 
@@ -57,7 +54,7 @@ When_leftShiftClick_pressed_rightAltClick_THEN_word_is_selected_before_rightAltC
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
-When_leftShiftClick_pressed_rightAltClick_pressed_mouse_moved_until_second_word_THEN_only_second_word_is_selected_#4204()
+When_leftShiftClick_pressed_rightAltClick_pressed_mouse_moved_until_second_word_THEN_only_first_word_is_selected_#4204()
 {
     setMousePositionToCaret()
     simulateTyping("hello")
@@ -74,7 +71,7 @@ When_leftShiftClick_pressed_rightAltClick_pressed_mouse_moved_until_second_word_
     sleep 100
     actual := getSelectedText()
 
-    expected := "world"
+    expected := "hello "
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
     setDefaultTestEnvironment(A_ThisFunc)
 }

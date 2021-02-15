@@ -48,7 +48,6 @@ doubledRightShiftDown()
     }
     else if (isAnyLeftModifierPressed())
     {
-        setTimer TimerResetModifierReleaseAction, OFF
         continuousPressRightShift()
     }
     else if (shiftActive)
@@ -124,7 +123,7 @@ doubledRightShiftUp()
         SetTimer TimerStickyFailBack, OFF
         SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         sleep % timeoutResetModifierContinuousPress + 5
-        sendDoubledValueAndReset("rightShiftClick", sendClickOnRightShiftClickRelease, isLeftShiftClickDown)
+        sendDoubledValueAndReset("rightShiftClick", sendClickOnRightShiftClickRelease, isRightShiftClickDown)
     }
     if (sendClickOnRightShiftClickRelease)
     {

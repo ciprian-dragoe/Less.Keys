@@ -48,7 +48,6 @@ doubledLeftCtrlDown()
     }
     else if (isAnyRightModifierPressed())
     {
-        setTimer TimerResetModifierReleaseAction, OFF
         continuousPressLeftCtrl()
 
     }

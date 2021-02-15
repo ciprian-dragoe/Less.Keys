@@ -1,4 +1,4 @@
-When_rightCtrlClick_is_pressed_leftCtrlClick_doubled_as_a_is_pressed_all_text_is_selected_before_a_leftCtrlClickRelease_#1601()
+When_rightCtrlClick_is_pressed_leftCtrlClick_doubled_as_a_pressed_all_text_is_selected_after_a_leftCtrlClickRelease_#1601()
 {
     modifierDoubledAsClick["leftCtrlClick"] := "a"
     simulateTyping("hello ")
@@ -6,18 +6,18 @@ When_rightCtrlClick_is_pressed_leftCtrlClick_doubled_as_a_is_pressed_all_text_is
     sleep 100
     processKeyDown("leftCtrlClick")
     sleep 100
-    actual := getSelectedText()
-    processKeyUp("rightCtrlClick")
-    sleep 100
     processKeyUp("leftCtrlClick")
     sleep 100
+    processKeyUp("rightCtrlClick")
+    sleep 100
+    actual := getSelectedText()
     expected := "hello "
 
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
-When_rightCtrlClick_doubled_as_b_is_pressed_leftCtrlClick_doubled_as_a_is_pressed_and_released_b_is_not_sent_on_RightCtrlClickRelease_#1602()
+When_rightCtrlClick_doubled_as_b_pressed_leftCtrlClick_doubled_as_a_pressed_and_released_b_is_not_sent_on_RightCtrlClickRelease_#1602()
 {
     modifierDoubledAsClick["leftCtrlClick"] := "a"
     modifierDoubledAsClick["rightCtrlClick"] := "b"
@@ -26,9 +26,9 @@ When_rightCtrlClick_doubled_as_b_is_pressed_leftCtrlClick_doubled_as_a_is_presse
     sleep 100
     processKeyDown("leftCtrlClick")
     sleep 100
-    processKeyUp("rightCtrlClick")
-    sleep 100
     processKeyUp("leftCtrlClick")
+    sleep 100
+    processKeyUp("rightCtrlClick")
     sleep 100
     actual := getSelectedText()
 

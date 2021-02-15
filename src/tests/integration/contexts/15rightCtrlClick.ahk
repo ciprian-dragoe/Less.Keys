@@ -242,7 +242,6 @@ When_rightCtrlClick_is_continuously_pressed_and_mouse_is_moved_the_text_is_selec
     MouseMove startingPosition.x, startingPosition.y
     processKeyUp("rightCtrlClick")
     sleep 100
-    
     actual := getSelectedText()
     expected := "hello "
     

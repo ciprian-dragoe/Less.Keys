@@ -1,4 +1,4 @@
-When_rightShiftClick_is_pressed_leftShiftClick_doubled_as_d_is_pressed_THEN_D_is_sent_before_a_leftShiftClickRelease_#2101()
+When_rightShiftClick_pressed_leftShiftClick_doubled_as_d_is_pressed_THEN_D_is_sent_after_leftShiftClick_release_#2101()
 {
     modifierDoubledAsClick["leftShiftClick"] := "d"
     simulateTyping("hello worl")
@@ -6,10 +6,10 @@ When_rightShiftClick_is_pressed_leftShiftClick_doubled_as_d_is_pressed_THEN_D_is
     sleep 100
     processKeyDown("leftShiftClick")
     sleep 100
+    processKeyUp("leftShiftClick")
+    sleep 100
     actual := clearText()
     processKeyUp("rightShiftClick")
-    sleep 100
-    processKeyUp("leftShiftClick")
     sleep 100
     expected := "hello worlD"
 
@@ -17,18 +17,18 @@ When_rightShiftClick_is_pressed_leftShiftClick_doubled_as_d_is_pressed_THEN_D_is
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
-When_rightShiftClick_pressed_leftShiftClick_pressed_THEN_whole_text_is_selected_before_rightShiftClick_release_#2102()
+When_rightShiftClick_pressed_leftShiftClick_pressed_THEN_whole_text_is_selected_after_rightShiftClick_release_#2102()
 {
     setMousePositionToCaret()
     simulateTyping("hello ")
     processKeyDown("rightShiftClick")
     sleep 100
     processKeyDown("leftShiftClick")
+    sleep 100
+    processKeyUp("leftShiftClick")
     sleep %timerTimeoutStickyKeys%
     actual := getSelectedText()
     processKeyUp("rightShiftClick")
-    sleep 100
-    processKeyUp("leftShiftClick")
     sleep 100
 
     expected := "hello "
@@ -76,7 +76,7 @@ When_rightShiftClick_pressed_leftShiftClick_pressed_mouse_moved_until_second_wor
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
-When_rightShiftClick_pressed_leftShiftClick_pressed_wait_timeoutStillSendLayoutKey_leftShiftClick_released_THEN_text_is_not_deselected_on_mouse_move_#2105()
+When_rightShiftClick_pressed_leftShiftClick_pressed_timeout_passed_leftShiftClick_released_THEN_text_is_not_selected_on_mouse_move_#2105()
 {
     timeoutStillSendLayoutKey := 300
     setMousePositionToCaret()
@@ -86,15 +86,16 @@ When_rightShiftClick_pressed_leftShiftClick_pressed_wait_timeoutStillSendLayoutK
     processKeyDown("rightShiftClick")
     sleep 30
     processKeyDown("leftShiftClick")
+    sleep 30
     sleep %timeoutStillSendLayoutKey%
+    MouseMove destination.x, destination.y
     processKeyUp("leftShiftClick")
     sleep 30
-    MouseMove destination.x, destination.y
     processKeyUp("rightShiftClick")
     sleep 100
     actual := getSelectedText()
 
-    expected := "hello"
+    expected := ""
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
     setDefaultTestEnvironment(A_ThisFunc)
 }

@@ -1,4 +1,4 @@
-When_leftCtrlClick_pressed_shift_pressed_rightCtrlClick_doubled_as_left_pressed_a_word_is_selected_before_a_rightCtrlClick_released_#1801()
+When_leftCtrlClick_pressed_shift_pressed_rightCtrlClick_doubled_as_left_pressed_a_word_is_selected_after_a_rightCtrlClick_released_#1801()
 {
     modifierDoubledAsClick["rightCtrlClick"] := "left"
     simulateTyping("hello world")
@@ -8,9 +8,10 @@ When_leftCtrlClick_pressed_shift_pressed_rightCtrlClick_doubled_as_left_pressed_
     sleep 100
     processKeyDown("rightCtrlClick")
     sleep 50
-    actual := getSelectedText()
     processKeyUp("rightCtrlClick")
+    sleep %timerTimeoutStickyKeys%
     sleep 100
+    actual := getSelectedText()
     processKeyUp("leftCtrlClick")
     sleep 100
     processKeyUp("shift")

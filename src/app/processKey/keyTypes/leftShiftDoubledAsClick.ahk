@@ -48,7 +48,6 @@ doubledLeftShiftDown()
     }
     else if (isAnyRightModifierPressed())
     {
-        setTimer TimerResetModifierReleaseAction, OFF
         continuousPressLeftShift()
     }
     else if (shiftActive)

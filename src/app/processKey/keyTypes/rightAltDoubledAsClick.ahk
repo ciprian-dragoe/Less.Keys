@@ -48,7 +48,6 @@ doubledRightAltDown()
     }
     else if (isAnyLeftModifierPressed())
     {
-        setTimer TimerResetModifierReleaseAction, OFF
         continuousPressRightAlt()
     }
     else if (altActive)
@@ -125,7 +124,7 @@ doubledRightAltUp()
         SetTimer TimerStickyFailBack, OFF
         SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         sleep % timeoutResetModifierContinuousPress + 5
-        sendDoubledValueAndReset("rightAltClick", sendClickOnRightAltClickRelease, isLeftAltClickDown)
+        sendDoubledValueAndReset("rightAltClick", sendClickOnRightAltClickRelease, isRightAltClickDown)
     }
     if (sendClickOnRightAltClickRelease)
     {

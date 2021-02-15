@@ -1,4 +1,4 @@
-When_leftShiftClick_is_pressed_rightShiftClick_doubled_as_d_is_pressed_THEN_D_is_sent_before_a_rightShiftClickRelease_#2201()
+When_leftShiftClick_is_pressed_rightShiftClick_doubled_as_d_is_pressed_THEN_D_is_sent_after_rightShiftClick_release_#2201()
 {
     modifierDoubledAsClick["rightShiftClick"] := "d"
     simulateTyping("hello worl")
@@ -6,10 +6,10 @@ When_leftShiftClick_is_pressed_rightShiftClick_doubled_as_d_is_pressed_THEN_D_is
     sleep 100
     processKeyDown("rightShiftClick")
     sleep 100
-    actual := clearText()
-    processKeyUp("leftShiftClick")
-    sleep 100
     processKeyUp("rightShiftClick")
+    actual := clearText()
+    sleep 100
+    processKeyUp("leftShiftClick")
     sleep 100
     expected := "hello worlD"
 
@@ -17,18 +17,18 @@ When_leftShiftClick_is_pressed_rightShiftClick_doubled_as_d_is_pressed_THEN_D_is
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
-When_leftShiftClick_pressed_rightShiftClick_pressed_THEN_whole_text_is_selected_before_leftShiftClick_release_#2202()
+When_leftShiftClick_pressed_rightShiftClick_pressed_THEN_whole_text_is_selected_after_leftShiftClick_release_#2202()
 {
     setMousePositionToCaret()
     simulateTyping("hello ")
     processKeyDown("leftShiftClick")
     sleep 100
     processKeyDown("rightShiftClick")
+    sleep 100
+    processKeyUp("rightShiftClick")
     sleep %timerTimeoutStickyKeys%
     actual := getSelectedText()
     processKeyUp("leftShiftClick")
-    sleep 100
-    processKeyUp("rightShiftClick")
     sleep 100
 
     expected := "hello "

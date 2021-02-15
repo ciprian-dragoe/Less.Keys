@@ -47,7 +47,6 @@ doubledLeftWinDown()
     }
     else if (isAnyRightModifierPressed())
     {
-        setTimer TimerResetModifierReleaseAction, OFF
         continuousPressLeftWin()
     }
     else if (winActive)

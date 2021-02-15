@@ -1,4 +1,4 @@
-When_leftShiftClick_pressed_ctrl_pressed_rightShiftClick_THEN_word_is_selected_before_rightCtrlClickRelease_#2501()
+When_leftShiftClick_pressed_ctrl_pressed_rightShiftClick_THEN_word_is_selected_after_rightCtrlClickRelease_#2501()
 {
     modifierDoubledAsClick["rightShiftClick"] := "left"
     simulateTyping("hello world")
@@ -8,11 +8,10 @@ When_leftShiftClick_pressed_ctrl_pressed_rightShiftClick_THEN_word_is_selected_b
     sleep 100
     processKeyDown("rightShiftClick")
     sleep 100
+    processKeyUp("rightShiftClick")
     sleep %timerTimeoutStickyKeys%
     actual := getSelectedText()
     processKeyUp("leftShiftClick")
-    sleep 100
-    processKeyUp("rightShiftClick")
     sleep 100
     simulateKeyUp("lctrl", 100)
     expected := "world"

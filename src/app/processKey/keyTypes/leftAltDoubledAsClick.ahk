@@ -50,7 +50,6 @@ doubledLeftAltDown()
     }
     else if (isAnyRightModifierPressed())
     {
-        setTimer TimerResetModifierReleaseAction, OFF
         continuousPressLeftAlt()
     }
     else if (altActive)
