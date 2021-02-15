@@ -1,4 +1,4 @@
-When_leftCtrlClick_pressed_shift_pressed_rightWinClick_THEN_word_is_selected_before_rightWinClickRelease_#6001()
+When_leftCtrlClick_pressed_shift_pressed_rightWinClick_THEN_word_is_selected_after_rightWinClickRelease_#6001()
 {
     modifierDoubledAsClick["rightWinClick"] := "left"
     simulateTyping("hello world")
@@ -8,11 +8,10 @@ When_leftCtrlClick_pressed_shift_pressed_rightWinClick_THEN_word_is_selected_bef
     sleep 100
     processKeyDown("rightWinClick")
     sleep 100
+    processKeyUp("rightWinClick")
     sleep %timerTimeoutStickyKeys%
     actual := getSelectedText()
     processKeyUp("leftCtrlClick")
-    sleep 100
-    processKeyUp("rightWinClick")
     sleep 100
     simulateKeyUp("lshift", 100)
     expected := "world"
@@ -21,16 +20,15 @@ When_leftCtrlClick_pressed_shift_pressed_rightWinClick_THEN_word_is_selected_bef
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
-When_leftCtrlClick_doubled_as_d_pressed_shift_pressed_rightWinClick_leftCtrlClick_release_shift_rightWinClick_release_THEN_text_not_modified_#6002()
+When_leftCtrlClick_doubled_as_d_pressed_shift_pressed_rightWinClick_pressed_leftCtrlClick_release_rightWinClick_release_THEN_b_is_sent_#6002()
 {
-    modifierDoubledAsClick["rightWinClick"] := "left"
     modifierDoubledAsClick["leftCtrlClick"] := "d"
+    modifierDoubledAsClick["rightWinClick"] := "b"
     simulateTyping("hello world")
     processKeyDown("leftCtrlClick")
     sleep 100
     simulateKeyDown("lshift", 100)
     sleep 100
-    modifierDoubledAsClick["rightWinClick"] := "b"
     processKeyDown("rightWinClick")
     sleep 100
     processKeyUp("leftCtrlClick")
@@ -38,7 +36,7 @@ When_leftCtrlClick_doubled_as_d_pressed_shift_pressed_rightWinClick_leftCtrlClic
     processKeyUp("rightWinClick")
     sleep 100
     simulateKeyUp("lshift", 100)
-    expected := "hello world"
+    expected := "hello worldB"
 
     validateTestOutput(A_ThisFunc , expected)
 }
