@@ -1,6 +1,5 @@
 global sendClickOnRightAltClickRelease := false
 global isRightAltDoubledAsClickPressed := false
-global repressRightAltReleaseCancelAltActive := false
 global doubledRightAltMouseHook := 0
 global isRightAltClickDown := false
 
@@ -27,7 +26,7 @@ doubledRightAltDown()
 
     isRightAltDoubledAsClickPressed := true
 
-    if (isRightShiftDoubledAsClickPressed || isRightWinDoubledAsClickPressed || isRightCtrlDoubledAsClickPressed)
+    if (!isAnyLeftModifierPressed() && isRightShiftDoubledAsClickPressed || isRightWinDoubledAsClickPressed || isRightCtrlDoubledAsClickPressed)
     {
         resetSendClickOnRightModifierRelease(1)
         setAltState(1)
@@ -35,27 +34,7 @@ doubledRightAltDown()
         return
     }
 
-    if (fixQuickTypeLeftRightDoubledModifiers || layoutKeyPressed || activePressedKeys.Length() > 0)
-    {
-        if (isAnyLeftModifierPressed())
-        {
-            continuousPressRightAlt()
-        }
-        else if (altActive)
-        {
-            repressNormalAltRelease := true
-        }
-    }
-    else if (isAnyLeftModifierPressed())
-    {
-        continuousPressRightAlt()
-    }
-    else if (altActive)
-    {
-        repressRightAltReleaseCancelAltActive := true
-        sendDoubledValueAndReset("rightAltClick", sendClickOnRightAltClickRelease, isRightAltClickDown)
-        return
-    }
+    continuousPressAnyActiveLeftModifier()
 
     altActive := 1
 
@@ -63,17 +42,6 @@ doubledRightAltDown()
     chooseClickDragActivation("rightAltClick", "mouseDragRightAltActivate", doubledRightAltMouseHook)
     setTimer TimerResetModifierReleaseAction, OFF
     setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
-}
-
-continuousPressRightAlt()
-{
-    resetSendClickOnLeftModifierRelease(1)
-    if (isLeftAltDoubledAsClickPressed)
-    {
-        repressLeftAltReleaseCancelAltActive := true
-        setAltState(1)
-        setTimer TimerMonitorAltModifierLift, %timeoutResetModifierContinuousPress%
-    }
 }
 
 mouseDragRightAltActivate(nCode, wParam, lParam)
@@ -99,23 +67,15 @@ doubledRightAltUp()
         setTimer TimerResetModifierReleaseAction, OFF
     }
 
-    if (repressRightAltReleaseCancelAltActive)
+    if (isLeftAltDoubledAsClickPressed)
     {
-        repressRightAltReleaseCancelAltActive := false
+        resetSendClickOnLeftModifierRelease(1)
     }
     else
     {
-        if (repressNormalAltRelease || repressLeftAltReleaseCancelAltActive)
-        {
-            repressNormalAltRelease := false
-            repressLeftAltReleaseCancelAltActive := false
-        }
-        else
-        {
-            SetTimer TimerStickyFailBack, OFF
-            SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-            altActive := 0
-        }
+        SetTimer TimerStickyFailBack, OFF
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+        altActive := 0
     }
 
     if (isRightAltClickDown)

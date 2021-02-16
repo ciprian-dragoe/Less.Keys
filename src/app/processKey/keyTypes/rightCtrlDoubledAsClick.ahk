@@ -1,6 +1,5 @@
 global sendClickOnRightCtrlClickRelease := false
 global isRightCtrlDoubledAsClickPressed := false
-global repressRightCtrlReleaseCancelCtrlActive := false
 global doubledRightCtrlMouseHook := 0
 global isRightCtrlClickDown := false
 
@@ -27,35 +26,16 @@ doubledRightCtrlDown()
 
     isRightCtrlDoubledAsClickPressed := true
 
-    if (isRightShiftDoubledAsClickPressed || isRightWinDoubledAsClickPressed || isRightAltDoubledAsClickPressed)
+    if (!isAnyLeftModifierPressed() && isRightShiftDoubledAsClickPressed || isRightWinDoubledAsClickPressed || isRightAltDoubledAsClickPressed)
     {
+        setTimer TimerResetModifierReleaseAction, OFF
         resetSendClickOnRightModifierRelease(1)
         setCtrlState(1)
         setTimer TimerMonitorCtrlModifierLift, %timeoutResetModifierContinuousPress%
         return
     }
 
-    if (fixQuickTypeLeftRightDoubledModifiers || layoutKeyPressed || activePressedKeys.Length() > 0)
-    {
-        if (isAnyLeftModifierPressed())
-        {
-            continuousPressRightCtrl()
-        }
-        else if (ctrlActive)
-        {
-            repressNormalCtrlRelease := true
-        }
-    }
-    else if (isAnyLeftModifierPressed())
-    {
-        continuousPressRightCtrl()
-    }
-    else if (ctrlActive)
-    {
-        repressRightCtrlReleaseCancelCtrlActive := true
-        sendDoubledValueAndReset("rightCtrlClick", sendClickOnRightCtrlClickRelease, isRightCtrlClickDown)
-        return
-    }
+    continuousPressAnyActiveLeftModifier()
 
     ctrlActive := 1
 
@@ -65,17 +45,6 @@ doubledRightCtrlDown()
     setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
 }
 
-continuousPressRightCtrl()
-{
-    resetSendClickOnLeftModifierRelease(1)
-    if (isLeftCtrlDoubledAsClickPressed)
-    {
-        repressLeftCtrlReleaseCancelCtrlActive := true
-        setCtrlState(1)
-        setTimer TimerMonitorCtrlModifierLift, %timeoutResetModifierContinuousPress%
-    }
-}
-
 mouseDragRightCtrlActivate(nCode, wParam, lParam)
 {
     cancelMouseHook(doubledRightCtrlMouseHook)
@@ -83,7 +52,6 @@ mouseDragRightCtrlActivate(nCode, wParam, lParam)
     if (wParam = 0x200)
     {
         debug("mouseDragRightCtrlActivate")
-        sendClickOnRightCtrlClickRelease := true
         isRightCtrlClickDown := true
         doubledAction := modifierDoubledAsClick["rightCtrlClick"]
         send {blind}{%doubledAction% down}
@@ -99,27 +67,19 @@ doubledRightCtrlUp()
         setTimer TimerResetModifierReleaseAction, OFF
     }
 
-    if (repressRightCtrlReleaseCancelCtrlActive)
+    if (isLeftCtrlDoubledAsClickPressed)
     {
-        repressRightCtrlReleaseCancelCtrlActive := false
+        resetSendClickOnLeftModifierRelease(1)
     }
     else
     {
-        if (repressNormalCtrlRelease || repressLeftCtrlReleaseCancelCtrlActive)
-        {
-            repressNormalCtrlRelease := false
-            repressLeftCtrlReleaseCancelCtrlActive := false
-        }
-        else
-        {
-            SetTimer TimerStickyFailBack, OFF
-            SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-            ctrlActive := 0
-        }
+        SetTimer TimerStickyFailBack, OFF
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+        ctrlActive := 0
     }
+
     if (isRightCtrlClickDown)
     {
-        sendClickOnRightCtrlClickRelease := true
         SetTimer TimerStickyFailBack, OFF
         SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         sleep % timeoutResetModifierContinuousPress + 5

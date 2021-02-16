@@ -1,7 +1,5 @@
-global fixQuickTypeLeftRightDoubledModifiers := 0
 global timeoutResetModifierContinuousPress := 20
-global repressNormalShiftRelease := false
-global repressNormalWinRelease := false
+
 
 
 cancelDoubledModifier()
@@ -49,33 +47,23 @@ sendDoubledValueAndReset(modifierValue, ByRef sendClickOnRelease, ByRef isModifi
             isModifierClickDown := false
             sendClickOnRelease := false
             debug("release button")
-            send {blind}%activeModifiers%{lbutton up}
+            send {blind}{lbutton up}
         }
-        else
+        else if (sendClickOnRelease)
         {
-            if (sendClickOnRelease)
-            {
-                sendClickOnRelease := false
-                isModifierClickDown := false
-                debug("button up & down")
-                send {blind}%activeModifiers%{lbutton down}
-                send {blind}%activeModifiers%{lbutton up}
-            }
-            else
-            {
-                sendClickOnRelease := true
-                isModifierClickDown := true
-                debug("deep pressed mouse")
-                send {blind}%activeModifiers%{lbutton down}
-            }
+            sendClickOnRelease := false
+            isModifierClickDown := false
+            debug("button up & down")
+            send {blind}{lbutton down}
+            send {blind}{lbutton up}
         }
     }
     else if (doubledAction = "rbutton")
     {
         isModifierClickDown := false
         sendClickOnRelease := false
-        send {blind}%activeModifiers%{rbutton down}
-        send {blind}%activeModifiers%{rbutton up}
+        send {blind}{rbutton down}
+        send {blind}{rbutton up}
     }
     else
     {
@@ -217,12 +205,6 @@ timerMonitorWinModifierLift()
     }
 }
 
-timerFixQuickTypeLeftRightDoubledModifiers()
-{
-    SetTimer, TimerFixQuickTypeLeftRightDoubledModifiers, OFF
-    fixQuickTypeLeftRightDoubledModifiers := false
-}
-
 isAnyLeftModifierPressed()
 {
     return isLeftAltDoubledAsClickPressed || isLeftCtrlDoubledAsClickPressed || isLeftWinDoubledAsClickPressed || isLeftShiftDoubledAsClickPressed
@@ -231,4 +213,60 @@ isAnyLeftModifierPressed()
 isAnyRightModifierPressed()
 {
     return isRightAltDoubledAsClickPressed || isRightCtrlDoubledAsClickPressed || isRightWinDoubledAsClickPressed || isRightShiftDoubledAsClickPressed
+}
+
+continuousPressAnyActiveLeftModifier()
+{
+    if (isLeftCtrlDoubledAsClickPressed)
+    {
+        resetSendClickOnLeftModifierRelease(1)
+        setCtrlState(1)
+        setTimer TimerMonitorCtrlModifierLift, %timeoutResetModifierContinuousPress%
+    }
+    if (isLeftAltDoubledAsClickPressed)
+    {
+        resetSendClickOnLeftModifierRelease(1)
+        setAltState(1)
+        setTimer TimerMonitorAltModifierLift, %timeoutResetModifierContinuousPress%
+    }
+    if (isLeftShiftDoubledAsClickPressed)
+    {
+        resetSendClickOnLeftModifierRelease(1)
+        setShiftState(1)
+        setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%
+    }
+    if (isLeftWinDoubledAsClickPressed)
+    {
+        resetSendClickOnLeftModifierRelease(1)
+        setWinState(1)
+        setTimer TimerMonitorWinModifierLift, %timeoutResetModifierContinuousPress%
+    }
+}
+
+continuousPressAnyActiveRightModifier()
+{
+    if (isRightCtrlDoubledAsClickPressed)
+    {
+        resetSendClickOnRightModifierRelease(1)
+        setCtrlState(1)
+        setTimer TimerMonitorCtrlModifierLift, %timeoutResetModifierContinuousPress%
+    }
+    if (isRightAltDoubledAsClickPressed)
+    {
+        resetSendClickOnRightModifierRelease(1)
+        setAltState(1)
+        setTimer TimerMonitorAltModifierLift, %timeoutResetModifierContinuousPress%
+    }
+    if (isRightShiftDoubledAsClickPressed)
+    {
+        resetSendClickOnRightModifierRelease(1)
+        setShiftState(1)
+        setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%
+    }
+    if (isRightWinDoubledAsClickPressed)
+    {
+        resetSendClickOnRightModifierRelease(1)
+        setWinState(1)
+        setTimer TimerMonitorWinModifierLift, %timeoutResetModifierContinuousPress%
+    }
 }

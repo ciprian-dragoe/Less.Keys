@@ -1,6 +1,5 @@
 global sendClickOnLeftShiftClickRelease := false
 global isLeftShiftDoubledAsClickPressed := false
-global repressLeftShiftReleaseCancelShiftActive := false
 global doubledLeftShiftMouseHook := 0
 global isLeftShiftClickDown := false
 
@@ -27,35 +26,16 @@ doubledLeftShiftDown()
     
     isLeftShiftDoubledAsClickPressed := true
     
-    if (isLeftCtrlDoubledAsClickPressed || isLeftWinDoubledAsClickPressed || isLeftAltDoubledAsClickPressed)
+    if (!isAnyRightModifierPressed() && isLeftCtrlDoubledAsClickPressed || isLeftWinDoubledAsClickPressed || isLeftAltDoubledAsClickPressed)
     {
+        setTimer TimerResetModifierReleaseAction, OFF
         resetSendClickOnLeftModifierRelease(1)
         setShiftState(1)
         setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%
         return
     }
 
-    if (fixQuickTypeLeftRightDoubledModifiers || layoutKeyPressed || activePressedKeys.Length() > 0)
-    {
-        if (isAnyRightModifierPressed())
-        {
-            continuousPressLeftShift()
-        }
-        else if (shiftActive)
-        {
-            repressNormalShiftRelease := true
-        }
-    }
-    else if (isAnyRightModifierPressed())
-    {
-        continuousPressLeftShift()
-    }
-    else if (shiftActive)
-    {
-        repressLeftShiftReleaseCancelShiftActive := true
-        sendDoubledValueAndReset("leftShiftClick", sendClickOnLeftShiftClickRelease, isLeftShiftClickDown)
-        return
-    }
+    continuousPressAnyActiveRightModifier()
 
     shiftActive := 1
 
@@ -63,17 +43,6 @@ doubledLeftShiftDown()
     chooseClickDragActivation("leftShiftClick", "mouseDragLeftShiftActivate", doubledLeftShiftMouseHook)
     setTimer TimerResetModifierReleaseAction, OFF
     setTimer TimerResetModifierReleaseAction, %timeoutStillSendLayoutKey%
-}
-
-continuousPressLeftShift()
-{
-    resetSendClickOnRightModifierRelease(1)
-    if (isRightShiftDoubledAsClickPressed)
-    {
-        repressRightShiftReleaseCancelShiftActive := true
-        setShiftState(1)
-        setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%
-    }
 }
 
 mouseDragLeftShiftActivate(nCode, wParam, lParam)
@@ -99,28 +68,19 @@ doubledLeftShiftUp()
         setTimer TimerResetModifierReleaseAction, OFF
     }
 
-    if (repressLeftShiftReleaseCancelShiftActive)
+    if (isRightShiftDoubledAsClickPressed)
     {
-        repressLeftShiftReleaseCancelShiftActive := false
+        resetSendClickOnRightModifierRelease(1)
     }
     else
     {
-        if (repressNormalShiftRelease || repressRightShiftReleaseCancelShiftActive)
-        {
-            repressNormalShiftRelease := false
-            repressRightShiftReleaseCancelShiftActive := false
-        }
-        else
-        {
-            SetTimer TimerStickyFailBack, OFF
-            SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-            shiftActive := 0
-        }
+        SetTimer TimerStickyFailBack, OFF
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+        shiftActive := 0
     }
 
     if (isLeftShiftClickDown)
     {
-        sendClickOnLeftShiftClickRelease := true
         SetTimer TimerStickyFailBack, OFF
         SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         sleep % timeoutResetModifierContinuousPress + 5

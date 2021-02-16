@@ -13,7 +13,6 @@ global defaultRightAltClickAction
 global defaultTimeoutStillSendLayoutKey
 global defaultTimeoutProcessLayoutOnRelease
 global defaultTimerTimeoutStickyKeys
-global defaultTimeoutFixQuickTypeLeftRightDoubledModifiers
 
 
 if (prepareTestEnvironment())
@@ -41,7 +40,6 @@ initTestEnvironment()
     defaultTimeoutProcessLayoutOnRelease := timeoutProcessLayoutOnRelease
     defaultTimeoutStillSendLayoutKey := timeoutStillSendLayoutKey
     defaultTimerTimeoutStickyKeys := timerTimeoutStickyKeys
-    defaultTimeoutFixQuickTypeLeftRightDoubledModifiers := timeoutFixQuickTypeLeftRightDoubledModifiers
     setTestVariables()
     SetTimer TimerStickyFailBack, OFF
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
@@ -61,6 +59,5 @@ finalizeTestEnvironment()
     timeoutProcessLayoutOnRelease := defaultTimeoutProcessLayoutOnRelease
     timeoutStillSendLayoutKey := defaultTimeoutStillSendLayoutKey
     timerTimeoutStickyKeys := defaultTimerTimeoutStickyKeys
-    timeoutFixQuickTypeLeftRightDoubledModifiers := defaultTimeoutFixQuickTypeLeftRightDoubledModifiers
     logStickyKeys := 1
 }

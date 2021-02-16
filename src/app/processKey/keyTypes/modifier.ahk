@@ -50,12 +50,6 @@ setCtrlState(state)
 {
     ctrlActive := state
     pressedState := state ? "down" : "up"
-    if (repressNormalCtrlRelease)
-    {
-        pressedState := "down"
-        ctrlActive := 1
-        repressNormalCtrlRelease := false
-    }
     debug("ctrl " . state)
     send {blind}{ctrl %pressedState%}
 }
@@ -64,12 +58,6 @@ setAltState(state)
 {
     altActive := state
     pressedState := state ? "down" : "up"
-    if (repressNormalAltRelease)
-    {
-        pressedState := "down"
-        altActive := 1
-        repressNormalAltRelease := false
-    }
     debug("alt " . state)
     send {blind}{alt %pressedState%}
 }
@@ -78,12 +66,6 @@ setShiftState(state)
 {
     shiftActive := state
     pressedState := state ? "down" : "up"
-    if (repressNormalShiftRelease)
-    {
-        pressedState := "down"
-        shiftActive := 1
-        repressNormalShiftRelease := false
-    }
     debug("shift " . state)
     send {blind}{shift %pressedState%}
 }
@@ -92,12 +74,6 @@ setWinState(state)
 {
     winActive := state
     pressedState := state ? "down" : "up"
-    if (repressNormalWinRelease)
-    {
-        pressedState := "down"
-        winActive := 1
-        repressNormalWinRelease := false
-    }
     debug("win " . state)
     send {blind}{lwin %pressedState%}
 }
