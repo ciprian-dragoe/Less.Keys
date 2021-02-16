@@ -54,7 +54,7 @@ When_leftShiftClick_pressed_rightAltClick_THEN_word_is_selected_after_rightAltCl
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
-When_leftShiftClick_pressed_rightAltClick_pressed_mouse_moved_until_second_word_THEN_only_first_word_is_selected_#4204()
+When_leftShiftClick_pressed_rightAltClick_pressed_mouse_moved_until_second_word_THEN_only_second_word_is_selected_#4204()
 {
     setMousePositionToCaret()
     simulateTyping("hello")
@@ -71,7 +71,7 @@ When_leftShiftClick_pressed_rightAltClick_pressed_mouse_moved_until_second_word_
     sleep 100
     actual := getSelectedText()
 
-    expected := "hello "
+    expected := "world"
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
     setDefaultTestEnvironment(A_ThisFunc)
 }

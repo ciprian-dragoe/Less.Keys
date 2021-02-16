@@ -18,7 +18,7 @@ When_leftCtrlClick_is_pressed_rightCtrlClick_doubled_as_a_is_pressed_all_text_is
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
-When_leftCtrlClick_doubled_as_b_pressed_rightCtrlClick_doubled_as_a_pressed_leftCtrlClick_released_rightCtrlClick_released_a_is_sent_1902()
+When_leftCtrlClick_doubled_as_b_pressed_rightCtrlClick_doubled_as_a_pressed_leftCtrlClick_released_rightCtrlClick_released_THEN_no_letter_is_sent_1902()
 {
     modifierDoubledAsClick["rightCtrlClick"] := "a"
     modifierDoubledAsClick["leftCtrlClick"] := "b"
@@ -33,7 +33,7 @@ When_leftCtrlClick_doubled_as_b_pressed_rightCtrlClick_doubled_as_a_pressed_left
     sleep 100
     actual := getSelectedText()
 
-    expected := "hello a"
+    expected := "hello "
     validateTestOutput(A_ThisFunc , expected)
 }
 
