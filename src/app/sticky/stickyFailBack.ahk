@@ -3,14 +3,21 @@
 ; This is a fail safe for such situations
 timerStickyFailBack()
 {
+    debugResult := ""
     for index, key in monitoredStickyKeys
     {
-        if (GetKeyState(key, "P"))
+        isPressed := GetKeyState(key, "P")
+        debugResult := debugResult . key . "=" . isPressed . "|"
+        if (isPressed)
         {
             return
         }
     }
 
+    if (logInput)
+    {
+        debugStoredData .= debugResult . "`n"
+    }
     resetStates()
 }
 

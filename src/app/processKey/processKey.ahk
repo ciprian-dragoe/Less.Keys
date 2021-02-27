@@ -15,14 +15,17 @@ global processKeyOnRelease
 
 processKeyDown(key)
 {
+    debug("[KEY_DOWN_BEGIN] " . key)
     if (processModifierKey(key, 1))
     {
+        debug("[KEY_DOWN_END] " . key)
         return
     }
     
     if (key = layoutChangeKey)
     {
         manageLayoutKeyDown(key)
+        debug("[KEY_DOWN_END] " . key)
         return
     }
 
@@ -33,18 +36,22 @@ processKeyDown(key)
         SetTimer, TimerProcessLayoutOnRelease, %timeoutProcessLayoutOnRelease%
     }
     processNormalKey(key)
+    debug("[KEY_DOWN_END] " . key)
 }
 
 processKeyUp(key)
 {
+    debug("[KEY_UP_BEGIN] " . key)
     if (processModifierKey(key, 0))
     {
+        debug("[KEY_UP_END] " . key)
         return
     }
 
     if (key = layoutChangeKey)
     {
         manageLayoutKeyUp(key)
+        debug("[KEY_UP_END] " . key)
         return
     }
 
@@ -73,4 +80,5 @@ processKeyUp(key)
         removeFromActivePressedKeys(key)
         debug(key . "|up")
     }
+    debug("[KEY_UP_END] " . key)
 }

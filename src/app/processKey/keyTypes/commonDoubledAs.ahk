@@ -6,16 +6,7 @@ cancelDoubledModifier()
 {
     resetSendClickOnLeftModifierRelease(1)
     resetSendClickOnRightModifierRelease(1)
-
-    leftCtrlActiveBeforeCtrlClickPress := false
-    leftAltActiveBeforeAltClickPress := false
-    repressLeftShiftReleaseCancelShiftActive := false
-    leftWinActiveBeforeWinClickPress := false
-
-    rightCtrlActiveBeforeCtrlClickPress := false
-    rightAltActiveBeforeCtrlClickPress := false
-    rightWinActiveBeforeCtrlClickPress := false
-    rightShiftActiveBeforeCtrlClickPress := false
+    setTimer TimerResetModifierReleaseAction, OFF
 }
 
 cancelMouseHook(ByRef id)

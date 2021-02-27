@@ -13,8 +13,11 @@ timerFixAppsOverwriteLessKeysKeyboardHooks()
                 return
             }
             isAppWhichOverWritesLessKeysActive := true
+            debug("====== reset from app which overwrites keyboard hooks")
+            SetTimer TimerStickyFailBack, OFF
             Suspend, On
             Suspend, Off
+            SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
             return
         }
     }

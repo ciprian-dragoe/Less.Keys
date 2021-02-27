@@ -1,6 +1,8 @@
 #SingleInstance
 #Persistent
+#NoEnv
 #MaxHotkeysPerInterval 400
+#InstallKeybdHook
 SetKeyDelay -1
 SetTitleMatchMode 2
 
