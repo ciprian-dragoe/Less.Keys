@@ -26,7 +26,7 @@ doubledRightCtrlDown()
 
     isRightCtrlDoubledAsClickPressed := true
 
-    if (!isAnyLeftModifierPressed() && isRightShiftDoubledAsClickPressed || isRightWinDoubledAsClickPressed || isRightAltDoubledAsClickPressed)
+    if (!isAnyLeftModifierPressed() && (isRightShiftDoubledAsClickPressed || isRightWinDoubledAsClickPressed || isRightAltDoubledAsClickPressed))
     {
         setTimer TimerResetModifierReleaseAction, OFF
         resetSendClickOnRightModifierRelease(1)

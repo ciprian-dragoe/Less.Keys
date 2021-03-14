@@ -1,4 +1,5 @@
 global modifierDoubledAsClick := object()
+global alternativeModifierDoubledAsClick := object()
 
 readDoubledModifierSettings(path)
 {
@@ -18,4 +19,21 @@ readDoubledModifierSettings(path)
     modifierDoubledAsClick["rightWinClick"] := action
     IniRead, action, %path%, mouse, rightAltDoubledAs
     modifierDoubledAsClick["rightAltClick"] := action
+
+    IniRead, action, %path%, mouse, alternativeLeftShiftDoubledAs
+    alternativeModifierDoubledAsClick["leftShiftClick"] := action
+    IniRead, action, %path%, mouse, alternativeLeftCtrlDoubledAs
+    alternativeModifierDoubledAsClick["leftCtrlClick"] := action
+    IniRead, action, %path%, mouse, alternativeLeftWinDoubledAs
+    alternativeModifierDoubledAsClick["leftWinClick"] := action
+    IniRead, action, %path%, mouse, alternativeLeftAltDoubledAs
+    alternativeModifierDoubledAsClick["leftAltClick"] := action
+    IniRead, action, %path%, mouse, alternativeRightShiftDoubledAs
+    alternativeModifierDoubledAsClick["rightShiftClick"] := action
+    IniRead, action, %path%, mouse, alternativeRightCtrlDoubledAs
+    alternativeModifierDoubledAsClick["rightCtrlClick"] := action
+    IniRead, action, %path%, mouse, alternativeRightWinDoubledAs
+    alternativeModifierDoubledAsClick["rightWinClick"] := action
+    IniRead, action, %path%, mouse, alternativeRightAltDoubledAs
+    alternativeModifierDoubledAsClick["rightAltClick"] := action
 }

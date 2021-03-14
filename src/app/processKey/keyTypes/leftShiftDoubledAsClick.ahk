@@ -26,7 +26,7 @@ doubledLeftShiftDown()
     
     isLeftShiftDoubledAsClickPressed := true
     
-    if (!isAnyRightModifierPressed() && isLeftCtrlDoubledAsClickPressed || isLeftWinDoubledAsClickPressed || isLeftAltDoubledAsClickPressed)
+    if (!isAnyRightModifierPressed() && (isLeftCtrlDoubledAsClickPressed || isLeftWinDoubledAsClickPressed || isLeftAltDoubledAsClickPressed))
     {
         setTimer TimerResetModifierReleaseAction, OFF
         resetSendClickOnLeftModifierRelease(1)

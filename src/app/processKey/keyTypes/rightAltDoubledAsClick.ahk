@@ -26,7 +26,7 @@ doubledRightAltDown()
 
     isRightAltDoubledAsClickPressed := true
 
-    if (!isAnyLeftModifierPressed() && isRightShiftDoubledAsClickPressed || isRightWinDoubledAsClickPressed || isRightCtrlDoubledAsClickPressed)
+    if (!isAnyLeftModifierPressed() && (isRightShiftDoubledAsClickPressed || isRightWinDoubledAsClickPressed || isRightCtrlDoubledAsClickPressed))
     {
         resetSendClickOnRightModifierRelease(1)
         setAltState(1)

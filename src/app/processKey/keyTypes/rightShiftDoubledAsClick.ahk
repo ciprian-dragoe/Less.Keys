@@ -26,7 +26,7 @@ doubledRightShiftDown()
     
     isRightShiftDoubledAsClickPressed := true
 
-    if (isRightCtrlDoubledAsClickPressed || isRightWinDoubledAsClickPressed || isRightAltDoubledAsClickPressed)
+    if (!isAnyLeftModifierPressed() && (isRightCtrlDoubledAsClickPressed || isRightWinDoubledAsClickPressed || isRightAltDoubledAsClickPressed))
     {
         resetSendClickOnRightModifierRelease(1)
         setShiftState(1)

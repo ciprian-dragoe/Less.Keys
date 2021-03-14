@@ -29,6 +29,10 @@ chooseClickDragActivation(modifierValue, callbackMethodName, ByRef hookStoreLoca
 sendDoubledValueAndReset(modifierValue, ByRef sendClickOnRelease, ByRef isModifierClickDown)
 {
     doubledAction := modifierDoubledAsClick[modifierValue]
+    if (layoutKeyPressed)
+    {
+        doubledAction := alternativeModifierDoubledAsClick[modifierValue]
+    }
     activeModifiers := getActiveModifiers()
     debug("doubled " . modifierValue . " => " . doubledAction)
     if (doubledAction = "lbutton")
@@ -42,8 +46,8 @@ sendDoubledValueAndReset(modifierValue, ByRef sendClickOnRelease, ByRef isModifi
         }
         else if (sendClickOnRelease)
         {
-            sendClickOnRelease := false
             isModifierClickDown := false
+            sendClickOnRelease := false
             debug("button up & down")
             send {blind}{lbutton down}
             send {blind}{lbutton up}
@@ -58,8 +62,8 @@ sendDoubledValueAndReset(modifierValue, ByRef sendClickOnRelease, ByRef isModifi
     }
     else
     {
-        sendClickOnRelease := false
         isModifierClickDown := false
+        sendClickOnRelease := false
         processKeyToSend(doubledAction)
     }
 }

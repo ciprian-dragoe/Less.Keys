@@ -26,7 +26,7 @@ doubledLeftWinDown()
 
     isLeftWinDoubledAsClickPressed := true
 
-    if (!isAnyRightModifierPressed() && isLeftCtrlDoubledAsClickPressed || isLeftShiftDoubledAsClickPressed || isLeftAltDoubledAsClickPressed)
+    if (!isAnyRightModifierPressed() && (isLeftCtrlDoubledAsClickPressed || isLeftShiftDoubledAsClickPressed || isLeftAltDoubledAsClickPressed))
     {
         resetSendClickOnLeftModifierRelease(1)
         winActive := 1
