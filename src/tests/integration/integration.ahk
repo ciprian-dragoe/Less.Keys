@@ -254,6 +254,9 @@ runIntegrationTests()
     When_alt_is_pressed_and_leftAltClick_is_continuously_pressed_and_mouse_is_moved_the_text_is_selected_#1126()
     When_leftAltClick_is_continuously_pressed_and_mouse_is_moved_and_ctrl_is_pressed_the_text_remains_selected_#1127()
     When_leftAltClick_is_continuously_pressed_and_mouse_is_moved_and_alt_is_pressed_and_released_the_text_remains_selected_#1128()
+    When_layoutKey_pressed_leftAltClick_pressed_at_release_alternative_value_is_sent_#1129()
+    When_layoutKey_pressed_leftAltClick_pressed_leftAltClick_released_layoutKey_releases_space_is_not_sent_#1130()
+    When_shift_pressed_layoutKey_pressed_leftAltClick_pressed_at_release_capitalized_alternative_value_is_sent_#1131()
 
     ; LEFT ALT CLICK & LEFT CTRL CLICK
     When_leftAltClick_is_pressed_and_leftCtrlClick_is_pressed_left_click_is_not_sent_on_leftAltClick_release_#1201()
@@ -360,6 +363,7 @@ runIntegrationTests()
     When_leftShiftClick_pressed_rightShiftClick_pressed_THEN_whole_text_is_selected_after_leftShiftClick_release_#2202()
     When_leftShiftClick_doubled_as_d_pressed_rightShiftClick_pressed_leftShiftClick_release_rightShiftClick_release_THEN_d_is_not_sent_#2203()
     When_leftShiftClick_pressed_rightShiftClick_pressed_mouse_moved_until_second_word_THEN_only_second_word_is_selected_#2204()
+    When_leftShiftClick_pressed_layoutKey_pressed_rightShiftClick_pressed_at_release_capitalized_alternative_value_is_sent_#2205()
 
     ; RIGHT SHIFT CLICK & LEFT CTRL CLICK
     When_rightShiftClick_pressed_leftCtrlClick_doubled_as_left_pressed_THEN_letter_is_selected_after_leftCtrlClick_release_#2301()

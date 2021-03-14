@@ -348,3 +348,52 @@ When_leftAltClick_is_continuously_pressed_and_mouse_is_moved_and_alt_is_pressed_
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
     setDefaultTestEnvironment(A_ThisFunc)
 }
+
+When_layoutKey_pressed_leftAltClick_pressed_at_release_alternative_value_is_sent_#1129()
+{
+    simulateTyping("w ")
+    processKeyDown("space")
+    sleep 100
+    processKeyDown("leftAltClick")
+    sleep 100
+    processKeyUp("leftAltClick")
+    sleep 100
+    processKeyUp("space")
+
+    expected := "w y"
+    validateTestOutput(A_ThisFunc , expected)
+}
+
+When_layoutKey_pressed_leftAltClick_pressed_leftAltClick_released_layoutKey_releases_space_is_not_sent_#1130()
+{
+    simulateTyping("w ")
+    processKeyDown("space")
+    sleep 100
+    processKeyDown("leftAltClick")
+    sleep 100
+    processKeyUp("leftAltClick")
+    sleep 100
+    processKeyUp("space")
+
+    expected := "w y"
+    validateTestOutput(A_ThisFunc , expected)
+}
+
+When_shift_pressed_layoutKey_pressed_leftAltClick_pressed_at_release_capitalized_alternative_value_is_sent_#1131()
+{
+    simulateTyping("w ")
+    processKeyDown("shift")
+    sleep 100
+    processKeyDown("space")
+    sleep 100
+    processKeyDown("leftAltClick")
+    sleep 100
+    processKeyUp("leftAltClick")
+    sleep 100
+    processKeyUp("space")
+    sleep 100
+    processKeyUp("shift")
+
+    expected := "w Y"
+    validateTestOutput(A_ThisFunc , expected)
+}

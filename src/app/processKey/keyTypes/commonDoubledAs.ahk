@@ -31,6 +31,8 @@ sendDoubledValueAndReset(modifierValue, ByRef sendClickOnRelease, ByRef isModifi
     doubledAction := modifierDoubledAsClick[modifierValue]
     if (layoutKeyPressed)
     {
+        SetTimer, TimerTimeoutSendLayoutKey, OFF
+        sendLayoutKey := false
         doubledAction := alternativeModifierDoubledAsClick[modifierValue]
     }
     activeModifiers := getActiveModifiers()

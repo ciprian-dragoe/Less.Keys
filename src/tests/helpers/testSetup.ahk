@@ -80,6 +80,16 @@ setTestVariables()
     modifierDoubledAsClick["rightShiftClick"] := "lbutton"
     modifierDoubledAsClick["rightWinClick"] := "lbutton"
     modifierDoubledAsClick["rightAltClick"] := "lbutton"
+
+    alternativeModifierDoubledAsClick["leftCtrlClick"] := "y"
+    alternativeModifierDoubledAsClick["leftShiftClick"] := "y"
+    alternativeModifierDoubledAsClick["leftWinClick"] := "y"
+    alternativeModifierDoubledAsClick["leftAltClick"] := "y"
+    alternativeModifierDoubledAsClick["rightCtrlClick"] := "y"
+    alternativeModifierDoubledAsClick["rightShiftClick"] := "y"
+    alternativeModifierDoubledAsClick["rightWinClick"] := "y"
+    alternativeModifierDoubledAsClick["rightAltClick"] := "y"
+
     send {shift up}
     send {ctrl up}
     send {alt up}

@@ -75,3 +75,22 @@ When_leftShiftClick_pressed_rightShiftClick_pressed_mouse_moved_until_second_wor
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
     setDefaultTestEnvironment(A_ThisFunc)
 }
+
+When_leftShiftClick_pressed_layoutKey_pressed_rightShiftClick_pressed_at_release_capitalized_alternative_value_is_sent_#2205()
+{
+    simulateTyping("w ")
+    processKeyDown("leftShiftClick")
+    sleep 100
+    processKeyDown("space")
+    sleep 100
+    processKeyDown("rightShiftClick")
+    sleep 100
+    processKeyUp("rightShiftClick")
+    sleep 100
+    processKeyUp("space")
+    sleep 100
+    processKeyUp("leftShiftClick")
+
+    expected := "w Y"
+    validateTestOutput(A_ThisFunc , expected)
+}
