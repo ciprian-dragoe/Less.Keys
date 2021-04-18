@@ -42,7 +42,7 @@ processNormalKey(key)
         return
     }
     
-    sendLayoutKey := false    
+    sendLayoutKey := false
     if (alternativeLayoutActive)
     {
         lastKeyProcessedAsAlternative := key

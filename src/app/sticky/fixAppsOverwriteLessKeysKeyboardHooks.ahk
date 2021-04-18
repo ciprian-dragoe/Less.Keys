@@ -4,6 +4,10 @@ global lastActiveAppName := ""
 timerFixAppsOverwriteLessKeysKeyboardHooks()
 {
     WinGetTitle, lastActiveAppName, A
+    if (logInput)
+    {
+        debugStoredData .= "========" . lastActiveAppName . "`n"
+    }
     for index, appName in appNamesOverwriteKeyboardHooks
     {
         IfInString, lastActiveAppName, %appName%
