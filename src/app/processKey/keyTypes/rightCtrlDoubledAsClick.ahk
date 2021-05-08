@@ -31,6 +31,7 @@ doubledRightCtrlDown()
         setTimer TimerResetModifierReleaseAction, OFF
         resetSendClickOnRightModifierRelease(1)
         setCtrlState(1)
+        isDoubledCtrlTriggeringDeepModifierPress := true
         setTimer TimerMonitorCtrlModifierLift, %timeoutResetModifierContinuousPress%
         return
     }
@@ -76,20 +77,17 @@ doubledRightCtrlUp()
         SetTimer TimerStickyFailBack, OFF
         SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         ctrlActive := 0
+        if (isDoubledCtrlTriggeringDeepModifierPress)
+        {
+            isDoubledCtrlTriggeringDeepModifierPress := false
+            timerMonitorCtrlModifierLift()
+        }
     }
 
-    if (isRightCtrlClickDown)
+    if (isRightCtrlClickDown || sendClickOnRightCtrlClickRelease)
     {
         SetTimer TimerStickyFailBack, OFF
         SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-        sleep % timeoutResetModifierContinuousPress + 5
-        sendDoubledValueAndReset("rightCtrlClick", sendClickOnRightCtrlClickRelease, isRightCtrlClickDown)
-    }
-    if (sendClickOnRightCtrlClickRelease)
-    {
-        SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-        sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("rightCtrlClick", sendClickOnRightCtrlClickRelease, isRightCtrlClickDown)
     }
 }

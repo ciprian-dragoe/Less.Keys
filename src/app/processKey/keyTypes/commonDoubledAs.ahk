@@ -1,4 +1,8 @@
 global timeoutResetModifierContinuousPress := 20
+global isDoubledCtrlTriggeringDeepModifierPress := false
+global isDoubledAltTriggeringDeepModifierPress := false
+global isDoubledShiftModifiedTriggeringDeepModifierPress := false
+global isDoubledWinTriggeringDeepModifierPress := false
 
 
 
@@ -44,23 +48,21 @@ sendDoubledValueAndReset(modifierValue, ByRef sendClickOnRelease, ByRef isModifi
             isModifierClickDown := false
             sendClickOnRelease := false
             debug("release button")
-            send {blind}{lbutton up}
+            processKeyToSend("lbutton up")
         }
         else if (sendClickOnRelease)
         {
             isModifierClickDown := false
             sendClickOnRelease := false
             debug("button up & down")
-            send {blind}{lbutton down}
-            send {blind}{lbutton up}
+            processKeyToSend("lbutton")
         }
     }
     else if (doubledAction = "rbutton")
     {
         isModifierClickDown := false
         sendClickOnRelease := false
-        send {blind}{rbutton down}
-        send {blind}{rbutton up}
+        processKeyToSend("rbutton")
     }
     else
     {
@@ -69,6 +71,7 @@ sendDoubledValueAndReset(modifierValue, ByRef sendClickOnRelease, ByRef isModifi
         processKeyToSend(doubledAction)
     }
 }
+
 
 resetDoubledModifierClickDrag(modifierValue, ByRef isClickDown)
 {
@@ -103,7 +106,7 @@ timerMonitorCtrlModifierLift()
 {
     if (!ctrlActive)
     {
-        debug("ctrl with key 0")
+        debug("ctrl with special key triggered continously <<<")
         send {ctrl up}
         setTimer TimerMonitorCtrlModifierLift, off
     }
@@ -124,7 +127,7 @@ timerMonitorShiftModifierLift()
 {
     if (!shiftActive)
     {
-        debug("shift with key 0")
+        debug("shift with special key triggered continously <<<")
         send {shift up}
         setTimer TimerMonitorShiftModifierLift, off
     }
@@ -175,7 +178,7 @@ timerMonitorAltModifierLift()
 {
     if (!altActive)
     {
-        debug("alt with key 0")
+        debug("alt with special key triggered continously <<<")
         send {alt up}
         setTimer TimerMonitorAltModifierLift, off
     }
@@ -196,7 +199,7 @@ timerMonitorWinModifierLift()
 {
     if (!winActive)
     {
-        debug("win with key 0")
+        debug("win with special key triggered continously <<<")
         send {lwin up}
         setTimer TimerMonitorWinModifierLift, off
     }
@@ -218,24 +221,28 @@ continuousPressAnyActiveLeftModifier()
     {
         resetSendClickOnLeftModifierRelease(1)
         setCtrlState(1)
+        isDoubledCtrlTriggeringDeepModifierPress := true
         setTimer TimerMonitorCtrlModifierLift, %timeoutResetModifierContinuousPress%
     }
     if (isLeftAltDoubledAsClickPressed)
     {
         resetSendClickOnLeftModifierRelease(1)
         setAltState(1)
+        isDoubledAltTriggeringDeepModifierPress := true
         setTimer TimerMonitorAltModifierLift, %timeoutResetModifierContinuousPress%
     }
     if (isLeftShiftDoubledAsClickPressed)
     {
         resetSendClickOnLeftModifierRelease(1)
         setShiftState(1)
+        isDoubledShiftTriggeringDeepModifierPress := true
         setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%
     }
     if (isLeftWinDoubledAsClickPressed)
     {
         resetSendClickOnLeftModifierRelease(1)
         setWinState(1)
+        isDoubledWinTriggeringDeepModifierPress := true
         setTimer TimerMonitorWinModifierLift, %timeoutResetModifierContinuousPress%
     }
 }
@@ -245,24 +252,28 @@ continuousPressAnyActiveRightModifier()
     if (isRightCtrlDoubledAsClickPressed)
     {
         resetSendClickOnRightModifierRelease(1)
+        isDoubledModifiedTriggeringDeepModifierPress := true
         setCtrlState(1)
         setTimer TimerMonitorCtrlModifierLift, %timeoutResetModifierContinuousPress%
     }
     if (isRightAltDoubledAsClickPressed)
     {
         resetSendClickOnRightModifierRelease(1)
+        isDoubledModifiedTriggeringDeepModifierPress := true
         setAltState(1)
         setTimer TimerMonitorAltModifierLift, %timeoutResetModifierContinuousPress%
     }
     if (isRightShiftDoubledAsClickPressed)
     {
         resetSendClickOnRightModifierRelease(1)
+        isDoubledModifiedTriggeringDeepModifierPress := true
         setShiftState(1)
         setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%
     }
     if (isRightWinDoubledAsClickPressed)
     {
         resetSendClickOnRightModifierRelease(1)
+        isDoubledModifiedTriggeringDeepModifierPress := true
         setWinState(1)
         setTimer TimerMonitorWinModifierLift, %timeoutResetModifierContinuousPress%
     }

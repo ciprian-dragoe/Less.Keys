@@ -28,8 +28,10 @@ doubledRightAltDown()
 
     if (!isAnyLeftModifierPressed() && (isRightShiftDoubledAsClickPressed || isRightWinDoubledAsClickPressed || isRightCtrlDoubledAsClickPressed))
     {
+        setTimer TimerResetModifierReleaseAction, OFF
         resetSendClickOnRightModifierRelease(1)
         setAltState(1)
+        isDoubledAltTriggeringDeepModifierPress := true
         setTimer TimerMonitorAltModifierLift, %timeoutResetModifierContinuousPress%
         return
     }
@@ -76,21 +78,17 @@ doubledRightAltUp()
         SetTimer TimerStickyFailBack, OFF
         SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         altActive := 0
+        if (isDoubledAltTriggeringDeepModifierPress)
+        {
+            isDoubledAltTriggeringDeepModifierPress := false
+            timerMonitorAltModifierLift()
+        }
     }
 
-    if (isRightAltClickDown)
-    {
-        sendClickOnRightAltClickRelease := true
-        SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-        sleep % timeoutResetModifierContinuousPress + 5
-        sendDoubledValueAndReset("rightAltClick", sendClickOnRightAltClickRelease, isRightAltClickDown)
-    }
-    if (sendClickOnRightAltClickRelease)
+    if (isRightAltClickDown || sendClickOnRightAltClickRelease)
     {
         SetTimer TimerStickyFailBack, OFF
         SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-        sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("rightAltClick", sendClickOnRightAltClickRelease, isRightAltClickDown)
     }
 }

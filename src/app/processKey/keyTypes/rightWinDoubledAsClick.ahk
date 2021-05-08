@@ -75,21 +75,17 @@ doubledRightWinUp()
         SetTimer TimerStickyFailBack, OFF
         SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         winActive := 0
+        if (isDoubledWinTriggeringDeepModifierPress)
+        {
+            isDoubledWinTriggeringDeepModifierPress := false
+            timerMonitorWinModifierLift()
+        }
     }
 
-    if (isRightWinClickDown)
-    {
-        sendClickOnRightWinClickRelease := true
-        SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-        sleep % timeoutResetModifierContinuousPress + 5
-        sendDoubledValueAndReset("rightWinClick", sendClickOnRightWinClickRelease, isRightWinClickDown)
-    }
-    if (sendClickOnRightWinClickRelease)
+    if (isRightWinClickDown || sendClickOnRightWinClickRelease)
     {
         SetTimer TimerStickyFailBack, OFF
         SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-        sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("rightWinClick", sendClickOnRightWinClickRelease, isRightWinClickDown)
     }
 }

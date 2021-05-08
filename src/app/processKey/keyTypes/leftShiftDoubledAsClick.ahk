@@ -31,6 +31,7 @@ doubledLeftShiftDown()
         setTimer TimerResetModifierReleaseAction, OFF
         resetSendClickOnLeftModifierRelease(1)
         setShiftState(1)
+        isDoubledShiftModifiedTriggeringDeepModifierPress := true
         setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%
         return
     }
@@ -77,20 +78,17 @@ doubledLeftShiftUp()
         SetTimer TimerStickyFailBack, OFF
         SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         shiftActive := 0
+        if (isDoubledShiftTriggeringDeepModifierPress)
+        {
+            isDoubledShiftTriggeringDeepModifierPress := false
+            timerMonitorShiftModifierLift()
+        }
     }
 
-    if (isLeftShiftClickDown)
+    if (isLeftShiftClickDown || sendClickOnLeftShiftClickRelease)
     {
         SetTimer TimerStickyFailBack, OFF
         SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-        sleep % timeoutResetModifierContinuousPress + 5
-        sendDoubledValueAndReset("leftShiftClick", sendClickOnLeftShiftClickRelease, isLeftShiftClickDown)
-    }
-    else if (sendClickOnLeftShiftClickRelease)
-    {
-        SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-        sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("leftShiftClick", sendClickOnLeftShiftClickRelease, isLeftShiftClickDown)
     }
 }

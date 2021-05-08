@@ -28,8 +28,10 @@ doubledRightShiftDown()
 
     if (!isAnyLeftModifierPressed() && (isRightCtrlDoubledAsClickPressed || isRightWinDoubledAsClickPressed || isRightAltDoubledAsClickPressed))
     {
+        setTimer TimerResetModifierReleaseAction, OFF
         resetSendClickOnRightModifierRelease(1)
         setShiftState(1)
+        isDoubledShiftModifiedTriggeringDeepModifierPress := true
         setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%
         return
     }
@@ -76,21 +78,17 @@ doubledRightShiftUp()
         SetTimer TimerStickyFailBack, OFF
         SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         shiftActive := 0
+        if (isDoubledShiftTriggeringDeepModifierPress)
+        {
+            isDoubledShiftTriggeringDeepModifierPress := false
+            timerMonitorShiftModifierLift()
+        }
     }
 
-    if (isRightShiftClickDown)
-    {
-        sendClickOnRightShiftClickRelease := true
-        SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-        sleep % timeoutResetModifierContinuousPress + 5
-        sendDoubledValueAndReset("rightShiftClick", sendClickOnRightShiftClickRelease, isRightShiftClickDown)
-    }
-    if (sendClickOnRightShiftClickRelease)
+    if (isRightShiftClickDown || sendClickOnRightShiftClickRelease)
     {
         SetTimer TimerStickyFailBack, OFF
         SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-        sleep % timeoutResetModifierContinuousPress + 5
         sendDoubledValueAndReset("rightShiftClick", sendClickOnRightShiftClickRelease, isRightShiftClickDown)
     }
 }

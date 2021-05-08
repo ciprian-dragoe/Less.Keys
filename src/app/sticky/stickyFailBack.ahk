@@ -3,26 +3,44 @@
 ; This is a fail safe for such situations
 timerStickyFailBack()
 {
-    debugResult := ""
-    for index, key in monitoredStickyKeys
+    if (isMonitoredStickyKeyPressed())
     {
-        isPressed := GetKeyState(key, "P")
-        debugResult := debugResult . key . "=" . isPressed . "|"
-        if (isPressed)
-        {
-            return
-        }
-    }
-
-    if (logInput)
-    {
-        debugStoredData .= debugResult . "`n"
+        return
     }
     resetStates()
 }
 
+isMonitoredStickyKeyPressed()
+{
+    for index, key in monitoredStickyKeys
+    {
+        isPressed := GetKeyState(key, "P")
+        if (isPressed)
+        {
+            return true
+        }
+    }
+    return false
+}
+
+isSpontaneousFalsePositiveLift()
+{
+    ; sometimes ahk detects a key as lifed although it is still physically pressed
+    ; double check for such situations again all keys a little milliseconds later
+    sleep 40
+    if (isMonitoredStickyKeyPressed())
+    {
+        return true
+    }
+    return false
+}
+
 resetStates()
 {
+    if (isSpontaneousFalsePositiveLift())
+    {
+        return
+    }
     debug("--- RESET STICKY")
     tempShiftState := shiftActive
     tempCtrlState := ctrlActive
