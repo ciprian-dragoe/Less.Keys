@@ -1,14 +1,14 @@
 When_leftWinClick_is_pressed_at_release_left_click_is_sent_#801()
 {
     simulateTyping("he")
-    `expected := setMousePositionToCaret()`
+    expected := setMousePositionToCaret()
     simulateTyping("llo")
     processKeyDown("leftWinClick")
     sleep 100
     processKeyUp("leftWinClick")
     sleep 100
     
-    validateCaretOutput(A_ThisFunc, expected)    
+    validateCaretOutput(A_ThisFunc, expected)
 }
 
 When_leftWinClick_is_continuously_pressed_and_layout_key_is_pressed_and_released_space_is_sent_#802()

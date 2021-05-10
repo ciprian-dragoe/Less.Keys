@@ -29,10 +29,12 @@ doubledLeftCtrlDown()
 
     if (!isAnyRightModifierPressed() && (isLeftWinDoubledAsClickPressed || isLeftShiftDoubledAsClickPressed || isLeftAltDoubledAsClickPressed))
     {
+        setTimer TimerResetModifierReleaseAction, OFF
         resetSendClickOnLeftModifierRelease(1)
         return
     }
 
+    resetSendClickOnRightModifierRelease(1)
     sendClickOnLeftCtrlClickRelease := true
     chooseClickDragActivation("leftCtrlClick", "mouseDragLeftCtrlActivate", doubledLeftCtrlMouseHook)
     setTimer TimerResetModifierReleaseAction, OFF
@@ -49,6 +51,10 @@ mouseDragLeftCtrlActivate(nCode, wParam, lParam)
         sendClickOnLeftCtrlClickRelease := true
         isLeftCtrlClickDown := true
         doubledAction := modifierDoubledAsClick["leftCtrlClick"]
+        if (!isNormalCtrlActive && !isRightCtrlDoubledAsClickPressed)
+        {
+            setCtrlState(0)
+        }
         processKeyToSend("lbutton down")
     }
 }
@@ -57,16 +63,14 @@ doubledLeftCtrlUp()
 {
     cancelMouseHook(doubledLeftCtrlMouseHook)
     isLeftCtrlDoubledAsClickPressed := false
+
     if (!isAnyRightModifierPressed())
     {
         setTimer TimerResetModifierReleaseAction, OFF
     }
 
-    if (isRightCtrlDoubledAsClickPressed)
-    {
-        resetSendClickOnRightModifierRelease(1)
-    }
-    else if (!isNormalCtrlActive)
+
+    if (!isNormalCtrlActive && !isRightCtrlDoubledAsClickPressed)
     {
         setCtrlState(0)
     }

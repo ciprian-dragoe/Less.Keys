@@ -36,7 +36,7 @@ When_rightCtrlClick_doubled_as_b_pressed_leftCtrlClick_doubled_as_a_pressed_and_
     validateTestOutput(A_ThisFunc , expected)
 }
 
-When_rightCtrlClick_pressed_leftCtrlClick_pressed_rightCtrlClick_releases_leftCtrlClick_released_w_letter_typed_THEN_w_is_sent_at_the_end_#1603()
+When_rightCtrlClick_pressed_leftCtrlClick_pressed_rightCtrlClick_releases_leftCtrlClick_released_w_letter_typed_THEN_w_is_sent_at_beginning_#1603()
 {
     setMousePositionToCaret()
     simulateTyping("hello ")
@@ -51,7 +51,7 @@ When_rightCtrlClick_pressed_leftCtrlClick_pressed_rightCtrlClick_releases_leftCt
     simulateTyping("w")
     actual := clearText()
 
-    expected := "hello w"
+    expected := "whello "
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
     setDefaultTestEnvironment(A_ThisFunc)
 }

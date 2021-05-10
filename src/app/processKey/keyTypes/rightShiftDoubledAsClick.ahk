@@ -29,10 +29,12 @@ doubledRightShiftDown()
 
     if (!isAnyLeftModifierPressed() && (isRightCtrlDoubledAsClickPressed || isRightWinDoubledAsClickPressed || isRightAltDoubledAsClickPressed))
     {
+        setTimer TimerResetModifierReleaseAction, OFF
         resetSendClickOnRightModifierRelease(1)
         return
     }
 
+    resetSendClickOnLeftModifierRelease(1)
     sendClickOnRightShiftClickRelease := true
     chooseClickDragActivation("rightShiftClick", "mouseDragRightShiftActivate", doubledRightShiftMouseHook)
     setTimer TimerResetModifierReleaseAction, OFF
@@ -49,6 +51,10 @@ mouseDragRightShiftActivate(nCode, wParam, lParam)
         sendClickOnRightShiftClickRelease := true
         isRightShiftClickDown := true
         doubledAction := modifierDoubledAsClick["rightShiftClick"]
+        if (!isNormalShiftActive && !isLeftShiftDoubledAsClickPressed)
+        {
+            setShiftState(0)
+        }
         processKeyToSend("lbutton down")
     }
 }
@@ -57,16 +63,13 @@ doubledRightShiftUp()
 {
     cancelMouseHook(doubledRightShiftMouseHook)
     isRightShiftDoubledAsClickPressed := false
+
     if (!isAnyLeftModifierPressed())
     {
         setTimer TimerResetModifierReleaseAction, OFF
     }
 
-    if (isLeftShiftDoubledAsClickPressed)
-    {
-        resetSendClickOnLeftModifierRelease(1)
-    }
-    else if (!isNormalShiftActive)
+    if (!isNormalShiftActive && !isLeftShiftDoubledAsClickPressed)
     {
         setShiftState(0)
     }

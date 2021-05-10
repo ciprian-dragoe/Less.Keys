@@ -51,25 +51,3 @@ When_leftCtrlClick_pressed_rightShiftClick_press_and_releasedTHEN_word_is_typed_
 
     validateTestOutput(A_ThisFunc , expected)
 }
-
-When_rightCtrlClick_pressed_leftShiftClick_pressed_mouse_moved_until_second_word_THEN_only_first_word_is_selected_#3404()
-{
-    setMousePositionToCaret()
-    simulateTyping("hello")
-    destination := getCurrentCaretPosition()
-    simulateTyping(" world")
-    processKeyDown("rightCtrlClick")
-    sleep 100
-    processKeyDown("leftShiftClick")
-    sleep 100
-    MouseMove destination.x, destination.y
-    processKeyUp("rightCtrlClick")
-    sleep 100
-    processKeyUp("leftShiftClick")
-    sleep 100
-    actual := getSelectedText()
-
-    expected := "hello "
-    addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment(A_ThisFunc)
-}

@@ -2,7 +2,6 @@ When_shift_key_is_logically_pressed_and_not_released_for_more_then_stickyTime_sh
 {
     simulateTyping("sticky")
     simulateKeyDown("lshift", timerTimeoutStickyKeys + 100)
-    
     actual := "" . (!shiftActive && !GetKeyState("shift"))
     addTestResult(A_ThisFunc, "1", actual, evaluateResult(actual, "1"))
     setDefaultTestEnvironment(A_ThisFunc)

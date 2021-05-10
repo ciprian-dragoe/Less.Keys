@@ -35,18 +35,20 @@ When_rightShiftClick_pressed_leftAltClick_pressed_THEN_word_is_selected_on_leftA
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
-When_rightShiftClick_pressed_leftAltClick_doubled_as_b_pressed_THEN_letter_is_not_selected_before_leftAltClick_release_#4303()
+When_rightShiftClick_pressed_leftAltClick_doubled_as_b_pressed_THEN_letter_is_not_sent_before_leftAltClick_release_#4303()
 {
     modifierDoubledAsClick["leftAltClick"] := "b"
+    modifierDoubledAsClick["rightShiftClick"] := "c"
     simulateTyping("hello")
     processKeyDown("rightShiftClick")
     sleep 100
     processKeyDown("leftAltClick")
-    sleep %timerTimeoutStickyKeys%
-    actual := clearText()
-    processKeyUp("rightShiftClick")
-    sleep 100
+    sleep % timerTimeoutStickyKeys + 100
     processKeyUp("leftAltClick")
+    sleep 100
+    processKeyUp("rightShiftClick")
+    actual := getSelectedText()
+    actual := clearText()
     sleep 100
     expected := "hello"
 

@@ -1,6 +1,7 @@
 When_rightShiftClick_pressed_leftWinClick_doubled_as_left_pressed_THEN_letter_is_selected_after_leftWinClick_release_#5901()
 {
     modifierDoubledAsClick["leftWinClick"] := "left"
+    modifierDoubledAsClick["rightShiftClick"] := "left"
     simulateTyping("hello")
     processKeyDown("rightShiftClick")
     sleep 100

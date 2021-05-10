@@ -29,10 +29,12 @@ doubledRightAltDown()
 
     if (!isAnyLeftModifierPressed() && (isRightShiftDoubledAsClickPressed || isRightWinDoubledAsClickPressed || isRightCtrlDoubledAsClickPressed))
     {
+        setTimer TimerResetModifierReleaseAction, OFF
         resetSendClickOnRightModifierRelease(1)
         return
     }
 
+    resetSendClickOnLeftModifierRelease(1)
     sendClickOnRightAltClickRelease := true
     chooseClickDragActivation("rightAltClick", "mouseDragRightAltActivate", doubledRightAltMouseHook)
     setTimer TimerResetModifierReleaseAction, OFF
@@ -49,6 +51,12 @@ mouseDragRightAltActivate(nCode, wParam, lParam)
         sendClickOnRightAltClickRelease := true
         isRightAltClickDown := true
         doubledAction := modifierDoubledAsClick["rightAltClick"]
+        if (!isNormalAltActive && !isLeftAltDoubledAsClickPressed)
+        {
+            ; for alt & win sending a normal up will trigger a special os action (activate the menu/startbar for example)
+            altActive := 0
+            processKeyToSend("{capslock}{capslock}{alt up}", true)
+        }
         processKeyToSend("lbutton down")
     }
 }
@@ -57,20 +65,17 @@ doubledRightAltUp()
 {
     cancelMouseHook(doubledRightAltMouseHook)
     isRightAltDoubledAsClickPressed := false
+
     if (!isAnyLeftModifierPressed())
     {
         setTimer TimerResetModifierReleaseAction, OFF
     }
 
-    if (isLeftAltDoubledAsClickPressed)
-    {
-        resetSendClickOnLeftModifierRelease(1)
-    }
-    else if (!isNormalAltActive)
+    if (!isNormalAltActive && !isLeftAltDoubledAsClickPressed)
     {
         ; for alt & win sending a normal up will trigger a special os action (activate the menu/startbar for example)
         altActive := 0
-        processKeyToSend("alt up", "!")
+        processKeyToSend("{capslock}{capslock}{alt up}", true)
     }
 
     if (isRightAltClickDown || sendClickOnRightAltClickRelease)

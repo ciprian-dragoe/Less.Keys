@@ -69,13 +69,20 @@ processNormalKey(key)
     }
 }
 
-processKeyToSend(key, modifier = "")
+processKeyToSend(key, literal = 0)
 {
     activeModifiers := getActiveModifiers(key)
     if (!processAhkKeyboardShortcuts(activeModifiers, key))
     {
         Critical On
-        send {blind}{%key%}%modifier%
+        if (literal)
+        {
+            send {blind}%key%
+        }
+        else
+        {
+            send {blind}{%key%}
+        }
         Critical Off
         return true
     }

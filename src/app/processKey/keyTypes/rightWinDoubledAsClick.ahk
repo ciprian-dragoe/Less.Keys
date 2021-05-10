@@ -29,10 +29,12 @@ doubledRightWinDown()
 
     if (!isAnyLeftModifierPressed() && (isRightShiftDoubledAsClickPressed || isRightAltDoubledAsClickPressed || isRightCtrlDoubledAsClickPressed))
     {
+        setTimer TimerResetModifierReleaseAction, OFF
         resetSendClickOnRightModifierRelease(1)
         return
     }
 
+    resetSendClickOnLeftModifierRelease(1)
     sendClickOnRightWinClickRelease := true
     chooseClickDragActivation("rightWinClick", "mouseDragRightWinActivate", doubledRightWinMouseHook)
     setTimer TimerResetModifierReleaseAction, OFF
@@ -49,6 +51,12 @@ mouseDragRightWinActivate(nCode, wParam, lParam)
         sendClickOnRightWinClickRelease := true
         isRightWinClickDown := true
         doubledAction := modifierDoubledAsClick["rightWinClick"]
+        if (!isNormalWinActive && !isLeftWinDoubledAsClickPressed)
+        {
+            ; for alt & win sending a normal up will trigger a special os action (activate the menu/startbar for example)
+            winActive := 0
+            processKeyToSend("{capslock}{capslock}{lwin up}", true)
+        }
         processKeyToSend("lbutton down")
     }
 }
@@ -57,20 +65,17 @@ doubledRightWinUp()
 {
     cancelMouseHook(doubledRightWinMouseHook)
     isRightWinDoubledAsClickPressed := false
+
     if (!isAnyLeftModifierPressed())
     {
         setTimer TimerResetModifierReleaseAction, OFF
     }
 
-    if (isLeftWinDoubledAsClickPressed)
-    {
-        resetSendClickOnLeftModifierRelease(1)
-    }
-    else if (!isNormalWinActive)
+    if (!isNormalWinActive && !isLeftWinDoubledAsClickPressed)
     {
         ; for alt & win sending a normal up will trigger a special os action (activate the menu/startbar for example)
         winActive := 0
-        processKeyToSend("lwin up", "#")
+        processKeyToSend("{capslock}{capslock}{lwin up}", true)
     }
 
     if (isRightWinClickDown || sendClickOnRightWinClickRelease)

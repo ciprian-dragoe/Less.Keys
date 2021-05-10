@@ -44,28 +44,28 @@ resetStates()
     debug("--- RESET STICKY")
 
 
-    if (shiftState)
+    if (shiftState || GetKeyState("shift"))
     {
         debug("================================= shift sticky")
         send {shift up}
         storeDebugData()
     }
-    if (ctrlState)
+    if (ctrlState || GetKeyState("ctrl"))
     {
         debug("================================= ctrl sticky")
         send {ctrl up}
         storeDebugData()
     }
-    if (altState)
+    if (altState || GetKeyState("alt"))
     {
         debug("================================= alt sticky")
-        send {alt up}
+        send {capslock}{capslock}{alt up}
         storeDebugData()
     }
-    if (winState)
+    if (winState || GetKeyState("lwin"))
     {
         debug("================================= win sticky")
-        send {win up}
+        send {capslock}{capslock}{lwin up}
         storeDebugData()
     }
 
@@ -93,6 +93,10 @@ resetStates()
     isRightWinDoubledAsClickPressed := false
     isRightCtrlDoubledAsClickPressed := false
     isRightShiftDoubledAsClickPressed := false
+    isNormalShiftActive := false
+    isNormalCtrlActive := false
+    isNormalAltActive := false
+    isNormalWinActive := false
     resetDoubledModifierClickDrag("leftCtrlClick", isLeftCtrlClickDown)
     resetDoubledModifierClickDrag("leftShiftClick", isLeftShiftClickDown)
     resetDoubledModifierClickDrag("leftAltClick", isLeftAltClickDown)
