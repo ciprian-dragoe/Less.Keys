@@ -42,29 +42,36 @@ resetStates()
         return
     }
     debug("--- RESET STICKY")
-    tempShiftState := shiftActive
-    tempCtrlState := ctrlActive
-    tempWinState := WinActive
-    tempAltState := altActive
-    tempShiftState := shiftActive
-    tempShiftState := shiftActive
-    tempLeftCtrlDownState := isLeftCtrlClickDown
-    tempLeftAltDownState := isLeftAltClickDown
-    tempLeftShiftDownState := isLeftShiftClickDown
-    tempLeftWinDownState := isLeftWinClickDown
-    tempRightCtrlDownState := isRightCtrlClickDown
-    tempRightAltDownState := isRightAltClickDown
-    tempRightShiftDownState := isRightShiftClickDown
-    tempRightWinDownState := isRightWinClickDown
 
-    isLeftCtrlDoubledAsClickPressed := false
-    isLeftShiftDoubledAsClickPressed := false
-    isLeftAltDoubledAsClickPressed := false
-    isLeftWinDoubledAsClickPressed := false
-    isRightAltDoubledAsClickPressed := false
-    isRightWinDoubledAsClickPressed := false
-    isRightCtrlDoubledAsClickPressed := false
-    isRightShiftDoubledAsClickPressed := false
+
+    if (shiftState)
+    {
+        debug("================================= shift sticky")
+        send {shift up}
+        storeDebugData()
+    }
+    if (ctrlState)
+    {
+        debug("================================= ctrl sticky")
+        send {ctrl up}
+        storeDebugData()
+    }
+    if (altState)
+    {
+        debug("================================= alt sticky")
+        send {alt up}
+        storeDebugData()
+    }
+    if (winState)
+    {
+        debug("================================= win sticky")
+        send {win up}
+        storeDebugData()
+    }
+
+    SetTimer, TimerScrollWithMouseMovement, OFF
+    systemCursor(1)
+
     sendUnClickOnLeftCtrlClickRelease := false
     activePressedKeys := []
     processKeyOnRelease := false
@@ -77,52 +84,15 @@ resetStates()
     altActive := false
     shiftActive := false
     winActive := false
-    if (!tempShiftState && GetKeyState("shift") && !GetKeyState("lshift", "P") && !GetKeyState("rshift", "P"))
-    {
-        debug("================================= shift sticky")
-        send {shift up}
-        storeDebugData()
-    }
-    if (!tempCtrlState && GetKeyState("ctrl") && !GetKeyState("lctrl", "P") && !GetKeyState("rctrl", "P"))
-    {
-        debug("================================= ctrl sticky")
-        send {ctrl up}
-        storeDebugData()
-    }
-    if (!tempAltState && GetKeyState("alt") && !GetKeyState("lalt", "P") && !GetKeyState("ralt", "P"))
-    {
-        debug("================================= alt sticky")
-        send {alt up}
-        storeDebugData()
-    }
-    if (!tempWinState && GetKeyState("lwin") && !GetKeyState("lwin", "P") && !GetKeyState("win", "P"))
-    {
-        debug("================================= win sticky")
-        send {win up}
-        storeDebugData()
-    }
 
-    SetTimer, TimerScrollWithMouseMovement, OFF
-    systemCursor(1)
-    if (tempShiftState)
-    {
-        send {shift up}
-    }
-
-    if (tempAltState)
-    {
-        send {alt up}
-    }
-
-    if (tempCtrlState)
-    {
-        send {ctrl up}
-    }
-
-    if (tempWinState)
-    {
-        send {lwin up}
-    }
+    isLeftCtrlDoubledAsClickPressed := false
+    isLeftShiftDoubledAsClickPressed := false
+    isLeftAltDoubledAsClickPressed := false
+    isLeftWinDoubledAsClickPressed := false
+    isRightAltDoubledAsClickPressed := false
+    isRightWinDoubledAsClickPressed := false
+    isRightCtrlDoubledAsClickPressed := false
+    isRightShiftDoubledAsClickPressed := false
     resetDoubledModifierClickDrag("leftCtrlClick", isLeftCtrlClickDown)
     resetDoubledModifierClickDrag("leftShiftClick", isLeftShiftClickDown)
     resetDoubledModifierClickDrag("leftAltClick", isLeftAltClickDown)
@@ -131,8 +101,5 @@ resetStates()
     resetDoubledModifierClickDrag("rightCtrlClick", isRightCtrlClickDown)
     resetDoubledModifierClickDrag("rightShiftClick", isRightShiftClickDown)
     resetDoubledModifierClickDrag("rightAltClick", isRightAltClickDown)
-    if (tempShiftState || tempAltState || tempCtrlState || tempWinState || tempLeftCtrlDownState || tempLeftShiftDownState || tempLeftAltDownState || tempLeftWinDownState || tempRightWinState || tempRightCtrlState || tempRightShiftState || tempRightAltState) {
-        debug("================================= shiftState " . tempShiftState . "|altState " . tempAltState . "|ctrlState " . tempCtrlState . "|winState " . tempWinState . "|isLeftCtrlClickDown " . tempLeftCtrlDownState . "|isLeftShiftClickDown " . tempLeftShiftDownState . "|isLeftAltClickDown " . tempLeftShiftDownState . "|isLeftWinClickDown " . tempLeftWinDownState . "|isRightWinClickDown " . tempRightWinDownState . "|isRightCtrlClickDown " . tempRightCtrlDownState . "|isRightShiftClickDown " . tempRightShiftDownState)
-        storeDebugData()
-    }
+
 }

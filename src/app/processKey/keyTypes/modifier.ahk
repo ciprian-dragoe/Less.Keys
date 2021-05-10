@@ -11,18 +11,21 @@
 
 
 global ctrlActive := false
-global altActive := false
 global shiftActive := false
+global altActive := false
 global winActive := false
-global winActive := false
+global isNormalCtrlActive := false
+global isNormalShiftActive := false
+global isNormalAltActive := false
+global isNormalWinActive := false
 global modifierActions := object()
 
 
 
-modifierActions["ctrl"] := func("setCtrlState")
-modifierActions["alt"] := func("setAltState")
-modifierActions["shift"] := func("setShiftState")
-modifierActions["lwin"] := func("setWinState")
+modifierActions["ctrl"] := func("setNormalCtrl")
+modifierActions["alt"] := func("setNormalAlt")
+modifierActions["shift"] := func("setNormalShift")
+modifierActions["lwin"] := func("setNormalWin")
 modifierActions["leftCtrlClick"] := func("processLeftCtrlDoubledAsClick")
 modifierActions["leftShiftClick"] := func("processLeftShiftDoubledAsClick")
 modifierActions["leftWinClick"] := func("processLeftWinDoubledAsClick")
@@ -45,13 +48,36 @@ processModifierKey(key, state)
     
     return false
 }
+setNormalCtrl(state)
+{
+    isNormalCtrlActive := state
+    setCtrlState(state)
+}
+
+setNormalShift(state)
+{
+    isNormalShiftActive := state
+    setShiftState(state)
+}
+
+setNormalAlt(state)
+{
+    isNormalAltActive := state
+    setAltState(state)
+}
+
+setNormalWin(state)
+{
+    isNormalWinActive := state
+    setAltState(state)
+}
 
 setCtrlState(state)
 {
     ctrlActive := state
     pressedState := state ? "down" : "up"
     debug("ctrl " . state)
-    send {blind}{ctrl %pressedState%}
+    send {ctrl %pressedState%}
 }
 
 setAltState(state)
@@ -59,7 +85,7 @@ setAltState(state)
     altActive := state
     pressedState := state ? "down" : "up"
     debug("alt " . state)
-    send {blind}{alt %pressedState%}
+    send {alt %pressedState%}
 }
 
 setShiftState(state)
@@ -67,7 +93,7 @@ setShiftState(state)
     shiftActive := state
     pressedState := state ? "down" : "up"
     debug("shift " . state)
-    send {blind}{shift %pressedState%}
+    send {shift %pressedState%}
 }
 
 setWinState(state)
@@ -75,7 +101,7 @@ setWinState(state)
     winActive := state
     pressedState := state ? "down" : "up"
     debug("win " . state)
-    send {blind}{lwin %pressedState%}
+    send {lwin %pressedState%}
 }
 
 getActiveModifiers(key = "")

@@ -25,20 +25,13 @@ doubledRightAltDown()
     }
 
     isRightAltDoubledAsClickPressed := true
+    setAltState(1)
 
     if (!isAnyLeftModifierPressed() && (isRightShiftDoubledAsClickPressed || isRightWinDoubledAsClickPressed || isRightCtrlDoubledAsClickPressed))
     {
-        setTimer TimerResetModifierReleaseAction, OFF
         resetSendClickOnRightModifierRelease(1)
-        setAltState(1)
-        isDoubledAltTriggeringDeepModifierPress := true
-        setTimer TimerMonitorAltModifierLift, %timeoutResetModifierContinuousPress%
         return
     }
-
-    continuousPressAnyActiveLeftModifier()
-
-    altActive := 1
 
     sendClickOnRightAltClickRelease := true
     chooseClickDragActivation("rightAltClick", "mouseDragRightAltActivate", doubledRightAltMouseHook)
@@ -56,7 +49,7 @@ mouseDragRightAltActivate(nCode, wParam, lParam)
         sendClickOnRightAltClickRelease := true
         isRightAltClickDown := true
         doubledAction := modifierDoubledAsClick["rightAltClick"]
-        send {blind}{%doubledAction% down}
+        processKeyToSend("lbutton down")
     }
 }
 
@@ -73,16 +66,11 @@ doubledRightAltUp()
     {
         resetSendClickOnLeftModifierRelease(1)
     }
-    else
+    else if (!isNormalAltActive)
     {
-        SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+        ; for alt & win sending a normal up will trigger a special os action (activate the menu/startbar for example)
         altActive := 0
-        if (isDoubledAltTriggeringDeepModifierPress)
-        {
-            isDoubledAltTriggeringDeepModifierPress := false
-            timerMonitorAltModifierLift()
-        }
+        processKeyToSend("alt up", "!")
     }
 
     if (isRightAltClickDown || sendClickOnRightAltClickRelease)

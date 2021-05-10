@@ -69,43 +69,17 @@ processNormalKey(key)
     }
 }
 
-processKeyToSend(key)
+processKeyToSend(key, modifier = "")
 {
     activeModifiers := getActiveModifiers(key)
     if (!processAhkKeyboardShortcuts(activeModifiers, key))
     {
         Critical On
-        isMonitorAhkSpontaneousBugActive = shouldCheckAhkModifierSpontaneousBug(key)
-        send {blind}%activeModifiers%{%key%}
-        if (isMonitorAhkSpontaneousBugActive)
-        {
-            fixSpontaneousActivationModiferBug()
-        }
+        send {blind}{%key%}%modifier%
         Critical Off
         return true
     }
     
-    return false
-}
-
-fixSpontaneousActivationModiferBug()
-{
-     if (GetKeyState("shift"))
-     {
-        send {shift up}
-     }
-     if (GetKeyState("ctrl"))
-     {
-        send {ctrl up}
-     }
-}
-
-shouldCheckAhkModifierSpontaneousBug(key)
-{
-    if (((isLeftCtrlDoubledAsClickPressed || isRightCtrlDoubledAsClickPressed) && !isDoubledCtrlTriggeringDeepModifierPress) || ((isLeftShiftDoubledAsClickPressed || isRightShiftDoubledAsClickPressed) && !isDoubledShiftTriggeringDeepModifierPress))
-    {
-        return true
-    }
     return false
 }
 

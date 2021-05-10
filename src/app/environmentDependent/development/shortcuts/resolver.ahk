@@ -1,7 +1,6 @@
 #include %A_ScriptDir%\app\environmentDependent\COMMON\debug.ahk
 #include %A_ScriptDir%\app\environmentDependent\COMMON\rightClick.ahk
 #include %A_ScriptDir%\app\environmentDependent\COMMON\accentedCharacters.ahk
-#include %A_ScriptDir%\app\environmentDependent\COMMON\modifierClick.ahk
 #include %A_ScriptDir%\app\environmentDependent\COMMON\functionKeys.ahk
 #include %A_ScriptDir%\app\environmentDependent\COMMON\random.ahk
 
@@ -14,9 +13,6 @@ resolverAction[502] := func("sendTestMessage")
 resolverAction[503] := func("displayDebugData")
 resolverAction[504] := func("reloadApp")
 resolverAction[505] := func("exit")
-resolverAction[506] := func("altModifierPressEmulate")
-resolverAction[507] := func("ctrlModifierPressEmulate")
-resolverAction[508] := func("winModifierPressEmulate")
 resolverAction[509] := func("storeDebugData")
 global functionKeysStartIndexMinusOne := 510
 resolverAction[511] := func("sendFunctionKey")

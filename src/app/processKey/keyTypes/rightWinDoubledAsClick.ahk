@@ -25,17 +25,13 @@ doubledRightWinDown()
     }
 
     isRightWinDoubledAsClickPressed := true
+    setWinState(1)
 
     if (!isAnyLeftModifierPressed() && (isRightShiftDoubledAsClickPressed || isRightAltDoubledAsClickPressed || isRightCtrlDoubledAsClickPressed))
     {
         resetSendClickOnRightModifierRelease(1)
-        winActive := 1
         return
     }
-
-    continuousPressAnyActiveLeftModifier()
-
-    winActive := 1
 
     sendClickOnRightWinClickRelease := true
     chooseClickDragActivation("rightWinClick", "mouseDragRightWinActivate", doubledRightWinMouseHook)
@@ -53,7 +49,7 @@ mouseDragRightWinActivate(nCode, wParam, lParam)
         sendClickOnRightWinClickRelease := true
         isRightWinClickDown := true
         doubledAction := modifierDoubledAsClick["rightWinClick"]
-        send {blind}{%doubledAction% down}
+        processKeyToSend("lbutton down")
     }
 }
 
@@ -70,16 +66,11 @@ doubledRightWinUp()
     {
         resetSendClickOnLeftModifierRelease(1)
     }
-    else
+    else if (!isNormalWinActive)
     {
-        SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+        ; for alt & win sending a normal up will trigger a special os action (activate the menu/startbar for example)
         winActive := 0
-        if (isDoubledWinTriggeringDeepModifierPress)
-        {
-            isDoubledWinTriggeringDeepModifierPress := false
-            timerMonitorWinModifierLift()
-        }
+        processKeyToSend("lwin up", "#")
     }
 
     if (isRightWinClickDown || sendClickOnRightWinClickRelease)

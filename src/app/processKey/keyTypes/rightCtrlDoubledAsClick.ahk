@@ -25,20 +25,13 @@ doubledRightCtrlDown()
     }
 
     isRightCtrlDoubledAsClickPressed := true
+    setCtrlState(1)
 
     if (!isAnyLeftModifierPressed() && (isRightShiftDoubledAsClickPressed || isRightWinDoubledAsClickPressed || isRightAltDoubledAsClickPressed))
     {
-        setTimer TimerResetModifierReleaseAction, OFF
         resetSendClickOnRightModifierRelease(1)
-        setCtrlState(1)
-        isDoubledCtrlTriggeringDeepModifierPress := true
-        setTimer TimerMonitorCtrlModifierLift, %timeoutResetModifierContinuousPress%
         return
     }
-
-    continuousPressAnyActiveLeftModifier()
-
-    ctrlActive := 1
 
     sendClickOnRightCtrlClickRelease := true
     chooseClickDragActivation("rightCtrlClick", "mouseDragRightCtrlActivate", doubledRightCtrlMouseHook)
@@ -55,7 +48,7 @@ mouseDragRightCtrlActivate(nCode, wParam, lParam)
         debug("mouseDragRightCtrlActivate")
         isRightCtrlClickDown := true
         doubledAction := modifierDoubledAsClick["rightCtrlClick"]
-        send {blind}{%doubledAction% down}
+        processKeyToSend("lbutton down")
     }
 }
 
@@ -72,16 +65,9 @@ doubledRightCtrlUp()
     {
         resetSendClickOnLeftModifierRelease(1)
     }
-    else
+    else if (!isNormalCtrlActive)
     {
-        SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-        ctrlActive := 0
-        if (isDoubledCtrlTriggeringDeepModifierPress)
-        {
-            isDoubledCtrlTriggeringDeepModifierPress := false
-            timerMonitorCtrlModifierLift()
-        }
+        setCtrlState(0)
     }
 
     if (isRightCtrlClickDown || sendClickOnRightCtrlClickRelease)

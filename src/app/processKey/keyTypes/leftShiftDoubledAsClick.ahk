@@ -25,20 +25,13 @@ doubledLeftShiftDown()
     }
     
     isLeftShiftDoubledAsClickPressed := true
+    setShiftState(1)
     
     if (!isAnyRightModifierPressed() && (isLeftCtrlDoubledAsClickPressed || isLeftWinDoubledAsClickPressed || isLeftAltDoubledAsClickPressed))
     {
-        setTimer TimerResetModifierReleaseAction, OFF
         resetSendClickOnLeftModifierRelease(1)
-        setShiftState(1)
-        isDoubledShiftModifiedTriggeringDeepModifierPress := true
-        setTimer TimerMonitorShiftModifierLift, %timeoutResetModifierContinuousPress%
         return
     }
-
-    continuousPressAnyActiveRightModifier()
-
-    shiftActive := 1
 
     sendClickOnLeftShiftClickRelease := true
     chooseClickDragActivation("leftShiftClick", "mouseDragLeftShiftActivate", doubledLeftShiftMouseHook)
@@ -56,7 +49,7 @@ mouseDragLeftShiftActivate(nCode, wParam, lParam)
         sendClickOnLeftShiftClickRelease := true
         isLeftShiftClickDown := true
         doubledAction := modifierDoubledAsClick["leftShiftClick"]
-        send {blind}{%doubledAction% down}
+        processKeyToSend("lbutton down")
     }
 }
 
@@ -73,16 +66,9 @@ doubledLeftShiftUp()
     {
         resetSendClickOnRightModifierRelease(1)
     }
-    else
+    else if (!isNormalShiftActive)
     {
-        SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-        shiftActive := 0
-        if (isDoubledShiftTriggeringDeepModifierPress)
-        {
-            isDoubledShiftTriggeringDeepModifierPress := false
-            timerMonitorShiftModifierLift()
-        }
+        setShiftState(0)
     }
 
     if (isLeftShiftClickDown || sendClickOnLeftShiftClickRelease)

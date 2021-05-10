@@ -32,22 +32,6 @@ TimerTimeoutSendLayoutKey:
     timerTimeoutSendLayoutKey()
 return
 
-TimerMonitorWinModifierLift:
-    timerMonitorWinModifierLift()
-return
-
-TimerMonitorAltModifierLift:
-    timerMonitorAltModifierLift()
-return
-
-TimerMonitorCtrlModifierLift:
-    timerMonitorCtrlModifierLift()
-return
-
-TimerMonitorShiftModifierLift:
-    timerMonitorShiftModifierLift()
-return
-
 TimerFixAppsOverwriteLessKeysKeyboardHooks:
     timerFixAppsOverwriteLessKeysKeyboardHooks()
 return
