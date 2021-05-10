@@ -17,49 +17,51 @@ storeDebugData()
     }
 }
 
-sendTestMessage()
+getModifierStates()
 {
-    shouldRestoreAlt := 0
-    if (GetKeyState("alt"))
-    {
-        shouldRestoreAlt := 1
-    }
-    shouldRestoreShift := 0
-    if (GetKeyState("shift"))
-    {
-        shouldRestoreShift := 1
-    }
-    shouldRestoreCtrl := 0
-    if (GetKeyState("ctrl"))
-    {
-        shouldRestoreCtrl := 1
-    }
-    shouldRestoreWin := 0
-    if (GetKeyState("lwin"))
-    {
-        shouldRestoreWin := 1
-    }
-    send {ctrl up}
-    resetModifierWithoutTriggerUpState("lwin", winActive)
-    resetModifierWithoutTriggerUpState("alt", altActive)
-    send {shift up}
-    send INTEGRATION_TEST
-    if (shouldRestoreAlt)
+    result := Object()
+    result["winActive"] := GetKeyState("lwin")
+    result["altActive"] := GetKeyState("alt")
+    result["ctrlActive"] := GetKeyState("ctrl")
+    result["shiftActive"] := GetKeyState("shift")
+    return result
+}
+
+resetModifiersToState(state)
+{
+    if (state["altActive"])
     {
         send {alt down}
     }
-    if (shouldRestoreCtrl)
+    if (state["ctrlActive"])
     {
         send {ctrl down}
     }
-    if (shouldRestoreShift)
+    if (state["shiftActive"])
     {
         send {shift down}
     }
-    if (shouldRestoreWin)
+    if (state["winActive"])
     {
         send {lwin down}
     }
+}
+
+resetAllModifiers()
+{
+    dummy := 0
+    resetModifierWithoutTriggerUpState("lwin", dummy)
+    resetModifierWithoutTriggerUpState("alt", dummy)
+    send {ctrl up}
+    send {shift up}
+}
+
+sendTestMessage()
+{
+    originalState := getModifierStates()
+    resetAllModifiers()
+    send INTEGRATION_TEST
+    resetModifiersToState(originalState)
 }
 
 exit()

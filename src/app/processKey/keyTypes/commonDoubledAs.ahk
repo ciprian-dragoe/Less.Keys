@@ -128,5 +128,7 @@ isAnyRightModifierPressed()
 resetModifierWithoutTriggerUpState(modifier, ByRef modifierState)
 {
     modifierState := 0
-    processKeyToSend("^{" . modifier . " up}{escape}", true)
+    dummyModifier := "#!^+"
+    final := dummyModifier . "{printscreen}" . "{" . modifier . " up}"
+    send % final
 }
