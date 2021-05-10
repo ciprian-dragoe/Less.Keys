@@ -55,7 +55,7 @@ getScrollAmount() {
 
 initiateScroll(direction, amount) {
     loop %amount% {
-        Send {blind}{%direction%}
+        processKeyToSend(direction)
     }
     if (amount) {
         totalDifferenceYAxis := 0

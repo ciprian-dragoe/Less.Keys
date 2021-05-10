@@ -54,8 +54,7 @@ mouseDragLeftAltActivate(nCode, wParam, lParam)
         if (!isNormalAltActive && !isRightAltDoubledAsClickPressed)
         {
             ; for alt & win sending a normal up will trigger a special os action (activate the menu/startbar for example)
-            altActive := 0
-            processKeyToSend("{capslock}{capslock}{alt up}", true)
+            resetModifierWithoutTriggerUpState("alt", altActive)
         }
         processKeyToSend("lbutton down")
     }

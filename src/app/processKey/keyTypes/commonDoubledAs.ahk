@@ -72,7 +72,7 @@ resetDoubledModifierClickDrag(modifierValue, ByRef isClickDown)
     if (isClickDown)
     {
         action := modifierDoubledAsClick[modifierValue]
-        send {blind}{%action% up}
+        processKeyToSend(action . " up")
         isClickDown := false
     }
 }
@@ -123,4 +123,10 @@ isAnyLeftModifierPressed()
 isAnyRightModifierPressed()
 {
     return isRightAltDoubledAsClickPressed || isRightCtrlDoubledAsClickPressed || isRightWinDoubledAsClickPressed || isRightShiftDoubledAsClickPressed
+}
+
+resetModifierWithoutTriggerUpState(modifier, ByRef modifierState)
+{
+    modifierState := 0
+    processKeyToSend("^{" . modifier . " up}{escape}", true)
 }

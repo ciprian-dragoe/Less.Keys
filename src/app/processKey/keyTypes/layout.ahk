@@ -50,13 +50,13 @@ manageLayoutKeyUp(key)
             {
                 debug(key . " sent on up")
                 debug(buffer . "|^^^^^^ on alternative layout released before")
-                send {blind}%activeModifiers%{%key%}
+                processKeyToSend(key)
                 processKeyToSend(buffer)
             }
             else
             {
                 debug(key . " sent on up")
-                send {blind}%activeModifiers%{%key%}
+                processKeyToSend(key)
             }
         }
         return

@@ -40,8 +40,8 @@ sendTestMessage()
         shouldRestoreWin := 1
     }
     send {ctrl up}
-    send {capslock}{capslock}{lwin up}
-    send {capslock}{capslock}{alt up}
+    resetModifierWithoutTriggerUpState("lwin", winActive)
+    resetModifierWithoutTriggerUpState("alt", altActive)
     send {shift up}
     send INTEGRATION_TEST
     if (shouldRestoreAlt)

@@ -59,13 +59,13 @@ resetStates()
     if (altState || GetKeyState("alt"))
     {
         debug("================================= alt sticky")
-        send {capslock}{capslock}{alt up}
+        resetModifierWithoutTriggerUpState("alt", altActive)
         storeDebugData()
     }
     if (winState || GetKeyState("lwin"))
     {
         debug("================================= win sticky")
-        send {capslock}{capslock}{lwin up}
+        resetModifierWithoutTriggerUpState("lwin", winActive)
         storeDebugData()
     }
 

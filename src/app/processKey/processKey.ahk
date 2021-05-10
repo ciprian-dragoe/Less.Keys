@@ -69,8 +69,7 @@ processKeyUp(key)
         debug(buffer . " => " . key . " on release")
         if (buffer = key)
         {
-            modifiers := getActiveModifiers()
-            send {blind}%modifiers%{%layoutChangeKey%}
+            processKeyToSend(layoutChangeKey)
         }
         processKeyToSend(key)
     }

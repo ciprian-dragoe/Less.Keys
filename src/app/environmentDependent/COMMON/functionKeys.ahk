@@ -3,7 +3,8 @@ sendFunctionKey(combination, index)
     validModifiers := "^+!"
     modifiers := extractValidModifiers(combination, validModifiers)
     number := "F" + Mod(index, functionKeysStartIndexMinusOne)
-    send %modifiers%{%number%}
+    final := "{lwin up}{" . number . "}{lwin down}"
+    processKeyToSend(final, true)
 }
 
 extractValidModifiers(combination, validModifiers)

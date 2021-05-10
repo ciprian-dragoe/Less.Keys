@@ -18,14 +18,14 @@ processNormalKey(key)
             {
                 lastKeyProcessedAsAlternative := ""
                 debug(layoutChangeKey . " sent because keyToSendOnUp without alternative value")
-                send {blind}{%layoutChangeKey%}
+                processKeyToSend(layoutChangeKey)
             }
             processKeyToSend(alternativeKey)
         }
         else
         {
             debug(keyToSendOnUp . " & " . key . "| timeoutProcessLayoutOnRelease 2 keys pressed")
-            send {blind}{%layoutChangeKey%}
+            processKeyToSend(layoutChangeKey)
             processKeyToSend(keyToSendOnUp)
             processKeyToSend(key)
         }
@@ -52,7 +52,7 @@ processNormalKey(key)
         {
             lastKeyProcessedAsAlternative := ""
             modifiers := getActiveModifiers()
-            send {blind}%modifiers%{%layoutChangeKey%}
+            processKeyToSend(layoutChangeKey)
         }
         processKeyToSend(alternativeValue)
 

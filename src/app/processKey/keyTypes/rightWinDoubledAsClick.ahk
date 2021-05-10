@@ -54,8 +54,7 @@ mouseDragRightWinActivate(nCode, wParam, lParam)
         if (!isNormalWinActive && !isLeftWinDoubledAsClickPressed)
         {
             ; for alt & win sending a normal up will trigger a special os action (activate the menu/startbar for example)
-            winActive := 0
-            processKeyToSend("{capslock}{capslock}{lwin up}", true)
+            resetModifierWithoutTriggerUpState("lwin", winActive)
         }
         processKeyToSend("lbutton down")
     }
