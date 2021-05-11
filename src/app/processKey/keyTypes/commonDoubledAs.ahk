@@ -128,7 +128,14 @@ isAnyRightModifierPressed()
 resetModifierWithoutTriggerUpState(modifier, ByRef modifierState)
 {
     modifierState := 0
-    dummyModifier := "#!^+"
-    final := dummyModifier . "{printscreen}" . "{" . modifier . " up}"
-    send % final
+    result := "{" . modifier . " up}"
+    if (!ctrlActive)
+    {
+        result := "{ctrl down}" . result . "{ctrl up}"
+    }
+    if (!shiftActive)
+    {
+        result := "{shift down}" . result . "{shift up}"
+    }
+    send % result
 }
