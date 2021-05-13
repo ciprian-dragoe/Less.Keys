@@ -131,13 +131,9 @@ resetModifierWithoutTriggerUpState(modifier, ByRef modifierState)
 {
     modifierState := 0
     result := "{" . modifier . " up}"
-    if (!ctrlActive)
+    if (!ctrlActive && !altActive && !shiftActive)
     {
         result := "{ctrl down}" . result . "{ctrl up}"
-    }
-    if (!shiftActive)
-    {
-        result := "{shift down}" . result . "{shift up}"
     }
     send {blind}%result%
 }
