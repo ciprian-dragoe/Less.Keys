@@ -53,7 +53,6 @@ mouseDragRightAltActivate(nCode, wParam, lParam)
         doubledAction := modifierDoubledAsClick["rightAltClick"]
         if (!isNormalAltActive && !isLeftAltDoubledAsClickPressed)
         {
-            ; for alt & win sending a normal up will trigger a special os action (activate the menu/startbar for example)
             resetModifierWithoutTriggerUpState("alt", altActive)
         }
         processKeyToSend("lbutton down")
@@ -72,9 +71,7 @@ doubledRightAltUp()
 
     if (!isNormalAltActive && !isLeftAltDoubledAsClickPressed)
     {
-        ; for alt & win sending a normal up will trigger a special os action (activate the menu/startbar for example)
-        altActive := 0
-        processKeyToSend("{capslock}{capslock}{alt up}", true)
+        resetModifierWithoutTriggerUpState("alt", altActive)
     }
 
     if (isRightAltClickDown || sendClickOnRightAltClickRelease)

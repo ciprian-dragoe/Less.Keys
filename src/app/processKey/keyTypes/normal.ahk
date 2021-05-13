@@ -74,7 +74,6 @@ processKeyToSend(key, literal = 0)
     activeModifiers := getActiveModifiers(key)
     if (!processAhkKeyboardShortcuts(activeModifiers, key))
     {
-        Critical On
         if (literal)
         {
             send {blind}%key%
@@ -83,7 +82,6 @@ processKeyToSend(key, literal = 0)
         {
             send {blind}{%key%}
         }
-        Critical Off
         return true
     }
     

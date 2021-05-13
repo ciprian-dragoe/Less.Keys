@@ -41,12 +41,10 @@ processKeyDown(key)
 
 processKeyUp(key)
 {
-    Thread, NoTimers, true
     debug("[KEY_UP_BEGIN] " . key)
     if (processModifierKey(key, 0))
     {
         debug("[KEY_UP_END] " . key)
-        Thread, NoTimers, false
         return
     }
 
@@ -54,7 +52,6 @@ processKeyUp(key)
     {
         manageLayoutKeyUp(key)
         debug("[KEY_UP_END] " . key)
-        Thread, NoTimers, false
         return
     }
 
@@ -83,5 +80,4 @@ processKeyUp(key)
         debug(key . "|up")
     }
     debug("[KEY_UP_END] " . key)
-    Thread, NoTimers, false
 }

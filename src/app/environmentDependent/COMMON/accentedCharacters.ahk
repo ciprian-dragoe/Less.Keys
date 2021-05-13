@@ -1,5 +1,5 @@
 sendAccentedSibling(sibling)
 {
     key := accentedCharacterSiblingCode[sibling]
-    send {%key%}
+    send {blind}{%key%}
 }

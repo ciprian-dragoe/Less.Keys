@@ -53,7 +53,6 @@ mouseDragRightWinActivate(nCode, wParam, lParam)
         doubledAction := modifierDoubledAsClick["rightWinClick"]
         if (!isNormalWinActive && !isLeftWinDoubledAsClickPressed)
         {
-            ; for alt & win sending a normal up will trigger a special os action (activate the menu/startbar for example)
             resetModifierWithoutTriggerUpState("lwin", winActive)
         }
         processKeyToSend("lbutton down")
@@ -72,9 +71,7 @@ doubledRightWinUp()
 
     if (!isNormalWinActive && !isLeftWinDoubledAsClickPressed)
     {
-        ; for alt & win sending a normal up will trigger a special os action (activate the menu/startbar for example)
-        winActive := 0
-        processKeyToSend("{capslock}{capslock}{lwin up}", true)
+        resetModifierWithoutTriggerUpState("lwin", winActive)
     }
 
     if (isRightWinClickDown || sendClickOnRightWinClickRelease)

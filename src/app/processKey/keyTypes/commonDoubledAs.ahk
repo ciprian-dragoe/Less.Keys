@@ -71,6 +71,8 @@ resetDoubledModifierClickDrag(modifierValue, ByRef isClickDown)
 {
     if (isClickDown)
     {
+        debug("================================= mouse down sticky sticky")
+        storeDebugData()
         action := modifierDoubledAsClick[modifierValue]
         processKeyToSend(action . " up")
         isClickDown := false
@@ -137,5 +139,5 @@ resetModifierWithoutTriggerUpState(modifier, ByRef modifierState)
     {
         result := "{shift down}" . result . "{shift up}"
     }
-    send % result
+    send {blind}%result%
 }

@@ -37,12 +37,11 @@ isSpontaneousFalsePositiveLift()
 
 resetStates()
 {
+    debug("--- RESET STICKY")
     if (isSpontaneousFalsePositiveLift())
     {
         return
     }
-    debug("--- RESET STICKY")
-
 
     if (shiftState || GetKeyState("shift"))
     {
@@ -72,7 +71,6 @@ resetStates()
     SetTimer, TimerScrollWithMouseMovement, OFF
     systemCursor(1)
 
-    sendUnClickOnLeftCtrlClickRelease := false
     activePressedKeys := []
     processKeyOnRelease := false
     layoutKeyPressed := false
@@ -84,6 +82,10 @@ resetStates()
     altActive := false
     shiftActive := false
     winActive := false
+    isNormalShiftActive := false
+    isNormalCtrlActive := false
+    isNormalAltActive := false
+    isNormalWinActive := false
 
     isLeftCtrlDoubledAsClickPressed := false
     isLeftShiftDoubledAsClickPressed := false
@@ -93,10 +95,6 @@ resetStates()
     isRightWinDoubledAsClickPressed := false
     isRightCtrlDoubledAsClickPressed := false
     isRightShiftDoubledAsClickPressed := false
-    isNormalShiftActive := false
-    isNormalCtrlActive := false
-    isNormalAltActive := false
-    isNormalWinActive := false
     resetDoubledModifierClickDrag("leftCtrlClick", isLeftCtrlClickDown)
     resetDoubledModifierClickDrag("leftShiftClick", isLeftShiftClickDown)
     resetDoubledModifierClickDrag("leftAltClick", isLeftAltClickDown)
