@@ -1,5 +1,7 @@
 reloadApp()
 {
+    SetTimer TimerStickyFailBack, Delete
+    Critical Off
     showToolTip("RELOADING")
     reload
 }

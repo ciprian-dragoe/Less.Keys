@@ -76,8 +76,6 @@ doubledRightAltUp()
 
     if (isRightAltClickDown || sendClickOnRightAltClickRelease)
     {
-        SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         sendDoubledValueAndReset("rightAltClick", sendClickOnRightAltClickRelease, isRightAltClickDown)
     }
 }

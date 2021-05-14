@@ -76,8 +76,6 @@ doubledLeftShiftUp()
 
     if (isLeftShiftClickDown || sendClickOnLeftShiftClickRelease)
     {
-        SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         sendDoubledValueAndReset("leftShiftClick", sendClickOnLeftShiftClickRelease, isLeftShiftClickDown)
     }
 }

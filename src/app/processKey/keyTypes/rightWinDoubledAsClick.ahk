@@ -76,8 +76,6 @@ doubledRightWinUp()
 
     if (isRightWinClickDown || sendClickOnRightWinClickRelease)
     {
-        SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         sendDoubledValueAndReset("rightWinClick", sendClickOnRightWinClickRelease, isRightWinClickDown)
     }
 }

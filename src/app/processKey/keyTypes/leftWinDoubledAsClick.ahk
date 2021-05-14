@@ -76,8 +76,6 @@ doubledLeftWinUp()
 
     if (isLeftWinClickDown || sendClickOnLeftWinClickRelease)
     {
-        SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         sendDoubledValueAndReset("leftWinClick", sendClickOnLeftWinClickRelease, isLeftWinClickDown)
     }
 }

@@ -75,8 +75,6 @@ doubledRightCtrlUp()
 
     if (isRightCtrlClickDown || sendClickOnRightCtrlClickRelease)
     {
-        SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         sendDoubledValueAndReset("rightCtrlClick", sendClickOnRightCtrlClickRelease, isRightCtrlClickDown)
     }
 }

@@ -77,8 +77,6 @@ doubledLeftCtrlUp()
 
     if (isLeftCtrlClickDown || sendClickOnLeftCtrlClickRelease)
     {
-        SetTimer TimerStickyFailBack, OFF
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         sendDoubledValueAndReset("leftCtrlClick", sendClickOnLeftCtrlClickRelease, isLeftCtrlClickDown)
     }
 }
