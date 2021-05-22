@@ -8,6 +8,10 @@ TimerStickyFailBack:
     timerStickyFailBack()
 return
 
+TimerResetAllModifiers:
+    timerResetAllModifiers()
+return
+
 TimerRealTimeDebug:
     timerRealTimeDebug()
 return

@@ -7,15 +7,15 @@ timerStickyFailBack()
     {
         return
     }
-    resetStates()
+    debug("--- sticky detected, will run again after fail safe")
+    SetTimer TimerResetAllModifiers, 40
 }
 
 isMonitoredStickyKeyPressed()
 {
     for index, key in monitoredStickyKeys
     {
-        isPressed := GetKeyState(key, "P")
-        if (isPressed)
+        if (GetKeyState(key, "P"))
         {
             return true
         }
@@ -23,25 +23,19 @@ isMonitoredStickyKeyPressed()
     return false
 }
 
-isSpontaneousFalsePositiveLift()
+timerResetAllModifiers()
 {
-    ; sometimes ahk detects a key as lifed although it is still physically pressed
-    ; double check for such situations again all keys a little milliseconds later
-    sleep 40
+    SetTimer TimerResetAllModifiers, OFF
     if (isMonitoredStickyKeyPressed())
     {
-        return true
+        return
     }
-    return false
+    resetStates()
 }
 
 resetStates()
 {
     debug("--- RESET STICKY")
-    if (isSpontaneousFalsePositiveLift())
-    {
-        return
-    }
 
     if (shiftState || GetKeyState("shift"))
     {
