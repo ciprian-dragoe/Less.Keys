@@ -33,7 +33,10 @@ processDisableEnableLessKeys()
         if (isLessKeysEnabled)
         {
             isLessKeysEnabled := false
+            temp := logInput
+            logInput := 0
             resetStates()
+            logInput := temp
             SetTimer TimerStickyFailBack, OFF
             debug("======" . lastActiveAppName . " disables LessKeys")
         }
