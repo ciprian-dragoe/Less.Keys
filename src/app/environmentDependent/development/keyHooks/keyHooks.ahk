@@ -1,4 +1,4 @@
-#IfWinNotActive ahk_group IgnoredApps
+#If isLessKeysEnabled
 
     *escape::processKeyDown(layout["escape"])
     *escape up::processRealKeyUp("escape")
@@ -263,7 +263,7 @@
 
     *lwin::toggleRealTimeDebug(showRealTimeDebugInfo)
 
-#IfWinNotActive
+#If
 
 ; avoids strange ahk bug where key is spontaneous treated as 2 times up + when other keys are remapped as win/alt key,
 ; they are sent twice on up

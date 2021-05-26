@@ -1,4 +1,5 @@
 global appNamesOverwriteKeyboardHooks := []
+global appNamesDisableLessKeys := []
 
 
 
@@ -9,7 +10,7 @@ readDisabledAppsSettings(path)
     apps := StrSplit(appNames, delimiter)
     for index, app in apps
     {
-        GroupAdd, IgnoredApps, %app%
+        appNamesDisableLessKeys.push(app)
     }
 }
 

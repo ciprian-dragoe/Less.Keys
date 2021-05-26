@@ -3,7 +3,7 @@
 ; This is a fail safe for such situations
 timerStickyFailBack()
 {
-    if (isMonitoredStickyKeyPressed())
+    if (!isAllMonitoredStickyKeysLifted())
     {
         return
     }
@@ -11,25 +11,30 @@ timerStickyFailBack()
     SetTimer TimerResetAllModifiers, 40
 }
 
-isMonitoredStickyKeyPressed()
+isAllMonitoredStickyKeysLifted()
 {
+    result := ""
     for index, key in monitoredStickyKeys
     {
-        if (GetKeyState(key, "P"))
+        state := GetKeyState(key, "P")
+        result := result . "|" . key . "=" . state
+        if (state)
         {
-            return true
+            return false
         }
     }
-    return false
+    return result
 }
 
 timerResetAllModifiers()
 {
     SetTimer TimerResetAllModifiers, OFF
-    if (isMonitoredStickyKeyPressed())
+    state := isAllMonitoredStickyKeysLifted()
+    if (!state)
     {
         return
     }
+    debug(state)
     resetStates()
 }
 

@@ -33,7 +33,7 @@ writeMemoryStream(value)
     debugStoredData .= result
     if (StrLen(debugStoredData) > 150000)
     {
-        StringTrimLeft, debugStoredData, debugStoredData, 75000
+        StringTrimLeft, debugStoredData, debugStoredData, 50000
     }
 }
 

@@ -8,6 +8,10 @@ TimerStickyFailBack:
     timerStickyFailBack()
 return
 
+ReEnableStickyKeysMonitor:
+    reEnableStickyKeysMonitor()
+return
+
 TimerResetAllModifiers:
     timerResetAllModifiers()
 return
@@ -36,6 +40,6 @@ TimerTimeoutSendLayoutKey:
     timerTimeoutSendLayoutKey()
 return
 
-TimerFixAppsOverwriteLessKeysKeyboardHooks:
-    timerFixAppsOverwriteLessKeysKeyboardHooks()
+TimerLessKeysManagementDependentActiveApp:
+    timerLessKeysManagementDependentActiveApp()
 return
