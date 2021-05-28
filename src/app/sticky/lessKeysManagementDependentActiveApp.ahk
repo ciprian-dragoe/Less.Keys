@@ -5,6 +5,10 @@ global lastActiveAppName := ""
 timerLessKeysManagementDependentActiveApp()
 {
     WinGetTitle, lastActiveAppName, A
+    if (!lastActiveAppName)
+    {
+        return
+    }
     if (logInput)
     {
         debugStoredData .= "========" . lastActiveAppName . "`n"
@@ -33,22 +37,26 @@ processDisableEnableLessKeys()
         if (isLessKeysEnabled)
         {
             isLessKeysEnabled := false
-            temp := logInput
-            logInput := 0
+            temp := logStickyKeys
+            logStickyKeys := 0
             resetStates()
-            logInput := temp
-            SetTimer TimerStickyFailBack, OFF
             debug("======" . lastActiveAppName . " disables LessKeys")
+            logStickyKeys := temp
+            SetTimer TimerStickyFailBack, OFF
         }
     }
     else
     {
         if (!isLessKeysEnabled)
         {
+            debug("====== LessKeys Active Again")
+            temp := logStickyKeys
+            logStickyKeys := 0
+            resetStates()
+            logStickyKeys := temp
             isLessKeysEnabled := 1
             SetTimer ReEnableStickyKeysMonitor, OFF
             SetTimer ReEnableStickyKeysMonitor, 5000
-            debug("====== LessKeys Active Again")
         }
     }
 }

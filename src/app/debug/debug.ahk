@@ -71,6 +71,7 @@ geStickyKeys()
     info .= "|isRightWinClickDown " . isRightWinClickDown . "|isRightCtrlClickDown " . isRightCtrlClickDown . "|isRightShiftClickDown " . isRightShiftClickDown . "|isRightAltClickDown " . isRightAltClickDown . "`n"
     info .= "layoutPressed=" . layoutKeyPressed . "`n"
     info .= "alternativeLayout=" . alternativeLayoutActive . "`n"
+    info .= "isLessKeysEnabled=" . isLessKeysEnabled . "`n"
 
     result := ""
     for index, value in monitoredStickyKeys
