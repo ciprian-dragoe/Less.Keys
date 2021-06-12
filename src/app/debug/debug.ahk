@@ -47,6 +47,8 @@ toggleRealTimeDebug(onOff)
     else
     {
         showRealTimeDebugInfo := true
+        SetTimer, TimerWobblyKey, OFF
+        SetTimer, TimerCancelWobblyKey, OFF
         SetTimer, TimerRealTimeDebug, 1000
     }
     showToolTip("showRealTimeDebugInfo = " . showRealTimeDebugInfo)

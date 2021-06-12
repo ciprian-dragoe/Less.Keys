@@ -1,6 +1,6 @@
 tooltip Compile started
 
-compilerPath := A_WorkingDir . "\externalTools\Ahk2Exe.exe"
+compilerPath := A_WorkingDir . "\externalTools\compiler\Ahk2Exe.exe"
 iconPath := A_WorkingDir . "\externalTools\icon.ico"
 sourcePath := A_WorkingDir . "\startLive.ahk"
 outputPath := A_WorkingDir . "\..\LessKeys.exe"

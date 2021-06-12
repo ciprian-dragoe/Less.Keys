@@ -1,5 +1,6 @@
 readMouseSettings(path)
 {
     IniRead, timeoutMouseScrollPoll, %path%, mouse, scrollPoll
-    IniRead, mouseScrollAcceleration, %path%, mouse, scrollAcceleration    
+    timeoutMouseScrollPoll := Max(timeoutMouseScrollPoll, 50)
+    IniRead, mouseScrollAcceleration, %path%, mouse, scrollAcceleration
 }

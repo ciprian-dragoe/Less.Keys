@@ -46,7 +46,7 @@ resetStates()
     {
         debug("================================= shift sticky")
         send {shift up}
-           ()
+        storeDebugData()()
     }
     if (ctrlState || GetKeyState("ctrl"))
     {

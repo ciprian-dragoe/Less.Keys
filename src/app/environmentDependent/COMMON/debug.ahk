@@ -12,10 +12,21 @@ displayDebugData()
     msgbox % debugStoredData
 }
 
-storeDebugData()
+storeDebugData(fileName = "")
 {
-    if (logStickyKeys) {
-        FileAppend, %debugStoredData%, %A_Desktop%\%A_Hour%-%A_Min%-%A_Sec%-%A_MSec%-stored-log.txt
+    if (logStickyKeys)
+    {
+        if (!fileName)
+        {
+            fileName = %A_Hour%-%A_Min%-%A_Sec%-%A_MSec%-stored-log.txt
+        }
+        else
+        {
+            fileName = %fileName%-%A_Hour%-%A_Min%-%A_Sec%-%A_MSec%.txt
+        }
+
+        showtooltip(fileName)
+        FileAppend, %debugStoredData%, %A_Desktop%\%fileName%
     }
 }
 
