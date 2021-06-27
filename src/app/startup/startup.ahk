@@ -7,17 +7,16 @@
 #include  %A_ScriptDir%\app\startup\load\layout.ahk
 #include  %A_ScriptDir%\app\startup\load\stickyFailBack.ahk
 #include  %A_ScriptDir%\app\startup\load\accentedCharacters.ahk
-#include  %A_ScriptDir%\app\sticky\lessKeysManagementDependentActiveApp.ahk
+#include  %A_ScriptDir%\app\sticky\lessKeysManagementBasedOnActiveApp.ahk
 
 
-global timerTimeoutStickyKeys := 2000
+global timerTimeoutStickyKeys := 700
 
 
 
 resetStates()
 readSettingsFile(PATH_APP_CONFIGURATION)
-SetTimer, TimerLessKeysManagementDependentActiveApp, 500
-SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+SetTimer, TimerLessKeysManagementBasedOnActiveApp, 500
 OnExit("resetStates")
 
 readSettingsFile(basePath)

@@ -3,12 +3,12 @@
 ; This is a fail safe for such situations
 timerStickyFailBack()
 {
+    SetTimer TimerStickyFailBack, OFF
     if (!isAllMonitoredStickyKeysLifted())
     {
         return
     }
-    debug("--- sticky detected, will run again after fail safe")
-    SetTimer TimerResetAllModifiers, 40
+    resetStates()
 }
 
 isAllMonitoredStickyKeysLifted()
@@ -26,18 +26,6 @@ isAllMonitoredStickyKeysLifted()
     return result
 }
 
-timerResetAllModifiers()
-{
-    SetTimer TimerResetAllModifiers, OFF
-    state := isAllMonitoredStickyKeysLifted()
-    if (!state)
-    {
-        return
-    }
-    debug(state)
-    resetStates()
-}
-
 resetStates()
 {
     debug("---RESET STICKY")
@@ -46,12 +34,14 @@ resetStates()
     {
         debug("================================= shift sticky")
         send {shift up}
+        shiftState := 0
         storeDebugData()()
     }
     if (ctrlState || GetKeyState("ctrl"))
     {
         debug("================================= ctrl sticky")
         send {ctrl up}
+        ctrlState := 0
         storeDebugData()
     }
     if (altState || GetKeyState("alt"))
@@ -67,8 +57,20 @@ resetStates()
         storeDebugData()
     }
 
-    SetTimer, TimerScrollWithMouseMovement, OFF
-    systemCursor(1)
+    if (layoutKeyPressed)
+    {
+        SetTimer, TimerScrollWithMouseMovement, OFF
+        systemCursor(1)
+    }
+
+    resetDoubledModifierClickDrag("leftCtrlClick", isLeftCtrlClickDown)
+    resetDoubledModifierClickDrag("leftShiftClick", isLeftShiftClickDown)
+    resetDoubledModifierClickDrag("leftAltClick", isLeftAltClickDown)
+    resetDoubledModifierClickDrag("leftWinClick", isLeftWinClickDown)
+    resetDoubledModifierClickDrag("rightWinClick", isRightWinClickDown)
+    resetDoubledModifierClickDrag("rightCtrlClick", isRightCtrlClickDown)
+    resetDoubledModifierClickDrag("rightShiftClick", isRightShiftClickDown)
+    resetDoubledModifierClickDrag("rightAltClick", isRightAltClickDown)
 
     activePressedKeys := []
     processKeyOnRelease := false
@@ -94,13 +96,4 @@ resetStates()
     isRightWinDoubledAsClickPressed := false
     isRightCtrlDoubledAsClickPressed := false
     isRightShiftDoubledAsClickPressed := false
-    resetDoubledModifierClickDrag("leftCtrlClick", isLeftCtrlClickDown)
-    resetDoubledModifierClickDrag("leftShiftClick", isLeftShiftClickDown)
-    resetDoubledModifierClickDrag("leftAltClick", isLeftAltClickDown)
-    resetDoubledModifierClickDrag("leftWinClick", isLeftWinClickDown)
-    resetDoubledModifierClickDrag("rightWinClick", isRightWinClickDown)
-    resetDoubledModifierClickDrag("rightCtrlClick", isRightCtrlClickDown)
-    resetDoubledModifierClickDrag("rightShiftClick", isRightShiftClickDown)
-    resetDoubledModifierClickDrag("rightAltClick", isRightAltClickDown)
-
 }

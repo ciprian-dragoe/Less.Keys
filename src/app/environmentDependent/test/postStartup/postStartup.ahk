@@ -41,8 +41,6 @@ initTestEnvironment()
     defaultTimeoutStillSendLayoutKey := timeoutStillSendLayoutKey
     defaultTimerTimeoutStickyKeys := timerTimeoutStickyKeys
     setTestVariables()
-    SetTimer TimerStickyFailBack, OFF
-    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
     logStickyKeys := 0
 }
 

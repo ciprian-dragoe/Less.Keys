@@ -8,14 +8,6 @@ TimerStickyFailBack:
     timerStickyFailBack()
 return
 
-ReEnableStickyKeysMonitor:
-    reEnableStickyKeysMonitor()
-return
-
-TimerResetAllModifiers:
-    timerResetAllModifiers()
-return
-
 TimerRealTimeDebug:
     timerRealTimeDebug()
 return
@@ -40,6 +32,6 @@ TimerTimeoutSendLayoutKey:
     timerTimeoutSendLayoutKey()
 return
 
-TimerLessKeysManagementDependentActiveApp:
-    timerLessKeysManagementDependentActiveApp()
+TimerlessKeysManagementBasedOnActiveApp:
+    timerLessKeysManagementBasedOnActiveApp()
 return
