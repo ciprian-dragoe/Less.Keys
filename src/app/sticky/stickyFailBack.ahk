@@ -6,6 +6,7 @@ timerStickyFailBack()
     SetTimer TimerStickyFailBack, OFF
     if (!isAllMonitoredStickyKeysLifted())
     {
+        SetTimer TimerStickyFailBack, 500
         return
     }
     resetStates()
@@ -16,14 +17,24 @@ isAllMonitoredStickyKeysLifted()
     result := ""
     for index, key in monitoredStickyKeys
     {
-        state := GetKeyState(key, "P")
-        result := result . "|" . key . "=" . state
-        if (state)
+        ; todo investigate why space & middle button are not read correctly
+        ;keyState := getDllKeyState(key)
+        ;result := result . "`n" . key . "=" . keyState
+        keyState := getKeyState(key, "P")
+        if (keyState)
         {
-            return false
+            return 0
         }
     }
-    return result
+    return 1
+}
+
+getDllKeyState(key)
+{
+    keyCode := GetKeyVK(key)
+    discardHistory := dllcall("GetAsyncKeyState", "uint", keyCode)
+    keyPressedState := dllcall("GetAsyncKeyState", "uint", keyCode)
+    return keyPressedState
 }
 
 resetStates()
@@ -35,32 +46,35 @@ resetStates()
         debug("================================= shift sticky")
         send {shift up}
         shiftState := 0
-        storeDebugData()()
+        storeDebugData(shift)
     }
     if (ctrlState || GetKeyState("ctrl"))
     {
         debug("================================= ctrl sticky")
         send {ctrl up}
         ctrlState := 0
-        storeDebugData()
+        storeDebugData("ctrl")
     }
     if (altState || GetKeyState("alt"))
     {
         debug("================================= alt sticky")
         resetModifierWithoutTriggerUpState("alt", altActive)
-        storeDebugData()
+        storeDebugData("alt")
     }
     if (winState || GetKeyState("lwin"))
     {
         debug("================================= win sticky")
         resetModifierWithoutTriggerUpState("lwin", winActive)
-        storeDebugData()
+        storeDebugData("win")
     }
 
     if (layoutKeyPressed)
     {
         SetTimer, TimerScrollWithMouseMovement, OFF
         systemCursor(1)
+        layoutKeyPressed := 0
+        debug("================================= space sticky")
+        storeDebugData("space")
     }
 
     resetDoubledModifierClickDrag("leftCtrlClick", isLeftCtrlClickDown)
