@@ -21,8 +21,6 @@ timerScrollWithMouseMovement()
         amount := getScrollAmount()
         initiateScroll(direction, amount)
     }
-    
-    DllCall("SetCursorPos", "int", initialMousePositionXAxis, "int", initialMousePositionYAxis)
 }
 
 getScrollDirection(differenceY, differenceX) {
@@ -50,10 +48,12 @@ getScrollDirection(differenceY, differenceX) {
 }
 
 getScrollAmount() {
-    return max(ceil(abs(totalDifferenceXAxis / mouseScrollAcceleration)), ceil(abs(totalDifferenceYAxis / mouseScrollAcceleration)))
+     return max(ceil(abs(totalDifferenceXAxis / mouseScrollAcceleration)), ceil(abs(totalDifferenceYAxis / mouseScrollAcceleration)))
 }
 
 initiateScroll(direction, amount) {
+    BlockInput, On
+    DllCall("SetCursorPos", "int", initialMousePositionXAxis, "int", initialMousePositionYAxis)
     loop %amount% {
         processKeyToSend(direction)
     }
@@ -63,6 +63,7 @@ initiateScroll(direction, amount) {
         sendLayoutKey := false
         sendRightMouseButton := false
     }
+    BlockInput, Off
 }
 
 systemCursor(OnOff) {
