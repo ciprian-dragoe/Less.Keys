@@ -56,11 +56,11 @@ toggleRealTimeDebug(onOff)
 
 timerRealTimeDebug(displayTime = 1000)
 {
-    info := geStickyKeys()
+    info := getStickyKeys()
     showToolTip(info, displayTime)
 }
 
-geStickyKeys()
+getStickyKeys()
 {
     info := ""
     info .= "shift down " . GetKeyState("shift") . " |shiftActive=" . shiftActive . "`n"

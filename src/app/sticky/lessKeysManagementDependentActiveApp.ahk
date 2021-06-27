@@ -43,17 +43,13 @@ processDisableEnableLessKeys()
             debug("======" . lastActiveAppName . " disables LessKeys")
             logStickyKeys := temp
             SetTimer TimerStickyFailBack, OFF
-            if (logStickyKeys)
-            {
-                storeDebugData("DisableLessKeys")
-            }
         }
     }
     else
     {
         if (!isLessKeysEnabled)
         {
-            debug("====== LessKeys A               tive Again")
+            debug("====== LessKeys Ative Again")
             temp := logStickyKeys
             logStickyKeys := 0
             resetStates()
@@ -61,10 +57,6 @@ processDisableEnableLessKeys()
             isLessKeysEnabled := 1
             SetTimer ReEnableStickyKeysMonitor, OFF
             SetTimer ReEnableStickyKeysMonitor, 5000
-            if (logStickyKeys)
-            {
-                storeDebugData("EnableLessKeys")
-            }
         }
     }
 }

@@ -40,7 +40,7 @@ timerResetAllModifiers()
 
 resetStates()
 {
-    debug("--- RESET STICKY")
+    debug("---RESET STICKY")
 
     if (shiftState || GetKeyState("shift"))
     {
