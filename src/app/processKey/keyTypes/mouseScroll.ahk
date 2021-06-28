@@ -54,9 +54,7 @@ getScrollAmount() {
 initiateScroll(direction, amount) {
     BlockInput, On
     DllCall("SetCursorPos", "int", initialMousePositionXAxis, "int", initialMousePositionYAxis)
-    loop %amount% {
-        processKeyToSend(direction)
-    }
+    processKeyToSend("{" . direction . " " . amount . "}", 1)
     if (amount) {
         totalDifferenceYAxis := 0
         totalDifferenceXAxis := 0
