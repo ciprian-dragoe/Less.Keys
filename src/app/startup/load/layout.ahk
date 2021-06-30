@@ -16,10 +16,6 @@ readLayoutFile(path)
         originalKey := StrSplit(A_LoopReadLine, "`:").1
         newValueForKey := StrSplit(A_LoopReadLine, "`:").2
 
-
-        ;temp(key)
-
-
         if (isModifierKey(newValueForKey))
         {
             monitoredStickyKeys.Push(originalKey)
@@ -45,14 +41,4 @@ readLayoutFile(path)
 isModifierKey(key)
 {
     return key = "lwin" || key = "rightShiftClick" || key = "leftShiftClick" || key = "leftCtrlClick" || key = "rightCtrlClick" || key = "leftAltClick" || key = "rightAltClick" || key = "leftWinClick" || key = "rightWinClick" || key = "ctrl" || key = "alt" || key = "shift"
-}
-
-temp(key)
-{
-    loop, 5
-    {
-        keyCode := GetKeyVK(key)
-        ;showtooltip(key . "=" . dllcall("GetAsyncKeyState", "uint", keyCode))
-        showtooltip(key . "=" . keyCode)
-    }
 }
