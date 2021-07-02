@@ -10,7 +10,7 @@
 #include  %A_ScriptDir%\app\sticky\lessKeysManagementBasedOnActiveApp.ahk
 
 
-global timerTimeoutStickyKeys := 1000
+global timerTimeoutStickyKeys := 1200
 
 
 
