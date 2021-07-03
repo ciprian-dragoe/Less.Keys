@@ -14,14 +14,9 @@ timerStickyFailBack()
 
 isAllMonitoredStickyKeysLifted()
 {
-    result := ""
     for index, key in monitoredStickyKeys
     {
-        ; todo investigate why space & middle button are not read correctly
-        ;keyState := getDllKeyState(key)
-        ;result := result . "`n" . key . "=" . keyState
-        keyState := getKeyState(key, "P")
-        if (keyState)
+        if (getKeyState(key, "P") || getDllKeyState(key))
         {
             return 0
         }
