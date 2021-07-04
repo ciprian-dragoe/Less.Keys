@@ -69,7 +69,7 @@ setNormalAlt(state)
 setNormalWin(state)
 {
     isNormalWinActive := state
-    setAltState(state)
+    setWinState(state)
 }
 
 setCtrlState(state)

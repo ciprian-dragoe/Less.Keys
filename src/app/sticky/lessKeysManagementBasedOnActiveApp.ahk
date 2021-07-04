@@ -37,7 +37,7 @@ processDisableEnableLessKeys()
         if (isLessKeysEnabled)
         {
             isLessKeysEnabled := false
-            SetTimer TimerStickyFailBack, OFF
+            SetTimer TimerStickyFailBack, off
             temp := logStickyKeys
             logStickyKeys := 0
             resetStates()
@@ -67,7 +67,7 @@ processRestartLessKeys()
         {
             isAppWhichOverWritesLessKeysActive := 1
             debug("====== reset from app which overwrites keyboard hooks")
-            SetTimer TimerStickyFailBack, OFF
+            SetTimer TimerStickyFailBack, Delete
             Suspend, On
             Suspend, Off
             SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%

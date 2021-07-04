@@ -3,7 +3,8 @@
 ; This is a fail safe for such situations
 timerStickyFailBack()
 {
-    SetTimer TimerStickyFailBack, OFF
+    SetTimer TimerStickyFailBack, off
+
     if (!isAllMonitoredStickyKeysLifted())
     {
         SetTimer TimerStickyFailBack, 500
@@ -16,11 +17,16 @@ isAllMonitoredStickyKeysLifted()
 {
     for index, key in monitoredStickyKeys
     {
-        if (getKeyState(key, "P") || getDllKeyState(key))
+        if (getKeyState(key, "P"))
         {
             return 0
         }
     }
+    if (getDllKeyState(layoutChangeKey))
+    {
+        return 0
+    }
+
     return 1
 }
 

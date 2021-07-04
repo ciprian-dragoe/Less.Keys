@@ -4,8 +4,7 @@
 ; contain function declarations, some also contain variable initialization and this will 
 ; not happen anymore
 
-TimerStickyFailBack:
-    timerStickyFailBack()
+timerDiscardBecauseAHKbug:
 return
 
 TimerRealTimeDebug:
@@ -34,4 +33,8 @@ return
 
 TimerlessKeysManagementBasedOnActiveApp:
     timerLessKeysManagementBasedOnActiveApp()
+return
+
+TimerStickyFailBack:
+    timerStickyFailBack()
 return

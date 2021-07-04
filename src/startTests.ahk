@@ -24,5 +24,5 @@ global PATH_APP_CONFIGURATION := A_ScriptDir .  "\app\environmentDependent\test\
 #include %A_ScriptDir%\app\startup\labels.ahk
 #include %A_ScriptDir%\app\environmentDependent\test\keyHooks\keyHooks.ahk
 
-; if you want to add your custom labels, add them here  
+; if you want to add your custom labels, add them here
 #include %A_ScriptDir%\app\environmentDependent\test\labels\custom.ahk

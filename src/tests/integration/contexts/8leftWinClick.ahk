@@ -179,16 +179,10 @@ When_leftWinClick_is_pressed_and_win_key_is_pressed_click_is_sent_on_leftWinClic
     sleep 100
     processKeyDown("lwin")
     sleep 50
-    
     processKeyUp("leftWinClick")
     sleep 100
     processKeyUp("lwin")
     sleep 700
-    processKeyDown("lwin")
-    sleep 100
-    processKeyUp("lwin")
-    sleep 700
-
     validateCaretOutput(A_ThisFunc, expected)
 }
 

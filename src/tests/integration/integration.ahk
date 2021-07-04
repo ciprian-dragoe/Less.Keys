@@ -80,6 +80,7 @@ runIntegrationTests()
     When_rightShiftClick_doubles_as_b_pressed_leftWinClick_doubled_as_c_pressed_rightShiftClick_released_leftWinClick_released_THEN_c_letter_is_sent_#5902()
     When_rightShiftClick_pressed_leftWinClick_pressed_THEN_word_is_selected_after_leftWinClick_release_#5903()
     When_rightShiftClick_pressed_leftWinClick_pressed_mouse_moved_until_second_word_THEN_only_second_is_selected_#5904()
+
     ; STICKY
     When_shift_key_is_logically_pressed_and_not_released_for_more_then_stickyTime_shift_and_shiftActive_is_reset_after_stickyTime_#101()
     When_shiftClick_key_is_logically_pressed_and_not_released_for_more_then_stickyTime_shift_is_reset_after_stickyTime_#102()
@@ -462,6 +463,7 @@ runIntegrationTests()
     When_leftShiftClick_doubled_as_d_pressed_ctrl_pressed_rightAltClick_pressed_leftShiftClick_release_ctrl_release_rightAltClick_release_THEN_b_letter_is_sent_#4102()
 
     ; LEFT SHIFT CLICK & RIGHT ALT CLICK
+
     When_leftShiftClick_pressed_rightAltClick_doubled_as_left_pressed_THEN_letter_is_selected_after_rightAltClickRelease_#4201()
     When_leftShiftClick_doubles_as_b_pressed_rightAltClick_doubled_as_c_pressed_leftShiftClick_released_rightAltClick_released_THEN_c_letter_is_sent_#4202()
     When_leftShiftClick_pressed_rightAltClick_THEN_word_is_selected_after_rightAltClickRelease_#4203()
@@ -495,6 +497,7 @@ runIntegrationTests()
     When_rightWinClick_is_pressed_and_ctrl_key_is_pressed_click_is_sent_on_rightWinClick_release_#4809()
     When_rightWinClick_is_pressed_and_win_key_is_pressed_and_released_click_is_sent_on_rightWinClick_release_#4810()
     When_rightWinClick_is_pressed_and_win_key_is_pressed_click_is_sent_on_rightWinClick_release_#4811()
+
     When_rightWinClick_is_pressed_and_shift_is_pressed_and_released_click_is_sent_on_rightWinClick_release_#4812()
     When_rightWinClick_is_pressed_and_shift_is_pressed_click_is_sent_on_rightWinClick_release_#4813()
     When_rightWinClick_is_pressed_and_shift_key_is_pressed_and_layout_key_pressed_and_backtick_pressed_keyboard_shortcut_is_sent_#4814()

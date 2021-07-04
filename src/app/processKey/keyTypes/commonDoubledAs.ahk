@@ -63,6 +63,7 @@ sendDoubledValueAndReset(modifierValue, ByRef sendClickOnRelease, ByRef isModifi
     {
         isModifierClickDown := false
         sendClickOnRelease := false
+
         processKeyToSend(doubledAction)
     }
 }
@@ -131,7 +132,7 @@ resetModifierWithoutTriggerUpState(modifier, ByRef modifierState)
 {
     modifierState := 0
     result := "{" . modifier . " up}"
-    if (!ctrlActive && !altActive && !shiftActive)
+    if (!ctrlActive)
     {
         result := "{ctrl down}" . result . "{ctrl up}"
     }

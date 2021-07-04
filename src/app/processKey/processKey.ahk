@@ -16,7 +16,7 @@ global processKeyOnRelease
 processKeyDown(key)
 {
     debug("[KEY_DOWN_BEGIN] " . key)
-    SetTimer TimerStickyFailBack, OFF
+    SetTimer TimerStickyFailBack, off
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
 
     if (processModifierKey(key, 1))
