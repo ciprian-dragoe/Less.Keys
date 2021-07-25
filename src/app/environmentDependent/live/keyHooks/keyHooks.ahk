@@ -1,275 +1,966 @@
 #If isLessKeysEnabled
 
-    *escape::processKeyDown(layout["escape"])
-    *escape up::processRealKeyUp("escape")
-
-    *f1::processKeyDown(layout["F1"])
-    *f1 up::processRealKeyUp("F1")
-
-    *f2::processKeyDown(layout["F2"])
-    *f2 up::processRealKeyUp("F2")
-
-    *f3::processKeyDown(layout["F3"])
-    *f3 up::processRealKeyUp("F3")
-
-    *f4::processKeyDown(layout["F4"])
-    *f4 up::processRealKeyUp("F4")
-
-    *f5::processKeyDown(layout["F5"])
-    *f5 up::processRealKeyUp("F5")
-
-    *f6::processKeyDown(layout["F6"])
-    *f6 up::processRealKeyUp("F6")
-
-    *f7::processKeyDown(layout["F7"])
-    *f7 up::processRealKeyUp("F7")
-
-    *f8::processKeyDown(layout["F8"])
-    *f8 up::processRealKeyUp("F8")
-
-    *f9::processKeyDown(layout["F9"])
-    *f9 up::processRealKeyUp("F9")
-
-    *f10::processKeyDown(layout["F10"])
-    *f10 up::processRealKeyUp("F10")
-
-    *f11::processKeyDown(layout["F11"])
-    *f11 up::processRealKeyUp("F11")
-
-    *f12::processKeyDown(layout["F12"])
-    *f12 up::processRealKeyUp("F12")
-
-    *home::processKeyDown(layout["home"])
-    *home up::processRealKeyUp("home")
-
-    *end::processKeyDown(layout["end"])
-    *end up::processRealKeyUp("end")
-
-    *insert::processKeyDown(layout["insert"])
-    *insert up::processRealKeyUp("insert")
-
-    *delete::processKeyDown(layout["delete"])
-    *delete up::processRealKeyUp("delete")
-
-    *sc029::processKeyDown(layout["``"])
-    *sc029 up::processRealKeyUp("``")
-
-    *1::processKeyDown(layout[1])
-    *1 up::processRealKeyUp(1)
-
-    *2::processKeyDown(layout[2])
-    *2 up::processRealKeyUp(2)
-
-    *3::processKeyDown(layout[3])
-    *3 up::processRealKeyUp(3)
-
-    *4::processKeyDown(layout[4])
-    *4 up::processRealKeyUp(4)
-
-    *5::processKeyDown(layout[5])
-    *5 up::processRealKeyUp(5)
-
-    *6::processKeyDown(layout[6])
-    *6 up::processRealKeyUp(6)
-
-    *7::processKeyDown(layout[7])
-    *7 up::processRealKeyUp(7)
-
-    *8::processKeyDown(layout[8])
-    *8 up::processRealKeyUp(8)
-
-    *9::processKeyDown(layout[9])
-    *9 up::processRealKeyUp(9)
-
-    *0::processKeyDown(layout[0])
-    *0 up::processRealKeyUp(0)
-
-    *-::processKeyDown(layout["-"])
-    *- up::processRealKeyUp("-")
-
-    *=::processKeyDown(layout["="])
-    *= up::processRealKeyUp("=")
-
-    *backspace::processKeyDown(layout["backspace"])
-    *backspace up::processRealKeyUp("backspace")
-
-    *tab::processKeyDown(layout["tab"])
-    *tab up::processRealKeyUp("tab")
-
-    *q::processKeyDown(layout["q"])
-    *q up::processRealKeyUp("q")
-
-    *w::processKeyDown(layout["w"])
-    *w up::processRealKeyUp("w")
-
-    *e::processKeyDown(layout["e"])
-    *e up::processRealKeyUp("e")
-
-    *r::processKeyDown(layout["r"])
-    *r up::processRealKeyUp("r")
-
-    *t::processKeyDown(layout["t"])
-    *t up::processRealKeyUp("t")
-
-    *y::processKeyDown(layout["y"])
-    *y up::processRealKeyUp("y")
-
-    *u::processKeyDown(layout["u"])
-    *u up::processRealKeyUp("u")
-
-    *i::processKeyDown(layout["i"])
-    *i up::processRealKeyUp("i")
-
-    *o::processKeyDown(layout["o"])
-    *o up::processRealKeyUp("o")
-
-    *p::processKeyDown(layout["p"])
-    *p up::processRealKeyUp("p")
-
-    *[::processKeyDown(layout["["])
-    *[ up::processRealKeyUp("[")
-
-    *]::processKeyDown(layout["]"])
-    *] up::processRealKeyUp("]")
-
-    *\::processKeyDown(layout["\"])
-    *\ up::processRealKeyUp("\")
-
-    *capslock::processKeyDown(layout["capslock"])
-    *capslock up::processRealKeyUp("capslock")
-
-    *a::processKeyDown(layout["a"])
-    *a up::processRealKeyUp("a")
-
-    *s::processKeyDown(layout["s"])
-    *s up::processRealKeyUp("s")
-
-    *d::processKeyDown(layout["d"])
-    *d up::processRealKeyUp("d")
-
-    *f::processKeyDown(layout["f"])
-    *f up::processRealKeyUp("f")
-
-    *g::processKeyDown(layout["g"])
-    *g up::processRealKeyUp("g")
-
-    *h::processKeyDown(layout["h"])
-    *h up::processRealKeyUp("h")
-
-    *j::processKeyDown(layout["j"])
-    *j up::processRealKeyUp("j")
-
-    *k::processKeyDown(layout["k"])
-    *k up::processRealKeyUp("k")
-
-    *l::processKeyDown(layout["l"])
-    *l up::processRealKeyUp("l")
-
-    *`;::processKeyDown(layout[";"])
-    *`; up::processRealKeyUp(";")
-
-    *'::processKeyDown(layout["'"])
-    *' up::processRealKeyUp("'")
-
-    *enter::processKeyDown(layout["enter"])
-    *enter up::processRealKeyUp("enter")
-
-    *z::processKeyDown(layout["z"])
-    *z up::processRealKeyUp("z")
-
-    *x::processKeyDown(layout["x"])
-    *x up::processRealKeyUp("x")
-
-    *c::processKeyDown(layout["c"])
-    *c up::processRealKeyUp("c")
-
-    *v::processKeyDown(layout["v"])
-    *v up::processRealKeyUp("v")
-
-    *b::processKeyDown(layout["b"])
-    *b up::processRealKeyUp("b")
-
-    *n::processKeyDown(layout["n"])
-    *n up::processRealKeyUp("n")
-
-    *m::processKeyDown(layout["m"])
-    *m up::processRealKeyUp("m")
-
-    *sc033::processKeyDown(layout[","])
-    *sc033 up::processRealKeyUp(",")
-
-    *sc034::processKeyDown(layout["."])
-    *sc034 up::processRealKeyUp(".")
-
-    *sc035::processKeyDown(layout["/"])
-    *sc035 up::processRealKeyUp("/")
-
-    *space::processKeyDown(layout["space"])
-    *space up::processRealKeyUp("space")
-
-    *left::processKeyDown(layout["left"])
-    *left up::processRealKeyUp("left")
-
-    *down::processKeyDown(layout["down"])
-    *down up::processRealKeyUp("down")
-
-    *right::processKeyDown(layout["right"])
-    *right up::processRealKeyUp("right")
-
-    *up::processKeyDown(layout["up"])
-    *up up::processRealKeyUp("up")
-
-    *pgdn::processKeyDown(layout["pgdn"])
-    *pgdn up::processRealKeyUp("pgdn")
-
-    *pgup::processKeyDown(layout["pgup"])
-    *pgup up::processRealKeyUp("pgup")
-
-    *appskey::processKeyDown(layout["appskey"])
-    *appskey up::processRealKeyUp("appskey")
-
-    *lctrl::processKeyDown(layout["lctrl"])
-    *lctrl up::processRealKeyUp("lctrl")
-
-    *rctrl::processKeyDown(layout["rctrl"])
-    *rctrl up::processRealKeyUp("rctrl")
-
-    *lalt::processKeyDown(layout["lalt"])
-    *lalt up::processRealKeyUp("lalt")
-
-    *ralt::processKeyDown(layout["ralt"])
-    *ralt up::processRealKeyUp("ralt")
-
-    *lshift::processKeyDown(layout["lshift"])
-    *lshift up::processRealKeyUp("lshift")
-
-    *rshift::processKeyDown(layout["rshift"])
-    *rshift up::processRealKeyUp("rshift")
-
-    *pause::processKeyDown(layout["pause"])
-    *pause up::processRealKeyUp("pause")
-
-    *MButton::processKeyDown(layout["MButton"])
-    *MButton up::processRealKeyUp("MButton")
-
-    *XButton1::processKeyDown(layout["XButton1"])
-    *XButton1 up::processRealKeyUp("XButton1")
-
-    *XButton2::processKeyDown(layout["XButton2"])
-    *XButton2 up::processRealKeyUp("XButton2")
-
-    *printscreen::processKeyDown(layout["printscreen"])
-    *printscreen up::processRealKeyUp("printscreen")
-
+    *escape::
+        critical on
+        processKeyDown(layout["escape"])
+        critical off
+    return
+    *escape up::
+        critical on
+        processRealKeyUp("escape")
+        critical off
+    return
+
+    *f1::
+        critical on
+        processKeyDown(layout["F1"])
+        critical off
+    return
+    *f1 up::
+        critical on
+        processRealKeyUp("F1")
+        critical off
+    return
+
+    *f2::
+        critical on
+        processKeyDown(layout["F2"])
+        critical off
+    return
+    *f2 up::
+        critical on
+        processRealKeyUp("F2")
+        critical off
+    return
+
+    *f3::
+        critical on
+        processKeyDown(layout["F3"])
+        critical off
+    return
+    *f3 up::
+        critical on
+        processRealKeyUp("F3")
+        critical off
+    return
+
+    *f4::
+        critical on
+        processKeyDown(layout["F4"])
+        critical off
+    return
+    *f4 up::
+        critical on
+        processRealKeyUp("F4")
+        critical off
+    return
+
+    *f5::
+        critical on
+        processKeyDown(layout["F5"])
+        critical off
+    return
+    *f5 up::
+        critical on
+        processRealKeyUp("F5")
+        critical off
+    return
+
+    *f6::
+        critical on
+        processKeyDown(layout["F6"])
+        critical off
+    return
+    *f6 up::
+        critical on
+        processRealKeyUp("F6")
+        critical off
+    return
+
+    *f7::
+        critical on
+        processKeyDown(layout["F7"])
+        critical off
+    return
+    *f7 up::
+        critical on
+        processRealKeyUp("F7")
+        critical off
+    return
+
+    *f8::
+        critical on
+        processKeyDown(layout["F8"])
+        critical off
+    return
+    *f8 up::
+        critical on
+        processRealKeyUp("F8")
+        critical off
+    return
+
+    *f9::
+        critical on
+        processKeyDown(layout["F9"])
+        critical off
+    return
+    *f9 up::
+        critical on
+        processRealKeyUp("F9")
+        critical off
+    return
+
+    *f10::
+        critical on
+        processKeyDown(layout["F10"])
+        critical off
+    return
+    *f10 up::
+        critical on
+        processRealKeyUp("F10")
+        critical off
+    return
+
+    *f11::
+        critical on
+        processKeyDown(layout["F11"])
+        critical off
+    return
+    *f11 up::
+        critical on
+        processRealKeyUp("F11")
+        critical off
+    return
+
+    *f12::
+        critical on
+        processKeyDown(layout["F12"])
+        critical off
+    return
+    *f12 up::
+        critical on
+        processRealKeyUp("F12")
+        critical off
+    return
+
+    *home::
+        critical on
+        processKeyDown(layout["home"])
+        critical off
+    return
+    *home up::
+        critical on
+        processRealKeyUp("home")
+        critical off
+    return
+
+    *end::
+        critical on
+        processKeyDown(layout["end"])
+        critical off
+    return
+    *end up::
+        critical on
+        processRealKeyUp("end")
+        critical off
+    return
+
+    *insert::
+        critical on
+        processKeyDown(layout["insert"])
+        critical off
+    return
+    *insert up::
+        critical on
+        processRealKeyUp("insert")
+        critical off
+    return
+
+    *delete::
+        critical on
+        processKeyDown(layout["delete"])
+        critical off
+    return
+    *delete up::
+        critical on
+        processRealKeyUp("delete")
+        critical off
+    return
+
+    *sc029::
+        critical on
+        processKeyDown(layout["``"])
+        critical off
+    return
+    *sc029 up::
+        critical on
+        processRealKeyUp("``")
+        critical off
+    return
+
+    *1::
+        critical on
+        processKeyDown(layout[1])
+        critical off
+    return
+    *1 up::
+        critical on
+        processRealKeyUp(1)
+        critical off
+    return
+
+    *2::
+        critical on
+        processKeyDown(layout[2])
+        critical off
+    return
+    *2 up::
+        critical on
+        processRealKeyUp(2)
+        critical off
+    return
+
+    *3::
+        critical on
+        processKeyDown(layout[3])
+        critical off
+    return
+    *3 up::
+        critical on
+        processRealKeyUp(3)
+        critical off
+    return
+
+    *4::
+        critical on
+        processKeyDown(layout[4])
+        critical off
+    return
+    *4 up::
+        critical on
+        processRealKeyUp(4)
+        critical off
+    return
+
+    *5::
+        critical on
+        processKeyDown(layout[5])
+        critical off
+    return
+    *5 up::
+        critical on
+        processRealKeyUp(5)
+        critical off
+    return
+
+    *6::
+        critical on
+        processKeyDown(layout[6])
+        critical off
+    return
+    *6 up::
+        critical on
+        processRealKeyUp(6)
+        critical off
+    return
+    *7::
+        critical on
+        processKeyDown(layout[7])
+        critical off
+    return
+    *7 up::
+        critical on
+        processRealKeyUp(7)
+        critical off
+    return
+
+    *8::
+        critical on
+        processKeyDown(layout[8])
+        critical off
+    return
+    *8 up::
+        critical on
+        processRealKeyUp(8)
+        critical off
+    return
+
+    *9::
+        critical on
+        processKeyDown(layout[9])
+        critical off
+    return
+    *9 up::
+        critical on
+        processRealKeyUp(9)
+        critical off
+    return
+
+    *0::
+        critical on
+        processKeyDown(layout[0])
+        critical off
+    return
+    *0 up::
+        critical on
+        processRealKeyUp(0)
+        critical off
+    return
+
+    *-::
+        critical on
+        processKeyDown(layout["-"])
+        critical off
+    return
+    *- up::
+        critical on
+        processRealKeyUp("-")
+        critical off
+    return
+
+    *=::
+        critical on
+        processKeyDown(layout["="])
+        critical off
+    return
+    *= up::
+        critical on
+        processRealKeyUp("=")
+        critical off
+    return
+
+    *backspace::
+        critical on
+        processKeyDown(layout["backspace"])
+        critical off
+    return
+    *backspace up::
+        critical on
+        processRealKeyUp("backspace")
+        critical off
+    return
+
+    *tab::
+        critical on
+        processKeyDown(layout["tab"])
+        critical off
+    return
+    *tab up::
+        critical on
+        processRealKeyUp("tab")
+        critical off
+    return
+
+    *q::
+        critical on
+        processKeyDown(layout["q"])
+        critical off
+    return
+    *q up::
+        critical on
+        processRealKeyUp("q")
+        critical off
+    return
+
+    *w::
+        critical on
+        processKeyDown(layout["w"])
+        critical off
+    return
+    *w up::
+        critical on
+        processRealKeyUp("w")
+        critical off
+    return
+
+    *e::
+        critical on
+        processKeyDown(layout["e"])
+        critical off
+    return
+    *e up::
+        critical on
+        processRealKeyUp("e")
+        critical off
+    return
+
+    *r::
+        critical on
+        processKeyDown(layout["r"])
+        critical off
+    return
+    *r up::
+        critical on
+        processRealKeyUp("r")
+        critical off
+    return
+
+    *t::
+        critical on
+        processKeyDown(layout["t"])
+        critical off
+    return
+    *t up::
+        critical on
+        processRealKeyUp("t")
+        critical off
+    return
+
+    *y::
+        critical on
+        processKeyDown(layout["y"])
+        critical off
+    return
+    *y up::
+        critical on
+        processRealKeyUp("y")
+        critical off
+    return
+
+    *u::
+        critical on
+        processKeyDown(layout["u"])
+        critical off
+    return
+    *u up::
+        critical on
+        processRealKeyUp("u")
+        critical off
+    return
+
+    *i::
+        critical on
+        processKeyDown(layout["i"])
+        critical off
+    return
+    *i up::
+        critical on
+        processRealKeyUp("i")
+        critical off
+    return
+
+    *o::
+        critical on
+        processKeyDown(layout["o"])
+        critical off
+    return
+    *o up::
+        critical on
+        processRealKeyUp("o")
+        critical off
+    return
+
+    *p::
+        critical on
+        processKeyDown(layout["p"])
+        critical off
+    return
+    *p up::
+        critical on
+        processRealKeyUp("p")
+        critical off
+    return
+
+    *[::
+        critical on
+        processKeyDown(layout["["])
+        critical off
+    return
+    *[ up::
+        critical on
+        processRealKeyUp("[")
+        critical off
+    return
+
+    *]::
+        critical on
+        processKeyDown(layout["]"])
+        critical off
+    return
+    *] up::
+        critical on
+        processRealKeyUp("]")
+        critical off
+    return
+
+    *\::
+        critical on
+        processKeyDown(layout["\"])
+        critical off
+    return
+    *\ up::
+        critical on
+        processRealKeyUp("\")
+        critical off
+    return
+
+    *capslock::
+        critical on
+        processKeyDown(layout["capslock"])
+        critical off
+    return
+    *capslock up::
+        critical on
+        processRealKeyUp("capslock")
+        critical off
+    return
+
+    *a::
+        critical on
+        processKeyDown(layout["a"])
+        critical off
+    return
+    *a up::
+        critical on
+        processRealKeyUp("a")
+        critical off
+    return
+
+    *s::
+        critical on
+        processKeyDown(layout["s"])
+        critical off
+    return
+    *s up::
+        critical on
+        processRealKeyUp("s")
+        critical off
+    return
+
+    *d::
+        critical on
+        processKeyDown(layout["d"])
+        critical off
+    return
+    *d up::
+        critical on
+        processRealKeyUp("d")
+        critical off
+    return
+
+    *f::
+        critical on
+        processKeyDown(layout["f"])
+        critical off
+    return
+    *f up::
+        critical on
+        processRealKeyUp("f")
+        critical off
+    return
+
+    *g::
+        critical on
+        processKeyDown(layout["g"])
+        critical off
+    return
+    *g up::
+        critical on
+        processRealKeyUp("g")
+        critical off
+    return
+
+    *h::
+        critical on
+        processKeyDown(layout["h"])
+        critical off
+    return
+    *h up::
+        critical on
+        processRealKeyUp("h")
+        critical off
+    return
+
+    *j::
+        critical on
+        processKeyDown(layout["j"])
+        critical off
+    return
+    *j up::
+        critical on
+        processRealKeyUp("j")
+        critical off
+    return
+
+    *k::
+        critical on
+        processKeyDown(layout["k"])
+        critical off
+    return
+    *k up::
+        critical on
+        processRealKeyUp("k")
+        critical off
+    return
+
+    *l::
+        critical on
+        processKeyDown(layout["l"])
+        critical off
+    return
+    *l up::
+        critical on
+        processRealKeyUp("l")
+        critical off
+    return
+
+    *`::
+        critical on
+        processKeyDown(layout[""])
+        critical off
+    return
+    *` up::
+        critical on
+        processRealKeyUp("")
+        critical off
+    return
+
+    *'::
+        critical on
+        processKeyDown(layout["'"])
+        critical off
+    return
+    *' up::
+        critical on
+        processRealKeyUp("'")
+        critical off
+    return
+
+    *enter::
+        critical on
+        processKeyDown(layout["enter"])
+        critical off
+    return
+    *enter up::
+        critical on
+        processRealKeyUp("enter")
+        critical off
+    return
+
+    *z::
+        critical on
+        processKeyDown(layout["z"])
+        critical off
+    return
+    *z up::
+        critical on
+        processRealKeyUp("z")
+        critical off
+    return
+
+    *x::
+        critical on
+        processKeyDown(layout["x"])
+        critical off
+    return
+    *x up::
+        critical on
+        processRealKeyUp("x")
+        critical off
+    return
+
+    *c::
+        critical on
+        processKeyDown(layout["c"])
+        critical off
+    return
+    *c up::
+        critical on
+        processRealKeyUp("c")
+        critical off
+    return
+
+    *v::
+        critical on
+        processKeyDown(layout["v"])
+        critical off
+    return
+    *v up::
+        critical on
+        processRealKeyUp("v")
+        critical off
+    return
+
+    *b::
+        critical on
+        processKeyDown(layout["b"])
+        critical off
+    return
+    *b up::
+        critical on
+        processRealKeyUp("b")
+        critical off
+    return
+
+    *n::
+        critical on
+        processKeyDown(layout["n"])
+        critical off
+    return
+    *n up::
+        critical on
+        processRealKeyUp("n")
+        critical off
+    return
+
+    *m::
+        critical on
+        processKeyDown(layout["m"])
+        critical off
+    return
+    *m up::
+        critical on
+        processRealKeyUp("m")
+        critical off
+    return
+
+    *sc033::
+        critical on
+        processKeyDown(layout[","])
+        critical off
+    return
+    *sc033 up::
+        critical on
+        processRealKeyUp(",")
+        critical off
+    return
+
+    *sc034::
+        critical on
+        processKeyDown(layout["."])
+        critical off
+    return
+    *sc034 up::
+        critical on
+        processRealKeyUp(".")
+        critical off
+    return
+
+    *sc035::
+        critical on
+        processKeyDown(layout["/"])
+        critical off
+    return
+    *sc035 up::
+        critical on
+        processRealKeyUp("/")
+        critical off
+    return
+
+    *space::
+        critical on
+        processKeyDown(layout["space"])
+        critical off
+    return
+    *space up::
+        critical on
+        processRealKeyUp("space")
+        critical off
+    return
+
+    *left::
+        critical on
+        processKeyDown(layout["left"])
+        critical off
+    return
+    *left up::
+        critical on
+        processRealKeyUp("left")
+        critical off
+    return
+
+    *down::
+        critical on
+        processKeyDown(layout["down"])
+        critical off
+    return
+    *down up::
+        critical on
+        processRealKeyUp("down")
+        critical off
+    return
+
+    *right::
+        critical on
+        processKeyDown(layout["right"])
+        critical off
+    return
+    *right up::
+        critical on
+        processRealKeyUp("right")
+        critical off
+    return
+
+    *up::
+        critical on
+        processKeyDown(layout["up"])
+        critical off
+    return
+    *up up::
+        critical on
+        processRealKeyUp("up")
+        critical off
+    return
+
+    *pgdn::
+        critical on
+        processKeyDown(layout["pgdn"])
+        critical off
+    return
+    *pgdn up::
+        critical on
+        processRealKeyUp("pgdn")
+        critical off
+    return
+
+    *pgup::
+        critical on
+        processKeyDown(layout["pgup"])
+        critical off
+    return
+    *pgup up::
+        critical on
+        processRealKeyUp("pgup")
+        critical off
+    return
+
+    *appskey::
+        critical on
+        processKeyDown(layout["appskey"])
+        critical off
+    return
+    *appskey up::
+        critical on
+        processRealKeyUp("appskey")
+        critical off
+    return
+
+    *lctrl::
+        critical on
+        processKeyDown(layout["lctrl"])
+        critical off
+    return
+    *lctrl up::
+        critical on
+        processRealKeyUp("lctrl")
+        critical off
+    return
+
+    *rctrl::
+        critical on
+        processKeyDown(layout["rctrl"])
+        critical off
+    return
+    *rctrl up::
+        critical on
+        processRealKeyUp("rctrl")
+        critical off
+    return
+
+    *lalt::
+        critical on
+        processKeyDown(layout["lalt"])
+        critical off
+    return
+    *lalt up::
+        critical on
+        processRealKeyUp("lalt")
+        critical off
+    return
+
+    *ralt::
+        critical on
+        processKeyDown(layout["ralt"])
+        critical off
+    return
+    *ralt up::
+        critical on
+        processRealKeyUp("ralt")
+        critical off
+    return
+
+    *lshift::
+        critical on
+        processKeyDown(layout["lshift"])
+        critical off
+    return
+    *lshift up::
+        critical on
+        processRealKeyUp("lshift")
+        critical off
+    return
+
+    *rshift::
+        critical on
+        processKeyDown(layout["rshift"])
+        critical off
+    return
+    *rshift up::
+        critical on
+        processRealKeyUp("rshift")
+        critical off
+    return
+
+    *pause::
+        critical on
+        processKeyDown(layout["pause"])
+        critical off
+    return
+    *pause up::
+        critical on
+        processRealKeyUp("pause")
+        critical off
+    return
+
+    *MButton::
+        critical on
+        processKeyDown(layout["MButton"])
+        critical off
+    return
+    *MButton up::
+        critical on
+        processRealKeyUp("MButton")
+        critical off
+    return
+
+    *XButton1::
+        critical on
+        processKeyDown(layout["XButton1"])
+        critical off
+    return
+    *XButton1 up::
+        critical on
+        processRealKeyUp("XButton1")
+        critical off
+    return
+
+    *XButton2::
+        critical on
+        processKeyDown(layout["XButton2"])
+        critical off
+    return
+    *XButton2 up::
+        critical on
+        processRealKeyUp("XButton2")
+        critical off
+    return
+
+    *printscreen::
+        critical on
+        processKeyDown(layout["printscreen"])
+        critical off
+    return
+    *printscreen up::
+        critical on
+        processRealKeyUp("printscreen")
+        critical off
+    return
 #If
+
 
 ; avoids strange ahk bug where key is spontaneous treated as 2 times up + when other keys are remapped as win/alt key,
 ; they are sent twice on up
 processRealKeyUp(key)
 {
-    if (GetKeyState(key, "P"))
-    {
-        return
-    }
     processKeyUp(layout[key])
 }
