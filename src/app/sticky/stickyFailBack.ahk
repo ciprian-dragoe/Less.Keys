@@ -10,24 +10,30 @@ timerStickyFailBack()
         SetTimer TimerStickyFailBack, 500
         return
     }
-    resetStates()
+
+    setTimer TimerCheckAgainIfTimerTriggeredBeforeKeyLift, 100
 }
 
 isAllMonitoredStickyKeysLifted()
 {
     for index, key in monitoredStickyKeys
     {
-        if (getKeyState(key, "P"))
+        if (getKeyState(key, "P") || getDllKeyState(key))
         {
             return 0
         }
     }
-    if (getDllKeyState(layoutChangeKey))
-    {
-        return 0
-    }
 
     return 1
+}
+
+timerCheckAgainIfTimerTriggeredBeforeKeyLift()
+{
+    setTimer TimerCheckAgainIfTimerTriggeredBeforeKeyLift, OFF
+    if (isAllMonitoredStickyKeysLifted())
+    {
+        resetStates()
+    }
 }
 
 getDllKeyState(key)

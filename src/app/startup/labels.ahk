@@ -7,6 +7,10 @@
 timerDiscardBecauseAHKbug:
 return
 
+TimerCheckAgainIfTimerTriggeredBeforeKeyLift:
+    timerCheckAgainIfTimerTriggeredBeforeKeyLift()
+return
+
 TimerRealTimeDebug:
     timerRealTimeDebug()
 return
