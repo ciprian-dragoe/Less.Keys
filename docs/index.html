@@ -18,294 +18,163 @@
 
       gtag('config', 'UA-176064705-1');
     </script>
-
-    <style>
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        margin: 0;
-      }
-
-      .navigation {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        background: green;
-        height: 50px;
-      }
-
-      .navigation .content {
-        display: grid;
-        align-items: center;
-        height: 100%;
-        grid-template-columns: 1fr 100px 100px 100px 100px;
-      }
-
-      .logo {
-        justify-self: start;
-      }
-
-      .link {
-        justify-self: end;
-      }
-
-      .section {
-        height: 100vh;
-      }
-
-      .horizonal-size {
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-
-      .header-section {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        align-items: center;
-        justify-items: center;
-      }
-
-      .center-text {
-        text-align: center;
-      }
-
-      .headline {
-        font-size: 2rem;
-      }
-
-      .promo-image {
-        width: 100%;
-        display: grid;
-        justify-content: end;
-      }
-
-      .video-section {
-        display: grid;
-        align-items: center;
-        justify-items: center;
-      }
-
-      .screen-capture {
-        height: 100%;
-        width: 100%;
-      }
-
-      .animation {
-        margin: 100px 0;
-        background: green;
-        width: 100%;
-        height: calc(100% - 200px);
-      }
-
-      .benefits {
-        display: grid;
-        height: 100%;
-        width: 100%;
-      }
-
-      .cta-section {
-        display: grid;
-      }
-
-      .download {
-        padding-top: 100px;
-      }
-
-      .shortcut-list {
-        display: grid;
-        height: 100%;
-        grid-template-columns: auto auto auto;
-        justify-items: center;
-        align-items: center;
-      }
-
-      .shortcut {
-        background: gray;
-        height: 100px;
-        width: 200px;
-      }
-
-      .tutorial-section {
-        display: grid;
-        grid-template-rows: 200px auto;
-      }
-
-      .tutorial-section .title {
-        padding-top: 100px;
-      }
-
-      .tutorials {
-        display: grid;
-        grid-gap: 10px;
-        grid-template-columns: auto auto;
-      }
-
-      .tutorial {
-        background: gray;
-      }
-
-      .donate-section {
-        display: grid;
-        grid-template-rows: 200px auto;
-        justify-items: center;
-        align-content: center;
-      }
-    </style>
   </head>
+
+  <style>
+    :root {
+      --theme-color-1: #01853C;
+      --theme-color-1-light: #BFE1D0;
+      --theme-color-2: #000000;
+      --theme-color-3: #FFFFFF;
+
+      --content-width: 700px;
+
+      --text-size-title: 20pt;
+      --text-size-sub-title: 15pt;
+      --text-size-phrase: 10pt;
+
+      --space-separation-phrases: 10px;
+      --space-separation-sections: 100px;
+    }
+
+    body {
+      margin: 0;
+      font-size: var(--text-size-phrase);
+    }
+
+    .main-button {
+      background: var(--theme-color-1);
+      border-radius: 5px;
+      border: 0;
+      color: var(--theme-color-3);
+      padding: 5px 15px;
+    }
+
+    .nav-section {
+      height: 30pt;
+      color: var(--theme-color-3);
+      background: var(--theme-color-1);
+    }
+
+    .nav-content {
+      width: var(--content-width);
+      margin: auto;
+      display: flex;
+      align-content: center;
+      height: 100%;
+    }
+
+    .nav-log {
+      margin: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-direction: row-reverse;
+      width: 100%;
+    }
+
+    .nav-link {
+      margin: auto 10px;
+    }
+
+    .description-section {
+      color: var(--theme-color-2);
+      width: var(--content-width);
+      margin: var(--space-separation-sections) auto;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .description-title {
+      font-size: var(--text-size-title);
+    }
+
+    .description-title:nth-child(2) {
+      margin-bottom: calc(2 * var(--space-separation-phrases))
+    }
+
+    .description-text:nth-child(even) {
+      margin-bottom: var(--space-separation-phrases);
+    }
+
+    .description-sub-title {
+      text-align: center;
+      font-size: var(--text-size-sub-title);
+      margin-bottom: calc(0.5 * var(--space-separation-phrases));
+    }
+
+    .description-sub-title span {
+      color: var(--theme-color-1);
+    }
+
+    .description-image {
+      height: 100px;
+      width: 250px;
+      background: black;
+      margin-bottom: var(--space-separation-phrases);
+    }
+
+    .benefits-section {
+      width: var(--content-width);
+      margin: var(--space-separation-sections) auto;
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+
   <body>
-    <nav class="navigation">
-      <div class="content horizonal-size">
-        <a class="logo" href="#header">LessKeys</a>
-        <a class="link" href="#video">Benefits</a>
-        <a class="link" href="#cta">Download</a>
-        <a class="link" href="#tutorial">Tutorials</a>
-        <a class="link" href="#donate">Donate</a>
+    <nav class="nav-section">
+      <div class="nav-content">
+        <div class="nav-log">
+          logo
+        </div>
+        <div class="nav-links">
+          <div class="nav-link">Benefits</div>
+          <div class="nav-link">Download</div>
+          <div class="nav-link">Tutorials</div>
+          <div class="nav-link">Donate</div>
+        </div>
       </div>
     </nav>
 
-    <div id="header" class="header-section section horizonal-size">
-      <div class="center-text">
-        <div class="headline">
-          Reduce wrist movement and type faster on any keyboard
-        </div>
-        <div class="problem-description">
-          <div>
-            I started to feel slight disconfort in my wrists while typing so I
-            replaced my regular keyboard with a kinesis advantage.
-          </div>
-          <br />
-          <div>
-            There was a problem though, when I was working remotely it was
-            annoying to carry the laptop and the keyboard with me.
-          </div>
-          <br />
-          <div>
-            So I started this project so that I can type any key on a classic
-            keyboard without moving my wrists.
-          </div>
-        </div>
-      </div>
-      <div class="promo-image">
+    <section class="description-section">
+      <div>
+        <div class="description-title">Reduce wrist movement</div>
+        <div class="description-title">& type faster on any keyboard</div>
         <div>
-          <div>turn this</div>
-          <img
-            src="https://api.pcloud.com/getpubthumb?code=XZHD9yXZXscdzd3J5Uf6NMGmnThgE4XAFx9k&linkpassword=undefined&size=907x283&crop=0&type=auto"
-            width="200px"
-            height="100px"
-          />
+          <div class="description-text">I started to feel slight discomfort in my wrists while typing</div>
+          <div class="description-text">so I replaced my regular keyboard with a kinesis advantage. </div>
+          <div class="description-text">There was a problem though, when I was working remotely it</div>
+          <div class="description-text">was annoying to carry the laptop and the keyboard with me.</div>
+          <div class="description-text">So I started this project so that I can type any key on a classic</div>
+          <div class="description-text">keyboard without moving my wrists. </div>
+          <div>
+            <button class="main-button">DOWNLOAD</button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="description-sub-title"><span>TURN</span>THIS</div>
+        <div class="description-image">1</div>
+        <div class="description-sub-title">INTO<span>THIS</span></div>
+        <div class="description-image">2</div>
+      </div>
+    </section>
+
+    <section class="benefits-section">
+      <div class="benefits-card">
+        <div class="benefits-icon"></div>
+        <div class="benefits-title"></div>
+        <div>
+          <div class="benefits-text"></div>
         </div>
         <div>
-          <div>into this</div>
-          <img
-            src="https://api.pcloud.com/getpubthumb?code=XZGs9yXZD5wkwWWI5rF6oc0cDyF0dbaeiUS7&linkpassword=undefined&size=632x295&crop=0&type=auto"
-            width="200px"
-            height="100px"
-          />
+          <button class="main-button"></button>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div id="video" class="video-section section horizonal-size">
-      <div class="screen-capture">
-        <div class="animation">
-          Gif cu secvente cheie din filmul youtube intro ecran minute
-          [19:38-20:16]
-        </div>
-      </div>
-      <div class="benefits">
-        <div class="benefit benefit1">
-          <div>Free and open source</div>
-          <div>
-            You can download the app free off charge and if there is a feature
-            you want to add you can easily tweak the source code
-          </div>
-        </div>
-        <div class="benefit benefit2">
-          <div>Adaptable learning curve</div>
-          <div>
-            Unlike the kinesis advantage which requires you to learn a whole new
-            layout from the beginning, you can choose to learn in incremental
-            steps parts of the new layout
-          </div>
-        </div>
-        <div class="benefit benefit3">
-          <div>Highly customizeable for power users</div>
-          <div>
-            Want to create your own layout for your custom scenario, no problem,
-            easily modify the config files
-          </div>
-          <div>
-            Want to create custom keyboard shortcuts, easily extend the source
-            code for your desired shortcuts
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="cta" class="cta-section section horizonal-size">
-      <div class="download">
-        <button class="download-button">DOWNLOAD</button>
-      </div>
-      <div class="unzip">Unzip</div>
-      <div class="run">Run LessKeys</div>
-      <div class="shortcuts">
-        <div class="title">Start typing with these shortcuts</div>
-        <div class="shortcut-list">
-          <div class="shortcut shortcut1">space↓ + a = left</div>
-          <div class="shortcut shortcut1">space↓ + d = right</div>
-          <div class="shortcut shortcut1">space↓ + w = up</div>
-          <div class="shortcut shortcut1">space↓ + s = down</div>
-          <div class="shortcut shortcut1">space↓ + q = home</div>
-          <div class="shortcut shortcut1">space↓ + e = end</div>
-          <div class="shortcut shortcut1">space↓ + f = backspace</div>
-          <div class="shortcut shortcut1">space↓ + c = enter</div>
-          <div class="shortcut shortcut1">space↓ + r = tab</div>
-        </div>
-      </div>
-    </div>
-
-    <div id="tutorial" class="tutorial-section section horizonal-size">
-      <div class="title">Tutorials to get the most out of LessKeys</div>
-      <div class="tutorials">
-        <div class="tutorial tutorial1">general presentation</div>
-        <div class="tutorial tutorial1">my layout</div>
-        <div class="tutorial tutorial1">my alternative layout</div>
-        <div class="tutorial tutorial1">my shortcuts</div>
-        <div class="tutorial tutorial1">my settings</div>
-      </div>
-    </div>
-
-    <div id="donate" class="donate-section section horizonal-size">
-      <div class="center-text">
-        Want to accelerate the development of LessKeys ?<br />
-        You can do this via a small donation
-      </div>
-      <form
-        action="https://www.paypal.com/cgi-bin/webscr"
-        method="post"
-        target="_top"
-        class="donate-button"
-      >
-        <input type="hidden" name="cmd" value="_s-xclick" />
-        <input type="hidden" name="hosted_button_id" value="CDKCEDX6B6ZPL" />
-        <input
-          type="image"
-          src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"
-          border="0"
-          name="submit"
-          title="PayPal - The safer, easier way to pay online!"
-          alt="Donate with PayPal button"
-        />
-        <img
-          alt=""
-          border="0"
-          src="https://www.paypal.com/en_US/i/scr/pixel.gif"
-          width="1"
-          height="1"
-        />
-      </form>
-    </div>
   </body>
 </html>
