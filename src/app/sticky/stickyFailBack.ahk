@@ -53,7 +53,7 @@ resetStates()
         debug("================================= shift sticky")
         send {shift up}
         shiftState := 0
-        storeDebugData(shift)
+        storeDebugData("shift")
     }
     if (ctrlState || GetKeyState("ctrl"))
     {
