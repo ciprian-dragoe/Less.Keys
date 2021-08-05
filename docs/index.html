@@ -28,6 +28,7 @@
       --theme-color-3: #FFFFFF;
 
       --content-width: 700px;
+      --card-height: 100px;
 
       --text-size-title: 20pt;
       --text-size-sub-title: 15pt;
@@ -35,6 +36,8 @@
 
       --space-separation-phrases: 10px;
       --space-separation-sections: 100px;
+
+      --radius: 5px;
     }
 
     body {
@@ -44,13 +47,21 @@
 
     .main-button {
       background: var(--theme-color-1);
-      border-radius: 5px;
+      border-radius: var(--radius);
       border: 0;
       color: var(--theme-color-3);
       padding: 5px 15px;
     }
 
-    .nav-section {
+    section {
+      color: var(--theme-color-2);
+      width: var(--content-width);
+      margin: var(--space-separation-sections) auto;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    nav {
       height: 30pt;
       color: var(--theme-color-3);
       background: var(--theme-color-1);
@@ -78,12 +89,8 @@
       margin: auto 10px;
     }
 
-    .description-section {
-      color: var(--theme-color-2);
-      width: var(--content-width);
-      margin: var(--space-separation-sections) auto;
-      display: flex;
-      justify-content: space-between;
+    .description {
+      flex-direction: row;
     }
 
     .description-title {
@@ -115,16 +122,72 @@
       margin-bottom: var(--space-separation-phrases);
     }
 
-    .benefits-section {
-      width: var(--content-width);
-      margin: var(--space-separation-sections) auto;
+    .benefits {
+      flex-direction: column;
+    }
+
+    .benefits > * {
+      margin-bottom: calc(2*var(--space-separation-phrases));
+    }
+
+    .benefits-card {
+      background: var(--theme-color-1-light);
+      height: var(--card-height);
+      border-radius: var(--radius);
       display: flex;
+      padding: calc(2*var(--space-separation-phrases)) calc(2*var(--space-separation-phrases)) 0 calc(2*var(--space-separation-phrases));
       justify-content: space-between;
+    }
+
+    .benefits-intro {
+      height: min-content;
+      display: flex;
+      align-items: center;
+      width: 45%;
+    }
+
+    .benefits-icon {
+      font-size: 22pt;
+      margin-right: var(--space-separation-phrases);
+    }
+
+    .benefits-title {
+      color: var(--theme-color-1);
+      font-weight: bold;
+    }
+
+    .benefits-text {
+      width: 45%;
+    }
+
+    .shortcuts-install {
+      text-align: center;
+      margin-bottom: calc(4*var(--space-separation-phrases));
+    }
+
+    .shortcuts {
+      flex-direction: column;
+    }
+
+    .shortcuts-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      column-gap: calc(2*var(--space-separation-phrases));
+      row-gap: calc(2*var(--space-separation-phrases));
+    }
+
+    .shortcuts-card {
+      padding: var(--space-separation-phrases) 0;
+      font-weight: bold;
+      border-radius: var(--radius);
+      border: 2px solid var(--theme-color-1);
+      text-align: center;
+      background: var(--theme-color-1-light);
     }
   </style>
 
   <body>
-    <nav class="nav-section">
+    <nav>
       <div class="nav-content">
         <div class="nav-log">
           logo
@@ -138,7 +201,7 @@
       </div>
     </nav>
 
-    <section class="description-section">
+    <section class="description">
       <div>
         <div class="description-title">Reduce wrist movement</div>
         <div class="description-title">& type faster on any keyboard</div>
@@ -163,18 +226,67 @@
       </div>
     </section>
 
-    <section class="benefits-section">
+    <section class="benefits">
       <div class="benefits-card">
-        <div class="benefits-icon"></div>
-        <div class="benefits-title"></div>
-        <div>
-          <div class="benefits-text"></div>
+        <div class="benefits-intro">
+          <div class="benefits-icon">icons</div>
+          <div class="benefits-title">Highly customizable</div>
         </div>
-        <div>
-          <button class="main-button"></button>
+
+        <div class="benefits-text">
+          <div>Want to create your own layout for your custom</div>
+          <div>scenario, no problem, easily modify the config files</div>
         </div>
+      </div>
+
+      <div class="benefits-card">
+        <div class="benefits-intro">
+          <div class="benefits-icon">icons</div>
+          <div class="benefits-title">Free & open source</div>
+        </div>
+
+        <div class="benefits-text">
+          <div>You can download the app free off charge</div>
+          <div>and if there is a feature you want to add you</div>
+          <div>can easily modify the source code</div>
+        </div>
+      </div>
+
+      <div class="benefits-card">
+        <div class="benefits-intro">
+          <div class="benefits-icon">icons</div>
+          <div class="benefits-title">Adaptable learning</div>
+        </div>
+
+        <div class="benefits-text">
+          <div>Unlike the kinesis advantage which requires you</div>
+          <div>to learn a whole new layout from the beginning you </div>
+          <div>can choose to learn in incremental steps parts</div>
+          <div>of the new layout</div>
+        </div>
+      </div>
+
+      <div>
+          <button class="main-button" style="width: 100%">Download</button>
       </div>
     </section>
 
+    <section class="shortcuts">
+      <div class="shortcuts-install">
+        Unzip > Run <span style="color: var(--theme-color-1)">Less Keys</span> > Start typing with these shortcuts
+      </div>
+
+      <div class="shortcuts-cards">
+        <div class="shortcuts-card">SPACE + A = LEFT</div>
+        <div class="shortcuts-card">SPACE + D = RIGHT</div>
+        <div class="shortcuts-card">SPACE + W = UP</div>
+        <div class="shortcuts-card">SPACE + S = DOWN</div>
+        <div class="shortcuts-card">SPACE + Q = HOME</div>
+        <div class="shortcuts-card">SPACE + E = END</div>
+        <div class="shortcuts-card">SPACE + F = BACKSPACE</div>
+        <div class="shortcuts-card">SPACE + C = ENTER</div>
+        <div class="shortcuts-card">SPACE + R = TAB</div>
+      </div>
+    </section>
   </body>
 </html>
