@@ -18,8 +18,9 @@ isAllMonitoredStickyKeysLifted()
 {
     for index, key in monitoredStickyKeys
     {
-        if (getKeyState(key, "P") || getDllKeyState(key))
+        if (getKeyState(key, "P"))
         {
+            debug("STICKY TIMER RESET => " . key . " pressed")
             return 0
         }
     }
