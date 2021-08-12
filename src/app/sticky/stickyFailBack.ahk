@@ -11,7 +11,8 @@ timerStickyFailBack()
         return
     }
 
-    setTimer TimerCheckAgainIfTimerTriggeredBeforeKeyLift, 100
+    debug("---CHECK AGAIN STICKY TO MEASURE FALSE POSITIVE")
+    setTimer TimerCheckAgainIfTimerTriggeredBeforeKeyLift, 300
 }
 
 isAllMonitoredStickyKeysLifted()

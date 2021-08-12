@@ -15,6 +15,7 @@ manageLayoutKeyDown(key)
         {
             CoordMode, Mouse, Screen
             MouseGetPos, initialMousePositionXAxis, initialMousePositionYAxis
+            SetTimer, TimerScrollWithMouseMovement, OFF
             SetTimer, TimerScrollWithMouseMovement, %timeoutMouseScrollPoll%
         }
 
