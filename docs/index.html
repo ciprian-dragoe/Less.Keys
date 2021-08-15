@@ -38,11 +38,17 @@
       --space-separation-sections: 100px;
 
       --radius: 5px;
+      --button-width: 150px;
     }
 
     body {
       margin: 0;
       font-size: var(--text-size-phrase);
+    }
+
+    .center-message {
+      text-align: center;
+      margin-bottom: calc(4*var(--space-separation-phrases));
     }
 
     .main-button {
@@ -51,6 +57,7 @@
       border: 0;
       color: var(--theme-color-3);
       padding: 5px 15px;
+      width: var(--button-width);
     }
 
     section {
@@ -160,11 +167,6 @@
       width: 45%;
     }
 
-    .shortcuts-install {
-      text-align: center;
-      margin-bottom: calc(4*var(--space-separation-phrases));
-    }
-
     .shortcuts {
       flex-direction: column;
     }
@@ -182,6 +184,40 @@
       border-radius: var(--radius);
       border: 2px solid var(--theme-color-1);
       text-align: center;
+      background: var(--theme-color-1-light);
+    }
+
+    .tutorials {
+      flex-direction: column;
+    }
+
+    .tutorials-videos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: calc(2*var(--space-separation-phrases));
+      row-gap: calc(2*var(--space-separation-phrases));
+    }
+
+    .tutorial-video {
+      height: 200px;
+      width: calc((var(--content-width)/2 - var(--space-separation-phrases)/2))px;
+      background: black;
+      margin-bottom: var(--space-separation-phrases);
+    }
+
+    .call-to-action {
+      flex-direction: column;
+      margin: 0;
+      width: 100%;
+    }
+
+    .call-to-action-donation {
+      text-underline: black;
+      color: black;
+    }
+
+    .call-to-action-message {
+      padding: calc(var(--space-separation-sections)/2) 0;
       background: var(--theme-color-1-light);
     }
   </style>
@@ -272,7 +308,7 @@
     </section>
 
     <section class="shortcuts">
-      <div class="shortcuts-install">
+      <div class="center-message">
         Unzip > Run <span style="color: var(--theme-color-1)">Less Keys</span> > Start typing with these shortcuts
       </div>
 
@@ -287,6 +323,32 @@
         <div class="shortcuts-card">SPACE + C = ENTER</div>
         <div class="shortcuts-card">SPACE + R = TAB</div>
       </div>
+    </section>
+
+    <section class="tutorials">
+        <div class="center-message">
+          <span style="color: var(--theme-color-1)">Tutorial</span> > to get the most out of LessKeys
+        </div>
+
+        <div class="tutorials-videos">
+          <div class="tutorial-video"></div>
+          <div class="tutorial-video"></div>
+          <div class="tutorial-video"></div>
+          <div class="tutorial-video"></div>
+        </div>
+    </section>
+
+    <section class="call-to-action">
+        <div class="center-message">
+          <div>Want to accelerate the development of LessKeys ?</div>
+          <div>You can do this via a small <a class="call-to-action-donation" href="www.google.com">donation</a></div>
+        </div>
+
+        <div class="call-to-action-message">
+          <div class="center-message" style="margin-bottom: var(--space-separation-phrases)">You can download the app</div>
+          <div class="center-message" style="margin-bottom: calc(2*var(--space-separation-phrases))">free of charge</div>
+          <div class="center-message" style="margin-bottom: var(--space-separation-phrases)"><button class="main-button">Download</button></div>
+        </div>
     </section>
   </body>
 </html>

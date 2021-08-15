@@ -32,10 +32,12 @@ isAllMonitoredStickyKeysLifted()
 timerCheckAgainIfTimerTriggeredBeforeKeyLift()
 {
     setTimer TimerCheckAgainIfTimerTriggeredBeforeKeyLift, OFF
+    critical on
     if (isAllMonitoredStickyKeysLifted())
     {
         resetStates()
     }
+    critical off
 }
 
 getDllKeyState(key)
