@@ -16,6 +16,7 @@ global processKeyOnRelease
 processKeyDown(key)
 {
     debug("[KEY_DOWN_BEGIN] " . key)
+    setTimer TimerCheckAgainIfTimerTriggeredBeforeKeyLift, off
     SetTimer TimerStickyFailBack, off
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
 
