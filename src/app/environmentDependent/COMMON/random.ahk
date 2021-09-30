@@ -9,4 +9,5 @@ sendKeyCombinationIndependentActiveModifiers(combination)
     resetAllModifiers()
     send %combination%
     resetModifiersToState(originalState)
+    debug("finish sendKeyCombinationIndependentActiveModifiers")
 }
