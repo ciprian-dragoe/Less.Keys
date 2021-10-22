@@ -1,6 +1,6 @@
-global sendKeyDown
-global sendKeyUp
-global IS_LESS_KEYS_ENABLED
+global IS_LESS_KEYS_ENABLED := 1
+global keyUpHandler
+global keyDownHandler
 
 
 sendKeyDownToExecutable(key)
@@ -30,14 +30,23 @@ toggleLessKeysEnabledMode()
 
 
 onMessage(0x1000, "toggleLessKeysEnabledMode")
-if (A_ScriptName = "keyHooks.exe")
+if (IS_RUNNING_DEBUG_MODE)
 {
-    sendKeyDown := sendKeyDownToExecutable
-    sendKeyUp := sendKeyUpToExecutable
+    keyDownHandler := func("sendKeyDownToDebug")
+    keyUpHandler := func("sendKeyUpToDebug")
 }
 else
 {
-    sendKeyDown := sendKeyDownToDebug
-    sendKeyUp := sendKeyUpToDebug
+    keyDownHandler := func("sendKeyDownToExecutable")
+    keyUpHandler := func("sendKeyUpToExecutable")
 }
 
+sendKeyDown(key)
+{
+    keyDownHandler.call(key)
+}
+
+sendKeyUp(key)
+{
+    keyDownHandler.call(key)
+}

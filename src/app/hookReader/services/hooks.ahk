@@ -576,7 +576,7 @@
     *printscreen::
         sendKeyDown("printscreen")
     return
-    *printscreen: up:
+    *printscreen up::
         sendKeyUp("printscreen")
     return
 
