@@ -9,7 +9,7 @@ SetTitleMatchMode 2
 SetBatchLines -1
 
 global PATH_APP_CONFIGURATION := A_ScriptDir .  "\..\environmentDependent\_development\binaries\"
-if (A_ScriptName = "hookReader.exe")
+if (A_ScriptName = "startHookHandler.exe")
 {
     PATH_APP_CONFIGURATION := A_ScriptDir .  ".\"
 }

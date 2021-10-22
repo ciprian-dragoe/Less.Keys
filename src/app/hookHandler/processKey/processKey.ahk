@@ -14,8 +14,12 @@ global processKeyOnRelease
 onMessage(0x1000, "processKeyDown")
 onMessage(0x1001, "processKeyUp")
 
-processKeyDown(key)
+processKeyDown(key, ignore=0)
 {
+    converted := GetKeyName(Format("sc{:x}", key))
+    msgbox % converted
+    return
+    key = layout[key]
     debug("[KEY_DOWN_BEGIN] " . key)
     setTimer TimerCheckAgainIfTimerTriggeredBeforeKeyLift, off
     SetTimer TimerStickyFailBack, off

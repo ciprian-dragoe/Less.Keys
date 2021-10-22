@@ -5,13 +5,16 @@
 #NoEnv
 Process, Priority,, High
 SetKeyDelay -1
+DetectHiddenWindows On
 SetTitleMatchMode 2
 SetBatchLines -1
 
 global IS_RUNNING_DEBUG_MODE := 1
-if (A_ScriptName = "hookHandler.exe")
+global TARGET_HANDLER_SCRIPT := "startHookHandler.ahk ahk_class AutoHotkey"
+if (A_ScriptName = "startHookReader.exe")
 {
     IS_RUNNING_DEBUG_MODE := 0
+    TARGET_HANDLER_SCRIPT := "startHookHandler.exe"
 }
 
 

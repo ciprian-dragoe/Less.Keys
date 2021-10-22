@@ -5,22 +5,23 @@ global keyDownHandler
 
 sendKeyDownToExecutable(key)
 {
-    PostMessage, 0x1000, %key%, 0, , processKey.exe
+    PostMessage, 0x1000, %key%, 0, , %TARGET_HANDLER_SCRIPT%
 }
 
 sendKeyDownToDebug(key)
 {
-    PostMessage, 0x1000, %key%, 0, , processKey.exe
+    key := GetKeySC(key)
+    PostMessage, 0x1000, %key%, 0, , %TARGET_HANDLER_SCRIPT%
 }
 
 sendKeyUpToExecutable(key)
 {
-    PostMessage, 0x1001, %key%, 0, , processKey.exe
+    PostMessage, 0x1001, GetKeySC(key), 0, , %TARGET_HANDLER_SCRIPT%
 }
 
 sendKeyUpToDebug(key)
 {
-    PostMessage, 0x1001, %key%, 0, , processKey.exe
+    PostMessage, 0x1001, GetKeySC(key), 0, , %TARGET_HANDLER_SCRIPT%
 }
 
 toggleLessKeysEnabledMode()
