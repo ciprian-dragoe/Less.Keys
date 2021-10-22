@@ -1,9 +1,8 @@
-#include  %A_ScriptDir%\app\processKey\keyTypes\modifier.ahk
-#include  %A_ScriptDir%\app\processKey\keyTypes\normal.ahk
-#include  %A_ScriptDir%\app\processKey\keyTypes\layout.ahk
-#include  %A_ScriptDir%\app\processKey\keyTypes\mouseScroll.ahk
-#include  %A_ScriptDir%\app\sticky\stickyFailBack.ahk
-
+#include  %A_ScriptDir%\processKey\keyTypes\modifier.ahk
+#include  %A_ScriptDir%\processKey\keyTypes\normal.ahk
+#include  %A_ScriptDir%\processKey\keyTypes\layout.ahk
+#include  %A_ScriptDir%\processKey\keyTypes\mouseScroll.ahk
+#include  %A_ScriptDir%\sticky\stickyFailBack.ahk
 
 
 global keyToSendOnUp
@@ -12,6 +11,8 @@ global lastKeyProcessedAsAlternative
 global activePressedKeys := []
 global processKeyOnRelease
 
+onMessage(0x1000, "processKeyDown")
+onMessage(0x1001, "processKeyUp")
 
 processKeyDown(key)
 {

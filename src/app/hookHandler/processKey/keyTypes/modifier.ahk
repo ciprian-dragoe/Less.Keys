@@ -1,12 +1,12 @@
-#include %A_ScriptDir%\app\processKey\keyTypes\commonDoubledAs.ahk
-#include %A_ScriptDir%\app\processKey\keyTypes\leftShiftDoubledAsClick.ahk
-#include %A_ScriptDir%\app\processKey\keyTypes\leftCtrlDoubledAsClick.ahk
-#include %A_ScriptDir%\app\processKey\keyTypes\leftWinDoubledAsClick.ahk
-#include %A_ScriptDir%\app\processKey\keyTypes\leftAltDoubledAsClick.ahk
-#include %A_ScriptDir%\app\processKey\keyTypes\rightCtrlDoubledAsClick.ahk
-#include %A_ScriptDir%\app\processKey\keyTypes\rightShiftDoubledAsClick.ahk
-#include %A_ScriptDir%\app\processKey\keyTypes\rightAltDoubledAsClick.ahk
-#include %A_ScriptDir%\app\processKey\keyTypes\rightWinDoubledAsClick.ahk
+#include %A_ScriptDir%\processKey\keyTypes\commonDoubledAs.ahk
+#include %A_ScriptDir%\processKey\keyTypes\leftShiftDoubledAsClick.ahk
+#include %A_ScriptDir%\processKey\keyTypes\leftCtrlDoubledAsClick.ahk
+#include %A_ScriptDir%\processKey\keyTypes\leftWinDoubledAsClick.ahk
+#include %A_ScriptDir%\processKey\keyTypes\leftAltDoubledAsClick.ahk
+#include %A_ScriptDir%\processKey\keyTypes\rightCtrlDoubledAsClick.ahk
+#include %A_ScriptDir%\processKey\keyTypes\rightShiftDoubledAsClick.ahk
+#include %A_ScriptDir%\processKey\keyTypes\rightAltDoubledAsClick.ahk
+#include %A_ScriptDir%\processKey\keyTypes\rightWinDoubledAsClick.ahk
 
 
 

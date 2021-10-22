@@ -1,1 +1,1 @@
-#include %A_ScriptDir%\app\environmentDependent\development\labels\custom.ahk
+#include %A_ScriptDir%\environmentDependent\..\development\labels\custom.ahk

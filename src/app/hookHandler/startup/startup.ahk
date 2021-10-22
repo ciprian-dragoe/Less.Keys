@@ -1,13 +1,13 @@
-#include  %A_ScriptDir%\app\startup\load\timing.ahk
-#include  %A_ScriptDir%\app\startup\load\logging.ahk
-#include  %A_ScriptDir%\app\startup\load\mouse.ahk
-#include  %A_ScriptDir%\app\startup\load\alternativeLayout.ahk
-#include  %A_ScriptDir%\app\startup\load\doubledModifier.ahk
-#include  %A_ScriptDir%\app\startup\load\keyboardShortcuts.ahk
-#include  %A_ScriptDir%\app\startup\load\layout.ahk
-#include  %A_ScriptDir%\app\startup\load\stickyFailBack.ahk
-#include  %A_ScriptDir%\app\startup\load\accentedCharacters.ahk
-#include  %A_ScriptDir%\app\sticky\lessKeysManagementBasedOnActiveApp.ahk
+#include  %A_ScriptDir%\startup\load\timing.ahk
+#include  %A_ScriptDir%\startup\load\logging.ahk
+#include  %A_ScriptDir%\startup\load\mouse.ahk
+#include  %A_ScriptDir%\startup\load\alternativeLayout.ahk
+#include  %A_ScriptDir%\startup\load\doubledModifier.ahk
+#include  %A_ScriptDir%\startup\load\keyboardShortcuts.ahk
+#include  %A_ScriptDir%\startup\load\layout.ahk
+#include  %A_ScriptDir%\startup\load\stickyFailBack.ahk
+#include  %A_ScriptDir%\startup\load\accentedCharacters.ahk
+#include  %A_ScriptDir%\sticky\lessKeysManagementBasedOnActiveApp.ahk
 
 
 global timerTimeoutStickyKeys := 1200

@@ -1,4 +1,4 @@
-#include %A_ScriptDir%\tests\indexTests.ahk
+#include %A_ScriptDir%\..\tests\indexTests.ahk
 
 
 
