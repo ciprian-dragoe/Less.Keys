@@ -2,7 +2,6 @@ global IS_LESS_KEYS_ENABLED := 1
 global keyUpHandler
 global keyDownHandler
 
-
 sendKeyDownToExecutable(key)
 {
     key := GetKeySC(key)
@@ -30,6 +29,10 @@ sendKeyUpToDebug(key)
 toggleLessKeysEnabledMode()
 {
     IS_LESS_KEYS_ENABLED := !IS_LESS_KEYS_ENABLED
+    tooltip active=%IS_LESS_KEYS_ENABLED%
+    sleep 500
+    tooltip
+    counter := 0
 }
 
 
@@ -52,5 +55,5 @@ sendKeyDown(key)
 
 sendKeyUp(key)
 {
-    keyDownHandler.call(key)
+    keyUpHandler.call(key)
 }

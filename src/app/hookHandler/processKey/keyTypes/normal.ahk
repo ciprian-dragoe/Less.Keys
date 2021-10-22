@@ -72,6 +72,7 @@ processNormalKey(key)
 processKeyToSend(key, literal = 0)
 {
     activeModifiers := getActiveModifiers(key)
+
     if (!processAhkKeyboardShortcuts(activeModifiers, key))
     {
         if (literal)

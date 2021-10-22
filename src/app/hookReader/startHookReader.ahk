@@ -1,13 +1,11 @@
 #SingleInstance
 #Persistent
-#MaxHotkeysPerInterval 600
+#MaxHotkeysPerInterval 100
 #InstallKeybdHook
 #NoEnv
 Process, Priority,, High
-SetKeyDelay -1
 DetectHiddenWindows On
 SetTitleMatchMode 2
-SetBatchLines -1
 
 global IS_RUNNING_DEBUG_MODE := 1
 global TARGET_HANDLER_SCRIPT := "startHookHandler.ahk ahk_class AutoHotkey"

@@ -573,13 +573,6 @@
         sendKeyUp("rshift")
     return
 
-    *printscreen::
-        sendKeyDown("printscreen")
-    return
-    *printscreen up::
-        sendKeyUp("printscreen")
-    return
-
     *pause::
         sendKeyDown("pause")
     return
@@ -608,3 +601,11 @@
         sendKeyUp("xbutton2")
     return
 #If
+
+*printscreen::
+    toggleLessKeysEnabledMode() ; TODO remove and move back
+    ;sendKeyDown("printscreen")
+return
+*printscreen up::
+    ;sendKeyUp("printscreen")
+return
