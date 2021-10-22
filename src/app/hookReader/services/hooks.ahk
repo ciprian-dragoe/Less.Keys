@@ -210,10 +210,10 @@
     return
 
     *backspace::
-        sendKeyDown("*")
+        sendKeyDown("backspace")
     return
     *backspace up::
-        sendKeyUp("*")
+        sendKeyUp("backspace")
     return
 
     *tab::
@@ -399,10 +399,10 @@
     return
 
     *enter::
-        sendKeyDown("*")
+        sendKeyDown("enter")
     return
     *enter up::
-        sendKeyUp("*")
+        sendKeyUp("enter")
     return
 
     *z::
@@ -455,24 +455,24 @@
     return
 
     *sc033::
-        sendKeyDown("sc033")
+        sendKeyDown(",")
     return
     *sc033 up::
-        sendKeyUp("sc033")
+        sendKeyUp(",")
     return
 
     *sc034::
-        sendKeyDown("sc034")
+        sendKeyDown(".")
     return
     *sc034 up::
-        sendKeyUp("sc034")
+        sendKeyUp(".")
     return
 
     *sc035::
-        sendKeyDown("sc035")
+        sendKeyDown("/")
     return
     *sc035 up::
-        sendKeyUp("sc035")
+        sendKeyUp("/")
     return
 
     *space::
@@ -546,10 +546,10 @@
     return
 
     *lalt::
-        sendKeyDown("altt")
+        sendKeyDown("alt")
     return
     *lalt up::
-        sendKeyUp("altt")
+        sendKeyUp("alt")
     return
 
     *ralt::

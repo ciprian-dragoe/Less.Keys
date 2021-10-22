@@ -14,13 +14,12 @@ global processKeyOnRelease
 onMessage(0x1000, "processKeyDown")
 onMessage(0x1001, "processKeyUp")
 
-processKeyDown(key, ignore=0)
+processKeyDown(scanKeyCode)
 {
-    converted := GetKeyName(Format("sc{:x}", key))
-    msgbox % converted
-    return
-    key = layout[key]
+    keyName := GetKeyName(Format("sc{:x}", scanKeyCode))
+    key := layout[keyName]
     debug("[KEY_DOWN_BEGIN] " . key)
+    msgbox % key
     setTimer TimerCheckAgainIfTimerTriggeredBeforeKeyLift, off
     SetTimer TimerStickyFailBack, off
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
@@ -48,8 +47,10 @@ processKeyDown(key, ignore=0)
     debug("[KEY_DOWN_END] " . key)
 }
 
-processKeyUp(key)
+processKeyUp(scanKeyCode)
 {
+    keyName := GetKeyName(Format("sc{:x}", scanKeyCode))
+    key := layout[keyName]
     debug("[KEY_UP_BEGIN] " . key)
     if (processModifierKey(key, 0))
     {

@@ -14,6 +14,7 @@ readLayoutFile(path)
             continue
         }
         originalKey := StrSplit(A_LoopReadLine, "`:").1
+        originalKey := GetKeyName(Format("sc{:x}", GetKeySC(originalKey)))
         newValueForKey := StrSplit(A_LoopReadLine, "`:").2
 
         if (isModifierKey(newValueForKey))
