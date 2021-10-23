@@ -10,7 +10,27 @@ readKeyboardShortcutsFile(path)
             continue
         }
         action := StrSplit(A_LoopReadLine, "`:").2
-        ; todo integrate key name based on vk code to real key name
-        keyboardShortcuts[StrSplit(A_LoopReadLine, "`:").1] := action
+        combination := StrSplit(A_LoopReadLine, "`:").1
+        if (!combination)
+        {
+            continue
+        }
+        key := getKeyWithoutModifiers(combination)
+        modifiers := StrReplace(combination, key, "")
+        validatedKey := GetKeyName(Format("sc{:x}", GetKeySC(key)))
+        if (validatedKey)
+        {
+            combination := modifiers . validatedKey
+        }
+        keyboardShortcuts[combination] := action
     }
+}
+
+getKeyWithoutModifiers(combination)
+{
+    result := StrReplace(combination, "^", "")
+    result := StrReplace(result, "#", "")
+    result := StrReplace(result, "!", "")
+    result := StrReplace(result, "+", "")
+    return result
 }

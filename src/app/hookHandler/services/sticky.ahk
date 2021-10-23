@@ -122,17 +122,3 @@ resetStates()
     isRightCtrlDoubledAsClickPressed := false
     isRightShiftDoubledAsClickPressed := false
 }
-
-toggleStickyKeysMonitoring(toggle)
-{
-    ; todo check sticky keys enabled disabled correct based on lessKeysManagementBasedOnActiveApp
-    ; showtooltip(toggle)
-    if (toggle)
-    {
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-    }
-    else
-    {
-        SetTimer TimerStickyFailBack, off
-    }
-}
