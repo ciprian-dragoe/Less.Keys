@@ -16,6 +16,9 @@ processKeyDown(scanKeyCode)
     keyName := GetKeyName(Format("sc{:x}", scanKeyCode))
     key := layout[keyName]
     debug("[KEY_DOWN_BEGIN] " . key)
+    setTimer TimerCheckAgainIfTimerTriggeredBeforeKeyLift, off
+    SetTimer TimerStickyFailBack, off
+    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
 
     if (processModifierKey(key, 1))
     {

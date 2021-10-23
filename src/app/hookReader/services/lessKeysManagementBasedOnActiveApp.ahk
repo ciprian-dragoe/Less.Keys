@@ -10,10 +10,6 @@ timerLessKeysManagementBasedOnActiveApp()
     {
         return
     }
-    if (logInput)
-    {
-        debugStoredData .= "========" . lastActiveAppName . "`n"
-    }
 
     processRestartLessKeys()
     processDisableEnableLessKeys()
@@ -38,11 +34,10 @@ processDisableEnableLessKeys()
         if (IS_LESS_KEYS_ENABLED)
         {
             IS_LESS_KEYS_ENABLED := false
-            SetTimer TimerStickyFailBack, off
+            PostMessage, %APP_MESSAGE_TOGGLE_STICKY_KEYS_MONITORING%, 0, 0, , %TARGET_HANDLER_SCRIPT%
             temp := logStickyKeys
             logStickyKeys := 0
             PostMessage, %APP_MESSAGE_RESET_STATES%, 0, 0, , %TARGET_HANDLER_SCRIPT%
-            debug("======" . lastActiveAppName . " disables LessKeys")
             logStickyKeys := temp
         }
     }
@@ -50,7 +45,6 @@ processDisableEnableLessKeys()
     {
         if (!IS_LESS_KEYS_ENABLED)
         {
-            debug("====== LessKeys Active Again")
             temp := logStickyKeys
             logStickyKeys := 0
             PostMessage, %APP_MESSAGE_RESET_STATES%, 0, 0, , %TARGET_HANDLER_SCRIPT%
@@ -67,11 +61,10 @@ processRestartLessKeys()
         if (!isAppWhichOverWritesLessKeysActive)
         {
             isAppWhichOverWritesLessKeysActive := 1
-            debug("====== reset from app which overwrites keyboard hooks")
-            SetTimer TimerStickyFailBack, Delete
+            PostMessage, %APP_MESSAGE_TOGGLE_STICKY_KEYS_MONITORING%, 0, 0, , %TARGET_HANDLER_SCRIPT%
             Suspend, On
             Suspend, Off
-            SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+            PostMessage, %APP_MESSAGE_TOGGLE_STICKY_KEYS_MONITORING%, 1, 0, , %TARGET_HANDLER_SCRIPT%
         }
     }
     else

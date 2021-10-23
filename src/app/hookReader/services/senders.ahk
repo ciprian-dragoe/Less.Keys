@@ -29,9 +29,6 @@ sendKeyUpToDebug(key)
 
 sendKeyDown(key)
 {
-    ;setTimer TimerCheckAgainIfTimerTriggeredBeforeKeyLift, off ; TODO wobbly win key
-    SetTimer TimerStickyFailBack, off
-    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
     KEY_DOWN_HANDLER.call(key)
 }
 

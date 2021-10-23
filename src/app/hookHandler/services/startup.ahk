@@ -13,6 +13,9 @@
 #include  %A_ScriptDir%\services\sticky.ahk
 
 
+global timerTimeoutStickyKeys := 1200
+
+
 readSettingsFile(basePath)
 {
     settings := basePath . "my-settings.cfg"

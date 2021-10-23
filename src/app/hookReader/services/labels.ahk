@@ -4,15 +4,6 @@
 ; contain function declarations, some also contain variable initialization and this will 
 ; not happen anymore
 
-; TODO wobbly win key
-TimerCheckAgainIfTimerTriggeredBeforeKeyLift:
-    timerCheckAgainIfTimerTriggeredBeforeKeyLift()
-return
-
 TimerLessKeysManagementBasedOnActiveApp:
     timerLessKeysManagementBasedOnActiveApp()
-return
-
-TimerStickyFailBack:
-    timerStickyFailBack()
 return

@@ -27,3 +27,15 @@ return
 TimerCancelTooltip:
     timerCancelTooltip()
 return
+
+TimerStickyFailBack:
+    timerStickyFailBack()
+return
+
+TimerCheckAgainIfTimerTriggeredBeforeKeyLift:
+    timerCheckAgainIfTimerTriggeredBeforeKeyLift()
+return
+
+TimerRealTimeDebug:
+    timerRealTimeDebug()
+return

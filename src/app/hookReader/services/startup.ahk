@@ -10,11 +10,7 @@
 #include  %A_ScriptDir%\..\environmentDependent\COMMON\loadSettings\appMessages.ahk
 #include  %A_ScriptDir%\..\environmentDependent\COMMON\debug.ahk
 #include  %A_ScriptDir%\services\debug.ahk
-#include  %A_ScriptDir%\services\sticky\lessKeysManagementBasedOnActiveApp.ahk
-#include  %A_ScriptDir%\services\sticky\stickyFailBack.ahk
-
-
-global timerTimeoutStickyKeys := 1200
+#include  %A_ScriptDir%\services\lessKeysManagementBasedOnActiveApp.ahk
 
 
 readSettingsFile(basePath)

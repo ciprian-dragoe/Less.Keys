@@ -157,7 +157,7 @@ resetAllModifiers()
 getModifierStates()
 {
     result := Object()
-    result["winActive"] := GetKeyState("lwin") ; TODO find way to key windows key state without the actual key in the name
+    result["winActive"] := GetKeyState("lwin")
     result["altActive"] := GetKeyState("alt")
     result["ctrlActive"] := GetKeyState("ctrl")
     result["shiftActive"] := GetKeyState("shift")
