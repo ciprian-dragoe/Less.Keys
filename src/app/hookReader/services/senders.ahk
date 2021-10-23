@@ -1,59 +1,54 @@
 global IS_LESS_KEYS_ENABLED := 1
-global keyUpHandler
-global keyDownHandler
+global KEY_UP_HANDLER
+global KEY_DOWN_HANDLER
+
 
 sendKeyDownToExecutable(key)
 {
     key := GetKeySC(key)
-    PostMessage, 0x1000, %key%, 0, , %TARGET_HANDLER_SCRIPT%
+    PostMessage, %APP_MESSAGE_PROCESS_KEY_DOWN%, %key%, 0, , %TARGET_HANDLER_SCRIPT%
 }
 
 sendKeyDownToDebug(key)
 {
     key := GetKeySC(key)
-    PostMessage, 0x1000, %key%, 0, , %TARGET_HANDLER_SCRIPT%
+    PostMessage, %APP_MESSAGE_PROCESS_KEY_DOWN%, %key%, 0, , %TARGET_HANDLER_SCRIPT%
 }
 
 sendKeyUpToExecutable(key)
 {
     key := GetKeySC(key)
-    PostMessage, 0x1001, %key%, 0, , %TARGET_HANDLER_SCRIPT%
+    PostMessage, %APP_MESSAGE_PROCESS_KEY_UP%, %key%, 0, , %TARGET_HANDLER_SCRIPT%
 }
 
 sendKeyUpToDebug(key)
 {
     key := GetKeySC(key)
-    PostMessage, 0x1001, %key%, 0, , %TARGET_HANDLER_SCRIPT%
-}
-
-toggleLessKeysEnabledMode()
-{
-    IS_LESS_KEYS_ENABLED := !IS_LESS_KEYS_ENABLED
-    tooltip active=%IS_LESS_KEYS_ENABLED%
-    sleep 500
-    tooltip
-    counter := 0
-}
-
-
-onMessage(0x1000, "toggleLessKeysEnabledMode")
-if (IS_RUNNING_DEBUG_MODE)
-{
-    keyDownHandler := func("sendKeyDownToDebug")
-    keyUpHandler := func("sendKeyUpToDebug")
-}
-else
-{
-    keyDownHandler := func("sendKeyDownToExecutable")
-    keyUpHandler := func("sendKeyUpToExecutable")
+    PostMessage, %APP_MESSAGE_PROCESS_KEY_UP%, %key%, 0, , %TARGET_HANDLER_SCRIPT%
 }
 
 sendKeyDown(key)
 {
-    keyDownHandler.call(key)
+    ;setTimer TimerCheckAgainIfTimerTriggeredBeforeKeyLift, off ; TODO wobbly win key
+    SetTimer TimerStickyFailBack, off
+    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+    KEY_DOWN_HANDLER.call(key)
 }
 
 sendKeyUp(key)
 {
-    keyUpHandler.call(key)
+    KEY_UP_HANDLER.call(key)
 }
+
+
+if (IS_RUNNING_DEBUG_MODE)
+{
+    KEY_DOWN_HANDLER := func("sendKeyDownToDebug")
+    KEY_UP_HANDLER := func("sendKeyUpToDebug")
+}
+else
+{
+    KEY_DOWN_HANDLER := func("sendKeyDownToExecutable")
+    KEY_UP_HANDLER := func("sendKeyUpToExecutable")
+}
+

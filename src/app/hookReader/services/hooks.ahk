@@ -111,13 +111,6 @@
         sendKeyUp("insert")
     return
 
-    *delete::
-        sendKeyDown("delete")
-    return
-    *delete up::
-        sendKeyUp("delete")
-    return
-
     *sc029::
         sendKeyDown("sc029")
     return
@@ -603,7 +596,7 @@
 #If
 
 *printscreen::
-    toggleLessKeysEnabledMode() ; TODO remove and move back
+    exitHookReader()
     ;sendKeyDown("printscreen")
 return
 *printscreen up::

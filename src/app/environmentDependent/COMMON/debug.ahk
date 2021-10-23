@@ -1,15 +1,9 @@
-reloadApp()
+debug(value)
 {
-    SetTimer TimerStickyFailBack, off
-    Critical Off
-    showToolTip("RELOADING")
-    reload
-}
-
-displayDebugData()
-{
-    clipboard := debugStoredData
-    msgbox % debugStoredData
+    if (logInput)
+    {
+        writeMemoryStream(value)
+    }
 }
 
 storeDebugData(fileName = "")
@@ -30,55 +24,24 @@ storeDebugData(fileName = "")
     }
 }
 
-getModifierStates()
+showToolTip(value, time = 600)
 {
-    result := Object()
-    result["winActive"] := GetKeyState("lwin")
-    result["altActive"] := GetKeyState("alt")
-    result["ctrlActive"] := GetKeyState("ctrl")
-    result["shiftActive"] := GetKeyState("shift")
-    return result
+    tooltip, |%value%|
+    sleep %time%
+    tooltip
 }
 
-resetModifiersToState(state)
+writeMemoryStream(value)
 {
-    if (state["altActive"])
+    keysPressed := ""
+    for index , key in activePressedKeys
     {
-        send {alt down}
+        keysPressed .= key
     }
-    if (state["ctrlActive"])
+    result = %A_Hour%:%A_Min%:%A_Sec%:%A_MSec%|%value%|^=%ctrlActive%`|!=%altActive%|+=%shiftActive%|#=%winActive%|layoutPressed=%layoutKeyPressed%|alternativeLayout=%alternativeLayoutActive%|keysPressed=%keysPressed%|ProcessKeyOnRelease=%processKeyOnRelease%|keyToSendOnUp=%keyToSendOnUp%|sendClickOnLeftCtrlClickRelease=%sendClickOnLeftCtrlClickRelease%|isLeftCtrlClickDown=%isLeftCtrlClickDown%|sendClickOnRightCtrlClickRelease=%sendClickOnRightCtrlClickRelease%|sendClickOnRightShiftClickRelease=%sendClickOnRightShiftClickRelease%|isRightAltDoubledAsClickPressed=%isRightAltDoubledAsClickPressed%|isRightCtrlDoubledAsClickPressed=%isRightCtrlDoubledAsClickPressed%|isRightWinDoubledAsClickPressed=%isRightWinDoubledAsClickPressed%|isRightShiftDoubledAsClickPressed=%isRightShiftDoubledAsClickPressed%`n
+    debugStoredData .= result
+    if (StrLen(debugStoredData) > 120000)
     {
-        send {ctrl down}
+        StringTrimLeft, debugStoredData, debugStoredData, 50000
     }
-    if (state["shiftActive"])
-    {
-        send {shift down}
-    }
-    if (state["winActive"])
-    {
-        send {lwin down}
-    }
-}
-
-resetAllModifiers()
-{
-    dummy := 0
-    resetModifierWithoutTriggerUpState("lwin", dummy)
-    resetModifierWithoutTriggerUpState("alt", dummy)
-    send {ctrl up}
-    send {shift up}
-}
-
-sendTestMessage()
-{
-    originalState := getModifierStates()
-    resetAllModifiers()
-    send INTEGRATION_TEST
-    resetModifiersToState(originalState)
-}
-
-exit()
-{
-    showToolTip("EXIT")
-    exitApp
 }

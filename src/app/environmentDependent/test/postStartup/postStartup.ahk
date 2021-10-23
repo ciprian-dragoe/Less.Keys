@@ -1,7 +1,6 @@
 #include %A_ScriptDir%\..\tests\indexTests.ahk
 
 
-
 global defaultLeftCtrlClickAction
 global defaultLeftShiftClickAction
 global defaultLeftWinClickAction
@@ -13,6 +12,15 @@ global defaultRightAltClickAction
 global defaultTimeoutStillSendLayoutKey
 global defaultTimeoutProcessLayoutOnRelease
 global defaultTimerTimeoutStickyKeys
+
+
+sendTestMessage()
+{
+    originalState := getModifierStates()
+    resetAllModifiers()
+    send INTEGRATION_TEST
+    resetModifiersToState(originalState)
+}
 
 
 if (prepareTestEnvironment())

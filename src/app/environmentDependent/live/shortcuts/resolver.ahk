@@ -1,5 +1,3 @@
-#include %A_ScriptDir%\..\environmentDependent\COMMON\debug.ahk
-#include %A_ScriptDir%\..\environmentDependent\COMMON\rightClick.ahk
 #include %A_ScriptDir%\..\environmentDependent\COMMON\accentedCharacters.ahk
 #include %A_ScriptDir%\..\environmentDependent\COMMON\functionKeys.ahk
 #include %A_ScriptDir%\..\environmentDependent\COMMON\random.ahk
@@ -8,12 +6,10 @@
 
 global resolverAction := object()
 resolverAction[500] := func("sendAccentedSibling")
-resolverAction[501] := func("rightClick")
-resolverAction[502] := func("sendTestMessage")
 resolverAction[503] := func("displayDebugData")
-resolverAction[504] := func("reloadApp")
-resolverAction[505] := func("exit")
-resolverAction[509] := func("storeDebugData")
+resolverAction[504] := func("reloadHookHandler")
+resolverAction[505] := func("exitHookHandler")
+resolverAction[509] := func("storeDebugLogHookHandler")
 global functionKeysStartIndexMinusOne := 510
 resolverAction[511] := func("sendFunctionKey")
 resolverAction[512] := func("sendFunctionKey")
