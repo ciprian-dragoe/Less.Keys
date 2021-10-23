@@ -1,6 +1,7 @@
 #include  %A_ScriptDir%\..\environmentDependent\COMMON\appMessages.ahk
+#include  %A_ScriptDir%\..\environmentDependent\COMMON\debug.ahk
+#include  %A_ScriptDir%\..\environmentDependent\COMMON\logging.ahk
 #include  %A_ScriptDir%\services\loadSettings\timing.ahk
-#include  %A_ScriptDir%\services\loadSettings\logging.ahk
 #include  %A_ScriptDir%\services\loadSettings\mouse.ahk
 #include  %A_ScriptDir%\services\loadSettings\alternativeLayout.ahk
 #include  %A_ScriptDir%\services\loadSettings\doubledModifier.ahk

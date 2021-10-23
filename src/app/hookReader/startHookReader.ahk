@@ -7,10 +7,12 @@ Process, Priority,, High
 DetectHiddenWindows On
 SetTitleMatchMode 2
 
+global PATH_APP_CONFIGURATION := A_ScriptDir .  "\..\environmentDependent\_development\binaries\"
 global IS_RUNNING_DEBUG_MODE := 1
 global TARGET_HANDLER_SCRIPT := "startHookHandler.ahk ahk_class AutoHotkey"
 if (A_ScriptName = "startHookReader.exe")
 {
+    PATH_APP_CONFIGURATION := A_ScriptDir .  ".\"
     IS_RUNNING_DEBUG_MODE := 0
     TARGET_HANDLER_SCRIPT := "startHookHandler.exe"
 }

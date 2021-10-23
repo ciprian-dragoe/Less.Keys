@@ -66,6 +66,8 @@ processRestartLessKeys()
             isAppWhichOverWritesLessKeysActive := 1
             SetTimer TimerStickyFailBack, off
             PostMessage, %APP_MESSAGE_RESET_HOOK_MONITORING%, 0, 0, , %TARGET_HANDLER_SCRIPT%
+            Suspend, On
+            Suspend, Off
             SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         }
     }

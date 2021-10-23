@@ -29,11 +29,13 @@ sendKeyUpToDebug(key)
 
 sendKeyDown(key)
 {
+    debug("|D| " . key)
     KEY_DOWN_HANDLER.call(key)
 }
 
 sendKeyUp(key)
 {
+    debug("|U| " . key)
     KEY_UP_HANDLER.call(key)
 }
 

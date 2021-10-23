@@ -58,6 +58,7 @@ resetStates()
         send {shift up}
         shiftState := 0
         storeDebugData("shift")
+        PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %TARGET_HANDLER_SCRIPT%
     }
     if (ctrlState || GetKeyState("ctrl"))
     {
@@ -65,18 +66,21 @@ resetStates()
         send {ctrl up}
         ctrlState := 0
         storeDebugData("ctrl")
+        PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %TARGET_HANDLER_SCRIPT%
     }
     if (altState || GetKeyState("alt"))
     {
         debug("================================= alt sticky")
         resetModifierWithoutTriggerUpState("alt", altActive)
         storeDebugData("alt")
+        PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %TARGET_HANDLER_SCRIPT%
     }
     if (winState || GetKeyState("lwin"))
     {
         debug("================================= win sticky")
         resetModifierWithoutTriggerUpState("lwin", winActive)
         storeDebugData("win")
+        PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %TARGET_HANDLER_SCRIPT%
     }
 
     if (layoutKeyPressed)
@@ -86,6 +90,7 @@ resetStates()
         layoutKeyPressed := 0
         debug("================================= space sticky")
         storeDebugData("space")
+        PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %TARGET_HANDLER_SCRIPT%
     }
 
     resetDoubledModifierClickDrag("leftCtrlClick", isLeftCtrlClickDown)

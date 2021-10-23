@@ -22,9 +22,8 @@ resetHookMonitoring()
     Suspend, Off
 }
 
-showToolTip(value, time = 600)
+storeDebugLogHookReader()
 {
-    tooltip, |%value%|
-    sleep %time%
-    tooltip
+    name = %A_Hour%-%A_Min%-%A_Sec%-%A_MSec%-hook-reader.txt
+    storeDebugData(name)
 }
