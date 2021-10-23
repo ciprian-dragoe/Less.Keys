@@ -39,3 +39,7 @@ return
 TimerRealTimeDebug:
     timerRealTimeDebug()
 return
+
+TimerCancelWobblyKey:
+    timerCancelWobblyKey()
+return

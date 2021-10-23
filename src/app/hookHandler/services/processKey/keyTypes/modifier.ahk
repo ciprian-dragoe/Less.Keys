@@ -7,6 +7,7 @@
 #include %A_ScriptDir%\services\processKey\keyTypes\rightShiftDoubledAsClick.ahk
 #include %A_ScriptDir%\services\processKey\keyTypes\rightAltDoubledAsClick.ahk
 #include %A_ScriptDir%\services\processKey\keyTypes\rightWinDoubledAsClick.ahk
+#include %A_ScriptDir%\services\processKey\keyTypes\wobblyKeyPress.ahk
 
 
 global ctrlActive := false
@@ -32,6 +33,8 @@ modifierActions["rightCtrlClick"] := func("processRightCtrlDoubledAsClick")
 modifierActions["rightShiftClick"] := func("processRightShiftDoubledAsClick")
 modifierActions["rightWinClick"] := func("processRightWinDoubledAsClick")
 modifierActions["rightAltClick"] := func("processRightAltDoubledAsClick")
+modifierActions["rightAltClick"] := func("processRightAltDoubledAsClick")
+modifierActions["wobblyWinKey"] := func("wobblyKeyPress")
 
 processModifierKey(key, state)
 {
