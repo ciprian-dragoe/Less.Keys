@@ -20,7 +20,7 @@ isAppInMonitoredList(app, monitoredAppList)
 {
     for index, appName in monitoredAppList
     {
-        IfInString, app, %appName%
+        If (InStr(app, appName))
         {
             return 1
         }
@@ -35,7 +35,7 @@ processDisableEnableLessKeys()
         if (IS_LESS_KEYS_ENABLED)
         {
             IS_LESS_KEYS_ENABLED := false
-            PostMessage, %APP_MESSAGE_TOGGLE_LESSKEYS%, 0, 0, , %TARGET_HANDLER_SCRIPT%
+            PostMessage, %APP_MESSAGE_SET_LESSKEYS_STATE%, 0, 0, , %TARGET_HANDLER_SCRIPT%
             SetTimer TimerStickyFailBack, off
             temp := logStickyKeys
             logStickyKeys := 0
@@ -52,7 +52,7 @@ processDisableEnableLessKeys()
             resetStates()
             logStickyKeys := temp
             IS_LESS_KEYS_ENABLED := 1
-            PostMessage, %APP_MESSAGE_TOGGLE_LESSKEYS%, 0, 0, , %TARGET_HANDLER_SCRIPT%
+            PostMessage, %APP_MESSAGE_SET_LESSKEYS_STATE%, 1, 0, , %TARGET_HANDLER_SCRIPT%
         }
     }
 }

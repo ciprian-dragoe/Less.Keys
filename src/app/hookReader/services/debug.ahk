@@ -10,18 +10,10 @@ reloadHookReader()
     reload
 }
 
-toggleLessKeysState()
+toggleLessKeysState(state)
 {
-    if (IS_LESS_KEYS_ENABLED)
-    {
-        showTooltip("LessKeys DISABLED")
-        IS_LESS_KEYS_ENABLED := 0
-    }
-    else
-    {
-        showTooltip("LessKeys ACTIVE")
-        IS_LESS_KEYS_ENABLED := 1
-    }
+    IS_LESS_KEYS_ENABLED := state
+    showtooltip("LessKeys = " . state)
 }
 
 resetHookMonitoring()
