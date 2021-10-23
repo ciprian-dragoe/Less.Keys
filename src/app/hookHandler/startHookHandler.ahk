@@ -1,12 +1,11 @@
 #SingleInstance
 #Persistent
-#MaxHotkeysPerInterval 600
+#MaxHotkeysPerInterval 100
 #InstallKeybdHook
 #NoEnv
 Process, Priority,, High
-SetKeyDelay -1
+DetectHiddenWindows On
 SetTitleMatchMode 2
-SetBatchLines -1
 
 global PATH_APP_CONFIGURATION := A_ScriptDir .  "\..\environmentDependent\_development\binaries\"
 global TARGET_HANDLER_SCRIPT := "startHookReader.ahk ahk_class AutoHotkey"
