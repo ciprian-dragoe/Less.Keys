@@ -43,3 +43,7 @@ return
 TimerCancelWobblyKey:
     timerCancelWobblyKey()
 return
+
+TimerLessKeysManagementBasedOnActiveApp:
+    timerLessKeysManagementBasedOnActiveApp()
+return

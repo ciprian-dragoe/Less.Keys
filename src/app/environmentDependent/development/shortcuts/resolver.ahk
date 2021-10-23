@@ -8,7 +8,6 @@
 global resolverAction := object()
 resolverAction[500] := func("sendAccentedSibling")
 resolverAction[502] := func("sendTestMessage")
-resolverAction[503] := func("displayDebugData")
 resolverAction[504] := func("reloadHookHandler")
 resolverAction[505] := func("exitHookHandler")
 resolverAction[509] := func("storeDebugLogHookHandler")
@@ -31,5 +30,4 @@ processShortcut(index, combination)
 {
     debug("shortcut: " . combination)
     resolverAction[index].call(combination, index)
-    return
 }

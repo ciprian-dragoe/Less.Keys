@@ -3,7 +3,3 @@
 ; are included, the code in the next files is no longer executed - although most files 
 ; contain function declarations, some also contain variable initialization and this will 
 ; not happen anymore
-
-TimerLessKeysManagementBasedOnActiveApp:
-    timerLessKeysManagementBasedOnActiveApp()
-return

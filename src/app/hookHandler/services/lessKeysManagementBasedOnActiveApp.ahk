@@ -1,6 +1,7 @@
 global isAppWhichOverWritesLessKeysActive := false
 global isLessKeysEnabled := true
 global lastActiveAppName := ""
+global IS_LESS_KEYS_ENABLED := 1
 
 
 timerLessKeysManagementBasedOnActiveApp()
@@ -34,10 +35,11 @@ processDisableEnableLessKeys()
         if (IS_LESS_KEYS_ENABLED)
         {
             IS_LESS_KEYS_ENABLED := false
-            PostMessage, %APP_MESSAGE_TOGGLE_STICKY_KEYS_MONITORING%, 0, 0, , %TARGET_HANDLER_SCRIPT%
+            PostMessage, %APP_MESSAGE_TOGGLE_LESSKEYS%, 0, 0, , %TARGET_HANDLER_SCRIPT%
+            SetTimer TimerStickyFailBack, off
             temp := logStickyKeys
             logStickyKeys := 0
-            PostMessage, %APP_MESSAGE_RESET_STATES%, 0, 0, , %TARGET_HANDLER_SCRIPT%
+            resetStates()
             logStickyKeys := temp
         }
     }
@@ -47,9 +49,10 @@ processDisableEnableLessKeys()
         {
             temp := logStickyKeys
             logStickyKeys := 0
-            PostMessage, %APP_MESSAGE_RESET_STATES%, 0, 0, , %TARGET_HANDLER_SCRIPT%
+            resetStates()
             logStickyKeys := temp
             IS_LESS_KEYS_ENABLED := 1
+            PostMessage, %APP_MESSAGE_TOGGLE_LESSKEYS%, 0, 0, , %TARGET_HANDLER_SCRIPT%
         }
     }
 }
@@ -61,10 +64,9 @@ processRestartLessKeys()
         if (!isAppWhichOverWritesLessKeysActive)
         {
             isAppWhichOverWritesLessKeysActive := 1
-            PostMessage, %APP_MESSAGE_TOGGLE_STICKY_KEYS_MONITORING%, 0, 0, , %TARGET_HANDLER_SCRIPT%
-            Suspend, On
-            Suspend, Off
-            PostMessage, %APP_MESSAGE_TOGGLE_STICKY_KEYS_MONITORING%, 1, 0, , %TARGET_HANDLER_SCRIPT%
+            SetTimer TimerStickyFailBack, off
+            PostMessage, %APP_MESSAGE_RESET_HOOK_MONITORING%, 0, 0, , %TARGET_HANDLER_SCRIPT%
+            SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         }
     }
     else
