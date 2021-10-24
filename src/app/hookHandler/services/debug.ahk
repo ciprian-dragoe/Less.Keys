@@ -6,10 +6,11 @@ exitHookHandler()
     exitApp
 }
 
-reloadHookHandler()
+reloadHookHandler(combination, index)
 {
-    PostMessage, %APP_MESSAGE_FORCE_RESET%, 0, 0, , %TARGET_HANDLER_SCRIPT%
-    showToolTip("RELOADING")
+    logInput := 0
+    logStickyKeys := 0
+    SendMessage, %APP_MESSAGE_FORCE_RESET%, 0, 0, , %TARGET_HANDLER_SCRIPT%
     reload
 }
 

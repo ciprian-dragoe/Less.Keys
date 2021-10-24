@@ -1,13 +1,13 @@
+getKeyWithoutModifiers(combination)
+{
+    result := StrReplace(combination, "^", "")
+    result := StrReplace(result, "#", "")
+    result := StrReplace(result, "!", "")
+    result := StrReplace(result, "+", "")
+    return result
+}
+
 ignoreShortcut()
 {
     return
-}
-
-sendKeyCombinationIndependentActiveModifiers(combination)
-{
-    originalState := getModifierStates()
-    resetAllModifiers()
-    send %combination%
-    resetModifiersToState(originalState)
-    debug("finish sendKeyCombinationIndependentActiveModifiers")
 }

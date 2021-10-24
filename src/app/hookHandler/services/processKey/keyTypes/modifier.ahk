@@ -166,3 +166,12 @@ getModifierStates()
     result["shiftActive"] := GetKeyState("shift")
     return result
 }
+
+sendKeyCombinationIndependentActiveModifiers(combination)
+{
+    originalState := getModifierStates()
+    resetAllModifiers()
+    send %combination%
+    resetModifiersToState(originalState)
+    debug("finish sendKeyCombinationIndependentActiveModifiers")
+}

@@ -1,3 +1,4 @@
+#installmousehook
 #SingleInstance
 #Persistent
 #MaxHotkeysPerInterval 100
@@ -6,6 +7,8 @@
 Process, Priority,, High
 DetectHiddenWindows On
 SetTitleMatchMode 2
+SetBatchLines -1
+
 
 global PATH_APP_CONFIGURATION := A_ScriptDir .  "\..\environmentDependent\_development\binaries\"
 global TARGET_HANDLER_SCRIPT := "startHookReader.ahk ahk_class AutoHotkey"

@@ -7,6 +7,8 @@ exitHookReader()
 
 reloadHookReader()
 {
+    BlockInput, On
+    showToolTip("RELOADING", 1000)
     reload
 }
 

@@ -1,7 +1,5 @@
 #include %A_ScriptDir%\..\environmentDependent\COMMON\accentedCharacters.ahk
 #include %A_ScriptDir%\..\environmentDependent\COMMON\functionKeys.ahk
-#include %A_ScriptDir%\..\environmentDependent\COMMON\random.ahk
-
 
 
 global resolverAction := object()

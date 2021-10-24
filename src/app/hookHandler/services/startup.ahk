@@ -1,3 +1,4 @@
+#include  %A_ScriptDir%\..\environmentDependent\COMMON\random.ahk
 #include  %A_ScriptDir%\..\environmentDependent\COMMON\appMessages.ahk
 #include  %A_ScriptDir%\..\environmentDependent\COMMON\debug.ahk
 #include  %A_ScriptDir%\..\environmentDependent\COMMON\logging.ahk

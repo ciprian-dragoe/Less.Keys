@@ -6,6 +6,8 @@
 Process, Priority,, High
 DetectHiddenWindows On
 SetTitleMatchMode 2
+SetBatchLines -1
+
 
 global PATH_APP_CONFIGURATION := A_ScriptDir .  "\..\environmentDependent\_development\binaries\"
 global IS_RUNNING_DEBUG_MODE := 1
