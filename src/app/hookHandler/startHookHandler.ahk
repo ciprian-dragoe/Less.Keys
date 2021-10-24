@@ -1,9 +1,10 @@
 #installmousehook
-#SingleInstance
+#SingleInstance Force
 #Persistent
 #MaxHotkeysPerInterval 100
 #InstallKeybdHook
 #NoEnv
+#NoTrayIcon
 Process, Priority,, High
 DetectHiddenWindows On
 SetTitleMatchMode 2

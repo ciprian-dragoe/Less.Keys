@@ -1,31 +1,21 @@
-#SingleInstance
+#SingleInstance Force
 #Persistent
-#MaxHotkeysPerInterval 400
-#InstallKeybdHook
 #NoEnv
-SetKeyDelay -1
 SetTitleMatchMode 2
+DetectHiddenWindows On
 
 
-
-global PATH_APP_CONFIGURATION := "..\"
+hookReader := A_ScriptDir . "\app\hookReader\startHookReader.ahk"
+hookHandler := A_ScriptDir . "\app\hookHandler\startHookHandler.ahk"
 if (A_ScriptName = "LessKeys.exe")
 {
-    PATH_APP_CONFIGURATION := A_ScriptDir .  ".\"
+    hookReader := A_ScriptDir . "\startHookReader.exe"
+    hookHandler := A_ScriptDir . "\startHookHandler.exe"
 }
 
-
-#include %A_ScriptDir%\startup\startup.ahk
-#include %A_ScriptDir%\processKey\processKey.ahk
-#include %A_ScriptDir%\environmentDependent\live\shortcuts\resolver.ahk
-#include %A_ScriptDir%\debug\debug.ahk
-#include %A_ScriptDir%\environmentDependent\live\postStartup\postStartup.ahk
-
-; the following includes have key hooks and labels, they should always be last included 
-; because after them any other code is no longer run (for example global variable declaration
-; will be ignored) 
-#include %A_ScriptDir%\startup\labels.ahk
-#include %A_ScriptDir%\environmentDependent\live\keyHooks\keyHooks.ahk
-
-; if you want to add your custom labels, add them here  
-#include %A_ScriptDir%\environmentDependent\live\labels\custom.ahk
+tooltip `n`nLessKeys`n`n
+; !!! scripts must be started in this order !!!
+run %hookReader%
+sleep 500
+run %hookHandler%
+tooltip
