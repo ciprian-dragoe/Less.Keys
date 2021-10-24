@@ -2,7 +2,7 @@ global REAL_TIME_DEBUG
 
 exitHookHandler()
 {
-    PostMessage, %APP_MESSAGE_FORCE_QUIT%, 0, 0, , %TARGET_HANDLER_SCRIPT%
+    PostMessage, %APP_MESSAGE_FORCE_QUIT%, 0, 0, , %SCRIPT_HOOKS_HANDLER%
     exitApp
 }
 
@@ -10,7 +10,7 @@ reloadHookHandler(combination, index)
 {
     logInput := 0
     logStickyKeys := 0
-    SendMessage, %APP_MESSAGE_FORCE_RESET%, 0, 0, , %TARGET_HANDLER_SCRIPT%
+    SendMessage, %APP_MESSAGE_FORCE_RESET%, 0, 0, , %SCRIPT_HOOKS_HANDLER%
     reload
 }
 
@@ -62,7 +62,7 @@ getStickyKeys()
 
 storeDebugLogHookHandler()
 {
-    PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %TARGET_HANDLER_SCRIPT%
+    PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
     name = %A_Hour%-%A_Min%-%A_Sec%-%A_MSec%-hook-handler.txt
     storeDebugData(name)
 }

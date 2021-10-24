@@ -35,7 +35,7 @@ processDisableEnableLessKeys()
         if (IS_LESS_KEYS_ENABLED)
         {
             IS_LESS_KEYS_ENABLED := false
-            PostMessage, %APP_MESSAGE_SET_LESSKEYS_STATE%, 0, 0, , %TARGET_HANDLER_SCRIPT%
+            PostMessage, %APP_MESSAGE_SET_LESSKEYS_STATE%, 0, 0, , %SCRIPT_HOOKS_READER%
             SetTimer TimerStickyFailBack, off
             temp := logStickyKeys
             logStickyKeys := 0
@@ -52,7 +52,7 @@ processDisableEnableLessKeys()
             resetStates()
             logStickyKeys := temp
             IS_LESS_KEYS_ENABLED := 1
-            PostMessage, %APP_MESSAGE_SET_LESSKEYS_STATE%, 1, 0, , %TARGET_HANDLER_SCRIPT%
+            PostMessage, %APP_MESSAGE_SET_LESSKEYS_STATE%, 1, 0, , %SCRIPT_HOOKS_READER%
         }
     }
 }
@@ -65,7 +65,7 @@ processRestartLessKeys()
         {
             isAppWhichOverWritesLessKeysActive := 1
             SetTimer TimerStickyFailBack, off
-            PostMessage, %APP_MESSAGE_RESET_HOOK_MONITORING%, 0, 0, , %TARGET_HANDLER_SCRIPT%
+            PostMessage, %APP_MESSAGE_RESET_HOOK_MONITORING%, 0, 0, , %SCRIPT_HOOKS_READER%
             Suspend, On
             Suspend, Off
             SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%

@@ -1,6 +1,6 @@
 exitHookReader()
 {
-    PostMessage, %APP_MESSAGE_FORCE_QUIT%, 0, 0, , %TARGET_HANDLER_SCRIPT%
+    PostMessage, %APP_MESSAGE_FORCE_QUIT%, 0, 0, , %SCRIPT_HOOKS_HANDLER%
     showToolTip("EXIT")
     exitApp
 }

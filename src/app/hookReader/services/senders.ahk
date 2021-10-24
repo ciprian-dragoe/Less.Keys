@@ -6,25 +6,25 @@ global KEY_DOWN_HANDLER
 sendKeyDownToExecutable(key)
 {
     key := GetKeySC(key)
-    PostMessage, %APP_MESSAGE_PROCESS_KEY_DOWN%, %key%, 0, , %TARGET_HANDLER_SCRIPT%
+    PostMessage, %APP_MESSAGE_PROCESS_KEY_DOWN%, %key%, 0, , %SCRIPT_HOOKS_HANDLER%
 }
 
 sendKeyDownToDebug(key)
 {
     key := GetKeySC(key)
-    PostMessage, %APP_MESSAGE_PROCESS_KEY_DOWN%, %key%, 0, , %TARGET_HANDLER_SCRIPT%
+    PostMessage, %APP_MESSAGE_PROCESS_KEY_DOWN%, %key%, 0, , %SCRIPT_HOOKS_HANDLER%
 }
 
 sendKeyUpToExecutable(key)
 {
     key := GetKeySC(key)
-    PostMessage, %APP_MESSAGE_PROCESS_KEY_UP%, %key%, 0, , %TARGET_HANDLER_SCRIPT%
+    PostMessage, %APP_MESSAGE_PROCESS_KEY_UP%, %key%, 0, , %SCRIPT_HOOKS_HANDLER%
 }
 
 sendKeyUpToDebug(key)
 {
     key := GetKeySC(key)
-    PostMessage, %APP_MESSAGE_PROCESS_KEY_UP%, %key%, 0, , %TARGET_HANDLER_SCRIPT%
+    PostMessage, %APP_MESSAGE_PROCESS_KEY_UP%, %key%, 0, , %SCRIPT_HOOKS_HANDLER%
 }
 
 sendKeyDown(key)
