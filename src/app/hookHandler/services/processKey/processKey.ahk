@@ -13,6 +13,7 @@ global processKeyOnRelease
 
 processKeyDown(scanKeyCode)
 {
+    critical
     keyName := GetKeyName(Format("sc{:x}", scanKeyCode))
     key := layout[keyName]
     debug("[KEY_DOWN_BEGIN] " . key)
@@ -45,6 +46,7 @@ processKeyDown(scanKeyCode)
 
 processKeyUp(scanKeyCode)
 {
+    critical
     keyName := GetKeyName(Format("sc{:x}", scanKeyCode))
     key := layout[keyName]
     debug("[KEY_UP_BEGIN] " . key)

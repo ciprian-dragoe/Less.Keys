@@ -21,6 +21,7 @@ if (A_ScriptName = "startHookHandler.exe")
 #include %A_ScriptDir%\services\postStartup.ahk
 #include %A_ScriptDir%\..\environmentDependent\_development\postStartup\postStartupHookHandler.ahk
 
+
 ; the following includes have key hooks and labels, they should always be last included
 ; because after them any other code is no longer run (for example global variable declaration
 ; will be ignored)

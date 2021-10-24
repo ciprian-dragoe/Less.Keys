@@ -1,4 +1,4 @@
-global debugStoredData
+global debugStoredData := ""
 
 showToolTip(value, time = 600)
 {
@@ -49,5 +49,6 @@ storeDebugData(fileName = "")
 
         showtooltip(fileName)
         FileAppend, %debugStoredData%, %A_Desktop%\%fileName%
+        debugStoredData := ""
     }
 }
