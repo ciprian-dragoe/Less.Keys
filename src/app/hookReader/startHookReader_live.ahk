@@ -12,12 +12,14 @@ SetBatchLines -1
 
 global IS_RUNNING_DEBUG_MODE := 1
 global SCRIPT_HOOKS_HANDLER := "startHookHandler_live.ahk ahk_class AutoHotkey"
+global SCRIPT_LESSKEYS := "LessKeys_live.ahk ahk_class AutoHotkey"
 PATH_APP_CONFIGURATION := A_ScriptDir .  "\..\environmentDependent\live\binaries\"
 if (A_ScriptName = "startHookReader.exe")
 {
     PATH_APP_CONFIGURATION := A_ScriptDir .  ".\"
     IS_RUNNING_DEBUG_MODE := 0
     SCRIPT_HOOKS_HANDLER := "startHookHandler.exe"
+    SCRIPT_LESSKEYS := "LessKeys.exe"
 }
 
 

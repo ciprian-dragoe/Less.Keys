@@ -1,14 +1,10 @@
 exitHookReader()
 {
-    PostMessage, %APP_MESSAGE_FORCE_QUIT%, 0, 0, , %SCRIPT_HOOKS_HANDLER%
-    showToolTip("EXIT")
     exitApp
 }
 
 reloadHookReader()
 {
-    BlockInput, On
-    showToolTip("RELOADING", 1000)
     reload
 }
 

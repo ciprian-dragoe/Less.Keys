@@ -6,8 +6,6 @@ DetectHiddenWindows On
 
 global HOOK_READER := A_ScriptDir . "\..\hookReader\startHookReader_development.ahk"
 global HOOK_HANDLER := A_ScriptDir . "\..\hookHandler\startHookHandler_development.ahk"
-
-
 if (A_ScriptName = "LessKeys.exe")
 {
     HOOK_READER := A_ScriptDir . "\startHookReader.exe"
@@ -15,9 +13,10 @@ if (A_ScriptName = "LessKeys.exe")
 }
 
 
-tooltip `n`nLessKeys`n`n
-; !!! scripts must be started in this order !!!
-run %HOOK_READER%
-sleep 500
-run %HOOK_HANDLER%
-tooltip
+#include  %A_ScriptDir%\..\environmentDependent\COMMON\appMessages.ahk
+#include %A_ScriptDir%\services\appConfiguration.ahk
+#include %A_ScriptDir%\services\debug.ahk
+#include %A_ScriptDir%\services\postStartup.ahk
+
+
+startApp()

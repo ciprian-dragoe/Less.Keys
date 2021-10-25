@@ -4,9 +4,9 @@
 
 global resolverAction := object()
 resolverAction[500] := func("sendAccentedSibling")
-resolverAction[504] := func("reloadHookHandler")
-resolverAction[505] := func("exitHookHandler")
-resolverAction[509] := func("storeDebugLogHookHandler")
+resolverAction[504] := func("reloadLessKeys")
+resolverAction[505] := func("exitLesskeys")
+resolverAction[509] := func("storeDebugLogLessKeys")
 global functionKeysStartIndexMinusOne := 510
 resolverAction[511] := func("sendFunctionKey")
 resolverAction[512] := func("sendFunctionKey")
