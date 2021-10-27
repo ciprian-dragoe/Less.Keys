@@ -5,6 +5,7 @@
 #InstallKeybdHook
 #NoEnv
 #NoTrayIcon
+SendMode Input
 Process, Priority,, High
 DetectHiddenWindows On
 SetTitleMatchMode 2

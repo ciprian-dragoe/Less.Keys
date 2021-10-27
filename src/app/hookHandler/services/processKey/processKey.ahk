@@ -84,6 +84,9 @@ processKeyUp(scanKeyCode)
         {
             lastKeyProcessedAsAlternative := ""
         }
+        layoutKeyActivatesProcessKeyOnRelease := true ; todo add test when key lifted if space pressed in less then x time activates process key on up
+        SetTimer, TimerProcessLayoutOnRelease, OFF
+        SetTimer, TimerProcessLayoutOnRelease, %timeoutProcessLayoutOnRelease%
         removeFromActivePressedKeys(key)
         debug(key . "|up")
     }

@@ -10,22 +10,32 @@ manageLayoutKeyDown(key)
     {
         cancelDoubledModifier()
         layoutKeyPressed := true
-        if (timeoutMouseScrollPoll)
+        if (activePressedKeys.length())
         {
-            CoordMode, Mouse, Screen
-            MouseGetPos, initialMousePositionXAxis, initialMousePositionYAxis
-            SetTimer, TimerScrollWithMouseMovement, OFF
-            SetTimer, TimerScrollWithMouseMovement, %timeoutMouseScrollPoll%
+            debug("space sent because other keys already pressed")
+            processKeyToSend(key) ; todo add test when other keys pressed but not lifted pressing space does not activate special layout and sends space
+        }
+        else
+        {
+            if (timeoutMouseScrollPoll)
+            }
+            {
+                CoordMode, Mouse, Screen
+                MouseGetPos, initialMousePositionXAxis, initialMousePositionYAxis
+                SetTimer, TimerScrollWithMouseMovement, OFF
+                SetTimer, TimerScrollWithMouseMovement, %timeoutMouseScrollPoll%
+            }
+
+            alternativeLayoutActive := true
+            sendLayoutKey := true
+            SetTimer, TimerTimeoutSendLayoutKey, %timeoutStillSendLayoutKey%
+            if (layoutKeyActivatesProcessKeyOnRelease)
+            {
+                processKeyOnRelease := true
+            }
+            debug(key . "|activates alternative layout")
         }
 
-        alternativeLayoutActive := true
-        sendLayoutKey := true
-        SetTimer, TimerTimeoutSendLayoutKey, %timeoutStillSendLayoutKey%
-        if (layoutKeyActivatesProcessKeyOnRelease)
-        {
-            processKeyOnRelease := true
-        }
-        debug(key . "|activates alternative layout")
     }
 }
 
