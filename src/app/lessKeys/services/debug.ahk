@@ -5,8 +5,9 @@ reloadApp()
 {
     tooltip `n`nRELOADING
     sleep 300
-    SendMessage, %APP_MESSAGE_FORCE_RELOAD%, 0, 0, , %SCRIPT_HOOKS_HANDLER%
     SendMessage, %APP_MESSAGE_FORCE_RELOAD%, 0, 0, , %SCRIPT_HOOKS_READER%
+    sleep 300
+    SendMessage, %APP_MESSAGE_FORCE_RELOAD%, 0, 0, , %SCRIPT_HOOKS_HANDLER%
     tooltip
 }
 

@@ -18,7 +18,6 @@ manageLayoutKeyDown(key)
         else
         {
             if (timeoutMouseScrollPoll)
-            }
             {
                 CoordMode, Mouse, Screen
                 MouseGetPos, initialMousePositionXAxis, initialMousePositionYAxis
