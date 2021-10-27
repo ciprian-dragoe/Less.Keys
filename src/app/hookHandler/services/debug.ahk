@@ -83,3 +83,8 @@ storeDebugLogHookHandler()
     name = %A_Hour%-%A_Min%-%A_Sec%-%A_MSec%-hook-handler.txt
     storeDebugData(name)
 }
+
+sendTestMessage()
+{
+    send INTEGRATION_TEST
+}

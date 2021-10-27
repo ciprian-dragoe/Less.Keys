@@ -4,7 +4,6 @@
 #MaxHotkeysPerInterval 100
 #InstallKeybdHook
 #NoEnv
-#NoTrayIcon
 SendMode Input
 Process, Priority,, High
 DetectHiddenWindows On
@@ -37,3 +36,12 @@ if (A_ScriptName = "startHookHandler.exe")
 
 ; if you want to add your custom labels, add them here
 #include %A_ScriptDir%\..\environmentDependent\test\labels\customHookHandler.ahk
+
+
+*F12::
+    ; emergency stop test test
+    tooltip TESTS STOPPED BY USER
+    sleep 700
+    tooltip
+    exitApp
+return

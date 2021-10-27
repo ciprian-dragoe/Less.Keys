@@ -1,11 +1,9 @@
-#include %A_ScriptDir%\..\environmentDependent\COMMON\rightClick.ahk
 #include %A_ScriptDir%\..\environmentDependent\COMMON\accentedCharacters.ahk
 #include %A_ScriptDir%\..\environmentDependent\COMMON\functionKeys.ahk
 
 
 global resolverAction := object()
 resolverAction[500] := func("sendAccentedSibling")
-resolverAction[502] := func("sendTestMessage")
 resolverAction[504] := func("reloadLessKeys")
 resolverAction[505] := func("exitLesskeys")
 resolverAction[509] := func("storeDebugLogLessKeys")

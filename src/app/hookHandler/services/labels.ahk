@@ -24,10 +24,6 @@ TimerTimeoutSendLayoutKey:
     timerTimeoutSendLayoutKey()
 return
 
-TimerCancelTooltip:
-    timerCancelTooltip()
-return
-
 TimerStickyFailBack:
     timerStickyFailBack()
 return

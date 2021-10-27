@@ -4,14 +4,16 @@
 reloadApp()
 {
     tooltip `n`nRELOADING
-    sleep 300
-    SendMessage, %APP_MESSAGE_FORCE_RELOAD%, 0, 0, , %SCRIPT_HOOKS_READER%
-    sleep 300
+    SendMessage, %APP_MESSAGE_FORCE_QUIT%, 0, 0, , %SCRIPT_HOOKS_READER%
     SendMessage, %APP_MESSAGE_FORCE_RELOAD%, 0, 0, , %SCRIPT_HOOKS_HANDLER%
+    sleep 300
+    run %HOOK_READER%
+    sleep 500
+    run %HOOK_HANDLER%
     tooltip
 }
 
-exitApp()
+exitLessKeys()
 {
     tooltip `n`nEXIT
     SendMessage, %APP_MESSAGE_FORCE_QUIT%, 0, 0, , %SCRIPT_HOOKS_READER%

@@ -111,13 +111,6 @@
         sendKeyUp("insert")
     return
 
-    *sc029::
-        sendKeyDown("sc029")
-    return
-    *sc029 up::
-        sendKeyDown("sc029")
-    return
-
     *1::
         sendKeyDown("1")
     return
@@ -255,7 +248,7 @@
         sendKeyDown("y")
     return
     *y up::
-        sendKeyUp("t")
+        sendKeyUp("y")
     return
 
     *u::
@@ -378,10 +371,10 @@
     return
 
     *`::
-        sendKeyDown("`")
+        sendKeyDown("``")
     return
     *` up::
-        sendKeyUp("`")
+        sendKeyUp("``")
     return
 
     *'::
@@ -539,10 +532,10 @@
     return
 
     *lalt::
-        sendKeyDown("alt")
+        sendKeyDown("lalt")
     return
     *lalt up::
-        sendKeyUp("alt")
+        sendKeyUp("lalt")
     return
 
     *ralt::
