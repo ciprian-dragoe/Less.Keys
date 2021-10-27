@@ -39,6 +39,9 @@ wobblyKeyUp()
     }
     else
     {
+        SetTimer TimerStickyFailBack, off
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+
         justBefore := min(timerTimeoutStickyKeys - 100, 500)
         SetTimer, TimerCancelWobblyKey, %justBefore%
     }
