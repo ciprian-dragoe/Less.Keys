@@ -11,9 +11,6 @@ timerStickyFailBack()
         return
     }
 
-    ; todo test if this has any impact if removed => remove any linked code if not otherwise set back stick to 1200
-    ;debug("---CHECK AGAIN STICKY TO MEASURE FALSE POSITIVE") ; merge multiple debugging info from multiple files
-    ;setTimer TimerCheckAgainIfTimerTriggeredBeforeKeyLift, 300
     resetStates()
 }
 
@@ -29,17 +26,6 @@ isAllMonitoredStickyKeysLifted()
     }
 
     return 1
-}
-
-timerCheckAgainIfTimerTriggeredBeforeKeyLift()
-{
-    setTimer TimerCheckAgainIfTimerTriggeredBeforeKeyLift, OFF
-    critical on
-    if (isAllMonitoredStickyKeysLifted())
-    {
-        resetStates()
-    }
-    critical off
 }
 
 getDllKeyState(key)

@@ -28,10 +28,6 @@ TimerStickyFailBack:
     timerStickyFailBack()
 return
 
-TimerCheckAgainIfTimerTriggeredBeforeKeyLift:
-    timerCheckAgainIfTimerTriggeredBeforeKeyLift()
-return
-
 TimerRealTimeDebug:
     timerRealTimeDebug()
 return
@@ -42,4 +38,8 @@ return
 
 TimerLessKeysManagementBasedOnActiveApp:
     timerLessKeysManagementBasedOnActiveApp()
+return
+
+TimerProcessEventLoop:
+    timerProcessEventLoop()
 return

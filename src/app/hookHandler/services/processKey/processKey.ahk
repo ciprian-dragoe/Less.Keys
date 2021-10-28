@@ -13,18 +13,15 @@ global processKeyOnRelease
 
 processKeyDown(scanKeyCode)
 {
-    critical
     keyName := GetKeyName(Format("sc{:x}", scanKeyCode))
     key := layout[keyName]
     debug("[KEY_DOWN_BEGIN] " . key)
-    setTimer TimerCheckAgainIfTimerTriggeredBeforeKeyLift, off
     SetTimer TimerStickyFailBack, off
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
 
     if (processModifierKey(key, 1))
     {
         debug("[KEY_DOWN_END] " . key)
-        critical off
         return
     }
     
@@ -32,7 +29,6 @@ processKeyDown(scanKeyCode)
     {
         manageLayoutKeyDown(key)
         debug("[KEY_DOWN_END] " . key)
-        critical off
         return
     }
 
@@ -44,19 +40,16 @@ processKeyDown(scanKeyCode)
     }
     processNormalKey(key)
     debug("[KEY_DOWN_END] " . key)
-    critical off
 }
 
 processKeyUp(scanKeyCode)
 {
-    critical
     keyName := GetKeyName(Format("sc{:x}", scanKeyCode))
     key := layout[keyName]
     debug("[KEY_UP_BEGIN] " . key)
     if (processModifierKey(key, 0))
     {
         debug("[KEY_UP_END] " . key)
-        critical off
         return
     }
 
@@ -64,7 +57,6 @@ processKeyUp(scanKeyCode)
     {
         manageLayoutKeyUp(key)
         debug("[KEY_UP_END] " . key)
-        critical off
         return
     }
 
@@ -93,5 +85,4 @@ processKeyUp(scanKeyCode)
         debug(key . "|up")
     }
     debug("[KEY_UP_END] " . key)
-    critical off
 }

@@ -1,5 +1,50 @@
-onMessage(APP_MESSAGE_PROCESS_KEY_DOWN, "processKeyDown")
-onMessage(APP_MESSAGE_PROCESS_KEY_UP, "processKeyUp")
+global eventLoop := []
+global isEventLoopBeingProcessed := 0
+
+addKeyDownToEventLoop(key)
+{
+    critical
+    eventLoop.push(func("processKeyDown").bind(key))
+    if (!isEventLoopBeingProcessed)
+    {
+        setTimer TimerProcessEventLoop, -10, -1000
+    }
+    critical off
+}
+
+addKeyUpToEventLoop(key)
+{
+    critical
+    eventLoop.push(func("processKeyUp").bind(key))
+    if (!isEventLoopBeingProcessed)
+    {
+        setTimer TimerProcessEventLoop, -10, -1000
+    }
+    critical off
+}
+
+TimerProcessEventLoop()
+{
+    isEventLoopBeingProcessed := 1
+    Loop
+    {
+        if (eventLoop.length())
+        {
+            eventLoop[1].call()
+            eventLoop.remove(1)
+        }
+        else
+        {
+            break
+        }
+    }
+    isEventLoopBeingProcessed := 0
+}
+
+
+
+onMessage(APP_MESSAGE_PROCESS_KEY_DOWN, "addKeyDownToEventLoop")
+onMessage(APP_MESSAGE_PROCESS_KEY_UP, "addKeyUpToEventLoop")
 onMessage(APP_MESSAGE_FORCE_QUIT, "exitHookHandler")
 onMessage(APP_MESSAGE_FORCE_RELOAD, "reloadHookHandler")
 onMessage(APP_MESSAGE_RESET_HOOK_MONITORING, "restartHookHandlerMonitoring")
