@@ -13,7 +13,7 @@ manageLayoutKeyDown(key)
         if (activePressedKeys.length())
         {
             debug("space sent because other keys already pressed")
-            processKeyToSend(key) ; todo add test when other keys pressed but not lifted pressing space does not activate special layout and sends space
+            processKeyToSend(key)
         }
         else
         {

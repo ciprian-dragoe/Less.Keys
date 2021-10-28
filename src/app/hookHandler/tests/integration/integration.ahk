@@ -72,6 +72,7 @@ runIntegrationTests()
 {
 /*
 */
+
     ; RIGHT SHIFT CLICK & LEFT ALT CLICK
     When_rightShiftClick_doubles_as_b_pressed_leftAltClick_doubled_as_c_pressed_rightShiftClick_released_leftAltClick_released_THEN_c_letter_is_sent_#4301()
     When_rightShiftClick_pressed_leftAltClick_pressed_THEN_word_is_selected_on_leftAltClick_release_#4302()
@@ -180,6 +181,8 @@ runIntegrationTests()
     When_letter_is_released_followed_by_layout_key_press_in_less_than_timeoutProcessLayoutOnRelease_followed_by_letter_press_followed_by_different_letter_press_and_release_space_and_normal_key_for_first_and_second_letter_is_sent_#614()
     When_letter_is_remapped_as_accented_character_is_pressed_accented_character_is_sent_#617()
     When_shift_key_is_pressed_followed_by_letter_remapped_as_accented_character_sibling_accented_character_is_sent_#618()
+    When_a_letter_is_pressed_followed_by_layout_key_press_space_is_sent_before_layout_key_lift_#620()
+    When_a_letter_is_pressed_followed_by_layout_key_press_space_followed_by_letter_with_alternative_mapping_the_normal_value_is_sent_#621()
 
     ; REMAPPED LAYOUT
     When_key_which_has_been_remapped_is_pressed_remapped_key_is_sent_instead_#701()
