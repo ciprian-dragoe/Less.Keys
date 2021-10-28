@@ -86,5 +86,5 @@ storeDebugLogHookHandler()
 
 sendTestMessage()
 {
-    send INTEGRATION_TEST
+    sendKeyCombinationIndependentActiveModifiers("INTEGRATION_TEST")
 }

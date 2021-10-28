@@ -76,6 +76,7 @@ runIntegrationTests()
     When_rightShiftClick_doubles_as_b_pressed_leftAltClick_doubled_as_c_pressed_rightShiftClick_released_leftAltClick_released_THEN_c_letter_is_sent_#4301()
     When_rightShiftClick_pressed_leftAltClick_pressed_THEN_word_is_selected_on_leftAltClick_release_#4302()
     When_rightShiftClick_pressed_leftAltClick_doubled_as_b_pressed_THEN_letter_is_not_sent_before_leftAltClick_release_#4303()
+
     ; RIGHT SHIFT CLICK & LEFT WIN CLICK
     When_rightShiftClick_pressed_leftWinClick_doubled_as_left_pressed_THEN_letter_is_selected_after_leftWinClick_release_#5901()
     When_rightShiftClick_doubles_as_b_pressed_leftWinClick_doubled_as_c_pressed_rightShiftClick_released_leftWinClick_released_THEN_c_letter_is_sent_#5902()

@@ -1,5 +1,12 @@
+; when the processor it under heavy load some messages might not be caught in time
+; to reduce such situations, give the onMessage functions higher priority and the
+; rest of the functions lower priority so that onMessage functions can always interrupt
+; them. Basically it's a very simple implementation of an event loop
+
+
 global eventLoop := []
 global isEventLoopBeingProcessed := 0
+
 
 addKeyDownToEventLoop(key)
 {

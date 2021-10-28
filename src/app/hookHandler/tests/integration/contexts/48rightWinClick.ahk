@@ -171,19 +171,14 @@ When_rightWinClick_is_pressed_and_win_key_is_pressed_and_released_click_is_sent_
 When_rightWinClick_is_pressed_and_win_key_is_pressed_click_is_sent_on_rightWinClick_release_#4811()
 {
     timerTimeoutStickyKeys := 3000
-    simulateTyping("he")
+    simulateTyping("h")
     setMousePositionToCaret()
     expected := getCurrentCaretPosition()
-    simulateTyping("llo")
-    simulateKeyDown("rightWinClick")
-    sleep 100
-    simulateKeyDown("lwin")
-    sleep 50
-    
-    simulateKeyUp("rightWinClick")
-    sleep 100
-    simulateKeyUp("lwin")
-    sleep 700
+    simulateTyping("o")
+    simulateKeyDown("rightWinClick", 50)
+    simulateKeyDown("lwin", 50)
+    simulateKeyUp("rightWinClick", 50)
+    simulateKeyUp("lwin",700)
 
     validateCaretOutput(A_ThisFunc, expected)
 }

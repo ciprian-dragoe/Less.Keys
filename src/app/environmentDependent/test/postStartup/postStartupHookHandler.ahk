@@ -62,6 +62,9 @@ finalizeTestEnvironment()
 
 setExtraKeys()
 {
+    layout["LWin"] := "lwin"
+    layout["RWin"] := "lwin"
+
     for key , value in layout
     {
         switch value

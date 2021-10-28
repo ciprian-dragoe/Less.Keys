@@ -1,7 +1,6 @@
 When_shift_key_is_logically_pressed_and_not_released_for_more_then_stickyTime_shift_and_shiftActive_is_reset_after_stickyTime_#101()
 {
     simulateTyping("sticky")
-    showtooltip("timerTimeoutStickyKeys" . timerTimeoutStickyKeys)
     simulateKeyDown("lshift", timerTimeoutStickyKeys + 100)
     actual := "" . (!shiftActive && !GetKeyState("shift"))
     addTestResult(A_ThisFunc, "1", actual, evaluateResult(actual, "1"))
