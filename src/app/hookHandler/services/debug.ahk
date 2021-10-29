@@ -12,7 +12,7 @@ exitHookHandler()
 
 restartHookHandlerMonitoring()
 {
-    reload
+    return
 }
 
 reloadLessKeys()
@@ -54,8 +54,7 @@ getStickyKeys()
     info .= "shift down " . GetKeyState("shift") . " |shiftActive=" . shiftActive . "`n"
     info .= "ctrl down " . GetKeyState("ctrl") . " |ctrlActive=" . ctrlActive . "`n"
     info .= "alt down " . GetKeyState("alt") . " |altActive=" . altActive . "`n"
-    info .= "lwin down " . GetKeyState("lwin") . " |winActive=" . winActive . "`n"
-    info .= "rwin down " . GetKeyState("rwin") . " |winActive=" . winActive . "`n"
+    info .= "win down " . GetKeyState("lwin") . " |winActive=" . winActive . "`n"
     info .= "lbutton=" . GetKeyState("lbutton") . "`n"
     info .= "|isLeftCtrlClickDown " . isLeftCtrlClickDown . "|isLeftShiftClickDown " . isLeftShiftClickDown . "|isLeftAltClickDown " . isLeftAltClickDown . "|isLeftWinClickDown " . isLeftWinClickDown . "`n"
     info .= "|isRightWinClickDown " . isRightWinClickDown . "|isRightCtrlClickDown " . isRightCtrlClickDown . "|isRightShiftClickDown " . isRightShiftClickDown . "|isRightAltClickDown " . isRightAltClickDown . "`n"

@@ -1,6 +1,5 @@
 global monitoredStickyKeys := []
 global layout
-global keyRemappedAsRightButton
 
 
 readLayoutFile(path)
@@ -21,11 +20,7 @@ readLayoutFile(path)
         {
             monitoredStickyKeys.Push(originalKey)
         } 
-        else if (newValueForKey = "rbutton")
-        {
-            keyRemappedAsRightButton := originalKey
-        }
-        
+
         specialCharacter := accentedCharacter[newValueForKey]
         if (specialCharacter)
         {
@@ -37,9 +32,4 @@ readLayoutFile(path)
             layout[originalKey] := newValueForKey
         }
     }
-}
-
-isModifierKey(key)
-{
-    return key = "lwin" || key = "rightShiftClick" || key = "leftShiftClick" || key = "leftCtrlClick" || key = "rightCtrlClick" || key = "leftAltClick" || key = "rightAltClick" || key = "leftWinClick" || key = "rightWinClick" || key = "ctrl" || key = "alt" || key = "shift"
 }

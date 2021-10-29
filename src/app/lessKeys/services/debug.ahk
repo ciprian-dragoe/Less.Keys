@@ -1,6 +1,3 @@
-; !!! scripts must be started in this order !!! HOOK_READER => HOOK_HANDLER
-
-
 reloadApp()
 {
     tooltip `n`nRELOADING

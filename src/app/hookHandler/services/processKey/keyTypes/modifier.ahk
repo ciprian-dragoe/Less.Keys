@@ -160,10 +160,10 @@ resetAllModifiers()
 getModifierStates()
 {
     result := Object()
-    result["winActive"] := GetKeyState("lwin")
-    result["altActive"] := GetKeyState("alt")
-    result["ctrlActive"] := GetKeyState("ctrl")
-    result["shiftActive"] := GetKeyState("shift")
+    result["winActive"] := winActive
+    result["altActive"] := altActive
+    result["ctrlActive"] := ctrlActive
+    result["shiftActive"] := shiftActive
     return result
 }
 

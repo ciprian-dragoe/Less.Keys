@@ -11,3 +11,8 @@ ignoreShortcut()
 {
     return
 }
+
+isModifierKey(key)
+{
+    return key = "lwin" || key = "rightShiftClick" || key = "leftShiftClick" || key = "leftCtrlClick" || key = "rightCtrlClick" || key = "leftAltClick" || key = "rightAltClick" || key = "leftWinClick" || key = "rightWinClick" || key = "ctrl" || key = "alt" || key = "shift"
+}

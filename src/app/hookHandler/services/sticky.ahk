@@ -5,35 +5,14 @@ timerStickyFailBack()
 {
     SetTimer TimerStickyFailBack, off
 
-    if (!isAllMonitoredStickyKeysLifted())
+    SendMessage, %APP_MESSAGE_IS_ANY_MODIFIER_KEY_PRESSED%, 0, 0, , %SCRIPT_HOOKS_READER%
+    if (ErrorLevel)
     {
         SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         return
     }
 
     resetStates()
-}
-
-isAllMonitoredStickyKeysLifted()
-{
-    for index, key in monitoredStickyKeys
-    {
-        if (getKeyState(key, "P"))
-        {
-            debug("STICKY TIMER RESET => " . key . " pressed")
-            return 0
-        }
-    }
-
-    return 1
-}
-
-getDllKeyState(key)
-{
-    keyCode := GetKeyVK(key)
-    discardHistory := dllcall("GetAsyncKeyState", "uint", keyCode)
-    keyPressedState := dllcall("GetAsyncKeyState", "uint", keyCode)
-    return keyPressedState
 }
 
 resetStates()
