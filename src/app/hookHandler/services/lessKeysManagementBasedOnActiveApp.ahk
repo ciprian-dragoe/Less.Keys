@@ -65,7 +65,6 @@ processRestartLessKeys()
         {
             isAppWhichOverWritesLessKeysActive := 1
             SetTimer TimerStickyFailBack, off
-            ; todo check in virtual machine if still workings
             PostMessage, %APP_MESSAGE_RESET_HOOK_MONITORING%, 0, 0, , %SCRIPT_LESSKEYS%
             SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         }

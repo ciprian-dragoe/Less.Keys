@@ -1,32 +1,32 @@
-#installmousehook
 #SingleInstance Force
 #Persistent
 #MaxHotkeysPerInterval 100
 #InstallKeybdHook
 #NoEnv
-SendMode Input
+#NoTrayIcon
 Process, Priority,, High
 DetectHiddenWindows On
 SetTitleMatchMode 2
 SetBatchLines -1
 
 
-global SCRIPT_HOOKS_READER := "startHookReader_test.ahk ahk_class AutoHotkey"
+global IS_RUNNING_DEBUG_MODE := 1
+global SCRIPT_HOOKS_HANDLER := "_LessKeys_development.ahk ahk_class AutoHotkey"
 global SCRIPT_LESSKEYS := "LessKeys_test.ahk ahk_class AutoHotkey"
 global PATH_APP_CONFIGURATION := A_ScriptDir .  "\..\environmentDependent\test\binaries\"
-if (A_ScriptName = "startHookHandler.exe")
+if (A_ScriptName = "startHookReader.exe")
 {
     PATH_APP_CONFIGURATION := A_ScriptDir .  ".\"
-    SCRIPT_HOOKS_READER := "startHookReader.exe"
+    IS_RUNNING_DEBUG_MODE := 0
+    SCRIPT_HOOKS_HANDLER := "startHookHandler.exe"
     SCRIPT_LESSKEYS := "LessKeys.exe"
 }
 
 
 #include %A_ScriptDir%\services\startup.ahk
-#include %A_ScriptDir%\services\processKey\processKey.ahk
-#include %A_ScriptDir%\..\environmentDependent\test\shortcuts\resolver.ahk
+#include %A_ScriptDir%\services\senders.ahk
 #include %A_ScriptDir%\services\postStartup.ahk
-#include %A_ScriptDir%\..\environmentDependent\test\postStartup\postStartupHookHandler.ahk
+#include %A_ScriptDir%\..\environmentDependent\test\postStartup\postStartupHookReader.ahk
 
 
 ; the following includes have key hooks and labels, they should always be last included
@@ -36,4 +36,7 @@ if (A_ScriptName = "startHookHandler.exe")
 
 
 ; if you want to add your custom labels, add them here
-#include %A_ScriptDir%\..\environmentDependent\test\labels\customHookHandler.ahk
+#include %A_ScriptDir%\..\environmentDependent\test\labels\customHookReader.ahk
+
+
+#include %A_ScriptDir%\services\hooks.ahk

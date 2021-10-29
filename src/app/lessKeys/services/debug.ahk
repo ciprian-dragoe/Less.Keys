@@ -2,11 +2,11 @@ reloadApp()
 {
     tooltip `n`nRELOADING
     SendMessage, %APP_MESSAGE_FORCE_QUIT%, 0, 0, , %SCRIPT_HOOKS_READER%
-    SendMessage, %APP_MESSAGE_FORCE_RELOAD%, 0, 0, , %SCRIPT_HOOKS_HANDLER%
+    SendMessage, %APP_MESSAGE_FORCE_QUIT%, 0, 0, , %SCRIPT_HOOKS_HANDLER%
     sleep 300
-    run %HOOK_READER%
+    run %HOOKS_READER%
     sleep 500
-    run %HOOK_HANDLER%
+    run %HOOKS_HANDLER%
     tooltip
 }
 
@@ -35,8 +35,8 @@ storeDebugLog()
 startApp()
 {
     tooltip `n`nLessKeys
-    run %HOOK_READER%
+    run %HOOKS_READER%
     sleep 500
-    run %HOOK_HANDLER%
+    run %HOOKS_HANDLER%
     tooltip
 }

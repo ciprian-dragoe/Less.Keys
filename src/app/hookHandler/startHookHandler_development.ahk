@@ -35,5 +35,6 @@ if (A_ScriptName = "startHookHandler.exe")
 ; will be ignored)
 #include %A_ScriptDir%\services\labels.ahk
 
+
 ; if you want to add your custom labels, add them here
 #include %A_ScriptDir%\..\environmentDependent\development\labels\customHookHandler.ahk

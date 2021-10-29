@@ -14,6 +14,7 @@ global defaultTimeoutProcessLayoutOnRelease
 global defaultTimerTimeoutStickyKeys
 global extraKeysMappings := object()
 
+
 if (prepareTestEnvironment())
 {
     initTestEnvironment()
