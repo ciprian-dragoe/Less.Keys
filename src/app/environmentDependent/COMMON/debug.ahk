@@ -36,7 +36,7 @@ writeMemoryStream(value)
 
 storeDebugData(fileName = "")
 {
-    if (logStickyKeys)
+    if (logInput)
     {
         if (!fileName)
         {

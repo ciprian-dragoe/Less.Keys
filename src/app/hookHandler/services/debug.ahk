@@ -23,7 +23,6 @@ reloadLessKeys()
 reloadHookHandler()
 {
     logInput := 0
-    logStickyKeys := 0
     reload
 }
 

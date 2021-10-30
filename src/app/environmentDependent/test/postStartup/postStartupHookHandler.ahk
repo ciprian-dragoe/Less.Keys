@@ -42,7 +42,6 @@ initTestEnvironment()
     defaultTimerTimeoutStickyKeys := timerTimeoutStickyKeys
     setTestVariables()
     setExtraKeys()
-    logStickyKeys := 0
 }
 
 finalizeTestEnvironment()
@@ -58,7 +57,6 @@ finalizeTestEnvironment()
     timeoutProcessLayoutOnRelease := defaultTimeoutProcessLayoutOnRelease
     timeoutStillSendLayoutKey := defaultTimeoutStillSendLayoutKey
     timerTimeoutStickyKeys := defaultTimerTimeoutStickyKeys
-    logStickyKeys := 1
 }
 
 setExtraKeys()

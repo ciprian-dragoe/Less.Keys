@@ -37,20 +37,14 @@ processDisableEnableLessKeys()
             IS_LESS_KEYS_ENABLED := false
             PostMessage, %APP_MESSAGE_SET_LESSKEYS_STATE%, 0, 0, , %SCRIPT_HOOKS_READER%
             SetTimer TimerStickyFailBack, off
-            temp := logStickyKeys
-            logStickyKeys := 0
             resetStates()
-            logStickyKeys := temp
         }
     }
     else
     {
         if (!IS_LESS_KEYS_ENABLED)
         {
-            temp := logStickyKeys
-            logStickyKeys := 0
             resetStates()
-            logStickyKeys := temp
             IS_LESS_KEYS_ENABLED := 1
             PostMessage, %APP_MESSAGE_SET_LESSKEYS_STATE%, 1, 0, , %SCRIPT_HOOKS_READER%
         }

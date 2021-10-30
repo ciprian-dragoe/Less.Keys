@@ -49,7 +49,6 @@ TimerProcessEventLoop()
 }
 
 
-
 onMessage(APP_MESSAGE_PROCESS_KEY_DOWN, "addKeyDownToEventLoop")
 onMessage(APP_MESSAGE_PROCESS_KEY_UP, "addKeyUpToEventLoop")
 onMessage(APP_MESSAGE_FORCE_QUIT, "exitHookHandler")

@@ -12,14 +12,14 @@ handleError(error, source)
     }
 }
 
-compilerPath := A_WorkingDir . "\..\docs\externalTools\compiler\Ahk2Exe.exe"
-iconPath := A_WorkingDir . "\..\docs\externalTools\icon.ico"
-sourcePathHookHandler := A_WorkingDir . "\app\hookHandler\startHookHandler_live.ahk"
-sourcePathHookReader := A_WorkingDir . "\app\hookReader\startHookReader_live.ahk"
-sourcePathLessKeys := A_WorkingDir . "\app\lessKeys\LessKeys_live.ahk"
-outputPathHookHandler := A_WorkingDir . "\..\startHookHandler.exe"
-outputPathHookReader := A_WorkingDir . "\..\startHookReader.exe"
-outputPathLessKeys := A_WorkingDir . "\..\LessKeys.exe"
+compilerPath := A_WorkingDir . "\..\..\..\docs\externalTools\compiler\Ahk2Exe.exe"
+iconPath := A_WorkingDir . "\..\..\..\docs\externalTools\icon.ico"
+sourcePathHookHandler := A_WorkingDir . "\..\hookHandler\startHookHandler_live.ahk"
+sourcePathHookReader := A_WorkingDir . "\..\hookReader\startHookReader_live.ahk"
+sourcePathLessKeys := A_WorkingDir . "\..\lessKeys\LessKeys_live.ahk"
+outputPathHookHandler := A_WorkingDir . "\..\environmentDependent\live\binaries\startHookHandler.exe"
+outputPathHookReader := A_WorkingDir . "\..\environmentDependent\live\binaries\startHookReader.exe"
+outputPathLessKeys := A_WorkingDir . "\..\environmentDependent\live\binaries\LessKeys.exe"
 runwait, %compilerPath% /in %sourcePathHookHandler% /out %outputPathHookHandler%
 handleError(ErrorLevel, sourcePathHookHandler)
 runwait, %compilerPath% /in %sourcePathHookReader% /out %outputPathHookReader%
