@@ -204,7 +204,7 @@ When_a_letter_is_pressed_followed_by_layout_key_press_space_is_sent_before_layou
 {
     simulateKeyDown("a", 50)
     simulateKeyDown("space", 50)
-    sleep % timerTimeoutStickyKeys + 200
+    sleep % timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys
     expected := "a "
     validateTestOutput(A_ThisFunc , expected)
     simulateKeyUp("space", 50)
@@ -216,7 +216,7 @@ When_a_letter_is_pressed_followed_by_layout_key_press_space_is_sent_before_layou
 {
     simulateKeyDown("a", 50)
     simulateKeyDown("space", 50)
-    sleep % timerTimeoutStickyKeys + 200
+    sleep % timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys
     expected := "a "
     validateTestOutput(A_ThisFunc , expected)
     simulateKeyUp("space", 50)
@@ -230,7 +230,7 @@ When_a_letter_is_pressed_followed_by_layout_key_press_space_followed_by_letter_w
     simulateKeyDown("space", 50)
     simulateKeyDown("c", 50)
     simulateKeyUp("c", 50)
-    sleep % timerTimeoutStickyKeys + 200
+    sleep % timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys
     expected := "a c"
     validateTestOutput(A_ThisFunc , expected)
     simulateKeyUp("space", 50)

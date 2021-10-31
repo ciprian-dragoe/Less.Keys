@@ -1,7 +1,7 @@
 When_shift_key_is_logically_pressed_and_not_released_for_more_then_stickyTime_shift_and_shiftActive_is_reset_after_stickyTime_#101()
 {
     simulateTyping("sticky")
-    simulateKeyDown("lshift", timerTimeoutStickyKeys + 100)
+    simulateKeyDown("lshift", timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys)
     actual := "" . (!shiftActive && !GetKeyState("shift"))
     addTestResult(A_ThisFunc, "1", actual, evaluateResult(actual, "1"))
     setDefaultTestEnvironment(A_ThisFunc)
@@ -11,7 +11,7 @@ When_shiftClick_key_is_logically_pressed_and_not_released_for_more_then_stickyTi
 {
     simulateTyping("sticky")
     simulateKeyDown("shiftClick")
-    sleep %timerTimeoutStickyKeys%
+    sleep % timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys
     sleep 100
     
     actual := "" . (!shiftActive && !GetKeyState("shift"))
@@ -22,7 +22,7 @@ When_shiftClick_key_is_logically_pressed_and_not_released_for_more_then_stickyTi
 When_ctrl_key_is_logically_pressed_and_not_released_for_more_then_stickyTime_ctrl_and_ctrlActive_is_reset_after_stickyTime_#103()
 {
     simulateTyping("sticky")
-    simulateKeyDown("lctrl", timerTimeoutStickyKeys + 100)
+    simulateKeyDown("lctrl", timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys)
     
     actual := "" . (!ctrlActive && !GetKeyState("ctrl"))
     addTestResult(A_ThisFunc, "1", actual, evaluateResult(actual, "1"))
@@ -33,7 +33,7 @@ When_ctrlClick_key_is_logically_pressed_and_not_released_for_more_then_stickyTim
 {
     simulateTyping("sticky")
     simulateKeyDown("ctrlClick")
-    sleep %timerTimeoutStickyKeys%
+    sleep % timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys
     sleep 100
     
     actual := "" . (!ctrlActive && !GetKeyState("ctrl"))
@@ -44,7 +44,7 @@ When_ctrlClick_key_is_logically_pressed_and_not_released_for_more_then_stickyTim
 When_alt_key_is_logically_pressed_and_not_released_for_more_then_stickyTime_alt_and_altActive_is_reset_after_stickyTime_#105()
 {
     simulateTyping("sticky")
-    simulateKeyDown("lalt", timerTimeoutStickyKeys + 100)
+    simulateKeyDown("lalt", timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys)
     
     actual := "" . (!altActive && !GetKeyState("alt"))
     addTestResult(A_ThisFunc, "1", actual, evaluateResult(actual, "1"))
@@ -56,7 +56,7 @@ When_alt_key_is_logically_pressed_and_not_released_for_more_then_stickyTime_alt_
 When_lwin_key_is_logically_pressed_and_not_released_for_more_then_stickyTime_lwin_and_winActive_is_reset_after_stickyTime_#106()
 {
     simulateTyping("sticky")
-    simulateKeyDown("lalt", timerTimeoutStickyKeys + 100)
+    simulateKeyDown("lalt", timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys)
     
     actual := "" . (!winActive && !GetKeyState("lwin"))
     addTestResult(A_ThisFunc, "1", actual, evaluateResult(actual, "1"))
@@ -68,7 +68,7 @@ When_lwin_key_is_logically_pressed_and_not_released_for_more_then_stickyTime_lwi
 When_layout_key_is_logically_pressed_and_not_released_for_more_then_stickyTime_alternativeLayout_is_reset_after_stickyTime_#107()
 {
     simulateTyping("sticky")
-    simulateKeyDown("space", timerTimeoutStickyKeys + 100)
+    simulateKeyDown("space", timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys)
     
     actual := "" . !alternativeLayoutActive
     addTestResult(A_ThisFunc, "1", actual, evaluateResult(actual, "1"))
@@ -79,7 +79,7 @@ When_processKeyOnRelease_is_set_after_stickyTime_it_is_reset_#108()
 {
     simulateTyping("sticky")
     processKeyOnRelease := true
-    simulateKeyDown("space", timerTimeoutStickyKeys + 100)
+    simulateKeyDown("space", timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys)
     
     actual := "" . !processKeyOnRelease
     addTestResult(A_ThisFunc, "1", actual, evaluateResult(actual, "1"))
@@ -96,7 +96,7 @@ When_leftShiftClick_key_is_logically_pressed_and_mouse_moved_and_stickyTime_pass
     simulateKeyDown("leftShiftClick")
     sleep 100
     MouseMove expected.x, expected.y
-    sleep %timerTimeoutStickyKeys%
+    sleep % timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys
     MouseMove startingPosition.x, startingPosition.y
     actual := getSelectedText()
     simulateKeyUp("leftShiftClick")
@@ -118,7 +118,7 @@ When_leftCtrlClick_key_is_logically_pressed_and_mouse_moved_and_stickyTime_passe
     simulateKeyDown("leftCtrlClick")
     sleep 100
     MouseMove expected.x, expected.y
-    sleep %timerTimeoutStickyKeys%
+    sleep % timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys
     MouseMove startingPosition.x, startingPosition.y
     actual := getSelectedText()
     simulateKeyUp("leftCtrlClick")
@@ -133,7 +133,7 @@ When_leftCtrlClick_key_is_logically_pressed_and_mouse_moved_and_stickyTime_passe
 When_non_modifier_key_is_logically_pressed_and_not_released_after_stickyTime_passes_activePressedKeys_is_reset_to_empty_array_#111()
 {
     simulateKeyDown("lshift", 100)
-    simulateKeyDown("a", timerTimeoutStickyKeys + 100)
+    simulateKeyDown("a", timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys)
     simulateKeyUp("lshift", 100)
 
     actual := "" . activePressedKeys.Length()
@@ -144,7 +144,7 @@ When_non_modifier_key_is_logically_pressed_and_not_released_after_stickyTime_pas
 When_lastKeyProcessedAsAlternative_is_set_after_stickyTime_it_is_reset_#112()
 {
     lastKeyProcessedAsAlternative := "a"
-    simulateKeyDown("space", timerTimeoutStickyKeys + 100)
+    simulateKeyDown("space", timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys)
     
     actual := "" . lastKeyProcessedAsAlternative = ""
     addTestResult(A_ThisFunc, "1", actual, evaluateResult(actual, "1"))
@@ -154,7 +154,7 @@ When_lastKeyProcessedAsAlternative_is_set_after_stickyTime_it_is_reset_#112()
 When_keyToSendOnUp_is_set_after_stickyTime_it_is_reset_#113()
 {
     keyToSendOnUp := "a"
-    simulateKeyDown("space", timerTimeoutStickyKeys + 100)
+    simulateKeyDown("space", timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys)
     
     actual := "" . keyToSendOnUp = ""
     addTestResult(A_ThisFunc, "1", actual, evaluateResult(actual, "1"))

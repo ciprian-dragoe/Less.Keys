@@ -16,7 +16,7 @@ When_leftCtrlClick_is_continuously_pressed_and_layout_key_is_pressed_but_not_rel
     simulateTyping("hello")
     simulateKeyDown("leftCtrlClick")
     sleep 100
-    simulateKeyDown("space", timerTimeoutStickyKeys)
+    simulateKeyDown("space", timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys)
     simulateKeyUp("space", 50)
     simulateKeyUp("leftCtrlClick")
     sleep 100

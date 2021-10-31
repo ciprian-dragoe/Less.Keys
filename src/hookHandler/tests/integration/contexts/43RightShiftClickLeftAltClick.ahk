@@ -40,7 +40,7 @@ When_rightShiftClick_pressed_leftAltClick_doubled_as_b_pressed_THEN_letter_is_no
     simulateKeyDown("rightShiftClick")
     sleep 100
     simulateKeyDown("leftAltClick")
-    sleep % timerTimeoutStickyKeys + 100
+    sleep % timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys
     simulateKeyUp("leftAltClick")
     sleep 100
     simulateKeyUp("rightShiftClick")

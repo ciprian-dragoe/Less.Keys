@@ -16,7 +16,7 @@
 #include  %A_ScriptDir%\services\sticky.ahk
 
 
-global timerTimeoutStickyKeys := 1600
+global timerTimeoutStickyKeys := 1500
 
 
 readSettingsFile(basePath)

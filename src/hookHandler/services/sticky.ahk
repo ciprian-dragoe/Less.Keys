@@ -1,18 +1,36 @@
 ; if the cpu is executing intensive tasks then the lift key up command may not be processed for
 ; modifier keys (ctrl, shift, alt, win) and they are still registered by the os as pressed.
 ; This is a fail safe for such situations
+global timeoutCheckAgainIfTimerTriggeredBeforeKeyLift := 300
+
+
 timerStickyFailBack()
 {
     SetTimer TimerStickyFailBack, off
 
-    SendMessage, %APP_MESSAGE_IS_ANY_MODIFIER_KEY_PRESSED%, 0, 0, , %SCRIPT_HOOKS_READER%
-    if (ErrorLevel)
+    if (isAnyModifierKeyPressed())
     {
         SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         return
     }
 
-    resetStates()
+    debug("---CHECK AGAIN STICKY TO MEASURE FALSE POSITIVE")
+    SetTimer TimerCheckAgainIfTimerTriggeredBeforeKeyLift, %timeoutCheckAgainIfTimerTriggeredBeforeKeyLift%
+}
+
+timerCheckAgainIfTimerTriggeredBeforeKeyLift()
+{
+    setTimer TimerCheckAgainIfTimerTriggeredBeforeKeyLift, OFF
+    if (!isAnyModifierKeyPressed())
+    {
+        resetStates()
+    }
+}
+
+isAnyModifierKeyPressed()
+{
+    SendMessage, %APP_MESSAGE_IS_ANY_MODIFIER_KEY_PRESSED%, 0, 0, , %SCRIPT_HOOKS_READER%
+    return %ErrorLevel%
 }
 
 resetStates()

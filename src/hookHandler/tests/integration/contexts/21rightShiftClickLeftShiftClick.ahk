@@ -26,7 +26,7 @@ When_rightShiftClick_pressed_leftShiftClick_pressed_THEN_whole_text_is_selected_
     simulateKeyDown("leftShiftClick")
     sleep 100
     simulateKeyUp("leftShiftClick")
-    sleep %timerTimeoutStickyKeys%
+    sleep % timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys
     actual := getSelectedText()
     simulateKeyUp("rightShiftClick")
     sleep 100

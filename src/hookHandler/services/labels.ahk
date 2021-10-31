@@ -12,6 +12,10 @@ TimerScrollWithMouseMovement:
     timerScrollWithMouseMovement()
 return
 
+TimerCheckAgainIfTimerTriggeredBeforeKeyLift:
+    timerCheckAgainIfTimerTriggeredBeforeKeyLift()
+return
+
 TimerResetModifierReleaseAction:
     timerResetModifierReleaseAction()
 return

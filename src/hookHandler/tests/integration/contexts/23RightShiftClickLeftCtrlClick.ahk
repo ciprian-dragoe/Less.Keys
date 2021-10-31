@@ -7,7 +7,7 @@ When_rightShiftClick_pressed_leftCtrlClick_doubled_as_left_pressed_THEN_letter_i
     simulateKeyDown("leftCtrlClick")
     sleep 100
     simulateKeyUp("leftCtrlClick")
-    sleep %timerTimeoutStickyKeys%
+    sleep % timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys
     actual := getSelectedText()
     simulateKeyUp("rightShiftClick")
     sleep 100
@@ -44,7 +44,7 @@ When_rightShiftClick_pressed_leftCtrlClick_THEN_word_is_selected_after_leftCtrlC
     simulateKeyDown("leftCtrlClick")
     sleep 100
     simulateKeyUp("leftCtrlClick")
-    sleep %timerTimeoutStickyKeys%
+    sleep % timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys
     actual := getSelectedText()
     simulateKeyUp("rightShiftClick")
     sleep 100

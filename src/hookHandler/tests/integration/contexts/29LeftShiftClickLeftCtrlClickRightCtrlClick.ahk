@@ -9,7 +9,7 @@ When_leftShiftClick_pressed_leftCtrlClick_pressed_rightCtrlClick_doubled_as_left
     simulateKeyDown("rightCtrlClick")
     sleep 100
     simulateKeyUp("rightCtrlClick")
-    sleep %timerTimeoutStickyKeys%
+    sleep % timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys
     actual := getSelectedText()
     simulateKeyUp("leftShiftClick")
     sleep 100
