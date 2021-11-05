@@ -1,0 +1,8 @@
+*.sln
+.idea
+.vs
+*.ahk.bak
+*.lnk
+*.DotSettings.user
+_*/
+_*
