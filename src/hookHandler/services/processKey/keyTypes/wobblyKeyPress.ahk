@@ -25,7 +25,7 @@ wobblyKeyDown()
 
     isWobblyKeyPressed := 1
     SetTimer, TimerCancelWobblyKey, OFF
-    removeFromActivePressedKeys("wobblyWinKey")
+    ;removeFromActivePressedKeys("wobblyWinKey") ; todo find impact if whole ActivePressedKeys removed
     otherKeyPressedWhileWobblyKeyDown := false
     setWinState(1)
 }

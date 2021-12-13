@@ -61,10 +61,7 @@ processNormalKey(key)
 
     if (key != lastKeyProcessedAsAlternative)
     {
-        if (processKeyToSend(key))
-        {
-            addToActivePressedKeys(key)
-        }
+        processKeyToSend(key)
         debug(key . "|key down")
     }
 }

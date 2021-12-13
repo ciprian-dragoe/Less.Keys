@@ -1,8 +1,16 @@
 global debugStoredData := ""
 
-showToolTip(value, time = 600)
+showToolTip(value, time = 600, locationX = 0, locationY = 0)
 {
-    tooltip, |%value%|
+
+    if (locationX && locationY)
+    {
+        tooltip, |%value%|, %locationX%, %locationY%
+    }
+    else
+    {
+        tooltip, |%value%|
+    }
     sleep %time%
     tooltip
 }

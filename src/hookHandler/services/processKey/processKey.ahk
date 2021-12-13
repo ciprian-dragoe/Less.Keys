@@ -83,7 +83,6 @@ processKeyUp(scanKeyCode)
         {
             lastKeyProcessedAsAlternative := ""
         }
-        removeFromActivePressedKeys(key)
         debug(key . "|up")
     }
     debug("[KEY_UP_END] " . key)
