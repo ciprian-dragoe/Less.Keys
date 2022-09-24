@@ -17,7 +17,7 @@ setMonitoredStickyKeys()
         originalKey := StrSplit(A_LoopReadLine, "`:").1
         ahkKeyName := GetKeyName(Format("sc{:x}", GetKeySC(originalKey)))
         key := StrSplit(A_LoopReadLine, "`:").2
-        if (isModifierKey(key) && !InStr(A_LoopReadLine, "###"))
+        if (isModifierKey(key) && !InStr(A_LoopReadLine, "###", true))
         {
             result.Push(ahkKeyName)
         }

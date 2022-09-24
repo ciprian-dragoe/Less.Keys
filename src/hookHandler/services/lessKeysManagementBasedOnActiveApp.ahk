@@ -7,20 +7,17 @@ global IS_LESS_KEYS_ENABLED := 1
 timerLessKeysManagementBasedOnActiveApp()
 {
     WinGetTitle, lastActiveAppName, A
-    if (!lastActiveAppName)
-    {
-        return
-    }
-
+    
     processRestartLessKeys()
     processDisableEnableLessKeys()
+    processCustomAppNameRules()
 }
 
 isAppInMonitoredList(app, monitoredAppList)
 {
     for index, appName in monitoredAppList
     {
-        If (InStr(app, appName))
+        If (InStr(app, appName), true)
         {
             return 1
         }

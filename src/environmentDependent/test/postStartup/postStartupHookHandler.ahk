@@ -14,6 +14,9 @@ global defaultTimeoutProcessLayoutOnRelease
 global defaultTimerTimeoutStickyKeys
 global extraKeysMappings := object()
 
+processCustomAppNameRules()
+{
+}
 
 if (prepareTestEnvironment())
 {
