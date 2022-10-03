@@ -169,9 +169,11 @@ getModifierStates()
 
 sendKeyCombinationIndependentActiveModifiers(combination)
 {
+    SetTimer TimerStickyFailBack, off
     originalState := getModifierStates()
     resetAllModifiers()
     send %combination%
     resetModifiersToState(originalState)
     debug("finish sendKeyCombinationIndependentActiveModifiers")
+    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
 }
