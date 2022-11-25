@@ -7,7 +7,6 @@
 global keyToSendOnUp
 global sendLayoutKey
 global lastKeyProcessedAsAlternative
-global activePressedKeys := []
 global processKeyOnRelease
 
 

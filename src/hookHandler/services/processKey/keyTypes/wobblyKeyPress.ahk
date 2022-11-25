@@ -1,6 +1,6 @@
 ; the newer lenovo ThinkPads models have a bad keyboard where it is very easy while a key is pressed
-; to be hardware detected as up and then down again, this implementation is to try to reduce
-; some of this scenarios
+; to be hardware detected as up and then down again, this implementation tries to reduce
+; some of these scenarios
 global otherKeyPressedWhileWobblyKeyDown := false
 global isWobblyKeyPressed := 0
 
@@ -25,7 +25,6 @@ wobblyKeyDown()
 
     isWobblyKeyPressed := 1
     SetTimer, TimerCancelWobblyKey, OFF
-    ;removeFromActivePressedKeys("wobblyWinKey") ; todo find impact if whole ActivePressedKeys removed
     otherKeyPressedWhileWobblyKeyDown := false
     setWinState(1)
 }
