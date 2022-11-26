@@ -34,16 +34,22 @@ wobblyKeyUp()
     isWobblyKeyPressed := 0
     SetTimer TimerStickyFailBack, off
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-    if (otherKeyPressedWhileWobblyKeyDown)
+    if (otherKeyPressedWhileWobblyKeyDown = 2)
     {
         ; to avoid bug in windows when where when pressing Win + (number)x and that 
         ; application is a stacked window, a tooltip remains always displayed if 
         ; win key is released before the animation finishes 
+        SetTimer, TimerCancelWobblyKey, OFF
         SetTimer, TimerCancelWobblyKey, 150
+    }
+    else if (otherKeyPressedWhileWobblyKeyDown)
+    {
+        timerCancelWobblyKey()        
     }
     else
     {
         justBefore := min(timerTimeoutStickyKeys - 100, 300)
+        SetTimer, TimerCancelWobblyKey, OFF
         SetTimer, TimerCancelWobblyKey, %justBefore%
     }
 }
