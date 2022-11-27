@@ -9,6 +9,7 @@
 #include  %A_ScriptDir%\services\loadSettings\keyboardShortcuts.ahk
 #include  %A_ScriptDir%\services\loadSettings\layout.ahk
 #include  %A_ScriptDir%\services\loadSettings\stickyFailBack.ahk
+#include  %A_ScriptDir%\services\loadSettings\random.ahk
 #include  %A_ScriptDir%\services\loadSettings\accentedCharacters.ahk
 #include  %A_ScriptDir%\services\loadSettings\stickyFailBack.ahk
 #include  %A_ScriptDir%\services\lessKeysManagementBasedOnActiveApp.ahk
@@ -32,6 +33,7 @@ readSettingsFile(basePath)
     readKeyboardShortcutsFile(basePath . "my-keyboard-shortcuts.cfg")
     readDisabledAppsSettings(settings)
     readRestartAppsSettings(settings)
+    readRandomSettings(settings)
 }
 
 
