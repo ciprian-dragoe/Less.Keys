@@ -14,21 +14,21 @@ processKeyDown(scanKeyCode)
 {
     keyName := GetKeyName(Format("sc{:x}", scanKeyCode))
     key := layout[keyName]
-    debug("[KEY_DOWN_BEGIN] " . key)
+    debug(key . "[KEY_DOWN_BEGIN]")
     SetTimer TimerStickyFailBack, off
     SetTimer TimerCheckAgainIfTimerTriggeredBeforeKeyLift, OFF
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
 
     if (processModifierKey(key, 1))
     {
-        debug("[KEY_DOWN_END] " . key)
+        debug(key . "[KEY_DOWN_END]")
         return
     }
     
     if (key = layoutChangeKey)
     {
         manageLayoutKeyDown(key)
-        debug("[KEY_DOWN_END] " . key)
+        debug(key . "[KEY_DOWN_END]")
         return
     }
 
@@ -39,7 +39,7 @@ processKeyDown(scanKeyCode)
         SetTimer, TimerProcessLayoutOnRelease, %timeoutProcessLayoutOnRelease%
     }
     processNormalKey(key)
-    debug("[KEY_DOWN_END] " . key)
+    debug(key . "[KEY_DOWN_END]")
 }
 
 processKeyUp(scanKeyCode)

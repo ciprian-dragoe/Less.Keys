@@ -48,20 +48,16 @@ When_alt_key_is_logically_pressed_and_not_released_for_more_then_stickyTime_alt_
     
     actual := "" . (!altActive && !GetKeyState("alt"))
     addTestResult(A_ThisFunc, "1", actual, evaluateResult(actual, "1"))
-    simulateKeyDown("lalt", 100)
-    simulateKeyUp("lalt", 100)
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_lwin_key_is_logically_pressed_and_not_released_for_more_then_stickyTime_lwin_and_winActive_is_reset_after_stickyTime_#106()
 {
     simulateTyping("sticky")
-    simulateKeyDown("lalt", timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys)
+    simulateKeyDown("lwin", timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys)
     
     actual := "" . (!winActive && !GetKeyState("lwin"))
     addTestResult(A_ThisFunc, "1", actual, evaluateResult(actual, "1"))
-    simulateKeyDown("lalt", 100)
-    simulateKeyUp("lalt", 100)
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
@@ -145,7 +141,7 @@ When_keyToSendOnUp_is_set_after_stickyTime_it_is_reset_#113()
     keyToSendOnUp := "a"
     simulateKeyDown("space", timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys)
     
-    actual := "" . keyToSendOnUp = ""
-    addTestResult(A_ThisFunc, "1", actual, evaluateResult(actual, "1"))
+    actual := "" . keyToSendOnUp . ""
+    addTestResult(A_ThisFunc, "", actual, evaluateResult(actual, ""))
     setDefaultTestEnvironment(A_ThisFunc)
 }

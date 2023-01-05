@@ -2,7 +2,6 @@ global debugStoredData := ""
 
 showToolTip(value, time = 600, locationX = 0, locationY = 0)
 {
-
     if (locationX && locationY)
     {
         tooltip, |%value%|, %locationX%, %locationY%

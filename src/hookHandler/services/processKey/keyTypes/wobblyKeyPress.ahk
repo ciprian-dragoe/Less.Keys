@@ -40,7 +40,7 @@ wobblyKeyUp()
         ; application is a stacked window, a tooltip remains always displayed if 
         ; win key is released before the animation finishes 
         SetTimer, TimerCancelWobblyKey, OFF
-        SetTimer, TimerCancelWobblyKey, 150
+        SetTimer, TimerCancelWobblyKey, 250
     }
     else if (otherKeyPressedWhileWobblyKeyDown)
     {

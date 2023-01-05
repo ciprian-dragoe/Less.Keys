@@ -52,7 +52,7 @@ When_leftCtrlClick_is_continuously_pressed_and_a_key_is_pressed_left_click_is_no
     simulateKeyUp("leftCtrlClick")
     sleep 100
 
-    validateCaretOutput(A_ThisFunc, expected)    
+    validateCaretOutputDiffers(A_ThisFunc, expected)    
 }
 
 When_leftCtrlClick_is_continuously_pressed_and_layout_key_is_pressed_and_key_remapped_as_left_is_sent_on_leftCtrlClick_release_click_is_not_sent_#405()

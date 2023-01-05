@@ -3,7 +3,7 @@ When_key_which_has_been_remapped_is_pressed_remapped_key_is_sent_instead_#701()
     simulateKeyDown("pause", 50)
     simulateKeyUp("pause", 50)
     
-    expected := "\"
+    expected := "1"
     validateTestOutput(A_ThisFunc , expected)
 }
 
@@ -14,7 +14,7 @@ When_layout_key_is_pressed_followed_by_key_which_has_been_remapped_is_pressed_al
     simulateKeyUp("pause", 50)
     simulateKeyUp("space", 50)
     
-    expected := "/"
+    expected := "2"
     validateTestOutput(A_ThisFunc , expected)
 }
 

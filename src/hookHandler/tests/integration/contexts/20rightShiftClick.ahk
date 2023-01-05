@@ -223,7 +223,6 @@ When_rightShiftClick_is_pressed_and_shift_key_is_pressed_and_layout_key_pressed_
     sleep 100
     actual := clearText()
     expected := "hello world INTEGRATION_TEST"
-    
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
     setDefaultTestEnvironment(A_ThisFunc)
 }    

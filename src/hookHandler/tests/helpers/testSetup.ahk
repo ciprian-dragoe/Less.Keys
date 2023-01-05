@@ -1,15 +1,16 @@
 prepareTestEnvironment()
 {
     showtooltip("RUNNING INTEGRATION TESTS", 1000)
-    run notepad
-    WinWaitActive, ahk_class Notepad, , 2
-    WinActivate, ahk_class Notepad, , 2
-    IfWinActive, ahk_class Notepad
+    run %TESTING_ENVIRONMENT%
+    sleep 2000
+    if (WinActive("ahk_class " . TESTING_ENVIRONMENT))
     {
-       WinMaximize
+       send ^n ; write in new file
+       WinMaximize ahk_class %TESTING_ENVIRONMENT%
        return true
     }
     
+    showtooltip("Please install " . TESTING_ENVIRONMENT, 2000)
     return false
 }
 
@@ -33,16 +34,18 @@ setDefaultTestEnvironment(testName)
 {
     output := "CLEANING | " . testName . " |"
     tooltip % output
-    send {escape}
+    setTestVariables()
+    sleep 1000
+    send {escape down}
     sleep 200
-    send {escape}
-    if (!WinActive("ahk_class Notepad"))
+    send {escape up}
+    if (!WinActive("ahk_class " . TESTING_ENVIRONMENT))
     {
-        WinActivate ahk_class Notepad
+        WinActivate ahk_class %TESTING_ENVIRONMENT%
+        sleep 200
     }
     clearText()
     MouseMove, 500, 500
-    setTestVariables()
     tooltip
 }
 
@@ -52,6 +55,10 @@ clearText()
     sleep 300
     send ^x
     sleep 300
+    
+    ; some text editors also encode a new line when it is not present
+    clipboard := RegExReplace(clipboard, "[^a-zA-Z0-9 _-]", "")
+
     return %clipboard%
 }
 
@@ -60,6 +67,10 @@ getSelectedText()
     sleep 100
     send ^c
     sleep 100
+    
+    ; some text editors also encode a new line when it is not present
+    clipboard := RegExReplace(clipboard, "[^a-zA-Z0-9 _-]", "")
+
     return %clipboard%
 }
 

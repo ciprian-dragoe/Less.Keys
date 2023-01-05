@@ -41,10 +41,10 @@ When_leftShiftClick_is_continuously_pressed_and_leftCtrlClick_is_continuously_pr
     simulateKeyDown("space")
     sleep 100
     simulateTyping("a")
-    actual := getSelectedText()
     simulateKeyUp("leftShiftClick")
     simulateKeyUp("leftCtrlClick")
     simulateKeyUp("space")
+    actual := getSelectedText()
     
     expected := "hello "
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))

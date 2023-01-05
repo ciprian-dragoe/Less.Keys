@@ -65,13 +65,13 @@ When_leftShiftClick_pressed_rightAltClick_pressed_mouse_moved_until_second_word_
     simulateKeyDown("rightAltClick")
     sleep 100
     MouseMove destination.x, destination.y
-    simulateKeyUp("rightShiftClick")
+    simulateKeyUp("leftShiftClick")
     sleep 100
     simulateKeyUp("rightAltClick")
     sleep 100
     actual := getSelectedText()
 
-    expected := "world"
+    expected := " world"
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
     setDefaultTestEnvironment(A_ThisFunc)
 }

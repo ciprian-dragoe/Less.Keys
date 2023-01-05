@@ -170,7 +170,6 @@ When_leftShiftClick_is_pressed_and_shift_key_is_pressed_click_is_sent_on_leftShi
     simulateKeyUp("leftShiftClick")
     sleep 100
     simulateKeyUp("lshift", 50)
-
     validateCaretOutput(A_ThisFunc, expected)
 }
 

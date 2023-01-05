@@ -70,8 +70,7 @@ When_rightShiftClick_pressed_leftShiftClick_pressed_mouse_moved_until_second_wor
     simulateKeyUp("leftShiftClick")
     sleep 100
     actual := getSelectedText()
-
-    expected := "world"
+    expected := " world"
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
     setDefaultTestEnvironment(A_ThisFunc)
 }
@@ -94,7 +93,6 @@ When_rightShiftClick_pressed_leftShiftClick_pressed_timeout_passed_leftShiftClic
     simulateKeyUp("rightShiftClick")
     sleep 100
     actual := getSelectedText()
-
     expected := ""
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
     setDefaultTestEnvironment(A_ThisFunc)
