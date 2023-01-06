@@ -64,6 +64,7 @@ clearText()
 
 getSelectedText()
 {
+    clipboard := ""
     sleep 100
     send ^c
     sleep 100

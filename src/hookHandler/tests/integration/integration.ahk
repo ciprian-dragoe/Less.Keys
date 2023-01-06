@@ -72,6 +72,7 @@ runIntegrationTests()
 {
 /*
 */
+
     ; RIGHT SHIFT CLICK & LEFT ALT CLICK
     When_rightShiftClick_doubles_as_b_pressed_leftAltClick_doubled_as_c_pressed_rightShiftClick_released_leftAltClick_released_THEN_c_letter_is_sent_#4301()
     When_rightShiftClick_pressed_leftAltClick_pressed_THEN_word_is_selected_on_leftAltClick_release_#4302()
