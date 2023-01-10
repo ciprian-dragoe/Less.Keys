@@ -8,7 +8,7 @@ global keyToSendOnUp
 global sendLayoutKey
 global lastKeyProcessedAsAlternative
 global processKeyOnRelease
-
+global activePressedKeys := []
 
 processKeyDown(scanKeyCode)
 {
@@ -82,6 +82,7 @@ processKeyUp(scanKeyCode)
         {
             lastKeyProcessedAsAlternative := ""
         }
+        removeFromActivePressedKeys(key)
         debug(key . "|up")
     }
     debug("[KEY_UP_END] " . key)

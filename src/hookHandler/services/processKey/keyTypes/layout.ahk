@@ -21,7 +21,7 @@ manageLayoutKeyDown(key)
         alternativeLayoutActive := true
         sendLayoutKey := true
         SetTimer, TimerTimeoutSendLayoutKey, %timeoutStillSendLayoutKey%
-        if (layoutKeyActivatesProcessKeyOnRelease)
+        if (layoutKeyActivatesProcessKeyOnRelease || activePressedKeys.length() > 0)
         {
             processKeyOnRelease := true
         }

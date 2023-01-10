@@ -199,3 +199,72 @@ When_shift_key_is_pressed_followed_by_letter_remapped_as_accented_character_sibl
     
     validateTestOutput(A_ThisFunc , expected)
 }
+
+When_letter_is_pressed_but_not_released_followed_by_layout_key_press_followed_by_key_with_alternative_layout_press_then_no_key_sent_before_that_key_is_released_#619()
+{
+    simulateKeyDown("w", timeoutProcessLayoutOnRelease + 100)
+    simulateKeyDown("space", 40)
+    simulateKeyDown("o", 40)
+    sleep %timerTimeoutStickyKeys%
+    
+    expected := "w"
+    validateTestOutput(A_ThisFunc , expected)
+    simulateKeyUp("o", 40)
+    simulateKeyUp("space", 40)
+    simulateKeyUp("w", 40)
+}
+
+When_letter_is_pressed_but_not_released_followed_by_layout_key_press_followed_by_key_with_alternative_layout_press_followed_by_layout_key_release_then_space_and_key_is_sent_#620()
+{
+    simulateKeyDown("w", timeoutProcessLayoutOnRelease + 100)
+    simulateKeyDown("space", 40)
+    simulateKeyDown("o", 40)
+    simulateKeyUp("space", 40)
+    
+    expected := "w o"
+    validateTestOutput(A_ThisFunc , expected)
+    simulateKeyUp("w", 40)
+    simulateKeyUp("o", 40)
+}
+
+When_letter_is_pressed_but_not_released_followed_by_layout_key_press_followed_by_key_with_alternative_layout_press_followed_by_key_release_then_alternative_key_is_sent_without_space_#621()
+{
+    simulateKeyDown("w", timeoutProcessLayoutOnRelease + 100)
+    simulateKeyDown("space", 40)
+    simulateKeyDown("o", 40)
+    simulateKeyUp("o", 40)
+    sleep %timerTimeoutStickyKeys%
+    
+    expected := "w-"
+    validateTestOutput(A_ThisFunc , expected)
+    simulateKeyUp("space", 40)
+    simulateKeyUp("w", 40)
+}
+
+When_letter_is_pressed_but_not_released_followed_by_layout_key_press_followed_by_ke1_with_alternative_layout_press_followed_by_ke2_with_alternative_layout_then_key1_and_key2_and_space_is_sent_#622()
+{
+    simulateKeyDown("w", timeoutProcessLayoutOnRelease + 100)
+    simulateKeyDown("space", 40)
+    simulateKeyDown("o", 40)
+    simulateKeyDown("l", 40)
+    
+    expected := "w ol"
+    validateTestOutput(A_ThisFunc , expected)
+    simulateKeyUp("w", 40)
+    simulateKeyUp("o", 40)
+    simulateKeyUp("l", 40)
+    simulateKeyUp("space", 40)
+}
+
+When_letter_is_pressed_and_released_followed_by_layout_key_press_followed_by_key_with_alternative_layout_press_then_alternative_key_is_sent_without_space#623()
+{
+    simulateKeyDown("w", timeoutProcessLayoutOnRelease + 100)
+    simulateKeyUp("w", timeoutProcessLayoutOnRelease + 100)
+    simulateKeyDown("space", 40)
+    simulateKeyDown("o", 40)
+    
+    expected := "w-"
+    validateTestOutput(A_ThisFunc , expected)
+    simulateKeyUp("o", 40)
+    simulateKeyUp("space", 40)
+}

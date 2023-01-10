@@ -73,6 +73,7 @@ processKeyToSend(key, literal = 0)
 
     if (!processAhkKeyboardShortcuts(activeModifiers, key))
     {
+        addToActivePressedKeys(key)
         if (literal)
         {
             send {blind}%key%
@@ -98,4 +99,38 @@ processAhkKeyboardShortcuts(activeModifiers, key)
     }
     
     return false
+}
+
+addToActivePressedKeys(key)
+{
+    if (activePressedKeys.Length() = 0)
+    {
+        activePressedKeys.Push(key)
+    }
+    else 
+    {
+        itemNotPresent := true
+        For index, value in activePressedKeys
+        {
+            if (value = key)
+            {
+                itemNotPresent := false
+                break
+            }
+        }
+        if (itemNotPresent)
+            activePressedKeys.Push(key)
+    }
+}
+
+removeFromActivePressedKeys(key)
+{
+    For index, value in activePressedKeys
+    {
+        if (value = key)
+        {
+            activePressedKeys.Remove(index)
+            break
+        }
+    }
 }
