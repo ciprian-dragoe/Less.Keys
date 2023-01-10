@@ -39,9 +39,10 @@ writeMemoryStream(value)
     }
     result = %A_Hour%:%A_Min%:%A_Sec%:%A_MSec%|%value%|layoutPressed=%space%|alternativeLayout=%layoutKeyPressed%|keysPressed=%keysPressed%|ProcessKeyOnRelease=%processKeyOnRelease%|keyToSendOnUp=%keyToSendOnUp%|layoutKeyActivatesProcessKeyOnRelease=%layoutKeyActivatesProcessKeyOnRelease%|RealShift=%realShift%|RealCtrl=%realCtrl%|RealAlt=%realAlt%|RealWin=%realWin%|^=%ctrlActive%`|!=%altActive%|+=%shiftActive%|#=%winActive%|`n
     debugStoredData .= result
-    if (StrLen(debugStoredData) > 120000)
+    if (StrLen(debugStoredData) > 50000)
     {
-        StringTrimLeft, debugStoredData, debugStoredData, 50000
+        StringTrimLeft, debugStoredData, debugStoredData, 20000
+        debugStoredData := "------------------------TRIMMED------------------------" . debugStoredData
     }
 }
 
