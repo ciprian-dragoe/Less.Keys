@@ -59,6 +59,7 @@ processNormalKey(key)
         return
     }
 
+    addToActivePressedKeys(key)
     if (key != lastKeyProcessedAsAlternative)
     {
         processKeyToSend(key)
@@ -73,7 +74,6 @@ processKeyToSend(key, literal = 0)
 
     if (!processAhkKeyboardShortcuts(activeModifiers, key))
     {
-        addToActivePressedKeys(key)
         if (literal)
         {
             send {blind}%key%
