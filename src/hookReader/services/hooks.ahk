@@ -588,6 +588,7 @@
     return
 #If
 
+
 *printscreen::
     PostMessage, %APP_MESSAGE_FORCE_QUIT%, 0, 0, , %SCRIPT_LESSKEYS%
     ;sendKeyDown("printscreen")

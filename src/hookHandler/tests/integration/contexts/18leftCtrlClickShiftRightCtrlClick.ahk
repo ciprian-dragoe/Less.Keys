@@ -40,6 +40,7 @@ When_leftCtrlClick_pressed_shift_pressed_rightCtrlClick_doubled_as_left_pressed_
     simulateKeyUp("shift")
     sleep 100
     actual := clearText()
+    showtooltip(actual, 3000)
     expected := "hello world"
 
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))

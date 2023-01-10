@@ -1,8 +1,15 @@
 global debugStoredData := ""
 
-showToolTip(value, time = 600)
+showToolTip(value, time = 600, locationX = 0, locationY = 0)
 {
-    tooltip, |%value%|
+    if (locationX && locationY)
+    {
+        tooltip, |%value%|, %locationX%, %locationY%
+    }
+    else
+    {
+        tooltip, |%value%|
+    }
     sleep %time%
     tooltip
 }
@@ -17,16 +24,12 @@ debug(value)
 
 writeMemoryStream(value)
 {
-    keysPressed := ""
-    for index , key in activePressedKeys
-    {
-        keysPressed .= key
-    }
     realShift := GetKeyState("shift")
     realCtrl := GetKeyState("ctrl")
     realAlt := GetKeyState("alt")
     realWin := GetKeyState("lwin")
-    result = %A_Hour%:%A_Min%:%A_Sec%:%A_MSec%|%value%|RealShift=%realShift%|RealCtrl=%realCtrl%|RealAlt=%realAlt%|RealWin=%realWin%|^=%ctrlActive%`|!=%altActive%|+=%shiftActive%|#=%winActive%|layoutPressed=%layoutKeyPressed%|alternativeLayout=%alternativeLayoutActive%|keysPressed=%keysPressed%|ProcessKeyOnRelease=%processKeyOnRelease%|keyToSendOnUp=%keyToSendOnUp%|layoutKeyActivatesProcessKeyOnRelease=%layoutKeyActivatesProcessKeyOnRelease%`n
+    space := GetKeyState("space", "P")
+    result = %A_Hour%:%A_Min%:%A_Sec%:%A_MSec%|%value%|RealShift=%realShift%|RealCtrl=%realCtrl%|RealAlt=%realAlt%|RealWin=%realWin%|^=%ctrlActive%`|!=%altActive%|+=%shiftActive%|#=%winActive%|layoutPressed=%space%|alternativeLayout=%layoutKeyPressed%|ProcessKeyOnRelease=%processKeyOnRelease%|keyToSendOnUp=%keyToSendOnUp%|layoutKeyActivatesProcessKeyOnRelease=%layoutKeyActivatesProcessKeyOnRelease%`n
     debugStoredData .= result
     if (StrLen(debugStoredData) > 120000)
     {

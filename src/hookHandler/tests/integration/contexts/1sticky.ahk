@@ -48,20 +48,16 @@ When_alt_key_is_logically_pressed_and_not_released_for_more_then_stickyTime_alt_
     
     actual := "" . (!altActive && !GetKeyState("alt"))
     addTestResult(A_ThisFunc, "1", actual, evaluateResult(actual, "1"))
-    simulateKeyDown("lalt", 100)
-    simulateKeyUp("lalt", 100)
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_lwin_key_is_logically_pressed_and_not_released_for_more_then_stickyTime_lwin_and_winActive_is_reset_after_stickyTime_#106()
 {
     simulateTyping("sticky")
-    simulateKeyDown("lalt", timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys)
+    simulateKeyDown("lwin", timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys)
     
     actual := "" . (!winActive && !GetKeyState("lwin"))
     addTestResult(A_ThisFunc, "1", actual, evaluateResult(actual, "1"))
-    simulateKeyDown("lalt", 100)
-    simulateKeyUp("lalt", 100)
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
@@ -130,17 +126,6 @@ When_leftCtrlClick_key_is_logically_pressed_and_mouse_moved_and_stickyTime_passe
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
-When_non_modifier_key_is_logically_pressed_and_not_released_after_stickyTime_passes_activePressedKeys_is_reset_to_empty_array_#111()
-{
-    simulateKeyDown("lshift", 100)
-    simulateKeyDown("a", timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys)
-    simulateKeyUp("lshift", 100)
-
-    actual := "" . activePressedKeys.Length()
-    addTestResult(A_ThisFunc, "0", actual, evaluateResult(actual, "0"))
-    setDefaultTestEnvironment(A_ThisFunc)
-}
-
 When_lastKeyProcessedAsAlternative_is_set_after_stickyTime_it_is_reset_#112()
 {
     lastKeyProcessedAsAlternative := "a"
@@ -156,7 +141,7 @@ When_keyToSendOnUp_is_set_after_stickyTime_it_is_reset_#113()
     keyToSendOnUp := "a"
     simulateKeyDown("space", timerTimeoutStickyKeys + 2 * timerTimeoutStickyKeys)
     
-    actual := "" . keyToSendOnUp = ""
-    addTestResult(A_ThisFunc, "1", actual, evaluateResult(actual, "1"))
+    actual := "" . keyToSendOnUp . ""
+    addTestResult(A_ThisFunc, "", actual, evaluateResult(actual, ""))
     setDefaultTestEnvironment(A_ThisFunc)
 }

@@ -10,31 +10,22 @@ manageLayoutKeyDown(key)
     {
         cancelDoubledModifier()
         layoutKeyPressed := true
-        if (activePressedKeys.length())
+        if (timeoutMouseScrollPoll)
         {
-            debug("space sent because other keys already pressed")
-            processKeyToSend(key)
-        }
-        else
-        {
-            if (timeoutMouseScrollPoll)
-            {
-                CoordMode, Mouse, Screen
-                MouseGetPos, initialMousePositionXAxis, initialMousePositionYAxis
-                SetTimer, TimerScrollWithMouseMovement, OFF
-                SetTimer, TimerScrollWithMouseMovement, %timeoutMouseScrollPoll%
-            }
-
-            alternativeLayoutActive := true
-            sendLayoutKey := true
-            SetTimer, TimerTimeoutSendLayoutKey, %timeoutStillSendLayoutKey%
-            if (layoutKeyActivatesProcessKeyOnRelease)
-            {
-                processKeyOnRelease := true
-            }
-            debug(key . "|activates alternative layout")
+            CoordMode, Mouse, Screen
+            MouseGetPos, initialMousePositionXAxis, initialMousePositionYAxis
+            SetTimer, TimerScrollWithMouseMovement, OFF
+            SetTimer, TimerScrollWithMouseMovement, %timeoutMouseScrollPoll%
         }
 
+        alternativeLayoutActive := true
+        sendLayoutKey := true
+        SetTimer, TimerTimeoutSendLayoutKey, %timeoutStillSendLayoutKey%
+        if (layoutKeyActivatesProcessKeyOnRelease || activePressedKeys.length() > 0)
+        {
+            processKeyOnRelease := true
+        }
+        debug(key . "|activates alternative layout")
     }
 }
 

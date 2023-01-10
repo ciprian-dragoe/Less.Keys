@@ -87,7 +87,6 @@ resetStates()
     resetDoubledModifierClickDrag("rightShiftClick", isRightShiftClickDown)
     resetDoubledModifierClickDrag("rightAltClick", isRightAltClickDown)
 
-    activePressedKeys := []
     processKeyOnRelease := false
     layoutKeyPressed := false
     alternativeLayoutActive := false

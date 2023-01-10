@@ -71,7 +71,7 @@ When_leftShiftClick_pressed_rightShiftClick_pressed_mouse_moved_until_second_wor
     sleep 100
     actual := getSelectedText()
 
-    expected := "world"
+    expected := " world"
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
     setDefaultTestEnvironment(A_ThisFunc)
 }

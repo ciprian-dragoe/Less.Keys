@@ -7,20 +7,17 @@ global IS_LESS_KEYS_ENABLED := 1
 timerLessKeysManagementBasedOnActiveApp()
 {
     WinGetTitle, lastActiveAppName, A
-    if (!lastActiveAppName)
-    {
-        return
-    }
-
+    
     processRestartLessKeys()
     processDisableEnableLessKeys()
+    processCustomAppNameRules()
 }
 
 isAppInMonitoredList(app, monitoredAppList)
 {
     for index, appName in monitoredAppList
     {
-        If (InStr(app, appName))
+        If (InStr(app, appName), true)
         {
             return 1
         }
@@ -37,14 +34,14 @@ processDisableEnableLessKeys()
             IS_LESS_KEYS_ENABLED := false
             PostMessage, %APP_MESSAGE_SET_LESSKEYS_STATE%, 0, 0, , %SCRIPT_HOOKS_READER%
             SetTimer TimerStickyFailBack, off
-            resetStates()
+            resetModifiers()
         }
     }
     else
     {
         if (!IS_LESS_KEYS_ENABLED)
         {
-            resetStates()
+            resetModifiers()
             IS_LESS_KEYS_ENABLED := 1
             PostMessage, %APP_MESSAGE_SET_LESSKEYS_STATE%, 1, 0, , %SCRIPT_HOOKS_READER%
         }
@@ -70,4 +67,18 @@ processRestartLessKeys()
             isAppWhichOverWritesLessKeysActive := false
         }
     }
+}
+
+resetModifiers()
+{
+    send {shift up}
+    shiftState := 0
+    send {ctrl up}
+    ctrlState := 0
+    send {alt up}
+    altState := 0
+    send {lwin up}
+    lwinState := 0
+    systemCursor(1)
+    layoutKeyPressed := 0
 }
