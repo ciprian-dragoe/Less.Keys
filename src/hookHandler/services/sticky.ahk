@@ -37,30 +37,30 @@ resetStates()
 {
     debug("---RESET STICKY")
 
-    if (shiftState || GetKeyState("shift"))
+    if (shiftActive || GetKeyState("shift"))
     {
         debug("================================= shift sticky")
         send {shift up}
-        shiftState := 0
+        shiftActive := 0
         storeDebugData("shift")
         PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
     }
-    if (ctrlState || GetKeyState("ctrl"))
+    if (ctrlActive || GetKeyState("ctrl"))
     {
         debug("================================= ctrl sticky")
         send {ctrl up}
-        ctrlState := 0
+        ctrlActive := 0
         storeDebugData("ctrl")
         PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
     }
-    if (altState || GetKeyState("alt"))
+    if (altActive || GetKeyState("alt"))
     {
         debug("================================= alt sticky")
         resetModifierWithoutTriggerUpState("alt", altActive)
         storeDebugData("alt")
         PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
     }
-    if (winState || GetKeyState("lwin"))
+    if (winActive || GetKeyState("lwin"))
     {
         debug("================================= win sticky")
         resetModifierWithoutTriggerUpState("lwin", winActive)

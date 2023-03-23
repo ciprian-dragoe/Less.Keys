@@ -11,22 +11,26 @@ global isEventLoopBeingProcessed := 0
 addKeyDownToEventLoop(key)
 {
     critical
+    
     eventLoop.push(func("processKeyDown").bind(key))
     if (!isEventLoopBeingProcessed)
     {
         setTimer TimerProcessEventLoop, -10, -1000
     }
+    
     critical off
 }
 
 addKeyUpToEventLoop(key)
 {
     critical
+    
     eventLoop.push(func("processKeyUp").bind(key))
     if (!isEventLoopBeingProcessed)
     {
         setTimer TimerProcessEventLoop, -10, -1000
     }
+    
     critical off
 }
 

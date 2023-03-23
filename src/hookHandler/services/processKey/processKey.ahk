@@ -46,7 +46,6 @@ processKeyUp(scanKeyCode)
 {
     keyName := GetKeyName(Format("sc{:x}", scanKeyCode))
     key := layout[keyName]
-
     debug("[KEY_UP_BEGIN] " . key)
     if (processModifierKey(key, 0))
     {

@@ -72,13 +72,13 @@ processRestartLessKeys()
 resetModifiers()
 {
     send {shift up}
-    shiftState := 0
+    shiftActive := 0
     send {ctrl up}
-    ctrlState := 0
+    ctrlActive := 0
     send {alt up}
-    altState := 0
+    altActive := 0
     send {lwin up}
-    lwinState := 0
+    winActive := 0
     systemCursor(1)
     layoutKeyPressed := 0
 }

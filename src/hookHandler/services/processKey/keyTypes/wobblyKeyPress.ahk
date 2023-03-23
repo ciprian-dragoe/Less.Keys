@@ -41,6 +41,11 @@ wobblyKeyUp()
         ; win key is released before the animation finishes 
         SetTimer, TimerCancelWobblyKey, OFF
         SetTimer, TimerCancelWobblyKey, 250
+        
+        ; in case some keys are treated as shortcuts that have a sleep it can happen
+        ; that in 250ms before lwin is considered as released a other keys are pressed
+        ; and recorded with winActive on
+        winActive := 0
     }
     else if (otherKeyPressedWhileWobblyKeyDown)
     {
