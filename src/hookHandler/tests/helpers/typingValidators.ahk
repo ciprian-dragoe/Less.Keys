@@ -8,7 +8,7 @@ validateTestOutput(testDescription, expectedResult)
 
 evaluateResult(expected, actual)
 {
-    if (expected = actual)
+    if (expected == actual)
     {
         return "PASS"
     }
