@@ -1,354 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LessKeys</title>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=UA-176064705-1"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-
-      gtag('config', 'UA-176064705-1');
-    </script>
-  </head>
-
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LessKeys</title>
   <style>
-    :root {
-      --theme-color-1: #01853C;
-      --theme-color-1-light: #BFE1D0;
-      --theme-color-2: #000000;
-      --theme-color-3: #FFFFFF;
-
-      --content-width: 700px;
-      --card-height: 100px;
-
-      --text-size-title: 20pt;
-      --text-size-sub-title: 15pt;
-      --text-size-phrase: 10pt;
-
-      --space-separation-phrases: 10px;
-      --space-separation-sections: 100px;
-
-      --radius: 5px;
-      --button-width: 150px;
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
       margin: 0;
-      font-size: var(--text-size-phrase);
+      background-image: url('images/pattern-LessKeys.jpg');
+      background-repeat: repeat;
     }
 
-    .center-message {
-      text-align: center;
-      margin-bottom: calc(4*var(--space-separation-phrases));
+    .navigation {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: green;
+      height: 50px;
     }
 
-    .main-button {
-      background: var(--theme-color-1);
-      border-radius: var(--radius);
-      border: 0;
-      color: var(--theme-color-3);
-      padding: 5px 15px;
-      width: var(--button-width);
-    }
-
-    section {
-      color: var(--theme-color-2);
-      width: var(--content-width);
-      margin: var(--space-separation-sections) auto;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    nav {
-      height: 30pt;
-      color: var(--theme-color-3);
-      background: var(--theme-color-1);
-    }
-
-    .nav-content {
-      width: var(--content-width);
-      margin: auto;
-      display: flex;
-      align-content: center;
+    .navigation .content {
+      display: grid;
+      align-items: center;
       height: 100%;
+      grid-template-columns: 1fr 100px 100px 100px;
     }
 
-    .nav-log {
-      margin: auto;
+    .logo {
+      justify-self: start;
     }
 
-    .nav-links {
-      display: flex;
-      flex-direction: row-reverse;
+    .link {
+      justify-self: end;
+    }
+
+    .section {
+      height: 100vh;
+    }
+
+    .horizontal-size {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      justify-items: center;
+    }
+
+    .story {
+      text-align: center;
+    }
+
+    .headline {
+      font-size: 2rem;
+    }
+
+    .promo-image {
+      width: 100%;
+      display: grid;
+      justify-content: end;
+    }
+
+    .video-section {
+      display: grid;
+      align-items: center;
+      justify-items: center;
+    }
+
+    .screen-capture {
+      height: 100%;
       width: 100%;
     }
 
-    .nav-link {
-      margin: auto 10px;
-    }
-
-    .description {
-      flex-direction: row;
-    }
-
-    .description-title {
-      font-size: var(--text-size-title);
-    }
-
-    .description-title:nth-child(2) {
-      margin-bottom: calc(2 * var(--space-separation-phrases))
-    }
-
-    .description-text:nth-child(even) {
-      margin-bottom: var(--space-separation-phrases);
-    }
-
-    .description-sub-title {
-      text-align: center;
-      font-size: var(--text-size-sub-title);
-      margin-bottom: calc(0.5 * var(--space-separation-phrases));
-    }
-
-    .description-sub-title span {
-      color: var(--theme-color-1);
-    }
-
-    .description-image {
-      height: 100px;
-      width: 250px;
-      background: black;
-      margin-bottom: var(--space-separation-phrases);
+    .animation {
+      margin: 100px 0;
+      background: green;
+      width: 100%;
+      height: calc(100% - 200px);
     }
 
     .benefits {
-      flex-direction: column;
-    }
-
-    .benefits > * {
-      margin-bottom: calc(2*var(--space-separation-phrases));
-    }
-
-    .benefits-card {
-      background: var(--theme-color-1-light);
-      height: var(--card-height);
-      border-radius: var(--radius);
-      display: flex;
-      padding: calc(2*var(--space-separation-phrases)) calc(2*var(--space-separation-phrases)) 0 calc(2*var(--space-separation-phrases));
-      justify-content: space-between;
-    }
-
-    .benefits-intro {
-      height: min-content;
-      display: flex;
-      align-items: center;
-      width: 45%;
-    }
-
-    .benefits-icon {
-      font-size: 22pt;
-      margin-right: var(--space-separation-phrases);
-    }
-
-    .benefits-title {
-      color: var(--theme-color-1);
-      font-weight: bold;
-    }
-
-    .benefits-text {
-      width: 45%;
-    }
-
-    .shortcuts {
-      flex-direction: column;
-    }
-
-    .shortcuts-cards {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      column-gap: calc(2*var(--space-separation-phrases));
-      row-gap: calc(2*var(--space-separation-phrases));
-    }
-
-    .shortcuts-card {
-      padding: var(--space-separation-phrases) 0;
-      font-weight: bold;
-      border-radius: var(--radius);
-      border: 2px solid var(--theme-color-1);
-      text-align: center;
-      background: var(--theme-color-1-light);
-    }
-
-    .tutorials {
-      flex-direction: column;
-    }
-
-    .tutorials-videos {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      column-gap: calc(2*var(--space-separation-phrases));
-      row-gap: calc(2*var(--space-separation-phrases));
-    }
-
-    .tutorial-video {
-      height: 200px;
-      width: calc((var(--content-width)/2 - var(--space-separation-phrases)/2))px;
-      background: black;
-      margin-bottom: var(--space-separation-phrases);
-    }
-
-    .call-to-action {
-      flex-direction: column;
-      margin: 0;
+      height: 100%;
       width: 100%;
     }
 
-    .call-to-action-donation {
-      text-underline: black;
-      color: black;
+    .cta-section {
+      display: grid;
     }
 
-    .call-to-action-message {
-      padding: calc(var(--space-separation-sections)/2) 0;
-      background: var(--theme-color-1-light);
+    .download {
+      padding-top: 100px;
+    }
+
+    .shortcut-list {
+      display: grid;
+      height: 100%;
+      grid-template-columns: auto auto auto;
+      justify-items: center;
+      align-items: center;
+    }
+
+    .shortcut {
+      background: gray;
+      height: 100px;
+      width: 200px;
+    }
+
+    .tutorial-section {
+      display: grid;
+      grid-template-rows: 200px auto;
+    }
+
+    .tutorial-section .title {
+      padding-top: 100px;
+    }
+
+    .tutorials {
+      display: grid;
+      grid-gap: 10px;
+      grid-template-columns: auto auto;
+    }
+
+    .tutorial {
+      background: gray;
     }
   </style>
+</head>
+<body>
+<nav class="navigation">
+  <div class="content horizontal-size">
+    <a class="logo" href="#header">LessKeys</a>
+    <a class="link" href="#video">Benefits</a>
+    <a class="link" href="#cta">Download</a>
+    <a class="link" href="#tutorial">Tutorials</a>
+  </div>
+</nav>
 
-  <body>
-    <nav>
-      <div class="nav-content">
-        <div class="nav-log">
-          logo
-        </div>
-        <div class="nav-links">
-          <div class="nav-link">Benefits</div>
-          <div class="nav-link">Download</div>
-          <div class="nav-link">Tutorials</div>
-          <div class="nav-link">Donate</div>
-        </div>
-      </div>
-    </nav>
-
-    <section class="description">
+<div id="header" class="header-section section horizontal-size">
+  <div class="story">
+    <div class="headline">
+      Reduce wrist movement and type faster on any keyboard
+    </div>
+    <div class="problem-description">
       <div>
-        <div class="description-title">Reduce wrist movement</div>
-        <div class="description-title">& type faster on any keyboard</div>
-        <div>
-          <div class="description-text">I started to feel slight discomfort in my wrists while typing</div>
-          <div class="description-text">so I replaced my regular keyboard with a kinesis advantage. </div>
-          <div class="description-text">There was a problem though, when I was working remotely it</div>
-          <div class="description-text">was annoying to carry the laptop and the keyboard with me.</div>
-          <div class="description-text">So I started this project so that I can type any key on a classic</div>
-          <div class="description-text">keyboard without moving my wrists. </div>
-          <div>
-            <button class="main-button">DOWNLOAD</button>
-          </div>
-        </div>
+        I started to feel slight discomfort in my wrists while typing so I
+        replaced my regular keyboard with a kinesis advantage.
       </div>
-
+      <br />
       <div>
-        <div class="description-sub-title"><span>TURN</span>THIS</div>
-        <div class="description-image">1</div>
-        <div class="description-sub-title">INTO<span>THIS</span></div>
-        <div class="description-image">2</div>
+        There was a problem though, when I was working remotely it was
+        annoying to carry the laptop and the keyboard with me.
       </div>
-    </section>
-
-    <section class="benefits">
-      <div class="benefits-card">
-        <div class="benefits-intro">
-          <div class="benefits-icon">icons</div>
-          <div class="benefits-title">Highly customizable</div>
-        </div>
-
-        <div class="benefits-text">
-          <div>Want to create your own layout for your custom</div>
-          <div>scenario, no problem, easily modify the config files</div>
-        </div>
-      </div>
-
-      <div class="benefits-card">
-        <div class="benefits-intro">
-          <div class="benefits-icon">icons</div>
-          <div class="benefits-title">Free & open source</div>
-        </div>
-
-        <div class="benefits-text">
-          <div>You can download the app free off charge</div>
-          <div>and if there is a feature you want to add you</div>
-          <div>can easily modify the source code</div>
-        </div>
-      </div>
-
-      <div class="benefits-card">
-        <div class="benefits-intro">
-          <div class="benefits-icon">icons</div>
-          <div class="benefits-title">Adaptable learning</div>
-        </div>
-
-        <div class="benefits-text">
-          <div>Unlike the kinesis advantage which requires you</div>
-          <div>to learn a whole new layout from the beginning you </div>
-          <div>can choose to learn in incremental steps parts</div>
-          <div>of the new layout</div>
-        </div>
-      </div>
-
+      <br />
       <div>
-          <button class="main-button" style="width: 100%">Download</button>
+        So I started this project so that I can type any key on a classic
+        keyboard without moving my wrists.
       </div>
-    </section>
+    </div>
+  </div>
+  <div class="promo-image">
+    <div>
+      <div>turn this</div>
+      <img
+              src="https://api.pcloud.com/getpubthumb?code=XZHD9yXZXscdzd3J5Uf6NMGmnThgE4XAFx9k&linkpassword=undefined&size=907x283&crop=0&type=auto"
+              width="200px"
+              height="100px"
+      />
+    </div>
+    <div>
+      <div>into this</div>
+      <img
+              src="https://api.pcloud.com/getpubthumb?code=XZGs9yXZD5wkwWWI5rF6oc0cDyF0dbaeiUS7&linkpassword=undefined&size=632x295&crop=0&type=auto"
+              width="200px"
+              height="100px"
+      />
+    </div>
+  </div>
+</div>
 
-    <section class="shortcuts">
-      <div class="center-message">
-        Unzip > Run <span style="color: var(--theme-color-1)">Less Keys</span> > Start typing with these shortcuts
+<div id="video" class="video-section section horizontal-size">
+  <div class="screen-capture">
+    <div class="animation">
+      Gif cu secvente cheie din filmul youtube intro ecran minute
+      [19:38-20:16]
+    </div>
+  </div>
+  <div class="benefits">
+    <div class="benefit benefit1">
+      <div>
+        Free and open source
       </div>
-
-      <div class="shortcuts-cards">
-        <div class="shortcuts-card">SPACE + A = LEFT</div>
-        <div class="shortcuts-card">SPACE + D = RIGHT</div>
-        <div class="shortcuts-card">SPACE + W = UP</div>
-        <div class="shortcuts-card">SPACE + S = DOWN</div>
-        <div class="shortcuts-card">SPACE + Q = HOME</div>
-        <div class="shortcuts-card">SPACE + E = END</div>
-        <div class="shortcuts-card">SPACE + F = BACKSPACE</div>
-        <div class="shortcuts-card">SPACE + C = ENTER</div>
-        <div class="shortcuts-card">SPACE + R = TAB</div>
+      <div>
+        You can download the app free off charge and if there is a feature
+        you want to add you can easily tweak the source code
       </div>
-    </section>
+    </div>
+    <div class="benefit benefit2">
+      <div>
+        Adaptable learning curve
+      </div>
+      <div>
+        Unlike the kinesis advantage which requires you to learn a whole new
+        layout from the beginning, you can choose to learn in incremental
+        steps parts of the new layout
+      </div>
+    </div>
+    <div class="benefit benefit3">
+      <div>
+        Highly customizeable for power users
+      </div>
+      <div>
+        Want to create your own layout for your custom scenario, no problem,
+        easily modify the config files
+      </div>
+      <div>
+        Want to create custom keyboard shortcuts, easily extend the source
+        code for your desired shortcuts
+      </div>
+    </div>
+  </div>
+</div>
 
-    <section class="tutorials">
-        <div class="center-message">
-          <span style="color: var(--theme-color-1)">Tutorial</span> > to get the most out of LessKeys
-        </div>
+<div id="cta" class="cta-section section horizontal-size">
+  <div class="download">
+    <button class="download-button">DOWNLOAD</button>
+  </div>
+  <div class="unzip">
+    Unzip
+  </div>
+  <div class="run">
+    Run LessKeys
+  </div>
+  <div class="shortcuts">
+    <div class="title">
+      Start typing with these shortcuts
+    </div>
+    <div class="shortcut-list">
+      <div class="shortcut shortcut1">
+        space↓ + a = left
+      </div>
+      <div class="shortcut shortcut1">
+        space↓ + d = right
+      </div>
+      <div class="shortcut shortcut1">
+        space↓ + w = up
+      </div>
+      <div class="shortcut shortcut1">
+        space↓ + s = down
+      </div>
+      <div class="shortcut shortcut1">
+        space↓ + q = home
+      </div>
+      <div class="shortcut shortcut1">
+        space↓ + e = end
+      </div>
+      <div class="shortcut shortcut1">
+        space↓ + f = backspace
+      </div>
+      <div class="shortcut shortcut1">
+        space↓ + c = enter
+      </div>
+      <div class="shortcut shortcut1">
+        space↓ + r = tab
+      </div>
+    </div>
+  </div>
+</div>
 
-        <div class="tutorials-videos">
-          <div class="tutorial-video"></div>
-          <div class="tutorial-video"></div>
-          <div class="tutorial-video"></div>
-          <div class="tutorial-video"></div>
-        </div>
-    </section>
-
-    <section class="call-to-action">
-        <div class="center-message">
-          <div>Want to accelerate the development of LessKeys ?</div>
-          <div>You can do this via a small <a class="call-to-action-donation" href="www.google.com">donation</a></div>
-        </div>
-
-        <div class="call-to-action-message">
-          <div class="center-message" style="margin-bottom: var(--space-separation-phrases)">You can download the app</div>
-          <div class="center-message" style="margin-bottom: calc(2*var(--space-separation-phrases))">free of charge</div>
-          <div class="center-message" style="margin-bottom: var(--space-separation-phrases)"><button class="main-button">Download</button></div>
-        </div>
-    </section>
-  </body>
+<div id="tutorial" class="tutorial-section section horizontal-size">
+  <div class="title">
+    Tutorials to get the most out of LessKeys
+  </div>
+  <div class="tutorials">
+    <div class="tutorial tutorial1">general presentation</div>
+    <div class="tutorial tutorial1">my layout</div>
+    <div class="tutorial tutorial1">my alternative layout</div>
+    <div class="tutorial tutorial1">my shortcuts</div>
+    <div class="tutorial tutorial1">my settings</div>
+  </div>
+</div>
+</body>
 </html>
