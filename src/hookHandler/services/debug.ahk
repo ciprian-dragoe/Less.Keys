@@ -17,6 +17,7 @@ restartHookHandlerMonitoring()
 
 reloadLessKeys()
 {
+    DetectHiddenWindows On
     PostMessage, %APP_MESSAGE_FORCE_RELOAD%, 0, 0, , %SCRIPT_LESSKEYS%
 }
 
