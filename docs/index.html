@@ -5,13 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LessKeys</title>
   <style>
+    .main-color {
+      color: green;
+    }
+
+    .main-background-color {
+      background: green;
+    }
+
+    .secondary-color {
+      color: white;
+    }
+    
     html {
       scroll-behavior: smooth;
     }
 
     body {
       margin: 0;
-      background-image: url('images/pattern-LessKeys.jpg');
+      background-image: url('images/pattern-lesskeys.jpg');
       background-repeat: repeat;
     }
 
@@ -19,7 +31,6 @@
       position: fixed;
       top: 0;
       width: 100%;
-      background: green;
       height: 50px;
     }
 
@@ -27,15 +38,17 @@
       display: grid;
       align-items: center;
       height: 100%;
-      grid-template-columns: 1fr 100px 100px 100px;
+      grid-template-columns: 1fr 100px 100px 100px 100px;
     }
 
     .logo {
       justify-self: start;
+      text-decoration: none;
     }
 
     .link {
       justify-self: end;
+      text-decoration: none;
     }
 
     .section {
@@ -60,6 +73,11 @@
 
     .headline {
       font-size: 2rem;
+      text-align: left;
+    }
+
+    .problem-description {
+      text-align: left;
     }
 
     .promo-image {
@@ -135,19 +153,25 @@
   </style>
 </head>
 <body>
-<nav class="navigation">
+<nav class="navigation main-background-color">
   <div class="content horizontal-size">
-    <a class="logo" href="#header">LessKeys</a>
-    <a class="link" href="#video">Benefits</a>
-    <a class="link" href="#cta">Download</a>
-    <a class="link" href="#tutorial">Tutorials</a>
+    <a class="logo secondary-color" href="#header">LessKeys</a>
+    <a class="link secondary-color" href="#video">Benefits</a>
+    <a class="link secondary-color" href="#cta">Download</a>
+    <a class="link secondary-color" href="#tutorial">Tutorials</a>
+    <a class="link secondary-color" href="#donate">Donate</a>
   </div>
 </nav>
 
 <div id="header" class="header-section section horizontal-size">
   <div class="story">
     <div class="headline">
-      Reduce wrist movement and type faster on any keyboard
+      <div>
+        Reduce wrist movement
+      </div>
+      <div>
+        & type faster on any keyboard
+      </div>
     </div>
     <div class="problem-description">
       <div>
@@ -168,19 +192,19 @@
   </div>
   <div class="promo-image">
     <div>
-      <div>turn this</div>
+      <div><span class="main-color">TURN</span> THIS</div>
       <img
-              src="https://api.pcloud.com/getpubthumb?code=XZHD9yXZXscdzd3J5Uf6NMGmnThgE4XAFx9k&linkpassword=undefined&size=907x283&crop=0&type=auto"
+              src="./images/regular-keyboard.jpg"
               width="200px"
-              height="100px"
+              height="80px"
       />
     </div>
     <div>
-      <div>into this</div>
+      <div>INTO <span class="main-color">THIS</span></div>
       <img
-              src="https://api.pcloud.com/getpubthumb?code=XZGs9yXZD5wkwWWI5rF6oc0cDyF0dbaeiUS7&linkpassword=undefined&size=632x295&crop=0&type=auto"
+              src="./images/kinesis-keyboard.jpg"
               width="200px"
-              height="100px"
+              height="170px"
       />
     </div>
   </div>
