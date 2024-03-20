@@ -1,315 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LessKeys</title>
-  <style>
-    .main-color {
-      color: green;
-    }
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>LessKeys</title>
+    <style>
+        :root {
+            --image-check-mark-dimension: 80px;
+            --content-width: 1000px;
 
-    .main-background-color {
-      background: green;
-    }
+            --color-primary: #29BA9F;
+            --color-primary-light: #DEF7F2;
+        }
 
-    .secondary-color {
-      color: white;
-    }
-    
-    html {
-      scroll-behavior: smooth;
-    }
+        .color-primary-background {
+            background-color: var(--color-primary);
+        }
 
-    body {
-      margin: 0;
-      background-image: url('images/pattern-lesskeys.png');
-      background-repeat: repeat;
-    }
+        .color-primary-light-background {
+            background-color: var(--color-primary-light);
+        }
 
-    .navigation {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      height: 50px;
-    }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    .navigation .content {
-      display: grid;
-      align-items: center;
-      height: 100%;
-      grid-template-columns: 1fr 100px 100px 100px 100px;
-    }
+        body {
+            margin: 0;
+            background-image: url('images/pattern-lesskeys.png');
+            background-repeat: repeat;
+        }
+        
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        table td {
+            padding: 0;
+        }
 
-    .logo {
-      justify-self: start;
-      text-decoration: none;
-    }
+        .container-horizontal {
+            display: flex;
+        }
 
-    .link {
-      justify-self: end;
-      text-decoration: none;
-    }
+        .container-center {
+            justify-content: center;
+            align-items: center;
+        }
 
-    .section {
-      height: 100vh;
-    }
+        .container-free-space {
+            flex-grow: 1;
+        }
 
-    .horizontal-size {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
+        .container-content {
+            width: var(--content-width);
+        }
 
-    .header-section {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      justify-items: center;
-    }
+        #section-cover-page {
+            height: 50vh;
+        }
 
-    .story {
-      text-align: center;
-    }
+        #section-cover-page nav ul {
+            display: flex;
+        }
 
-    .headline {
-      font-size: 2rem;
-      text-align: left;
-    }
+        #section-cover-page nav ul li {
+            margin: 0 10px;
+        }
 
-    .problem-description {
-      text-align: left;
-    }
+        #section-download {
+            height: 50vh;
+            text-align: center;
+        }
 
-    .promo-image {
-      width: 100%;
-      display: grid;
-      justify-content: end;
-    }
+        #section-download .button-download {
+            width: 100px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-    .video-section {
-      display: grid;
-      align-items: center;
-      justify-items: center;
-    }
+        #section-benefits {
+            height: 100vh;
+        }
 
-    .screen-capture {
-      height: 100%;
-      width: 100%;
-    }
+        #section-benefits .benefits-description tr {
+            display: flex;
+            flex-direction: row;
+        }
 
-    .animation {
-      margin: 100px 0;
-      background: green;
-      width: 100%;
-      height: calc(100% - 200px);
-    }
+        #section-benefits .benefits-description tr img {
+            width: var(--image-check-mark-dimension);
+            height: var(--image-check-mark-dimension);
+            position: absolute;
+        }
 
-    .benefits {
-      display: grid;
-      height: 100%;
-      width: 100%;
-    }
+        #section-benefits .benefits-description tr .image-placeholder {
+            width: calc(var(--image-check-mark-dimension) / 2);
+            height: var(--image-check-mark-dimension);
+        }
 
-    .cta-section {
-      display: grid;
-    }
+        #section-benefits .benefits-description tr .description {
+            width: calc(var(--content-width) - var(--image-check-mark-dimension) / 2);
+        }
+    </style>
 
-    .download {
-      padding-top: 100px;
-    }
-
-    .shortcut-list {
-      display: grid;
-      height: 100%;
-      grid-template-columns: auto auto auto;
-      justify-items: center;
-      align-items: center;
-    }
-
-    .shortcut {
-      background: gray;
-      height: 100px;
-      width: 200px;
-    }
-
-    .tutorial-section {
-      display: grid;
-      grid-template-rows: 200px auto;
-    }
-
-    .tutorial-section .title {
-      padding-top: 100px;
-    }
-
-    .tutorials {
-      display: grid;
-      grid-gap: 10px;
-      grid-template-columns: auto auto;
-    }
-
-    .tutorial {
-      background: gray;
-    }
-  </style>
 </head>
 <body>
-<nav class="navigation main-background-color">
-  <div class="content horizontal-size">
-    <a class="logo secondary-color" href="#header">LessKeys</a>
-    <a class="link secondary-color" href="#video">Benefits</a>
-    <a class="link secondary-color" href="#cta">Download</a>
-    <a class="link secondary-color" href="#tutorial">Tutorials</a>
-    <a class="link secondary-color" href="#donate">Donate</a>
-  </div>
-</nav>
+<section id="section-cover-page" class="color-primary-background container-horizontal">
+    <div class="container-free-space"></div>
 
-<div id="header" class="header-section section horizontal-size">
-  <div class="story">
-    <div class="headline">
-      <div>
-        Reduce wrist movement
-      </div>
-      <div>
-        & type faster on any keyboard
-      </div>
-    </div>
-    <div class="problem-description">
-      <div>
-        I started to feel slight discomfort in my wrists while typing so I
-        replaced my regular keyboard with a kinesis advantage.
-      </div>
-      <br />
-      <div>
-        There was a problem though, when I was working remotely it was
-        annoying to carry the laptop and the keyboard with me.
-      </div>
-      <br />
-      <div>
-        So I started this project so that I can type any key on a classic
-        keyboard without moving my wrists.
-      </div>
-    </div>
-  </div>
-  <div class="promo-image">
-    <div>
-      <div><span class="main-color">TURN</span> THIS</div>
-      <img
-              src="./images/regular-keyboard.jpg"
-              width="200px"
-              height="80px"
-      />
-    </div>
-    <div>
-      <div>INTO <span class="main-color">THIS</span></div>
-      <img
-              src="./images/kinesis-keyboard.jpg"
-              width="200px"
-              height="170px"
-      />
-    </div>
-  </div>
-</div>
+    <div class="container-content">
+        <nav>
+            <ul>
+                <li><a href="#section-cover-page">Home</a></li>
+                <li class="container-free-space"></li>
+                <li><a href="#download">Download</a></li>
+                <li><a href="#section-benefits">Benefits</a></li>
+                <li><a href="#tutorial">Tutorials</a></li>
+                <li><a href="#donate">Donate</a></li>
+            </ul>
+        </nav>
 
-<div id="video" class="video-section section horizontal-size">
-  <div class="screen-capture">
-    <div class="animation">
-      Gif cu secvente cheie din filmul youtube intro ecran minute
-      [19:38-20:16]
+        <div class="container-horizontal">
+            <img src="images"/>
+            <img src="images"/>
+        </div>
     </div>
-  </div>
-  <div class="benefits">
-    <div class="benefit benefit1">
-      <div>
-        Free and open source
-      </div>
-      <div>
-        You can download the app free off charge and if there is a feature
-        you want to add you can easily tweak the source code
-      </div>
-    </div>
-    <div class="benefit benefit2">
-      <div>
-        Adaptable learning curve
-      </div>
-      <div>
-        Unlike the kinesis advantage which requires you to learn a whole new
-        layout from the beginning, you can choose to learn in incremental
-        steps parts of the new layout
-      </div>
-    </div>
-    <div class="benefit benefit3">
-      <div>
-        Highly customizeable for power users
-      </div>
-      <div>
-        Want to create your own layout for your custom scenario, no problem,
-        easily modify the config files
-      </div>
-      <div>
-        Want to create custom keyboard shortcuts, easily extend the source
-        code for your desired shortcuts
-      </div>
-    </div>
-  </div>
-</div>
 
-<div id="cta" class="cta-section section horizontal-size">
-  <div class="download">
-    <button class="download-button">DOWNLOAD</button>
-  </div>
-  <div class="unzip">
-    Unzip
-  </div>
-  <div class="run">
-    Run LessKeys
-  </div>
-  <div class="shortcuts">
-    <div class="title">
-      Start typing with these shortcuts
-    </div>
-    <div class="shortcut-list">
-      <div class="shortcut shortcut1">
-        space↓ + a = left
-      </div>
-      <div class="shortcut shortcut1">
-        space↓ + d = right
-      </div>
-      <div class="shortcut shortcut1">
-        space↓ + w = up
-      </div>
-      <div class="shortcut shortcut1">
-        space↓ + s = down
-      </div>
-      <div class="shortcut shortcut1">
-        space↓ + q = home
-      </div>
-      <div class="shortcut shortcut1">
-        space↓ + e = end
-      </div>
-      <div class="shortcut shortcut1">
-        space↓ + f = backspace
-      </div>
-      <div class="shortcut shortcut1">
-        space↓ + c = enter
-      </div>
-      <div class="shortcut shortcut1">
-        space↓ + r = tab
-      </div>
-    </div>
-  </div>
-</div>
+    <div class="container-free-space"></div>
+</section>
 
-<div id="tutorial" class="tutorial-section section horizontal-size">
-  <div class="title">
-    Tutorials to get the most out of LessKeys
-  </div>
-  <div class="tutorials">
-    <div class="tutorial tutorial1">general presentation</div>
-    <div class="tutorial tutorial1">my layout</div>
-    <div class="tutorial tutorial1">my alternative layout</div>
-    <div class="tutorial tutorial1">my shortcuts</div>
-    <div class="tutorial tutorial1">my settings</div>
-  </div>
-</div>
+<section id="section-download" class="container-horizontal container-center">
+    <div class="container-free-space"></div>
+
+    <div class="container-content">
+        <div>
+            <h1>Reduce wrist movement & type faster on any keyboard</h1>
+            <div>
+                <p>I started to feel slight discomfort in my wrists while typing to I replaced my regular</p>
+                <p> my regular keyboard with a kinesis advantage.</p>
+            </div>
+            <div>
+                <p>There was a problem though, when I was working remotely it was</p>
+                <p>annoying to carry the laptop and the keyboard with me.</p>
+            </div>
+            <div>
+                <p>So I started this project so that I can</p>
+                <p>type any key on a classic keyboard without moving my wrists.</p>
+            </div>
+
+            <button class="button-download">Download</button>
+        </div>
+    </div>
+
+    <div class="container-free-space"></div>
+</section>
+
+<section id="section-benefits" class="container-horizontal container-center">
+    <div class="container-free-space"></div>
+    <div class="container-content">
+        <div class="benefits-summary">
+            <img/>
+            <h1>TURN THIS - INTO THIS</h1>
+        </div>
+
+        <table class="benefits-description">
+            <tbody>
+            <tr>
+                <td>
+                    <img src="images/button-check-mark.png" class="image-dimensions" alt=""/>
+                </td>
+                <td class="image-placeholder"></td>
+                <td class="color-primary-light-background image-placeholder"><td>
+                <td class="color-primary-light-background">
+                    <h1>Highly customizable</h1>
+                </td>
+                <td class="color-primary-light-background">
+                    <p>
+                        Want to create your own layout for your custom scenario, no problem, easily modify the config files. Want to create custom keyboard shortcuts, easily extend the source code for your desired shortcuts
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="images/button-check-mark.png" class="image-dimensions" alt=""/>
+                </td>
+                <td class="image-placeholder"></td>
+                <td class="color-primary-light-background image-placeholder"><td>
+                <td class="color-primary-light-background">
+                    <h1>Free & open source</h1>
+                </td>
+                <td class="color-primary-light-background">
+                    <p>
+                        You can download the app free of charge and if there is a feature you want to add you can easily
+                        tweak the source code
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="images/button-check-mark.png" class="image-dimensions" alt=""/>
+                </td>
+                <td class="image-placeholder"></td>
+                <td class="color-primary-light-background image-placeholder"><td>
+                <td class="color-primary-light-background">
+                    <h1>Adaptable learning</h1>
+                </td>
+                <td class="color-primary-light-background">
+                    <p>
+                        Unlike the kinesis advantage which requires you to learn a whole new layout from the beginning,
+                        you ca choose to learn in incremental steps the layout
+                    </p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    </div>
+    <div class="container-free-space"></div>
+</section>
+
 </body>
 </html>
