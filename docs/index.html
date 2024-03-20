@@ -44,6 +44,11 @@
         .container-horizontal {
             display: flex;
         }
+        
+        .container-vertical {
+            display: flex;
+            flex-direction: column;
+        }
 
         .container-center {
             justify-content: center;
@@ -57,9 +62,31 @@
         .container-content {
             width: var(--content-width);
         }
+        
+        .button-download {
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            width: 100px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
         #section-cover-page {
             height: 50vh;
+        }
+
+        #section-cover-page .container-horizontal {
+            flex: 1;
+            justify-content: space-between;
+            align-items: end;
+        }
+        
+        #section-cover-page .container-horizontal img {
+            height: 40vh;
         }
 
         #section-cover-page nav ul {
@@ -74,36 +101,90 @@
             height: 50vh;
             text-align: center;
         }
+        
+        #section-download  {
+            height: 50vh;
+            text-align: center;
+        }
 
-        #section-download .button-download {
-            width: 100px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        #section-download .container-vertical {
+            height: 80%;
+            justify-content: space-around;
+            align-items: center;
+        }
+        
+        #section-download .container-vertical .button-container {
+            display: flex;
+            justify-content: center;
         }
 
         #section-benefits {
             height: 100vh;
         }
 
-        #section-benefits .benefits-description tr {
-            display: flex;
-            flex-direction: row;
+        #section-benefits .benefits-summary {
+            height: 50vh;
+            justify-content: space-around;
         }
 
-        #section-benefits .benefits-description tr img {
+        #section-benefits .benefits-summary img {
+            height: 70%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #section-benefits .benefits-summary h1 {
+            text-align: center;
+        }
+        
+        #section-benefits .benefits-description {
+            height: 50vh;
+        }
+        
+        #section-benefits .benefits-description ul {
+            display: flex;
+            flex-grow: 1;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        #section-benefits .benefits-description li {
+            display: flex;
+            flex-direction: row;
+            align-content: space-around;
+        }
+
+        #section-benefits .benefits-description li img {
             width: var(--image-check-mark-dimension);
             height: var(--image-check-mark-dimension);
             position: absolute;
         }
 
-        #section-benefits .benefits-description tr .image-placeholder {
+        #section-benefits .benefits-description li .image-placeholder {
             width: calc(var(--image-check-mark-dimension) / 2);
             height: var(--image-check-mark-dimension);
+            flex-shrink: 0;
         }
 
-        #section-benefits .benefits-description tr .description {
+        #section-benefits .benefits-description li .container-horizontal {
             width: calc(var(--content-width) - var(--image-check-mark-dimension) / 2);
+        }
+
+        #section-benefits .benefits-description li .container-horizontal h1 {
+            flex-shrink: 0;
+            margin: 0 50px;
+            text-align: center;
+            line-height: var(--image-check-mark-dimension);
+        }
+
+        #section-benefits .benefits-description li .container-horizontal p {
+            flex-grow: 1;
+        }
+        
+        #section-benefits .benefits-description li .button-download {
+            flex-grow: 1;
+            display: flex;
         }
     </style>
 
@@ -112,7 +193,7 @@
 <section id="section-cover-page" class="color-primary-background container-horizontal">
     <div class="container-free-space"></div>
 
-    <div class="container-content">
+    <div class="container-content container-vertical">
         <nav>
             <ul>
                 <li><a href="#section-cover-page">Home</a></li>
@@ -125,8 +206,8 @@
         </nav>
 
         <div class="container-horizontal">
-            <img src="images"/>
-            <img src="images"/>
+            <img src="https://mtek3d.com/wp-content/uploads/2018/01/image-placeholder-500x500.jpg"/>
+            <img src="https://mtek3d.com/wp-content/uploads/2018/01/image-placeholder-500x500.jpg"/>
         </div>
     </div>
 
@@ -136,8 +217,7 @@
 <section id="section-download" class="container-horizontal container-center">
     <div class="container-free-space"></div>
 
-    <div class="container-content">
-        <div>
+    <div class="container-content container-vertical">
             <h1>Reduce wrist movement & type faster on any keyboard</h1>
             <div>
                 <p>I started to feel slight discomfort in my wrists while typing to I replaced my regular</p>
@@ -152,8 +232,9 @@
                 <p>type any key on a classic keyboard without moving my wrists.</p>
             </div>
 
-            <button class="button-download">Download</button>
-        </div>
+            <div class="button-container">
+                <button class="button-download">Download</button>    
+            </div>
     </div>
 
     <div class="container-free-space"></div>
@@ -162,65 +243,58 @@
 <section id="section-benefits" class="container-horizontal container-center">
     <div class="container-free-space"></div>
     <div class="container-content">
-        <div class="benefits-summary">
-            <img/>
+        <div class="benefits-summary container-vertical">
+            <img src="https://mtek3d.com/wp-content/uploads/2018/01/image-placeholder-500x500.jpg"/>
             <h1>TURN THIS - INTO THIS</h1>
         </div>
 
-        <table class="benefits-description">
-            <tbody>
-            <tr>
-                <td>
+        <div class="benefits-description container-vertical">
+            <ul>
+                <li>
                     <img src="images/button-check-mark.png" class="image-dimensions" alt=""/>
-                </td>
-                <td class="image-placeholder"></td>
-                <td class="color-primary-light-background image-placeholder"><td>
-                <td class="color-primary-light-background">
-                    <h1>Highly customizable</h1>
-                </td>
-                <td class="color-primary-light-background">
-                    <p>
-                        Want to create your own layout for your custom scenario, no problem, easily modify the config files. Want to create custom keyboard shortcuts, easily extend the source code for your desired shortcuts
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img src="images/button-check-mark.png" class="image-dimensions" alt=""/>
-                </td>
-                <td class="image-placeholder"></td>
-                <td class="color-primary-light-background image-placeholder"><td>
-                <td class="color-primary-light-background">
-                    <h1>Free & open source</h1>
-                </td>
-                <td class="color-primary-light-background">
-                    <p>
-                        You can download the app free of charge and if there is a feature you want to add you can easily
-                        tweak the source code
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img src="images/button-check-mark.png" class="image-dimensions" alt=""/>
-                </td>
-                <td class="image-placeholder"></td>
-                <td class="color-primary-light-background image-placeholder"><td>
-                <td class="color-primary-light-background">
-                    <h1>Adaptable learning</h1>
-                </td>
-                <td class="color-primary-light-background">
-                    <p>
-                        Unlike the kinesis advantage which requires you to learn a whole new layout from the beginning,
-                        you ca choose to learn in incremental steps the layout
-                    </p>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+                    <div class="image-placeholder"></div>
+                    <div class="container-horizontal color-primary-light-background">
+                        <div class="image-placeholder"></div>
+                        <h1>Highly customizable</h1>
+                        <p>
+                            Want to create your own layout for your custom scenario, no problem, easily modify the config files. Want to create custom keyboard shortcuts, easily extend the source code for your desired shortcuts
+                        </p>
+                    </div>
+                </li>
 
+                <li>
+                    <img src="images/button-check-mark.png" class="image-dimensions" alt=""/>
+                    <div class="image-placeholder"></div>
+                    <div class="container-horizontal color-primary-light-background">
+                        <div class="image-placeholder"></div>
+                        <h1>Free & open source</h1>
+                        <p>
+                            You can download the app free of charge and if there is a feature you want to add you can easily
+                            tweak the source code
+                        </p>
+                    </div>
+                </li>
+
+                <li>
+                    <img src="images/button-check-mark.png" class="image-dimensions" alt=""/>
+                    <div class="image-placeholder"></div>
+                    <div class="container-horizontal color-primary-light-background">
+                        <div class="image-placeholder"></div>
+                        <h1>Adaptable learning</h1>
+                        <p>
+                            Unlike the kinesis advantage which requires you to learn a whole new layout from the beginning,
+                            you ca choose to learn in incremental steps the layout
+                        </p>
+                    </div>
+                </li>
+                
+                <li>
+                    <button class="button-download">Download</button>
+                </li>
+            </ul>
+        </div>
     </div>
+    
     <div class="container-free-space"></div>
 </section>
 
