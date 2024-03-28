@@ -4,16 +4,21 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>LessKeys</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap">
     <style>
         :root {
-            --image-check-mark-dimension: 80px;
+            --image-check-mark-dimension: 90px;
+            --download-button-height: 60px;
+            
             --content-width: 1000px;
 
             --color-primary: #29BA9F;
             --color-primary-light: #DEF7F2;
             
-            --title-font-size: 30px;
-            --description-font-size: 20px;
+            --title-font-size: 20px;
+            --description-font-size: 14px;
+
+            --font-weight-bold: 600;
         }
 
         .color-primary-background {
@@ -34,6 +39,9 @@
 
         html {
             scroll-behavior: smooth;
+            font-size: var(--description-font-size);
+            font-family: 'Poppins', sans-serif;
+            
         }
 
         body {
@@ -78,9 +86,12 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            background-color: var(--color-primary);
+            color: white;
             text-align: center;
-            width: 100px;
-            height: 30px;
+            width: 150px;
+            height: 35px;
+            font-weight: var(--font-weight-bold);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -186,16 +197,19 @@
             flex-shrink: 0;
             margin: 0 50px;
             text-align: center;
+            color: var(--color-primary);
             line-height: var(--image-check-mark-dimension);
         }
 
         #section-benefits .benefits-description li .container-horizontal p {
             flex-grow: 1;
+            color: var(--color-primary);
         }
         
         #section-benefits .benefits-description li .button-download {
             flex-grow: 1;
             display: flex;
+            height: var(--download-button-height);
         }
         
         #section-tutorial {
@@ -209,6 +223,7 @@
         
         #section-tutorial .container-content .default-shortcuts .title {
             margin: calc(var(--content-width) * 0.06) 0;
+            font-weight: var(--font-weight-bold);
             text-align: center;
             font-size: var(--title-font-size);
         }
@@ -232,7 +247,8 @@
             line-height: calc(var(--content-width)*0.06 - 4px);
             font-size: var(--description-font-size);
             text-align: center;
-            border: 2px solid black;
+            border: 3px solid black;
+            font-weight: var(--font-weight-bold);
             border-radius: 5px;
         }
 
@@ -241,6 +257,7 @@
 
         #section-tutorial .container-content .videos .title {
             text-align: center;
+            font-weight: var(--font-weight-bold);
             font-size: var(--title-font-size);
             margin: calc(var(--content-width) * 0.06) 0;
         }
@@ -259,10 +276,45 @@
             margin-bottom: calc(var(--content-width) * 0.06);
             background: black;
         }
+        
+        #section-donation {
+            height: 30vh;
+        }
+        
+        #section-donation .container-content .description {
+            text-align: center;
+            font-size: var(--description-font-size);
+        }
+        
+        #section-donation .container-content .description a{
+            color: black;
+        }
+        
+        #section-footer {
+            height: 30vh;
+            display: flex;
+            align-items: center;
+        }
+
+        #section-footer .container-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            justify-content: space-between;
+            height: 40%;
+        }
+        
+        #section-footer .container-content div .title {
+            font-size: var(--title-font-size);
+            font-weight: var(--font-weight-bold);
+        }
+
     </style>
 
 </head>
 <body>
+
 <section id="section-cover-page" class="color-primary-background container-horizontal">
     <div class="container-free-space"></div>
 
@@ -271,16 +323,16 @@
             <ul>
                 <li><a href="#section-cover-page">Home</a></li>
                 <li class="container-free-space"></li>
-                <li><a href="#download">Download</a></li>
+                <li><a href="#section-download">Download</a></li>
                 <li><a href="#section-benefits">Benefits</a></li>
-                <li><a href="#tutorial">Tutorials</a></li>
-                <li><a href="#donate">Donate</a></li>
+                <li><a href="#section-tutorial">Tutorials</a></li>
+                <li><a href="#section-donation">Donate</a></li>
             </ul>
         </nav>
 
         <div class="container-horizontal">
-            <img src="https://mtek3d.com/wp-content/uploads/2018/01/image-placeholder-500x500.jpg"/>
-            <img src="https://mtek3d.com/wp-content/uploads/2018/01/image-placeholder-500x500.jpg"/>
+            <img src="./images/stanga-mana.gif"/>
+            <img src="./images/dreapta-mana.gif"/>
         </div>
     </div>
 
@@ -413,5 +465,31 @@
     <div class="container-free-space"></div>
 </section>
 
+<section id="section-donation" class="container-horizontal container-center">
+    <div class="container-free-space"></div>
+
+    <div class="container-content">
+        <div class="description">
+            <div>Want to accelerate the development of LessKeys ?</div>
+            <div>You can do this via a small <a href="www.google.com">donation</a></div>
+        </div>
+    </div>
+
+    <div class="container-free-space"></div>
+</section>
+
+<section id="section-footer" class="color-primary-light-background container-horizontal">
+    <div class="container-free-space"></div>
+
+    <div class="container-content">
+        <div>
+            <div>You can download the app</div>
+            <div class="title">free of charge</div>
+        </div>
+        <button class="button-download">Download</button>
+    </div>
+
+    <div class="container-free-space"></div>
+</section>
 </body>
 </html>
