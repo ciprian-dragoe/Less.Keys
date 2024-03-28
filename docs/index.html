@@ -11,6 +11,9 @@
 
             --color-primary: #29BA9F;
             --color-primary-light: #DEF7F2;
+            
+            --title-font-size: 30px;
+            --description-font-size: 20px;
         }
 
         .color-primary-background {
@@ -19,6 +22,14 @@
 
         .color-primary-light-background {
             background-color: var(--color-primary-light);
+        }
+        
+        .color-primary {
+            color: var(--color-primary);
+        }
+
+        .color-primary-light {
+            color: var(--color-primary-light);
         }
 
         html {
@@ -186,6 +197,68 @@
             flex-grow: 1;
             display: flex;
         }
+        
+        #section-tutorial {
+        }
+        
+        #section-tutorial .container-content .default-shortcuts {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+        
+        #section-tutorial .container-content .default-shortcuts .title {
+            margin: calc(var(--content-width) * 0.06) 0;
+            text-align: center;
+            font-size: var(--title-font-size);
+        }
+
+        #section-tutorial .container-content .default-shortcuts .sub-title {
+            text-align: center;
+            font-size: var(--description-font-size);
+        }
+        
+        #section-tutorial .container-content .default-shortcuts .layout-shortcuts {
+            display: flex;
+            justify-content: space-between;
+            align-content: space-between;
+            flex-wrap: wrap;
+            height: calc(var(--content-width) * 0.264 + 12px);
+        }
+
+        #section-tutorial .container-content .default-shortcuts .layout-shortcuts .shortcut {
+            width: calc(30% - 4px);
+            height: calc(var(--content-width)*0.06 - 4px);
+            line-height: calc(var(--content-width)*0.06 - 4px);
+            font-size: var(--description-font-size);
+            text-align: center;
+            border: 2px solid black;
+            border-radius: 5px;
+        }
+
+        #section-tutorial .container-content .videos {
+        }
+
+        #section-tutorial .container-content .videos .title {
+            text-align: center;
+            font-size: var(--title-font-size);
+            margin: calc(var(--content-width) * 0.06) 0;
+        }
+
+        #section-tutorial .container-content .videos .layout-videos {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-content: space-between;
+            height: 100%;
+        }
+
+        #section-tutorial .container-content .layout-videos .video {
+            width: calc(var(--content-width) * 0.47);
+            height: calc(var(--content-width) * 0.35);
+            margin-bottom: calc(var(--content-width) * 0.06);
+            background: black;
+        }
     </style>
 
 </head>
@@ -295,6 +368,48 @@
         </div>
     </div>
     
+    <div class="container-free-space"></div>
+</section>
+
+<section id="section-tutorial" class="container-horizontal container-center">
+    <div class="container-free-space"></div>
+
+    <div class="container-content">
+        <div class="default-shortcuts">
+            <div class="title">
+                Unzip > Run <span class="color-primary">LessKeys.exe</span> > Start typing with default layout
+                <div class="sub-title">
+                    *for some users the antivirus might block the app, please add it to the exception list
+                </div>
+            </div>
+            
+            <div class="layout-shortcuts">
+                <div class="shortcut">SPACE + A = LEFT</div>
+                <div class="shortcut">SPACE + D = RIGHT</div>
+                <div class="shortcut">SPACE + W = UP</div>
+                <div class="shortcut">SPACE + S = DOWN</div>
+                <div class="shortcut">SPACE + Q = HOME</div>
+                <div class="shortcut">SPACE + E = END</div>
+                <div class="shortcut">SPACE + F = BACKSPACE</div>
+                <div class="shortcut">SPACE + C = ENTER</div>
+                <div class="shortcut">SPACE + R = TAB</div>
+            </div>
+        </div>
+
+        <div class="videos">
+            <div class="title">
+                <span class="color-primary">Tutorials</span> to get the most out of LessKeys
+            </div>
+            
+            <div class="layout-videos">
+                <div class="video"></div>
+                <div class="video"></div>
+                <div class="video"></div>
+                <div class="video"></div>
+            </div>
+        </div>
+    </div>
+
     <div class="container-free-space"></div>
 </section>
 
