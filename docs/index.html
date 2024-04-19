@@ -9,6 +9,7 @@
         :root {
             --image-check-mark-dimension: 90px;
             --download-button-height: 60px;
+            --logo-dimension: 40px;
             
             --content-width: 1000px;
 
@@ -41,7 +42,6 @@
             scroll-behavior: smooth;
             font-size: var(--description-font-size);
             font-family: 'Poppins', sans-serif;
-            
         }
 
         body {
@@ -54,6 +54,10 @@
             list-style: none;
             padding: 0;
             margin: 0;
+        }
+
+        a {
+            text-decoration: none;
         }
         
         table td {
@@ -106,12 +110,39 @@
             justify-content: space-between;
             align-items: end;
         }
+
+        #section-cover-page .container-horizontal div {
+            text-align: center;
+        }
+
+        #section-cover-page .container-content nav ul {
+            margin-top: 10px;
+        }
         
-        #section-cover-page .container-horizontal div img {
+        #section-cover-page .container-content nav ul li img {
+            height: var(--logo-dimension);
+        }
+
+        #section-cover-page .container-content nav ul li a {
+            line-height: var(--logo-dimension);
+        }
+
+        #section-cover-page .img-explanation {
+            justify-content: center;
+        }
+        
+        #section-cover-page .img-explanation div .writing {
             margin: 0;
             padding: 0;
             display: block;
             height: 30vh;
+        }
+
+        #section-cover-page .img-explanation div .text {
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0;
+            display: block;
         }
 
         #section-cover-page nav ul {
@@ -315,6 +346,24 @@
 
     </style>
 
+    <script defer>
+        window.onload = function() {
+            document.getElementById('img-left-text').src = './images/left-text.gif';
+            document.getElementById('img-right-text').src = './images/right-text.gif';
+            document.getElementById('img-left-writing').src = './images/left-writing.gif';
+            document.getElementById('img-right-writing').src = './images/right-writing.gif';
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        };
+        
+    </script>
 </head>
 <body>
 
@@ -324,7 +373,7 @@
     <div class="container-content container-vertical">
         <nav>
             <ul>
-                <li><a href="#section-cover-page">Home</a></li>
+                <li><img class="logo" src="./images/logo.png" alt="home"/></li>
                 <li class="container-free-space"></li>
                 <li><a href="#section-download">Download</a></li>
                 <li><a href="#section-benefits">Benefits</a></li>
@@ -333,13 +382,14 @@
             </ul>
         </nav>
 
-        <div class="container-horizontal">
+        <div class="container-horizontal img-explanation">
             <div>
-                <img src=""/>
-                <img src="./images/stanga-mana.gif"/>    
+                <img class="text" id="img-left-text" src="./images/left-text-static.png"/>
+                <img class="writing" id="img-left-writing" src="./images/left-writing-static.png"/>    
             </div>
             <div>
-                <img src="./images/dreapta-mana.gif"/>    
+                <img class="text" id="img-right-text" src="./images/right-text-static.png"/>
+                <img class="writing" id="img-right-writing" src="./images/right-writing-static.png"/>    
             </div>
         </div>
     </div>
@@ -377,7 +427,7 @@
     <div class="container-free-space"></div>
     <div class="container-content">
         <div class="benefits-summary container-vertical">
-            <img src="https://mtek3d.com/wp-content/uploads/2018/01/image-placeholder-500x500.jpg"/>
+            <img src="./images/keyboard-comparison.png" alt="kineses-vs-normal-keyboard">
             <h1>TURN THIS - INTO THIS</h1>
         </div>
 
@@ -416,13 +466,13 @@
                         <h1>Adaptable learning</h1>
                         <p>
                             Unlike the kinesis advantage which requires you to learn a whole new layout from the beginning,
-                            you ca choose to learn in incremental steps the layout
+                            you can choose to learn in incremental steps the layout
                         </p>
                     </div>
                 </li>
                 
                 <li>
-                    <button class="button-download">Download</button>
+                    <a href="https://github.com/ciprian-dragoe/Less.Keys/releases" class="button-download">Download</a>
                 </li>
             </ul>
         </div>
@@ -479,7 +529,7 @@
     <div class="container-content">
         <div class="description">
             <div>Want to accelerate the development of LessKeys ?</div>
-            <div>You can do this via a small <a href="www.google.com">donation</a></div>
+            <div>You can do this via a small <a style="text-decoration: underline" href="https://www.paypal.com/donate/?hosted_button_id=H338CHHB43ZL6">donation</a></div>
         </div>
     </div>
 
@@ -494,7 +544,7 @@
             <div>You can download the app</div>
             <div class="title">free of charge</div>
         </div>
-        <button class="button-download">Download</button>
+        <a href="https://github.com/ciprian-dragoe/Less.Keys/releases" class="button-download">Download</a>
     </div>
 
     <div class="container-free-space"></div>
