@@ -32,6 +32,7 @@ processDisableEnableLessKeys()
         if (IS_LESS_KEYS_ENABLED)
         {
             IS_LESS_KEYS_ENABLED := false
+            DetectHiddenWindows On
             PostMessage, %APP_MESSAGE_SET_LESSKEYS_STATE%, 0, 0, , %SCRIPT_HOOKS_READER%
             SetTimer TimerStickyFailBack, off
             resetModifiers()
@@ -43,6 +44,7 @@ processDisableEnableLessKeys()
         {
             resetModifiers()
             IS_LESS_KEYS_ENABLED := 1
+            DetectHiddenWindows On
             PostMessage, %APP_MESSAGE_SET_LESSKEYS_STATE%, 1, 0, , %SCRIPT_HOOKS_READER%
         }
     }
@@ -56,6 +58,7 @@ processRestartLessKeys()
         {
             isAppWhichOverWritesLessKeysActive := 1
             SetTimer TimerStickyFailBack, off
+            DetectHiddenWindows On
             PostMessage, %APP_MESSAGE_RESET_HOOK_MONITORING%, 0, 0, , %SCRIPT_LESSKEYS%
             SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         }

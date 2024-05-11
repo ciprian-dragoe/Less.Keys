@@ -16,7 +16,6 @@ processKeyDown(scanKeyCode)
     key := layout[keyName]
     debug(key . "[KEY_DOWN_BEGIN]")
     SetTimer TimerStickyFailBack, off
-    SetTimer TimerCheckAgainIfTimerTriggeredBeforeKeyLift, OFF
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
 
     if (processModifierKey(key, 1))

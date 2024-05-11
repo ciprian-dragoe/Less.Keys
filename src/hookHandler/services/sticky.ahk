@@ -7,30 +7,23 @@ global timeoutCheckAgainIfTimerTriggeredBeforeKeyLift := 300
 timerStickyFailBack()
 {
     SetTimer TimerStickyFailBack, off
-
-    if (isAnyModifierKeyPressed())
-    {
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-        return
-    }
-
-    debug("---CHECK AGAIN STICKY TO MEASURE FALSE POSITIVE")
-    SetTimer TimerCheckAgainIfTimerTriggeredBeforeKeyLift, %timeoutCheckAgainIfTimerTriggeredBeforeKeyLift%
+    offloadHookReaderProcessCheckAnyModifierKeyPressed()
 }
 
-timerCheckAgainIfTimerTriggeredBeforeKeyLift()
+offloadHookReaderProcessCheckAnyModifierKeyPressed()
 {
-    setTimer TimerCheckAgainIfTimerTriggeredBeforeKeyLift, OFF
-    if (!isAnyModifierKeyPressed())
-    {
-        resetStates()
-    }
+    DetectHiddenWindows On
+    PostMessage, %APP_MESSAGE_IS_ANY_MODIFIER_KEY_PRESSED%, 0, 0, , %SCRIPT_HOOKS_READER%
 }
 
-isAnyModifierKeyPressed()
+handleModifierKeyPressed()
 {
-    SendMessage, %APP_MESSAGE_IS_ANY_MODIFIER_KEY_PRESSED%, 0, 0, , %SCRIPT_HOOKS_READER%
-    return %ErrorLevel%
+    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+}
+
+handleModifierKeyNotPressed()
+{
+    resetStates()
 }
 
 resetStates()
@@ -43,6 +36,7 @@ resetStates()
         send {shift up}
         shiftActive := 0
         storeDebugData("shift")
+        DetectHiddenWindows On
         PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
     }
     if (ctrlActive || GetKeyState("ctrl"))
@@ -51,6 +45,7 @@ resetStates()
         send {ctrl up}
         ctrlActive := 0
         storeDebugData("ctrl")
+        DetectHiddenWindows On
         PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
     }
     if (altActive || GetKeyState("alt"))
@@ -58,6 +53,7 @@ resetStates()
         debug("================================= alt sticky")
         resetModifierWithoutTriggerUpState("alt", altActive)
         storeDebugData("alt")
+        DetectHiddenWindows On
         PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
     }
     if (winActive || GetKeyState("lwin"))
@@ -65,6 +61,7 @@ resetStates()
         debug("================================= win sticky")
         resetModifierWithoutTriggerUpState("lwin", winActive)
         storeDebugData("win")
+        DetectHiddenWindows On
         PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
     }
 
@@ -75,6 +72,7 @@ resetStates()
         layoutKeyPressed := 0
         debug("================================= space sticky")
         storeDebugData("space")
+        DetectHiddenWindows On
         PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
     }
 

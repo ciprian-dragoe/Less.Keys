@@ -2,6 +2,7 @@ global REAL_TIME_DEBUG
 
 exitLessKeys()
 {
+    DetectHiddenWindows On
     PostMessage, %APP_MESSAGE_FORCE_QUIT%, 0, 0, , %SCRIPT_LESSKEYS%
 }
 
@@ -74,6 +75,7 @@ getStickyKeys()
 
 storeDebugLogLessKeys()
 {
+    DetectHiddenWindows On
     PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_LESSKEYS%
 }
 
