@@ -31,8 +31,10 @@ isAnyModifierKeyPressed()
     DetectHiddenWindows On
     for index, key in MONITORED_STICKY_KEYS
     {
+        
         if (getKeyState(key, "P"))
         {
+            ;showtooltip(key . "|" . getKeyState(key, "P"))
             PostMessage, %APP_MESSAGE_IS_ANY_MODIFIER_KEY_PRESSED_HANDLE%, 0, 0, , %SCRIPT_HOOKS_HANDLER%
             return
         }

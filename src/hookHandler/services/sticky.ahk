@@ -18,6 +18,8 @@ offloadHookReaderProcessCheckAnyModifierKeyPressed()
 
 handleModifierKeyPressed()
 {
+    ;showtooltip("handleModifierKeyPressed")
+    SetTimer TimerStickyFailBack, off
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
 }
 
@@ -29,7 +31,7 @@ handleModifierKeyNotPressed()
 resetStates()
 {
     debug("---RESET STICKY")
-
+    ;showtooltip("RESET STICKY")
     if (shiftActive || GetKeyState("shift"))
     {
         debug("================================= shift sticky")
