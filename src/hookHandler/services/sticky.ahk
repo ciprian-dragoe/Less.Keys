@@ -32,52 +32,73 @@ resetStates()
 {
     debug("---RESET STICKY")
     ;showtooltip("RESET STICKY")
-    if (shiftActive || GetKeyState("shift"))
+    if (shiftActive || SHOULD_RESET_STICKY_WHEN_NON_ADMIN)
     {
         debug("================================= shift sticky")
         send {shift up}
+        isNormalShiftActive := 0
         shiftActive := 0
-        storeDebugData("shift")
-        DetectHiddenWindows On
-        PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
+        if (!SHOULD_RESET_STICKY_WHEN_NON_ADMIN)
+        {
+            storeDebugData("shift")
+            DetectHiddenWindows On
+            PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
+        }
     }
-    if (ctrlActive || GetKeyState("ctrl"))
+    if (ctrlActive || SHOULD_RESET_STICKY_WHEN_NON_ADMIN)
     {
         debug("================================= ctrl sticky")
         send {ctrl up}
+        isNormalCtrlActive := 0
         ctrlActive := 0
-        storeDebugData("ctrl")
-        DetectHiddenWindows On
-        PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
+        if (!SHOULD_RESET_STICKY_WHEN_NON_ADMIN)
+        {
+            storeDebugData("ctrl")
+            DetectHiddenWindows On
+            PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
+        }
     }
-    if (altActive || GetKeyState("alt"))
+    if (altActive || SHOULD_RESET_STICKY_WHEN_NON_ADMIN)
     {
         debug("================================= alt sticky")
         resetModifierWithoutTriggerUpState("alt", altActive)
-        storeDebugData("alt")
-        DetectHiddenWindows On
-        PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
+        resetModifierWithoutTriggerUpState("lwin", isNormalAltActive)
+        if (!SHOULD_RESET_STICKY_WHEN_NON_ADMIN)
+        {
+            storeDebugData("alt")
+            DetectHiddenWindows On
+            PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
+        }
     }
-    if (winActive || GetKeyState("lwin"))
+    if (winActive || SHOULD_RESET_STICKY_WHEN_NON_ADMIN)
     {
         debug("================================= win sticky")
         resetModifierWithoutTriggerUpState("lwin", winActive)
-        storeDebugData("win")
-        DetectHiddenWindows On
-        PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
+        resetModifierWithoutTriggerUpState("lwin", isNormalWinActive)
+        if (!SHOULD_RESET_STICKY_WHEN_NON_ADMIN)
+        {
+            storeDebugData("win")
+            DetectHiddenWindows On
+            PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
+        }
     }
 
-    if (layoutKeyPressed)
+    if (layoutKeyPressed || SHOULD_RESET_STICKY_WHEN_NON_ADMIN)
     {
         SetTimer, TimerScrollWithMouseMovement, OFF
         systemCursor(1)
         layoutKeyPressed := 0
         debug("================================= space sticky")
-        storeDebugData("space")
-        DetectHiddenWindows On
-        PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
+        if (!SHOULD_RESET_STICKY_WHEN_NON_ADMIN)
+        {
+            storeDebugData("space")
+            DetectHiddenWindows On
+            PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
+        }
     }
 
+    resetSendClickOnRightModifierRelease(1)
+    resetSendClickOnLeftModifierRelease(1)
     resetDoubledModifierClickDrag("leftCtrlClick", isLeftCtrlClickDown)
     resetDoubledModifierClickDrag("leftShiftClick", isLeftShiftClickDown)
     resetDoubledModifierClickDrag("leftAltClick", isLeftAltClickDown)

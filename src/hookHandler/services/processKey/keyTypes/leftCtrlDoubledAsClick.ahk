@@ -68,7 +68,6 @@ doubledLeftCtrlUp()
         setTimer TimerResetModifierReleaseAction, OFF
     }
 
-
     if (!isNormalCtrlActive && !isRightCtrlDoubledAsClickPressed)
     {
         setCtrlState(0)

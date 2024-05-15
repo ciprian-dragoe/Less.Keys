@@ -2,6 +2,7 @@ global isAppWhichOverWritesLessKeysActive := false
 global isLessKeysEnabled := true
 global lastActiveAppName := ""
 global IS_LESS_KEYS_ENABLED := 1
+global SHOULD_RESET_STICKY_WHEN_NON_ADMIN := 0
 
 
 timerLessKeysManagementBasedOnActiveApp()
@@ -11,6 +12,41 @@ timerLessKeysManagementBasedOnActiveApp()
     processRestartLessKeys()
     processDisableEnableLessKeys()
     processCustomAppNameRules()
+    if (!A_IsAdmin)
+    {
+        processStickyFallbackWhenNotAdmin()
+    }
+}
+
+processStickyFallbackWhenNotAdmin()
+{
+    WinGet, active_pid, PID, A
+    hProcess := DllCall("OpenProcess", "UInt", 0x0400, "Int", false, "UInt", active_pid, "Ptr")
+    
+    if (!hProcess)
+    {
+        SHOULD_RESET_STICKY_WHEN_NON_ADMIN := 1
+        ;showtooltip("admin process")
+        return
+    }
+    
+    DllCall("Advapi32.dll\OpenProcessToken", "Ptr", hProcess, "UInt", 0x0008, "PtrP", hToken)
+    DllCall("Advapi32.dll\GetTokenInformation", "Ptr", hToken, "UInt", 2, "UIntP", isAdmin, "UInt", 4, "UIntP", returnLength)
+    DllCall("kernel32.dll\CloseHandle", "Ptr", hProcess)
+    if (isAdmin)
+    {
+        SHOULD_RESET_STICKY_WHEN_NON_ADMIN := 1
+        ;showtooltip("admin process")
+    }
+    else
+    {
+        if (SHOULD_RESET_STICKY_WHEN_NON_ADMIN)
+        {
+            ;showtooltip("sticky reset because non admin process is active again")
+            resetStates()
+        }
+        SHOULD_RESET_STICKY_WHEN_NON_ADMIN := 0
+    }
 }
 
 isAppInMonitoredList(app, monitoredAppList)

@@ -73,7 +73,7 @@ resetDoubledModifierClickDrag(modifierValue, ByRef isClickDown)
     if (isClickDown)
     {
         debug("================================= mouse down sticky sticky")
-        storeDebugData()
+        ;storeDebugData()
         action := modifierDoubledAsClick[modifierValue]
         processKeyToSend(action . " up")
         isClickDown := false
