@@ -12,8 +12,8 @@ handleError(error, source)
     }
 }
 
-compilerPath := A_WorkingDir . "\..\..\docs\externalTools\compiler\Ahk2Exe.exe"
-iconPath := A_WorkingDir . "\..\..\docs\externalTools\icon.ico"
+compilerPath := A_WorkingDir . "\..\..\tools\ahk-compiler\Ahk2Exe.exe"
+iconPath := A_WorkingDir . "\..\..\tools\ahk-compiler\icon.ico"
 sourcePathHookHandler := A_WorkingDir . "\..\hookHandler\startHookHandler_development.ahk"
 sourcePathHookReader := A_WorkingDir . "\..\hookReader\startHookReader_development.ahk"
 sourcePathLessKeys := A_WorkingDir . "\..\lessKeys\LessKeys_development.ahk"
