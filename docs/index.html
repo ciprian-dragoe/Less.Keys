@@ -13,6 +13,10 @@
             
             --content-width: 1000px;
 
+            @media only screen and (max-width: 768px) and (orientation: portrait) {
+                --content-width: 90vw;
+            }
+
             --color-primary: #29BA9F;
             --color-primary-light: #DEF7F2;
             
@@ -50,6 +54,11 @@
             color: var(--color-primary-light);
         }
 
+        @media only screen and (max-width: 768px) and (orientation: portrait) {
+            .hide-mobile-portrait {
+                display: none;
+            }
+        }
         body {
             margin: 0;
             background-image: url('images/pattern-lesskeys.png');
@@ -110,6 +119,12 @@
         #section-cover-page {
             height: 50vh;
         }
+        
+        @media only screen and (max-width: 768px) and (orientation: portrait) {
+            #section-cover-page {
+                height: 100vh;
+            }
+        }
 
         #section-cover-page .container-horizontal {
             flex: 1;
@@ -137,6 +152,18 @@
         #section-cover-page .img-explanation {
             justify-content: center;
         }
+
+        @media only screen and (max-width: 768px) and (orientation: portrait) {
+            #section-cover-page .img-explanation {
+                flex-direction: column;
+                justify-content: flex-end;
+                align-items: center;
+            }
+            
+            #section-cover-page .divider {
+                flex-grow: 1;
+            }
+        }
         
         #section-cover-page .img-explanation div .writing {
             margin: 0;
@@ -145,6 +172,12 @@
             height: 30vh;
         }
 
+        @media only screen and (max-width: 768px) and (orientation: portrait) {
+            #section-cover-page .img-explanation div .writing {
+                width: 90vw;
+            }
+        }
+        
         #section-cover-page .img-explanation div .text {
             margin-left: auto;
             margin-right: auto;
@@ -375,19 +408,21 @@
         <nav>
             <ul>
                 <li><img class="logo" src="./images/logo.png" alt="home"/></li>
-                <li class="container-free-space"></li>
+                <li class="container-free-space hide-mobile-portrait"></li>
                 <li><a href="#section-download">Download</a></li>
-                <li><a href="#section-benefits">Benefits</a></li>
+                <li class="hide-mobile-portrait"><a href="#section-benefits">Benefits</a></li>
                 <li><a href="#section-tutorial">Tutorials</a></li>
                 <li><a href="#section-donation">Donate</a></li>
             </ul>
         </nav>
 
         <div class="container-horizontal img-explanation">
+            <div class="divider"></div>
             <div>
                 <img class="text" id="img-left-text" src="./images/left-text-static.png"/>
                 <img class="writing" id="img-left-writing" src="./images/left-writing-static.png"/>    
             </div>
+            <div class="divider"></div>
             <div>
                 <img class="text" id="img-right-text" src="./images/right-text-static.png"/>
                 <img class="writing" id="img-right-writing" src="./images/right-writing-static.png"/>    
