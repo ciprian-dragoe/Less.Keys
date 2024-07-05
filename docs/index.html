@@ -10,6 +10,8 @@
             --image-check-mark-dimension: 105px;
             --download-button-height: 60px;
             --logo-dimension: 40px;
+            --image-dimension-desktop: 400px;
+            --image-dimension-mobile-portrait: 200px;
             
             --content-width: 1000px;
 
@@ -21,9 +23,17 @@
             --color-primary-light: #DEF7F2;
             
             --title-font-size: 2em;
+            --title-font-size-mobile: 1.5em;
             --paragraph-font-size: 1em;
+            --paragraph-font-size-mobile: 0.9em;
 
             --font-weight-bold: 600;
+        }
+
+        .title {
+            font-size: var(--title-font-size);
+            font-weight: var(--font-weight-bold);
+            min-width: 350px;
         }
 
         html {
@@ -31,13 +41,17 @@
             font-family: 'Poppins', sans-serif;
             font-size: var(--paragraph-font-size);
         }
-        
-        .title {
-            font-size: var(--title-font-size);
-            font-weight: var(--font-weight-bold);
-            min-width: 350px;
-        }
 
+        @media only screen and (max-width: 768px) {
+            html {
+                font-size: var(--paragraph-font-size-mobile);
+            }
+            
+            .title {
+                font-size: var(--title-font-size-mobile);
+            }
+        }
+        
         .color-primary-background {
             background-color: var(--color-primary);
         }
@@ -197,6 +211,12 @@
             height: 50vh;
             text-align: center;
         }
+
+        @media only screen and (max-width: 768px) and (orientation: portrait) {
+            #section-download {
+                height: 100vh;
+            }
+        }
         
         #section-download p {
             margin: 0;
@@ -221,16 +241,34 @@
             height: 100vh;
         }
 
+        @media only screen and (max-width: 768px) and (orientation: portrait) {
+            #section-benefits {
+                height: 100vh;
+            }
+        }
+
         #section-benefits .benefits-summary {
             height: 50vh;
             justify-content: space-around;
         }
 
+        @media only screen and (max-width: 768px) and (orientation: portrait) {
+            #section-benefits .benefits-summary {
+                justify-content: center;
+            }
+        }
+        
         #section-benefits .benefits-summary img {
-            height: 70%;
+            height: var(--image-dimension-desktop);
             display: block;
             margin-left: auto;
             margin-right: auto;
+        }
+
+        @media only screen and (max-width: 768px) and (orientation: portrait) {
+            #section-benefits .benefits-summary img {
+                height: var(--image-dimension-mobile-portrait);
+            }
         }
 
         #section-benefits .benefits-summary h1 {
@@ -268,6 +306,12 @@
 
         #section-benefits .benefits-description li .container-horizontal {
             width: calc(var(--content-width) - var(--image-check-mark-dimension) / 2);
+        }
+
+        @media only screen and (max-width: 768px) and (orientation: portrait) {
+            #section-benefits .benefits-description li .container-horizontal p {
+                position: absolute; /* todo find layout that works */ 
+            }
         }
 
         #section-benefits .benefits-description li .container-horizontal h1 {
@@ -410,7 +454,7 @@
                 <li><img class="logo" src="./images/logo.png" alt="home"/></li>
                 <li class="container-free-space hide-mobile-portrait"></li>
                 <li><a href="#section-download">Download</a></li>
-                <li class="hide-mobile-portrait"><a href="#section-benefits">Benefits</a></li>
+                <li class=""><a href="#section-benefits">Benefits</a></li>
                 <li><a href="#section-tutorial">Tutorials</a></li>
                 <li><a href="#section-donation">Donate</a></li>
             </ul>
