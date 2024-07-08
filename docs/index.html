@@ -8,13 +8,19 @@
     <style>
         :root {
             --image-check-mark-dimension: 105px;
+            @media only screen and (max-width: 768px) and (orientation: portrait) {
+                --image-check-mark-dimension: 50px;
+            }
             --download-button-height: 60px;
+            
             --logo-dimension: 40px;
-            --image-dimension-desktop: 400px;
-            --image-dimension-mobile-portrait: 200px;
+            
+            --image-dimension: 400px;
+            @media only screen and (max-width: 768px) and (orientation: portrait) {
+                --image-dimension: 200px;
+            }
             
             --content-width: 1000px;
-
             @media only screen and (max-width: 768px) and (orientation: portrait) {
                 --content-width: 90vw;
             }
@@ -23,9 +29,14 @@
             --color-primary-light: #DEF7F2;
             
             --title-font-size: 2em;
-            --title-font-size-mobile: 1.5em;
+            @media only screen and (max-width: 768px) and (orientation: portrait) {
+                --title-font-size: 1.5em;
+            }
+            
             --paragraph-font-size: 1em;
-            --paragraph-font-size-mobile: 0.9em;
+            @media only screen and (max-width: 768px) and (orientation: portrait) {
+                --title-font-size: 0.9em;
+            }
 
             --font-weight-bold: 600;
         }
@@ -42,16 +53,6 @@
             font-size: var(--paragraph-font-size);
         }
 
-        @media only screen and (max-width: 768px) {
-            html {
-                font-size: var(--paragraph-font-size-mobile);
-            }
-            
-            .title {
-                font-size: var(--title-font-size-mobile);
-            }
-        }
-        
         .color-primary-background {
             background-color: var(--color-primary);
         }
@@ -73,6 +74,7 @@
                 display: none;
             }
         }
+        
         body {
             margin: 0;
             background-image: url('images/pattern-lesskeys.png');
@@ -259,16 +261,10 @@
         }
         
         #section-benefits .benefits-summary img {
-            height: var(--image-dimension-desktop);
+            height: var(--image-dimension);
             display: block;
             margin-left: auto;
             margin-right: auto;
-        }
-
-        @media only screen and (max-width: 768px) and (orientation: portrait) {
-            #section-benefits .benefits-summary img {
-                height: var(--image-dimension-mobile-portrait);
-            }
         }
 
         #section-benefits .benefits-summary h1 {
