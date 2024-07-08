@@ -17,7 +17,7 @@
             
             --image-dimension: 400px;
             @media only screen and (max-width: 768px) and (orientation: portrait) {
-                --image-dimension: 200px;
+                --image-dimension: 300px;
             }
             
             --content-width: 1000px;
@@ -35,7 +35,7 @@
             
             --paragraph-font-size: 1em;
             @media only screen and (max-width: 768px) and (orientation: portrait) {
-                --title-font-size: 0.9em;
+                --paragraph-font-size: 0.9em;
             }
 
             --font-weight-bold: 600;
@@ -190,7 +190,7 @@
 
         @media only screen and (max-width: 768px) and (orientation: portrait) {
             #section-cover-page .img-explanation div .writing {
-                width: 90vw;
+                width: var(--content-width);
             }
         }
         
@@ -216,7 +216,7 @@
 
         @media only screen and (max-width: 768px) and (orientation: portrait) {
             #section-download {
-                height: 100vh;
+                min-height: 500px;
             }
         }
         
@@ -250,7 +250,7 @@
         }
 
         #section-benefits .benefits-summary {
-            height: 50vh;
+            height: calc(var(--image-dimension) + var(--title-font-size) + 20px);
             justify-content: space-around;
         }
 
@@ -261,7 +261,7 @@
         }
         
         #section-benefits .benefits-summary img {
-            height: var(--image-dimension);
+            width: var(--image-dimension);
             display: block;
             margin-left: auto;
             margin-right: auto;
@@ -272,7 +272,8 @@
         }
         
         #section-benefits .benefits-description {
-            height: 50vh;
+            /*height: 60vh;*/
+            height: 100%;
         }
         
         #section-benefits .benefits-description ul {
@@ -286,6 +287,12 @@
             display: flex;
             flex-direction: row;
             align-content: space-around;
+        }
+
+        @media only screen and (max-width: 768px) and (orientation: portrait) {
+            #section-benefits .benefits-description li {
+                margin-bottom: 20px;
+            }    
         }
 
         #section-benefits .benefits-description li img {
@@ -305,8 +312,9 @@
         }
 
         @media only screen and (max-width: 768px) and (orientation: portrait) {
-            #section-benefits .benefits-description li .container-horizontal p {
-                position: absolute; /* todo find layout that works */ 
+            #section-benefits .benefits-description li .container-horizontal{
+                display: flex;
+                flex-direction: column;
             }
         }
 
@@ -318,9 +326,25 @@
             line-height: var(--image-check-mark-dimension);
         }
 
+        @media only screen and (max-width: 768px) and (orientation: portrait) {
+            #section-benefits .benefits-description li .container-horizontal h1 {
+                text-align: left;
+            }
+        }
+
         #section-benefits .benefits-description li .container-horizontal p {
             flex-grow: 1;
             color: var(--color-primary);
+        }
+
+        @media only screen and (max-width: 768px) and (orientation: portrait) {
+            #section-benefits .benefits-description li .container-horizontal p {
+                margin: 0 0 0 calc(var(--image-check-mark-dimension) * -1 / 2);
+                background-color: var(--color-primary-light);
+                padding-top: 10px;
+                padding-bottom: 10px;
+                padding-left: calc(var(--image-check-mark-dimension) / 3);
+            }
         }
         
         #section-benefits .benefits-description li .button-download {
@@ -513,7 +537,7 @@
                     <img src="images/button-check-mark.png" class="image-dimensions" alt=""/>
                     <div class="image-placeholder"></div>
                     <div class="container-horizontal color-primary-light-background">
-                        <div class="image-placeholder"></div>
+                        <div class="image-placeholder hide-mobile-portrait"></div>
                         <h1 class="title">Highly customizable</h1>
                         <p>
                             Want to create your own layout for your custom scenario, no problem, easily modify the config files
@@ -525,7 +549,7 @@
                     <img src="images/button-check-mark.png" class="image-dimensions" alt=""/>
                     <div class="image-placeholder"></div>
                     <div class="container-horizontal color-primary-light-background">
-                        <div class="image-placeholder"></div>
+                        <div class="image-placeholder hide-mobile-portrait"></div>
                         <h1 class="title">Free & open source</h1>
                         <p>
                             You can download the app free of charge and if there is a feature you want to add you can easily
@@ -538,7 +562,7 @@
                     <img src="images/button-check-mark.png" class="image-dimensions" alt=""/>
                     <div class="image-placeholder"></div>
                     <div class="container-horizontal color-primary-light-background">
-                        <div class="image-placeholder"></div>
+                        <div class="image-placeholder hide-mobile-portrait"></div>
                         <h1 class="title">Adaptable learning</h1>
                         <p>
                             Unlike the kinesis advantage which requires you to learn a whole new layout from the beginning,
