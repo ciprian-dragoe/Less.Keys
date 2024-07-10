@@ -384,6 +384,13 @@
             height: calc(var(--content-width) * 0.264 + 12px);
         }
 
+        @media only screen and (max-width: 768px) and (orientation: portrait) {
+            #section-tutorial .container-content .default-shortcuts .layout-shortcuts {
+                justify-content: space-around;
+                height: calc(var(--content-width) * 0.364 + 12px);
+            }
+        }
+
         #section-tutorial .container-content .default-shortcuts .layout-shortcuts .shortcut {
             width: calc(30% - 4px);
             height: calc(var(--content-width)*0.06 - 4px);
@@ -392,6 +399,13 @@
             border: 3px solid black;
             font-weight: var(--font-weight-bold);
             border-radius: 5px;
+        }
+
+        @media only screen and (max-width: 768px) and (orientation: portrait) {
+            #section-tutorial .container-content .default-shortcuts .layout-shortcuts .shortcut {
+                width: calc(50% - 8px);
+                border: 2px solid black;
+            }
         }
 
         #section-tutorial .container-content .videos {
