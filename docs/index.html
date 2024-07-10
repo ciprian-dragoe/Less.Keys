@@ -420,17 +420,30 @@
 
         #section-tutorial .container-content .videos .layout-videos {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
             flex-wrap: wrap;
             align-content: space-between;
             height: 100%;
         }
 
+        @media only screen and (max-width: 768px) and (orientation: portrait) {
+            #section-tutorial .container-content .videos .layout-videos {
+                justify-content: center;
+            }
+        }
+        
         #section-tutorial .container-content .layout-videos .video {
             width: calc(var(--content-width) * 0.4789);
             height: calc(var(--content-width) * 0.26);
             margin-bottom: calc(var(--content-width) * 0.06);
             background: black;
+        }
+
+        @media only screen and (max-width: 768px) and (orientation: portrait) {
+            #section-tutorial .container-content .layout-videos .video {
+                width: calc(var(--content-width) * 0.9578);
+                height: calc(var(--content-width) * 0.52);
+            }
         }
         
         #section-donation {
