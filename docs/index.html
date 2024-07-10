@@ -94,6 +94,10 @@
         table td {
             padding: 0;
         }
+        
+        .full-height {
+            height: 100%;
+        }
 
         .container-horizontal {
             display: flex;
@@ -272,8 +276,7 @@
         }
         
         #section-benefits .benefits-description {
-            /*height: 60vh;*/
-            height: 100%;
+            flex-grow: 1;
         }
         
         #section-benefits .benefits-description ul {
@@ -525,7 +528,7 @@
 
 <section id="section-benefits" class="container-horizontal container-center">
     <div class="container-free-space"></div>
-    <div class="container-content">
+    <div class="container-content container-vertical full-height">
         <div class="benefits-summary container-vertical">
             <img src="./images/keyboard-comparison.png" alt="kineses-vs-normal-keyboard">
             <h1 class="title">TURN THIS - INTO THIS</h1>
