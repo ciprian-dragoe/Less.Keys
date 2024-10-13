@@ -7,13 +7,30 @@ global timeoutCheckAgainIfTimerTriggeredBeforeKeyLift := 300
 timerStickyFailBack()
 {
     SetTimer TimerStickyFailBack, off
-    offloadHookReaderProcessCheckAnyModifierKeyPressed()
+    if (isAnyModifierKeyPressed())
+    {
+        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+        return
+    }
+
+    debug("---CHECK AGAIN STICKY TO MEASURE FALSE POSITIVE")
+    SetTimer TimerCheckAgainIfTimerTriggeredBeforeKeyLift, %timeoutCheckAgainIfTimerTriggeredBeforeKeyLift%
 }
 
-offloadHookReaderProcessCheckAnyModifierKeyPressed()
+timerCheckAgainIfTimerTriggeredBeforeKeyLift()
+{
+    setTimer TimerCheckAgainIfTimerTriggeredBeforeKeyLift, OFF
+    if (!isAnyModifierKeyPressed())
+    {
+        resetStates()
+    }
+}
+
+isAnyModifierKeyPressed()
 {
     DetectHiddenWindows On
     PostMessage, %APP_MESSAGE_IS_ANY_MODIFIER_KEY_PRESSED%, 0, 0, , %SCRIPT_HOOKS_READER%
+    return %ErrorLevel%
 }
 
 handleModifierKeyPressed()
