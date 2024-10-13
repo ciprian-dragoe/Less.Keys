@@ -7,6 +7,7 @@ global timeoutCheckAgainIfTimerTriggeredBeforeKeyLift := 300
 timerStickyFailBack()
 {
     SetTimer TimerStickyFailBack, off
+    SetTimer timerCheckAgainIfTimerTriggeredBeforeKeyLift, off
     if (isAnyModifierKeyPressed())
     {
         SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
@@ -37,6 +38,7 @@ handleModifierKeyPressed()
 {
     ;showtooltip("handleModifierKeyPressed")
     SetTimer TimerStickyFailBack, off
+    SetTimer timerCheckAgainIfTimerTriggeredBeforeKeyLift, off
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
 }
 
