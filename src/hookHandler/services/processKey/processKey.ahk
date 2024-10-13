@@ -18,6 +18,11 @@ processKeyDown(scanKeyCode)
     SetTimer TimerStickyFailBack, off
     SetTimer timerCheckAgainIfTimerTriggeredBeforeKeyLift, off
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
+    if (timedCapsActive)
+    {
+        SetTimer, TimerDisableCapsLock, OFF
+        SetTimer, TimerDisableCapsLock, %TIME_TIMEOUT_TIMED_CAPS_LOCK%
+    }
 
     if (processModifierKey(key, 1))
     {
@@ -47,6 +52,11 @@ processKeyUp(scanKeyCode)
     keyName := GetKeyName(Format("sc{:x}", scanKeyCode))
     key := layout[keyName]
     debug("[KEY_UP_BEGIN] " . key)
+    if (timedCapsActive)
+    {
+        SetTimer, TimerDisableCapsLock, OFF
+        SetTimer, TimerDisableCapsLock, %TIME_TIMEOUT_TIMED_CAPS_LOCK%
+    }
     if (processModifierKey(key, 0))
     {
         debug("[KEY_UP_END] " . key)
