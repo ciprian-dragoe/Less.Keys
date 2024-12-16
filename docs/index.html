@@ -21,7 +21,7 @@
             }
             
             --content-width: 1000px;
-            @media only screen and (max-width: 768px) and (orientation: portrait) {
+            @media only screen and (max-width: 768px) {
                 --content-width: 90vw;
             }
 
@@ -390,6 +390,13 @@
                 height: calc(var(--content-width) * 0.364 + 12px);
             }
         }
+        
+        @media only screen and (max-width: 500px) and (orientation: portrait) {
+            #section-tutorial .container-content .default-shortcuts .layout-shortcuts {
+                justify-content: space-evenly;
+                height: calc(var(--content-width) * 0.8);
+            }
+        }
 
         #section-tutorial .container-content .default-shortcuts .layout-shortcuts .shortcut {
             width: calc(30% - 4px);
@@ -404,6 +411,13 @@
         @media only screen and (max-width: 768px) and (orientation: portrait) {
             #section-tutorial .container-content .default-shortcuts .layout-shortcuts .shortcut {
                 width: calc(50% - 8px);
+                border: 2px solid black;
+            }
+        }
+        
+        @media only screen and (max-width: 500px) and (orientation: portrait) {
+            #section-tutorial .container-content .default-shortcuts .layout-shortcuts .shortcut {
+                width: calc(95%);
                 border: 2px solid black;
             }
         }
@@ -504,7 +518,7 @@
                 <li><img class="logo" src="./images/logo.png" alt="home"/></li>
                 <li class="container-free-space hide-mobile-portrait"></li>
                 <li><a href="#section-download">Download</a></li>
-                <li class=""><a href="#section-benefits">Benefits</a></li>
+                <li class="hide-mobile-portrait"><a href="#section-benefits">Benefits</a></li>
                 <li><a href="#section-tutorial">Tutorials</a></li>
                 <li><a href="#section-donation">Donate</a></li>
             </ul>
@@ -617,10 +631,11 @@
     <div class="container-content">
         <div class="default-shortcuts">
             <div class="main-message">
-                <div class="title">Unzip > Run <span class="color-primary">LessKeys.exe</span> > Start typing with default layout</div>
+                <div class="title">Unzip > Run <span class="color-primary">LessKeys.ahk</span></div>
                 <div class="sub-title">
-                    *for some users the antivirus might block the app, please add it to the exception list
+                    *you need to have installed <a href="https://www.autohotkey.com/download/1.1/AutoHotkey112207_Install.exe">AutoHotkey</a>
                 </div>
+                <div class="title">Start typing with the default layout</div>
             </div>
             
             <div class="layout-shortcuts">
