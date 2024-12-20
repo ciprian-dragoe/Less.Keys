@@ -13,8 +13,8 @@ SetBatchLines -1
 
 
 global SCRIPT_HOOKS_READER := "startHookReader_live.ahk ahk_class AutoHotkey"
-global SCRIPT_LESSKEYS := "LessKeys_live.ahk ahk_class AutoHotkey"
-global PATH_APP_CONFIGURATION := A_ScriptDir .  "\..\environmentDependent\live\binaries\"
+global SCRIPT_LESSKEYS := "LessKeys.ahk ahk_class AutoHotkey"
+global PATH_APP_CONFIGURATION := A_ScriptDir .  "\..\..\" ; the "live" environment is set in the root folder opposed to the other environments to make the app easier to run for non-technical users 
 if (A_ScriptName = "startHookHandler.exe")
 {
     PATH_APP_CONFIGURATION := A_ScriptDir .  ".\"
