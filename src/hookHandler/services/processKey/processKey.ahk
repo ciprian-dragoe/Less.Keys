@@ -2,6 +2,7 @@
 #include  %A_ScriptDir%\services\processKey\keyTypes\normal.ahk
 #include  %A_ScriptDir%\services\processKey\keyTypes\layout.ahk
 #include  %A_ScriptDir%\services\processKey\keyTypes\mouseScroll.ahk
+#include  %A_ScriptDir%\services\processKey\keyTypes\timedCapsLock.ahk
 
 
 global keyToSendOnUp
