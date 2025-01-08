@@ -30,7 +30,7 @@ timerCheckAgainIfTimerTriggeredBeforeKeyLift()
 isAnyModifierKeyPressed()
 {
     DetectHiddenWindows On
-    PostMessage, %APP_MESSAGE_IS_ANY_MODIFIER_KEY_PRESSED%, 0, 0, , %SCRIPT_HOOKS_READER%
+    SendMessage, %APP_MESSAGE_IS_ANY_MODIFIER_KEY_PRESSED%, 0, 0, , %SCRIPT_HOOKS_READER%
     return %ErrorLevel%
 }
 
