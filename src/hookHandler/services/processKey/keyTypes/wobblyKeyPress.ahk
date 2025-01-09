@@ -33,7 +33,6 @@ wobblyKeyUp()
 {
     isWobblyKeyPressed := 0
     SetTimer TimerStickyFailBack, off
-    SetTimer timerCheckAgainIfTimerTriggeredBeforeKeyLift, off
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
     if (otherKeyPressedWhileWobblyKeyDown = 2)
     {

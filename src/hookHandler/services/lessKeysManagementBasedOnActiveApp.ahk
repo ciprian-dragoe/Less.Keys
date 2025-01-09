@@ -71,7 +71,6 @@ processDisableEnableLessKeys()
             DetectHiddenWindows On
             PostMessage, %APP_MESSAGE_SET_LESSKEYS_STATE%, 0, 0, , %SCRIPT_HOOKS_READER%
             SetTimer TimerStickyFailBack, off
-            SetTimer timerCheckAgainIfTimerTriggeredBeforeKeyLift, off
             resetModifiers()
         }
     }

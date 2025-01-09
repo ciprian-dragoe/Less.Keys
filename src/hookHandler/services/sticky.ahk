@@ -1,29 +1,16 @@
 ; if the cpu is executing intensive tasks then the lift key up command may not be processed for
 ; modifier keys (ctrl, shift, alt, win) and they are still registered by the os as pressed.
 ; This is a fail safe for such situations
-global timeoutCheckAgainIfTimerTriggeredBeforeKeyLift := 300
+global stickyStillPressed := 0
 
 
 timerStickyFailBack()
 {
     SetTimer TimerStickyFailBack, off
-    SetTimer timerCheckAgainIfTimerTriggeredBeforeKeyLift, off
     if (isAnyModifierKeyPressed())
     {
         SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
         return
-    }
-
-    debug("---CHECK AGAIN STICKY TO MEASURE FALSE POSITIVE")
-    SetTimer TimerCheckAgainIfTimerTriggeredBeforeKeyLift, %timeoutCheckAgainIfTimerTriggeredBeforeKeyLift%
-}
-
-timerCheckAgainIfTimerTriggeredBeforeKeyLift()
-{
-    setTimer TimerCheckAgainIfTimerTriggeredBeforeKeyLift, OFF
-    if (!isAnyModifierKeyPressed())
-    {
-        resetStates()
     }
 }
 
@@ -31,20 +18,12 @@ isAnyModifierKeyPressed()
 {
     DetectHiddenWindows On
     SendMessage, %APP_MESSAGE_IS_ANY_MODIFIER_KEY_PRESSED%, 0, 0, , %SCRIPT_HOOKS_READER%
-    return %ErrorLevel%
-}
-
-handleModifierKeyPressed()
-{
-    ;showtooltip("handleModifierKeyPressed")
-    SetTimer TimerStickyFailBack, off
-    SetTimer timerCheckAgainIfTimerTriggeredBeforeKeyLift, off
-    SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-}
-
-handleModifierKeyNotPressed()
-{
-    resetStates()
+    ;debug("isAnyModifierKeyPressed" . %ErrorLevel% . " >>>")
+    if (%ErrorLevel% = 0)
+    {
+        return true
+    }
+    return false
 }
 
 resetStates()
