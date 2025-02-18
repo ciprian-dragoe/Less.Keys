@@ -7,25 +7,18 @@ global stickyStillPressed := 0
 timerStickyFailBack()
 {
     SetTimer TimerStickyFailBack, off
-    if (isAnyModifierKeyPressed())
-    {
-        SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
-        return
-    }
-}
-
-isAnyModifierKeyPressed()
-{
     DetectHiddenWindows On
     SendMessage, %APP_MESSAGE_IS_ANY_MODIFIER_KEY_PRESSED%, 0, 0, , %SCRIPT_HOOKS_READER%
-    ;debug("isAnyModifierKeyPressed" . %ErrorLevel% . " >>>")
-    if (%ErrorLevel% = 0)
-    {
-        return true
-    }
-    return false
 }
 
+resetStickState()
+{
+    if (isAnyRightModifierPressed() || isAnyLeftModifierPressed() || isNormalAltActive || isNormalShiftActive || isNormalWinActive || ctrlActive)
+    {
+        ;showtooltip("sticky detected")
+        resetStates()
+    } 
+}
 resetStates()
 {
     debug("---RESET STICKY")

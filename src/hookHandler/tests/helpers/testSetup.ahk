@@ -44,6 +44,10 @@ setDefaultTestEnvironment(testName)
         WinActivate ahk_class %TESTING_ENVIRONMENT%
         sleep 200
     }
+    shiftActive := 0
+    ctrlActive := 0
+    winActive := 0
+    altActive := 0
     clearText()
     MouseMove, 500, 500
     tooltip

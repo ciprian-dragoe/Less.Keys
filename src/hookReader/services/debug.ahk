@@ -26,18 +26,16 @@ storeDebugLogHookReader()
     storeDebugData(name)
 }
 
-sendProcessResultAnyModifierKeyPressed()
+sendProcessResultAnyModifierKeyPressed(wParam, lParam, msg, hwnd)
 {
     DetectHiddenWindows On
     for index, key in MONITORED_STICKY_KEYS
-    {
-        
+    { 
         if (getKeyState(key, "P"))
         {
             ;showtooltip(key . "|" . getKeyState(key, "P"))
-            return 1
+            DetectHiddenWindows On
+            SendMessage, %APP_MESSAGE_RESET_STICKY%, 0, 0, , %SCRIPT_HOOKS_HANDLER%
         }
     }
-    
-    return 0
 }
