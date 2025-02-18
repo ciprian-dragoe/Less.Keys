@@ -1,42 +1,39 @@
 # LessKeys
 
 ## What it is
-To reduce wrist movement for accessing certain keys (for example the arrow keys) you can change the layout of your keyboard only while the "space" key is pressed. After you release the "space" key, the normal keyboard layout is again set.
+When you are typing if you want to press enter or backspace you normally move your right hand to reach those keys.
+To keep your hands always on the keys row you can use LessKeys to temporary change the layout of your keyboard only while space is pressed.
 
-Example: you are writing the text "Helo, how are you doing?" and notice that you misspelled the word "hello". You press the left key until you reach the word "helo" and correct it. Alternatively  you could press the "space" key and while it is pressed you press the "a" key which would be translated into left arrow key instead of the letter "a". After releasing the "space" key, when you press again the "a" key, the "a" letter will be sent.
+Example: you are writing the text "successfull" and notice that you misspelled by adding an extra "l". With LessKeys you press the "space" and while keeping it pressed the "f" key which would send "backspace". After releasing the "space" key, when you press again the "f" key, the "f" letter will be sent.
 
-## Who is it for ?
-1. People who want to reduce the amount of wrist movement (similar results as having a kinesis advantage can be reached with certain alternative layouts, copy the ".cfg" files from `.\docs\archived-layouts\kinesisReplacer\` to the root program path)
+## Who is it for
+1. People who want to reduce the amount of wrist movement (similar results as having a kinesis advantage can be reached with certain alternative layouts. An example layout can be found in the directory where LessKeys is at `.\src\tools\archived-layouts\kinesisReplacer\`. You need to copy all those files over the ones in root folder of LessKeys)
 1. Power users who want to type faster (especially for programmers who extensively use the ctrl/alt/shift modifiers for shortcut combinations)
 
-## Editing the layout
-If you want to create your own layout you can edit the following files:
-1. `my-layout`
+## How to run
+1. You need to have installed the latest version of AutoHotkey V1.1 (https://autohotkey.com/download/1.1/AutoHotkey_1.1.37.02_setup.exe)
+1. In the folder where you have download LessKeys double-click the file `LessKeys.ahk` 
+
+## Customizing LessKeys
+1. `my-layout.cfg`
    <br>This layout is active while the "space" key is ***not*** pressed
    <br>Example: by setting capslock:enter you can remap the capslock key to enter key. While less keys is running you when you press "capslock", the "enter" key will be sent instead and capslock will not be activated.
-2. `my-alternative-layout`
+1. `my-alternative-layout.cfg`
    <br>This layout is only active while having the "space" key pressed
-   <br>Example: by setting a:left when you have the space key pressed and press the "a" key you will instead have the "left" key pressed
-
-## Shortcuts
-You can also create your own shortcuts. For this you need to assign a key combination with a number that must be implemented in the `./src/environmentDependent/live/shortcuts/resolver.ahk`
-<br>The implementation is done in autohotkey.
-Please recompile the program after creating the new shortcut using `./src/lessKeys/compileLive.ahk`
-- please be sure in the taskbar the program is not already running as it won't be able to write over it the new version
-- sometimes the antivirus can complain that the resulted file has a trojan, you can ignore the warning and set to allow the compiled file on your system
-
-## Advanced
-1. You can disable the program in certain apps by adding keywords of the program name in the file `my-settings.cfg` under the section `[disable] appNames`
+   <br>Example: by setting a:left when you have the space key pressed and while keeping it pressed you type the "a" key you will instead send the "left" key
+1. `my-keyboard-shortcuts.cfg`
+   <br> You can also create your own global keyboard shortcuts. For example pressing "ctrl+alt+a" will trigger while "notepad++" is active to send "hello notepad" but while "visual studio code" is active to send "hello vscode".
+   <br> For this you add in the file `my-keyboard-shortcuts.cfg` the line "^+a:312". You then go to the file `./src/environmentDependent/live/shortcuts/resolver.ahk` and add the line `resolverAction[312] := func("helloApp")`. In the same file you define them function "helloApp" with the code of what you want to happen when you press "ctrl+shift+a".
+1. `my-settings.cfg`
+   <br> You can disable the program in certain apps by adding keywords of the program name in the file `my-settings.cfg` under the section `[disable] appNames`
    <br>Example:
    <br>`[disable]
    appNames=Remote Desktop Connection~~~StarCraft~~~Virtual Machine Connection~~~skype
    `
    <br>While you are playing Starcraft it would be as if you have not opened LessKeys.
    <br>If you open Skype you will notice that LessKeys is still functioning. This is because you have entered with lower letter the word `skype` and the application name is with upper letter, so you need to enter `Skype`
-1. If you have a trackpoint you can simulate as if you have a middle mouse button for scrolling like in thinkpad keyboards by pressing the "space" key and moving the trackpoint which will trigger a scroll. To enable this functionality add in the `my-settings.cfg` section `mouse` property `scrollPoll` and `scrollAcceleration` any positive number. You can play with these number to adjust the scroll speed
-1. For the layout used in `.\docs\archived-layouts\kinesisReplacer\` you will see in the file `my-layout.cfg` that the "2" key is remapped to "leftShiftClick". This is a special modifier key which acts as the shift key and if no other key has been presed after pressing "2" the right click will be sent (or the value assigned to it in the my-settings.cfg file)
+
 ## Development
-1. Before committing any PR please be sure that all integration tests are passing by running `./src/lessKeys/LessKeys_test.ahk`
-   <br>This will start the notepad app and enter certain phrases during which it checks the validity of the code. The tests last ~20 minutes and at the end you will see an output in notepad with all the test results (if any failed tests you will see them at the end of the file)  
+1. Before committing any PR please be sure that all system tests are passing by running `./src/lessKeys/LessKeys_test.ahk`
+   <br>This will start the notepad++ app and enter certain phrases during which it checks the validity of the code. The tests last ~20 minutes and at the end you will see an output in notepad with all the test results (if any failed tests you will see them at the end of the file)  
    <br>In order for the tests to run without interruption please disable windows game bar global shortcuts & microsoft teams global global shortcuts
-1. The code is structured to make the difference between live/test/development environment by the files it includes when you start the app via `./src/environmentDependent/{yourDevelopmentEnvironmentName}`
