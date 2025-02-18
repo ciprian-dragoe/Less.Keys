@@ -48,6 +48,7 @@ setDefaultTestEnvironment(testName)
     ctrlActive := 0
     winActive := 0
     altActive := 0
+    layoutKeyPressed := 0
     clearText()
     MouseMove, 500, 500
     tooltip

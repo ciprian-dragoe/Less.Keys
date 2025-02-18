@@ -14,7 +14,7 @@ timerStickyFailBack()
 
 resetStickState()
 {
-    if (isAnyRightModifierPressed() || isAnyLeftModifierPressed() || isNormalAltActive || isNormalShiftActive || isNormalWinActive || ctrlActive)
+    if (isAnyRightModifierPressed() || isAnyLeftModifierPressed() || isNormalAltActive || isNormalShiftActive || isNormalWinActive || ctrlActive || layoutKeyPressed)
     {
         resetStates()
     }
