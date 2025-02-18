@@ -36,4 +36,4 @@ Example: you are writing the text "successfull" and notice that you misspelled b
 ## Development
 1. Before committing any PR please be sure that all system tests are passing by running `./src/lessKeys/LessKeys_test.ahk`
    <br>This will start the notepad++ app and enter certain phrases during which it checks the validity of the code. The tests last ~20 minutes and at the end you will see an output in notepad with all the test results (if any failed tests you will see them at the end of the file)  
-   <br>In order for the tests to run without interruption please disable windows game bar global shortcuts & microsoft teams global global shortcuts
+   <br>In order for the tests to run without interruption please disable windows game bar global shortcuts & microsoft teams global shortcuts
