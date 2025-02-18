@@ -71,7 +71,7 @@ global failureTestResults := []
 runIntegrationTests()
 {
 /*
-*/
+
     ; RIGHT SHIFT CLICK & LEFT ALT CLICK
     When_rightShiftClick_doubles_as_b_pressed_leftAltClick_doubled_as_c_pressed_rightShiftClick_released_leftAltClick_released_THEN_c_letter_is_sent_#4301()
     When_rightShiftClick_pressed_leftAltClick_pressed_THEN_word_is_selected_on_leftAltClick_release_#4302()
@@ -81,7 +81,10 @@ runIntegrationTests()
     When_rightShiftClick_pressed_leftWinClick_doubled_as_left_pressed_THEN_letter_is_selected_after_leftWinClick_release_#5901()
     When_rightShiftClick_doubles_as_b_pressed_leftWinClick_doubled_as_c_pressed_rightShiftClick_released_leftWinClick_released_THEN_c_letter_is_sent_#5902()
     When_rightShiftClick_pressed_leftWinClick_pressed_THEN_word_is_selected_after_leftWinClick_release_#5903()
+*/
     When_rightShiftClick_pressed_leftWinClick_pressed_mouse_moved_until_second_word_THEN_only_second_is_selected_#5904()
+
+/*
 
     ; STICKY
     When_shift_key_is_logically_pressed_and_not_released_for_more_then_stickyTime_shift_and_shiftActive_is_reset_after_stickyTime_#101()
@@ -577,6 +580,7 @@ runIntegrationTests()
     ; RIGHT CTRL CLICK & SHIFT & LEFT WIN CLICK
     When_rightCtrlClick_pressed_shift_pressed_leftWinClick_THEN_word_is_selected_after_leftWinClickRelease_#6101()
     When_rightCtrlClick_doubled_as_d_pressed_shift_pressed_leftWinClick_pressed_rightCtrlClick_release_leftWinClick_release_THEN_B_is_sent_#6102()
+*/
 
 /*
 */
