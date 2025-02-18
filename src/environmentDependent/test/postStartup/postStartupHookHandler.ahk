@@ -71,24 +71,37 @@ setExtraKeys()
 
     for key , value in layout
     {
-        switch value
+        if (InStr(value, "leftCtrlClick"))
         {
-            case "leftCtrlClick":
-                extraKeysMappings[value] := key
-            case "rightCtrlClick":
-                extraKeysMappings[value] := key
-            case "leftShiftClick":
-                extraKeysMappings[value] := key
-            case "rightShiftClick":
-                extraKeysMappings[value] := key
-            case "leftWinClick":
-                extraKeysMappings[value] := key
-            case "rightWinClick":
-                extraKeysMappings[value] := key
-            case "leftAltClick":
-                extraKeysMappings[value] := key
-            case "rightAltClick":
-                extraKeysMappings[value] := key
+            extraKeysMappings[value] := key
+        }
+        else if (InStr(value, "rightCtrlClick"))
+        {
+            extraKeysMappings[value] := key
+        }
+        else if (InStr(value, "leftShiftClick"))
+        {
+            extraKeysMappings[value] := key
+        }
+        else if (InStr(value, "rightShiftClick"))
+        {
+            extraKeysMappings[value] := key
+        }
+        else if (InStr(value, "leftWinClick"))
+        {
+            extraKeysMappings[value] := key
+        }
+        else if (InStr(value, "rightWinClick"))
+        {
+            extraKeysMappings[value] := key
+        }
+        else if (InStr(value, "leftAltClick"))
+        {
+            extraKeysMappings[value] := key
+        }
+        else if (InStr(value, "rightAltClick"))
+        {
+            extraKeysMappings[value] := key
         }
     }
 }

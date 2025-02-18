@@ -11,7 +11,7 @@ SetBatchLines -1
 
 
 global IS_RUNNING_DEBUG_MODE := 1
-global SCRIPT_HOOKS_HANDLER := "_LessKeys_development.ahk ahk_class AutoHotkey"
+global SCRIPT_HOOKS_HANDLER := "startHookHandler_test.ahk ahk_class AutoHotkey"
 global SCRIPT_LESSKEYS := "LessKeys_test.ahk ahk_class AutoHotkey"
 global PATH_APP_CONFIGURATION := A_ScriptDir .  "\..\environmentDependent\test\binaries\"
 if (A_ScriptName = "startHookReader.exe")
@@ -33,7 +33,6 @@ if (A_ScriptName = "startHookReader.exe")
 ; because after them any other code is no longer run (for example global variable declaration
 ; will be ignored)
 #include %A_ScriptDir%\services\labels.ahk
-
 
 ; if you want to add your custom labels, add them here
 #include %A_ScriptDir%\..\environmentDependent\test\labels\customHookReader.ahk
