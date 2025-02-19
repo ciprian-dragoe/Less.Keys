@@ -52,6 +52,7 @@ setDefaultTestEnvironment(testName)
     clearText()
     MouseMove, 500, 500
     tooltip
+    sleep % (timerTimeoutStickyKeys + 100)
 }
 
 clearText()

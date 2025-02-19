@@ -8,7 +8,8 @@ When_rightWinClick_is_pressed_at_release_left_click_is_sent_#4801()
     simulateKeyUp("rightWinClick")
     sleep 100
     
-    validateCaretOutput(A_ThisFunc, expected)    
+    validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightWinClick_is_continuously_pressed_and_layout_key_is_pressed_and_released_space_is_sent_#4802()
@@ -24,6 +25,7 @@ When_rightWinClick_is_continuously_pressed_and_layout_key_is_pressed_and_release
 
     expected := "hello"
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightWinClick_is_continuously_pressed_and_backtick_is_pressed_keyboard_shortcut_is_sent_#4803()
@@ -54,7 +56,8 @@ When_rightWinClick_is_continuously_pressed_and_backtick_is_pressed_left_click_is
     simulateKeyUp("rightWinClick")
     sleep 100
 
-    validateCaretOutput(A_ThisFunc, expected)    
+    validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightWinClick_is_continuously_pressed_and_layout_key_is_pressed_and_backtick_is_sent_on_rightWinClick_release_click_is_not_sent_#4805()
@@ -72,6 +75,7 @@ When_rightWinClick_is_continuously_pressed_and_layout_key_is_pressed_and_backtic
     expected := setMousePositionToCaret()
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightWinClick_is_pressed_and_win_key_is_pressed_and_released_click_is_sent_on_rightWinClick_release_#4806()
@@ -94,6 +98,7 @@ When_rightWinClick_is_pressed_and_win_key_is_pressed_and_released_click_is_sent_
     sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightWinClick_is_pressed_and_alt_key_is_pressed_click_is_sent_on_rightWinClick_release_#4807()
@@ -111,6 +116,7 @@ When_rightWinClick_is_pressed_and_alt_key_is_pressed_click_is_sent_on_rightWinCl
     send {escape 2}
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightWinClick_is_pressed_and_ctrl_key_is_pressed_and_released_click_is_sent_on_rightWinClick_release_#4808()
@@ -127,6 +133,7 @@ When_rightWinClick_is_pressed_and_ctrl_key_is_pressed_and_released_click_is_sent
     sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightWinClick_is_pressed_and_ctrl_key_is_pressed_click_is_sent_on_rightWinClick_release_#4809()
@@ -143,6 +150,7 @@ When_rightWinClick_is_pressed_and_ctrl_key_is_pressed_click_is_sent_on_rightWinC
     simulateKeyUp("lctrl", 100)
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightWinClick_is_pressed_and_win_key_is_pressed_and_released_click_is_sent_on_rightWinClick_release_#4810()
@@ -166,6 +174,7 @@ When_rightWinClick_is_pressed_and_win_key_is_pressed_and_released_click_is_sent_
     sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightWinClick_is_pressed_and_win_key_is_pressed_click_is_sent_on_rightWinClick_release_#4811()
@@ -181,6 +190,7 @@ When_rightWinClick_is_pressed_and_win_key_is_pressed_click_is_sent_on_rightWinCl
     simulateKeyUp("lwin",700)
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightWinClick_is_pressed_and_shift_is_pressed_and_released_click_is_sent_on_rightWinClick_release_#4812()
@@ -197,6 +207,7 @@ When_rightWinClick_is_pressed_and_shift_is_pressed_and_released_click_is_sent_on
     sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightWinClick_is_pressed_and_shift_is_pressed_click_is_sent_on_rightWinClick_release_#4813()
@@ -213,6 +224,7 @@ When_rightWinClick_is_pressed_and_shift_is_pressed_click_is_sent_on_rightWinClic
     simulateKeyUp("lshift", 100)
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightWinClick_is_pressed_and_shift_key_is_pressed_and_layout_key_pressed_and_backtick_pressed_keyboard_shortcut_is_sent_#4814()
@@ -251,6 +263,7 @@ When_rightWinClick_is_continuously_pressed_and_layout_key_is_pressed_after_relea
     sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }    
 
 When_rightWinClick_is_continuously_pressed_and_mouse_is_moved_the_text_is_selected_#4816()
@@ -284,10 +297,10 @@ When_non_modifier_letter_is_released_and_layout_key_continuous_press_in_less_the
     expected := getCurrentCaretPosition()
     simulateKeyUp("space", 100)
     simulateKeyUp("rightWinClick")
-    
     sleep 100
     
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_non_modifier_letter_is_released_and_layout_key_continuous_press_in_less_then_timeoutProcessLayoutOnRelease_and_rightWinClick_continous_press_and_backtick_pressed_and_rightWinClick_released_left_click_is_not_sent_#4821()
@@ -303,10 +316,10 @@ When_non_modifier_letter_is_released_and_layout_key_continuous_press_in_less_the
     simulateKeyUp("space", 100)
     simulateKeyUp("rightWinClick")
     expected := getCurrentCaretPosition()
-    
     sleep 100
     
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightWinClick_is_pressed_more_then_timeoutStillSendLayoutKey_left_click_is_not_sent_on_rightWinClick_release_#4822()
@@ -321,6 +334,7 @@ When_rightWinClick_is_pressed_more_then_timeoutStillSendLayoutKey_left_click_is_
     sleep 100
     
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightWinClick_action_is_not_lbutton_and_mouse_is_moved_on_release_action_is_sent_instead_of_mouse_click_#4825()
@@ -338,6 +352,7 @@ When_rightWinClick_action_is_not_lbutton_and_mouse_is_moved_on_release_action_is
     expected := "hello c"
     validateTestOutput(A_ThisFunc , expected)
     modifierDoubledAsClick["rightWinClick"] := "lbutton"
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_win_is_pressed_and_rightWinClick_is_continuously_pressed_and_mouse_is_moved_the_text_is_selected_#4826()

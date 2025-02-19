@@ -24,7 +24,7 @@ When_rightCtrlClick_doubled_as_d_pressed_shift_pressed_leftShiftClick_rightCtrlC
 {
     modifierDoubledAsClick["rightCtrlClick"] := "d"
     modifierDoubledAsClick["leftShiftClick"] := "b"
-    simulateTyping("hello ")
+    simulateTyping("hello")
     simulateKeyDown("rightCtrlClick")
     sleep 100
     simulateKeyDown("lshift", 100)
@@ -36,7 +36,7 @@ When_rightCtrlClick_doubled_as_d_pressed_shift_pressed_leftShiftClick_rightCtrlC
     simulateKeyUp("lshift", 100)
     sleep 100
     simulateKeyUp("leftShiftClick")
-    expected := "hello b"
+    expected := "hellob"
 
     validateTestOutput(A_ThisFunc , expected)
 }

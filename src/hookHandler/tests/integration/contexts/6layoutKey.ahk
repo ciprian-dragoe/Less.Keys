@@ -11,6 +11,7 @@ When_layout_key_is_pressed_and_key_which_is_reMapped_as_left_key_is_sent_cursor_
 
     validateCaretOutput(A_ThisFunc, expected)
     clearText()
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_layout_key_is_pressed_a_key_does_not_introduce_letter_a_#602()
@@ -22,6 +23,7 @@ When_layout_key_is_pressed_a_key_does_not_introduce_letter_a_#602()
     
     expected := "hello "
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_layout_key_is_pressed_less_then_timeoutStillSendLayoutKey_and_during_this_time_no_non_modifier_key_is_pressed_space_is_sent_on_layout_key_up_#603()
@@ -32,6 +34,7 @@ When_layout_key_is_pressed_less_then_timeoutStillSendLayoutKey_and_during_this_t
     
     expected := "hello  "
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_layout_key_is_pressed_more_then_timeoutStillSendLayoutKey_and_during_this_time_no_non_modifier_key_is_pressed_space_is_not_sent_on_layout_key_up_#604()
@@ -42,6 +45,7 @@ When_layout_key_is_pressed_more_then_timeoutStillSendLayoutKey_and_during_this_t
     
     expected := "hello "
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_layout_key_is_pressed_less_then_timeoutStillSendLayoutKey_and_during_this_time_non_modifier_key_is_pressed_space_is_not_sent_on_layout_key_up_#605()
@@ -53,6 +57,7 @@ When_layout_key_is_pressed_less_then_timeoutStillSendLayoutKey_and_during_this_t
     
     expected := "hello "
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_layout_key_is_pressed_less_then_timeoutStillSendLayoutKey_and_during_this_time_modifier_key_is_pressed_space_is_sent_on_layout_key_up_#606()
@@ -65,6 +70,7 @@ When_layout_key_is_pressed_less_then_timeoutStillSendLayoutKey_and_during_this_t
     
     expected := "hello  "
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_layout_key_is_pressed_continuously_for_3_seconds_and_during_this_time_no_non_modifier_key_is_pressed_space_is_not_sent_on_layout_key_up_#607()
@@ -80,6 +86,7 @@ When_layout_key_is_pressed_continuously_for_3_seconds_and_during_this_time_no_no
     
     expected := "hello "
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_non_modifier_key_is_already_pressed_and_layout_key_is_pressed_space_is_sent_before_layout_key_released_#608()
@@ -93,6 +100,7 @@ When_non_modifier_key_is_already_pressed_and_layout_key_is_pressed_space_is_sent
     
     expected := "we "
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_non_modifier_key_is_released_followed_by_layout_key_press_in_less_than_timeoutProcessLayoutOnRelease_followed_by_non_modifier_key_press_which_has_alternative_mapping_followed_by_same_non_modifier_key_release_remapped_key_is_sent_#609()
@@ -106,6 +114,7 @@ When_non_modifier_key_is_released_followed_by_layout_key_press_in_less_than_time
     
     expected := "w"
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_non_modifier_key_is_released_followed_by_layout_key_press_in_less_than_timeoutProcessLayoutOnRelease_followed_by_non_modifier_key_press_followed_layout_key_release_space_is_sent_followed_by_non_modifier_key_#610()
@@ -119,6 +128,7 @@ When_non_modifier_key_is_released_followed_by_layout_key_press_in_less_than_time
     
     expected := "w e"
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_layout_key_is_pressed_followed_by_non_modifier_key_press_without_release_followed_by_layout_key_release_followed_by_same_non_modifier_key_press_remapped_key_is_sent_only_once_and_no_other_key_#611()
@@ -133,6 +143,7 @@ When_layout_key_is_pressed_followed_by_non_modifier_key_press_without_release_fo
     
     expected := "w"
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_layout_key_is_pressed_followed_by_non_modifier_key_press_followed_by_layout_key_release_followed_by_other_non_modifier_key_press_remapped_key_is_sent_followed_last_non_modifier_key_pressed_#612()
@@ -148,6 +159,7 @@ When_layout_key_is_pressed_followed_by_non_modifier_key_press_followed_by_layout
     
     expected := "dw"
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_non_modifier_key_is_released_followed_by_layout_key_press_in_less_than_timeoutProcessLayoutOnRelease_followed_by_non_modifier_key_press_without_alternative_mapping_followed_by_same_release_the_key_is_sent_followed_by_space_#613()
@@ -161,6 +173,7 @@ When_non_modifier_key_is_released_followed_by_layout_key_press_in_less_than_time
     
     expected := "w y"
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_letter_is_released_followed_by_layout_key_press_in_less_than_timeoutProcessLayoutOnRelease_followed_by_letter_press_followed_by_different_letter_press_and_release_space_and_normal_key_for_first_and_second_letter_is_sent_#614()
@@ -176,6 +189,7 @@ When_letter_is_released_followed_by_layout_key_press_in_less_than_timeoutProcess
     
     expected := "w ol"
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_letter_is_remapped_as_accented_character_is_pressed_accented_character_is_sent_#617()
@@ -186,6 +200,7 @@ When_letter_is_remapped_as_accented_character_is_pressed_accented_character_is_s
     simulateKeyUp("pgup", 50)
     
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_shift_key_is_pressed_followed_by_letter_remapped_as_accented_character_sibling_accented_character_is_sent_#618()
@@ -198,6 +213,7 @@ When_shift_key_is_pressed_followed_by_letter_remapped_as_accented_character_sibl
     simulateKeyUp("lshift", 50)
     
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_letter_is_pressed_but_not_released_followed_by_layout_key_press_followed_by_key_with_alternative_layout_press_then_no_key_sent_before_that_key_is_released_#619()
@@ -212,6 +228,7 @@ When_letter_is_pressed_but_not_released_followed_by_layout_key_press_followed_by
     simulateKeyUp("o", 40)
     simulateKeyUp("space", 40)
     simulateKeyUp("w", 40)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_letter_is_pressed_but_not_released_followed_by_layout_key_press_followed_by_key_with_alternative_layout_press_followed_by_layout_key_release_then_space_and_key_is_sent_#620()
@@ -225,6 +242,7 @@ When_letter_is_pressed_but_not_released_followed_by_layout_key_press_followed_by
     validateTestOutput(A_ThisFunc , expected)
     simulateKeyUp("w", 40)
     simulateKeyUp("o", 40)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_letter_is_pressed_but_not_released_followed_by_layout_key_press_followed_by_key_with_alternative_layout_press_followed_by_key_release_then_alternative_key_is_sent_without_space_#621()
@@ -239,6 +257,7 @@ When_letter_is_pressed_but_not_released_followed_by_layout_key_press_followed_by
     validateTestOutput(A_ThisFunc , expected)
     simulateKeyUp("space", 40)
     simulateKeyUp("w", 40)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_letter_is_pressed_but_not_released_followed_by_layout_key_press_followed_by_ke1_with_alternative_layout_press_followed_by_ke2_with_alternative_layout_then_key1_and_key2_and_space_is_sent_#622()
@@ -254,6 +273,7 @@ When_letter_is_pressed_but_not_released_followed_by_layout_key_press_followed_by
     simulateKeyUp("o", 40)
     simulateKeyUp("l", 40)
     simulateKeyUp("space", 40)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_letter_is_pressed_and_released_followed_by_layout_key_press_followed_by_key_with_alternative_layout_press_then_alternative_key_is_sent_without_space#623()
@@ -267,4 +287,5 @@ When_letter_is_pressed_and_released_followed_by_layout_key_press_followed_by_key
     validateTestOutput(A_ThisFunc , expected)
     simulateKeyUp("o", 40)
     simulateKeyUp("space", 40)
+    setDefaultTestEnvironment(A_ThisFunc)
 }

@@ -14,6 +14,7 @@ When_leftCtrlClick_pressed_rightShiftClick_doubled_as_left_pressed_timeout_pass_
     expected := "hello"
 
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftCtrlClick_doubles_as_b_pressed_rightShiftClick_doubled_as_c_pressed_leftCtrlClick_released_rightShiftClick_released_THEN_c_letter_is_sent_#3402()
@@ -32,6 +33,7 @@ When_leftCtrlClick_doubles_as_b_pressed_rightShiftClick_doubled_as_c_pressed_lef
     expected := "helloc"
 
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftCtrlClick_pressed_rightShiftClick_press_and_releasedTHEN_word_is_typed_at_beginning_#3403()
@@ -50,4 +52,5 @@ When_leftCtrlClick_pressed_rightShiftClick_press_and_releasedTHEN_word_is_typed_
     expected := "whello"
 
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }

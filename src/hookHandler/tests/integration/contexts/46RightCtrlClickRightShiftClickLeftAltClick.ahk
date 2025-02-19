@@ -21,11 +21,11 @@ When_rightCtrlClick_pressed_rightShiftClick_pressed_leftAltClick_THEN_word_is_se
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
-When_rightCtrlClick_doubled_as_d_pressed_rightShiftClick_pressed_leftAltClick_pressed_rightCtrlClick_release_rightShiftClick_release_leftAltClick_release_THEN_b_letter_sent_#4602()
+When_rightCtrlClick_doubled_as_d_pressed_rightShiftClick_pressed_leftAltClick_pressed_rightCtrlClick_release_rightShiftClick_release_leftAltClick_release_THEN_no_letter_sent_#4602()
 {
     modifierDoubledAsClick["rightCtrlClick"] := "d"
-    modifierDoubledAsClick["leftAltClick"] := "b"
-    simulateTyping("hello world")
+    modifierDoubledAsClick["leftAlt"] := "b"
+    simulateTyping("hello world")Click
     simulateKeyDown("rightCtrlClick")
     sleep 100
     simulateKeyDown("rightShiftClick")
@@ -38,7 +38,8 @@ When_rightCtrlClick_doubled_as_d_pressed_rightShiftClick_pressed_leftAltClick_pr
     sleep 100
     simulateKeyUp("rightShiftClick")
     sleep 100
-    expected := "hello worldb"
+    expected := "hello world"
 
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }

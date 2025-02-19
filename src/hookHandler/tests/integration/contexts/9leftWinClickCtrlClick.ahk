@@ -15,6 +15,7 @@ When_leftCtrlClick_pressed_leftWinClick_pressed_THEN_left_click_is_not_sent_on_l
     sleep 500
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftWinClick_pressed_leftCtrlClick_pressed_THEN_left_click_is_not_sent_on_leftCtrlClick_release_#902()
@@ -34,6 +35,7 @@ When_leftWinClick_pressed_leftCtrlClick_pressed_THEN_left_click_is_not_sent_on_l
     sleep 500
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftWinClick_is_continuously_pressed_and_leftCtrlClick_is_continuously_pressed_and_backtick_pressed_keyboard_shortcut_is_sent_#903()
@@ -73,6 +75,7 @@ When_leftWinClick_is_continuously_pressed_and_leftCtrlClick_is_continuously_pres
     expected := getCurrentCaretPosition()
     
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftWinClick_is_continuously_pressed_and_leftCtrlClick_is_continuously_pressed_more_then_timeoutStillSendLayoutKey_left_click_is_not_sent_on_leftCtrlClick_release_#905()
@@ -90,4 +93,5 @@ When_leftWinClick_is_continuously_pressed_and_leftCtrlClick_is_continuously_pres
     simulateKeyUp("leftCtrlClick")
     
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }

@@ -39,4 +39,5 @@ When_leftCtrlClick_as_d_pressed_shift_pressed_rightShiftClick_pressed_leftCtrlCl
     expected := "hello worldB"
 
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }

@@ -12,6 +12,7 @@ When_rightAltClick_is_pressed_and_rightShiftClick_is_pressed_left_click_is_not_s
     simulateKeyUp("rightShiftClick")
     
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightShiftClick_is_pressed_and_rightAltClick_is_pressed_click_is_not_sent_on_rightShiftClick_release_#5202()
@@ -31,6 +32,7 @@ When_rightShiftClick_is_pressed_and_rightAltClick_is_pressed_click_is_not_sent_o
     sleep 300
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightAltClick_is_continuously_pressed_and_rightShiftClick_is_continuously_pressed_and_backtick_pressed_keyboard_shortcut_is_sent_#5203()
@@ -69,6 +71,7 @@ When_rightAltClick_is_continuously_pressed_and_rightShiftClick_is_continuously_p
     expected := getCurrentCaretPosition()
     
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightAltClick_is_continuously_pressed_and_rightShiftClick_is_continuously_pressed_more_then_timeoutStillSendLayoutKey_left_click_is_not_sent_on_rightShiftClick_release_#5205()
@@ -86,4 +89,5 @@ When_rightAltClick_is_continuously_pressed_and_rightShiftClick_is_continuously_p
     simulateKeyUp("rightShiftClick")
     
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }

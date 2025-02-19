@@ -8,7 +8,8 @@ When_leftShiftClick_is_pressed_at_release_left_click_is_sent_#301()
     simulateKeyUp("leftShiftClick")
     sleep 100
     
-    validateCaretOutput(A_ThisFunc, expected)    
+    validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftShiftClick_is_continuously_pressed_and_layout_key_is_pressed_and_released_space_is_sent_#302()
@@ -23,6 +24,7 @@ When_leftShiftClick_is_continuously_pressed_and_layout_key_is_pressed_and_releas
 
     expected := "hello "
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftShiftClick_is_continuously_pressed_and_backtick_is_pressed_keyboard_shortcut_is_sent_#303()
@@ -53,7 +55,8 @@ When_leftShiftClick_is_continuously_pressed_and_backtick_is_pressed_left_click_i
     simulateKeyUp("leftShiftClick")
     sleep 100
 
-    validateCaretOutput(A_ThisFunc, expected)    
+    validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftShiftClick_is_continuously_pressed_and_layout_key_is_pressed_and_backtick_is_sent_on_leftShiftClick_release_click_is_not_sent_#305()
@@ -71,6 +74,7 @@ When_leftShiftClick_is_continuously_pressed_and_layout_key_is_pressed_and_backti
     expected := setMousePositionToCaret()
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftShiftClick_is_pressed_and_shift_key_is_pressed_and_released_click_is_sent_on_leftShiftClick_release_#306()
@@ -88,6 +92,7 @@ When_leftShiftClick_is_pressed_and_shift_key_is_pressed_and_released_click_is_se
     sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftShiftClick_is_pressed_and_alt_key_is_pressed_click_is_sent_on_leftShiftClick_release_#307()
@@ -105,6 +110,7 @@ When_leftShiftClick_is_pressed_and_alt_key_is_pressed_click_is_sent_on_leftShift
     send {escape 2}
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftShiftClick_is_pressed_and_ctrl_key_is_pressed_and_released_click_is_sent_on_leftShiftClick_release_#308()
@@ -121,6 +127,7 @@ When_leftShiftClick_is_pressed_and_ctrl_key_is_pressed_and_released_click_is_sen
     sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftShiftClick_is_pressed_and_ctrl_key_is_pressed_click_is_sent_on_leftShiftClick_release_#309()
@@ -137,6 +144,7 @@ When_leftShiftClick_is_pressed_and_ctrl_key_is_pressed_click_is_sent_on_leftShif
     simulateKeyUp("lctrl", 100)
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftShiftClick_is_pressed_and_shift_key_is_pressed_and_released_click_is_sent_on_leftShiftClick_release_#310()
@@ -155,6 +163,7 @@ When_leftShiftClick_is_pressed_and_shift_key_is_pressed_and_released_click_is_se
     sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftShiftClick_is_pressed_and_shift_key_is_pressed_click_is_sent_on_leftShiftClick_release_#311()
@@ -171,6 +180,7 @@ When_leftShiftClick_is_pressed_and_shift_key_is_pressed_click_is_sent_on_leftShi
     sleep 100
     simulateKeyUp("lshift", 50)
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftShiftClick_is_pressed_and_shift_is_pressed_and_released_click_is_sent_on_leftShiftClick_release_#312()
@@ -187,6 +197,7 @@ When_leftShiftClick_is_pressed_and_shift_is_pressed_and_released_click_is_sent_o
     sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftShiftClick_is_pressed_and_shift_is_pressed_click_is_sent_on_leftShiftClick_release_#313()
@@ -203,6 +214,7 @@ When_leftShiftClick_is_pressed_and_shift_is_pressed_click_is_sent_on_leftShiftCl
     simulateKeyUp("lshift", 100)
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftShiftClick_is_pressed_and_shift_key_is_pressed_and_layout_key_pressed_and_backtick_pressed_keyboard_shortcut_is_sent_#314()
@@ -241,6 +253,7 @@ When_leftShiftClick_is_continuously_pressed_and_layout_key_is_pressed_after_rele
     sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }    
 
 When_leftShiftClick_is_continuously_pressed_and_mouse_is_moved_the_text_is_selected_#316()
@@ -295,10 +308,10 @@ When_non_modifier_letter_is_released_and_layout_key_continuous_press_in_less_the
     expected := getCurrentCaretPosition()
     simulateKeyUp("space", 100)
     simulateKeyUp("leftShiftClick")
-    
     sleep 100
     
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_non_modifier_letter_is_released_and_layout_key_continuous_press_in_less_then_timeoutProcessLayoutOnRelease_and_leftShiftClick_continuous_press_and_backtick_pressed_and_leftShiftClick_released_left_click_is_not_sent_#321()
@@ -314,10 +327,10 @@ When_non_modifier_letter_is_released_and_layout_key_continuous_press_in_less_the
     simulateKeyUp("space", 100)
     simulateKeyUp("leftShiftClick")
     expected := getCurrentCaretPosition()
-    
     sleep 100
     
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftShiftClick_is_pressed_more_then_timeoutStillSendLayoutKey_left_click_is_not_sent_on_leftShiftClick_release_#322()
@@ -332,6 +345,7 @@ When_leftShiftClick_is_pressed_more_then_timeoutStillSendLayoutKey_left_click_is
     sleep 100
     
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftShiftClick_action_is_not_lbutton_and_mouse_is_moved_on_release_action_is_sent_instead_of_mouse_click_#325()
@@ -349,6 +363,7 @@ When_leftShiftClick_action_is_not_lbutton_and_mouse_is_moved_on_release_action_i
     expected := "hello c"
     validateTestOutput(A_ThisFunc , expected)
     modifierDoubledAsClick["leftShiftClick"] := "lbutton"
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_shift_is_pressed_and_leftShiftClick_is_continuously_pressed_and_mouse_is_moved_the_text_is_selected_#326()
@@ -426,5 +441,6 @@ When_leftShiftClick_is_pressed_and_a_letter_pressed_and_released_and_shift_press
     simulateKeyUp("lshift", 100)
     expected := "AA"
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 

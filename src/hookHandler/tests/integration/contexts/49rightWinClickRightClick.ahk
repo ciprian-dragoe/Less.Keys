@@ -15,6 +15,7 @@ When_rightCtrlClick_pressed_rightWinClick_pressed_THEN_right_click_is_not_sent_o
     sleep 500
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightWinClick_pressed_rightCtrlClick_pressed_THEN_right_click_is_not_sent_on_rightCtrlClick_release_#4902()
@@ -34,6 +35,7 @@ When_rightWinClick_pressed_rightCtrlClick_pressed_THEN_right_click_is_not_sent_o
     sleep 500
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightWinClick_is_continuously_pressed_and_rightCtrlClick_is_continuously_pressed_and_backtick_pressed_keyboard_shortcut_is_sent_#4903()
@@ -73,6 +75,7 @@ When_rightWinClick_is_continuously_pressed_and_rightCtrlClick_is_continuously_pr
     expected := getCurrentCaretPosition()
     
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightWinClick_is_continuously_pressed_and_rightCtrlClick_is_continuously_pressed_more_then_timeoutStillSendLayoutKey_right_click_is_not_sent_on_rightCtrlClick_release_#4905()
@@ -90,4 +93,5 @@ When_rightWinClick_is_continuously_pressed_and_rightCtrlClick_is_continuously_pr
     simulateKeyUp("rightCtrlClick")
     
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }

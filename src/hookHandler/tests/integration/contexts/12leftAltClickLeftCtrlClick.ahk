@@ -12,6 +12,7 @@ When_leftAltClick_is_pressed_and_leftCtrlClick_is_pressed_left_click_is_not_sent
     simulateKeyUp("leftCtrlClick")
     
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftCtrlClick_is_pressed_and_leftAltClick_is_pressed_click_is_not_sent_on_leftCtrlClick_release_#1202()
@@ -31,6 +32,7 @@ When_leftCtrlClick_is_pressed_and_leftAltClick_is_pressed_click_is_not_sent_on_l
     sleep 300
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftAltClick_is_continuously_pressed_and_leftCtrlClick_is_continuously_pressed_and_backtick_pressed_keyboard_shortcut_is_sent#1203()
@@ -86,4 +88,5 @@ When_leftAltClick_is_continuously_pressed_and_leftCtrlClick_is_continuously_pres
     simulateKeyUp("leftCtrlClick")
     
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }

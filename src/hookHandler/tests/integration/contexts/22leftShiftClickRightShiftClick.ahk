@@ -52,6 +52,7 @@ When_leftShiftClick_doubled_as_d_pressed_rightShiftClick_pressed_leftShiftClick_
 
     expected := "hello "
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftShiftClick_pressed_rightShiftClick_pressed_mouse_moved_until_second_word_THEN_only_second_word_is_selected_#2204()
@@ -93,4 +94,5 @@ When_leftShiftClick_pressed_layoutKey_pressed_rightShiftClick_pressed_at_release
 
     expected := "w Y"
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }

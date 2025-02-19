@@ -9,6 +9,7 @@ When_leftAltClick_is_pressed_at_release_left_click_is_sent_#1101()
     sleep 100
     
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftAltClick_is_continuously_pressed_and_layout_key_is_pressed_and_released_space_is_sent_#1102()
@@ -24,6 +25,7 @@ When_leftAltClick_is_continuously_pressed_and_layout_key_is_pressed_and_released
 
     expected := "hello"
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftAltClick_is_continuously_pressed_and_backtick_is_pressed_keyboard_shortcut_is_sent_#1103()
@@ -54,7 +56,8 @@ When_leftAltClick_is_continuously_pressed_and_backtick_is_pressed_left_click_is_
     simulateKeyUp("leftAltClick")
     sleep 100
 
-    validateCaretOutput(A_ThisFunc, expected)    
+    validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftAltClick_is_pressed_and_alt_key_is_pressed_and_released_click_is_sent_on_leftAltClick_release_#1106()
@@ -71,6 +74,7 @@ When_leftAltClick_is_pressed_and_alt_key_is_pressed_and_released_click_is_sent_o
     sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftAltClick_is_pressed_and_alt_key_is_pressed_click_is_sent_on_leftAltClick_release_#1107()
@@ -87,6 +91,7 @@ When_leftAltClick_is_pressed_and_alt_key_is_pressed_click_is_sent_on_leftAltClic
     simulateKeyUp("lalt", 50)
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftAltClick_is_pressed_and_ctrl_key_is_pressed_and_released_click_is_sent_on_leftAltClick_release_#1108()
@@ -103,6 +108,7 @@ When_leftAltClick_is_pressed_and_ctrl_key_is_pressed_and_released_click_is_sent_
     sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftAltClick_is_pressed_and_ctrl_key_is_pressed_click_is_sent_on_leftAltClick_release_#1109()
@@ -119,6 +125,7 @@ When_leftAltClick_is_pressed_and_ctrl_key_is_pressed_click_is_sent_on_leftAltCli
     simulateKeyUp("lctrl", 100)
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftAltClick_is_pressed_and_win_key_is_pressed_and_released_click_is_sent_on_leftAltClick_release_#1110()
@@ -142,6 +149,7 @@ When_leftAltClick_is_pressed_and_win_key_is_pressed_and_released_click_is_sent_o
     sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftAltClick_is_pressed_and_win_key_is_pressed_click_is_sent_on_leftAltClick_release_#1111()
@@ -162,6 +170,7 @@ When_leftAltClick_is_pressed_and_win_key_is_pressed_click_is_sent_on_leftAltClic
     sleep 700
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftAltClick_is_pressed_and_shift_is_pressed_and_released_click_is_sent_on_leftAltClick_release_#1112()
@@ -178,6 +187,7 @@ When_leftAltClick_is_pressed_and_shift_is_pressed_and_released_click_is_sent_on_
     sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftAltClick_is_pressed_and_shift_is_pressed_click_is_sent_on_leftAltClick_release_#1113()
@@ -194,6 +204,7 @@ When_leftAltClick_is_pressed_and_shift_is_pressed_click_is_sent_on_leftAltClick_
     simulateKeyUp("lshift", 100)
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftAltClick_is_continuously_pressed_and_layout_key_is_pressed_after_release_left_click_is_not_sent_#1115()
@@ -210,6 +221,7 @@ When_leftAltClick_is_continuously_pressed_and_layout_key_is_pressed_after_releas
     sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }    
 
 When_leftAltClick_is_continuously_pressed_and_mouse_is_moved_the_text_is_selected_#1116()
@@ -250,8 +262,8 @@ When_leftAltClick_pressed_and_mouse_is_moved_and_layout_key_is_pressed_longer_th
     expected := "hello "
 
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment(A_ThisFunc)
     timerTimeoutStickyKeys := default
+    setDefaultTestEnvironment(A_ThisFunc)
 }    
 
 When_leftAltClick_is_pressed_more_then_timeoutStillSendLayoutKey_left_click_is_not_sent_on_leftAltClick_release_#1122()
@@ -266,6 +278,7 @@ When_leftAltClick_is_pressed_more_then_timeoutStillSendLayoutKey_left_click_is_n
     sleep 100
     
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftAltClick_action_is_not_lbutton_and_mouse_is_moved_on_release_action_is_sent_instead_of_mouse_click_#1125()
@@ -283,6 +296,7 @@ When_leftAltClick_action_is_not_lbutton_and_mouse_is_moved_on_release_action_is_
     expected := "hello c"
     validateTestOutput(A_ThisFunc , expected)
     modifierDoubledAsClick["leftAltClick"] := "lbutton"
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_alt_is_pressed_and_leftAltClick_is_continuously_pressed_and_mouse_is_moved_the_text_is_selected_#1126()
@@ -358,6 +372,7 @@ When_layoutKey_pressed_leftAltClick_pressed_at_release_alternative_value_is_sent
 
     expected := "w y"
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_layoutKey_pressed_leftAltClick_pressed_leftAltClick_released_layoutKey_releases_space_is_not_sent_#1130()
@@ -373,6 +388,7 @@ When_layoutKey_pressed_leftAltClick_pressed_leftAltClick_released_layoutKey_rele
 
     expected := "w y"
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_shift_pressed_layoutKey_pressed_leftAltClick_pressed_at_release_capitalized_alternative_value_is_sent_#1131()
@@ -392,4 +408,5 @@ When_shift_pressed_layoutKey_pressed_leftAltClick_pressed_at_release_capitalized
 
     expected := "w Y"
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }

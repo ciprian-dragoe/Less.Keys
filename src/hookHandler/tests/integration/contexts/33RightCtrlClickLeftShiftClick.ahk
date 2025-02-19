@@ -1,4 +1,4 @@
-When_rightCtrlClick_doubled_as_b_pressed_leftShiftClick_doubled_as_a_pressed_timeout_pass_leftShiftClick_released_THEN_letter_is_not_sent_#3301()
+ When_rightCtrlClick_doubled_as_b_pressed_leftShiftClick_doubled_as_a_pressed_timeout_pass_leftShiftClick_released_THEN_letter_is_not_sent_#3301()
 {
     modifierDoubledAsClick["leftShiftClick"] := "a"
     modifierDoubledAsClick["rightCtrlClick"] := "b"
@@ -15,6 +15,7 @@ When_rightCtrlClick_doubled_as_b_pressed_leftShiftClick_doubled_as_a_pressed_tim
     expected := "hello"
 
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightCtrlClick_doubles_as_b_pressed_leftShiftClick_doubled_as_c_pressed_rightCtrlClick_released_leftShiftClick_released_THEN_c_letter_is_sent_#3302()
@@ -33,6 +34,7 @@ When_rightCtrlClick_doubles_as_b_pressed_leftShiftClick_doubled_as_c_pressed_rig
     expected := "helloc"
 
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightCtrlClick_pressed_leftShiftClick_press_and_released_THEN_word_is_typed_at_beginning_#3303()
@@ -51,6 +53,7 @@ When_rightCtrlClick_pressed_leftShiftClick_press_and_released_THEN_word_is_typed
     expected := "whello"
 
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightCtrlClick_pressed_leftShiftClick_pressed_mouse_moved_until_second_word_THEN_only_first_word_is_selected_#3304()

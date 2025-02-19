@@ -8,7 +8,8 @@ When_leftCtrlClick_is_pressed_at_release_left_click_is_sent_#401()
     simulateKeyUp("leftCtrlClick")
     sleep 100
     
-    validateCaretOutput(A_ThisFunc, expected)    
+    validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftCtrlClick_is_continuously_pressed_and_layout_key_is_pressed_but_not_released_space_is_not_sent_#402()
@@ -23,6 +24,7 @@ When_leftCtrlClick_is_continuously_pressed_and_layout_key_is_pressed_but_not_rel
         
     expected := "hello"
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftCtrlClick_is_continuously_pressed_and_a_letter_is_pressed_all_text_is_selected_#403()
@@ -52,7 +54,8 @@ When_leftCtrlClick_is_continuously_pressed_and_a_key_is_pressed_left_click_is_no
     simulateKeyUp("leftCtrlClick")
     sleep 100
 
-    validateCaretOutputDiffers(A_ThisFunc, expected)    
+    validateCaretOutputDiffers(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftCtrlClick_is_continuously_pressed_and_layout_key_is_pressed_and_key_remapped_as_left_is_sent_on_leftCtrlClick_release_click_is_not_sent_#405()
@@ -71,6 +74,7 @@ When_leftCtrlClick_is_continuously_pressed_and_layout_key_is_pressed_and_key_rem
     simulateKeyUp("a", 50)
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftCtrlClick_is_pressed_and_ctrl_key_is_pressed_and_released_click_is_sent_on_leftCtrlClick_release_#406()
@@ -87,6 +91,7 @@ When_leftCtrlClick_is_pressed_and_ctrl_key_is_pressed_and_released_click_is_sent
     sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftCtrlClick_is_pressed_and_ctrl_key_is_pressed_click_is_sent_on_leftCtrlClick_release_#407()
@@ -103,6 +108,7 @@ When_leftCtrlClick_is_pressed_and_ctrl_key_is_pressed_click_is_sent_on_leftCtrlC
     simulateKeyUp("lctrl", 50)
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftCtrlClick_is_pressed_and_alt_key_is_pressed_and_released_click_is_sent_on_leftCtrlClick_release_#408()
@@ -122,6 +128,7 @@ When_leftCtrlClick_is_pressed_and_alt_key_is_pressed_and_released_click_is_sent_
     sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftCtrlClick_is_pressed_and_alt_key_is_pressed_click_is_sent_on_leftCtrlClick_release_#409()
@@ -138,6 +145,7 @@ When_leftCtrlClick_is_pressed_and_alt_key_is_pressed_click_is_sent_on_leftCtrlCl
     simulateKeyUp("lalt", 100)
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftCtrlClick_is_pressed_and_win_key_is_pressed_and_released_click_is_sent_on_leftCtrlClick_release_#410()
@@ -162,6 +170,7 @@ When_leftCtrlClick_is_pressed_and_win_key_is_pressed_and_released_click_is_sent_
     sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftCtrlClick_is_pressed_and_win_key_is_pressed_click_is_sent_on_leftCtrlClick_release_#411()
@@ -182,6 +191,7 @@ When_leftCtrlClick_is_pressed_and_win_key_is_pressed_click_is_sent_on_leftCtrlCl
     sleep 700
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftCtrlClick_is_pressed_and_shift_is_pressed_and_released_click_is_sent_on_leftCtrlClick_release_#412()
@@ -198,6 +208,7 @@ When_leftCtrlClick_is_pressed_and_shift_is_pressed_and_released_click_is_sent_on
     sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftCtrlClick_is_pressed_and_shift_is_pressed_click_is_sent_on_leftCtrlClick_release_#413()
@@ -214,6 +225,7 @@ When_leftCtrlClick_is_pressed_and_shift_is_pressed_click_is_sent_on_leftCtrlClic
     simulateKeyUp("lshift", 100)
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftCtrlClick_is_pressed_and_shift_key_is_pressed_and_layout_key_pressed_and_key_remapped_as_left_key_a_word_is_selected_#414()
@@ -252,6 +264,7 @@ When_leftCtrlClick_is_continuously_pressed_and_layout_key_is_pressed_after_relea
     sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }    
 
 When_leftCtrlClick_is_continuously_pressed_and_mouse_is_moved_the_text_is_selected_#416()
@@ -306,6 +319,7 @@ When_non_modifier_letter_is_released_and_layout_key_press_in_less_then_timeoutPr
     sleep 100
     
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_non_modifier_letter_is_released_and_layout_key_press_in_less_then_timeoutProcessLayoutOnRelease_and_leftCtrlClick_press_and_letter_key_pressed_and_released_and_leftCtrlClick_released_left_click_is_not_sent_#421()
@@ -323,6 +337,7 @@ When_non_modifier_letter_is_released_and_layout_key_press_in_less_then_timeoutPr
     sleep 100
     
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftCtrlClick_is_pressed_more_then_timeoutStillSendLayoutKey_left_click_is_not_sent_on_leftCtrlClick_release_#422()
@@ -337,6 +352,7 @@ When_leftCtrlClick_is_pressed_more_then_timeoutStillSendLayoutKey_left_click_is_
     sleep 100
     
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftCtrlClick_action_is_not_lbutton_and_mouse_is_moved_on_release_action_is_sent_instead_of_mouse_click_#425()
@@ -354,6 +370,7 @@ When_leftCtrlClick_action_is_not_lbutton_and_mouse_is_moved_on_release_action_is
     expected := "hello c"
     validateTestOutput(A_ThisFunc , expected)
     modifierDoubledAsClick["leftCtrlClick"] := "lbutton"
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_ctrl_is_pressed_and_leftCtrlClick_is_continuously_pressed_and_mouse_is_moved_the_text_is_selected_#426()

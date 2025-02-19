@@ -34,6 +34,7 @@ When_rightShiftClick_doubles_as_b_pressed_leftWinClick_doubled_as_c_pressed_righ
     expected := "helloc"
 
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightShiftClick_pressed_leftWinClick_pressed_THEN_word_is_selected_after_leftWinClick_release_#5903()

@@ -476,7 +476,7 @@ runIntegrationTests()
 
     ; LEFT CTRL CLICK & NORMAL SHIFT & RIGHT ALT CLICK
     When_leftCtrlClick_pressed_shift_pressed_rightAltClick_THEN_word_is_selected_after_rightAltClickRelease_#4401()
-    When_leftCtrlClick_doubled_as_d_pressed_shift_pressed_rightAltClick_pressed_leftCtrlClick_released_shift_released_rightAltClick_released_THEN_b_letter_sent_#4402()
+    When_leftCtrlClick_doubled_as_d_pressed_shift_pressed_rightAltClick_pressed_leftCtrlClick_released_shift_released_rightAltClick_released_THEN_B_letter_sent_#4402()
 
     ; RIGHT CTRL CLICK & NORMAL SHIFT & LEFT ALT CLICK
     When_rightCtrlClick_pressed_shift_pressed_leftAltClick_THEN_word_is_selected_after_leftAltClickRelease_#3601()
@@ -484,7 +484,7 @@ runIntegrationTests()
 
     ; RIGHT CTRL CLICK & RIGHT SHIFT SHIFT & LEFT ALT CLICK
     When_rightCtrlClick_pressed_rightShiftClick_pressed_leftAltClick_THEN_word_is_selected_after_leftAltClickRelease_#4601()
-    When_rightCtrlClick_doubled_as_d_pressed_rightShiftClick_pressed_leftAltClick_pressed_rightCtrlClick_release_rightShiftClick_release_leftAltClick_release_THEN_b_letter_sent_#4602()
+    When_rightCtrlClick_doubled_as_d_pressed_rightShiftClick_pressed_leftAltClick_pressed_rightCtrlClick_release_rightShiftClick_release_leftAltClick_release_THEN_no_letter_sent_#4602()
 
     ; LEFT CTRL CLICK & LEFT SHIFT SHIFT & RIGHT ALT CLICK
     When_leftCtrlClick_pressed_leftShiftClick_pressed_rightAltClick_THEN_word_is_selected_after_rightAltClickRelease_#4701()

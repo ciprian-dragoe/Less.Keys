@@ -15,7 +15,6 @@ global defaultTimerTimeoutStickyKeys
 global extraKeysMappings := object()
 ; previously was normal notepad but in recent update it is very unstable as a test environment with random failing
 global TESTING_ENVIRONMENT := "Notepad++"
-
 processCustomAppNameRules()
 {
 }

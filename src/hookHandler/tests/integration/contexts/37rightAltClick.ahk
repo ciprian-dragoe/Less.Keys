@@ -9,6 +9,7 @@ When_rightAltClick_is_pressed_at_release_left_click_is_sent_#3701()
     sleep 100
     
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightAltClick_is_continuously_pressed_and_layout_key_is_pressed_and_released_space_is_sent_#3702()
@@ -24,6 +25,7 @@ When_rightAltClick_is_continuously_pressed_and_layout_key_is_pressed_and_release
 
     expected := "hello"
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightAltClick_is_continuously_pressed_and_backtick_is_pressed_keyboard_shortcut_is_sent_#3703()
@@ -56,6 +58,7 @@ When_rightAltClick_is_pressed_and_alt_key_is_pressed_and_released_click_is_sent_
     sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightAltClick_is_pressed_and_alt_key_is_pressed_click_is_sent_on_rightAltClick_release_#3707()
@@ -72,6 +75,7 @@ When_rightAltClick_is_pressed_and_alt_key_is_pressed_click_is_sent_on_rightAltCl
     simulateKeyUp("lalt", 50)
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightAltClick_is_pressed_and_ctrl_key_is_pressed_and_released_click_is_sent_on_rightAltClick_release_#3708()
@@ -88,6 +92,7 @@ When_rightAltClick_is_pressed_and_ctrl_key_is_pressed_and_released_click_is_sent
     sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightAltClick_is_pressed_and_ctrl_key_is_pressed_click_is_sent_on_rightAltClick_release_#3709()
@@ -104,6 +109,7 @@ When_rightAltClick_is_pressed_and_ctrl_key_is_pressed_click_is_sent_on_rightAltC
     simulateKeyUp("lctrl", 100)
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightAltClick_is_pressed_and_win_key_is_pressed_and_released_click_is_sent_on_rightAltClick_release_#3710()
@@ -127,6 +133,7 @@ When_rightAltClick_is_pressed_and_win_key_is_pressed_and_released_click_is_sent_
     sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightAltClick_is_pressed_and_win_key_is_pressed_click_is_sent_on_rightAltClick_release_#3711()
@@ -147,6 +154,7 @@ When_rightAltClick_is_pressed_and_win_key_is_pressed_click_is_sent_on_rightAltCl
     sleep 700
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightAltClick_is_pressed_and_shift_is_pressed_and_released_click_is_sent_on_rightAltClick_release_#3712()
@@ -163,6 +171,7 @@ When_rightAltClick_is_pressed_and_shift_is_pressed_and_released_click_is_sent_on
     sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightAltClick_is_pressed_and_shift_is_pressed_click_is_sent_on_rightAltClick_release_#3713()
@@ -179,6 +188,7 @@ When_rightAltClick_is_pressed_and_shift_is_pressed_click_is_sent_on_rightAltClic
     simulateKeyUp("lshift", 100)
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightAltClick_is_continuously_pressed_and_layout_key_is_pressed_after_release_left_click_is_not_sent_#3715()
@@ -195,6 +205,7 @@ When_rightAltClick_is_continuously_pressed_and_layout_key_is_pressed_after_relea
     sleep 100
 
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }    
 
 When_rightAltClick_is_continuously_pressed_and_mouse_is_moved_the_text_is_selected_#3716()
@@ -235,8 +246,8 @@ When_rightAltClick_pressed_and_mouse_is_moved_and_layout_key_is_pressed_longer_t
     expected := "hello "
 
     addTestResult(A_ThisFunc, expected, actual, evaluateResult(expected, actual))
-    setDefaultTestEnvironment(A_ThisFunc)
     timerTimeoutStickyKeys := default
+    setDefaultTestEnvironment(A_ThisFunc)
 }    
 
 When_rightAltClick_is_pressed_more_then_timeoutStillSendLayoutKey_left_click_is_not_sent_on_rightAltClick_release_#3722()
@@ -251,6 +262,7 @@ When_rightAltClick_is_pressed_more_then_timeoutStillSendLayoutKey_left_click_is_
     sleep 100
     
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightAltClick_action_is_not_lbutton_and_mouse_is_moved_on_release_action_is_sent_instead_of_mouse_click_#3725()
@@ -268,6 +280,7 @@ When_rightAltClick_action_is_not_lbutton_and_mouse_is_moved_on_release_action_is
     expected := "hello c"
     validateTestOutput(A_ThisFunc , expected)
     modifierDoubledAsClick["rightAltClick"] := "lbutton"
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_alt_is_pressed_and_rightAltClick_is_continuously_pressed_and_mouse_is_moved_the_text_is_selected_#3726()

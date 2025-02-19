@@ -39,4 +39,5 @@ When_rightCtrlClick_doubled_as_d_pressed_shift_pressed_leftAltClick_pressed_righ
     expected := "hello worldb"
 
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }

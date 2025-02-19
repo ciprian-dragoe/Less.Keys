@@ -34,6 +34,7 @@ When_rightCtrlClick_doubled_as_b_pressed_leftCtrlClick_doubled_as_a_pressed_and_
 
     expected := "hello "
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_rightCtrlClick_pressed_leftCtrlClick_pressed_rightCtrlClick_releases_leftCtrlClick_released_w_letter_typed_THEN_w_is_sent_at_beginning_#1603()

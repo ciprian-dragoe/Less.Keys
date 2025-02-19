@@ -12,6 +12,7 @@ When_leftShiftClick_is_pressed_and_leftCtrlClick_is_pressed_left_click_is_not_se
     simulateKeyUp("leftCtrlClick")
     
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftCtrlClick_is_pressed_and_leftShiftClick_is_pressed_click_is_not_sent_on_leftCtrlClick_release_#502()
@@ -28,6 +29,7 @@ When_leftCtrlClick_is_pressed_and_leftShiftClick_is_pressed_click_is_not_sent_on
     simulateKeyUp("leftShiftClick")
     
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftShiftClick_is_continuously_pressed_and_leftCtrlClick_is_continuously_pressed_and_layout_key_continuously_pressed_and_key_remapped_as_left_key_a_word_is_selected_#503()
@@ -68,6 +70,7 @@ When_leftShiftClick_is_continuously_pressed_and_leftCtrlClick_is_continuously_pr
     simulateKeyUp("space")
     
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftShiftClick_is_continuously_pressed_and_leftCtrlClick_is_continuously_pressed_more_then_timeoutStillSendLayoutKey_left_click_is_not_sent_on_leftCtrlClick_release_#505()
@@ -85,4 +88,5 @@ When_leftShiftClick_is_continuously_pressed_and_leftCtrlClick_is_continuously_pr
     simulateKeyUp("leftCtrlClick")
     
     validateCaretOutput(A_ThisFunc, expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }

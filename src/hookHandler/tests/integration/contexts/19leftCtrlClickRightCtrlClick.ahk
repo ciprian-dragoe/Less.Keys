@@ -35,6 +35,7 @@ When_leftCtrlClick_doubled_as_b_pressed_rightCtrlClick_doubled_as_a_pressed_left
 
     expected := "hello a"
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
 
 When_leftCtrlClick_pressed_rightCtrlClick_pressed_mouse_moved_until_second_word_THEN_only_first_word_is_selected_#1903()
@@ -76,4 +77,5 @@ When_leftCtrlClick_doubled_as_b_pressed_rightCtrlClick_doubled_as_a_pressed_left
 
     expected := "hello"
     validateTestOutput(A_ThisFunc , expected)
+    setDefaultTestEnvironment(A_ThisFunc)
 }
