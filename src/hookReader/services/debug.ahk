@@ -39,6 +39,12 @@ sendProcessResultAnyModifierKeyPressed(wParam, lParam, msg, hwnd)
         }
     }
     
+    SetTimer TimerAllowLatencyKeyProcessingBeforeSticky, 150
+}
+
+timerAllowLatencyKeyProcessingBeforeSticky()
+{
+    SetTimer TimerAllowLatencyKeyProcessingBeforeSticky, off
     DetectHiddenWindows On
     SendMessage, %APP_MESSAGE_RESET_STICKY%, 0, 0, , %SCRIPT_HOOKS_HANDLER%
 }
