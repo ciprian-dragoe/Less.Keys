@@ -39,7 +39,7 @@ sendProcessResultAnyModifierKeyPressed(wParam, lParam, msg, hwnd)
         }
     }
     
-    SetTimer TimerAllowLatencyKeyProcessingBeforeSticky, 150
+    SetTimer TimerAllowLatencyKeyProcessingBeforeSticky, 1000
 }
 
 timerAllowLatencyKeyProcessingBeforeSticky()
