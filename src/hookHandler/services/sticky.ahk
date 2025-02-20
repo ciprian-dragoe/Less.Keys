@@ -1,11 +1,12 @@
 ; if the cpu is executing intensive tasks then the lift key up command may not be processed for
 ; modifier keys (ctrl, shift, alt, win) and they are still registered by the os as pressed.
 ; This is a fail safe for such situations
-
+global ALLOW_RESET_STICKY_KEYS := 0
 
 timerStickyFailBack()
 {
     SetTimer TimerStickyFailBack, off
+    ALLOW_RESET_STICKY_KEYS := 1
     DetectHiddenWindows On
     ;showtooltip("send")
     SendMessage, %APP_MESSAGE_IS_ANY_MODIFIER_KEY_PRESSED%, 0, 0, , %SCRIPT_HOOKS_READER%
@@ -13,7 +14,7 @@ timerStickyFailBack()
 
 resetStickState()
 {
-    if (isAnyRightModifierPressed() || isAnyLeftModifierPressed() || isNormalAltActive || isNormalShiftActive || isNormalWinActive || ctrlActive || layoutKeyPressed)
+    if (ALLOW_RESET_STICKY_KEYS = 1 && (isAnyRightModifierPressed() || isAnyLeftModifierPressed() || isNormalAltActive || isNormalShiftActive || isNormalWinActive || ctrlActive || layoutKeyPressed))
     {
         resetStates()
     }

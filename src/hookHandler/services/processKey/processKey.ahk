@@ -16,6 +16,7 @@ processKeyDown(scanKeyCode)
     keyName := GetKeyName(Format("sc{:x}", scanKeyCode))
     key := layout[keyName]
     debug(key . "[KEY_DOWN_BEGIN]")
+    ALLOW_RESET_STICKY_KEYS := 0
     SetTimer TimerStickyFailBack, off
     SetTimer TimerStickyFailBack, %timerTimeoutStickyKeys%
     if (timedCapsActive)
