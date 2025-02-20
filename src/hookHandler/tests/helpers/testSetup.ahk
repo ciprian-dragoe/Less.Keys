@@ -36,6 +36,22 @@ setDefaultTestEnvironment(testName)
     tooltip % output
     setTestVariables()
     sleep 1000
+    send {ctrl down}
+    sleep 200
+    send {ctrl up}
+    sleep 200
+    send {alt down}
+    sleep 200
+    send {alt up}
+    sleep 200
+    send {alt down}
+    sleep 200
+    send {alt up}
+    sleep 200
+    send {escape down}
+    sleep 200
+    send {escape up}
+    sleep 200
     send {escape down}
     sleep 200
     send {escape up}
@@ -44,15 +60,66 @@ setDefaultTestEnvironment(testName)
         WinActivate ahk_class %TESTING_ENVIRONMENT%
         sleep 200
     }
-    shiftActive := 0
-    ctrlActive := 0
-    winActive := 0
-    altActive := 0
-    layoutKeyPressed := 0
     clearText()
+    
+    ctrlActive := false
+    shiftActive := false
+    altActive := false
+    winActive := false
+    isNormalCtrlActive := false
+    isNormalShiftActive := false
+    isNormalAltActive := false
+    isNormalWinActive := false
+    layoutKeyPressed := 0
+    alternativeLayoutActive := 0
+    layoutKeyActivatesProcessKeyOnRelease := 0
+    sendClickOnLeftAltClickRelease := false
+    isLeftAltDoubledAsClickPressed := false
+    doubledLeftAltMouseHook := 0
+    isLeftAltClickDown := false
+    sendClickOnLeftCtrlClickRelease := 0
+    isLeftCtrlDoubledAsClickPressed := 0
+    doubledLeftCtrlMouseHook := 0
+    isLeftCtrlClickDown := 0
+    sendClickOnLeftShiftClickRelease := false
+    isLeftShiftDoubledAsClickPressed := false
+    doubledLeftShiftMouseHook := 0
+    isLeftShiftClickDown := false
+    sendClickOnLeftWinClickRelease := false
+    isLeftWinDoubledAsClickPressed := false
+    doubledLeftWinMouseHook := 0
+    isLeftWinClickDown := false
+    sendClickOnRightAltClickRelease := false
+    isRightAltDoubledAsClickPressed := false
+    doubledRightAltMouseHook := 0
+    isRightAltClickDown := false
+    sendClickOnRightCtrlClickRelease := false
+    isRightCtrlDoubledAsClickPressed := false
+    doubledRightCtrlMouseHook := 0
+    isRightCtrlClickDown := false
+    sendClickOnRightShiftClickRelease := false
+    isRightShiftDoubledAsClickPressed := false
+    doubledRightShiftMouseHook := 0
+    isRightShiftClickDown := false
+    sendClickOnRightWinClickRelease := false
+    isRightWinDoubledAsClickPressed := false
+    doubledRightWinMouseHook := 0
+    isRightWinClickDown := false
+    keyToSendOnUp := ""
+    sendLayoutKey := ""
+    lastKeyProcessedAsAlternative := ""
+    processKeyOnRelease := ""
+    activePressedKeys := []
+    
+    SetTimer TimerLessKeysManagementBasedOnActiveApp, off
+    SetTimer TimerStickyFailBack, off
+    setTimer TimerResetModifierReleaseAction, OFF
+    SetTimer TimerProcessLayoutOnRelease, OFF
+    SetTimer TimerTimeoutSendLayoutKey, OFF
+    SetTimer TimerScrollWithMouseMovement, OFF
     MouseMove, 500, 500
     tooltip
-    sleep % (timerTimeoutStickyKeys + 100)
+    sleep 200
 }
 
 clearText()

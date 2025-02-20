@@ -1,7 +1,6 @@
 global alternativeLayoutActive
 global layoutKeyActivatesProcessKeyOnRelease
 global layoutKeyPressed
-global alternativeLayoutActive
 
 
 manageLayoutKeyDown(key)

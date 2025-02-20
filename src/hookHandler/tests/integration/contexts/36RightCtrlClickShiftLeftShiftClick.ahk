@@ -20,7 +20,7 @@ When_rightCtrlClick_pressed_shift_pressed_leftShiftClick_THEN_word_is_selected_a
     setDefaultTestEnvironment(A_ThisFunc)
 }
 
-When_rightCtrlClick_doubled_as_d_pressed_shift_pressed_leftShiftClick_rightCtrlClick_release_shift_release_leftShiftClick_release_THEN_b_sent_#3602()
+When_rightCtrlClick_doubled_as_d_pressed_shift_pressed_leftShiftClick_rightCtrlClick_release_shift_release_leftShiftClick_release_THEN_B_sent_#3602()
 {
     modifierDoubledAsClick["rightCtrlClick"] := "d"
     modifierDoubledAsClick["leftShiftClick"] := "b"
@@ -36,7 +36,7 @@ When_rightCtrlClick_doubled_as_d_pressed_shift_pressed_leftShiftClick_rightCtrlC
     simulateKeyUp("lshift", 100)
     sleep 100
     simulateKeyUp("leftShiftClick")
-    expected := "hellob"
+    expected := "helloB"
 
     validateTestOutput(A_ThisFunc , expected)
 }

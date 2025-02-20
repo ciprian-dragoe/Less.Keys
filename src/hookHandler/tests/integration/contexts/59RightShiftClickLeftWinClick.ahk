@@ -61,7 +61,7 @@ When_rightShiftClick_pressed_leftWinClick_pressed_mouse_moved_until_second_word_
     setMousePositionToCaret()
     simulateTyping("hello")
     destination := getCurrentCaretPosition()
-    simulateTyping(" world")
+    simulateTyping("world")
     simulateKeyDown("rightShiftClick")
     sleep 100
     simulateKeyDown("leftWinClick")
