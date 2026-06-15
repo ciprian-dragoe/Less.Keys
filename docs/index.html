@@ -451,6 +451,53 @@
             height: calc(var(--content-width) * 0.26);
             margin-bottom: calc(var(--content-width) * 0.06);
             background: black;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        #section-tutorial .container-content .layout-videos .video img.video-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        #section-tutorial .container-content .layout-videos .video .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 68px;
+            height: 48px;
+            background-color: rgba(255, 0, 0, 0.85);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+            pointer-events: none;
+        }
+
+        #section-tutorial .container-content .layout-videos .video:hover .play-button {
+            background-color: rgba(255, 0, 0, 1);
+        }
+
+        #section-tutorial .container-content .layout-videos .video .play-button::after {
+            content: '';
+            border-style: solid;
+            border-width: 10px 0 10px 20px;
+            border-color: transparent transparent transparent white;
+            margin-left: 4px;
+        }
+
+        #section-tutorial .container-content .layout-videos .video iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
         @media only screen and (max-width: 768px) and (orientation: portrait) {
@@ -657,10 +704,10 @@
             </div>
             
             <div class="layout-videos">
-                <div class="video"></div>
-                <div class="video"></div>
-                <div class="video"></div>
-                <div class="video"></div>
+                <div class="video" onclick="this.innerHTML='<iframe src=\'https://www.youtube.com/embed/ZQEYec8LhXE?autoplay=1\' allow=\'autoplay; encrypted-media\' allowfullscreen></iframe>'">
+                    <img class="video-thumbnail" src="https://img.youtube.com/vi/ZQEYec8LhXE/maxresdefault.jpg" alt="LessKeys Tutorial"/>
+                    <div class="play-button"></div>
+                </div>
             </div>
         </div>
     </div>
