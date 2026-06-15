@@ -38,8 +38,11 @@ resetStates()
         if (!SHOULD_RESET_STICKY_WHEN_NON_ADMIN)
         {
             storeDebugData("shift")
-            DetectHiddenWindows On
-            PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
+            if (logInput)
+            {
+                DetectHiddenWindows On
+                PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
+            }
         }
     }
     if (ctrlActive || SHOULD_RESET_STICKY_WHEN_NON_ADMIN)
@@ -51,8 +54,11 @@ resetStates()
         if (!SHOULD_RESET_STICKY_WHEN_NON_ADMIN)
         {
             storeDebugData("ctrl")
-            DetectHiddenWindows On
-            PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
+            if (logInput)
+            {
+                DetectHiddenWindows On
+                PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
+            }
         }
     }
     if (altActive || SHOULD_RESET_STICKY_WHEN_NON_ADMIN)
@@ -63,8 +69,11 @@ resetStates()
         if (!SHOULD_RESET_STICKY_WHEN_NON_ADMIN)
         {
             storeDebugData("alt")
-            DetectHiddenWindows On
-            PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
+            if (logInput)
+            {
+                DetectHiddenWindows On
+                PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
+            }
         }
     }
     if (winActive || SHOULD_RESET_STICKY_WHEN_NON_ADMIN)
@@ -75,8 +84,11 @@ resetStates()
         if (!SHOULD_RESET_STICKY_WHEN_NON_ADMIN)
         {
             storeDebugData("win")
-            DetectHiddenWindows On
-            PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
+            if (logInput)
+            {
+                DetectHiddenWindows On
+                PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
+            }
         }
     }
 
@@ -89,8 +101,11 @@ resetStates()
         if (!SHOULD_RESET_STICKY_WHEN_NON_ADMIN)
         {
             storeDebugData("space")
-            DetectHiddenWindows On
-            PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
+            if (logInput)
+            {
+                DetectHiddenWindows On
+                PostMessage, %APP_MESSAGE_STORE_DEBUG_LOG%, 0, 0, , %SCRIPT_HOOKS_READER%
+            }
         }
     }
 
